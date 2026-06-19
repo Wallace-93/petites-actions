@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bitcoin & Cryptomonnaies — NiouDem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --deep:#042C53;--mid:#185FA5;--light:#378ADD;--pale:#85B7EB;
+  --bg:#f0f7ff;--surf:#e6f1fb;--bord:#b5d4f4;--white:#fff;
+  --gold:#c9a84c;--btc:#F7931A;--btc-pale:#fff8f0;--btc-surf:#fef3e2;
+  --serif:'Playfair Display',Georgia,serif;--sans:'Inter',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--white);color:var(--deep);-webkit-font-smoothing:antialiased;}
+.nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.94);backdrop-filter:blur(24px);border-bottom:0.5px solid var(--bord);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:62px;position:relative;}
+.nav-logo{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--deep);text-decoration:none;}
+.nav-logo span{color:var(--mid);}
+.nav-back{font-size:13px;color:var(--light);text-decoration:none;transition:color .2s;}
+.nav-back:hover{color:var(--deep);}
+.nav-cta{background:var(--deep);color:#fff;border:none;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:500;padding:8px 22px;border-radius:100px;text-decoration:none;transition:background .2s;display:inline-block;}
+.nav-cta:hover{background:var(--mid);}
+
+/* HERO */
+.hero{position:relative;background:#0a0a0a;overflow:hidden;padding:88px 48px 80px;}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(247,147,26,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(247,147,26,.04) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;}
+.hero::after{content:'';position:absolute;top:-80px;right:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(247,147,26,.15) 0%,transparent 65%);pointer-events:none;}
+.hero-glow{position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(24,95,165,.15) 0%,transparent 70%);pointer-events:none;}
+.hero-inner{position:relative;z-index:2;max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:56px;align-items:center;}
+.hero-number{font-family:var(--serif);font-size:180px;font-weight:800;letter-spacing:-8px;line-height:1;color:rgba(247,147,26,.05);position:absolute;top:-30px;left:-20px;pointer-events:none;user-select:none;}
+.hero-breadcrumb{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(247,147,26,.5);margin-bottom:18px;}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(247,147,26,.15);border:0.5px solid rgba(247,147,26,.3);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,200,100,.95);margin-bottom:20px;}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--btc);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.hero-h1{font-family:var(--serif);font-size:clamp(30px,4.5vw,52px);font-weight:800;letter-spacing:-.5px;line-height:1.08;color:#fff;margin-bottom:18px;}
+.hero-h1 em{font-style:italic;color:var(--btc);}
+.hero-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,.55);line-height:1.75;max-width:500px;margin-bottom:32px;}
+.hero-meta{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.hero-meta-item{font-size:13px;font-weight:300;color:rgba(255,255,255,.35);}
+.hero-meta-item strong{color:rgba(255,255,255,.85);font-weight:500;}
+.hero-card{background:rgba(255,255,255,.05);border:0.5px solid rgba(247,147,26,.2);border-radius:20px;padding:28px 24px;min-width:240px;backdrop-filter:blur(12px);}
+.hc-label{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(247,147,26,.5);margin-bottom:16px;}
+.hc-price{font-family:var(--serif);font-size:46px;font-weight:800;letter-spacing:-2px;color:#fff;line-height:1;margin-bottom:4px;display:flex;align-items:flex-start;gap:4px;}
+.hc-price-sup{font-size:20px;margin-top:8px;}
+.hc-price-label{font-size:12px;font-weight:300;color:rgba(255,255,255,.3);margin-bottom:20px;}
+.hc-divider{height:0.5px;background:rgba(247,147,26,.15);margin-bottom:16px;}
+.hc-feature{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:300;color:rgba(255,255,255,.6);margin-bottom:10px;}
+.hc-check{width:18px;height:18px;border-radius:50%;background:rgba(247,147,26,.2);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--btc);flex-shrink:0;}
+.hc-btn{display:block;width:100%;background:var(--btc);color:#fff;border:none;cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:500;padding:13px;border-radius:100px;margin-top:20px;text-align:center;text-decoration:none;transition:opacity .2s,transform .15s;}
+.hc-btn:hover{opacity:.88;transform:scale(1.02);}
+.hc-free{display:block;text-align:center;font-size:12px;font-weight:300;color:rgba(255,255,255,.28);margin-top:10px;}
+
+/* SECTIONS */
+.section{padding:88px 48px;}
+.section-bg{background:var(--bg);}
+.section-white{background:var(--white);}
+.section-dark{background:#0a0a0a;}
+.section-btc{background:var(--btc-pale);}
+.s-tag{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);margin-bottom:14px;}
+.s-tag-btc{color:var(--btc);}
+.s-title{font-family:var(--serif);font-size:clamp(26px,3.5vw,38px);font-weight:800;letter-spacing:-.3px;line-height:1.1;color:var(--deep);margin-bottom:14px;}
+.s-sub{font-size:15px;font-weight:300;color:var(--light);line-height:1.75;max-width:560px;margin-bottom:52px;}
+
+/* BITCOIN STATS */
+.btc-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(247,147,26,.15);border-radius:20px;overflow:hidden;max-width:960px;margin:0 auto;}
+.btc-stat{background:var(--white);padding:28px 20px;text-align:center;transition:background .2s;}
+.btc-stat:hover{background:var(--btc-surf);}
+.btc-stat-num{font-family:var(--serif);font-size:32px;font-weight:800;letter-spacing:-1.5px;color:var(--btc);margin-bottom:6px;line-height:1;}
+.btc-stat-label{font-size:12px;font-weight:300;color:var(--light);line-height:1.5;}
+
+/* BLOCKCHAIN EXPLIQUÉ */
+.blockchain-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;max-width:960px;position:relative;}
+.blockchain-steps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:0.5px;background:var(--bord);z-index:0;}
+.bc-step{text-align:center;position:relative;z-index:1;padding:0 12px;}
+.bc-dot{width:56px;height:56px;border-radius:50%;background:var(--surf);border:0.5px solid var(--bord);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 16px;transition:background .2s,border-color .2s;}
+.bc-step:hover .bc-dot{background:var(--btc-surf);border-color:rgba(247,147,26,.3);}
+.bc-title{font-family:var(--serif);font-size:14px;font-weight:700;color:var(--deep);margin-bottom:6px;letter-spacing:-.1px;}
+.bc-desc{font-size:12px;font-weight:300;color:var(--light);line-height:1.55;}
+
+/* COMPARATIF BTC vs OR vs EURO */
+.asset-compare{max-width:860px;margin:0 auto;}
+.asset-table{width:100%;border-collapse:collapse;background:var(--white);border-radius:16px;overflow:hidden;border:0.5px solid var(--bord);}
+.asset-table th{padding:14px 18px;text-align:left;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--pale);background:var(--bg);border-bottom:0.5px solid var(--bord);}
+.asset-table td{padding:14px 18px;font-size:13px;font-weight:300;color:var(--light);border-bottom:0.5px solid var(--bord);}
+.asset-table tr:last-child td{border-bottom:none;}
+.asset-table td:first-child{font-family:var(--serif);font-weight:700;color:var(--deep);font-size:14px;}
+.asset-table tr:hover td{background:var(--bg);}
+.check-yes{color:#2e7d32;font-weight:600;}
+.check-no{color:#c9573a;font-weight:600;}
+.check-mid{color:var(--gold);font-weight:600;}
+
+/* RISQUES */
+.risk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(247,147,26,.12);border-radius:20px;overflow:hidden;max-width:960px;}
+.risk-card{background:var(--white);padding:30px 26px;transition:background .2s;}
+.risk-card:hover{background:var(--btc-surf);}
+.risk-icon{font-size:26px;margin-bottom:14px;}
+.risk-title{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--deep);margin-bottom:8px;letter-spacing:-.2px;}
+.risk-desc{font-size:13px;font-weight:300;color:var(--light);line-height:1.65;}
+
+/* OUTCOMES */
+.outcomes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--bord);border-radius:20px;overflow:hidden;max-width:960px;}
+.oc{background:var(--white);padding:32px 28px;transition:background .2s;}
+.oc:hover{background:var(--surf);}
+.oc-icon{font-size:26px;margin-bottom:16px;}
+.oc-title{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--deep);margin-bottom:8px;letter-spacing:-.2px;}
+.oc-desc{font-size:13px;font-weight:300;color:var(--light);line-height:1.65;}
+
+/* PROGRAMME */
+.programme{max-width:760px;}
+.module{border:0.5px solid var(--bord);border-radius:16px;background:var(--white);margin-bottom:12px;overflow:hidden;transition:box-shadow .2s;}
+.module:hover{box-shadow:0 6px 28px rgba(247,147,26,.08);}
+.module-header{display:flex;align-items:center;gap:16px;padding:20px 24px;cursor:pointer;user-select:none;}
+.module-num{font-family:var(--serif);font-size:12px;font-weight:700;color:var(--pale);min-width:28px;}
+.module-title{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--deep);flex:1;letter-spacing:-.2px;}
+.module-meta{font-size:12px;font-weight:300;color:var(--pale);white-space:nowrap;}
+.module-toggle{width:28px;height:28px;border-radius:50%;border:0.5px solid var(--bord);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--pale);transition:transform .25s,background .2s;}
+.module.open .module-toggle{transform:rotate(45deg);background:var(--btc-surf);}
+.module-body{display:none;padding:0 24px 22px 68px;}
+.module.open .module-body{display:block;}
+.module-lessons{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.module-lessons li{display:flex;align-items:flex-start;gap:10px;font-size:13px;font-weight:300;color:var(--light);line-height:1.55;}
+.module-lessons li::before{content:'\2192';color:var(--bord);font-size:12px;margin-top:1px;flex-shrink:0;}
+
+/* CITATION */
+.quote-block{max-width:680px;margin:0 auto;text-align:center;padding:20px 0 40px;}
+.quote-text{font-family:var(--serif);font-size:clamp(20px,3vw,28px);font-weight:700;font-style:italic;color:#fff;line-height:1.35;margin-bottom:18px;letter-spacing:-.3px;}
+.quote-text em{color:var(--btc);font-style:normal;}
+.quote-author{font-size:13px;font-weight:300;color:rgba(255,255,255,.35);}
+
+/* TARIFS */
+.tarifs-inner{max-width:860px;margin:0 auto;}
+.tarifs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.p-card{border:0.5px solid var(--bord);border-radius:20px;padding:32px 28px;background:var(--white);position:relative;transition:transform .2s,box-shadow .2s,border-color .2s;}
+.p-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(24,95,165,.1);border-color:var(--pale);}
+.p-card.featured{background:#0a0a0a;border-color:rgba(247,147,26,.3);}
+.p-card.featured:hover{box-shadow:0 12px 40px rgba(247,147,26,.15);}
+.p-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--btc);color:#fff;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:4px 16px;border-radius:100px;white-space:nowrap;}
+.p-label{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--pale);margin-bottom:14px;}
+.p-card.featured .p-label{color:rgba(247,147,26,.5);}
+.p-name{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--deep);margin-bottom:12px;letter-spacing:-.3px;}
+.p-card.featured .p-name{color:#fff;}
+.p-price{display:flex;align-items:flex-end;gap:3px;margin-bottom:6px;font-family:var(--serif);}
+.p-amount{font-size:44px;font-weight:800;letter-spacing:-2px;color:var(--deep);line-height:1;}
+.p-card.featured .p-amount{color:var(--btc);}
+.p-cur{font-size:20px;font-weight:700;color:var(--deep);margin-bottom:6px;}
+.p-card.featured .p-cur{color:var(--btc);}
+.p-period{font-size:12px;font-weight:300;color:var(--pale);margin-bottom:18px;}
+.p-card.featured .p-period{color:rgba(247,147,26,.5);}
+.p-features{list-style:none;margin-bottom:24px;display:flex;flex-direction:column;gap:8px;}
+.p-features li{font-size:13px;font-weight:300;color:var(--light);display:flex;align-items:flex-start;gap:8px;}
+.p-card.featured .p-features li{color:rgba(255,255,255,.6);}
+.p-features li::before{content:'\2713';color:var(--mid);font-weight:700;font-size:11px;margin-top:2px;flex-shrink:0;}
+.p-card.featured .p-features li::before{color:var(--btc);}
+.p-btn{width:100%;background:var(--surf);color:var(--deep);border:0.5px solid var(--bord);cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:500;padding:12px;border-radius:100px;transition:background .2s,color .2s;text-align:center;text-decoration:none;display:block;}
+.p-btn:hover{background:var(--mid);color:#fff;border-color:var(--mid);}
+.p-card.featured .p-btn{background:var(--btc);color:#fff;border-color:var(--btc);}
+.p-card.featured .p-btn:hover{opacity:.88;}
+
+/* CTA */
+.cta-bottom{background:#0a0a0a;padding:88px 48px;text-align:center;position:relative;overflow:hidden;}
+.cta-bottom::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(247,147,26,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(247,147,26,.04) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;}
+.cta-bottom::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(247,147,26,.08) 0%,transparent 70%);pointer-events:none;}
+.cta-inner{position:relative;z-index:2;max-width:560px;margin:0 auto;}
+.cta-tag{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(247,147,26,.5);margin-bottom:16px;}
+.cta-h2{font-family:var(--serif);font-size:clamp(26px,4vw,42px);font-weight:800;letter-spacing:-.5px;line-height:1.1;color:#fff;margin-bottom:14px;}
+.cta-h2 em{font-style:italic;color:var(--btc);}
+.cta-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:36px;}
+.cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--btc);color:#fff;border:none;cursor:pointer;font-family:var(--sans);font-size:15px;font-weight:500;padding:15px 36px;border-radius:100px;text-decoration:none;transition:opacity .2s,transform .15s;}
+.cta-btn:hover{opacity:.88;transform:scale(1.02);}
+.cta-note{font-size:12px;font-weight:300;color:rgba(255,255,255,.22);margin-top:14px;}
+footer{background:#0a0a0a;border-top:0.5px solid rgba(247,147,26,.1);padding:36px 48px 24px;}
+.ft{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.f-brand{font-family:var(--serif);font-size:18px;font-weight:700;color:#fff;}
+.f-brand span{color:var(--btc);}
+.f-links{display:flex;gap:24px;}
+.f-links a{font-size:12px;font-weight:300;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s;}
+.f-links a:hover{color:var(--btc);}
+.f-copy{font-size:11px;color:rgba(255,255,255,.15);}
+@media(max-width:860px){
+  .nav{padding:0 24px;}.hero{padding:56px 24px 52px;}.hero-inner{grid-template-columns:1fr;}.hero-card{display:none;}
+  .section{padding:60px 24px;}.btc-stats{grid-template-columns:repeat(2,1fr);}
+  .blockchain-steps{grid-template-columns:1fr;}.blockchain-steps::before{display:none;}
+  .risk-grid{grid-template-columns:1fr;}.outcomes-grid{grid-template-columns:1fr;}
+  .tarifs-grid{grid-template-columns:1fr;max-width:360px;margin:0 auto;}
+  .cta-bottom{padding:60px 24px;}footer{padding:28px 24px 20px;}.ft{flex-direction:column;align-items:flex-start;}
+}
+
+/* ── MOBILE 393px (Redmi Note 13 Pro) ── */
+@media(max-width:480px){
+  .nav{padding:0 16px;height:56px;}
+  .nav-logo{font-size:17px;}
+  .nav-back{font-size:12px;}
+  .nav-cta{font-size:12px;padding:7px 14px;}
+  .hero{padding:44px 18px 48px;}
+  .hero-inner{grid-template-columns:1fr;gap:0;}
+  .hero-card{display:none;}
+  .hero-h1{font-size:28px;}
+  .hero-sub{font-size:14px;}
+  .hero-meta{gap:12px;}
+  .hero-meta-item{font-size:12px;}
+  .hero-number{font-size:100px;top:-10px;left:-10px;}
+  .section{padding:48px 18px;}
+  .s-title{font-size:22px;}
+  .s-sub{font-size:13px;margin-bottom:32px;}
+  .outcomes-grid{grid-template-columns:1fr;gap:2px;}
+  .oc{padding:22px 18px;}
+  .programme{max-width:100%;}
+  .module-header{padding:16px 16px;gap:10px;}
+  .module-title{font-size:14px;}
+  .module-meta{display:none;}
+  .module-body{padding:0 16px 18px 44px;}
+  .tarifs-grid{grid-template-columns:1fr;gap:16px;max-width:100%;}
+  .p-card{padding:24px 20px;}
+  .p-amount{font-size:36px;}
+  .cta-bottom{padding:52px 18px;}
+  .cta-h2{font-size:24px;}
+  .quote-block{padding:10px 0 24px;}
+  .quote-text{font-size:18px;}
+  footer{padding:28px 18px 20px;}
+  .ft{flex-direction:column;gap:14px;}
+  .f-links{flex-wrap:wrap;gap:14px;}
+  /* Alert banner */
+  .alert-banner{padding:18px;}
+  .alert-inner{gap:12px;}
+  /* Key numbers */
+  .key-numbers{grid-template-columns:1fr 1fr;}
+  .kn-num{font-size:26px;}
+  /* Timeline */
+  .timeline::before{left:16px;}
+  .tl-dot{width:32px;height:32px;font-size:12px;}
+  .tl-item{gap:16px;}
+  /* Compare grid */
+  .compare-grid{grid-template-columns:1fr;}
+  /* Strategies */
+  .strategies-grid{grid-template-columns:1fr;}
+  /* Budget visual */
+  .budget-bar{height:48px;}
+  .budget-bar-seg{font-size:13px;}
+  .budget-legend{grid-template-columns:1fr;}
+  /* Simulator */
+  .sim-grid{grid-template-columns:1fr;}
+  .sim-results{grid-template-columns:1fr;}
+  /* Blockchain steps */
+  .blockchain-steps{grid-template-columns:1fr;}
+  .blockchain-steps::before{display:none;}
+  /* BTC stats */
+  .btc-stats{grid-template-columns:1fr 1fr;}
+  /* Risk grid */
+  .risk-grid{grid-template-columns:1fr;}
+  /* Concepts grid */
+  .concepts-grid{grid-template-columns:1fr 1fr;}
+  /* Tools grid */
+  .tools-grid{grid-template-columns:1fr;}
+  /* Products grid */
+  .products-grid{grid-template-columns:1fr;}
+  /* Eco grid */
+  .eco-grid{grid-template-columns:1fr 1fr;}
+  /* Early perks */
+  .early-perks-grid{grid-template-columns:1fr;}
+  .early-section{padding:48px 18px;}
+  /* Pyramid */
+  .pyramid-bar{margin:0!important;padding:14px 14px;}
+  .pyramid-title{font-size:14px;}
+  .pyramid-sub{font-size:11px;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Niou<span>Dem</span></a>
+  <a href="index.html" class="nav-back" style="position:absolute;left:50%;transform:translateX(-50%);">← Toutes les formations</a>
+  <a href="index.html#forum" class="nav-cta">Commencer</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-left" style="position:relative;">
+      <div class="hero-number">4</div>
+      <div class="hero-breadcrumb">Formation 4 — Agir</div>
+      <div class="hero-badge"><span class="badge-dot"></span>Niveau intermédiaire</div>
+      <h1 class="hero-h1">Bitcoin &amp;<br><em>Cryptomonnaies</em></h1>
+      <p class="hero-sub">Le Bitcoin n'est pas une mode — c'est une révolution monétaire. Cette formation vous donne les bases solides pour comprendre la blockchain, évaluer les cryptoactifs, investir avec méthode et sécuriser votre patrimoine numérique.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><strong>6 h</strong> de contenu</div>
+        <div class="hero-meta-item"><strong>18</strong> leçons</div>
+        <div class="hero-meta-item"><strong>4</strong> exercices pratiques</div>
+        <div class="hero-meta-item"><strong>Accès à vie</strong></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hc-label">Rejoindre la formation</div>
+      <div class="hc-price"><span>60</span><span class="hc-price-sup">€</span></div>
+      <div class="hc-price-label">accès à l'ensemble des formations · à vie</div>
+      <div class="hc-divider"></div>
+      <div class="hc-feature"><span class="hc-check">✓</span>18 leçons vidéo</div>
+      <div class="hc-feature"><span class="hc-check">✓</span>Guide sécurité crypto inclus</div>
+      <div class="hc-feature"><span class="hc-check">✓</span>Accès communauté</div>
+      <div class="hc-feature"><span class="hc-check">✓</span>Mises à jour incluses</div>
+      <div class="hc-feature"><span class="hc-check">✓</span>1 session coach offerte</div>
+      <a href="https://buy.stripe.com/CLUB_PLACEHOLDER?utm_source=petitesactions" class="hc-btn">Rejoindre — 60 €</a>
+      <span class="hc-free">ou <a href="index.html#coach" style="color:rgba(255,255,255,.35);text-decoration:underline;">premier contact gratuit</a></span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BITCOIN -->
+<section class="section section-btc">
+  <div class="s-tag s-tag-btc" style="text-align:center;">Bitcoin en chiffres</div>
+  <h2 class="s-title" style="text-align:center;margin-bottom:8px;">L'actif le plus performant de la décennie</h2>
+  <p class="s-sub" style="text-align:center;margin:0 auto 48px;">Des données objectives pour comprendre pourquoi le Bitcoin ne peut plus être ignoré.</p>
+  <div class="btc-stats">
+    <div class="btc-stat"><div class="btc-stat-num">21M</div><div class="btc-stat-label">Nombre maximum de bitcoins — jamais un de plus. La rareté absolue.</div></div>
+    <div class="btc-stat"><div class="btc-stat-num">+900%</div><div class="btc-stat-label">Performance du Bitcoin sur 5 ans (2019-2024) malgré une volatilité importante</div></div>
+    <div class="btc-stat"><div class="btc-stat-num">15 ans</div><div class="btc-stat-label">D'existence sans jamais avoir été piraté — le réseau le plus sécurisé du monde</div></div>
+    <div class="btc-stat"><div class="btc-stat-num">150+</div><div class="btc-stat-label">Pays dans lesquels le Bitcoin est légal et utilisé comme réserve de valeur</div></div>
+  </div>
+</section>
+
+<!-- BLOCKCHAIN -->
+<section class="section section-white">
+  <div class="s-tag">Les fondamentaux</div>
+  <h2 class="s-title">La blockchain expliquée simplement</h2>
+  <p class="s-sub">La blockchain est le moteur du Bitcoin — un registre public, transparent et immuable. Voici comment elle fonctionne en 5 étapes.</p>
+  <div class="blockchain-steps">
+    <div class="bc-step">
+      <div class="bc-dot">💸</div>
+      <div class="bc-title">Transaction initiée</div>
+      <div class="bc-desc">Vous envoyez du Bitcoin à une adresse — la transaction est diffusée sur le réseau mondial.</div>
+    </div>
+    <div class="bc-step">
+      <div class="bc-dot">🌐</div>
+      <div class="bc-title">Diffusion réseau</div>
+      <div class="bc-desc">Des milliers de nœuds indépendants dans le monde reçoivent et vérifient la transaction.</div>
+    </div>
+    <div class="bc-step">
+      <div class="bc-dot">⛏️</div>
+      <div class="bc-title">Validation par mining</div>
+      <div class="bc-desc">Des mineurs regroupent les transactions en blocs et résolvent un problème cryptographique complexe.</div>
+    </div>
+    <div class="bc-step">
+      <div class="bc-dot">🔗</div>
+      <div class="bc-title">Bloc ajouté</div>
+      <div class="bc-desc">Le bloc validé est ajouté à la chaîne — lié cryptographiquement à tous les blocs précédents.</div>
+    </div>
+    <div class="bc-step">
+      <div class="bc-dot">✅</div>
+      <div class="bc-title">Transaction confirmée</div>
+      <div class="bc-desc">La transaction est désormais immuable et transparente — vérifiable par n'importe qui, pour toujours.</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARATIF -->
+<section class="section section-bg">
+  <div class="s-tag">Comprendre les actifs</div>
+  <h2 class="s-title">Bitcoin, or ou euro — lequel protège le mieux votre patrimoine ?</h2>
+  <p class="s-sub">Un comparatif objectif des trois principales "réserves de valeur" selon les critères d'une bonne monnaie.</p>
+  <div class="asset-compare">
+    <table class="asset-table">
+      <thead>
+        <tr>
+          <th>Critère</th>
+          <th>₿ Bitcoin</th>
+          <th>🥇 Or</th>
+          <th>💶 Euro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Offre limitée</td><td class="check-yes">✓ 21M max</td><td class="check-mid">~ Rare mais minable</td><td class="check-no">✗ Illimitée</td></tr>
+        <tr><td>Résistance à l'inflation</td><td class="check-yes">✓ Déflationnaire</td><td class="check-yes">✓ Historiquement oui</td><td class="check-no">✗ Perd ~3%/an</td></tr>
+        <tr><td>Portabilité</td><td class="check-yes">✓ Mondiale, instantanée</td><td class="check-no">✗ Difficile à transporter</td><td class="check-mid">~ Dépend des frontières</td></tr>
+        <tr><td>Divisibilité</td><td class="check-yes">✓ 0,00000001 BTC</td><td class="check-no">✗ Limitée physiquement</td><td class="check-yes">✓ Centimes</td></tr>
+        <tr><td>Vérifiabilité</td><td class="check-yes">✓ Code open source</td><td class="check-mid">~ Tests requis</td><td class="check-mid">~ Banque centrale</td></tr>
+        <tr><td>Résistance à la censure</td><td class="check-yes">✓ Décentralisé</td><td class="check-mid">~ Partiellement</td><td class="check-no">✗ Gel possible</td></tr>
+        <tr><td>Volatilité</td><td class="check-no">⚡ Très élevée</td><td class="check-mid">~ Modérée</td><td class="check-yes">✓ Stable</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- RISQUES -->
+<section class="section section-white">
+  <div class="s-tag">Investir avec lucidité</div>
+  <h2 class="s-title">Les risques à connaître avant d'investir</h2>
+  <p class="s-sub">NiouDem ne vend pas de rêves. Investir dans les cryptos comporte des risques réels — voici lesquels, et comment les gérer.</p>
+  <div class="risk-grid">
+    <div class="risk-card"><div class="risk-icon">📊</div><div class="risk-title">Volatilité extrême</div><div class="risk-desc">Le Bitcoin peut perdre 50 à 80% en quelques mois — et récupérer bien au-delà. N'investissez que ce que vous pouvez vous permettre de ne pas toucher pendant 4 à 5 ans minimum.</div></div>
+    <div class="risk-card"><div class="risk-icon">🔑</div><div class="risk-title">Sécurité et garde</div><div class="risk-desc">"Not your keys, not your coins." Laisser ses cryptos sur un exchange, c'est prendre le risque qu'il ferme ou soit hacké. La formation vous apprend à sécuriser vos actifs.</div></div>
+    <div class="risk-card"><div class="risk-icon">🎰</div><div class="risk-title">L'écosystème spéculatif</div><div class="risk-desc">99% des altcoins sont de la pure spéculation. Cette formation se concentre sur le Bitcoin et quelques actifs solides — pas sur les memecoins ou les arnaques DeFi.</div></div>
+    <div class="risk-card"><div class="risk-icon">📜</div><div class="risk-title">Risque réglementaire</div><div class="risk-desc">Les règles fiscales et légales évoluent. Comprendre le cadre juridique français (flat tax 30%, déclaration) est indispensable avant d'investir.</div></div>
+    <div class="risk-card"><div class="risk-icon">🧠</div><div class="risk-title">FOMO et panique</div><div class="risk-desc">Acheter au plus haut par peur de manquer le train, vendre au plus bas par panique — les deux erreurs les plus courantes. La formation vous arme psychologiquement.</div></div>
+    <div class="risk-card"><div class="risk-icon">🌊</div><div class="risk-title">Corrélation avec les marchés</div><div class="risk-desc">En période de crise, le Bitcoin peut chuter avec les marchés actions. Il ne se comporte pas toujours comme une valeur refuge à court terme.</div></div>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="section section-bg">
+  <div class="s-tag">Ce que vous apprenez</div>
+  <h2 class="s-title">6 compétences pour investir dans les cryptos avec méthode</h2>
+  <p class="s-sub">Pas de hype, pas de promesses — des compétences concrètes pour naviguer cet écosystème avec lucidité.</p>
+  <div class="outcomes-grid">
+    <div class="oc"><div class="oc-icon">⛓️</div><div class="oc-title">Comprendre la blockchain</div><div class="oc-desc">Maîtriser le fonctionnement technique du Bitcoin et de la blockchain — sans être développeur, avec des explications claires.</div></div>
+    <div class="oc"><div class="oc-icon">🔍</div><div class="oc-title">Évaluer un cryptoactif</div><div class="oc-desc">Distinguer un projet solide d'une arnaque — cas d'usage, tokenomics, équipe, liquidité, décentralisation réelle.</div></div>
+    <div class="oc"><div class="oc-icon">💼</div><div class="oc-title">Construire une position crypto</div><div class="oc-desc">Définir quelle part de son portefeuille allouer aux cryptos et appliquer la stratégie DCA sur le Bitcoin.</div></div>
+    <div class="oc"><div class="oc-icon">🔐</div><div class="oc-title">Sécuriser ses cryptoactifs</div><div class="oc-desc">Configurer un hardware wallet, comprendre les clés privées et protéger ses actifs des hacks et des pertes.</div></div>
+    <div class="oc"><div class="oc-icon">📋</div><div class="oc-title">Gérer la fiscalité crypto</div><div class="oc-desc">Comprendre le régime fiscal français (flat tax 30%), savoir quand déclarer et quels outils utiliser pour tracer ses transactions.</div></div>
+    <div class="oc"><div class="oc-icon">🧘</div><div class="oc-title">Investir sans paniquer</div><div class="oc-desc">Développer la résilience émotionnelle nécessaire pour traverser les cycles baissiers sans vendre au mauvais moment.</div></div>
+  </div>
+</section>
+
+<!-- PROGRAMME -->
+<section class="section section-white">
+  <div class="s-tag">Programme complet</div>
+  <h2 class="s-title">18 leçons · 5 modules</h2>
+  <p class="s-sub">De la blockchain à la sécurité de vos actifs — un parcours complet, honnête et sans hype.</p>
+  <div class="programme">
+    <div class="module open" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-num">01</span>
+        <span class="module-title">Bitcoin — la révolution monétaire</span>
+        <span class="module-meta">4 leçons · 65 min</span>
+        <span class="module-toggle">+</span>
+      </div>
+      <div class="module-body">
+        <ul class="module-lessons">
+          <li>Pourquoi Satoshi Nakamoto a créé le Bitcoin — le problème qu'il résout</li>
+          <li>La blockchain expliquée — registre décentralisé, consensus, immuabilité</li>
+          <li>Le halving Bitcoin — pourquoi la rareté programmée est révolutionnaire</li>
+          <li>Bitcoin vs or vs euro — comparatif objectif des réserves de valeur</li>
+        </ul>
+      </div>
+    </div>
+    <div class="module" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-num">02</span>
+        <span class="module-title">L'écosystème crypto</span>
+        <span class="module-meta">3 leçons · 55 min</span>
+        <span class="module-toggle">+</span>
+      </div>
+      <div class="module-body">
+        <ul class="module-lessons">
+          <li>Bitcoin, Ethereum et les altcoins — comprendre les différences fondamentales</li>
+          <li>Les exchanges centralisés vs décentralisés — avantages, risques et comment choisir</li>
+          <li>Les stablecoins — qu'est-ce que c'est, à quoi ça sert, quels risques</li>
+        </ul>
+      </div>
+    </div>
+    <div class="module" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-num">03</span>
+        <span class="module-title">Investir avec méthode</span>
+        <span class="module-meta">4 leçons · 60 min</span>
+        <span class="module-toggle">+</span>
+      </div>
+      <div class="module-body">
+        <ul class="module-lessons">
+          <li>Quelle part de son portefeuille allouer aux cryptos — selon son profil de risque</li>
+          <li>Le DCA sur Bitcoin — la stratégie la plus efficace pour les investisseurs long terme</li>
+          <li>Identifier et éviter les arnaques — rug pulls, pump & dump, faux projets</li>
+          <li>Exercice : construire votre position Bitcoin avec votre budget réel</li>
+        </ul>
+      </div>
+    </div>
+    <div class="module" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-num">04</span>
+        <span class="module-title">Sécurité et garde des actifs</span>
+        <span class="module-meta">4 leçons · 65 min</span>
+        <span class="module-toggle">+</span>
+      </div>
+      <div class="module-body">
+        <ul class="module-lessons">
+          <li>Clés privées et seed phrase — comprendre ce que vous possédez vraiment</li>
+          <li>Hot wallet vs cold wallet — quand utiliser l'un ou l'autre</li>
+          <li>Configurer un hardware wallet Ledger ou Trezor — tutoriel pas à pas</li>
+          <li>Exercice : sécuriser vos actifs et créer un plan de succession numérique</li>
+        </ul>
+      </div>
+    </div>
+    <div class="module" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-num">05</span>
+        <span class="module-title">Fiscalité et gestion long terme</span>
+        <span class="module-meta">3 leçons · 55 min</span>
+        <span class="module-toggle">+</span>
+      </div>
+      <div class="module-body">
+        <ul class="module-lessons">
+          <li>La fiscalité crypto en France — flat tax 30%, seuil de déclaration, cas pratiques</li>
+          <li>Les outils de suivi fiscal — Koinly, CoinTracking, Waltio — comparatif</li>
+          <li>Gérer les cycles de marché — bull market, bear market, et comment rester serein</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark">
+  <div class="quote-block">
+    <div class="quote-text">"Bitcoin est l'internet de l'argent. Si vous croyiez en internet en 1993, vous devriez croire en <em>Bitcoin</em> aujourd'hui."</div>
+    <div class="quote-author">— Andreas Antonopoulos, auteur de "Mastering Bitcoin"</div>
+  </div>
+</section>
+
+<section class="section section-white" id="tarifs">
+  <div class="tarifs-inner">
+    <div class="s-tag" style="text-align:center;">Choisissez votre formule</div>
+    <h2 class="s-title" style="text-align:center;margin-bottom:8px;">Commencez sans risque</h2>
+    <p class="s-sub" style="text-align:center;margin:0 auto 48px;">60 € pour accéder à l'ensemble des formations.
+Premier échange avec un coach toujours offert.</p>
+    <div class="tarifs-grid">
+      <div class="p-card">
+        <div class="p-label">Pour démarrer</div>
+        <div class="p-name">Premier contact</div>
+        <div class="p-price"><span class="p-amount">0</span><span class="p-cur">€</span></div>
+        <div class="p-period">gratuit · sans engagement</div>
+        <ul class="p-features">
+          <li>Appel découverte 30 min</li>
+          <li>Analyse de votre profil investisseur</li>
+          <li>Recommandations personnalisées</li>
+          <li>Sans carte bancaire requise</li>
+        </ul>
+        <a href="index.html#coach" class="p-btn">Prendre rendez-vous</a>
+      </div>
+      <div class="p-card featured">
+        <div class="p-badge">Le plus choisi</div>
+        <div class="p-label">Pour progresser vite</div>
+        <div class="p-name">Session coaching</div>
+        <div class="p-price"><span class="p-amount">25</span><span class="p-cur">€</span></div>
+        <div class="p-period">par session de 1h30</div>
+        <ul class="p-features">
+          <li>1h30 de coaching individuel</li>
+          <li>Stratégie crypto personnalisée</li>
+          <li>Support email 48h après</li>
+          <li>Abonnement &amp; forfait possible</li>
+        </ul>
+        <a href="https://buy.stripe.com/SESSION_PLACEHOLDER?utm_source=petitesactions" class="p-btn">Réserver — 25 €</a>
+      </div>
+      <div class="p-card">
+        <div class="p-label">Pour s'engager</div>
+        <div class="p-name">Club de formation</div>
+        <div class="p-price"><span class="p-amount">60</span><span class="p-cur">€</span></div>
+        <div class="p-period">accès à l'ensemble des formations · à vie</div>
+        <ul class="p-features">
+          <li>Accès à l'ensemble des formations NiouDem</li>
+          <li>Accès à vie au contenu</li>
+          <li>Communauté privée d'investisseurs</li>
+          <li>Mises à jour incluses</li>
+          <li>1 session coach offerte</li>
+        </ul>
+        <a href="https://buy.stripe.com/CLUB_PLACEHOLDER?utm_source=petitesactions" class="p-btn">Rejoindre — 60 €</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-bottom">
+  <div class="cta-inner">
+    <div class="cta-tag">Prêt à comprendre la révolution monétaire ?</div>
+    <h2 class="cta-h2">Le Bitcoin attend.<br>Votre banque, <em>non.</em></h2>
+    <p class="cta-sub">Pendant que vous hésitez, l'adoption progresse. Comprendre cet actif aujourd'hui, c'est prendre une longueur d'avance sur la majorité.</p>
+    <a href="https://buy.stripe.com/CLUB_PLACEHOLDER?utm_source=petitesactions" class="cta-btn">Commencer la formation — 60 € →</a>
+    <div class="cta-note">ou <a href="index.html#coach" style="color:rgba(255,255,255,.22);text-decoration:underline;">prendre un premier contact gratuit</a></div>
+  </div>
+</div>
+
+<footer>
+  <div class="ft">
+    <div class="f-brand">Niou<span>Dem</span></div>
+    <div class="f-links">
+      <a href="index.html">Accueil</a>
+      <a href="index.html#formations">Formations</a>
+      <a href="index.html#tarifs">Tarifs</a>
+      <a href="index.html#forum">Communauté</a>
+    </div>
+    <div class="f-copy">© 2025 NiouDem · Paris, France</div>
+  </div>
+</footer>
+
+<script>
+function toggleModule(el){
+  var isOpen=el.classList.contains('open');
+  document.querySelectorAll('.module').forEach(function(m){m.classList.remove('open');});
+  if(!isOpen)el.classList.add('open');
+}
+</script>
+</body>
+</html>
