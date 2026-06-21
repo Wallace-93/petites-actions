@@ -3,625 +3,330 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Optimisation fiscale — NiouDem</title>
+<title>Optimisation fiscale, Petites Actions</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --deep:#042C53;--mid:#185FA5;--light:#378ADD;--pale:#85B7EB;
-  --bg:#f0f7ff;--surf:#e6f1fb;--bord:#b5d4f4;--white:#fff;
-  --gold:#c9a84c;--gold-pale:#fdf6e3;--gold-surf:#faeeda;--gold-bord:#e8d090;
-  --indigo:#312e81;--indigo-mid:#4f46e5;--indigo-light:#eef2ff;--indigo-surf:#e0e7ff;--indigo-bord:#a5b4fc;
-  --serif:'Playfair Display',Georgia,serif;--sans:'Inter',system-ui,sans-serif;
+  --ink:#16181D;--ink-soft:#383B42;--ink-muted:#6B6F76;--ink-faint:#9498A0;
+  --bg:#FFFFFF;--bg-soft:#F7F8FA;--bg-mid:#EEF0F3;--bg-line:#E3E6EA;
+  --green:#16A34A;--green-light:#22C55E;--green-pale:#EDFBF1;--green-bord:#BBF0CC;
+  --amber:#F59E0B;--amber-pale:#FFF7E8;--amber-bord:#FCE3A8;
+  --violet:#7C5CFC;--violet-pale:#F1EEFE;--violet-bord:#D9D0FC;
+  --blue:#2563EB;--blue-pale:#EBF1FE;
+  --coral:#FB6B4F;--coral-pale:#FFEEEA;
+  --sans:'Inter', system-ui,-apple-system, sans-serif;
 }
 html{scroll-behavior:smooth;}
-body{font-family:var(--sans);background:var(--white);color:var(--deep);-webkit-font-smoothing:antialiased;}
-.nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.94);backdrop-filter:blur(24px);border-bottom:0.5px solid var(--bord);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:62px;position:relative;}
-.nav-logo{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--deep);text-decoration:none;}
-.nav-logo span{color:var(--mid);}
-.nav-back{font-size:13px;color:var(--light);text-decoration:none;transition:color .2s;}
-.nav-back:hover{color:var(--deep);}
-.nav-cta{background:var(--deep);color:#fff;border:none;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:500;padding:8px 22px;border-radius:100px;text-decoration:none;transition:background .2s;display:inline-block;}
-.nav-cta:hover{background:var(--mid);}
-.hero{position:relative;background:var(--indigo);overflow:hidden;padding:88px 48px 80px;}
-.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;}
-.hero::after{content:'';position:absolute;top:-80px;right:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.15) 0%,transparent 65%);pointer-events:none;}
-.hero-inner{position:relative;z-index:2;max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:56px;align-items:center;}
-.hero-number{font-family:var(--serif);font-size:180px;font-weight:800;letter-spacing:-8px;line-height:1;color:rgba(255,255,255,.04);position:absolute;top:-30px;left:-20px;pointer-events:none;user-select:none;}
-.hero-breadcrumb{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(165,180,252,.5);margin-bottom:18px;}
-.hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(201,168,76,.15);border:0.5px solid rgba(201,168,76,.3);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,220,130,.95);margin-bottom:20px;}
-.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
-.hero-h1{font-family:var(--serif);font-size:clamp(30px,4.5vw,52px);font-weight:800;letter-spacing:-.5px;line-height:1.08;color:#fff;margin-bottom:18px;}
-.hero-h1 em{font-style:italic;color:var(--gold);}
-.hero-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.75;max-width:500px;margin-bottom:32px;}
-.hero-meta{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
-.hero-meta-item{font-size:13px;font-weight:300;color:rgba(255,255,255,.4);}
-.hero-meta-item strong{color:rgba(255,255,255,.85);font-weight:500;}
-.hero-card{background:rgba(255,255,255,.07);border:0.5px solid rgba(201,168,76,.2);border-radius:20px;padding:28px 24px;min-width:240px;backdrop-filter:blur(12px);}
-.hc-label{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:16px;}
-.hc-price{font-family:var(--serif);font-size:46px;font-weight:800;letter-spacing:-2px;color:#fff;line-height:1;margin-bottom:4px;display:flex;align-items:flex-start;gap:4px;}
-.hc-price-sup{font-size:20px;margin-top:8px;}
-.hc-price-label{font-size:12px;font-weight:300;color:rgba(255,255,255,.3);margin-bottom:20px;}
-.hc-divider{height:0.5px;background:rgba(201,168,76,.15);margin-bottom:16px;}
-.hc-feature{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:300;color:rgba(255,255,255,.6);margin-bottom:10px;}
-.hc-check{width:18px;height:18px;border-radius:50%;background:rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gold);flex-shrink:0;}
-.hc-btn{display:block;width:100%;background:var(--gold);color:var(--deep);border:none;cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:600;padding:13px;border-radius:100px;margin-top:20px;text-align:center;text-decoration:none;transition:opacity .2s,transform .15s;}
-.hc-btn:hover{opacity:.88;transform:scale(1.02);}
-.hc-free{display:block;text-align:center;font-size:12px;font-weight:300;color:rgba(255,255,255,.28);margin-top:10px;}
-.section{padding:88px 48px;}
-.section-bg{background:var(--bg);}
-.section-white{background:var(--white);}
-.section-dark{background:var(--indigo);}
-.s-tag{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);margin-bottom:14px;}
-.s-title{font-family:var(--serif);font-size:clamp(26px,3.5vw,38px);font-weight:800;letter-spacing:-.3px;line-height:1.1;color:var(--deep);margin-bottom:14px;}
-.s-sub{font-size:15px;font-weight:300;color:var(--light);line-height:1.75;max-width:560px;margin-bottom:52px;}
-.eco-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--gold-bord);border-radius:20px;overflow:hidden;max-width:960px;margin:0 auto;}
-.eco-card{background:var(--white);padding:28px 20px;text-align:center;transition:background .2s;}
-.eco-card:hover{background:var(--gold-pale);}
-.eco-num{font-family:var(--serif);font-size:32px;font-weight:800;letter-spacing:-1.5px;color:var(--indigo);margin-bottom:6px;line-height:1;}
-.eco-label{font-size:12px;font-weight:300;color:var(--light);line-height:1.5;}
-.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:960px;}
-.tool-card{border:0.5px solid var(--bord);border-radius:20px;padding:30px 26px;background:var(--white);transition:transform .2s,box-shadow .2s,border-color .2s;}
-.tool-card:hover{transform:translateY(-3px);box-shadow:0 10px 36px rgba(79,70,229,.08);border-color:var(--indigo-bord);}
-.tool-card.featured{background:var(--indigo);border-color:var(--indigo);}
-.tool-icon{font-size:26px;margin-bottom:14px;}
-.tool-name{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--deep);margin-bottom:6px;letter-spacing:-.2px;}
-.tool-card.featured .tool-name{color:#fff;}
-.tool-badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:100px;margin-bottom:10px;}
-.tool-badge.high{background:var(--indigo-light);color:var(--indigo-mid);}
-.tool-badge.medium{background:var(--surf);color:var(--mid);}
-.tool-badge.gold{background:var(--gold-pale);color:#8a6a00;}
-.tool-desc{font-size:13px;font-weight:300;color:var(--light);line-height:1.65;margin-bottom:12px;}
-.tool-card.featured .tool-desc{color:rgba(255,255,255,.6);}
-.tool-avantage{font-size:12px;font-weight:500;color:var(--indigo-mid);display:flex;align-items:center;gap:5px;}
-.tool-card.featured .tool-avantage{color:var(--gold);}
-.tool-avantage::before{content:'\2713';font-size:11px;}
-.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:800px;}
-.compare-card{border-radius:20px;padding:32px 28px;border:0.5px solid var(--bord);background:var(--white);transition:transform .2s;}
-.compare-card:hover{transform:translateY(-3px);}
-.compare-card.flat{background:var(--indigo);border-color:var(--indigo);}
-.compare-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
-.compare-icon{font-size:22px;}
-.compare-title{font-family:var(--serif);font-size:18px;font-weight:700;letter-spacing:-.2px;color:var(--deep);}
-.compare-card.flat .compare-title{color:#fff;}
-.compare-rec{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:var(--gold);color:var(--deep);padding:3px 10px;border-radius:100px;margin-bottom:14px;}
-.compare-rate{font-family:var(--serif);font-size:42px;font-weight:800;letter-spacing:-2px;margin-bottom:6px;line-height:1;}
-.compare-card.flat .compare-rate{color:var(--gold);}
-.compare-rate-label{font-size:12px;font-weight:300;color:var(--light);margin-bottom:16px;}
-.compare-card.flat .compare-rate-label{color:rgba(255,255,255,.5);}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;letter-spacing:-.01em;}
+.nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.94);backdrop-filter:blur(20px);border-bottom:1px solid var(--bg-line);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:66px;}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none;}
+.nav-mark{width:30px;height:30px;border-radius:9px;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.nav-mark svg{width:16px;height:16px;}
+.nav-name{font-size:17px;font-weight:800;color:var(--ink);letter-spacing:-.03em;}
+.nav-back{font-size:13.5px;color:var(--ink-muted);text-decoration:none;font-weight:500;position:absolute;left:50%;transform:translateX(-50%);transition:color .2s;}
+.nav-back:hover{color:var(--ink);}
+.nav-cta{background:var(--ink);color:#fff;font-size:13.5px;font-weight:600;padding:10px 22px;border-radius:10px;text-decoration:none;transition:background .2s;display:inline-block;}
+.nav-cta:hover{background:var(--ink-soft);}
+.hero{background:var(--ink);padding:64px 48px 56px;position:relative;overflow:hidden;}
+.hero-inner{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;position:relative;z-index:2;}
+.hero-num-bg{font-size:200px;font-weight:800;letter-spacing:-.06em;line-height:1;color:rgba(255,255,255,.03);position:absolute;top:-40px;left:-20px;pointer-events:none;user-select:none;}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);border-radius:100px;padding:6px 15px;font-size:12px;font-weight:600;color:var(--green-light);margin-bottom:20px;}
+.hero-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--green-light);}
+.hero-h1{font-size:clamp(28px,4.2vw,46px);font-weight:800;letter-spacing:-.04em;line-height:1.08;color:#fff;margin-bottom:16px;}
+.hero-sub{font-size:15.5px;font-weight:400;color:rgba(255,255,255,.55);line-height:1.65;max-width:460px;margin-bottom:28px;}
+.hero-meta{display:flex;gap:20px;flex-wrap:wrap;}
+.hero-meta-item{font-size:12.5px;font-weight:500;color:rgba(255,255,255,.35);}
+.hero-meta-item strong{color:rgba(255,255,255,.8);font-weight:700;}
+.hero-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:26px 22px;min-width:230px;}
+.hc-label{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:14px;}
+.hc-pts{display:flex;align-items:baseline;gap:6px;margin-bottom:4px;}
+.hc-pts-num{font-size:34px;font-weight:800;color:var(--amber);letter-spacing:-.03em;}
+.hc-pts-label{font-size:13px;font-weight:600;color:rgba(255,255,255,.4);}
+.hc-divider{height:1px;background:rgba(255,255,255,.08);margin:14px 0;}
+.hc-feature{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:500;color:rgba(255,255,255,.55);margin-bottom:9px;}
+.hc-check{width:16px;height:16px;border-radius:50%;background:rgba(34,197,94,.18);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--green-light);flex-shrink:0;}
+.hc-btn{display:block;width:100%;background:var(--green);color:#fff;border:none;cursor:pointer;font-family:var(--sans);font-size:13.5px;font-weight:700;padding:13px;border-radius:10px;margin-top:16px;text-align:center;text-decoration:none;transition:background .2s;}
+.hc-btn:hover{background:#149041;}
+.section{padding:72px 48px;}
+.section-soft{background:var(--bg-soft);}
+.section-white{background:var(--bg);}
+.section-ink{background:var(--ink);}
+.s-tag{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--green);margin-bottom:12px;}
+.s-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--green);}
+.s-title{font-size:clamp(24px,3.2vw,34px);font-weight:800;letter-spacing:-.04em;line-height:1.12;color:var(--ink);margin-bottom:14px;}
+.s-sub{font-size:14.5px;font-weight:400;color:var(--ink-muted);line-height:1.65;max-width:500px;margin-bottom:44px;}
+.alert-banner{background:var(--coral-pale);border-top:1px solid #FFD9CC;border-bottom:1px solid #FFD9CC;padding:24px 48px;}
+.alert-inner{max-width:880px;margin:0 auto;display:flex;align-items:flex-start;gap:16px;}
+.alert-icon{font-size:22px;flex-shrink:0;}
+.alert-text h3{font-size:15px;font-weight:700;color:var(--coral);margin-bottom:5px;}
+.alert-text p{font-size:13px;font-weight:400;color:var(--ink-muted);line-height:1.6;}
+.alert-text p strong{color:var(--ink);font-weight:600;}
+.key-numbers{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bg-line);border-radius:16px;overflow:hidden;}
+.kn-card{background:var(--bg);padding:26px 20px;text-align:center;}
+.kn-num{font-size:30px;font-weight:800;letter-spacing:-.03em;color:var(--coral);margin-bottom:6px;}
+.kn-label{font-size:11.5px;font-weight:400;color:var(--ink-muted);line-height:1.45;}
+.timeline{max-width:700px;position:relative;}
+.timeline::before{content:'';position:absolute;left:18px;top:0;bottom:0;width:2px;background:var(--bg-line);}
+.tl-item{display:flex;gap:24px;margin-bottom:32px;position:relative;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-dot{width:38px;height:38px;border-radius:50%;background:var(--bg-soft);border:2px solid var(--bg-line);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--ink-muted);flex-shrink:0;position:relative;z-index:1;}
+.tl-dot.warn{background:var(--coral-pale);border-color:#FFC4AD;color:var(--coral);}
+.tl-dot.go{background:var(--green-pale);border-color:var(--green-bord);color:var(--green);}
+.tl-date{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--green);margin-bottom:5px;}
+.tl-title{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:7px;letter-spacing:-.02em;}
+.tl-desc{font-size:13px;font-weight:400;color:var(--ink-muted);line-height:1.65;}
+.tl-desc strong{color:var(--ink);font-weight:600;}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:780px;}
+.compare-card{border-radius:16px;padding:26px 24px;border:1px solid var(--bg-line);}
+.compare-card.good{background:var(--green-pale);border-color:var(--green-bord);}
+.compare-card.bad{background:var(--coral-pale);border-color:#FFC4AD;}
+.compare-card.alt{background:var(--violet-pale);border-color:var(--violet-bord);}
+.compare-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.compare-icon{font-size:20px;}
+.compare-title{font-size:16px;font-weight:700;}
+.compare-card.good .compare-title{color:#0F7A35;}
+.compare-card.bad .compare-title{color:var(--coral);}
+.compare-card.alt .compare-title{color:var(--violet);}
 .compare-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
-.compare-list li{font-size:13px;font-weight:300;color:var(--light);display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
-.compare-card.flat .compare-list li{color:rgba(255,255,255,.65);}
-.compare-list li::before{content:'\2192';color:var(--bord);font-size:12px;flex-shrink:0;margin-top:1px;}
-.compare-card.flat .compare-list li::before{color:rgba(165,180,252,.4);}
-.outcomes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--bord);border-radius:20px;overflow:hidden;max-width:960px;}
-.oc{background:var(--white);padding:32px 28px;transition:background .2s;}
-.oc:hover{background:var(--indigo-light);}
-.oc-icon{font-size:26px;margin-bottom:16px;}
-.oc-title{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--deep);margin-bottom:8px;letter-spacing:-.2px;}
-.oc-desc{font-size:13px;font-weight:300;color:var(--light);line-height:1.65;}
-.programme{max-width:760px;}
-.module{border:0.5px solid var(--bord);border-radius:16px;background:var(--white);margin-bottom:12px;overflow:hidden;transition:box-shadow .2s;}
-.module:hover{box-shadow:0 6px 28px rgba(79,70,229,.08);}
-.module-header{display:flex;align-items:center;gap:16px;padding:20px 24px;cursor:pointer;user-select:none;}
-.module-num{font-family:var(--serif);font-size:12px;font-weight:700;color:var(--pale);min-width:28px;}
-.module-title{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--deep);flex:1;letter-spacing:-.2px;}
-.module-meta{font-size:12px;font-weight:300;color:var(--pale);white-space:nowrap;}
-.module-toggle{width:28px;height:28px;border-radius:50%;border:0.5px solid var(--bord);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--pale);transition:transform .25s,background .2s;}
-.module.open .module-toggle{transform:rotate(45deg);background:var(--indigo-light);}
-.module-body{display:none;padding:0 24px 22px 68px;}
+.compare-list li{font-size:13px;font-weight:400;color:var(--ink-muted);display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
+.compare-list li::before{font-size:11px;flex-shrink:0;margin-top:2px;font-weight:700;}
+.compare-card.good .compare-list li::before{content:'✓';color:var(--green);}
+.compare-card.bad .compare-list li::before{content:'✗';color:var(--coral);}
+.compare-card.alt .compare-list li::before{content:'→';color:var(--violet);}
+.outcomes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bg-line);border-radius:16px;overflow:hidden;}
+.oc{background:var(--bg);padding:26px 22px;}
+.oc-icon{font-size:22px;margin-bottom:14px;}
+.oc-title{font-size:14.5px;font-weight:700;color:var(--ink);margin-bottom:7px;letter-spacing:-.02em;}
+.oc-desc{font-size:12.5px;font-weight:400;color:var(--ink-muted);line-height:1.6;}
+.programme{max-width:700px;}
+.module{border:1px solid var(--bg-line);border-radius:14px;background:var(--bg);margin-bottom:10px;overflow:hidden;transition:border-color .2s;}
+.module:hover{border-color:var(--green-bord);}
+.module-header{display:flex;align-items:center;gap:14px;padding:17px 20px;cursor:pointer;user-select:none;}
+.module-num{font-size:11px;font-weight:800;color:var(--green);min-width:24px;}
+.module-title{font-size:15px;font-weight:700;color:var(--ink);flex:1;letter-spacing:-.02em;}
+.module-meta{font-size:11.5px;font-weight:500;color:var(--ink-faint);white-space:nowrap;}
+.module-toggle{width:24px;height:24px;border-radius:50%;background:var(--bg-soft);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--ink-muted);transition:transform .25s, background .2s;}
+.module.open .module-toggle{transform:rotate(45deg);background:var(--green-pale);color:var(--green);}
+.module-body{display:none;padding:0 20px 18px 58px;}
 .module.open .module-body{display:block;}
-.module-lessons{list-style:none;display:flex;flex-direction:column;gap:9px;}
-.module-lessons li{display:flex;align-items:flex-start;gap:10px;font-size:13px;font-weight:300;color:var(--light);line-height:1.55;}
-.module-lessons li::before{content:'\2192';color:var(--bord);font-size:12px;margin-top:1px;flex-shrink:0;}
-
-/* EARLY MEMBER */
-.early-section{background:linear-gradient(135deg,#1e1b4b 0%,var(--indigo) 100%);padding:88px 48px;}
-.early-inner{max-width:900px;margin:0 auto;}
-.early-top{text-align:center;margin-bottom:52px;}
-.early-tag{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(201,168,76,.6);margin-bottom:14px;}
-.early-title{font-family:var(--serif);font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.8px;line-height:1.08;color:#fff;margin-bottom:14px;}
-.early-title em{font-style:italic;color:var(--gold);}
-.early-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,.45);line-height:1.7;max-width:520px;margin:0 auto;}
-.early-perks-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px;}
-.early-perk-card{background:rgba(255,255,255,.05);border:0.5px solid rgba(201,168,76,.15);border-radius:16px;padding:24px 20px;transition:background .2s,border-color .2s;}
-.early-perk-card:hover{background:rgba(255,255,255,.08);border-color:rgba(201,168,76,.3);}
-.early-perk-card.mystery{border-color:rgba(255,255,255,.08);background:rgba(255,255,255,.03);}
-.ep-icon{font-size:26px;margin-bottom:12px;}
-.ep-title{font-family:var(--serif);font-size:15px;font-weight:700;color:#fff;margin-bottom:6px;letter-spacing:-.2px;}
-.ep-desc{font-size:12px;font-weight:300;color:rgba(255,255,255,.5);line-height:1.6;}
-.ep-mystery{font-size:12px;font-weight:300;color:rgba(255,255,255,.25);line-height:1.6;font-style:italic;}
-.early-cta{text-align:center;}
-.early-cta-title{font-family:var(--serif);font-size:20px;font-weight:700;color:#fff;margin-bottom:8px;letter-spacing:-.3px;}
-.early-cta-sub{font-size:13px;font-weight:300;color:rgba(255,255,255,.4);margin-bottom:24px;}
-.early-btn{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--deep);border:none;cursor:pointer;font-family:var(--sans);font-size:15px;font-weight:600;padding:14px 36px;border-radius:100px;text-decoration:none;transition:opacity .2s,transform .15s;}
-.early-btn:hover{opacity:.88;transform:scale(1.02);}
-.early-spots{font-size:12px;font-weight:300;color:rgba(255,255,255,.25);margin-top:12px;}
-
-.quote-block{max-width:680px;margin:0 auto;text-align:center;padding:20px 0 40px;}
-.quote-text{font-family:var(--serif);font-size:clamp(20px,3vw,28px);font-weight:700;font-style:italic;color:#fff;line-height:1.35;margin-bottom:18px;letter-spacing:-.3px;}
-.quote-text em{color:var(--gold);font-style:normal;}
-.quote-author{font-size:13px;font-weight:300;color:rgba(255,255,255,.35);}
-
-/* TARIFS */
-.tarifs-inner{max-width:920px;margin:0 auto;}
-.tarifs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.p-card{border:0.5px solid var(--bord);border-radius:20px;padding:32px 28px;background:var(--white);position:relative;transition:transform .2s,box-shadow .2s,border-color .2s;}
-.p-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(24,95,165,.1);border-color:var(--pale);}
-.p-card.featured{background:var(--indigo);border-color:var(--indigo);}
-.p-card.featured:hover{box-shadow:0 12px 40px rgba(49,46,129,.3);}
-.p-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--deep);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 16px;border-radius:100px;white-space:nowrap;}
-.p-label{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--pale);margin-bottom:14px;}
-.p-card.featured .p-label{color:rgba(165,180,252,.5);}
-.p-name{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--deep);margin-bottom:8px;letter-spacing:-.3px;}
+.module-lessons{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.module-lessons li{display:flex;align-items:flex-start;gap:9px;font-size:12.5px;font-weight:400;color:var(--ink-muted);line-height:1.55;}
+.module-lessons li::before{content:'→';color:var(--bg-line);font-size:11px;margin-top:1px;flex-shrink:0;}
+.quote-block{max-width:640px;margin:0 auto;text-align:center;padding:10px 0 20px;}
+.quote-text{font-size:clamp(18px,2.6vw,24px);font-weight:700;color:#fff;line-height:1.4;letter-spacing:-.02em;margin-bottom:14px;}
+.quote-text em{color:var(--green-light);font-style:italic;}
+.quote-author{font-size:12.5px;font-weight:400;color:rgba(255,255,255,.35);}
+.tarifs-inner{max-width:780px;margin:0 auto;}
+.tarifs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.p-card{border:1px solid var(--bg-line);border-radius:16px;padding:28px 24px;background:var(--bg);position:relative;transition:transform .2s, border-color .2s;}
+.p-card:hover{transform:translateY(-3px);border-color:var(--ink-faint);}
+.p-card.featured{background:var(--ink);border-color:var(--ink);}
+.p-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:4px 14px;border-radius:100px;white-space:nowrap;}
+.p-label{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px;}
+.p-card.featured .p-label{color:rgba(255,255,255,.3);}
+.p-name{font-size:17px;font-weight:800;color:var(--ink);margin-bottom:10px;letter-spacing:-.03em;}
 .p-card.featured .p-name{color:#fff;}
-.p-early-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);background:rgba(201,168,76,.1);border:0.5px solid rgba(201,168,76,.25);padding:4px 10px;border-radius:100px;margin-bottom:12px;}
-.p-price{display:flex;align-items:flex-end;gap:3px;margin-bottom:6px;font-family:var(--serif);}
-.p-amount{font-size:44px;font-weight:800;letter-spacing:-2px;color:var(--deep);line-height:1;}
-.p-card.featured .p-amount{color:var(--gold);}
-.p-cur{font-size:20px;font-weight:700;color:var(--deep);margin-bottom:6px;}
-.p-card.featured .p-cur{color:var(--gold);}
-.p-period{font-size:12px;font-weight:300;color:var(--pale);margin-bottom:18px;}
-.p-card.featured .p-period{color:rgba(165,180,252,.5);}
-.p-features{list-style:none;margin-bottom:24px;display:flex;flex-direction:column;gap:8px;}
-.p-features li{font-size:13px;font-weight:300;color:var(--light);display:flex;align-items:flex-start;gap:8px;}
-.p-card.featured .p-features li{color:rgba(255,255,255,.65);}
-.p-features li::before{content:'\2713';color:var(--mid);font-weight:700;font-size:11px;margin-top:2px;flex-shrink:0;}
-.p-card.featured .p-features li::before{color:var(--gold);}
-.p-btn{width:100%;background:var(--surf);color:var(--deep);border:0.5px solid var(--bord);cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:500;padding:12px;border-radius:100px;transition:background .2s,color .2s;text-align:center;text-decoration:none;display:block;}
-.p-btn:hover{background:var(--mid);color:#fff;border-color:var(--mid);}
-.p-card.featured .p-btn{background:var(--gold);color:var(--deep);border-color:var(--gold);font-weight:600;}
-.p-card.featured .p-btn:hover{opacity:.88;}
-
-.cta-bottom{background:var(--indigo);padding:88px 48px;text-align:center;position:relative;overflow:hidden;}
-.cta-bottom::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;}
-.cta-bottom::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(201,168,76,.08) 0%,transparent 70%);pointer-events:none;}
-.cta-inner{position:relative;z-index:2;max-width:560px;margin:0 auto;}
-.cta-tag{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:16px;}
-.cta-h2{font-family:var(--serif);font-size:clamp(26px,4vw,42px);font-weight:800;letter-spacing:-.5px;line-height:1.1;color:#fff;margin-bottom:14px;}
-.cta-h2 em{font-style:italic;color:var(--gold);}
-.cta-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:36px;}
-.cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--deep);border:none;cursor:pointer;font-family:var(--sans);font-size:15px;font-weight:600;padding:15px 36px;border-radius:100px;text-decoration:none;transition:opacity .2s,transform .15s;}
-.cta-btn:hover{opacity:.88;transform:scale(1.02);}
-.cta-note{font-size:12px;font-weight:300;color:rgba(255,255,255,.22);margin-top:14px;}
-footer{background:var(--indigo);border-top:0.5px solid rgba(165,180,252,.1);padding:36px 48px 24px;}
+.p-price{display:flex;align-items:flex-end;gap:3px;margin-bottom:5px;}
+.p-amount{font-size:38px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1;}
+.p-card.featured .p-amount{color:var(--green-light);}
+.p-cur{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:5px;}
+.p-card.featured .p-cur{color:rgba(34,197,94,.6);}
+.p-period{font-size:11.5px;font-weight:500;color:var(--ink-faint);margin-bottom:16px;}
+.p-card.featured .p-period{color:rgba(255,255,255,.3);}
+.p-features{list-style:none;margin-bottom:20px;display:flex;flex-direction:column;gap:7px;}
+.p-features li{font-size:12px;font-weight:400;color:var(--ink-muted);display:flex;align-items:flex-start;gap:7px;}
+.p-card.featured .p-features li{color:rgba(255,255,255,.55);}
+.p-features li::before{content:'✓';color:var(--green);font-weight:700;font-size:10px;margin-top:2px;flex-shrink:0;}
+.p-card.featured .p-features li::before{color:var(--green-light);}
+.p-btn{width:100%;background:var(--bg-soft);color:var(--ink);border:1px solid var(--bg-line);cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:600;padding:12px;border-radius:9px;transition:background .2s;text-align:center;text-decoration:none;display:block;}
+.p-btn:hover{background:var(--bg-mid);}
+.p-card.featured .p-btn{background:var(--green);color:#fff;border-color:var(--green);}
+.p-card.featured .p-btn:hover{background:#149041;}
+.cta-bottom{background:var(--ink);padding:72px 48px;text-align:center;}
+.cta-inner{max-width:500px;margin:0 auto;}
+.cta-tag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(34,197,94,.6);margin-bottom:14px;}
+.cta-h2{font-size:clamp(22px,3.5vw,36px);font-weight:800;letter-spacing:-.04em;line-height:1.12;color:#fff;margin-bottom:12px;}
+.cta-h2 em{font-style:italic;color:var(--green-light);}
+.cta-sub{font-size:13.5px;font-weight:400;color:rgba(255,255,255,.4);line-height:1.6;margin-bottom:28px;}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;border:none;cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:700;padding:14px 32px;border-radius:11px;text-decoration:none;transition:background .2s;}
+.cta-btn:hover{background:#149041;}
+.cta-note{font-size:12px;font-weight:400;color:rgba(255,255,255,.22);margin-top:13px;}
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:32px 48px 22px;}
 .ft{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
-.f-brand{font-family:var(--serif);font-size:18px;font-weight:700;color:#fff;}
-.f-brand span{color:var(--gold);}
-.f-links{display:flex;gap:24px;}
-.f-links a{font-size:12px;font-weight:300;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s;}
-.f-links a:hover{color:var(--gold);}
+.ft-brand{display:flex;align-items:center;gap:8px;}
+.ft-mark{width:24px;height:24px;border-radius:7px;background:var(--green);display:flex;align-items:center;justify-content:center;}
+.ft-mark svg{width:13px;height:13px;}
+.ft-name{font-size:14px;font-weight:800;color:#fff;letter-spacing:-.03em;}
+.f-links{display:flex;gap:22px;}
+.f-links a{font-size:11.5px;font-weight:500;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s;}
+.f-links a:hover{color:rgba(255,255,255,.6);}
 .f-copy{font-size:11px;color:rgba(255,255,255,.15);}
+.sim-box{max-width:560px;margin:0 auto;background:var(--bg);border:1px solid var(--bg-line);border-radius:18px;padding:30px 28px;}
+.sim-title{font-size:18px;font-weight:800;color:var(--ink);margin-bottom:5px;letter-spacing:-.02em;}
+.sim-sub{font-size:12.5px;font-weight:400;color:var(--ink-muted);margin-bottom:22px;line-height:1.55;}
+.sim-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.sim-label{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;display:block;}
+.sim-input{width:100%;background:var(--bg-soft);border:1px solid var(--bg-line);border-radius:9px;padding:10px 13px;font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);outline:none;}
+.sim-input:focus{border-color:var(--green);}
+.sim-results{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px;}
+.sim-result{border-radius:11px;padding:14px 12px;text-align:center;background:var(--bg-soft);}
+.sim-result.hi{background:var(--green-pale);}
+.sim-result-amount{font-size:19px;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin-bottom:3px;}
+.sim-result.hi .sim-result-amount{color:var(--green);}
+.sim-result-label{font-size:10.5px;font-weight:500;color:var(--ink-muted);}
 @media(max-width:860px){
-  .nav{padding:0 24px;}.hero{padding:56px 24px 52px;}.hero-inner{grid-template-columns:1fr;}.hero-card{display:none;}
-  .section{padding:60px 24px;}.eco-grid{grid-template-columns:repeat(2,1fr);}
-  .tools-grid{grid-template-columns:1fr;}.compare-grid{grid-template-columns:1fr;}
-  .outcomes-grid{grid-template-columns:1fr;}.early-perks-grid{grid-template-columns:1fr;}
-  .tarifs-grid{grid-template-columns:1fr;max-width:360px;margin:0 auto;}
-  .early-section{padding:60px 24px;}.cta-bottom{padding:60px 24px;}
-  footer{padding:28px 24px 20px;}.ft{flex-direction:column;align-items:flex-start;}
-}
-
-/* ── MOBILE 393px (Redmi Note 13 Pro) ── */
-@media(max-width:480px){
-  .nav{padding:0 16px;height:56px;}
-  .nav-logo{font-size:17px;}
-  .nav-back{font-size:12px;}
-  .nav-cta{font-size:12px;padding:7px 14px;}
-  .hero{padding:44px 18px 48px;}
-  .hero-inner{grid-template-columns:1fr;gap:0;}
+  .nav{padding:0 24px;}
+  .hero{padding:48px 24px 44px;}
+  .hero-inner{grid-template-columns:1fr;}
   .hero-card{display:none;}
-  .hero-h1{font-size:28px;}
-  .hero-sub{font-size:14px;}
-  .hero-meta{gap:12px;}
-  .hero-meta-item{font-size:12px;}
-  .hero-number{font-size:100px;top:-10px;left:-10px;}
-  .section{padding:48px 18px;}
-  .s-title{font-size:22px;}
-  .s-sub{font-size:13px;margin-bottom:32px;}
-  .outcomes-grid{grid-template-columns:1fr;gap:2px;}
-  .oc{padding:22px 18px;}
-  .programme{max-width:100%;}
-  .module-header{padding:16px 16px;gap:10px;}
-  .module-title{font-size:14px;}
-  .module-meta{display:none;}
-  .module-body{padding:0 16px 18px 44px;}
-  .tarifs-grid{grid-template-columns:1fr;gap:16px;max-width:100%;}
-  .p-card{padding:24px 20px;}
-  .p-amount{font-size:36px;}
-  .cta-bottom{padding:52px 18px;}
-  .cta-h2{font-size:24px;}
-  .quote-block{padding:10px 0 24px;}
-  .quote-text{font-size:18px;}
-  footer{padding:28px 18px 20px;}
-  .ft{flex-direction:column;gap:14px;}
-  .f-links{flex-wrap:wrap;gap:14px;}
-  /* Alert banner */
-  .alert-banner{padding:18px;}
-  .alert-inner{gap:12px;}
-  /* Key numbers */
+  .alert-banner{padding:18px 24px;}
+  .section{padding:52px 24px;}
   .key-numbers{grid-template-columns:1fr 1fr;}
-  .kn-num{font-size:26px;}
-  /* Timeline */
-  .timeline::before{left:16px;}
-  .tl-dot{width:32px;height:32px;font-size:12px;}
-  .tl-item{gap:16px;}
-  /* Compare grid */
   .compare-grid{grid-template-columns:1fr;}
-  /* Strategies */
-  .strategies-grid{grid-template-columns:1fr;}
-  /* Budget visual */
-  .budget-bar{height:48px;}
-  .budget-bar-seg{font-size:13px;}
-  .budget-legend{grid-template-columns:1fr;}
-  /* Simulator */
-  .sim-grid{grid-template-columns:1fr;}
+  .outcomes-grid{grid-template-columns:1fr;}
+  .tarifs-grid{grid-template-columns:1fr;max-width:360px;margin:0 auto;}
+  .cta-bottom{padding:52px 24px;}
+  .sim-row{grid-template-columns:1fr;}
   .sim-results{grid-template-columns:1fr;}
-  /* Blockchain steps */
-  .blockchain-steps{grid-template-columns:1fr;}
-  .blockchain-steps::before{display:none;}
-  /* BTC stats */
-  .btc-stats{grid-template-columns:1fr 1fr;}
-  /* Risk grid */
-  .risk-grid{grid-template-columns:1fr;}
-  /* Concepts grid */
-  .concepts-grid{grid-template-columns:1fr 1fr;}
-  /* Tools grid */
-  .tools-grid{grid-template-columns:1fr;}
-  /* Products grid */
-  .products-grid{grid-template-columns:1fr;}
-  /* Eco grid */
-  .eco-grid{grid-template-columns:1fr 1fr;}
-  /* Early perks */
-  .early-perks-grid{grid-template-columns:1fr;}
-  .early-section{padding:48px 18px;}
-  /* Pyramid */
-  .pyramid-bar{margin:0!important;padding:14px 14px;}
-  .pyramid-title{font-size:14px;}
-  .pyramid-sub{font-size:11px;}
+  footer{padding:26px 24px 18px;}
+  .ft{flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:480px){
+  .nav{padding:0 16px;height:58px;}
+  .nav-name{font-size:15px;}
+  .nav-back{font-size:12px;}
+  .nav-cta{font-size:12px;padding:8px 16px;}
+  .hero{padding:40px 18px 36px;}
+  .hero-h1{font-size:26px;}
+  .section{padding:40px 18px;}
+  .s-title{font-size:21px;}
+  .f-links{flex-wrap:wrap;gap:14px;}
 }
 </style>
 </head>
 <body>
 
 <nav class="nav">
-  <a href="index.html" class="nav-logo">Niou<span>Dem</span></a>
-  <a href="index.html" class="nav-back" style="position:absolute;left:50%;transform:translateX(-50%);">← Toutes les formations</a>
-  <a href="index.html#forum" class="nav-cta">Commencer</a>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <span class="nav-name">Petites Actions</span>
+  </a>
+  <a href="index.html" class="nav-back">← Tous les parcours</a>
+  <a href="index.html#tarifs" class="nav-cta">Commencer</a>
 </nav>
 
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-left" style="position:relative;">
-      <div class="hero-number">7</div>
-      <div class="hero-breadcrumb">Formation 7 — Optimiser</div>
-      <div class="hero-badge"><span class="badge-dot"></span>Niveau avancé</div>
-      <h1 class="hero-h1">Optimisation<br><em>fiscale</em></h1>
-      <p class="hero-sub">L'impôt est inévitable — le payer plus que nécessaire ne l'est pas. Cette formation vous apprend à utiliser légalement tous les outils fiscaux à votre disposition pour maximiser ce que vous gardez réellement de vos revenus et investissements.</p>
-      <div class="hero-meta">
-        <div class="hero-meta-item"><strong>7 h</strong> de contenu</div>
-        <div class="hero-meta-item"><strong>20</strong> leçons</div>
-        <div class="hero-meta-item"><strong>4</strong> exercices pratiques</div>
-        <div class="hero-meta-item"><strong>Accès à vie</strong></div>
-      </div>
+      <div class="hero-num-bg">7</div>
+      <div class="hero-pill"><span class="hero-pill-dot"></span>Niveau avancé</div>
+      <h1 class="hero-h1">Optimisation fiscale</h1>
+      <p class="hero-sub">L'impôt est inévitable, le payer plus que nécessaire ne l'est pas. Utilisez légalement tous les outils à disposition.</p>
+      <div class="hero-meta"><div class="hero-meta-item"><strong>20</strong> leçons</div><div class="hero-meta-item"><strong>7h</strong> de contenu</div><div class="hero-meta-item"><strong>400</strong> points</div><div class="hero-meta-item"><strong>Accès à vie</strong></div></div>
     </div>
     <div class="hero-card">
-      <div class="hc-label">Club NiouDem — toutes les formations</div>
-      <div class="hc-price"><span>60</span><span class="hc-price-sup">€</span></div>
-      <div class="hc-price-label">accès à l'ensemble des formations · à vie</div>
+      <div class="hc-label">Ce parcours rapporte</div>
+      <div class="hc-pts"><span class="hc-pts-num">400</span><span class="hc-pts-label">points</span></div>
       <div class="hc-divider"></div>
-      <div class="hc-feature"><span class="hc-check">✓</span>Accès à l'ensemble des formations</div>
-      <div class="hc-feature"><span class="hc-check">✓</span>Statut Early Member inclus</div>
-      <div class="hc-feature"><span class="hc-check">✓</span>Communauté privée</div>
-      <div class="hc-feature"><span class="hc-check">✓</span>Mises à jour à vie</div>
-      <div class="hc-feature"><span class="hc-check">✓</span>1 session coach offerte</div>
-      <a href="https://buy.stripe.com/CLUB_PLACEHOLDER?utm_source=petitesactions" class="hc-btn">Rejoindre le Club — 60 €</a>
-      <span class="hc-free">ou <a href="index.html#coach" style="color:rgba(255,255,255,.35);text-decoration:underline;">premier contact gratuit</a></span>
+      <div class="hc-feature"><span class="hc-check">✓</span>Leçons courtes</div>
+      <div class="hc-feature"><span class="hc-check">✓</span>Quiz après chaque leçon</div>
+      <div class="hc-feature"><span class="hc-check">✓</span>Actions concrètes</div>
+      <div class="hc-feature"><span class="hc-check">✓</span>Badge de progression</div>
+      <a href="index.html#tarifs" class="hc-btn">Débloquer, 60 €</a>
     </div>
   </div>
 </div>
 
-<section class="section section-bg">
-  <div class="s-tag" style="text-align:center;">Ce que vous économisez</div>
-  <h2 class="s-title" style="text-align:center;margin-bottom:8px;">L'optimisation fiscale en chiffres</h2>
-  <p class="s-sub" style="text-align:center;margin:0 auto 48px;">Des économies légales et significatives — accessibles à tous, pas seulement aux riches.</p>
-  <div class="eco-grid">
-    <div class="eco-card"><div class="eco-num">30%</div><div class="eco-label">Flat tax sur les gains financiers — évitable partiellement via le PEA</div></div>
-    <div class="eco-card"><div class="eco-num">−4 600€</div><div class="eco-label">Abattement annuel sur dividendes pour une personne seule via le PEA</div></div>
-    <div class="eco-card"><div class="eco-num">+11%</div><div class="eco-label">Gain net annuel supplémentaire en optimisant son enveloppe fiscale vs compte ordinaire</div></div>
-    <div class="eco-card"><div class="eco-num">41%</div><div class="eco-label">TMI max évitée grâce au PER pour les contribuables dans les tranches élevées</div></div>
+
+<section class="section section-soft">
+  <div class="s-tag"><span class="s-tag-dot"></span>Ce que vous économisez</div>
+  <h2 class="s-title">L'optimisation fiscale en chiffres</h2>
+  <div class="key-numbers">
+    <div class="kn-card"><div class="kn-num" style="color:var(--violet);">30%</div><div class="kn-label">Flat tax, évitable partiellement via le PEA</div></div>
+    <div class="kn-card"><div class="kn-num" style="color:var(--violet);">−4 600€</div><div class="kn-label">Abattement annuel via assurance-vie</div></div>
+    <div class="kn-card"><div class="kn-num" style="color:var(--violet);">+11%</div><div class="kn-label">Gain net annuel en optimisant son enveloppe</div></div>
+    <div class="kn-card"><div class="kn-num" style="color:var(--violet);">41%</div><div class="kn-label">TMI max évitée grâce au PER</div></div>
   </div>
 </section>
 
 <section class="section section-white">
-  <div class="s-tag">Les outils d'optimisation</div>
-  <h2 class="s-title">6 leviers fiscaux légaux à maîtriser</h2>
-  <p class="s-sub">Ces outils existent pour tous les contribuables — mais la majorité ne les connaît pas ou ne les utilise pas correctement.</p>
-  <div class="tools-grid">
-    <div class="tool-card featured">
-      <div class="tool-icon">🏦</div>
-      <div class="tool-name">PEA</div>
-      <span class="tool-badge gold">Priorité absolue</span>
-      <div class="tool-desc">Après 5 ans, vos gains boursiers sont exonérés d'impôt sur le revenu. Seuls les prélèvements sociaux (17,2%) s'appliquent. L'enveloppe la plus puissante pour l'investisseur français.</div>
-      <div class="tool-avantage">Économie potentielle : jusqu'à 12,8% d'IR en moins</div>
-    </div>
-    <div class="tool-card">
-      <div class="tool-icon">🌱</div>
-      <div class="tool-name">PER</div>
-      <span class="tool-badge high">Impact élevé</span>
-      <div class="tool-desc">Chaque versement est déductible de votre revenu imposable. Pour un contribuable à 30% de TMI, 1 000 € versés coûtent réellement 700 € après économie fiscale.</div>
-      <div class="tool-avantage">Économie immédiate selon votre tranche marginale</div>
-    </div>
-    <div class="tool-card">
-      <div class="tool-icon">🛡️</div>
-      <div class="tool-name">Assurance-vie</div>
-      <span class="tool-badge high">Impact élevé</span>
-      <div class="tool-desc">Après 8 ans, abattement de 4 600 € (9 200 € pour un couple) sur les gains retirés. Et en cas de décès, transmission hors succession jusqu'à 152 500 € par bénéficiaire.</div>
-      <div class="tool-avantage">Transmission + capitalisation fiscalement optimisée</div>
-    </div>
-    <div class="tool-card">
-      <div class="tool-icon">🏠</div>
-      <div class="tool-name">LMNP réel</div>
-      <span class="tool-badge medium">Immobilier</span>
-      <div class="tool-desc">Amortir son bien immobilier comptablement pour réduire — voire annuler — les revenus locatifs imposables. L'un des rares niches fiscales encore très accessibles.</div>
-      <div class="tool-avantage">Revenu locatif potentiellement non imposé pendant 10-15 ans</div>
-    </div>
-    <div class="tool-card">
-      <div class="tool-icon">💸</div>
-      <div class="tool-name">Déficit foncier</div>
-      <span class="tool-badge medium">Immobilier</span>
-      <div class="tool-desc">Imputer les travaux de rénovation sur votre revenu global pour réduire votre impôt — dans la limite de 10 700 € par an reportable.</div>
-      <div class="tool-avantage">Réduction directe du revenu imposable</div>
-    </div>
-    <div class="tool-card">
-      <div class="tool-icon">🎁</div>
-      <div class="tool-name">Dons & réductions</div>
-      <span class="tool-badge medium">Accessible à tous</span>
-      <div class="tool-desc">Les dons aux associations ouvrent droit à une réduction d'impôt de 66 à 75%. Combiné à d'autres dispositifs, un levier simple et souvent négligé.</div>
-      <div class="tool-avantage">Réduction de 66 à 75% du montant donné</div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-bg">
-  <div class="s-tag">Choisir le bon régime</div>
-  <h2 class="s-title">Flat tax ou barème progressif ?</h2>
-  <p class="s-sub">Pour vos revenus financiers, vous pouvez choisir entre deux régimes d'imposition — la formation vous apprend à calculer lequel est le plus avantageux selon votre situation.</p>
-  <div class="compare-grid">
-    <div class="compare-card flat">
-      <div class="compare-header"><div class="compare-icon">⚡</div><div class="compare-title">Flat tax (PFU)</div></div>
-      <div class="compare-rec">Le plus simple</div>
-      <div class="compare-rate">30%</div>
-      <div class="compare-rate-label">12,8% IR + 17,2% prélèvements sociaux</div>
-      <ul class="compare-list">
-        <li>Taux unique sur tous les revenus du capital</li>
-        <li>Pas de calcul complexe — prélevé à la source</li>
-        <li>Avantageux si votre TMI est supérieur à 11%</li>
-        <li>Applicable aux dividendes, plus-values, intérêts</li>
-      </ul>
-    </div>
-    <div class="compare-card">
-      <div class="compare-header"><div class="compare-icon">📊</div><div class="compare-title">Barème progressif</div></div>
-      <ul class="compare-list">
-        <li>Revenus du capital ajoutés à vos autres revenus</li>
-        <li>Avantageux si vous êtes non imposable ou à 11% de TMI</li>
-        <li>Permet de bénéficier de l'abattement de 40% sur les dividendes</li>
-        <li>Choix à faire lors de la déclaration annuelle</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section class="section section-white">
-  <div class="s-tag">Ce que vous apprenez</div>
-  <h2 class="s-title">6 compétences pour optimiser légalement</h2>
-  <p class="s-sub">Des stratégies concrètes pour garder plus de ce que vous gagnez — sans risque fiscal, sans complexité excessive.</p>
+  <div class="s-tag"><span class="s-tag-dot"></span>Les outils</div>
+  <h2 class="s-title">6 leviers fiscaux légaux</h2>
   <div class="outcomes-grid">
-    <div class="oc"><div class="oc-icon">🔍</div><div class="oc-title">Analyser votre situation fiscale</div><div class="oc-desc">Calculer votre taux marginal d'imposition réel et identifier vos marges d'optimisation selon votre profil.</div></div>
-    <div class="oc"><div class="oc-icon">🏦</div><div class="oc-title">Optimiser vos enveloppes fiscales</div><div class="oc-desc">Utiliser PEA, PER et assurance-vie dans le bon ordre et dans les bonnes proportions selon votre situation.</div></div>
-    <div class="oc"><div class="oc-icon">🏠</div><div class="oc-title">Réduire l'impôt sur vos revenus locatifs</div><div class="oc-desc">Choisir entre micro-foncier, réel et LMNP selon votre situation pour minimiser légalement votre imposition.</div></div>
-    <div class="oc"><div class="oc-icon">⚖️</div><div class="oc-title">Choisir entre flat tax et barème</div><div class="oc-desc">Calculer chaque année lequel des deux régimes est le plus avantageux pour vos revenus du capital.</div></div>
-    <div class="oc"><div class="oc-icon">🎁</div><div class="oc-title">Utiliser toutes les réductions disponibles</div><div class="oc-desc">Dons, emploi à domicile, frais professionnels réels — ne laisser aucune réduction sur la table.</div></div>
-    <div class="oc"><div class="oc-icon">📋</div><div class="oc-title">Déclarer correctement et sans stress</div><div class="oc-desc">Maîtriser la déclaration de revenus pour les investisseurs — plus-values, dividendes, revenus locatifs, crypto.</div></div>
+    <div class="oc"><div class="oc-icon">🏦</div><div class="oc-title">PEA</div><div class="oc-desc">Exonération d'impôt après 5 ans.</div></div>
+    <div class="oc"><div class="oc-icon">🌱</div><div class="oc-title">PER</div><div class="oc-desc">Déduction immédiate du revenu imposable.</div></div>
+    <div class="oc"><div class="oc-icon">🛡️</div><div class="oc-title">Assurance-vie</div><div class="oc-desc">Abattement après 8 ans + transmission.</div></div>
+    <div class="oc"><div class="oc-icon">🏠</div><div class="oc-title">LMNP réel</div><div class="oc-desc">Amortir son bien, réduire l'imposable.</div></div>
+    <div class="oc"><div class="oc-icon">💸</div><div class="oc-title">Déficit foncier</div><div class="oc-desc">Imputer les travaux sur le revenu global.</div></div>
+    <div class="oc"><div class="oc-icon">🎁</div><div class="oc-title">Dons</div><div class="oc-desc">Réduction d'impôt de 66 à 75%.</div></div>
   </div>
 </section>
 
-<section class="section section-bg">
-  <div class="s-tag">Programme complet</div>
-  <h2 class="s-title">20 leçons · 5 modules</h2>
-  <p class="s-sub">De l'analyse de votre situation à la déclaration optimisée — un parcours complet pour l'investisseur qui veut garder le maximum.</p>
+<section class="section section-soft">
+  <div class="s-tag"><span class="s-tag-dot"></span>Choisir le bon régime</div>
+  <h2 class="s-title">Flat tax ou barème ?</h2>
+  <div class="compare-grid">
+    <div class="compare-card alt"><div class="compare-header"><span class="compare-icon">⚡</span><span class="compare-title">Flat tax, 30%</span></div><ul class="compare-list"><li>Taux unique, simple</li><li>Avantageux si TMI > 11%</li></ul></div>
+    <div class="compare-card good"><div class="compare-header"><span class="compare-icon">📊</span><span class="compare-title">Barème progressif</span></div><ul class="compare-list"><li>Avantageux si non imposable</li><li>Abattement 40% sur dividendes</li></ul></div>
+  </div>
+</section>
+
+
+<section class="section section-soft">
+  <div class="s-tag"><span class="s-tag-dot"></span>Programme</div>
+  <h2 class="s-title">Le détail du parcours</h2>
+  <p class="s-sub">Une progression logique, sans jargon inutile.</p>
   <div class="programme">
-    <div class="module open" onclick="toggleModule(this)">
-      <div class="module-header">
-        <span class="module-num">01</span>
-        <span class="module-title">Comprendre votre fiscalité personnelle</span>
-        <span class="module-meta">4 leçons · 60 min</span>
-        <span class="module-toggle">+</span>
-      </div>
-      <div class="module-body">
-        <ul class="module-lessons">
-          <li>Le barème progressif de l'IR — comprendre les tranches et calculer son TMI réel</li>
-          <li>Revenus du travail, du capital, fonciers — comment chaque catégorie est imposée</li>
-          <li>La flat tax (PFU) — fonctionnement, avantages et cas où le barème est préférable</li>
-          <li>Exercice : analyser votre avis d'imposition et identifier vos marges d'optimisation</li>
-        </ul>
-      </div>
-    </div>
-    <div class="module" onclick="toggleModule(this)">
-      <div class="module-header">
-        <span class="module-num">02</span>
-        <span class="module-title">Optimiser ses placements financiers</span>
-        <span class="module-meta">4 leçons · 65 min</span>
-        <span class="module-toggle">+</span>
-      </div>
-      <div class="module-body">
-        <ul class="module-lessons">
-          <li>Le PEA — stratégie de retrait optimale, calcul des gains nets après 5 ans</li>
-          <li>L'assurance-vie — timing des retraits, clause bénéficiaire, stratégie de transmission</li>
-          <li>Le PER — à qui ça profite vraiment et comment calibrer ses versements</li>
-          <li>Exercice : simuler votre gain fiscal sur 10 ans selon votre enveloppe actuelle</li>
-        </ul>
-      </div>
-    </div>
-    <div class="module" onclick="toggleModule(this)">
-      <div class="module-header">
-        <span class="module-num">03</span>
-        <span class="module-title">Fiscalité immobilière avancée</span>
-        <span class="module-meta">4 leçons · 70 min</span>
-        <span class="module-toggle">+</span>
-      </div>
-      <div class="module-body">
-        <ul class="module-lessons">
-          <li>Micro-foncier vs réel simplifié — calcul comparatif selon votre niveau de charges</li>
-          <li>Le statut LMNP réel — amortissements, charges déductibles, comptabilité simplifiée</li>
-          <li>Le déficit foncier — comment l'utiliser pour réduire son impôt global</li>
-          <li>Exercice : optimiser la fiscalité d'un bien locatif réel avec vos chiffres</li>
-        </ul>
-      </div>
-    </div>
-    <div class="module" onclick="toggleModule(this)">
-      <div class="module-header">
-        <span class="module-num">04</span>
-        <span class="module-title">Fiscalité crypto et actifs numériques</span>
-        <span class="module-meta">4 leçons · 55 min</span>
-        <span class="module-toggle">+</span>
-      </div>
-      <div class="module-body">
-        <ul class="module-lessons">
-          <li>Le régime fiscal crypto en France — flat tax 30%, seuil de cession, cas de non-imposition</li>
-          <li>Calculer ses plus-values crypto — méthode PUMP, prix de revient, cas pratiques</li>
-          <li>Déclarer ses cryptos — formulaires, outils (Koinly, Waltio), pièges à éviter</li>
-          <li>Exercice : simuler votre imposition sur un portefeuille crypto réel</li>
-        </ul>
-      </div>
-    </div>
-    <div class="module" onclick="toggleModule(this)">
-      <div class="module-header">
-        <span class="module-num">05</span>
-        <span class="module-title">Stratégie fiscale globale</span>
-        <span class="module-meta">4 leçons · 60 min</span>
-        <span class="module-toggle">+</span>
-      </div>
-      <div class="module-body">
-        <ul class="module-lessons">
-          <li>Construire sa stratégie fiscale personnelle — combinaison optimale des outils</li>
-          <li>Anticiper les changements de loi — comment adapter sa stratégie sans paniquer</li>
-          <li>Les erreurs fiscales les plus courantes des investisseurs — et comment les éviter</li>
-          <li>Exercice final : votre plan d'optimisation fiscale complet pour l'année à venir</li>
-        </ul>
-      </div>
-    </div>
+    
+<div class="module open" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">01</span><span class="module-title">Comprendre sa fiscalité</span><span class="module-meta">4 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>Le barème progressif de l'IR</li><li>Revenus du travail, capital, fonciers</li><li>La flat tax expliquée</li><li>Analyser votre avis d'imposition</li></ul></div></div>
+<div class="module" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">02</span><span class="module-title">Optimiser ses placements</span><span class="module-meta">4 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>Le PEA en stratégie de retrait</li><li>L'assurance-vie et transmission</li><li>Le PER, à qui ça profite</li><li>Simuler votre gain fiscal</li></ul></div></div>
+<div class="module" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">03</span><span class="module-title">Fiscalité immobilière</span><span class="module-meta">4 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>Micro-foncier vs réel</li><li>Le statut LMNP réel</li><li>Le déficit foncier</li><li>Optimiser votre fiscalité réelle</li></ul></div></div>
+<div class="module" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">04</span><span class="module-title">Fiscalité crypto</span><span class="module-meta">4 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>Le régime fiscal crypto en France</li><li>Calculer ses plus-values</li><li>Déclarer ses cryptos</li><li>Simuler votre imposition</li></ul></div></div>
+<div class="module" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">05</span><span class="module-title">Stratégie fiscale globale</span><span class="module-meta">4 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>Combiner les outils efficacement</li><li>Anticiper les changements de loi</li><li>Les erreurs courantes</li><li>Votre plan d'optimisation</li></ul></div></div>
+
   </div>
 </section>
 
-<!-- EARLY MEMBER -->
-<div class="early-section">
-  <div class="early-inner">
-    <div class="early-top">
-      <div class="early-tag">Offre de lancement</div>
-      <h2 class="early-title">Statut <em>Early Member</em></h2>
-      <p class="early-sub">Les premiers membres qui rejoignent NiouDem bénéficient d'avantages exclusifs — permanents — que les futurs membres n'auront jamais. Et ce n'est que le début.</p>
-    </div>
-    <div class="early-perks-grid">
-      <div class="early-perk-card">
-        <div class="ep-icon">🎓</div>
-        <div class="ep-title">Accès à toutes les formations</div>
-        <div class="ep-desc">Les Accès à l'ensemble des formations de NiouDem — pour un seul prix unique de 60 €. Accès à vie, mises à jour incluses.</div>
-      </div>
-      <div class="early-perk-card">
-        <div class="ep-icon">⚡</div>
-        <div class="ep-title">Accès prioritaire aux nouveautés</div>
-        <div class="ep-desc">Chaque nouvelle formation, outil ou contenu est disponible en avant-première pour les Early Members — avant tout le monde.</div>
-      </div>
-      <div class="early-perk-card">
-        <div class="ep-icon">🏅</div>
-        <div class="ep-title">Badge Early Member</div>
-        <div class="ep-desc">Un statut visible dans la communauté qui distingue les fondateurs des autres membres — pour toujours.</div>
-      </div>
-      <div class="early-perk-card">
-        <div class="ep-icon">🎙️</div>
-        <div class="ep-title">Sessions live exclusives</div>
-        <div class="ep-desc">Des sessions questions/réponses live avec les coachs — réservées aux Early Members, non accessibles autrement.</div>
-      </div>
-      <div class="early-perk-card">
-        <div class="ep-icon">💬</div>
-        <div class="ep-title">Influence sur le contenu</div>
-        <div class="ep-desc">Vos retours façonnent les prochaines formations. Les Early Members ont une voix directe sur les sujets traités.</div>
-      </div>
-      <div class="early-perk-card mystery">
-        <div class="ep-icon">🎁</div>
-        <div class="ep-title">Surprises à venir</div>
-        <div class="ep-mystery">Nous préparons des avantages supplémentaires pour les Early Members — outils exclusifs, partenariats, accès spéciaux. Nous ne pouvons pas encore tout dévoiler. Mais ceux qui sont là dès le début en profiteront en premier.</div>
-      </div>
-    </div>
-    <div class="early-cta">
-      <div class="early-cta-title">Rejoignez les premiers membres de NiouDem</div>
-      <div class="early-cta-sub">60 € · Accès à vie · Statut Early Member permanent</div>
-      <a href="https://buy.stripe.com/CLUB_PLACEHOLDER?utm_source=petitesactions" class="early-btn">Devenir Early Member — 60 € →</a>
-      <div class="early-spots">⚡ Offre de lancement — places limitées</div>
-    </div>
-  </div>
-</div>
-
-<section class="section section-dark">
+<section class="section section-ink">
   <div class="quote-block">
-    <div class="quote-text">"Les impôts sont le prix que nous payons pour une société <em>civilisée</em> — mais personne n'est obligé de payer plus que sa juste part."</div>
-    <div class="quote-author">— Oliver Wendell Holmes Jr., juge à la Cour Suprême américaine</div>
+    <div class="quote-text">"Personne n'est obligé de payer plus que sa <em>juste part.</em>"</div>
+    <div class="quote-author">, Oliver Wendell Holmes Jr., juge à la Cour Suprême</div>
   </div>
 </section>
 
-<section class="section section-white" id="tarifs">
+<section class="section section-white">
   <div class="tarifs-inner">
-    <div class="s-tag" style="text-align:center;">Une offre, tout inclus</div>
-    <h2 class="s-title" style="text-align:center;margin-bottom:8px;">Le Club NiouDem</h2>
-    <p class="s-sub" style="text-align:center;margin:0 auto 48px;">60 € pour accéder à l'ensemble des formations.
-Premier échange avec un coach toujours offert.</p>
+    <div class="s-tag" style="justify-content:center;display:flex;"><span class="s-tag-dot"></span>Tarifs</div>
+    <h2 class="s-title" style="text-align:center;">Débloquez ce parcours</h2>
+    <p class="s-sub" style="text-align:center;margin-left:auto;margin-right:auto;">60 € pour l'ensemble des 8 formations, pas seulement celle-ci.</p>
     <div class="tarifs-grid">
       <div class="p-card">
-        <div class="p-label">Pour démarrer</div>
-        <div class="p-name">Premier contact</div>
+        <div class="p-label">Gratuit</div>
+        <div class="p-name">Découverte</div>
         <div class="p-price"><span class="p-amount">0</span><span class="p-cur">€</span></div>
-        <div class="p-period">gratuit · sans engagement</div>
-        <ul class="p-features">
-          <li>Appel découverte 30 min</li>
-          <li>Analyse de votre profil fiscal</li>
-          <li>Recommandations personnalisées</li>
-          <li>Sans carte bancaire requise</li>
-        </ul>
-        <a href="index.html#coach" class="p-btn">Prendre rendez-vous</a>
+        <div class="p-period">sans engagement</div>
+        <ul class="p-features"><li>Premier parcours offert</li><li>Quiz et actions inclus</li><li>Sans carte bancaire</li></ul>
+        <a href="index.html#tarifs" class="p-btn">Continuer gratuitement</a>
       </div>
       <div class="p-card featured">
-        <div class="p-badge">⚡ Early Member</div>
+        <div class="p-badge">Recommandé</div>
         <div class="p-label">Accès complet</div>
-        <div class="p-name">Club NiouDem</div>
-        <div class="p-early-badge">✦ Statut Early Member</div>
+        <div class="p-name">Toutes les formations</div>
         <div class="p-price"><span class="p-amount">60</span><span class="p-cur">€</span></div>
-        <div class="p-period">accès à l'ensemble des formations · à vie</div>
-        <ul class="p-features">
-          <li>Accès à l'ensemble des formations</li>
-          <li>Accès à vie + mises à jour</li>
-          <li>Communauté privée d'investisseurs</li>
-          <li>1 session coach offerte</li>
-          <li>Accès prioritaire aux nouveautés</li>
-          <li>Surprises Early Member à venir</li>
-        </ul>
-        <a href="https://buy.stripe.com/CLUB_PLACEHOLDER?utm_source=petitesactions" class="p-btn">Rejoindre le Club — 60 €</a>
+        <div class="p-period">à vie · tout inclus</div>
+        <ul class="p-features"><li>8 formations complètes</li><li>Accès à vie + mises à jour</li><li>1 session coach offerte</li><li>Communauté privée</li></ul>
+        <a href="https://buy.stripe.com/CLUB_PLACEHOLDER?utm_source=petitesactions" class="p-btn">Débloquer, 60 €</a>
       </div>
       <div class="p-card">
-        <div class="p-label">Pour aller plus loin</div>
-        <div class="p-name">Session coaching</div>
+        <div class="p-label">À la carte</div>
+        <div class="p-name">Coaching</div>
         <div class="p-price"><span class="p-amount">25</span><span class="p-cur">€</span></div>
-        <div class="p-period">par session de 1h30</div>
-        <ul class="p-features">
-          <li>1h30 de coaching individuel</li>
-          <li>Stratégie fiscale personnalisée</li>
-          <li>Support email 48h après</li>
-          <li>Abonnement &amp; forfait possible</li>
-        </ul>
-        <a href="https://buy.stripe.com/SESSION_PLACEHOLDER?utm_source=petitesactions" class="p-btn">Réserver — 25 €</a>
+        <div class="p-period">par session 1h30</div>
+        <ul class="p-features"><li>1h30 individuel</li><li>Stratégie personnalisée</li><li>Forfait possible</li></ul>
+        <a href="https://buy.stripe.com/SESSION_PLACEHOLDER?utm_source=petitesactions" class="p-btn">Réserver, 25 €</a>
       </div>
     </div>
   </div>
@@ -629,24 +334,25 @@ Premier échange avec un coach toujours offert.</p>
 
 <div class="cta-bottom">
   <div class="cta-inner">
-    <div class="cta-tag">Dernière formation — et pas des moindres</div>
+    <div class="cta-tag">Prêt à commencer ?</div>
     <h2 class="cta-h2">L'impôt optimisé,<br>c'est de l'argent <em>gagné.</em></h2>
-    <p class="cta-sub">Chaque euro d'impôt évité légalement est un euro qui continue de travailler pour vous. Ne laissez plus l'État prendre plus que sa part.</p>
-    <a href="https://buy.stripe.com/CLUB_PLACEHOLDER?utm_source=petitesactions" class="cta-btn">Rejoindre le Club NiouDem — 60 € →</a>
-    <div class="cta-note">ou <a href="index.html#coach" style="color:rgba(255,255,255,.22);text-decoration:underline;">prendre un premier contact gratuit</a></div>
+    <p class="cta-sub">5 minutes suffisent pour commencer. Pas besoin de tout savoir.</p>
+    <a href="index.html#tarifs" class="cta-btn">Commencer gratuitement →</a>
   </div>
 </div>
 
 <footer>
   <div class="ft">
-    <div class="f-brand">Niou<span>Dem</span></div>
+    <div class="ft-brand">
+      <span class="ft-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="ft-name">Petites Actions</span>
+    </div>
     <div class="f-links">
       <a href="index.html">Accueil</a>
       <a href="index.html#formations">Formations</a>
       <a href="index.html#tarifs">Tarifs</a>
-      <a href="index.html#forum">Communauté</a>
     </div>
-    <div class="f-copy">© 2025 NiouDem · Paris, France</div>
+    <div class="f-copy">© 2025 Petites Actions · Paris, France</div>
   </div>
 </footer>
 
@@ -655,6 +361,11 @@ function toggleModule(el){
   var isOpen=el.classList.contains('open');
   document.querySelectorAll('.module').forEach(function(m){m.classList.remove('open');});
   if(!isOpen)el.classList.add('open');
+}
+function calcSim(){
+  var inputs = document.querySelectorAll('.sim-input');
+  var fmt = function(n){return n>0?Math.round(n).toLocaleString('fr-FR')+' €':',';};
+  window.simFmt = fmt;
 }
 </script>
 </body>
