@@ -299,7 +299,7 @@ footer{border-top:1px solid var(--bg-line);padding:40px 48px 28px;}
     <li><a href="#formations">Formations</a></li>
     <li><a href="#tarifs">Tarifs</a></li>
   </ul>
-  <div class="nav-right">
+  <div class="nav-right" id="navRight">
     <a href="#" class="nav-login">Se connecter</a>
     <a href="inscription.html" class="nav-cta">Commencer gratuitement</a>
   </div>
@@ -723,10 +723,23 @@ function applyHublots(completed){
   });
 }
 
+async function signOut(){
+  await sb.auth.signOut();
+  window.location.href = 'index.html';
+}
+
 (async function(){
   applyHublots(false); // état par défaut le temps de vérifier la session
   const { data: { session } } = await sb.auth.getSession();
   if(!session){ return; }
+
+  const { data: profile } = await sb.from('profiles').select('prenom').eq('id', session.user.id).single();
+  const prenom = (profile && profile.prenom) ? profile.prenom : 'Toi';
+  document.getElementById('navRight').innerHTML =
+    '<span style="font-size:13.5px;font-weight:600;color:var(--ink);">👋 ' + prenom + '</span>' +
+    '<a href="lecons-monnaie.html" class="nav-cta">Continuer →</a>' +
+    '<a href="#" onclick="signOut();return false;" class="nav-login">Déconnexion</a>';
+
   const { data: badge } = await sb.from('badges').select('badge_name').eq('user_id', session.user.id).eq('badge_name','le_declic').maybeSingle();
   applyHublots(!!badge);
 })();
