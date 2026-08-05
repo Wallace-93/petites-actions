@@ -55,9 +55,21 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);-webkit-font-
 .ht-check{width:16px;height:16px;border-radius:50%;background:var(--green-pale);display:flex;align-items:center;justify-content:center;color:var(--green);font-size:10px;font-weight:800;flex-shrink:0;}
 
 /* ── PHONE MOCKUP ── */
-.phone-wrap{position:relative;display:flex;justify-content:center;}
-.phone{width:300px;background:var(--ink);border-radius:36px;padding:10px;box-shadow:none;position:relative;}
-.phone-screen{background:var(--bg);border-radius:28px;overflow:hidden;padding:20px 18px 24px;}
+.phone-wrap{position:relative;display:flex;justify-content:center;perspective:1200px;}
+.phone-wrap::before{content:'';position:absolute;bottom:-10px;width:220px;height:40px;background:radial-gradient(ellipse,rgba(0,0,0,.18) 0%,transparent 70%);border-radius:50%;filter:blur(6px);}
+.phone{width:300px;background:linear-gradient(155deg,#1c1c1e,#0a0a0b);border-radius:44px;padding:12px;position:relative;box-shadow:0 30px 70px -15px rgba(0,0,0,.35),0 8px 20px -6px rgba(0,0,0,.25),inset 0 0 0 1.5px rgba(255,255,255,.08);transform:rotate(-1.5deg);}
+.phone-island{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:84px;height:22px;background:#000;border-radius:14px;z-index:5;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;}
+.phone-island::before{content:'';width:7px;height:7px;border-radius:50%;background:#1a2f1a;box-shadow:inset 0 0 0 1px rgba(100,200,255,.15);}
+.phone-statusbar{display:flex;align-items:center;justify-content:space-between;padding:8px 18px 2px;font-size:12px;font-weight:700;color:var(--ink);}
+.phone-status-icons{display:flex;align-items:center;gap:4px;}
+.phone-screen{background:var(--bg);border-radius:34px;overflow:hidden;position:relative;box-shadow:inset 0 0 0 1px rgba(0,0,0,.04);}
+.phone-viewport{height:430px;overflow:hidden;position:relative;padding:6px 18px 24px;}
+.phone-scroll-content{animation:phoneAutoScroll 9s ease-in-out infinite;}
+@keyframes phoneAutoScroll{
+  0%,12%{transform:translateY(0);}
+  45%,55%{transform:translateY(-92px);}
+  88%,100%{transform:translateY(0);}
+}
 .ps-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
 .ps-avatar{display:flex;align-items:center;gap:8px;}
 .ps-av-circle{width:30px;height:30px;border-radius:50%;background:var(--violet-pale);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--violet);}
@@ -169,6 +181,13 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);-webkit-font-
 /* ── FORMATIONS ── */
 .formations-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
 .f-card{background:var(--bg);border:1px solid var(--bg-line);border-radius:16px;padding:24px 20px;cursor:pointer;transition:border-color .2s, transform .2s;}
+.f-hublot{position:absolute;top:14px;right:14px;width:10px;height:10px;border-radius:50%;box-shadow:0 0 0 3px rgba(0,0,0,.03);}
+.f-hublot.on{background:var(--green);box-shadow:0 0 0 3px var(--green-pale),0 0 8px rgba(34,197,94,.5);}
+.f-hublot.off{background:var(--coral);box-shadow:0 0 0 3px var(--coral-pale);}
+.f-card{position:relative;}
+.f-card.locked{cursor:not-allowed;}
+.f-card.locked:hover{border-color:var(--bg-line);transform:none;}
+.f-card.locked .fc-title,.f-card.locked .fc-desc{opacity:.55;}
 .f-card:hover{border-color:var(--green);transform:translateY(-3px);}
 .fc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
 .fc-num{width:28px;height:28px;border-radius:8px;background:var(--bg-soft);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--ink-faint);}
@@ -233,6 +252,9 @@ footer{border-top:1px solid var(--bg-line);padding:40px 48px 28px;}
   .hero-inner{grid-template-columns:1fr;gap:40px;padding-bottom:48px;}
   .phone-wrap{order:-1;}
   .phone{width:260px;}
+  .phone-viewport{height:370px;}
+  .phone-scroll-content{animation-name:phoneAutoScrollSm;}
+  @keyframes phoneAutoScrollSm{0%,12%{transform:translateY(0);}45%,55%{transform:translateY(-80px);}88%,100%{transform:translateY(0);}}
   .section{padding:64px 24px;}
   .concept-grid{grid-template-columns:1fr 1fr;}
   .anatomy-grid{grid-template-columns:1fr;}
@@ -278,7 +300,7 @@ footer{border-top:1px solid var(--bg-line);padding:40px 48px 28px;}
   </ul>
   <div class="nav-right">
     <a href="#" class="nav-login">Se connecter</a>
-    <a href="#tarifs" class="nav-cta">Commencer gratuitement</a>
+    <a href="inscription.html" class="nav-cta">Commencer gratuitement</a>
   </div>
 </nav>
 
@@ -290,7 +312,7 @@ footer{border-top:1px solid var(--bg-line);padding:40px 48px 28px;}
       <h1 class="hero-h1">Apprendre à gérer son argent<br>et à investir, <span class="accent">une petite<br>action</span> à la fois.</h1>
       <p class="hero-sub">Des leçons courtes, des quiz pour valider, des actions concrètes à réaliser. Pas de jargon, pas de blabla, juste des progrès mesurables, jour après jour.</p>
       <div class="hero-actions">
-        <a href="#tarifs" class="btn-primary">Commencer maintenant →</a>
+        <a href="inscription.html" class="btn-primary">Commencer maintenant →</a>
         <a href="#concept" class="btn-ghost">Comment ça marche ↓</a>
       </div>
       <div class="hero-trust">
@@ -301,40 +323,63 @@ footer{border-top:1px solid var(--bg-line);padding:40px 48px 28px;}
     </div>
     <div class="phone-wrap">
       <div class="phone">
+        <div class="phone-island"></div>
         <div class="phone-screen">
-          <div class="ps-header">
-            <div class="ps-avatar">
-              <div class="ps-av-circle">SK</div>
-              <div>
-                <div class="ps-greet">Bonjour</div>
-                <div class="ps-name">Sara</div>
+          <div class="phone-statusbar">
+            <span>9:41</span>
+            <div class="phone-status-icons">
+              <svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="7" width="3" height="4" rx="0.5" fill="currentColor"/><rect x="4.5" y="4.5" width="3" height="6.5" rx="0.5" fill="currentColor"/><rect x="9" y="2" width="3" height="9" rx="0.5" fill="currentColor"/><rect x="13.5" y="0" width="3" height="11" rx="0.5" fill="currentColor" opacity=".35"/></svg>
+              <svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 2.2C4.9 2.2 2.5 3.2.8 4.9l1.4 1.4c1.4-1.4 3.3-2.2 5.3-2.2s3.9.8 5.3 2.2l1.4-1.4C12.5 3.2 10.1 2.2 7.5 2.2zM7.5 6.5c-1.3 0-2.5.5-3.4 1.4L7.5 11.4l3.4-3.5c-.9-.9-2.1-1.4-3.4-1.4z" fill="currentColor"/></svg>
+              <svg width="24" height="11" viewBox="0 0 24 11" fill="none"><rect x="1" y="1" width="19" height="9" rx="2.3" stroke="currentColor" stroke-width="1"/><rect x="2.5" y="2.5" width="14" height="6" rx="1" fill="currentColor"/><rect x="21.5" y="3.5" width="1.5" height="4" rx="0.7" fill="currentColor"/></svg>
+            </div>
+          </div>
+          <div class="phone-viewport">
+            <div class="phone-scroll-content">
+              <div class="ps-header">
+                <div class="ps-avatar">
+                  <div class="ps-av-circle">SK</div>
+                  <div>
+                    <div class="ps-greet">Bonjour</div>
+                    <div class="ps-name">Sara</div>
+                  </div>
+                </div>
+                <div class="ps-streak">🔥 12 jours</div>
+              </div>
+              <div class="ps-progress-card">
+                <div class="ps-pc-top">
+                  <div class="ps-pc-label">Ton parcours</div>
+                  <div class="ps-pc-pct">42%</div>
+                </div>
+                <div class="ps-pc-bar"><div class="ps-pc-fill"></div></div>
+                <div class="ps-pc-sub">Comprendre la monnaie · 6/14 leçons</div>
+              </div>
+              <div class="ps-section-label">Aujourd'hui</div>
+              <div class="ps-lesson done">
+                <div class="ps-l-icon">✓</div>
+                <div class="ps-l-text"><div class="ps-l-title">1971, le tournant Nixon</div><div class="ps-l-meta">Terminé · 10 min</div></div>
+                <div class="ps-l-pts">+20</div>
+              </div>
+              <div class="ps-lesson active">
+                <div class="ps-l-icon">▶</div>
+                <div class="ps-l-text"><div class="ps-l-title">Ce qui a changé depuis</div><div class="ps-l-meta">En cours · 11 min</div></div>
+                <div class="ps-l-pts">+20</div>
+              </div>
+              <div class="ps-lesson">
+                <div class="ps-l-icon">🔒</div>
+                <div class="ps-l-text"><div class="ps-l-title">Comment fonctionne la BCE</div><div class="ps-l-meta">10 min</div></div>
+                <div class="ps-l-pts">+20</div>
+              </div>
+              <div class="ps-lesson">
+                <div class="ps-l-icon">📈</div>
+                <div class="ps-l-text"><div class="ps-l-title">L'inflation expliquée simplement</div><div class="ps-l-meta">9 min</div></div>
+                <div class="ps-l-pts">+20</div>
+              </div>
+              <div class="ps-lesson">
+                <div class="ps-l-icon">🧮</div>
+                <div class="ps-l-text"><div class="ps-l-title">Calculer votre perte réelle</div><div class="ps-l-meta">8 min</div></div>
+                <div class="ps-l-pts">+20</div>
               </div>
             </div>
-            <div class="ps-streak">🔥 12 jours</div>
-          </div>
-          <div class="ps-progress-card">
-            <div class="ps-pc-top">
-              <div class="ps-pc-label">Ton parcours</div>
-              <div class="ps-pc-pct">42%</div>
-            </div>
-            <div class="ps-pc-bar"><div class="ps-pc-fill"></div></div>
-            <div class="ps-pc-sub">Maîtriser son budget · 7/16 leçons</div>
-          </div>
-          <div class="ps-section-label">Aujourd'hui</div>
-          <div class="ps-lesson done">
-            <div class="ps-l-icon">✓</div>
-            <div class="ps-l-text"><div class="ps-l-title">La règle 50/30/20</div><div class="ps-l-meta">Terminé · 12 min</div></div>
-            <div class="ps-l-pts">+20</div>
-          </div>
-          <div class="ps-lesson active">
-            <div class="ps-l-icon">▶</div>
-            <div class="ps-l-text"><div class="ps-l-title">Créer ses enveloppes</div><div class="ps-l-meta">En cours · 8 min</div></div>
-            <div class="ps-l-pts">+20</div>
-          </div>
-          <div class="ps-lesson">
-            <div class="ps-l-icon">🔒</div>
-            <div class="ps-l-text"><div class="ps-l-title">Automatiser l'épargne</div><div class="ps-l-meta">10 min</div></div>
-            <div class="ps-l-pts">+20</div>
           </div>
         </div>
       </div>
@@ -523,49 +568,49 @@ footer{border-top:1px solid var(--bg-line);padding:40px 48px 28px;}
     <h2 class="s-title">8 parcours. Un seul accès.</h2>
     <p class="s-sub">De la compréhension du système monétaire jusqu'à l'optimisation fiscale.</p>
     <div class="formations-grid">
-      <div class="f-card" onclick="window.location='monnaie.html'">
+      <div class="f-card" data-formation="monnaie" onclick="goFormation('monnaie')"><span class="f-hublot" id="hublot-monnaie"></span>
         <div class="fc-top"><div class="fc-num">00</div><div class="fc-pts">280 pts</div></div>
         <div class="fc-title">Comprendre la monnaie & le système</div>
         <div class="fc-desc">L'inflation et pourquoi rester passif coûte cher.</div>
         <div class="fc-meta">14 leçons · 5h</div>
       </div>
-      <div class="f-card" onclick="window.location='psychologie.html'">
+      <div class="f-card" data-formation="psychologie" onclick="goFormation('psychologie')"><span class="f-hublot" id="hublot-psychologie"></span>
         <div class="fc-top"><div class="fc-num">01</div><div class="fc-pts">240 pts</div></div>
         <div class="fc-title">Psychologie de l'argent</div>
         <div class="fc-desc">Vos biais, vos croyances, vos émotions.</div>
         <div class="fc-meta">12 leçons · 4h</div>
       </div>
-      <div class="f-card" onclick="window.location='budget.html'">
+      <div class="f-card" data-formation="budget" onclick="goFormation('budget')"><span class="f-hublot" id="hublot-budget"></span>
         <div class="fc-top"><div class="fc-num">02</div><div class="fc-pts">320 pts</div></div>
         <div class="fc-title">Maîtriser son budget</div>
         <div class="fc-desc">50/30/20, épargne automatique.</div>
         <div class="fc-meta">16 leçons · 5h</div>
       </div>
-      <div class="f-card" onclick="window.location='bourse.html'">
+      <div class="f-card" data-formation="bourse" onclick="goFormation('bourse')"><span class="f-hublot" id="hublot-bourse"></span>
         <div class="fc-top"><div class="fc-num">03</div><div class="fc-pts">480 pts</div></div>
         <div class="fc-title">Premiers pas en bourse</div>
         <div class="fc-desc">ETF, PEA, DCA. Investir sans spéculer.</div>
         <div class="fc-meta">24 leçons · 8h</div>
       </div>
-      <div class="f-card" onclick="window.location='crypto.html'">
+      <div class="f-card" data-formation="crypto" onclick="goFormation('crypto')"><span class="f-hublot" id="hublot-crypto"></span>
         <div class="fc-top"><div class="fc-num">04</div><div class="fc-pts">360 pts</div></div>
         <div class="fc-title">Bitcoin & Cryptomonnaies</div>
         <div class="fc-desc">Blockchain, sécurité, fiscalité.</div>
         <div class="fc-meta">18 leçons · 6h</div>
       </div>
-      <div class="f-card" onclick="window.location='immobilier.html'">
+      <div class="f-card" data-formation="immobilier" onclick="goFormation('immobilier')"><span class="f-hublot" id="hublot-immobilier"></span>
         <div class="fc-top"><div class="fc-num">05</div><div class="fc-pts">360 pts</div></div>
         <div class="fc-title">Investir dans la pierre</div>
         <div class="fc-desc">SCPI, LMNP, rendement locatif.</div>
         <div class="fc-meta">18 leçons · 6h</div>
       </div>
-      <div class="f-card" onclick="window.location='epargne.html'">
+      <div class="f-card" data-formation="epargne" onclick="goFormation('epargne')"><span class="f-hublot" id="hublot-epargne"></span>
         <div class="fc-top"><div class="fc-num">06</div><div class="fc-pts">200 pts</div></div>
         <div class="fc-title">Épargne & sécurité</div>
         <div class="fc-desc">Fonds d'urgence, assurance-vie, PER.</div>
         <div class="fc-meta">10 leçons · 3h</div>
       </div>
-      <div class="f-card" onclick="window.location='fiscalite.html'">
+      <div class="f-card" data-formation="fiscalite" onclick="goFormation('fiscalite')"><span class="f-hublot" id="hublot-fiscalite"></span>
         <div class="fc-top"><div class="fc-num">07</div><div class="fc-pts">400 pts</div></div>
         <div class="fc-title">Optimisation fiscale</div>
         <div class="fc-desc">PEA, PER, LMNP, flat tax.</div>
@@ -597,7 +642,7 @@ footer{border-top:1px solid var(--bg-line);padding:40px 48px 28px;}
             <li>Suivi de progression</li>
             <li>Sans carte bancaire</li>
           </ul>
-          <a href="#" class="p-btn">Commencer gratuitement</a>
+          <a href="inscription.html" class="p-btn">Commencer gratuitement</a>
         </div>
         <div class="p-card main">
           <span class="p-badge club">Recommandé</span>
@@ -625,7 +670,7 @@ footer{border-top:1px solid var(--bg-line);padding:40px 48px 28px;}
   <div class="cta-section">
     <h2 class="cta-title">Votre première leçon<br>vous attend. <span class="accent">5 minutes.</span></h2>
     <p class="cta-sub">Pas besoin de tout savoir pour commencer. Juste besoin de faire le premier pas.</p>
-    <a href="#tarifs" class="btn-primary" style="font-size:16px;padding:16px 36px;">Commencer gratuitement →</a>
+    <a href="inscription.html" class="btn-primary" style="font-size:16px;padding:16px 36px;">Commencer gratuitement →</a>
   </div>
 </section>
 
@@ -645,5 +690,32 @@ footer{border-top:1px solid var(--bg-line);padding:40px 48px 28px;}
   </div>
 </footer>
 
+<script>
+function goFormation(f){
+  if(f === 'monnaie'){
+    window.location.href = 'monnaie.html';
+    return;
+  }
+  const completed = localStorage.getItem('pa_completed_monnaie') === 'true';
+  if(completed){
+    window.location.href = f + '.html';
+  } else {
+    window.location.href = 'monnaie.html';
+  }
+}
+
+(function(){
+  const completed = localStorage.getItem('pa_completed_monnaie') === 'true';
+  const formations = ['monnaie','psychologie','budget','bourse','crypto','immobilier','epargne','fiscalite'];
+  formations.forEach(function(f){
+    const dot = document.getElementById('hublot-' + f);
+    const card = document.querySelector('[data-formation="' + f + '"]');
+    if(!dot) return;
+    const unlocked = (f === 'monnaie') || completed;
+    dot.classList.add(unlocked ? 'on' : 'off');
+    if(!unlocked && card) card.classList.add('locked');
+  });
+})();
+</script>
 </body>
 </html>

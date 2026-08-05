@@ -40,6 +40,8 @@ a{color:inherit;}
 .sb-item.active{background:var(--green-pale);color:var(--green);}
 .sb-item.done{color:var(--ink);}
 .sb-check{width:20px;height:20px;border-radius:50%;background:var(--bg-mid);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--ink-faint);flex-shrink:0;}
+.sb-item.locked{opacity:.45;cursor:not-allowed;}
+.sb-item.locked:hover{background:transparent;}
 .sb-item.done .sb-check{background:var(--green);color:#fff;}
 .sb-item.active .sb-check{background:var(--green);color:#fff;}
 .sb-module-label{font-size:10.5px;font-weight:700;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.05em;padding:14px 10px 6px;}
@@ -373,6 +375,18 @@ action:"Écris ton plan personnel en 4 lignes, une par étape. Où en es-tu sur 
 }
 ];
 
+/* ============ GATE D'ACCÈS ============ */
+(function(){
+  try{
+    const u = JSON.parse(localStorage.getItem('pa_user'));
+    if(!u || !u.email){
+      window.location.href = 'inscription.html?redirect=lecons-monnaie.html';
+    }
+  }catch(e){
+    window.location.href = 'inscription.html?redirect=lecons-monnaie.html';
+  }
+})();
+
 /* ============ MOTEUR ============ */
 const KEY = 'pa_progress_monnaie';
 function getProgress(){ try{ return JSON.parse(localStorage.getItem(KEY)) || {}; }catch(e){ return {}; } }
@@ -381,6 +395,13 @@ function setProgress(p){ localStorage.setItem(KEY, JSON.stringify(p)); }
 let current = parseInt(new URLSearchParams(location.search).get('l')) || 1;
 if(current < 1) current = 1;
 if(current > LESSONS.length) current = LESSONS.length;
+// isUnlocked defined below; re-clamp after definition happens in render() via goTo guard on load
+
+function isUnlocked(n){
+  if(n === 1) return true;
+  const progress = getProgress();
+  return !!progress[n-1];
+}
 
 function renderSidebar(){
   const progress = getProgress();
@@ -394,13 +415,22 @@ function renderSidebar(){
     if(l.module !== lastModule){ html += '<div class="sb-module-label">' + l.module.split(' — ')[0] + '</div>'; lastModule = l.module; }
     const isDone = !!progress[n];
     const isActive = n === current;
-    html += '<div class="sb-item ' + (isActive?'active':'') + ' ' + (isDone?'done':'') + '" onclick="goTo(' + n + ')">' +
-      '<span class="sb-check">' + (isDone ? '✓' : n) + '</span>' + l.title + '</div>';
+    const unlocked = isUnlocked(n);
+    const lockedClass = unlocked ? '' : 'locked';
+    let iconContent = n;
+    if(isDone) iconContent = '✓';
+    else if(!unlocked) iconContent = '🔒';
+    html += '<div class="sb-item ' + (isActive?'active':'') + ' ' + (isDone?'done':'') + ' ' + lockedClass + '" onclick="goTo(' + n + ')">' +
+      '<span class="sb-check">' + iconContent + '</span>' + l.title + '</div>';
   });
   sb.innerHTML = html;
 }
 
 function goTo(n){
+  if(!isUnlocked(n)){
+    alert('Termine la leçon précédente pour débloquer celle-ci.');
+    return;
+  }
   current = n;
   history.replaceState(null, '', '?l=' + n);
   render();
@@ -460,9 +490,23 @@ function toggleAction(){
   const progress = getProgress();
   progress[current] = !progress[current];
   setProgress(progress);
+
+  const allDone = LESSONS.every(function(l,i){ return !!progress[i+1]; });
+  if(allDone){
+    localStorage.setItem('pa_completed_monnaie', 'true');
+    setTimeout(function(){ window.location.href = 'succes.html'; }, 600);
+    return;
+  }
   render();
 }
 
+if(!isUnlocked(current)){
+  const progress = getProgress();
+  let lastUnlocked = 1;
+  for(let i=1;i<=LESSONS.length;i++){ if(isUnlocked(i)) lastUnlocked = i; else break; }
+  current = lastUnlocked;
+  history.replaceState(null, '', '?l=' + current);
+}
 render();
 </script>
 </body>
