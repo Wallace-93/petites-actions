@@ -487,22 +487,35 @@ function goTo(n){
   window.scrollTo(0,0);
 }
 
+let quizState = {};
+
+function allQuizCorrect(l){
+  for(let i=0;i<l.quiz.length;i++){ if(!quizState[i]) return false; }
+  return true;
+}
+
 function render(){
   renderSidebar();
   const l = LESSONS[current-1];
   const progress = getProgress();
   const done = !!progress[current];
+  quizState = {};
+  if(done){ l.quiz.forEach(function(q,i){ quizState[i] = true; }); }
   const main = document.getElementById('main');
   let quizHtml = '';
   l.quiz.forEach(function(q, qi){
     let optsHtml = '';
     q.opts.forEach(function(opt, oi){
-      optsHtml += '<div class="quiz-opt" id="q' + qi + 'o' + oi + '" onclick="answerQuiz(' + qi + ',' + oi + ',' + q.correct + ')">' +
+      const preAnswered = done && oi === q.correct;
+      optsHtml += '<div class="quiz-opt ' + (preAnswered?'correct disabled':'') + '" id="q' + qi + 'o' + oi + '" onclick="answerQuiz(' + qi + ',' + oi + ',' + q.correct + ')">' +
         '<span class="quiz-letter">' + String.fromCharCode(65+oi) + '</span><span class="quiz-opt-text">' + opt + '</span></div>';
     });
     quizHtml += '<div class="quiz-card"><div class="quiz-q">Question ' + (qi+1) + '. ' + q.q + '</div>' + optsHtml +
-      '<div class="quiz-explain" id="exp' + qi + '"><strong>Explication : </strong>' + q.explain + '</div></div>';
+      '<div class="quiz-explain ' + (done?'show':'') + '" id="exp' + qi + '"><strong>Explication : </strong>' + q.explain + '</div></div>';
   });
+
+  const quizOk = allQuizCorrect(l);
+  const actionCardStyle = (!quizOk && !done) ? 'opacity:.5;pointer-events:none;' : '';
 
   main.innerHTML =
     (done ? '<div class="completion-badge show">✓ Leçon terminée</div>' : '') +
@@ -514,7 +527,8 @@ function render(){
     '<div class="section-label quiz"><span class="dot"></span>Vérifier</div>' +
     quizHtml +
     '<div class="section-label action"><span class="dot"></span>Petite action</div>' +
-    '<div class="action-card">' +
+    (!quizOk && !done ? '<div style="font-size:12.5px;font-weight:600;color:var(--coral);margin-bottom:10px;">🔒 Réponds correctement aux ' + l.quiz.length + ' questions pour débloquer cette action.</div>' : '') +
+    '<div class="action-card" id="actionCard" style="' + actionCardStyle + '">' +
       '<div class="action-text">' + l.action + '</div>' +
       '<div class="action-check" onclick="toggleAction()"><span class="action-box ' + (done?'checked':'') + '" id="actionBox">' + (done?'✓':'') + '</span><span class="action-label">Marquer cette leçon comme terminée</span></div>' +
     '</div>' +
@@ -525,20 +539,42 @@ function render(){
 }
 
 function answerQuiz(qi, oi, correct){
-  for(let k=0;k<10;k++){
-    const el = document.getElementById('q'+qi+'o'+k);
-    if(el){ el.classList.add('disabled'); }
-  }
+  if(quizState[qi]) return; // déjà répondu correctement, verrouillé
   const chosen = document.getElementById('q'+qi+'o'+oi);
-  const correctEl = document.getElementById('q'+qi+'o'+correct);
-  if(oi === correct){ chosen.classList.add('correct'); }
-  else { chosen.classList.add('wrong'); correctEl.classList.add('correct'); }
-  document.getElementById('exp'+qi).classList.add('show');
+  if(chosen.classList.contains('disabled')) return;
+
+  if(oi === correct){
+    for(let k=0;k<10;k++){
+      const el = document.getElementById('q'+qi+'o'+k);
+      if(el){ el.classList.add('disabled'); }
+    }
+    chosen.classList.add('correct');
+    quizState[qi] = true;
+    document.getElementById('exp'+qi).classList.add('show');
+    const l = LESSONS[current-1];
+    const quizOk = allQuizCorrect(l);
+    const card = document.getElementById('actionCard');
+    if(quizOk && card){
+      card.style.opacity = '';
+      card.style.pointerEvents = '';
+      const lock = card.previousElementSibling;
+      if(lock && lock.textContent.indexOf('Réponds correctement') !== -1){ lock.style.display = 'none'; }
+    }
+  } else {
+    chosen.classList.add('wrong');
+    document.getElementById('exp'+qi).classList.add('show');
+    setTimeout(function(){ chosen.classList.remove('wrong'); }, 900);
+  }
 }
 
 async function toggleAction(){
+  const l = LESSONS[current-1];
   const progress = getProgress();
   const newValue = !progress[current];
+  if(newValue && !allQuizCorrect(l)){
+    alert('Réponds correctement à toutes les questions du quiz avant de valider cette leçon.');
+    return;
+  }
   await setProgressServer(current, newValue);
   render();
 }
