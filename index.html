@@ -283,6 +283,7 @@ footer{border-top:1px solid var(--bg-line);padding:40px 48px 28px;}
   .ft-links{flex-wrap:wrap;gap:14px;}
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
 <body>
 
@@ -691,30 +692,43 @@ footer{border-top:1px solid var(--bg-line);padding:40px 48px 28px;}
 </footer>
 
 <script>
+const SUPABASE_URL = 'https://pchkshpbzsybvtwxqvrf.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjaGtzaHBienN5YnZ0d3hxdnJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NDgwMTAsImV4cCI6MjEwMTUyNDAxMH0.3EqyBUDmHHJ79mdDD6dmpVwsuEA0h2hF-75Up9R2Snc';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let FORMATIONS_UNLOCKED = false;
+
 function goFormation(f){
   if(f === 'monnaie'){
     window.location.href = 'monnaie.html';
     return;
   }
-  const completed = localStorage.getItem('pa_completed_monnaie') === 'true';
-  if(completed){
+  if(FORMATIONS_UNLOCKED){
     window.location.href = f + '.html';
   } else {
     window.location.href = 'monnaie.html';
   }
 }
 
-(function(){
-  const completed = localStorage.getItem('pa_completed_monnaie') === 'true';
+function applyHublots(completed){
+  FORMATIONS_UNLOCKED = completed;
   const formations = ['monnaie','psychologie','budget','bourse','crypto','immobilier','epargne','fiscalite'];
   formations.forEach(function(f){
     const dot = document.getElementById('hublot-' + f);
     const card = document.querySelector('[data-formation="' + f + '"]');
     if(!dot) return;
+    dot.classList.remove('on','off');
     const unlocked = (f === 'monnaie') || completed;
     dot.classList.add(unlocked ? 'on' : 'off');
-    if(!unlocked && card) card.classList.add('locked');
+    if(card) card.classList.toggle('locked', !unlocked);
   });
+}
+
+(async function(){
+  applyHublots(false); // état par défaut le temps de vérifier la session
+  const { data: { session } } = await sb.auth.getSession();
+  if(!session){ return; }
+  const { data: badge } = await sb.from('badges').select('badge_name').eq('user_id', session.user.id).eq('badge_name','le_declic').maybeSingle();
+  applyHublots(!!badge);
 })();
 </script>
 </body>
