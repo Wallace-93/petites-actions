@@ -737,6 +737,7 @@ async function signOut(){
   const prenom = (profile && profile.prenom) ? profile.prenom : 'Toi';
   document.getElementById('navRight').innerHTML =
     '<span style="font-size:13.5px;font-weight:600;color:var(--ink);">👋 ' + prenom + '</span>' +
+    '<a href="trading-lab.html" class="nav-login">📈 Trading Lab</a>' +
     '<a href="lecons-monnaie.html" class="nav-cta">Continuer →</a>' +
     '<a href="#" onclick="signOut();return false;" class="nav-login">Déconnexion</a>';
 

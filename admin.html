@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Espace admin — Petites Actions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#16181D;--ink-soft:#383B42;--ink-muted:#6B6F76;--ink-faint:#9498A0;
+  --bg:#FFFFFF;--bg-soft:#F7F8FA;--bg-mid:#EEF0F3;--bg-line:#E3E6EA;
+  --green:#16A34A;--green-pale:#EDFBF1;--green-bord:#BBF0CC;
+  --amber:#F59E0B;--amber-pale:#FFF7E8;
+  --violet:#7C5CFC;--violet-pale:#F1EEFE;
+  --coral:#FB6B4F;--coral-pale:#FFEEEA;
+  --sans:'Inter',system-ui,-apple-system,sans-serif;
+}
+body{font-family:var(--sans);background:var(--bg-soft);color:var(--ink);-webkit-font-smoothing:antialiased;letter-spacing:-.01em;}
+a{color:inherit;}
+.nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--bg-line);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;font-size:15px;color:var(--ink);}
+.nav-mark{width:26px;height:26px;border-radius:8px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;}
+.nav-tag{font-size:11px;font-weight:700;color:var(--violet);background:var(--violet-pale);padding:4px 10px;border-radius:100px;}
+.nav-back{font-size:13px;font-weight:600;color:var(--ink-muted);text-decoration:none;}
+
+.wrap{max-width:1180px;margin:0 auto;padding:32px 24px 80px;}
+.page-title{font-size:24px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px;}
+.page-sub{font-size:13.5px;color:var(--ink-muted);margin-bottom:32px;}
+
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:36px;}
+.metric-card{background:var(--bg);border:1px solid var(--bg-line);border-radius:16px;padding:20px 22px;}
+.metric-label{font-size:11.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:8px;}
+.metric-value{font-size:28px;font-weight:800;letter-spacing:-.02em;color:var(--ink);}
+.metric-sub{font-size:12px;color:var(--ink-muted);margin-top:4px;}
+
+.section-title{font-size:16px;font-weight:800;letter-spacing:-.01em;margin:36px 0 14px;display:flex;align-items:center;gap:8px;}
+.section-title .dot{width:6px;height:6px;border-radius:50%;background:var(--green);}
+
+.formations-progress{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px;}
+.fp-card{background:var(--bg);border:1px solid var(--bg-line);border-radius:12px;padding:14px 16px;}
+.fp-name{font-size:11.5px;font-weight:700;color:var(--ink-muted);margin-bottom:8px;}
+.fp-bar{height:6px;background:var(--bg-mid);border-radius:100px;overflow:hidden;margin-bottom:6px;}
+.fp-fill{height:100%;background:var(--green);border-radius:100px;}
+.fp-count{font-size:12px;font-weight:700;color:var(--ink);}
+
+.table-wrap{background:var(--bg);border:1px solid var(--bg-line);border-radius:16px;overflow:hidden;}
+table{width:100%;border-collapse:collapse;}
+th{text-align:left;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-faint);padding:14px 16px;background:var(--bg-soft);border-bottom:1px solid var(--bg-line);}
+td{padding:14px 16px;font-size:13px;color:var(--ink-soft);border-bottom:1px solid var(--bg-line);}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:var(--bg-soft);}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;}
+.pill.green{background:var(--green-pale);color:var(--green);}
+.pill.amber{background:var(--amber-pale);color:#8a6a00;}
+.pill.gray{background:var(--bg-mid);color:var(--ink-faint);}
+.objective-tag{font-size:11px;font-weight:600;color:var(--ink-muted);}
+.loading{text-align:center;padding:60px;color:var(--ink-faint);font-size:14px;}
+.access-denied{text-align:center;padding:100px 20px;}
+.access-denied h2{font-size:20px;margin-bottom:10px;}
+.access-denied p{color:var(--ink-muted);font-size:14px;}
+
+@media(max-width:900px){
+  .metrics-grid{grid-template-columns:1fr 1fr;}
+  .formations-progress{grid-template-columns:1fr 1fr;}
+  .table-wrap{overflow-x:auto;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <span class="nav-mark">PA</span>
+    Petites Actions <span class="nav-tag">Admin</span>
+  </a>
+  <a href="index.html" class="nav-back">← Retour au site</a>
+</nav>
+
+<div class="wrap" id="app">
+  <div class="loading">Vérification des accès…</div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://pchkshpbzsybvtwxqvrf.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjaGtzaHBienN5YnZ0d3hxdnJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NDgwMTAsImV4cCI6MjEwMTUyNDAxMH0.3EqyBUDmHHJ79mdDD6dmpVwsuEA0h2hF-75Up9R2Snc';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const FORMATIONS = [
+  {key:'monnaie', label:'Monnaie', total:14},
+  {key:'psychologie', label:'Psychologie', total:12},
+  {key:'budget', label:'Budget', total:16},
+  {key:'bourse', label:'Bourse', total:24},
+  {key:'crypto', label:'Crypto', total:18},
+];
+
+function fmtDate(iso){
+  if(!iso) return '—';
+  const d = new Date(iso);
+  return d.toLocaleDateString('fr-FR', {day:'2-digit', month:'short', year:'numeric'});
+}
+
+async function boot(){
+  const app = document.getElementById('app');
+
+  const { data: { session } } = await sb.auth.getSession();
+  if(!session){
+    window.location.href = 'connexion.html?redirect=admin.html';
+    return;
+  }
+
+  const { data: myProfile } = await sb.from('profiles').select('is_admin, prenom').eq('id', session.user.id).single();
+  if(!myProfile || !myProfile.is_admin){
+    app.innerHTML = '<div class="access-denied"><h2>🔒 Accès réservé</h2><p>Cette page est réservée aux administrateurs de Petites Actions.</p></div>';
+    return;
+  }
+
+  // Récupération des données
+  const [{ data: profiles }, { data: allProgress }, { data: allBadges }] = await Promise.all([
+    sb.from('profiles').select('id, prenom, email, objectif, created_at, is_admin'),
+    sb.from('lesson_progress').select('user_id, formation, completed'),
+    sb.from('badges').select('user_id, badge_name')
+  ]);
+
+  const totalUsers = profiles ? profiles.length : 0;
+  const badgeCount = allBadges ? allBadges.filter(b => b.badge_name === 'le_declic').length : 0;
+  const completionRate = totalUsers > 0 ? Math.round((badgeCount / totalUsers) * 100) : 0;
+
+  // Progression par formation (nombre d'utilisateurs ayant terminé au moins 1 leçon)
+  const formationStats = FORMATIONS.map(f => {
+    const rows = (allProgress || []).filter(p => p.formation === f.key && p.completed);
+    const uniqueUsers = new Set(rows.map(r => r.user_id)).size;
+    const totalLessonsCompleted = rows.length;
+    return { ...f, uniqueUsers, totalLessonsCompleted };
+  });
+
+  // Progression par utilisateur (pour le tableau)
+  function userProgressSummary(userId){
+    const rows = (allProgress || []).filter(p => p.user_id === userId && p.completed);
+    const byFormation = {};
+    rows.forEach(r => { byFormation[r.formation] = (byFormation[r.formation]||0) + 1; });
+    return byFormation;
+  }
+  function userHasBadge(userId){
+    return (allBadges || []).some(b => b.user_id === userId && b.badge_name === 'le_declic');
+  }
+
+  const objectifLabels = {
+    budget: '📊 Budget',
+    epargne: '🛡️ Épargne',
+    investir: '📈 Investir',
+    dettes: '🎯 Dettes',
+  };
+
+  // Tri : inscrits les plus récents en premier
+  const sortedProfiles = (profiles || []).slice().sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
+
+  const rowsHtml = sortedProfiles.map(p => {
+    const prog = userProgressSummary(p.id);
+    const hasBadge = userHasBadge(p.id);
+    const progSummary = FORMATIONS.map(f => {
+      const done = prog[f.key] || 0;
+      if(done === 0) return '';
+      return `<span class="pill gray" style="margin-right:4px;">${f.label} ${done}/${f.total}</span>`;
+    }).join('') || '<span style="color:var(--ink-faint);font-size:12px;">Aucune leçon commencée</span>';
+
+    return `<tr>
+      <td><strong>${p.prenom || '—'}</strong>${p.is_admin ? ' <span class="pill violet" style="background:var(--violet-pale);color:var(--violet);margin-left:4px;">admin</span>' : ''}</td>
+      <td>${p.email || '—'}</td>
+      <td><span class="objective-tag">${objectifLabels[p.objectif] || p.objectif || '—'}</span></td>
+      <td>${fmtDate(p.created_at)}</td>
+      <td>${progSummary}</td>
+      <td>${hasBadge ? '<span class="pill green">🏅 Le Déclic</span>' : '<span class="pill amber">En cours</span>'}</td>
+    </tr>`;
+  }).join('');
+
+  app.innerHTML = `
+    <div class="page-title">Espace admin</div>
+    <div class="page-sub">Bienvenue ${myProfile.prenom || ''}. Vue d'ensemble de l'activité Petites Actions.</div>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">Inscrits</div>
+        <div class="metric-value">${totalUsers}</div>
+        <div class="metric-sub">Comptes créés au total</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Badge "Le Déclic"</div>
+        <div class="metric-value">${badgeCount}</div>
+        <div class="metric-sub">Formation 0 terminée intégralement</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Taux de complétion</div>
+        <div class="metric-value">${completionRate}%</div>
+        <div class="metric-sub">Des inscrits ont terminé la F0</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Leçons validées</div>
+        <div class="metric-value">${(allProgress || []).filter(p=>p.completed).length}</div>
+        <div class="metric-sub">Toutes formations confondues</div>
+      </div>
+    </div>
+
+    <div class="section-title"><span class="dot"></span>Progression par formation</div>
+    <div class="formations-progress">
+      ${formationStats.map(f => `
+        <div class="fp-card">
+          <div class="fp-name">${f.label}</div>
+          <div class="fp-bar"><div class="fp-fill" style="width:${totalUsers>0 ? Math.min(100, Math.round(f.uniqueUsers/totalUsers*100)) : 0}%"></div></div>
+          <div class="fp-count">${f.uniqueUsers} apprenant${f.uniqueUsers>1?'s':''} actif${f.uniqueUsers>1?'s':''}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="section-title"><span class="dot"></span>Tous les inscrits (${totalUsers})</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Prénom</th><th>Email</th><th>Objectif</th><th>Inscrit le</th><th>Progression</th><th>Statut</th></tr>
+        </thead>
+        <tbody>
+          ${rowsHtml || '<tr><td colspan="6" style="text-align:center;color:var(--ink-faint);padding:30px;">Aucune inscription pour le moment</td></tr>'}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+boot();
+</script>
+</body>
+</html>
