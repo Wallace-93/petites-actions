@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maîtriser son budget — Leçons — Petites Actions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#16181D;--ink-soft:#383B42;--ink-muted:#6B6F76;--ink-faint:#9498A0;
+  --bg:#FFFFFF;--bg-soft:#F7F8FA;--bg-mid:#EEF0F3;--bg-line:#E3E6EA;
+  --green:#16A34A;--green-light:#22C55E;--green-pale:#EDFBF1;--green-bord:#BBF0CC;
+  --amber:#F59E0B;--amber-pale:#FFF7E8;--amber-bord:#FCE3A8;
+  --violet:#7C5CFC;--violet-pale:#F1EEFE;--violet-bord:#D9D0FC;
+  --coral:#FB6B4F;--coral-pale:#FFEEEA;
+  --sans:'Inter',system-ui,-apple-system,sans-serif;
+}
+body{font-family:var(--sans);background:var(--bg-soft);color:var(--ink);-webkit-font-smoothing:antialiased;letter-spacing:-.01em;}
+a{color:inherit;}
+
+.nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--bg-line);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;font-size:15px;color:var(--ink);}
+.nav-mark{width:26px;height:26px;border-radius:8px;background:var(--green);display:flex;align-items:center;justify-content:center;}
+.nav-mark svg{width:14px;height:14px;}
+.nav-back{font-size:13px;font-weight:600;color:var(--ink-muted);text-decoration:none;}
+.nav-progress-pill{font-size:12px;font-weight:700;color:var(--green);background:var(--green-pale);padding:5px 12px;border-radius:100px;}
+
+.layout{display:grid;grid-template-columns:280px 1fr;max-width:1100px;margin:0 auto;min-height:calc(100vh - 60px);}
+.sidebar{border-right:1px solid var(--bg-line);background:var(--bg);padding:24px 16px;position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow-y:auto;}
+.sb-progress-bar{height:6px;background:var(--bg-mid);border-radius:100px;overflow:hidden;margin:0 10px 18px;}
+.sb-progress-fill{height:100%;background:var(--green);border-radius:100px;transition:width .3s;}
+.sb-item{display:flex;align-items:center;gap:10px;padding:10px 10px;border-radius:10px;cursor:pointer;margin-bottom:2px;font-size:13px;font-weight:600;color:var(--ink-muted);transition:background .15s;}
+.sb-item:hover{background:var(--bg-soft);}
+.sb-item.active{background:var(--green-pale);color:var(--green);}
+.sb-item.done{color:var(--ink);}
+.sb-item.locked{opacity:.45;cursor:not-allowed;}
+.sb-item.locked:hover{background:transparent;}
+.sb-check{width:20px;height:20px;border-radius:50%;background:var(--bg-mid);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--ink-faint);flex-shrink:0;}
+.sb-item.done .sb-check{background:var(--green);color:#fff;}
+.sb-item.active .sb-check{background:var(--green);color:#fff;}
+.sb-module-label{font-size:10.5px;font-weight:700;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.05em;padding:14px 10px 6px;}
+
+.main{padding:36px 40px 80px;max-width:720px;}
+.lesson-eyebrow{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:10px;}
+.lesson-title{font-size:28px;font-weight:800;letter-spacing:-.03em;color:var(--ink);margin-bottom:8px;line-height:1.15;}
+.lesson-meta{font-size:13px;color:var(--ink-faint);margin-bottom:32px;}
+
+.section-label{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-muted);margin:36px 0 16px;}
+.section-label .dot{width:6px;height:6px;border-radius:50%;background:var(--green);}
+.section-label.quiz .dot{background:var(--violet);}
+.section-label.action .dot{background:var(--amber);}
+
+.script-text p{font-size:15.5px;font-weight:400;color:var(--ink-soft);line-height:1.75;margin-bottom:18px;}
+
+.quiz-card{background:var(--bg);border:1px solid var(--bg-line);border-radius:16px;padding:24px;margin-bottom:14px;}
+.quiz-q{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:16px;line-height:1.5;}
+.quiz-opt{display:flex;align-items:flex-start;gap:12px;padding:13px 15px;border:1.5px solid var(--bg-line);border-radius:11px;margin-bottom:9px;cursor:pointer;transition:border-color .15s,background .15s;}
+.quiz-opt:hover{border-color:var(--ink-faint);}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-pale);}
+.quiz-opt.wrong{border-color:var(--coral);background:var(--coral-pale);}
+.quiz-opt.disabled{cursor:default;pointer-events:none;}
+.quiz-letter{width:24px;height:24px;border-radius:7px;background:var(--bg-soft);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--ink-muted);flex-shrink:0;}
+.quiz-opt.correct .quiz-letter{background:var(--green);color:#fff;}
+.quiz-opt.wrong .quiz-letter{background:var(--coral);color:#fff;}
+.quiz-opt-text{font-size:13.5px;font-weight:500;color:var(--ink);padding-top:2px;}
+.quiz-explain{display:none;font-size:13px;font-weight:400;color:var(--ink-muted);line-height:1.6;background:var(--bg-soft);border-radius:10px;padding:14px 16px;margin-top:8px;}
+.quiz-explain.show{display:block;}
+.quiz-explain strong{color:var(--ink);}
+
+.action-card{background:var(--amber-pale);border:1px solid var(--amber-bord);border-radius:16px;padding:22px 24px;}
+.action-text{font-size:14.5px;font-weight:500;color:var(--ink);line-height:1.65;margin-bottom:16px;}
+.action-check{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;}
+.action-box{width:22px;height:22px;border-radius:7px;border:2px solid var(--amber);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;transition:background .15s;}
+.action-box.checked{background:var(--amber);}
+.action-label{font-size:13px;font-weight:700;color:#8a6a00;}
+
+.lesson-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:1px solid var(--bg-line);}
+.nav-btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;border:none;cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:700;padding:13px 24px;border-radius:11px;text-decoration:none;transition:background .2s;}
+.nav-btn:hover{background:var(--ink-soft);}
+.nav-btn.ghost{background:var(--bg-mid);color:var(--ink-muted);}
+.nav-btn.ghost:hover{background:var(--bg-line);}
+.completion-badge{display:none;align-items:center;gap:8px;background:var(--green-pale);color:var(--green);font-size:12.5px;font-weight:700;padding:8px 16px;border-radius:100px;margin-bottom:20px;}
+.completion-badge.show{display:inline-flex;}
+
+@media(max-width:860px){
+  .layout{grid-template-columns:1fr;}
+  .sidebar{position:static;height:auto;border-right:none;border-bottom:1px solid var(--bg-line);}
+  .main{padding:28px 20px 60px;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    Petites Actions
+  </a>
+  <a href="budget.html" class="nav-back">← Retour au parcours</a>
+  <div style="display:flex;align-items:center;gap:14px;">
+    <span class="nav-progress-pill" id="navProgress">0/16 leçons</span>
+    <a href="#" onclick="signOut();return false;" style="font-size:12.5px;font-weight:600;color:var(--ink-muted);text-decoration:none;">Déconnexion</a>
+  </div>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar"></aside>
+  <main class="main" id="main"></main>
+</div>
+
+<script>
+/* ============ DONNÉES DES 16 LEÇONS — MAÎTRISER SON BUDGET ============ */
+const LESSONS = [
+{module:"Module 1 — Faire le diagnostic", title:"Où va vraiment votre argent", duration:"9 min",
+script:[
+"Où va mon argent ? Pas approximativement, vraiment. La plupart des gens ont une idée générale de leurs dépenses mais ne savent pas combien ils ont dépensé le mois dernier en restauration ou en achats en ligne.",
+"Les gens sous-estiment leurs dépenses de 20 à 40% en moyenne. Trois raisons : les petits montants s'accumulent de façon invisible, les dépenses par carte sont moins ressenties qu'en cash, et les abonnements oubliés sortent chaque mois sans qu'on les remarque.",
+"La première étape pour maîtriser son budget, c'est de regarder la réalité en face, sans jugement, avec de la curiosité. On ne peut améliorer que ce qu'on mesure."
+],
+quiz:[
+{q:"De combien les gens sous-estiment-ils leurs dépenses en moyenne ?",opts:["De 5 à 10%","De 20 à 40%","De 50 à 60%","Ils les surestiment"],correct:1,
+explain:"Cette distorsion vient des petits montants invisibles, du paiement par carte, et des abonnements oubliés."},
+{q:"Pourquoi les paiements par carte génèrent-ils plus de dépenses qu'en espèces ?",opts:["Les commerçants appliquent des surcharges","Le geste est abstrait et réduit l'impact émotionnel","Les cartes proposent des offres spéciales","Les relevés arrivent trop tard"],correct:1,
+explain:"Payer en espèces crée une friction naturelle absente avec la carte."},
+{q:"Quelle est la première étape pour maîtriser son budget ?",opts:["Ouvrir un compte épargne","Réduire ses dépenses de 20%","Regarder la réalité de ses dépenses en face, sans jugement","Établir un budget prévisionnel"],correct:2,
+explain:"On ne peut améliorer que ce qu'on mesure."}
+],
+action:"Ouvre ton appli bancaire, catégorise chaque dépense des 3 derniers mois en grandes familles. Calcule le total par catégorie."
+},
+{module:"Module 1 — Faire le diagnostic", title:"Dépenses fixes et dépenses variables", duration:"8 min",
+script:[
+"Les dépenses fixes reviennent chaque mois pour un montant identique : loyer, charges, abonnements, assurance. Prévisibles, stables, difficiles à modifier à court terme.",
+"Les dépenses variables fluctuent selon vos choix : alimentation, restauration, loisirs. Plus difficiles à anticiper mais bien plus faciles à modifier.",
+"Cette distinction calcule votre « reste à vivre » : revenus nets moins dépenses fixes. Elle indique aussi où concentrer vos efforts : réduire son loyer est difficile, réduire ses achats impulsifs est immédiat.",
+"Une troisième catégorie : les dépenses exceptionnelles (Noël, vacances, contrôle technique). Divisez-les par 12 et incluez-les comme épargne dédiée mensuelle pour éviter le choc budgétaire."
+],
+quiz:[
+{q:"Quelle est la différence entre dépenses fixes et variables ?",opts:["Les fixes sont plus importantes","Les fixes reviennent chaque mois pour un montant stable, les variables fluctuent","Les fixes sont obligatoires, les variables optionnelles","Les fixes concernent les besoins uniquement"],correct:1,
+explain:"Cette distinction détermine où concentrer ses efforts d'optimisation."},
+{q:"Comment calculer son « reste à vivre » ?",opts:["Revenus nets moins loisirs","Revenus bruts moins impôts","Revenus nets moins toutes les dépenses fixes","Revenus nets moins dettes"],correct:2,
+explain:"C'est la somme réellement disponible pour dépenses variables, épargne et investissement."},
+{q:"Comment gérer les dépenses exceptionnelles comme Noël ?",opts:["Payer par crédit","Les diviser par 12 et les épargner mensuellement","Les considérer comme des imprévus","Les réduire au maximum"],correct:1,
+explain:"600€ de cadeaux deviennent 50€/mois, bien plus gérable qu'un choc budgétaire."}
+],
+action:"Sépare tes dépenses en 3 colonnes : fixe, variable, exceptionnelle. Calcule ton reste à vivre."
+},
+{module:"Module 1 — Faire le diagnostic", title:"Identifier vos fuites invisibles", duration:"9 min",
+script:[
+"Une fuite invisible sort régulièrement de votre compte sans conscience ou sans valeur proportionnelle. Cinq catégories : les abonnements dormants (50 à 150€/mois de valeur nulle), les frais bancaires inutiles, les achats automatiques oubliés.",
+"Les dépenses de commodité : commander plutôt que cuisiner par fatigue, prendre un taxi par précipitation. Pas mauvaises en soi, problématiques quand systématiques et non choisies.",
+"Les dépenses sociales inconscientes : acheter parce que d'autres l'ont, offrir au-delà de ses moyens par peur de décevoir.",
+"Méthode : pour chaque dépense, demandez « Est-ce que ça m'apporte une valeur réelle et proportionnelle à son coût ? » Si non, c'est une fuite."
+],
+quiz:[
+{q:"Qu'est-ce qu'une fuite invisible ?",opts:["Une dépense imprévue","Une dépense régulière sans conscience ou sans valeur proportionnelle","Une dépense cachée par les banques","Une dépense trop petite pour compter"],correct:1,
+explain:"Abonnements dormants, frais inutiles, achats automatiques oubliés en sont des exemples."},
+{q:"Comment les dépenses sociales inconscientes génèrent-elles des fuites ?",opts:["En comparant ses revenus aux autres","En créant des dépenses motivées par la pression sociale plutôt que ses priorités","En incitant à investir avec son entourage","En générant des dépenses de luxe"],correct:1,
+explain:"La pression sociale génère des dépenses qui ne correspondent pas à nos vraies priorités."},
+{q:"Quelle question identifie une fuite ?",opts:["Aurais-je pu payer moins cher ?","Correspond-elle à mes valeurs ?","M'apporte-t-elle une valeur réelle et proportionnelle à son coût ?","Était-elle planifiée ?"],correct:2,
+explain:"Ce filtre efficace n'exige pas de ne rien dépenser, mais que chaque euro soit un choix délibéré."}
+],
+action:"Surligne en rouge chaque dépense sans valeur réelle sur ton relevé. Élimine la fuite la plus simple cette semaine."
+},
+{module:"Module 1 — Faire le diagnostic", title:"Votre bilan financier personnel", duration:"8 min",
+script:[
+"Un bilan financier : d'un côté votre actif (tout ce que vous possédez), de l'autre votre passif (tout ce que vous devez). La différence est votre patrimoine net, votre richesse réelle.",
+"Actif : liquidités, investissements (PEA, assurance-vie), immobilier, autres actifs. Passif : crédit immobilier, crédits conso, dettes personnelles, découvert.",
+"Pour beaucoup qui débutent, ce chiffre est faible ou légèrement négatif. Ce n'est pas un problème, c'est un point de départ pour mesurer votre progression.",
+"Un second document, le tableau de flux : revenus moins dépenses, égale votre capacité d'épargne mensuelle, le carburant de la construction de patrimoine."
+],
+quiz:[
+{q:"Comment calcule-t-on son patrimoine net ?",opts:["Revenus annuels moins dépenses annuelles","Actif total moins passif total","Épargne moins dettes en cours","Investissements moins crédits immobiliers"],correct:1,
+explain:"C'est la mesure la plus honnête de la richesse réelle à un instant donné."},
+{q:"Différence entre bilan patrimonial et tableau de flux ?",opts:["Le bilan concerne les actifs, le tableau les dépenses","Le bilan est une photo à un instant T, le tableau montre les mouvements mensuels","Le bilan est annuel, le tableau mensuel","Le bilan est pour investisseurs uniquement"],correct:1,
+explain:"Les deux sont complémentaires et nécessaires pour piloter ses finances avec clarté."},
+{q:"Que représente la capacité d'épargne mensuelle ?",opts:["Le montant qu'on décide d'épargner","Le maximum théorique possible","La différence entre revenus et dépenses totales","Le montant recommandé par les conseillers"],correct:2,
+explain:"C'est le carburant réel de la construction du patrimoine à long terme."}
+],
+action:"Crée ton bilan financier : actif, passif, patrimoine net. Puis ton tableau de flux pour ta capacité d'épargne actuelle."
+},
+{module:"Module 2 — La règle 50/30/20", title:"La règle 50/30/20 expliquée", duration:"9 min",
+script:[
+"Popularisée par Elizabeth Warren, la règle 50/30/20 : 50% pour les besoins, 30% pour les envies, 20% pour l'épargne et le remboursement de dettes. Trois enveloppes, trois pourcentages, c'est tout.",
+"Les besoins : logement, alimentation de base, transport, factures, assurances obligatoires. Les envies : restaurant, loisirs, voyages, ce ne sont pas des dépenses irresponsables, elles font partie d'une vie équilibrée.",
+"L'épargne : fonds d'urgence, investissement, remboursement de dettes, la partie la plus importante pour construire votre patrimoine.",
+"Cette règle est un point de départ, pas une loi absolue. Si le loyer représente 40% des revenus, adaptez plutôt que d'abandonner. La direction compte plus que la perfection."
+],
+quiz:[
+{q:"Que comprend la catégorie « besoins » ?",opts:["Tout ce qui est prélevé automatiquement","Les dépenses indispensables : logement, alimentation, transport, assurances obligatoires","Les dépenses les plus importantes en montant","Les dépenses les plus satisfaisantes"],correct:1,
+explain:"Ce sont les dépenses qu'on ne peut éliminer sans impacter significativement sa vie."},
+{q:"Les loisirs sont-ils irresponsables selon cette règle ?",opts:["Oui, à éliminer pour maximiser l'épargne","Oui, sauf sous 10%","Non, ils font partie de la catégorie « envies » équilibrée","Ça dépend des revenus"],correct:2,
+explain:"La règle intègre explicitement 30% pour les envies, qui font partie d'une vie équilibrée."},
+{q:"Que faire si le loyer représente déjà 40% des revenus ?",opts:["Déménager immédiatement","Abandonner la règle","Adapter la règle et progresser dans la bonne direction","Chercher un revenu complémentaire"],correct:2,
+explain:"La règle est un point de départ, pas une loi absolue. La direction compte plus que la perfection immédiate."}
+],
+action:"Calcule quel pourcentage de tes revenus va dans chaque catégorie. Compare aux cibles 50/30/20. Identifie ton plus gros écart."
+},
+{module:"Module 2 — La règle 50/30/20", title:"Les enveloppes budgétaires", duration:"9 min",
+script:[
+"Pour respecter les proportions, le concept d'enveloppes budgétaires, vieux comme l'argent, reste puissant transposé au numérique.",
+"Méthode des comptes multiples : un compte pour les besoins fixes (virement auto), un pour les envies (carte dédiée), un compte épargne (virement auto le jour du salaire). Sépare physiquement les enveloppes.",
+"Méthode des applications : Bankin', Linxo, YNAB créent des enveloppes virtuelles avec suivi en temps réel. Moins radicale mais plus facile à mettre en place.",
+"Principe clé : allouer l'argent avant de le dépenser, pas après. La plupart des gens dépensent puis espèrent épargner ce qui reste, il ne reste presque jamais rien."
+],
+quiz:[
+{q:"Quelle est l'idée centrale des enveloppes budgétaires ?",opts:["Dépenser uniquement en espèces","Allouer l'argent dans des catégories avant de dépenser","Réduire le nombre de catégories","Mettre de côté ce qui reste en fin de mois"],correct:1,
+explain:"Quand l'enveloppe d'une catégorie est vide, la dépense s'arrête jusqu'au mois suivant."},
+{q:"Pourquoi les comptes multiples sont-ils particulièrement efficaces ?",opts:["Meilleurs taux d'intérêt","Séparations physiques empêchant le mélange entre enveloppes","Réduction des frais bancaires","Automatisation de tous les paiements"],correct:1,
+explain:"Des comptes distincts créent des barrières physiques visibles immédiatement."},
+{q:"Quelle erreur classique la méthode des enveloppes corrige-t-elle ?",opts:["Trop dépenser en loisirs","Ne pas surveiller ses relevés","Dépenser d'abord et espérer épargner ce qui reste","Avoir trop de catégories"],correct:2,
+explain:"La méthode inverse la logique : l'épargne est prélevée en premier, on dépense dans ce qui reste."}
+],
+action:"Choisis ta méthode d'enveloppes. Ouvre un deuxième compte si besoin, configure un virement automatique d'épargne le jour du salaire."
+},
+{module:"Module 2 — La règle 50/30/20", title:"Ajustements selon votre revenu", duration:"8 min",
+script:[
+"Revenus serrés (1000-1800€) : priorité absolue au fonds d'urgence, même 50€/mois. La règle devient 70/20/10 ou 80/15/5. L'habitude d'épargner compte plus que le montant.",
+"Revenus moyens (1800-3500€) : la règle 50/30/20 standard s'applique le mieux. L'enjeu : le lifestyle creep, chaque augmentation de revenu doit être partiellement redirigée vers l'épargne, pas intégralement dépensée.",
+"Revenus confortables (3500€+) : viser 30 à 50% d'épargne. Chaque point de pourcentage supplémentaire représente des montants significatifs qui, investis, produisent des effets importants.",
+"Quel que soit le niveau, connaître ses revenus, ses contraintes, et optimiser vers une épargne croissante."
+],
+quiz:[
+{q:"Qu'est-ce que le « lifestyle creep » ?",opts:["Une méthode pour augmenter ses revenus","La tendance à augmenter ses dépenses proportionnellement à chaque hausse de revenus","Une stratégie pour réduire ses dépenses","Un phénomène réservé aux hauts revenus"],correct:1,
+explain:"C'est l'un des principaux freins à la construction de patrimoine pour les revenus moyens."},
+{q:"Pour des revenus serrés, quelle est la priorité absolue ?",opts:["Atteindre rapidement 50/30/20 standard","Éliminer tous les loisirs","Un fonds d'urgence, même petit, automatique","Rembourser toutes ses dettes d'abord"],correct:2,
+explain:"50€/mois représentent 600€ en un an, la différence entre un imprévu géré et une déstabilisation totale."},
+{q:"Quel taux d'épargne viser avec des revenus confortables ?",opts:["20% comme tout le monde","10% suffisent","Au-delà de 20%, voire 30 à 50%","Le taux n'a pas d'importance"],correct:2,
+explain:"Chaque point de pourcentage supplémentaire accélère considérablement la construction du patrimoine."}
+],
+action:"Détermine ta situation (serrée, moyenne, confortable). Calcule ton taux d'épargne actuel et compare-le à la cible recommandée."
+},
+{module:"Module 2 — La règle 50/30/20", title:"Reconstruire votre budget", duration:"9 min",
+script:[
+"5 étapes pour reconstruire votre budget. Étape 1 : ancrer l'épargne en premier, décidez du montant avant tout, même 50€, en automatique le jour du salaire.",
+"Étape 2 : lister et totaliser les dépenses fixes, votre socle incompressible. Étape 3 : calculer l'enveloppe disponible pour les variables (revenus - épargne - fixes).",
+"Étape 4 : allouer cette enveloppe par sous-catégories réalistes, basées sur vos habitudes réelles. Étape 5 : réviser après le premier mois, certaines enveloppes seront trop serrées, d'autres trop généreuses, c'est normal.",
+"Un budget imparfait et appliqué vaut infiniment plus qu'un budget parfait jamais mis en place."
+],
+quiz:[
+{q:"Quelle est la première étape de construction du budget ?",opts:["Lister ses dépenses fixes","Calculer son revenu net","Décider et automatiser son épargne avant de budgéter le reste","Définir ses objectifs long terme"],correct:2,
+explain:"C'est l'inversion de la logique classique qui consiste à épargner ce qui reste."},
+{q:"Comment calcule-t-on l'enveloppe variable disponible ?",opts:["Revenus nets moins dépenses fixes","Revenus nets moins épargne moins dépenses fixes","Revenus nets moins 30% pour les envies","Dépenses du mois précédent divisées par 1,2"],correct:1,
+explain:"C'est le budget réel disponible pour les dépenses variables du quotidien."},
+{q:"Pourquoi le premier budget ne sera-t-il jamais parfait ?",opts:["Les méthodes sont trop théoriques","Il est basé sur des estimations à tester face à la réalité","Les dépenses changent trop souvent","Il faut des années d'expérience"],correct:1,
+explain:"C'est un processus itératif, pas un document figé, à tester puis ajuster."}
+],
+action:"Construis ton budget en 5 étapes : épargne auto, dépenses fixes, enveloppe variable, répartition par sous-catégorie. Mets en place le virement d'épargne."
+},
+{module:"Module 3 — Automatiser et fluidifier", title:"Virements automatiques", duration:"8 min",
+script:[
+"Les gens qui automatisent leur épargne épargnent plus, plus régulièrement, avec moins d'effort. L'automatisation enlève la décision répétée, le plus grand ennemi de la bonne gestion.",
+"Premier virement : épargne de base, le jour du salaire, non négociable. Deuxième : investissement mensuel, indépendamment des conditions de marché. Troisième : dépenses fixes, vérifiez qu'elles partent du bon compte.",
+"Quatrième optionnel : enveloppes de dépenses variables si vous utilisez la méthode des comptes multiples.",
+"Règle importante : après avoir mis en place ces virements, ne regardez pas votre solde chaque semaine. Une fois par mois lors de votre revue suffit. La distance crée de la discipline."
+],
+quiz:[
+{q:"Pourquoi l'automatisation de l'épargne est-elle plus efficace ?",opts:["Elle génère de meilleurs rendements","Elle enlève la décision répétée et l'influence de l'émotion du moment","Elle est recommandée par les banques","Elle permet d'épargner plus qu'en manuel"],correct:1,
+explain:"Chaque décision manuelle s'expose aux raisons de ne pas la faire. L'automatisation contourne ce problème."},
+{q:"Quel est le premier virement à mettre en place ?",opts:["Vers son investissement","Pour ses dépenses variables","Vers son épargne de base, le jour du salaire","Pour ses dépenses fixes"],correct:2,
+explain:"L'épargne de base est non négociable et représente le fondement de toute la stratégie."},
+{q:"À quelle fréquence regarder son épargne automatisée ?",opts:["Tous les jours","Toutes les semaines","Une fois par mois lors d'une revue dédiée","Une fois par an"],correct:2,
+explain:"La distance crée de la discipline et évite les tentations."}
+],
+action:"Configure aujourd'hui au moins un virement automatique vers ton épargne. Même 30 à 50€."
+},
+{module:"Module 3 — Automatiser et fluidifier", title:"Organiser ses comptes", duration:"8 min",
+script:[
+"Un seul compte où tout est mélangé crée confusion et risque de dépassement. Une architecture à plusieurs niveaux clarifie tout.",
+"Niveau 1, compte de transit : le salaire arrive, les virements partent immédiatement, quasiment à zéro en fin de mois. Niveau 2, compte de dépenses fixes : reçoit le montant exact des prélèvements, pas de carte attachée.",
+"Niveau 3, compte de dépenses courantes : votre carte de débit principale, l'enveloppe variable, quand il est vide, l'enveloppe est épuisée. Niveau 4, compte épargne : reçoit l'épargne automatique, non touché sauf raisons définies.",
+"Niveau 5 optionnel, compte investissement : PEA ou assurance-vie, regardé une fois par mois ou trimestre. Avec les banques en ligne gratuites, ouvrir plusieurs comptes est simple et gratuit."
+],
+quiz:[
+{q:"Quel est le rôle du compte de transit ?",opts:["Concentrer les dépenses fixes","Recevoir le salaire et redistribuer automatiquement, se retrouvant à zéro en fin de mois","Servir de fonds d'urgence","Accumuler l'épargne mensuelle"],correct:1,
+explain:"Son rôle est de redistribuer immédiatement vers les autres comptes via virements automatiques."},
+{q:"Pourquoi ne pas attacher de carte au compte de dépenses fixes ?",opts:["Pour réduire les frais","Pour éviter d'y piocher pour des dépenses courantes","Ce sont généralement des comptes épargne","Pour prioriser les prélèvements"],correct:1,
+explain:"Ça évite de mettre en défaut un prélèvement important comme le loyer."},
+{q:"À quelle fréquence vérifier son architecture bancaire ?",opts:["Tous les jours","Toutes les semaines","Une fois par mois","Une fois par an"],correct:2,
+explain:"Une architecture bien configurée fonctionne de façon quasiment autonome."}
+],
+action:"Regarde ton architecture actuelle. Identifie le compte manquant pour compléter le système. Ouvre une banque en ligne si besoin."
+},
+{module:"Module 3 — Automatiser et fluidifier", title:"Applications de suivi budgétaire", duration:"7 min",
+script:[
+"Trois catégories d'outils. Les agrégateurs bancaires (Bankin', Linxo) se connectent à vos comptes et catégorisent automatiquement, gratuit et efficace pour une vue d'ensemble.",
+"Les applications par enveloppes (YNAB) plus actives, vous saisissez chaque dépense, l'app montre en temps réel ce qui reste dans chaque enveloppe.",
+"Le suivi manuel simplifié, un tableur, moins automatique mais entièrement personnalisable.",
+"Le critère de sélection n'est pas la sophistication mais l'utilisation réelle : la meilleure application est celle qu'on ouvre régulièrement."
+],
+quiz:[
+{q:"Comment fonctionnent les agrégateurs bancaires ?",opts:["Saisie manuelle de chaque transaction","Connexion aux comptes pour importer et catégoriser automatiquement","Remplacent la déclaration fiscale","Réservés aux professionnels"],correct:1,
+explain:"Ils offrent une vue consolidée de vos finances automatiquement."},
+{q:"Quel est le critère principal pour choisir une application ?",opts:["Le nombre de fonctionnalités","La sécurité des données","Celle qu'on utilisera vraiment et régulièrement","Le coût"],correct:2,
+explain:"Un outil sophistiqué abandonné après une semaine ne vaut rien face à un tableau simple utilisé fidèlement."},
+{q:"YNAB appartient à quelle catégorie ?",opts:["Agrégateur bancaire","Application de budget par enveloppes","Application d'investissement","Comparateur bancaire"],correct:1,
+explain:"On y définit ses enveloppes et l'app montre en temps réel ce qu'il reste dans chacune."}
+],
+action:"Installe Bankin' ou crée un tableur simple avec tes catégories. L'objectif : avoir un outil de suivi actif cette semaine."
+},
+{module:"Module 3 — Automatiser et fluidifier", title:"Configurer votre système", duration:"8 min",
+script:[
+"Assemblons les briques. Un système complet a 4 composantes : automatisation de l'allocation, suivi en temps réel, rituel de revue hebdomadaire et mensuel, bilan trimestriel.",
+"Le jour du salaire, l'argent se répartit automatiquement. Votre application montre où vous en êtes. Un rituel hebdomadaire de 10 minutes, mensuel de 30 minutes. Tous les 3 mois, comparaison du patrimoine net.",
+"Ce système, une fois en place, ne demande plus que 30-40 minutes par semaine. Il y aura des mois difficiles, c'est normal, le système ne prétend pas éliminer l'imprévisible.",
+"Un mauvais mois avec un bon système reste un mois difficile. Un mauvais mois sans système, c'est le début d'une spirale."
+],
+quiz:[
+{q:"Quelles sont les 4 composantes d'un système budgétaire complet ?",opts:["Budget, épargne, investissement, retraite","Automatisation, suivi en temps réel, rituel de revue, bilan trimestriel","Compte courant, épargne, PEA, assurance-vie","Revenus, dépenses fixes, variables, épargne"],correct:1,
+explain:"Ces quatre éléments fonctionnent ensemble et se renforcent mutuellement."},
+{q:"Combien de temps devrait prendre la gestion une fois le système en place ?",opts:["1-2h par jour","1-2h par semaine","30-40 minutes par semaine","Aucun temps nécessaire"],correct:2,
+explain:"L'automatisation gère le reste, les rituels de revue suffisent."},
+{q:"Quelle est la fréquence du bilan patrimonial ?",opts:["Mensuelle","Hebdomadaire","Trimestrielle","Annuelle"],correct:2,
+explain:"Elle permet d'observer une progression réelle sans les variations trompeuses du court terme."}
+],
+action:"Assemble ton système : virements automatiques, application configurée, rappels calendrier pour tes rituels et ton bilan trimestriel."
+},
+{module:"Module 4 — Ancrer le rituel", title:"Le bilan mensuel en 15 minutes", duration:"7 min",
+script:[
+"Une fois par mois, 15 minutes pour regarder où vous en êtes. 5 questions : ai-je épargné le montant prévu ? Quelles enveloppes respectées ou dépassées ? Y a-t-il eu un imprévu, comment absorbé ?",
+"Mon patrimoine net a-t-il progressé ? Qu'est-ce que je vais ajuster le mois prochain ? Pas de jugement, juste des constats basés sur les données de votre application.",
+"La régularité de ce bilan compte plus que sa profondeur. Un bilan imparfait fait chaque mois vaut infiniment plus qu'un bilan parfait fait une fois par an.",
+"C'est piloter par les données plutôt que naviguer à vue."
+],
+quiz:[
+{q:"Quel est l'objectif du bilan mensuel ?",opts:["Calculer précisément ses revenus et dépenses","Maintenir une conscience régulière et ajuster le cap","Comparer exhaustivement au mois précédent","Vérifier les virements automatiques"],correct:1,
+explain:"Cinq questions simples, 15 minutes, un cap maintenu. La régularité prime sur la profondeur."},
+{q:"Que faire si une enveloppe a été dépassée ?",opts:["La réduire le mois suivant","Constater sans jugement et décider si un ajustement est nécessaire","Transférer le dépassement au mois suivant","Augmenter l'épargne pour compenser"],correct:1,
+explain:"Un dépassement est une information utile, pas un échec moral."},
+{q:"Que signifie « piloter par les données » ?",opts:["Utiliser des logiciels de trading","Baser ses décisions sur des données réelles plutôt que des impressions","Analyser des données économiques","Automatiser toutes les décisions"],correct:1,
+explain:"Des informations réelles collectées plutôt que des estimations floues."}
+],
+action:"Programme ton premier bilan mensuel dans ton calendrier. Note les 5 questions dans un document que tu ouvriras ce jour-là."
+},
+{module:"Module 4 — Ancrer le rituel", title:"Objectifs SMART financiers", duration:"9 min",
+script:[
+"Un budget sans objectif manque de direction. SMART : Spécifique, Mesurable, Atteignable, Réaliste, Temporellement défini.",
+"Objectif vague : « je veux épargner plus. » Version SMART : « constituer un fonds d'urgence de 3600€, en épargnant 300€/mois pendant 12 mois, dès le 1er janvier. »",
+"Trois horizons : court terme (moins d'1 an, fonds d'urgence), moyen terme (1-5 ans, apport immobilier), long terme (5 ans+, indépendance financière).",
+"Avoir un objectif actif par horizon crée un système de motivation complet : le court terme pour rester motivé au quotidien, le long terme pour ancrer la démarche dans une vision de vie."
+],
+quiz:[
+{q:"Que signifie le T de SMART ?",opts:["Tangible","Total","Temporellement défini","Transparent"],correct:2,
+explain:"Sans horizon temporel, l'objectif reste indéfiniment « pour plus tard »."},
+{q:"Lequel de ces objectifs est SMART ?",opts:["Je veux investir en bourse","Je veux épargner plus","Constituer un apport de 20 000€ en épargnant 500€/mois pendant 40 mois","Je veux être indépendant financièrement"],correct:2,
+explain:"Spécifique, mesurable, temporellement défini : tous les critères sont remplis."},
+{q:"Combien d'objectifs actifs avoir en parallèle ?",opts:["Un seul","Autant que possible","Un par horizon temporel : court, moyen, long terme","Deux maximum"],correct:2,
+explain:"Cela crée un système de motivation complet à tous les horizons."}
+],
+action:"Formule un objectif SMART pour chaque horizon (court, moyen, long terme). Note-les dans ton journal de décisions."
+},
+{module:"Module 4 — Ancrer le rituel", title:"Libérer du capital pour investir", duration:"8 min",
+script:[
+"Comment libérer du capital même sans l'impression d'en avoir les moyens ? Quatre sources : l'élimination des fuites (50-200€/mois sans changer de mode de vie), l'optimisation des dépenses fixes (renégocier tous les 2 ans, 30-100€ d'économies).",
+"L'augmentation des revenus, souvent la plus efficace : négociation salariale, revenu complémentaire, vente d'objets, mission freelance. Le réaménagement des dépenses variables : cuisiner en avance, éviter les achats d'impulsion.",
+"L'objectif n'est pas l'ascétisme mais financer son futur sans sacrifier son présent. Il est souvent possible de libérer 100 à 300€ supplémentaires par mois.",
+"200€ investis mensuellement sur 20 ans à 7% représentent environ 100 000€ de capital. Ce n'est pas de la magie, c'est de l'arithmétique et de la méthode."
+],
+quiz:[
+{q:"Quelle est la première source de capital libérable ?",opts:["L'augmentation du salaire","L'élimination des fuites invisibles","La réduction alimentaire","Le remboursement anticipé de crédits"],correct:1,
+explain:"Elle ne nécessite aucun changement de mode de vie."},
+{q:"À quelle fréquence remettre en concurrence ses contrats ?",opts:["Tous les mois","Tous les deux ans environ","Uniquement en cas de problème","Jamais"],correct:1,
+explain:"Le marché évolue constamment et les offres s'améliorent."},
+{q:"Que représentent 200€/mois pendant 20 ans à 7% ?",opts:["Environ 20 000€","Environ 48 000€","Environ 100 000€","Environ 200 000€"],correct:2,
+explain:"C'est l'illustration de la puissance des intérêts composés sur les petits montants réguliers."}
+],
+action:"Identifie 3 sources de capital libérable dans ton budget. Engage-toi à en libérer au moins une ce mois-ci."
+},
+{module:"Module 4 — Ancrer le rituel", title:"Votre plan sur 12 mois", duration:"9 min",
+script:[
+"Votre feuille de route sur 12 mois, en 4 trimestres. T1, les fondations : diagnostic complet, mise en place du système, première optimisation.",
+"T2, la consolidation : vous vivez avec votre système, les enveloppes sont calibrées, vous formalisez vos objectifs SMART et investissez les premiers euros libérés.",
+"T3, l'accélération : votre système est mature, vous augmentez votre taux d'épargne, vous explorez les formations suivantes pour savoir où investir.",
+"T4, la projection : bilan de l'année, patrimoine progressé, taux d'épargne augmenté, système fonctionnel, objectifs pour l'année suivante.",
+"Vous avez maintenant tous les outils : diagnostic, méthode, automatisation, rituels, vision. La suite vous apprendra à faire travailler le capital libéré. Petites Actions. On y va."
+],
+quiz:[
+{q:"Quel est l'objectif du premier trimestre ?",opts:["Commencer à investir en bourse","Maximiser son taux d'épargne","Poser les fondations : diagnostic, système, première optimisation","Atteindre l'équilibre 50/30/20"],correct:2,
+explain:"Ces trois mois créent la base sur laquelle tout le reste s'appuie."},
+{q:"Qu'est-ce qui est normal dans ce plan sur 12 mois ?",opts:["Une progression linéaire sans accroc","Atteindre 50/30/20 dès le premier mois","Des mois difficiles et des ajustements","Un doublement du patrimoine en un an"],correct:2,
+explain:"Ce qui compte n'est pas la perfection de chaque mois mais la direction générale."},
+{q:"Quel est le meilleur indicateur de succès à la fin des 12 mois ?",opts:["Avoir respecté chaque enveloppe tous les mois","Un patrimoine net qui a progressé et un taux d'épargne augmenté","Avoir atteint tous ses objectifs SMART","N'avoir eu aucune dépense imprévue"],correct:1,
+explain:"Ces indicateurs montrent que le système fonctionne, indépendamment de la perfection de chaque mois."}
+],
+action:"Construis ta feuille de route sur 12 mois : 2-3 actions prioritaires par trimestre, et tes indicateurs de succès pour la fin de l'année."
+}
+];
+
+/* ============ SUPABASE ============ */
+const SUPABASE_URL = 'https://pchkshpbzsybvtwxqvrf.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjaGtzaHBienN5YnZ0d3hxdnJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NDgwMTAsImV4cCI6MjEwMTUyNDAxMH0.3EqyBUDmHHJ79mdDD6dmpVwsuEA0h2hF-75Up9R2Snc';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const FORMATION = 'budget';
+let CURRENT_USER = null;
+let PROGRESS_CACHE = {};
+
+async function requireAuth(){
+  const { data: { session } } = await sb.auth.getSession();
+  if(!session){
+    window.location.href = 'inscription.html?redirect=lecons-budget.html';
+    return null;
+  }
+  return session.user;
+}
+
+async function requireUnlock(userId){
+  const { data: badge } = await sb.from('badges').select('badge_name').eq('user_id', userId).eq('badge_name','le_declic').maybeSingle();
+  if(!badge){
+    window.location.href = 'lecons-monnaie.html';
+    return false;
+  }
+  return true;
+}
+
+async function signOut(){
+  await sb.auth.signOut();
+  window.location.href = 'index.html';
+}
+
+async function loadProgressFromServer(){
+  const { data } = await sb
+    .from('lesson_progress')
+    .select('lesson_number, completed')
+    .eq('user_id', CURRENT_USER.id)
+    .eq('formation', FORMATION);
+  const p = {};
+  if(data){ data.forEach(function(row){ if(row.completed) p[row.lesson_number] = true; }); }
+  PROGRESS_CACHE = p;
+  return p;
+}
+function getProgress(){ return PROGRESS_CACHE; }
+async function setProgressServer(lessonNumber, value){
+  PROGRESS_CACHE[lessonNumber] = value;
+  await sb.from('lesson_progress').upsert({
+    user_id: CURRENT_USER.id,
+    formation: FORMATION,
+    lesson_number: lessonNumber,
+    completed: value,
+    completed_at: value ? new Date().toISOString() : null
+  }, { onConflict: 'user_id,formation,lesson_number' });
+}
+
+let current = parseInt(new URLSearchParams(location.search).get('l')) || 1;
+if(current < 1) current = 1;
+if(current > LESSONS.length) current = LESSONS.length;
+
+function isUnlocked(n){
+  if(n === 1) return true;
+  const progress = getProgress();
+  return !!progress[n-1];
+}
+
+function renderSidebar(){
+  const progress = getProgress();
+  const doneCount = Object.keys(progress).filter(k=>progress[k]).length;
+  document.getElementById('navProgress').textContent = doneCount + '/' + LESSONS.length + ' leçons';
+  const sbEl = document.getElementById('sidebar');
+  let html = '<div class="sb-progress-bar"><div class="sb-progress-fill" style="width:' + Math.round(doneCount/LESSONS.length*100) + '%"></div></div>';
+  let lastModule = '';
+  LESSONS.forEach(function(l, i){
+    const n = i+1;
+    if(l.module !== lastModule){ html += '<div class="sb-module-label">' + l.module.split(' — ')[0] + '</div>'; lastModule = l.module; }
+    const isDone = !!progress[n];
+    const isActive = n === current;
+    const unlocked = isUnlocked(n);
+    const lockedClass = unlocked ? '' : 'locked';
+    let iconContent = n;
+    if(isDone) iconContent = '✓';
+    else if(!unlocked) iconContent = '🔒';
+    html += '<div class="sb-item ' + (isActive?'active':'') + ' ' + (isDone?'done':'') + ' ' + lockedClass + '" onclick="goTo(' + n + ')">' +
+      '<span class="sb-check">' + iconContent + '</span>' + l.title + '</div>';
+  });
+  sbEl.innerHTML = html;
+}
+
+function goTo(n){
+  if(!isUnlocked(n)){
+    alert('Termine la leçon précédente pour débloquer celle-ci.');
+    return;
+  }
+  current = n;
+  history.replaceState(null, '', '?l=' + n);
+  render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  renderSidebar();
+  const l = LESSONS[current-1];
+  const progress = getProgress();
+  const done = !!progress[current];
+  const main = document.getElementById('main');
+  let quizHtml = '';
+  l.quiz.forEach(function(q, qi){
+    let optsHtml = '';
+    q.opts.forEach(function(opt, oi){
+      optsHtml += '<div class="quiz-opt" id="q' + qi + 'o' + oi + '" onclick="answerQuiz(' + qi + ',' + oi + ',' + q.correct + ')">' +
+        '<span class="quiz-letter">' + String.fromCharCode(65+oi) + '</span><span class="quiz-opt-text">' + opt + '</span></div>';
+    });
+    quizHtml += '<div class="quiz-card"><div class="quiz-q">Question ' + (qi+1) + '. ' + q.q + '</div>' + optsHtml +
+      '<div class="quiz-explain" id="exp' + qi + '"><strong>Explication : </strong>' + q.explain + '</div></div>';
+  });
+
+  main.innerHTML =
+    (done ? '<div class="completion-badge show">✓ Leçon terminée</div>' : '') +
+    '<div class="lesson-eyebrow">' + l.module + '</div>' +
+    '<div class="lesson-title">' + (current) + '. ' + l.title + '</div>' +
+    '<div class="lesson-meta">' + l.duration + ' de lecture · Leçon ' + current + ' sur ' + LESSONS.length + '</div>' +
+    '<div class="section-label"><span class="dot"></span>Comprendre</div>' +
+    '<div class="script-text">' + l.script.map(function(p){return '<p>'+p+'</p>';}).join('') + '</div>' +
+    '<div class="section-label quiz"><span class="dot"></span>Vérifier</div>' +
+    quizHtml +
+    '<div class="section-label action"><span class="dot"></span>Petite action</div>' +
+    '<div class="action-card">' +
+      '<div class="action-text">' + l.action + '</div>' +
+      '<div class="action-check" onclick="toggleAction()"><span class="action-box ' + (done?'checked':'') + '" id="actionBox">' + (done?'✓':'') + '</span><span class="action-label">Marquer cette leçon comme terminée</span></div>' +
+    '</div>' +
+    '<div class="lesson-nav">' +
+      (current > 1 ? '<button class="nav-btn ghost" onclick="goTo(' + (current-1) + ')">← Leçon précédente</button>' : '<span></span>') +
+      (current < LESSONS.length ? '<button class="nav-btn" onclick="goTo(' + (current+1) + ')">Leçon suivante →</button>' : '<a href="budget.html" class="nav-btn">Terminer le parcours →</a>') +
+    '</div>';
+}
+
+function answerQuiz(qi, oi, correct){
+  for(let k=0;k<10;k++){
+    const el = document.getElementById('q'+qi+'o'+k);
+    if(el){ el.classList.add('disabled'); }
+  }
+  const chosen = document.getElementById('q'+qi+'o'+oi);
+  const correctEl = document.getElementById('q'+qi+'o'+correct);
+  if(oi === correct){ chosen.classList.add('correct'); }
+  else { chosen.classList.add('wrong'); correctEl.classList.add('correct'); }
+  document.getElementById('exp'+qi).classList.add('show');
+}
+
+async function toggleAction(){
+  const progress = getProgress();
+  const newValue = !progress[current];
+  await setProgressServer(current, newValue);
+  render();
+}
+
+async function boot(){
+  document.getElementById('main').innerHTML = '<div style="padding:60px 0;text-align:center;color:var(--ink-faint);font-size:14px;">Chargement de ta progression…</div>';
+  const user = await requireAuth();
+  if(!user) return;
+  const unlocked = await requireUnlock(user.id);
+  if(!unlocked) return;
+  CURRENT_USER = user;
+  await loadProgressFromServer();
+
+  if(!isUnlocked(current)){
+    let lastUnlocked = 1;
+    for(let i=1;i<=LESSONS.length;i++){ if(isUnlocked(i)) lastUnlocked = i; else break; }
+    current = lastUnlocked;
+    history.replaceState(null, '', '?l=' + current);
+  }
+  render();
+}
+boot();
+</script>
+</body>
+</html>
