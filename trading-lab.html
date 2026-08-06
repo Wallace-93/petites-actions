@@ -592,7 +592,7 @@ async function submitOrder(){
     await sb.from('trading_positions').upsert(pos, { onConflict: 'user_id,asset_id' });
   }
 
-  await sb.from('trading_portfolios').upsert({ user_id: CURRENT_USER.id, cash_balance: PORTFOLIO.cash_balance }, { onConflict: 'user_id' });
+  await sb.from('trading_portfolios').update({ cash_balance: PORTFOLIO.cash_balance }).eq('user_id', CURRENT_USER.id);
 
   const order = {
     user_id: CURRENT_USER.id, asset_id: modalAsset.id, asset_symbol: modalAsset.symbol,
@@ -607,20 +607,6 @@ async function submitOrder(){
   renderApp();
 }
 
-async function ensurePortfolio(){
-  const { data: existing } = await sb.from('trading_portfolios').select('*').eq('user_id', CURRENT_USER.id).maybeSingle();
-  if(existing) return existing;
-  // Compte créé avant l'existence du Trading Lab : on crée le portefeuille manquant, une seule fois.
-  const { data: created, error } = await sb.from('trading_portfolios')
-    .insert({ user_id: CURRENT_USER.id, cash_balance: 10000 })
-    .select().single();
-  if(error){
-    console.error('Impossible de créer le portefeuille :', error);
-    return { user_id: CURRENT_USER.id, cash_balance: 10000 };
-  }
-  return created;
-}
-
 async function boot(){
   const { data: { session } } = await sb.auth.getSession();
   if(!session){
@@ -629,15 +615,15 @@ async function boot(){
   }
   CURRENT_USER = session.user;
 
-  PORTFOLIO = await ensurePortfolio();
-
-  const [{ data: positions }, { data: orders }, { data: snapshots }, prices] = await Promise.all([
+  const [{ data: portfolio }, { data: positions }, { data: orders }, { data: snapshots }, prices] = await Promise.all([
+    sb.from('trading_portfolios').select('*').eq('user_id', CURRENT_USER.id).single(),
     sb.from('trading_positions').select('*').eq('user_id', CURRENT_USER.id),
     sb.from('trading_orders').select('*').eq('user_id', CURRENT_USER.id).order('created_at', {ascending:false}).limit(30),
     sb.from('trading_portfolio_snapshots').select('*').eq('user_id', CURRENT_USER.id).order('created_at', {ascending:true}),
     fetchPrices()
   ]);
 
+  PORTFOLIO = portfolio || { cash_balance: 10000 };
   POSITIONS = positions || [];
   ORDERS = orders || [];
   SNAPSHOTS = snapshots || [];
