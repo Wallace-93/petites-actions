@@ -6,18 +6,21 @@
 <title>Investir dans la pierre, Petites Actions</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --ink:#16181D;--ink-soft:#383B42;--ink-muted:#6B6F76;--ink-faint:#9498A0;
-  --bg:#FFFFFF;--bg-soft:#F7F8FA;--bg-mid:#EEF0F3;--bg-line:#E3E6EA;
-  --green:#16A34A;--green-light:#22C55E;--green-pale:#EDFBF1;--green-bord:#BBF0CC;
-  --amber:#F59E0B;--amber-pale:#FFF7E8;--amber-bord:#FCE3A8;
-  --violet:#7C5CFC;--violet-pale:#F1EEFE;--violet-bord:#D9D0FC;
-  --blue:#2563EB;--blue-pale:#EBF1FE;
-  --coral:#FB6B4F;--coral-pale:#FFEEEA;
-  --sans:'Inter', system-ui,-apple-system, sans-serif;
+  /* Encre & Laiton — noms conservés, valeurs repointées */
+  --ink:#12212B;--ink-soft:#43555F;--ink-muted:#7A8A93;--ink-faint:#96A3AA;
+  --bg:#FCFBF8;--bg-soft:#F5F4EE;--bg-mid:#EFF0EA;--bg-line:#DCDDD3;
+  --green:#1E4B3C;--green-light:#2A6350;--green-pale:#E7EFEA;--green-bord:#BFD6C9;
+  --amber:#B8862F;--amber-pale:#F6EFE0;--amber-bord:#E4D2AC;
+  --violet:#4A5C6B;--violet-pale:#EDF0F2;--violet-bord:#D4DBE0;
+  --blue:#1E4B3C;--blue-pale:#E7EFEA;
+  --coral:#A24332;--coral-pale:#F8EDEA;   /* réservé au risque et à l'avertissement */
+  --sans:'Karla', system-ui,-apple-system, sans-serif;
+  --display:'Newsreader', Georgia, serif;
+  --mono:'IBM Plex Mono', ui-monospace, monospace;
 }
 html{scroll-behavior:smooth;}
 body{font-family:var(--sans);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;letter-spacing:-.01em;}
@@ -205,6 +208,35 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
   .s-title{font-size:21px;}
   .f-links{flex-wrap:wrap;gap:14px;}
 }
+
+/* ===== Direction Encre & Laiton — surcouche typographique =====
+   Les titres passent en serif. Les graisses 800 et l'interlettrage serré
+   avaient été réglés pour Inter : ils écrasent une serif, on les desserre. */
+body{font-family:var(--sans);letter-spacing:0;}
+h1,h2,h3,h4,
+.hero-h1,.s-title,.cta-h2,.p-name,.mod-title,.c-title,.hc-title,
+.concept-title,.f-title,.step-title,.q-title,.pill-title{
+  font-family:var(--display);letter-spacing:-.015em;
+}
+.hero-h1,.s-title,.cta-h2{font-weight:500;letter-spacing:-.018em;line-height:1.14;}
+h3,h4,.p-name,.mod-title,.c-title,.hc-title{font-weight:600;}
+
+/* Les étiquettes, compteurs et métadonnées prennent la mono : c'est la police
+   des relevés, elle ancre le vocabulaire chiffré du sujet. */
+.s-tag,.f-copy,.p-unit,.mod-count,.hero-badge,.hero-stat-label,.stat-label,
+.h-meta,.m-count,.badge,.eyebrow{font-family:var(--mono);letter-spacing:.06em;}
+
+/* ===== Bloc « le cadre » ===== */
+.cadre-legal{
+  max-width:760px;margin:0 auto;border-left:3px solid var(--coral);
+  background:var(--coral-pale);border-radius:0 10px 10px 0;padding:24px 26px 26px;
+}
+.cadre-legal h3{font-size:18px;color:var(--ink);margin-bottom:11px;}
+.cadre-legal p{font-size:14.5px;line-height:1.65;color:var(--ink-soft);}
+.cadre-legal p + p{margin-top:10px;}
+.cadre-legal strong{color:var(--ink);font-weight:600;}
+.section-cadre{padding:56px 24px;background:var(--bg-soft);border-top:1px solid var(--bg-line);}
+.ft-mentions{font-size:12.5px;line-height:1.7;opacity:.72;margin-top:16px;max-width:70ch;}
 </style>
 </head>
 <body>
@@ -263,7 +295,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
 </section>
 
 <section class="section section-soft">
-  <div class="s-tag"><span class="s-tag-dot"></span>Calculez avant d'acheter</div>
+  <div class="s-tag"><span class="s-tag-dot"></span>Calcule avant d'acheter</div>
   <h2 class="s-title">Simulateur de rendement locatif</h2>
   <div class="sim-box">
     <div class="sim-title">Rendement locatif brut</div>
@@ -293,8 +325,8 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
     
 <div class="module open" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">01</span><span class="module-title">Choisir sa stratégie</span><span class="module-meta">3 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>SCPI, location nue, LMNP, colocation</li><li>Définir son profil investisseur</li><li>Les marchés immobiliers en France</li></ul></div></div>
 <div class="module" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">02</span><span class="module-title">Trouver et analyser un bien</span><span class="module-meta">4 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>Les critères d'un bon bien</li><li>Calculer la rentabilité</li><li>Négocier le prix</li><li>Analyser 3 annonces réelles</li></ul></div></div>
-<div class="module" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">03</span><span class="module-title">Financer son investissement</span><span class="module-meta">4 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>L'effet de levier immobilier</li><li>Critères des banques</li><li>Optimiser son dossier</li><li>Simuler votre capacité d'emprunt</li></ul></div></div>
-<div class="module" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">04</span><span class="module-title">Fiscalité et optimisation</span><span class="module-meta">4 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>Micro-foncier, réel, LMNP réel</li><li>Le statut LMNP en détail</li><li>SCI, holding, démembrement</li><li>Comparer votre imposition</li></ul></div></div>
+<div class="module" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">03</span><span class="module-title">Financer son investissement</span><span class="module-meta">4 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>L'effet de levier immobilier</li><li>Critères des banques</li><li>Optimiser son dossier</li><li>Simuler ta capacité d'emprunt</li></ul></div></div>
+<div class="module" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">04</span><span class="module-title">Fiscalité et optimisation</span><span class="module-meta">4 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>Micro-foncier, réel, LMNP réel</li><li>Le statut LMNP en détail</li><li>SCI, holding, démembrement</li><li>Comparer ton imposition</li></ul></div></div>
 <div class="module" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">05</span><span class="module-title">Gérer son patrimoine</span><span class="module-meta">3 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>Trouver de bons locataires</li><li>Gérer les imprévus</li><li>Passer au deuxième bien</li></ul></div></div>
 
   </div>
@@ -310,7 +342,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
 <section class="section section-white">
   <div class="tarifs-inner">
     <div class="s-tag" style="justify-content:center;display:flex;"><span class="s-tag-dot"></span>Tarifs</div>
-    <h2 class="s-title" style="text-align:center;">Débloquez ce parcours</h2>
+    <h2 class="s-title" style="text-align:center;">Débloque ce parcours</h2>
     <p class="s-sub" style="text-align:center;margin-left:auto;margin-right:auto;">60 € pour l'ensemble des 8 formations, pas seulement celle-ci.</p>
     <div class="tarifs-grid">
       <div class="p-card">
@@ -345,11 +377,22 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
 <div class="cta-bottom">
   <div class="cta-inner">
     <div class="cta-tag">Prêt à commencer ?</div>
-    <h2 class="cta-h2">La pierre ne dort<br><em>jamais.</em></h2>
+    <h2 class="cta-h2">La pierre engage longtemps.<br>Autant <em>savoir</em> à quoi.</h2>
     <p class="cta-sub">5 minutes suffisent pour commencer. Pas besoin de tout savoir.</p>
     <a href="index.html#tarifs" class="cta-btn">Commencer gratuitement →</a>
   </div>
 </div>
+
+
+<!-- LE CADRE -->
+<section class="section-cadre">
+  <div class="cadre-legal">
+    <h3>Ce que Petites Actions n'est pas</h3>
+    <p>Nous ne sommes pas conseillers en investissement. Nous n'émettons aucune recommandation personnalisée, nous ne vendons aucun produit financier et nous ne touchons <strong>aucune commission</strong> sur ce que tu pourrais souscrire ailleurs.</p>
+    <p><strong>Aucun rendement n'est garanti nulle part sur ce site.</strong> Tout investissement comporte un risque de perte en capital, y compris de la totalité des sommes engagées. Les simulateurs de cette page sont des outils pédagogiques : ils illustrent un mécanisme, ils ne prédisent rien.</p>
+    <p>Ce que nous faisons : expliquer ces mécanismes assez clairement pour que les décisions que tu prendras soient réellement les tiennes.</p>
+  </div>
+</section>
 
 <footer>
   <div class="ft">
@@ -361,7 +404,11 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
       <a href="index.html">Accueil</a>
       <a href="index.html#formations">Formations</a>
       <a href="index.html#tarifs">Tarifs</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="mentions-legales.html#confidentialite">Confidentialité</a>
+      <a href="mentions-legales.html#cgv">CGV</a>
     </div>
+    <p class="ft-mentions">Petites Actions est un site de formation en éducation financière. Il ne fournit ni conseil en investissement personnalisé, ni service de gestion, ni intermédiation en produits financiers. Investir comporte un risque de perte en capital.</p>
     <div class="f-copy">© 2025 Petites Actions · Paris, France</div>
   </div>
 </footer>

@@ -6,18 +6,21 @@
 <title>Premiers pas en bourse, Petites Actions</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --ink:#16181D;--ink-soft:#383B42;--ink-muted:#6B6F76;--ink-faint:#9498A0;
-  --bg:#FFFFFF;--bg-soft:#F7F8FA;--bg-mid:#EEF0F3;--bg-line:#E3E6EA;
-  --green:#16A34A;--green-light:#22C55E;--green-pale:#EDFBF1;--green-bord:#BBF0CC;
-  --amber:#F59E0B;--amber-pale:#FFF7E8;--amber-bord:#FCE3A8;
-  --violet:#7C5CFC;--violet-pale:#F1EEFE;--violet-bord:#D9D0FC;
-  --blue:#2563EB;--blue-pale:#EBF1FE;
-  --coral:#FB6B4F;--coral-pale:#FFEEEA;
-  --sans:'Inter', system-ui,-apple-system, sans-serif;
+  /* Encre & Laiton — noms conservés, valeurs repointées */
+  --ink:#12212B;--ink-soft:#43555F;--ink-muted:#7A8A93;--ink-faint:#96A3AA;
+  --bg:#FCFBF8;--bg-soft:#F5F4EE;--bg-mid:#EFF0EA;--bg-line:#DCDDD3;
+  --green:#1E4B3C;--green-light:#2A6350;--green-pale:#E7EFEA;--green-bord:#BFD6C9;
+  --amber:#B8862F;--amber-pale:#F6EFE0;--amber-bord:#E4D2AC;
+  --violet:#4A5C6B;--violet-pale:#EDF0F2;--violet-bord:#D4DBE0;
+  --blue:#1E4B3C;--blue-pale:#E7EFEA;
+  --coral:#A24332;--coral-pale:#F8EDEA;   /* réservé au risque et à l'avertissement */
+  --sans:'Karla', system-ui,-apple-system, sans-serif;
+  --display:'Newsreader', Georgia, serif;
+  --mono:'IBM Plex Mono', ui-monospace, monospace;
 }
 html{scroll-behavior:smooth;}
 body{font-family:var(--sans);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;letter-spacing:-.01em;}
@@ -205,6 +208,35 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
   .s-title{font-size:21px;}
   .f-links{flex-wrap:wrap;gap:14px;}
 }
+
+/* ===== Direction Encre & Laiton — surcouche typographique =====
+   Les titres passent en serif. Les graisses 800 et l'interlettrage serré
+   avaient été réglés pour Inter : ils écrasent une serif, on les desserre. */
+body{font-family:var(--sans);letter-spacing:0;}
+h1,h2,h3,h4,
+.hero-h1,.s-title,.cta-h2,.p-name,.mod-title,.c-title,.hc-title,
+.concept-title,.f-title,.step-title,.q-title,.pill-title{
+  font-family:var(--display);letter-spacing:-.015em;
+}
+.hero-h1,.s-title,.cta-h2{font-weight:500;letter-spacing:-.018em;line-height:1.14;}
+h3,h4,.p-name,.mod-title,.c-title,.hc-title{font-weight:600;}
+
+/* Les étiquettes, compteurs et métadonnées prennent la mono : c'est la police
+   des relevés, elle ancre le vocabulaire chiffré du sujet. */
+.s-tag,.f-copy,.p-unit,.mod-count,.hero-badge,.hero-stat-label,.stat-label,
+.h-meta,.m-count,.badge,.eyebrow{font-family:var(--mono);letter-spacing:.06em;}
+
+/* ===== Bloc « le cadre » ===== */
+.cadre-legal{
+  max-width:760px;margin:0 auto;border-left:3px solid var(--coral);
+  background:var(--coral-pale);border-radius:0 10px 10px 0;padding:24px 26px 26px;
+}
+.cadre-legal h3{font-size:18px;color:var(--ink);margin-bottom:11px;}
+.cadre-legal p{font-size:14.5px;line-height:1.65;color:var(--ink-soft);}
+.cadre-legal p + p{margin-top:10px;}
+.cadre-legal strong{color:var(--ink);font-weight:600;}
+.section-cadre{padding:56px 24px;background:var(--bg-soft);border-top:1px solid var(--bg-line);}
+.ft-mentions{font-size:12.5px;line-height:1.7;opacity:.72;margin-top:16px;max-width:70ch;}
 </style>
 </head>
 <body>
@@ -252,7 +284,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
     <div class="oc"><div class="oc-icon">🔄</div><div class="oc-title">DCA</div><div class="oc-desc">Investir une somme fixe chaque mois.</div></div>
     <div class="oc"><div class="oc-icon">🏦</div><div class="oc-title">PEA</div><div class="oc-desc">L'enveloppe fiscale idéale en France.</div></div>
     <div class="oc"><div class="oc-icon">📊</div><div class="oc-title">Indice</div><div class="oc-desc">Mesure la performance d'un marché.</div></div>
-    <div class="oc"><div class="oc-icon">⚖️</div><div class="oc-title">Allocation</div><div class="oc-desc">La répartition de votre portefeuille.</div></div>
+    <div class="oc"><div class="oc-icon">⚖️</div><div class="oc-title">Allocation</div><div class="oc-desc">La répartition de ton portefeuille.</div></div>
     <div class="oc"><div class="oc-icon">🌍</div><div class="oc-title">Diversification</div><div class="oc-desc">Réduire le risque global.</div></div>
   </div>
 </section>
@@ -260,7 +292,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
 <section class="section section-white">
   <div class="s-tag"><span class="s-tag-dot"></span>Choisir son cadre</div>
   <h2 class="s-title">PEA ou CTO ?</h2>
-  <p class="s-sub">Le choix de votre enveloppe conditionne votre fiscalité.</p>
+  <p class="s-sub">Le choix de ton enveloppe conditionne ta fiscalité.</p>
   <div class="compare-grid">
     <div class="compare-card good"><div class="compare-header"><span class="compare-icon">🏆</span><span class="compare-title">PEA, Recommandé</span></div><ul class="compare-list"><li>Exonération après 5 ans</li><li>Plafond 150 000 €</li><li>Idéal pour débuter</li></ul></div>
     <div class="compare-card alt"><div class="compare-header"><span class="compare-icon">🌐</span><span class="compare-title">CTO</span></div><ul class="compare-list"><li>Pas de plafond</li><li>Tous les marchés mondiaux</li><li>Complémentaire au PEA</li></ul></div>
@@ -268,9 +300,9 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
 </section>
 
 <section class="section section-soft">
-  <div class="s-tag"><span class="s-tag-dot"></span>Simulez</div>
+  <div class="s-tag"><span class="s-tag-dot"></span>Simule</div>
   <h2 class="s-title">La puissance du DCA</h2>
-  <p class="s-sub">Calculez ce que votre investissement mensuel pourrait rapporter.</p>
+  <p class="s-sub">Calcule ce que ton investissement mensuel pourrait rapporter.</p>
   <div class="sim-box">
     <div class="sim-title">Simulateur DCA</div>
     <div class="sim-sub">Investissement régulier sur le long terme.</div>
@@ -296,11 +328,11 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
   <div class="programme">
     
 <div class="module open" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">01</span><span class="module-title"><a href="lecons-bourse.html?l=1" style="color:inherit;text-decoration:none;">Comment fonctionne la bourse ?</a></span><span class="module-meta">4 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>La bourse expliquée simplement</li><li>Pourquoi les marchés montent</li><li>Actions, ETF, fonds</li><li>Les indices boursiers</li></ul></div></div>
-<div class="module" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">02</span><span class="module-title"><a href="lecons-bourse.html?l=5" style="color:inherit;text-decoration:none;">Choisir son broker</a></span><span class="module-meta">4 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>PEA vs CTO</li><li>Comparatif des meilleurs brokers</li><li>Ouvrir son PEA pas à pas</li><li>Ouvrir votre compte</li></ul></div></div>
+<div class="module" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">02</span><span class="module-title"><a href="lecons-bourse.html?l=5" style="color:inherit;text-decoration:none;">Choisir son broker</a></span><span class="module-meta">4 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>PEA vs CTO</li><li>Comparatif des meilleurs brokers</li><li>Ouvrir son PEA pas à pas</li><li>Ouvrir ton compte</li></ul></div></div>
 <div class="module" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">03</span><span class="module-title"><a href="lecons-bourse.html?l=9" style="color:inherit;text-decoration:none;">Les ETF</a></span><span class="module-meta">4 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>Qu'est-ce qu'un ETF</li><li>Capitalisant vs distribuant</li><li>Réplication physique vs synthétique</li><li>Les ETF monde incontournables</li></ul></div></div>
 <div class="module" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">04</span><span class="module-title"><a href="lecons-bourse.html?l=13" style="color:inherit;text-decoration:none;">La stratégie DCA</a></span><span class="module-meta">4 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>Pourquoi investir régulièrement</li><li>Calculer son montant mensuel</li><li>Automatiser ses investissements</li><li>Simuler 10 ans de DCA</li></ul></div></div>
-<div class="module" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">05</span><span class="module-title"><a href="lecons-bourse.html?l=17" style="color:inherit;text-decoration:none;">Construire son portefeuille</a></span><span class="module-meta">4 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>Définir son profil de risque</li><li>Allocation selon son horizon</li><li>Le rééquilibrage annuel</li><li>Votre portefeuille idéal</li></ul></div></div>
-<div class="module" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">06</span><span class="module-title"><a href="lecons-bourse.html?l=21" style="color:inherit;text-decoration:none;">Psychologie et erreurs</a></span><span class="module-meta">4 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>5 erreurs classiques</li><li>Gérer les krachs boursiers</li><li>L'art de la patience active</li><li>Votre plan sur 5 ans</li></ul></div></div>
+<div class="module" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">05</span><span class="module-title"><a href="lecons-bourse.html?l=17" style="color:inherit;text-decoration:none;">Construire son portefeuille</a></span><span class="module-meta">4 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>Définir son profil de risque</li><li>Allocation selon son horizon</li><li>Le rééquilibrage annuel</li><li>Ton portefeuille idéal</li></ul></div></div>
+<div class="module" onclick="toggleModule(this)"><div class="module-header"><span class="module-num">06</span><span class="module-title"><a href="lecons-bourse.html?l=21" style="color:inherit;text-decoration:none;">Psychologie et erreurs</a></span><span class="module-meta">4 leçons</span><span class="module-toggle">+</span></div><div class="module-body"><ul class="module-lessons"><li>5 erreurs classiques</li><li>Gérer les krachs boursiers</li><li>L'art de la patience active</li><li>Ton plan sur 5 ans</li></ul></div></div>
 
   </div>
 </section>
@@ -315,7 +347,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
 <section class="section section-white">
   <div class="tarifs-inner">
     <div class="s-tag" style="justify-content:center;display:flex;"><span class="s-tag-dot"></span>Tarifs</div>
-    <h2 class="s-title" style="text-align:center;">Débloquez ce parcours</h2>
+    <h2 class="s-title" style="text-align:center;">Débloque ce parcours</h2>
     <p class="s-sub" style="text-align:center;margin-left:auto;margin-right:auto;">60 € pour l'ensemble des 8 formations, pas seulement celle-ci.</p>
     <div class="tarifs-grid">
       <div class="p-card">
@@ -350,11 +382,22 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
 <div class="cta-bottom">
   <div class="cta-inner">
     <div class="cta-tag">Prêt à commencer ?</div>
-    <h2 class="cta-h2">Chaque mois sans investir<br>est un mois <em>perdu.</em></h2>
+    <h2 class="cta-h2">Tu n'es pas en retard.<br>Tu es <em>au début.</em></h2>
     <p class="cta-sub">5 minutes suffisent pour commencer. Pas besoin de tout savoir.</p>
     <a href="lecons-bourse.html" class="cta-btn">Commencer les leçons →</a>
   </div>
 </div>
+
+
+<!-- LE CADRE -->
+<section class="section-cadre">
+  <div class="cadre-legal">
+    <h3>Ce que Petites Actions n'est pas</h3>
+    <p>Nous ne sommes pas conseillers en investissement. Nous n'émettons aucune recommandation personnalisée, nous ne vendons aucun produit financier et nous ne touchons <strong>aucune commission</strong> sur ce que tu pourrais souscrire ailleurs.</p>
+    <p><strong>Aucun rendement n'est garanti nulle part sur ce site.</strong> Tout investissement comporte un risque de perte en capital, y compris de la totalité des sommes engagées. Les simulateurs de cette page sont des outils pédagogiques : ils illustrent un mécanisme, ils ne prédisent rien.</p>
+    <p>Ce que nous faisons : expliquer ces mécanismes assez clairement pour que les décisions que tu prendras soient réellement les tiennes.</p>
+  </div>
+</section>
 
 <footer>
   <div class="ft">
@@ -366,7 +409,11 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:
       <a href="index.html">Accueil</a>
       <a href="index.html#formations">Formations</a>
       <a href="index.html#tarifs">Tarifs</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="mentions-legales.html#confidentialite">Confidentialité</a>
+      <a href="mentions-legales.html#cgv">CGV</a>
     </div>
+    <p class="ft-mentions">Petites Actions est un site de formation en éducation financière. Il ne fournit ni conseil en investissement personnalisé, ni service de gestion, ni intermédiation en produits financiers. Investir comporte un risque de perte en capital.</p>
     <div class="f-copy">© 2025 Petites Actions · Paris, France</div>
   </div>
 </footer>

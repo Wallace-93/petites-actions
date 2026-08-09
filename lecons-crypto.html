@@ -6,18 +6,20 @@
 <title>Bitcoin & Cryptomonnaies — Leçons — Petites Actions</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --ink:#16181D;--ink-soft:#383B42;--ink-muted:#6B6F76;--ink-faint:#9498A0;
-  --bg:#FFFFFF;--bg-soft:#F7F8FA;--bg-mid:#EEF0F3;--bg-line:#E3E6EA;
-  --green:#16A34A;--green-light:#22C55E;--green-pale:#EDFBF1;--green-bord:#BBF0CC;
-  --amber:#F59E0B;--amber-pale:#FFF7E8;--amber-bord:#FCE3A8;
-  --violet:#7C5CFC;--violet-pale:#F1EEFE;--violet-bord:#D9D0FC;
-  --coral:#FB6B4F;--coral-pale:#FFEEEA;
-  --sans:'Inter',system-ui,-apple-system,sans-serif;
+  --ink:#12212B;--ink-soft:#43555F;--ink-muted:#7A8A93;--ink-faint:#96A3AA;
+  --bg:#FCFBF8;--bg-soft:#F5F4EE;--bg-mid:#EFF0EA;--bg-line:#DCDDD3;
+  --green:#1E4B3C;--green-light:#2A6350;--green-pale:#E7EFEA;--green-bord:#BFD6C9;
+  --amber:#B8862F;--amber-pale:#F6EFE0;--amber-bord:#E4D2AC;
+  --violet:#4A5C6B;--violet-pale:#EDF0F2;--violet-bord:#D4DBE0;
+  --coral:#A24332;--coral-pale:#F8EDEA;
+  --sans:'Karla',system-ui,-apple-system,sans-serif;
+  --display:'Newsreader',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
 }
 body{font-family:var(--sans);background:var(--bg-soft);color:var(--ink);-webkit-font-smoothing:antialiased;letter-spacing:-.01em;}
 a{color:inherit;}
@@ -82,6 +84,17 @@ a{color:inherit;}
   .sidebar{position:static;height:auto;border-right:none;border-bottom:1px solid var(--bg-line);}
   .main{padding:28px 20px 60px;}
 }
+
+/* ===== Direction Encre & Laiton — surcouche typographique ===== */
+body{font-family:var(--sans);letter-spacing:0;}
+h1,h2,h3,h4,.hero-h1,.s-title,.cta-h2,.p-name,.mod-title,.c-title,.hc-title,
+.lecon-title,.q-title,.auth-title,.perf-title,.section-title,.edu-title,.tips-title{
+  font-family:var(--display);letter-spacing:-.015em;
+}
+.hero-h1,.s-title,.cta-h2,.auth-title{font-weight:500;letter-spacing:-.018em;line-height:1.16;}
+h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
+.s-tag,.f-copy,.hstat-label,.stat-label,.perf-note,.order-meta,.pos-value,
+.price-cell,.asset-label,.badge,.eyebrow,.nav-balance{font-family:var(--mono);}
 </style>
 </head>
 <body>

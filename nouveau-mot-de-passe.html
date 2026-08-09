@@ -5,16 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nouveau mot de passe — Petites Actions</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --ink:#16181D;--ink-muted:#6B6F76;--ink-faint:#9498A0;
-  --bg:#FFFFFF;--bg-soft:#F7F8FA;--bg-line:#E3E6EA;
-  --green:#16A34A;--green-pale:#EDFBF1;--green-bord:#BBF0CC;
-  --coral:#FB6B4F;
-  --sans:'Inter',system-ui,-apple-system,sans-serif;
+  --ink:#12212B;--ink-muted:#7A8A93;--ink-faint:#96A3AA;
+  --bg:#FCFBF8;--bg-soft:#F5F4EE;--bg-line:#DCDDD3;
+  --green:#1E4B3C;--green-pale:#E7EFEA;--green-bord:#BFD6C9;
+  --coral:#A24332;
+  --sans:'Karla',system-ui,-apple-system,sans-serif;
+  --display:'Newsreader',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
 }
 body{font-family:var(--sans);background:var(--bg-soft);color:var(--ink);-webkit-font-smoothing:antialiased;letter-spacing:-.01em;min-height:100vh;display:flex;flex-direction:column;}
 a{color:inherit;}
@@ -32,11 +34,22 @@ a{color:inherit;}
 .submit-btn{width:100%;background:var(--green);color:#fff;border:none;cursor:pointer;font-family:var(--sans);font-size:15px;font-weight:700;padding:14px;border-radius:12px;transition:background .2s;margin-bottom:10px;}
 .submit-btn:hover{background:#149041;}
 .submit-btn:disabled{opacity:.6;cursor:not-allowed;}
-.form-error{background:#FFEEEA;border:1px solid #FFC4AD;border-radius:10px;padding:11px 14px;font-size:12.5px;color:var(--coral);margin-bottom:16px;display:none;}
+.form-error{background:#F8EDEA;border:1px solid #FFC4AD;border-radius:10px;padding:11px 14px;font-size:12.5px;color:var(--coral);margin-bottom:16px;display:none;}
 .form-error.show{display:block;}
 .invalid-link{text-align:center;padding:20px 0;}
 .invalid-link p{color:var(--ink-muted);font-size:13.5px;line-height:1.6;margin-bottom:16px;}
 .invalid-link a{color:var(--green);font-weight:700;text-decoration:none;}
+
+/* ===== Direction Encre & Laiton — surcouche typographique ===== */
+body{font-family:var(--sans);letter-spacing:0;}
+h1,h2,h3,h4,.hero-h1,.s-title,.cta-h2,.p-name,.mod-title,.c-title,.hc-title,
+.lecon-title,.q-title,.auth-title,.perf-title,.section-title,.edu-title,.tips-title{
+  font-family:var(--display);letter-spacing:-.015em;
+}
+.hero-h1,.s-title,.cta-h2,.auth-title{font-weight:500;letter-spacing:-.018em;line-height:1.16;}
+h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
+.s-tag,.f-copy,.hstat-label,.stat-label,.perf-note,.order-meta,.pos-value,
+.price-cell,.asset-label,.badge,.eyebrow,.nav-balance{font-family:var(--mono);}
 </style>
 </head>
 <body>
