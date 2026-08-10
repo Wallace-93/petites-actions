@@ -126,8 +126,8 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
       <li>Communauté privée</li>
       <li>Toutes les leçons déjà débloquées</li>
     </ul>
-    <a href="https://buy.stripe.com/CLUB_PLACEHOLDER?utm_source=petitesactions&promo=ledeclic37" class="offer-btn">Débloquer tout, 37,80 € →</a>
-    <div class="offer-timer">⏱ Offre valable 48h, réservée aux membres ayant terminé la formation 0</div>
+    <span class="offer-btn" style="opacity:.55;cursor:default;pointer-events:none;">Ouverture prochaine</span>
+    <div class="offer-timer">Les formations suivantes ouvriront bientôt. Ton accès et ta progression sont conservés.</div>
   </div>
   <a href="index.html" class="skip-link">Plus tard, retour à l'accueil</a>
 </div>
@@ -146,5 +146,11 @@ const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   }
 })();
 </script>
+
+<div style="border-top:1px solid var(--bg-line);padding:22px 24px;text-align:center;font-size:12.5px;color:var(--ink-muted);background:var(--bg-soft);">
+  <a href="mentions-legales.html" style="color:var(--ink-muted);margin:0 10px;">Mentions légales</a>
+  <a href="mentions-legales.html#confidentialite" style="color:var(--ink-muted);margin:0 10px;">Confidentialité</a>
+  <a href="mentions-legales.html#cgv" style="color:var(--ink-muted);margin:0 10px;">CGV</a>
+</div>
 </body>
 </html>

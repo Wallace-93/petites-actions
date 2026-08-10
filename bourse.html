@@ -237,6 +237,12 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title{font-weight:600;}
 .cadre-legal strong{color:var(--ink);font-weight:600;}
 .section-cadre{padding:56px 24px;background:var(--bg-soft);border-top:1px solid var(--bg-line);}
 .ft-mentions{font-size:12.5px;line-height:1.7;opacity:.72;margin-top:16px;max-width:70ch;}
+
+/* ===== Formule payante suspendue le temps de la bêta ===== */
+.p-btn.bientot{background:var(--bg-mid);color:var(--ink-muted);border:1px dashed var(--bg-line);
+  cursor:default;pointer-events:none;font-weight:600;}
+.p-soon{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--amber);margin-top:9px;text-align:center;display:block;}
 </style>
 </head>
 <body>
@@ -365,7 +371,7 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title{font-weight:600;}
         <div class="p-price"><span class="p-amount">60</span><span class="p-cur">€</span></div>
         <div class="p-period">à vie · tout inclus</div>
         <ul class="p-features"><li>8 formations complètes</li><li>Accès à vie + mises à jour</li><li>1 session coach offerte</li><li>Communauté privée</li></ul>
-        <a href="https://buy.stripe.com/CLUB_PLACEHOLDER?utm_source=petitesactions" class="p-btn">Débloquer, 60 €</a>
+        <span class="p-btn bientot">Ouverture prochaine</span><span class="p-soon">Bêta en cours</span>
       </div>
       <div class="p-card">
         <div class="p-label">À la carte</div>
@@ -373,7 +379,7 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title{font-weight:600;}
         <div class="p-price"><span class="p-amount">25</span><span class="p-cur">€</span></div>
         <div class="p-period">par session 1h30</div>
         <ul class="p-features"><li>1h30 individuel</li><li>Stratégie personnalisée</li><li>Forfait possible</li></ul>
-        <a href="https://buy.stripe.com/SESSION_PLACEHOLDER?utm_source=petitesactions" class="p-btn">Réserver, 25 €</a>
+        <span class="p-btn bientot">Ouverture prochaine</span><span class="p-soon">Bêta en cours</span>
       </div>
     </div>
   </div>

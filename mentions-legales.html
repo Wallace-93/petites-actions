@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentions légales, confidentialité et CGV — Petites Actions</title>
+<meta name="description" content="Mentions légales, politique de confidentialité, gestion des cookies et conditions générales de vente du site Petites Actions.">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --encre:#12212B;--encre-2:#43555F;--encre-3:#7A8A93;
+  --papier:#FCFBF8;--papier-2:#EFF0EA;--trait:#DCDDD3;
+  --pin:#1E4B3C;--pin-clair:#E7EFEA;
+  --laiton:#B8862F;--laiton-clair:#F6EFE0;
+  --brique:#A24332;--brique-clair:#F8EDEA;
+  --display:'Newsreader',Georgia,serif;
+  --texte:'Karla',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--texte);background:var(--papier);color:var(--encre-2);font-size:16px;line-height:1.68;-webkit-font-smoothing:antialiased;}
+a{color:var(--pin);}
+:focus-visible{outline:2px solid var(--pin);outline-offset:3px;border-radius:3px;}
+
+/* Navigation */
+.nav{position:sticky;top:0;z-index:50;background:rgba(252,251,248,.94);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--trait);}
+.nav-in{max-width:1120px;margin:0 auto;padding:15px 24px;display:flex;align-items:center;gap:24px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;}
+.nav-mark{width:27px;height:27px;border-radius:6px;background:var(--pin);display:grid;place-items:center;flex:none;}
+.nav-mark svg{width:15px;height:15px;}
+.nav-name{font-family:var(--display);font-size:18px;font-weight:600;color:var(--encre);letter-spacing:-.015em;}
+.nav-retour{margin-left:auto;font-size:14.5px;font-weight:600;text-decoration:none;color:var(--encre);}
+
+/* En-tête */
+.entete{padding:56px 24px 34px;border-bottom:1px solid var(--trait);}
+.entete-in{max-width:1120px;margin:0 auto;}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--laiton);display:flex;align-items:center;gap:9px;margin-bottom:16px;}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--laiton);}
+h1{font-family:var(--display);font-weight:500;font-size:clamp(30px,4.2vw,46px);color:var(--encre);letter-spacing:-.018em;line-height:1.14;margin-bottom:14px;}
+.entete p{max-width:62ch;font-size:17px;}
+.maj{font-family:var(--mono);font-size:12px;color:var(--encre-3);margin-top:18px;}
+
+/* Corps en deux colonnes */
+.corps{max-width:1120px;margin:0 auto;padding:44px 24px 80px;display:grid;grid-template-columns:230px 1fr;gap:56px;align-items:start;}
+.sommaire{position:sticky;top:82px;}
+.sommaire-titre{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--encre-3);margin-bottom:14px;}
+.sommaire ol{list-style:none;counter-reset:s;}
+.sommaire li{counter-increment:s;margin-bottom:9px;}
+.sommaire a{display:block;text-decoration:none;color:var(--encre-2);font-size:14.5px;padding-left:26px;position:relative;line-height:1.4;}
+.sommaire a::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;font-family:var(--mono);font-size:11px;color:var(--laiton);top:3px;}
+.sommaire a:hover{color:var(--encre);}
+@media(max-width:900px){
+  .corps{grid-template-columns:1fr;gap:34px;}
+  .sommaire{position:static;border-bottom:1px solid var(--trait);padding-bottom:22px;}
+}
+
+article section{scroll-margin-top:90px;padding-bottom:44px;}
+article section + section{border-top:1px solid var(--trait);padding-top:40px;}
+h2{font-family:var(--display);font-weight:500;font-size:clamp(24px,3vw,32px);color:var(--encre);letter-spacing:-.018em;line-height:1.18;margin-bottom:20px;}
+h3{font-family:var(--display);font-weight:600;font-size:19px;color:var(--encre);margin:26px 0 9px;}
+h4{font-family:var(--texte);font-weight:700;font-size:15px;color:var(--encre);margin:18px 0 6px;}
+p{margin-bottom:12px;max-width:74ch;}
+ul{margin:0 0 14px 0;padding-left:0;list-style:none;max-width:74ch;}
+li{margin-bottom:7px;padding-left:20px;position:relative;}
+li::before{content:"";position:absolute;left:2px;top:11px;width:5px;height:5px;border-radius:50%;background:var(--laiton);}
+strong{color:var(--encre);font-weight:600;}
+
+/* Champ à compléter */
+.tbd{background:var(--laiton-clair);border-bottom:1px dashed var(--laiton);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:.88em;color:#7A5A12;}
+
+/* Encadrés */
+.note{background:var(--papier-2);border:1px solid var(--trait);border-radius:10px;padding:18px 20px;margin:18px 0;font-size:14.6px;}
+.note p:last-child{margin-bottom:0;}
+.alerte{background:var(--brique-clair);border-left:3px solid var(--brique);border-radius:0 10px 10px 0;padding:18px 20px;margin:18px 0;font-size:14.6px;}
+.alerte p:last-child{margin-bottom:0;}
+
+/* Tableau */
+table{width:100%;border-collapse:collapse;margin:16px 0 20px;font-size:14.5px;}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--trait);vertical-align:top;}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--encre-3);font-weight:400;}
+td:first-child{color:var(--encre);font-weight:600;width:34%;}
+@media(max-width:640px){
+  table,thead,tbody,tr,td{display:block;width:100%;}
+  thead{display:none;}
+  td{border-bottom:0;padding:2px 0;}
+  tr{border-bottom:1px solid var(--trait);padding:12px 0;display:block;}
+  td:first-child{width:auto;}
+}
+
+/* Pied de page */
+footer{background:var(--encre);color:#B7C3CA;padding:48px 24px 38px;}
+.ft{max-width:1120px;margin:0 auto;}
+.ft-haut{display:flex;flex-wrap:wrap;gap:22px;justify-content:space-between;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.12);}
+.ft-name{font-family:var(--display);font-size:18px;font-weight:600;color:#fff;}
+.ft-links{display:flex;flex-wrap:wrap;gap:20px;}
+.ft-links a{color:#B7C3CA;text-decoration:none;font-size:14px;}
+.ft-links a:hover{color:#fff;}
+.ft-mentions{font-size:12.5px;line-height:1.7;color:#8FA0A9;margin-top:20px;max-width:70ch;}
+.ft-copy{font-family:var(--mono);font-size:11.5px;color:#7A8A93;margin-top:20px;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="nav-name">Petites Actions</span>
+    </a>
+    <a href="index.html" class="nav-retour">← Retour au site</a>
+  </div>
+</nav>
+
+<header class="entete">
+  <div class="entete-in">
+    <div class="eyebrow">Informations légales</div>
+    <h1>Mentions légales, confidentialité<br>et conditions de vente.</h1>
+    <p>Cette page rassemble tout ce que tu dois pouvoir vérifier avant de créer un compte ou de payer : qui édite ce site, ce que nous faisons de tes données, et ce à quoi nous nous engageons.</p>
+    <div class="maj">Dernière mise à jour : <span class="tbd">JJ/MM/AAAA</span></div>
+  </div>
+</header>
+
+<div class="corps">
+  <nav class="sommaire" aria-label="Sommaire">
+    <div class="sommaire-titre">Sommaire</div>
+    <ol>
+      <li><a href="#mentions">Mentions légales</a></li>
+      <li><a href="#confidentialite">Confidentialité et données</a></li>
+      <li><a href="#cookies">Cookies et traceurs</a></li>
+      <li><a href="#cgv">Conditions générales de vente</a></li>
+      <li><a href="#contact">Nous contacter</a></li>
+    </ol>
+  </nav>
+
+  <article>
+
+  <!-- ==================== 1. MENTIONS LÉGALES ==================== -->
+  <section id="mentions">
+    <h2>1. Mentions légales</h2>
+    <p>Conformément à la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN), voici l'identité des personnes qui éditent et hébergent ce site.</p>
+
+    <h3>Éditeur du site</h3>
+    <table>
+      <thead><tr><th>Élément</th><th>Valeur</th></tr></thead>
+      <tbody>
+        <tr><td>Dénomination</td><td><span class="tbd">Raison sociale ou nom et prénom si entreprise individuelle</span></td></tr>
+        <tr><td>Forme juridique</td><td><span class="tbd">SASU, EURL, micro-entreprise…</span></td></tr>
+        <tr><td>Capital social</td><td><span class="tbd">Montant, ou « sans objet » si entreprise individuelle</span></td></tr>
+        <tr><td>Siège social</td><td><span class="tbd">Adresse postale complète</span></td></tr>
+        <tr><td>SIRET</td><td><span class="tbd">14 chiffres</span></td></tr>
+        <tr><td>RCS</td><td><span class="tbd">Ville d'immatriculation et numéro</span></td></tr>
+        <tr><td>N° TVA intracommunautaire</td><td><span class="tbd">FR… ou « non assujetti, art. 293 B du CGI »</span></td></tr>
+        <tr><td>Directeur de la publication</td><td><span class="tbd">Nom et prénom</span></td></tr>
+        <tr><td>Contact</td><td><span class="tbd">adresse@exemple.fr</span> — <span class="tbd">téléphone</span></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Activité de formation</h3>
+    <p>Petites Actions est édité par un organisme de formation déclaré sous le numéro de déclaration d'activité <span class="tbd">n° d'enregistrement</span> auprès de la Préfecture de la région <span class="tbd">région</span>. <strong>Cet enregistrement ne vaut pas agrément de l'État.</strong></p>
+    <div class="note">
+      <p>Cette section n'est à conserver que si l'activité de formation est effectivement déclarée auprès de la DREETS. Si ce n'est pas le cas, il faut supprimer ce paragraphe entier plutôt que de le laisser incomplet : une mention de conformité inexacte est plus dommageable qu'une mention absente.</p>
+    </div>
+
+    <h3>Hébergement</h3>
+    <p>Le site est hébergé par <strong>GitHub Inc.</strong>, 88 Colin P. Kelly Jr Street, San Francisco, CA 94107, États-Unis — <a href="https://github.com" rel="nofollow noopener">github.com</a>.</p>
+    <p>La base de données et le service d'authentification sont fournis par <strong>Supabase Inc.</strong>, 970 Toa Payoh North, Singapour — <a href="https://supabase.com" rel="nofollow noopener">supabase.com</a>.</p>
+
+    <h3>Propriété intellectuelle</h3>
+    <p>L'ensemble des contenus de ce site — textes des leçons, quiz, illustrations, structure pédagogique, charte graphique et code source — est protégé par le droit d'auteur et reste la propriété exclusive de l'éditeur, sauf mention contraire.</p>
+    <p>L'accès à une formation confère un droit d'usage strictement personnel. Sont notamment interdits, sans autorisation écrite préalable : la reproduction, la diffusion, la revente, le partage d'identifiants de connexion, l'extraction systématique de contenus, et l'utilisation des contenus pour entraîner un modèle d'apprentissage automatique.</p>
+
+    <h3>Nature du site et limites de responsabilité</h3>
+    <p>Petites Actions est un site de <strong>formation et d'information</strong>. Il ne constitue ni un service de conseil en investissement, ni une activité d'intermédiation en opérations de banque, en services de paiement ou en assurance, ni un service de gestion de portefeuille. L'éditeur n'est pas immatriculé en tant que conseiller en investissements financiers.</p>
+    <p>Les contenus sont fournis à titre pédagogique et général. Ils ne tiennent pas compte de la situation personnelle, patrimoniale ou fiscale de chaque utilisateur, et ne peuvent donc pas se substituer à l'avis d'un professionnel qualifié. Les décisions financières prises à la suite de la consultation de ce site relèvent de la seule responsabilité de l'utilisateur.</p>
+    <p>Les simulateurs et le Trading Lab sont des outils de démonstration fonctionnant en monnaie fictive ou sur la base d'hypothèses saisies par l'utilisateur. <strong>Ils n'ont aucune valeur prédictive.</strong> Les cours affichés dans le Trading Lab proviennent d'une source tierce et peuvent être différés, incomplets ou momentanément indisponibles.</p>
+
+    <h3>Liens externes</h3>
+    <p>Ce site peut renvoyer vers des sites tiers, notamment institutionnels. L'éditeur n'exerce aucun contrôle sur leur contenu et décline toute responsabilité à leur égard.</p>
+  </section>
+
+  <!-- ==================== 2. CONFIDENTIALITÉ ==================== -->
+  <section id="confidentialite">
+    <h2>2. Politique de confidentialité</h2>
+    <p>Cette politique décrit les traitements de données personnelles réalisés dans le cadre du site, conformément au Règlement (UE) 2016/679 (RGPD) et à la loi Informatique et Libertés.</p>
+
+    <h3>Responsable du traitement</h3>
+    <p><span class="tbd">Dénomination de l'éditeur</span>, dont les coordonnées figurent au point 1, est responsable des traitements décrits ci-dessous. Aucun délégué à la protection des données n'a été désigné, cette désignation n'étant pas obligatoire au regard de l'activité.</p>
+
+    <h3>Données collectées et finalités</h3>
+    <table>
+      <thead><tr><th>Données</th><th>Finalité et base légale</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Prénom, adresse e-mail, mot de passe (stocké sous forme chiffrée et non lisible par l'éditeur)</td>
+          <td>Création et gestion du compte, connexion, réinitialisation du mot de passe. <strong>Base légale :</strong> exécution du contrat.</td>
+        </tr>
+        <tr>
+          <td>Progression pédagogique : leçons terminées, réponses aux quiz, actions cochées, points, badges, séries</td>
+          <td>Fourniture du service de formation et restitution de la progression. <strong>Base légale :</strong> exécution du contrat.</td>
+        </tr>
+        <tr>
+          <td>Données du Trading Lab : portefeuille virtuel, ordres simulés, instantanés de valorisation</td>
+          <td>Fonctionnement du simulateur pédagogique. <strong>Base légale :</strong> exécution du contrat.</td>
+        </tr>
+        <tr>
+          <td>Données de commande : date, montant, référence de transaction</td>
+          <td>Gestion des achats, facturation, comptabilité. <strong>Base légale :</strong> exécution du contrat et obligation légale.</td>
+        </tr>
+        <tr>
+          <td>Données techniques de connexion (adresse IP, journaux d'accès)</td>
+          <td>Sécurité du service, prévention des abus, diagnostic d'incident. <strong>Base légale :</strong> intérêt légitime.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alerte">
+      <p><strong>Aucune donnée bancaire n'est collectée ni stockée par Petites Actions.</strong> Les paiements sont traités intégralement par Stripe : le numéro de carte est saisi sur une interface Stripe et ne transite jamais par nos serveurs.</p>
+    </div>
+
+    <h3>Destinataires et sous-traitants</h3>
+    <p>Les données ne sont ni vendues, ni louées, ni cédées à des tiers à des fins publicitaires. Elles sont accessibles à l'éditeur et aux prestataires techniques strictement nécessaires au fonctionnement du service :</p>
+    <ul>
+      <li><strong>Supabase Inc.</strong> — hébergement de la base de données et service d'authentification.</li>
+      <li><strong>GitHub Inc.</strong> — hébergement des pages du site.</li>
+      <li><strong>Stripe Payments Europe Ltd.</strong> — traitement des paiements et conservation des données de facturation.</li>
+      <li><strong>Google LLC</strong> — fourniture des polices de caractères, ce qui implique la transmission de l'adresse IP du visiteur lors du chargement des pages.</li>
+      <li><span class="tbd">Prestataire d'envoi d'e-mails, le cas échéant</span></li>
+    </ul>
+
+    <h3>Transferts hors Union européenne</h3>
+    <p>Certains de ces prestataires sont établis hors de l'Union européenne ou y transfèrent des données. Ces transferts sont encadrés par les clauses contractuelles types adoptées par la Commission européenne et, s'agissant des prestataires américains, par le cadre de protection des données UE–États-Unis lorsque ceux-ci y sont certifiés.</p>
+
+    <h3>Durées de conservation</h3>
+    <ul>
+      <li><strong>Compte et progression :</strong> pendant toute la durée de vie du compte, puis <strong>trois ans</strong> à compter de la dernière connexion, avant suppression ou anonymisation.</li>
+      <li><strong>Pièces comptables et factures :</strong> <strong>dix ans</strong> à compter de la clôture de l'exercice, conformément au Code de commerce.</li>
+      <li><strong>Journaux techniques :</strong> <strong>douze mois</strong> au maximum.</li>
+    </ul>
+
+    <h3>Sécurité</h3>
+    <p>Les échanges sont chiffrés par HTTPS. Les mots de passe sont stockés sous forme de condensats non réversibles. L'accès aux données de chaque compte est cloisonné au niveau de la base par des règles de sécurité par ligne, de sorte qu'un utilisateur connecté ne peut accéder qu'à ses propres données.</p>
+
+    <h3>Tes droits</h3>
+    <p>Tu disposes des droits d'accès, de rectification, d'effacement, de limitation, d'opposition et de portabilité sur tes données, ainsi que du droit de définir des directives relatives à leur sort après ton décès.</p>
+    <p>Pour les exercer, écris à <span class="tbd">adresse@exemple.fr</span> depuis l'adresse associée à ton compte. Une réponse te sera apportée dans un délai d'un mois. Si la réponse ne te satisfait pas, tu peux introduire une réclamation auprès de la <strong>CNIL</strong> — 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07 — <a href="https://www.cnil.fr" rel="noopener">cnil.fr</a>.</p>
+
+    <h3>Âge minimum</h3>
+    <p>La création d'un compte est réservée aux personnes âgées d'au moins 18 ans. Un mineur ne peut créer de compte ni effectuer d'achat qu'avec l'accord préalable du titulaire de l'autorité parentale.</p>
+  </section>
+
+  <!-- ==================== 3. COOKIES ==================== -->
+  <section id="cookies">
+    <h2>3. Cookies et traceurs</h2>
+    <p>Ce site n'utilise <strong>ni cookie publicitaire, ni cookie de mesure d'audience, ni traceur tiers de suivi</strong>. Aucun profilage n'est réalisé et aucune donnée n'est transmise à des régies.</p>
+    <p>Seuls sont utilisés des dispositifs strictement nécessaires au fonctionnement du service, qui sont exemptés de consentement préalable au sens de l'article 82 de la loi Informatique et Libertés :</p>
+    <ul>
+      <li><strong>Jeton de session</strong> — conservé par ton navigateur pour te maintenir connecté d'une page à l'autre. Il disparaît à la déconnexion ou à l'expiration de la session.</li>
+      <li><strong>Stockage local des cours du Trading Lab</strong> — mémorise les derniers cours reçus afin d'éviter d'afficher une valorisation fausse lorsque la source de données est momentanément indisponible. Aucune donnée personnelle n'y figure.</li>
+    </ul>
+    <p>Tu peux effacer ces éléments à tout moment depuis les réglages de ton navigateur. La suppression du jeton de session entraîne simplement la déconnexion du compte.</p>
+    <div class="note">
+      <p><strong>À revoir en cas d'évolution du site.</strong> L'ajout d'un outil de mesure d'audience, d'un pixel de réseau social ou d'une vidéo intégrée depuis une plateforme tierce rendrait obligatoire l'affichage d'un bandeau de consentement préalable. Cette section devra alors être entièrement réécrite.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 4. CGV ==================== -->
+  <section id="cgv">
+    <h2>4. Conditions générales de vente</h2>
+    <p>Les présentes conditions régissent la vente des formations et des séances d'accompagnement proposées sur ce site. Elles sont acceptées par le client avant tout paiement et prévalent sur tout autre document.</p>
+
+    <h3>4.1 Prestations et prix</h3>
+    <p>Les prix sont indiqués en euros, toutes taxes comprises. <span class="tbd">Mention de TVA applicable : « TVA non applicable, art. 293 B du CGI » ou taux applicable</span></p>
+    <ul>
+      <li><strong>Accès complet aux formations — 60 €.</strong> Paiement unique donnant accès aux huit formations, à leurs mises à jour, à la communauté et à une séance d'accompagnement offerte.</li>
+      <li><strong>Séance d'accompagnement supplémentaire — 25 €.</strong> Séance individuelle d'une heure trente, à distance.</li>
+      <li><strong>Formation « Comprendre la monnaie » — gratuite,</strong> accessible après création d'un compte, sans paiement ni saisie de coordonnées bancaires.</li>
+    </ul>
+    <p>L'éditeur se réserve la possibilité de modifier ses prix à tout moment. Le prix applicable est celui affiché au moment de la commande.</p>
+
+    <h3>4.2 Durée de l'accès</h3>
+    <p>L'accès dit « à vie » s'entend pour <strong>toute la durée d'exploitation du service</strong>, sans limitation de temps ni renouvellement à payer. En cas d'arrêt définitif du service, le client en sera informé au moins <span class="tbd">trois</span> mois à l'avance et pourra télécharger les contenus des formations auxquelles il a accès.</p>
+
+    <h3>4.3 Commande et paiement</h3>
+    <p>La commande est validée lors du paiement, effectué par carte bancaire via Stripe. Un e-mail de confirmation récapitulant la commande est adressé au client. L'accès aux contenus est ouvert immédiatement après confirmation du paiement.</p>
+
+    <h3>4.4 Droit de rétractation</h3>
+    <p>Le client consommateur dispose en principe d'un délai de <strong>quatorze jours</strong> à compter de la conclusion du contrat pour se rétracter, sans motif ni pénalité (article L221-18 du Code de la consommation).</p>
+    <p>Toutefois, s'agissant de la fourniture d'un contenu numérique non fourni sur support matériel, ce droit ne peut plus être exercé lorsque l'exécution a commencé <strong>après accord préalable exprès du client et renoncement exprès de sa part à son droit de rétractation</strong> (article L221-28, 13° du même code).</p>
+    <div class="alerte">
+      <p><strong>Condition de validité, à mettre en œuvre dans le tunnel de paiement.</strong> Cette exception ne s'applique que si le client coche lui-même, avant le paiement, une case <em>non pré-cochée</em> par laquelle il demande l'accès immédiat aux contenus et reconnaît perdre son droit de rétractation. Sans cette case, ni sans la confirmation de cet accord sur un support durable, le délai de quatorze jours court normalement — et il est porté à douze mois si l'information n'a pas été donnée.</p>
+    </div>
+    <p>Tant que le client n'a ouvert aucune leçon payante, il peut demander l'annulation de sa commande et le remboursement intégral dans le délai de quatorze jours, en écrivant à l'adresse de contact ou en utilisant la fonctionnalité de rétractation en ligne accessible depuis son compte. Le remboursement intervient dans les quatorze jours suivant la demande, par le même moyen de paiement.</p>
+    <p>Les séances d'accompagnement peuvent être annulées ou reportées sans frais jusqu'à <span class="tbd">48</span> heures avant l'horaire convenu.</p>
+
+    <h3>4.5 Garanties légales</h3>
+    <p>Le client bénéficie de la garantie légale de conformité applicable aux contenus et services numériques (articles L224-25-12 et suivants du Code de la consommation) ainsi que de la garantie contre les vices cachés (articles 1641 et suivants du Code civil). En cas de défaut de conformité, il peut demander la mise en conformité du service et, à défaut, une réduction de prix ou la résolution du contrat.</p>
+
+    <h3>4.6 Absence de conseil en investissement et de garantie de résultat</h3>
+    <p>Les formations sont des prestations pédagogiques. Elles ne comportent aucune recommandation d'investissement personnalisée, aucune sollicitation d'achat ou de vente d'un instrument financier, et <strong>aucune garantie de gain, de rendement ou de résultat</strong> de quelque nature que ce soit. L'éditeur ne perçoit aucune rémunération, commission ou apport d'affaires de la part d'un établissement financier, d'un courtier ou d'un émetteur de produits.</p>
+
+    <h3>4.7 Réclamation et médiation de la consommation</h3>
+    <p>Toute réclamation doit d'abord être adressée à <span class="tbd">adresse@exemple.fr</span>. Une réponse sera apportée dans un délai de <span class="tbd">quinze</span> jours.</p>
+    <p>Conformément à l'article L612-1 du Code de la consommation, si le litige n'est pas résolu, le client consommateur peut recourir gratuitement au médiateur de la consommation dont relève l'éditeur :</p>
+    <table>
+      <thead><tr><th>Élément</th><th>Valeur</th></tr></thead>
+      <tbody>
+        <tr><td>Médiateur</td><td><span class="tbd">Nom de l'organisme agréé CECMC (CM2C, Médicys, AFEDEM…)</span></td></tr>
+        <tr><td>Adresse postale</td><td><span class="tbd">Adresse complète</span></td></tr>
+        <tr><td>Site internet</td><td><span class="tbd">URL de saisine</span></td></tr>
+      </tbody>
+    </table>
+    <div class="alerte">
+      <p><strong>Adhésion à souscrire avant la première vente.</strong> L'obligation s'applique à tout professionnel vendant à des consommateurs, sans seuil de chiffre d'affaires et quel que soit le statut, micro-entreprise comprise. L'adhésion coûte quelques dizaines d'euros par an et la DGCCRF vérifie systématiquement ce point lors de ses contrôles. Tant que l'organisme n'est pas choisi, ce tableau ne doit pas être publié avec des mentions vides.</p>
+    </div>
+
+    <h3>4.8 Droit applicable</h3>
+    <p>Les présentes conditions sont soumises au droit français. À défaut de résolution amiable, le litige pourra être porté devant la juridiction compétente. Le consommateur peut saisir, à son choix, la juridiction du lieu où il demeurait au moment de la conclusion du contrat ou de la survenance du fait dommageable.</p>
+  </section>
+
+  <!-- ==================== 5. CONTACT ==================== -->
+  <section id="contact">
+    <h2>5. Nous contacter</h2>
+    <p>Pour toute question relative aux formations, à ton compte, à tes données personnelles ou à une commande : <span class="tbd">adresse@exemple.fr</span>.</p>
+    <p>Adresse postale : <span class="tbd">adresse complète de l'éditeur</span>.</p>
+  </section>
+
+  </article>
+</div>
+
+<footer>
+  <div class="ft">
+    <div class="ft-haut">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="ft-name">Petites Actions</span>
+      </div>
+      <div class="ft-links">
+        <a href="index.html">Accueil</a>
+        <a href="index.html#formations">Formations</a>
+        <a href="index.html#tarifs">Tarifs</a>
+        <a href="#mentions">Mentions légales</a>
+        <a href="#confidentialite">Confidentialité</a>
+        <a href="#cgv">CGV</a>
+      </div>
+    </div>
+    <p class="ft-mentions">Petites Actions est un site de formation en éducation financière. Il ne fournit ni conseil en investissement personnalisé, ni service de gestion, ni intermédiation en produits financiers. Investir comporte un risque de perte en capital.</p>
+    <div class="ft-copy">© 2025 Petites Actions · Paris, France</div>
+  </div>
+</footer>
+
+</body>
+</html>
