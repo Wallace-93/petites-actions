@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retours des testeurs — Petites Actions</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --encre:#12212B;--encre-2:#43555F;--encre-3:#7A8A93;
+  --papier:#FCFBF8;--papier-2:#EFF0EA;--trait:#DCDDD3;
+  --pin:#1E4B3C;--pin-clair:#E7EFEA;
+  --laiton:#B8862F;--laiton-clair:#F6EFE0;
+  --brique:#A24332;--brique-clair:#F8EDEA;
+  --display:'Newsreader',Georgia,serif;
+  --texte:'Karla',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+body{font-family:var(--texte);background:var(--papier);color:var(--encre-2);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{color:var(--pin);}
+:focus-visible{outline:2px solid var(--pin);outline-offset:3px;border-radius:3px;}
+
+.nav{border-bottom:1px solid var(--trait);background:var(--papier);position:sticky;top:0;z-index:20;}
+.nav-in{max-width:1000px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:14px;}
+.nav-mark{width:26px;height:26px;border-radius:6px;background:var(--pin);display:grid;place-items:center;flex:none;}
+.nav-mark svg{width:14px;height:14px;}
+.nav-name{font-family:var(--display);font-size:17px;font-weight:600;color:var(--encre);}
+.nav-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--laiton);background:var(--laiton-clair);border:1px solid #E4D2AC;padding:3px 9px;border-radius:100px;}
+.nav-liens{margin-left:auto;display:flex;gap:18px;}
+.nav-liens a{font-size:13.5px;font-weight:600;text-decoration:none;color:var(--encre-2);}
+
+.wrap{max-width:1000px;margin:0 auto;padding:36px 22px 70px;}
+h1{font-family:var(--display);font-weight:500;font-size:34px;color:var(--encre);letter-spacing:-.018em;line-height:1.15;margin-bottom:8px;}
+.sous{color:var(--encre-3);font-size:15px;margin-bottom:28px;}
+
+.chiffres{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--trait);border:1px solid var(--trait);border-radius:11px;overflow:hidden;margin-bottom:26px;}
+.chiffre{background:var(--papier);padding:18px 18px 20px;}
+.chiffre-n{font-family:var(--display);font-size:30px;font-weight:500;color:var(--encre);line-height:1;}
+.chiffre-l{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--encre-3);margin-top:8px;}
+@media(max-width:700px){.chiffres{grid-template-columns:repeat(2,1fr);}}
+
+.filtres{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px;}
+.filtre{background:var(--papier);border:1px solid var(--trait);border-radius:100px;padding:6px 13px;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--encre-2);}
+.filtre:hover{border-color:var(--encre-3);}
+.filtre.actif{background:var(--pin);border-color:var(--pin);color:#fff;}
+
+.retour{border:1px solid var(--trait);border-radius:11px;padding:18px 20px;margin-bottom:12px;background:var(--papier);}
+.retour-haut{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:9px;}
+.etiq{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:4px;border:1px solid var(--trait);color:var(--encre-3);}
+.etiq.bug{color:var(--brique);background:var(--brique-clair);border-color:#EBC9C1;}
+.etiq.contenu{color:var(--pin);background:var(--pin-clair);border-color:#BFD6C9;}
+.etiq.idee{color:var(--laiton);background:var(--laiton-clair);border-color:#E4D2AC;}
+.retour-meta{font-family:var(--mono);font-size:11.5px;color:var(--encre-3);margin-left:auto;}
+.retour-msg{color:var(--encre);font-size:15px;white-space:pre-wrap;}
+.retour-page{font-family:var(--mono);font-size:11.5px;color:var(--encre-3);margin-top:9px;}
+
+.vide{text-align:center;padding:60px 20px;color:var(--encre-3);}
+.vide-t{font-family:var(--display);font-size:20px;color:var(--encre);margin-bottom:8px;}
+.err{background:var(--brique-clair);border-left:3px solid var(--brique);border-radius:0 9px 9px 0;padding:16px 18px;font-size:14px;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <span class="nav-name">Petites Actions</span>
+    <span class="nav-tag">Retours</span>
+    <div class="nav-liens">
+      <a href="admin.html">Admin</a>
+      <a href="index.html">← Site</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap" id="app">
+  <div class="vide"><div class="vide-t">Chargement…</div></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+const SUPABASE_URL = 'https://pchkshpbzsybvtwxqvrf.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjaGtzaHBienN5YnZ0d3hxdnJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NDgwMTAsImV4cCI6MjEwMTUyNDAxMH0.3EqyBUDmHHJ79mdDD6dmpVwsuEA0h2hF-75Up9R2Snc';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let RETOURS = [];
+let FILTRE = 'tous';
+
+const LIBELLES = { bug:'Bug', contenu:'Contenu', idee:'Idée', autre:'Autre' };
+
+function dateCourte(iso){
+  const d = new Date(iso);
+  return d.toLocaleDateString('fr-FR', { day:'2-digit', month:'short' }) + ' · ' +
+         d.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+}
+
+function echapper(t){
+  const d = document.createElement('div');
+  d.textContent = t == null ? '' : String(t);
+  return d.innerHTML;
+}
+
+function rendre(){
+  const app = document.getElementById('app');
+  const compte = c => RETOURS.filter(r => r.categorie === c).length;
+  const liste = FILTRE === 'tous' ? RETOURS : RETOURS.filter(r => r.categorie === FILTRE);
+
+  const filtres = ['tous','bug','contenu','idee','autre'].map(c =>
+    `<button class="filtre ${FILTRE===c?'actif':''}" onclick="filtrer('${c}')">${
+      c==='tous' ? 'Tous ('+RETOURS.length+')' : LIBELLES[c]+' ('+compte(c)+')'
+    }</button>`).join('');
+
+  const corps = liste.length === 0
+    ? `<div class="vide"><div class="vide-t">Rien pour l'instant</div><p>Les retours envoyés depuis le widget apparaîtront ici.</p></div>`
+    : liste.map(r => `
+      <div class="retour">
+        <div class="retour-haut">
+          <span class="etiq ${r.categorie || ''}">${LIBELLES[r.categorie] || 'Sans catégorie'}</span>
+          ${r.user_id ? '' : '<span class="etiq">Visiteur anonyme</span>'}
+          <span class="retour-meta">${dateCourte(r.created_at)}</span>
+        </div>
+        <div class="retour-msg">${echapper(r.message)}</div>
+        <div class="retour-page">${echapper(r.page || 'page inconnue')}</div>
+      </div>`).join('');
+
+  const semaine = RETOURS.filter(r => Date.now() - new Date(r.created_at).getTime() < 7*24*3600*1000).length;
+
+  app.innerHTML = `
+    <h1>Retours des testeurs</h1>
+    <p class="sous">Tout ce qui a été envoyé depuis le widget, du plus récent au plus ancien.</p>
+    <div class="chiffres">
+      <div class="chiffre"><div class="chiffre-n">${RETOURS.length}</div><div class="chiffre-l">Au total</div></div>
+      <div class="chiffre"><div class="chiffre-n">${semaine}</div><div class="chiffre-l">7 derniers jours</div></div>
+      <div class="chiffre"><div class="chiffre-n">${compte('bug')}</div><div class="chiffre-l">Bugs signalés</div></div>
+      <div class="chiffre"><div class="chiffre-n">${compte('idee')}</div><div class="chiffre-l">Idées</div></div>
+    </div>
+    <div class="filtres">${filtres}</div>
+    ${corps}`;
+}
+
+function filtrer(c){ FILTRE = c; rendre(); }
+
+(async function(){
+  const app = document.getElementById('app');
+  const { data: { session } } = await sb.auth.getSession();
+  if(!session){ window.location.href = 'connexion.html'; return; }
+
+  const { data: profil } = await sb.from('profiles').select('is_admin').eq('id', session.user.id).maybeSingle();
+  if(!profil || !profil.is_admin){
+    app.innerHTML = '<div class="err">Cette page est réservée aux administrateurs.</div>';
+    return;
+  }
+
+  const { data, error } = await sb.from('retours').select('*').order('created_at', { ascending:false }).limit(300);
+  if(error){
+    app.innerHTML = '<div class="err">Lecture impossible : ' + echapper(error.message) +
+      '<br><br>Vérifie que la politique de lecture administrateur a bien été créée sur la table <code>retours</code>.</div>';
+    return;
+  }
+  RETOURS = data || [];
+  rendre();
+})();
+</script>
+</body>
+</html>
