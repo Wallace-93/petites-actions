@@ -679,10 +679,22 @@ async function signOut(){
   const { data: { session } } = await sb.auth.getSession();
   if(!session){ return; }
 
-  const { data: profile } = await sb.from('profiles').select('prenom').eq('id', session.user.id).maybeSingle();
+  const { data: profile } = await sb.from('profiles').select('prenom, is_admin').eq('id', session.user.id).maybeSingle();
   const prenom = (profile && profile.prenom) ? profile.prenom : 'Toi';
+
+  /* Le lien d'administration n'est rendu que si le profil porte is_admin.
+     La politique RLS de profiles empêche de lire le drapeau d'un autre
+     compte : ce test ne peut donc pas être détourné pour l'afficher chez
+     quelqu'un d'autre. Les pages admin refont la vérification de leur
+     côté — masquer un lien n'est pas une protection. */
+  const lienAdmin = (profile && profile.is_admin)
+    ? '<a href="admin-retours.html" class="nav-login" style="color:var(--laiton);">Bêta</a>' +
+      '<a href="admin.html" class="nav-login">Admin</a>'
+    : '';
+
   document.getElementById('navRight').innerHTML =
     '<span style="font-family:var(--mono);font-size:12.5px;color:var(--encre-3);">' + prenom + '</span>' +
+    lienAdmin +
     '<a href="trading-lab.html" class="nav-login">Trading Lab</a>' +
     '<a href="lecons-monnaie.html" class="nav-cta">Continuer</a>' +
     '<a href="#" onclick="signOut();return false;" class="nav-login">Déconnexion</a>';

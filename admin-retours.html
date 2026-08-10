@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Retours des testeurs — Petites Actions</title>
+<title>Tableau de bord de la bêta — Petites Actions</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,6 +60,24 @@ h1{font-family:var(--display);font-weight:500;font-size:34px;color:var(--encre);
 
 .vide{text-align:center;padding:60px 20px;color:var(--encre-3);}
 .vide-t{font-family:var(--display);font-size:20px;color:var(--encre);margin-bottom:8px;}
+
+.bloc{margin-bottom:40px;}
+.bloc-titre{font-family:var(--display);font-size:24px;font-weight:500;color:var(--encre);letter-spacing:-.015em;margin-bottom:6px;}
+.bloc-sous{font-size:14px;color:var(--encre-3);margin-bottom:20px;max-width:66ch;}
+.onglets{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px;}
+.entonnoir{border:1px solid var(--trait);border-radius:11px;overflow:hidden;}
+.barre-ligne{display:grid;grid-template-columns:132px 1fr 96px;gap:14px;align-items:center;padding:9px 16px;border-bottom:1px solid var(--trait);}
+.barre-ligne:last-child{border-bottom:0;}
+.barre-ligne.chute{background:var(--brique-clair);}
+.barre-nom{font-family:var(--mono);font-size:11.5px;color:var(--encre-3);}
+.barre-piste{background:var(--papier-2);border-radius:4px;height:16px;overflow:hidden;}
+.barre-jauge{height:100%;background:var(--pin);border-radius:4px;transition:width .4s ease-out;}
+.barre-ligne.chute .barre-jauge{background:var(--brique);}
+.barre-val{font-family:var(--mono);font-size:11.5px;color:var(--encre);text-align:right;}
+.barre-val span{color:var(--encre-3);}
+.legende{font-size:13px;color:var(--encre-3);margin-top:12px;line-height:1.6;}
+.avert{background:var(--laiton-clair);border:1px solid #E4D2AC;border-radius:9px;padding:13px 15px;font-size:13.5px;color:#7A5A12;margin-bottom:20px;line-height:1.6;}
+@media(max-width:640px){.barre-ligne{grid-template-columns:92px 1fr 74px;gap:9px;padding:8px 11px;}}
 .err{background:var(--brique-clair);border-left:3px solid var(--brique);border-radius:0 9px 9px 0;padding:16px 18px;font-size:14px;}
 </style>
 </head>
@@ -69,7 +87,7 @@ h1{font-family:var(--display);font-weight:500;font-size:34px;color:var(--encre);
   <div class="nav-in">
     <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
     <span class="nav-name">Petites Actions</span>
-    <span class="nav-tag">Retours</span>
+    <span class="nav-tag">Bêta</span>
     <div class="nav-liens">
       <a href="admin.html">Admin</a>
       <a href="index.html">← Site</a>
@@ -88,9 +106,18 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 let RETOURS = [];
+let PROFILS = [];
+let PROGRESSION = [];
 let FILTRE = 'tous';
+let FORMATION = null;
 
 const LIBELLES = { bug:'Bug', contenu:'Contenu', idee:'Idée', autre:'Autre' };
+const NOMS_FORMATION = {
+  monnaie:'Comprendre la monnaie', psychologie:'Psychologie de l\'argent',
+  budget:'Maîtriser son budget', bourse:'Premiers pas en bourse',
+  crypto:'Bitcoin & cryptomonnaies', immobilier:'Investir dans la pierre',
+  epargne:'Épargne & sécurité', fiscalite:'Optimisation fiscale'
+};
 
 function dateCourte(iso){
   const d = new Date(iso);
@@ -104,43 +131,115 @@ function echapper(t){
   return d.innerHTML;
 }
 
+/* Entonnoir : pour chaque leçon d'une formation, combien de comptes
+   distincts l'ont terminée. La chute entre deux lignes consécutives
+   est l'endroit où les gens s'arrêtent. */
+function entonnoir(formation){
+  const parLecon = {};
+  PROGRESSION.forEach(function(p){
+    if(p.formation !== formation || !p.completed) return;
+    const n = Number(p.lesson_number);
+    if(!Number.isFinite(n)) return;
+    (parLecon[n] = parLecon[n] || new Set()).add(p.user_id);
+  });
+  const numeros = Object.keys(parLecon).map(Number).sort(function(a,b){ return a-b; });
+  if(numeros.length === 0) return [];
+  const max = numeros[numeros.length - 1];
+  const lignes = [];
+  for(let i = 1; i <= max; i++){
+    lignes.push({ lecon:i, comptes: parLecon[i] ? parLecon[i].size : 0 });
+  }
+  const depart = lignes[0].comptes || 1;
+  lignes.forEach(function(l, i){
+    l.pct = Math.round(l.comptes / depart * 100);
+    const prec = i > 0 ? lignes[i-1].comptes : l.comptes;
+    l.chute = prec > 0 && (prec - l.comptes) / prec >= 0.30 && prec >= 3;
+  });
+  return lignes;
+}
+
+function rendreStats(){
+  const actifs = new Set(PROGRESSION.filter(function(p){ return p.completed; }).map(function(p){ return p.user_id; }));
+  const septJours = Date.now() - 7*24*3600*1000;
+  const nouveaux = PROFILS.filter(function(p){ return new Date(p.created_at).getTime() > septJours; }).length;
+  const leconsFaites = PROGRESSION.filter(function(p){ return p.completed; }).length;
+
+  const formations = Object.keys(NOMS_FORMATION).filter(function(f){
+    return PROGRESSION.some(function(p){ return p.formation === f; });
+  });
+  if(!FORMATION || formations.indexOf(FORMATION) === -1) FORMATION = formations[0] || 'monnaie';
+
+  const lignes = entonnoir(FORMATION);
+  const petitEchantillon = PROFILS.length < 10;
+
+  const onglets = formations.map(function(f){
+    return '<button class="filtre ' + (FORMATION===f?'actif':'') + '" onclick="choisirFormation(\'' + f + '\')">' +
+           echapper(NOMS_FORMATION[f] || f) + '</button>';
+  }).join('');
+
+  const barres = lignes.length === 0
+    ? '<div class="vide"><div class="vide-t">Aucune leçon terminée</div><p>L\'entonnoir apparaîtra dès les premières leçons validées.</p></div>'
+    : '<div class="entonnoir">' + lignes.map(function(l){
+        return '<div class="barre-ligne ' + (l.chute?'chute':'') + '">' +
+          '<span class="barre-nom">Leçon ' + l.lecon + '</span>' +
+          '<span class="barre-piste"><span class="barre-jauge" style="width:' + Math.max(l.pct,1) + '%"></span></span>' +
+          '<span class="barre-val">' + l.comptes + ' <span>· ' + l.pct + '%</span></span>' +
+        '</div>';
+      }).join('') + '</div>';
+
+  return '<div class="bloc">' +
+    '<div class="bloc-titre">Où les gens s\'arrêtent</div>' +
+    '<div class="bloc-sous">Nombre de comptes ayant terminé chaque leçon. Une ligne surlignée signale une perte de plus de 30 % par rapport à la précédente : c\'est cette leçon-là qu\'il faut relire.</div>' +
+    (petitEchantillon ? '<div class="avert">Moins de dix comptes inscrits : ces chiffres sont encore du bruit, pas un signal. Attends une dizaine de testeurs actifs avant d\'en tirer une conclusion.</div>' : '') +
+    '<div class="chiffres">' +
+      '<div class="chiffre"><div class="chiffre-n">' + PROFILS.length + '</div><div class="chiffre-l">Comptes créés</div></div>' +
+      '<div class="chiffre"><div class="chiffre-n">' + actifs.size + '</div><div class="chiffre-l">Ont commencé</div></div>' +
+      '<div class="chiffre"><div class="chiffre-n">' + nouveaux + '</div><div class="chiffre-l">Inscrits cette semaine</div></div>' +
+      '<div class="chiffre"><div class="chiffre-n">' + leconsFaites + '</div><div class="chiffre-l">Leçons terminées</div></div>' +
+    '</div>' +
+    '<div class="onglets">' + onglets + '</div>' +
+    barres +
+    '<div class="legende">Le pourcentage est calculé par rapport au nombre de comptes ayant terminé la leçon 1.</div>' +
+  '</div>';
+}
+
 function rendre(){
   const app = document.getElementById('app');
-  const compte = c => RETOURS.filter(r => r.categorie === c).length;
-  const liste = FILTRE === 'tous' ? RETOURS : RETOURS.filter(r => r.categorie === FILTRE);
+  const compte = function(c){ return RETOURS.filter(function(r){ return r.categorie === c; }).length; };
+  const liste = FILTRE === 'tous' ? RETOURS : RETOURS.filter(function(r){ return r.categorie === FILTRE; });
 
-  const filtres = ['tous','bug','contenu','idee','autre'].map(c =>
-    `<button class="filtre ${FILTRE===c?'actif':''}" onclick="filtrer('${c}')">${
-      c==='tous' ? 'Tous ('+RETOURS.length+')' : LIBELLES[c]+' ('+compte(c)+')'
-    }</button>`).join('');
+  const filtres = ['tous','bug','contenu','idee','autre'].map(function(c){
+    return '<button class="filtre ' + (FILTRE===c?'actif':'') + '" onclick="filtrer(\'' + c + '\')">' +
+      (c==='tous' ? 'Tous (' + RETOURS.length + ')' : LIBELLES[c] + ' (' + compte(c) + ')') + '</button>';
+  }).join('');
 
   const corps = liste.length === 0
-    ? `<div class="vide"><div class="vide-t">Rien pour l'instant</div><p>Les retours envoyés depuis le widget apparaîtront ici.</p></div>`
-    : liste.map(r => `
-      <div class="retour">
-        <div class="retour-haut">
-          <span class="etiq ${r.categorie || ''}">${LIBELLES[r.categorie] || 'Sans catégorie'}</span>
-          ${r.user_id ? '' : '<span class="etiq">Visiteur anonyme</span>'}
-          <span class="retour-meta">${dateCourte(r.created_at)}</span>
-        </div>
-        <div class="retour-msg">${echapper(r.message)}</div>
-        <div class="retour-page">${echapper(r.page || 'page inconnue')}</div>
-      </div>`).join('');
+    ? '<div class="vide"><div class="vide-t">Rien pour l\'instant</div><p>Les retours envoyés depuis le widget apparaîtront ici.</p></div>'
+    : liste.map(function(r){
+      return '<div class="retour">' +
+        '<div class="retour-haut">' +
+          '<span class="etiq ' + (r.categorie || '') + '">' + (LIBELLES[r.categorie] || 'Sans catégorie') + '</span>' +
+          (r.user_id ? '' : '<span class="etiq">Visiteur anonyme</span>') +
+          '<span class="retour-meta">' + dateCourte(r.created_at) + '</span>' +
+        '</div>' +
+        '<div class="retour-msg">' + echapper(r.message) + '</div>' +
+        '<div class="retour-page">' + echapper(r.page || 'page inconnue') + '</div>' +
+      '</div>';
+    }).join('');
 
-  const semaine = RETOURS.filter(r => Date.now() - new Date(r.created_at).getTime() < 7*24*3600*1000).length;
-
-  app.innerHTML = `
-    <h1>Retours des testeurs</h1>
-    <p class="sous">Tout ce qui a été envoyé depuis le widget, du plus récent au plus ancien.</p>
-    <div class="chiffres">
-      <div class="chiffre"><div class="chiffre-n">${RETOURS.length}</div><div class="chiffre-l">Au total</div></div>
-      <div class="chiffre"><div class="chiffre-n">${semaine}</div><div class="chiffre-l">7 derniers jours</div></div>
-      <div class="chiffre"><div class="chiffre-n">${compte('bug')}</div><div class="chiffre-l">Bugs signalés</div></div>
-      <div class="chiffre"><div class="chiffre-n">${compte('idee')}</div><div class="chiffre-l">Idées</div></div>
-    </div>
-    <div class="filtres">${filtres}</div>
-    ${corps}`;
+  app.innerHTML =
+    '<h1>Tableau de bord de la bêta</h1>' +
+    '<p class="sous">Ce que font les testeurs, et ce qu\'ils en disent.</p>' +
+    rendreStats() +
+    '<div class="bloc">' +
+      '<div class="bloc-titre">Retours reçus</div>' +
+      '<div class="bloc-sous">Tout ce qui a été envoyé depuis le widget, du plus récent au plus ancien.</div>' +
+      '<div class="filtres">' + filtres + '</div>' +
+      corps +
+    '</div>';
 }
+
+function choisirFormation(f){ FORMATION = f; rendre(); }
 
 function filtrer(c){ FILTRE = c; rendre(); }
 
@@ -155,13 +254,21 @@ function filtrer(c){ FILTRE = c; rendre(); }
     return;
   }
 
-  const { data, error } = await sb.from('retours').select('*').order('created_at', { ascending:false }).limit(300);
-  if(error){
-    app.innerHTML = '<div class="err">Lecture impossible : ' + echapper(error.message) +
-      '<br><br>Vérifie que la politique de lecture administrateur a bien été créée sur la table <code>retours</code>.</div>';
+  const [retours, profils, progression] = await Promise.all([
+    sb.from('retours').select('*').order('created_at', { ascending:false }).limit(300),
+    sb.from('profiles').select('id, created_at'),
+    sb.from('lesson_progress').select('user_id, formation, lesson_number, completed')
+  ]);
+
+  if(retours.error){
+    app.innerHTML = '<div class="err">Lecture des retours impossible : ' + echapper(retours.error.message) +
+      '<br><br>Vérifie que la politique de lecture administrateur a bien été créée sur la table <code>retours</code> (migration-3-retours.sql).</div>';
     return;
   }
-  RETOURS = data || [];
+
+  RETOURS = retours.data || [];
+  PROFILS = profils.data || [];
+  PROGRESSION = progression.data || [];
   rendre();
 })();
 </script>
