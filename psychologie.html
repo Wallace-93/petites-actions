@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Psychologie de l'argent, Petites Actions</title>
+<title>Psychologie de l'argent, NiouDem</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -96,8 +96,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);-webkit-font-
 .compare-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
 .compare-list li{font-size:13px;font-weight:400;color:var(--ink-muted);display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
 .compare-list li::before{font-size:11px;flex-shrink:0;margin-top:2px;font-weight:700;}
-.compare-card.good .compare-list li::before{content:'✓';color:var(--green);}
-.compare-card.bad .compare-list li::before{content:'✗';color:var(--coral);}
+.compare-card.good .compare-list li::before{content:'';color:var(--green);}
+.compare-card.bad .compare-list li::before{content:'';color:var(--coral);}
 .compare-card.alt .compare-list li::before{content:'→';color:var(--violet);}
 .outcomes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bg-line);border-radius:16px;overflow:hidden;}
 .oc{background:var(--bg);padding:26px 22px;}
@@ -142,7 +142,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);-webkit-font-
 .p-features{list-style:none;margin-bottom:20px;display:flex;flex-direction:column;gap:7px;}
 .p-features li{font-size:12px;font-weight:400;color:var(--ink-muted);display:flex;align-items:flex-start;gap:7px;}
 .p-card.featured .p-features li{color:rgba(255,255,255,.55);}
-.p-features li::before{content:'✓';color:var(--green);font-weight:700;font-size:10px;margin-top:2px;flex-shrink:0;}
+.p-features li::before{content:'';color:var(--green);font-weight:700;font-size:10px;margin-top:2px;flex-shrink:0;}
 .p-card.featured .p-features li::before{color:var(--green-light);}
 .p-btn{width:100%;background:var(--bg-soft);color:var(--ink);border:1px solid var(--bg-line);cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:600;padding:12px;border-radius:9px;transition:background .2s;text-align:center;text-decoration:none;display:block;}
 .p-btn:hover{background:var(--bg-mid);}
@@ -243,14 +243,37 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title{font-weight:600;}
   cursor:default;pointer-events:none;font-weight:600;}
 .p-soon{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--amber);margin-top:9px;text-align:center;display:block;}
+
+.nav-name em,.ft-name em{font-style:normal;color:var(--amber);}
+
+/* Renvoi vers la grille tarifaire unique de l'accueil */
+.tarif-renvoi{max-width:680px;margin:0 auto;text-align:center;border:1px solid var(--bg-line);
+  border-radius:12px;padding:30px 28px 32px;background:var(--bg);}
+.tarif-renvoi h2{margin-bottom:10px;}
+.tarif-renvoi p{font-size:15px;color:var(--ink-soft);margin-bottom:20px;line-height:1.65;}
+.tarif-renvoi .renvoi-btn{display:inline-block;text-decoration:none;background:var(--green);color:#fff;
+  font-size:15px;font-weight:600;padding:13px 24px;border-radius:8px;}
+.tarif-renvoi .renvoi-note{font-family:var(--mono);font-size:11.5px;color:var(--ink-muted);margin-top:16px;letter-spacing:.04em;}
+
+/* Bande d'ouverture : emblème et intention de la formation */
+.nd-ouverture{padding:56px 24px;border-bottom:1px solid var(--bg-line,#DCDDD3);background:var(--bg,#FCFBF8);}
+.nd-ouv-in{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:290px 1fr;gap:48px;align-items:center;}
+.nd-ouv-txt .phrase{font-family:var(--display,Georgia,serif);font-size:clamp(22px,2.7vw,30px);
+  font-weight:500;color:var(--ink,#12212B);letter-spacing:-.015em;line-height:1.24;margin-bottom:14px;}
+.nd-ouv-txt .detail{font-size:16px;line-height:1.68;color:var(--ink-soft,#43555F);max-width:56ch;}
+@media(max-width:820px){
+  .nd-ouv-in{grid-template-columns:1fr;gap:26px;}
+  .nd-embleme{max-width:216px;margin-left:auto;margin-right:auto;}
+}
 </style>
+<link rel="stylesheet" href="signature.css">
 </head>
 <body>
 
 <nav class="nav">
   <a href="index.html" class="nav-logo">
     <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-    <span class="nav-name">Petites Actions</span>
+    <span class="nav-name">Niou<em>Dem</em></span>
   </a>
   <a href="index.html" class="nav-back">← Tous les parcours</a>
   <a href="index.html#tarifs" class="nav-cta">Commencer</a>
@@ -269,27 +292,37 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title{font-weight:600;}
       <div class="hc-label">Ce parcours rapporte</div>
       <div class="hc-pts"><span class="hc-pts-num">240</span><span class="hc-pts-label">points</span></div>
       <div class="hc-divider"></div>
-      <div class="hc-feature"><span class="hc-check">✓</span>Leçons courtes</div>
-      <div class="hc-feature"><span class="hc-check">✓</span>Quiz après chaque leçon</div>
-      <div class="hc-feature"><span class="hc-check">✓</span>Actions concrètes</div>
-      <div class="hc-feature"><span class="hc-check">✓</span>Badge de progression</div>
+      <div class="hc-feature"><span class="hc-check"></span>Leçons courtes</div>
+      <div class="hc-feature"><span class="hc-check"></span>Quiz après chaque leçon</div>
+      <div class="hc-feature"><span class="hc-check"></span>Actions concrètes</div>
+      <div class="hc-feature"><span class="hc-check"></span>Badge de progression</div>
       <a href="lecons-psychologie.html" class="hc-btn">Commencer les leçons →</a>
     </div>
   </div>
 </div>
 
 
+<section class="nd-ouverture">
+  <div class="nd-ouv-in">
+    <div><svg class="nd-embleme" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><path class="trait anime" style="--l:640" d="M150 46c-22-13-52-16-78-9v112c26-7 56-4 78 9 22-13 52-16 78-9V37c-26-7-56-4-78 9z"/><path class="trait-fin" d="M150 46v112"/><path class="trait anime" style="--l:160" d="M76 78h44l-10-10M120 114H76l10 10"/><circle class="trait anime" style="--l:130" cx="200" cy="96" r="21"/><path class="trait-fin" d="M200 75v42M179 96h42"/><circle class="plein surgit" cx="200" cy="96" r="4"/></svg></div>
+    <div class="nd-ouv-txt">
+      <p class="phrase">Le premier obstacle entre toi et ton argent, c'est toi.</p>
+      <p class="detail">Nos décisions financières sont prises par des réflexes hérités, souvent bien avant qu'on ait le temps de réfléchir. Les reconnaître, c'est déjà les désamorcer.</p>
+    </div>
+  </div>
+</section>
+
 <section class="section section-soft">
   <div class="s-tag"><span class="s-tag-dot"></span>Ce que tu apprends</div>
   <h2 class="s-title">6 compétences concrètes</h2>
   <p class="s-sub">Pas de théorie inutile, que de l'applicable dès demain.</p>
   <div class="outcomes-grid">
-    <div class="oc"><div class="oc-icon">🧠</div><div class="oc-title">Identifier tes biais</div><div class="oc-desc">Aversion à la perte, biais de confirmation, pensée magique.</div></div>
-    <div class="oc"><div class="oc-icon">🔍</div><div class="oc-title">Décoder tes croyances</div><div class="oc-desc">Remonter à l'origine de tes convictions sur l'argent.</div></div>
-    <div class="oc"><div class="oc-icon">🎯</div><div class="oc-title">Relation saine à l'argent</div><div class="oc-desc">Ni dans l'anxiété, ni dans le déni.</div></div>
-    <div class="oc"><div class="oc-icon">⚡</div><div class="oc-title">Gérer ses émotions</div><div class="oc-desc">Ne plus laisser peur ou cupidité dicter tes choix.</div></div>
-    <div class="oc"><div class="oc-icon">🏗️</div><div class="oc-title">Habitudes durables</div><div class="oc-desc">Des rituels financiers qui s'intègrent naturellement.</div></div>
-    <div class="oc"><div class="oc-icon">🚀</div><div class="oc-title">Passer à l'action</div><div class="oc-desc">Briser la procrastination financière.</div></div>
+    <div class="oc"><div class="oc-icon"><span class="nd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4a3 3 0 00-3 3 3 3 0 00-2 5 3 3 0 002 5 3 3 0 003 3 3 3 0 003-3V4.5A3 3 0 009 4z"/><path d="M15 4a3 3 0 013 3 3 3 0 012 5 3 3 0 01-2 5 3 3 0 01-3 3 3 3 0 01-3-3"/></svg></span></div><div class="oc-title">Identifier tes biais</div><div class="oc-desc">Aversion à la perte, biais de confirmation, pensée magique.</div></div>
+    <div class="oc"><div class="oc-icon"><span class="nd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></span></div><div class="oc-title">Décoder tes croyances</div><div class="oc-desc">Remonter à l'origine de tes convictions sur l'argent.</div></div>
+    <div class="oc"><div class="oc-icon"><span class="nd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg></span></div><div class="oc-title">Relation saine à l'argent</div><div class="oc-desc">Ni dans l'anxiété, ni dans le déni.</div></div>
+    <div class="oc"><div class="oc-icon"><span class="nd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg></span></div><div class="oc-title">Gérer ses émotions</div><div class="oc-desc">Ne plus laisser peur ou cupidité dicter tes choix.</div></div>
+    <div class="oc"><div class="oc-icon"><span class="nd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V6l10 4M4 21h16M14 21V10l6 3v8"/></svg></span></div><div class="oc-title">Habitudes durables</div><div class="oc-desc">Des rituels financiers qui s'intègrent naturellement.</div></div>
+    <div class="oc"><div class="oc-icon"><span class="nd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 2 5 6 5 10l-3 3h-4l-3-3c0-4 2-8 5-10z"/><path d="M9 16l-2 5 4-2M15 16l2 5-4-2"/><circle cx="12" cy="10" r="1.6"/></svg></span></div><div class="oc-title">Passer à l'action</div><div class="oc-desc">Briser la procrastination financière.</div></div>
   </div>
 </section>
 
@@ -303,11 +336,11 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title{font-weight:600;}
       <ul class="compare-list"><li>Identifier le vrai frein</li><li>Le dépasser durablement</li></ul>
     </div>
     <div class="compare-card alt">
-      <div class="compare-header"><span class="compare-icon">😰</span><span class="compare-title">Anxiété financière</span></div>
+      <div class="compare-header"><span class="compare-icon"><span class="nd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M9 10v.1M15 10v.1M9 16c1.8-1.4 4.2-1.4 6 0"/></svg></span></span><span class="compare-title">Anxiété financière</span></div>
       <ul class="compare-list"><li>Dissocier identité et solde</li><li>Décider sereinement</li></ul>
     </div>
     <div class="compare-card alt">
-      <div class="compare-header"><span class="compare-icon">🌱</span><span class="compare-title">Peur d'investir</span></div>
+      <div class="compare-header"><span class="compare-icon"><span class="nd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-8"/><path d="M12 13C12 9 9 6 5 6c0 4 3 7 7 7z"/><path d="M12 13c0-3.5 2.6-6 6-6 0 3.5-2.6 6-6 6z"/></svg></span></span><span class="compare-title">Peur d'investir</span></div>
       <ul class="compare-list"><li>Démanteler les peurs</li><li>Construire la confiance</li></ul>
     </div>
   </div>
@@ -337,35 +370,12 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title{font-weight:600;}
 
 <section class="section section-white">
   <div class="tarifs-inner">
-    <div class="s-tag" style="justify-content:center;display:flex;"><span class="s-tag-dot"></span>Tarifs</div>
-    <h2 class="s-title" style="text-align:center;">Débloque ce parcours</h2>
-    <p class="s-sub" style="text-align:center;margin-left:auto;margin-right:auto;">60 € pour l'ensemble des 8 formations, pas seulement celle-ci.</p>
-    <div class="tarifs-grid">
-      <div class="p-card">
-        <div class="p-label">Gratuit</div>
-        <div class="p-name">Découverte</div>
-        <div class="p-price"><span class="p-amount">0</span><span class="p-cur">€</span></div>
-        <div class="p-period">sans engagement</div>
-        <ul class="p-features"><li>Premier parcours offert</li><li>Quiz et actions inclus</li><li>Sans carte bancaire</li></ul>
-        <a href="index.html#tarifs" class="p-btn">Continuer gratuitement</a>
-      </div>
-      <div class="p-card featured">
-        <div class="p-badge">Recommandé</div>
-        <div class="p-label">Accès complet</div>
-        <div class="p-name">Toutes les formations</div>
-        <div class="p-price"><span class="p-amount">60</span><span class="p-cur">€</span></div>
-        <div class="p-period">à vie · tout inclus</div>
-        <ul class="p-features"><li>8 formations complètes</li><li>Accès à vie + mises à jour</li><li>1 session coach offerte</li><li>Communauté privée</li></ul>
-        <span class="p-btn bientot">Ouverture prochaine</span><span class="p-soon">Bêta en cours</span>
-      </div>
-      <div class="p-card">
-        <div class="p-label">À la carte</div>
-        <div class="p-name">Coaching</div>
-        <div class="p-price"><span class="p-amount">25</span><span class="p-cur">€</span></div>
-        <div class="p-period">par session 1h30</div>
-        <ul class="p-features"><li>1h30 individuel</li><li>Stratégie personnalisée</li><li>Forfait possible</li></ul>
-        <span class="p-btn bientot">Ouverture prochaine</span><span class="p-soon">Bêta en cours</span>
-      </div>
+    <div class="tarif-renvoi">
+      <div class="s-tag" style="justify-content:center;display:flex;"><span class="s-tag-dot"></span>Tarifs</div>
+      <h2 class="s-title">Cette formation n'est pas vendue seule.</h2>
+      <p>Un seul accès ouvre les huit formations, leurs mises à jour et l'accompagnement. Et parce qu'un prix unique écarterait une partie de ceux à qui NiouDem s'adresse, tu choisis toi-même le tien parmi trois.</p>
+      <a href="index.html#tarifs" class="renvoi-btn">Voir les trois tarifs →</a>
+      <div class="renvoi-note">Ouverture prochaine · bêta en cours</div>
     </div>
   </div>
 </section>
@@ -383,29 +393,32 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title{font-weight:600;}
 <!-- LE CADRE -->
 <section class="section-cadre">
   <div class="cadre-legal">
-    <h3>Ce que Petites Actions n'est pas</h3>
+    <h3>Ce que NiouDem n'est pas</h3>
     <p>Nous ne sommes pas conseillers en investissement. Nous n'émettons aucune recommandation personnalisée, nous ne vendons aucun produit financier et nous ne touchons <strong>aucune commission</strong> sur ce que tu pourrais souscrire ailleurs.</p>
     <p><strong>Aucun rendement n'est garanti nulle part sur ce site.</strong> Tout investissement comporte un risque de perte en capital, y compris de la totalité des sommes engagées. Les simulateurs de cette page sont des outils pédagogiques : ils illustrent un mécanisme, ils ne prédisent rien.</p>
     <p>Ce que nous faisons : expliquer ces mécanismes assez clairement pour que les décisions que tu prendras soient réellement les tiennes.</p>
   </div>
 </section>
 
+<div class="nd-refrain">NiouDem.</div>
+
 <footer>
   <div class="ft">
     <div class="ft-brand">
       <span class="ft-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      <span class="ft-name">Petites Actions</span>
+      <span class="ft-name">Niou<em>Dem</em></span>
     </div>
     <div class="f-links">
       <a href="index.html">Accueil</a>
       <a href="index.html#formations">Formations</a>
       <a href="index.html#tarifs">Tarifs</a>
+      <a href="qui-sommes-nous.html">Qui nous sommes</a>
       <a href="mentions-legales.html">Mentions légales</a>
       <a href="mentions-legales.html#confidentialite">Confidentialité</a>
       <a href="mentions-legales.html#cgv">CGV</a>
     </div>
-    <p class="ft-mentions">Petites Actions est un site de formation en éducation financière. Il ne fournit ni conseil en investissement personnalisé, ni service de gestion, ni intermédiation en produits financiers. Investir comporte un risque de perte en capital.</p>
-    <div class="f-copy">© 2025 Petites Actions · Paris, France</div>
+    <p class="ft-mentions">NiouDem est un site de formation en éducation financière. Il ne fournit ni conseil en investissement personnalisé, ni service de gestion, ni intermédiation en produits financiers. Investir comporte un risque de perte en capital.</p>
+    <div class="f-copy">© 2025 NiouDem · Méthode Petites Actions</div>
   </div>
 </footer>
 
@@ -422,5 +435,6 @@ function calcSim(){
 }
 </script>
 <script src="retours.js" defer></script>
+<script src="signature.js" defer></script>
 </body>
 </html>

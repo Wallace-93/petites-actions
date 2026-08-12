@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Espace admin — Petites Actions</title>
+<title>Espace admin · NiouDem</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
@@ -80,6 +80,8 @@ h1,h2,h3,h4,.hero-h1,.s-title,.cta-h2,.p-name,.mod-title,.c-title,.hc-title,
 h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
 .s-tag,.f-copy,.hstat-label,.stat-label,.perf-note,.order-meta,.pos-value,
 .price-cell,.asset-label,.badge,.eyebrow,.nav-balance{font-family:var(--mono);}
+
+.nav-name em,.ft-name em{font-style:normal;color:var(--amber);}
 </style>
 </head>
 <body>
@@ -87,7 +89,7 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
 <nav class="nav">
   <a href="index.html" class="nav-logo">
     <span class="nav-mark">PA</span>
-    Petites Actions <span class="nav-tag">Admin</span>
+    NiouDem <span class="nav-tag">Admin</span>
   </a>
   <a href="admin-retours.html" class="nav-back" style="margin-right:16px;">Retours des testeurs</a>
   <a href="index.html" class="nav-back">← Retour au site</a>
@@ -127,7 +129,7 @@ async function boot(){
 
   const { data: myProfile } = await sb.from('profiles').select('is_admin, prenom').eq('id', session.user.id).single();
   if(!myProfile || !myProfile.is_admin){
-    app.innerHTML = '<div class="access-denied"><h2>🔒 Accès réservé</h2><p>Cette page est réservée aux administrateurs de Petites Actions.</p></div>';
+    app.innerHTML = '<div class="access-denied"><h2>🔒 Accès réservé</h2><p>Cette page est réservée aux administrateurs de NiouDem.</p></div>';
     return;
   }
 
@@ -192,7 +194,7 @@ async function boot(){
 
   app.innerHTML = `
     <div class="page-title">Espace admin</div>
-    <div class="page-sub">Bienvenue ${myProfile.prenom || ''}. Vue d'ensemble de l'activité Petites Actions.</div>
+    <div class="page-sub">Bienvenue ${myProfile.prenom || ''}. Vue d'ensemble de l'activité NiouDem.</div>
 
     <div class="metrics-grid">
       <div class="metric-card">

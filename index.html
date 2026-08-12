@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Petites Actions — Apprendre à gérer son argent, une action à la fois</title>
-<meta name="description" content="Des leçons courtes et une action concrète à chaque fois. Formation en éducation financière, sans jargon et sans promesse de rendement.">
+<title>NiouDem · L'éducation financière, une petite action à la fois</title>
+<meta name="description" content="NiouDem, « on y va » en wolof. Des leçons courtes, une action concrète à chaque fois, et quelqu'un à qui poser ses questions. Trois tarifs, pour que le prix n'écarte personne.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -12,173 +12,131 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 
 :root{
-  /* Encre & Laiton */
-  --encre:#12212B;
-  --encre-2:#43555F;
-  --encre-3:#7A8A93;
-  --papier:#FCFBF8;
-  --papier-2:#EFF0EA;
-  --trait:#DCDDD3;
-  --pin:#1E4B3C;
-  --pin-clair:#E7EFEA;
-  --laiton:#B8862F;
-  --laiton-clair:#F6EFE0;
-  --brique:#A24332;
-  --brique-clair:#F8EDEA;
-
-  --display:'Newsreader', Georgia, serif;
-  --texte:'Karla', system-ui, -apple-system, sans-serif;
-  --mono:'IBM Plex Mono', ui-monospace, monospace;
-
+  --encre:#12212B;--encre-2:#43555F;--encre-3:#7A8A93;
+  --papier:#FCFBF8;--papier-2:#EFF0EA;--trait:#DCDDD3;
+  --pin:#1E4B3C;--pin-clair:#E7EFEA;
+  --laiton:#B8862F;--laiton-clair:#F6EFE0;
+  --brique:#A24332;--brique-clair:#F8EDEA;
+  --display:'Newsreader',Georgia,serif;
+  --texte:'Karla',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
   --lg:1120px;
 }
 
 html{scroll-behavior:smooth;}
-body{
-  font-family:var(--texte);
-  background:var(--papier);
-  color:var(--encre-2);
-  -webkit-font-smoothing:antialiased;
-  font-size:16px;
-  line-height:1.65;
-}
+body{font-family:var(--texte);background:var(--papier);color:var(--encre-2);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;}
 a{color:inherit;}
 :focus-visible{outline:2px solid var(--pin);outline-offset:3px;border-radius:3px;}
+img{max-width:100%;display:block;}
 
 .display{font-family:var(--display);color:var(--encre);font-weight:500;letter-spacing:-.015em;line-height:1.14;}
 h1.display{font-size:clamp(38px,5.4vw,60px);}
 h2.display{font-size:clamp(28px,3.6vw,40px);}
 h3{font-family:var(--display);font-weight:600;color:var(--encre);font-size:19px;line-height:1.3;letter-spacing:-.01em;}
-
-.eyebrow{
-  font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--laiton);display:flex;align-items:center;gap:9px;margin-bottom:18px;
-}
-.eyebrow::before{content:"";width:22px;height:1px;background:var(--laiton);flex:none;}
-.eyebrow.center{justify-content:center;}
 .lede{font-size:17.5px;color:var(--encre-2);max-width:58ch;}
 
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--laiton);display:flex;align-items:center;gap:9px;margin-bottom:18px;}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--laiton);flex:none;}
+.eyebrow.center{justify-content:center;}
+
+/* ===== LE REFRAIN — signature de marque =====
+   « NiouDem » veut dire « on y va ». Le nom est donc déjà une phrase :
+   on s'en sert comme ponctuation, à la fin de chaque acte de la page. */
+.refrain{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  margin-top:52px;font-family:var(--display);font-size:22px;font-weight:600;
+  color:var(--laiton);letter-spacing:-.01em;
+}
+.refrain::before,.refrain::after{content:"";height:1px;width:48px;background:var(--laiton);opacity:.45;}
+
 /* ---------- Navigation ---------- */
-.nav{position:sticky;top:0;z-index:50;background:rgba(252,251,248,.92);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--trait);}
-.nav-in{max-width:var(--lg);margin:0 auto;padding:15px 24px;display:flex;align-items:center;gap:32px;}
+.nav{position:sticky;top:0;z-index:50;background:rgba(252,251,248,.93);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--trait);}
+.nav-in{max-width:var(--lg);margin:0 auto;padding:15px 24px;display:flex;align-items:center;gap:30px;}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none;}
-.nav-mark{width:27px;height:27px;border-radius:6px;background:var(--pin);display:grid;place-items:center;flex:none;}
+.nav-mark{width:28px;height:28px;border-radius:7px;background:var(--pin);display:grid;place-items:center;flex:none;}
 .nav-mark svg{width:15px;height:15px;}
-.nav-name{font-family:var(--display);font-size:18px;font-weight:600;color:var(--encre);letter-spacing:-.015em;}
-.nav-links{list-style:none;display:flex;gap:26px;margin-left:auto;}
+.nav-name{font-family:var(--display);font-size:19px;font-weight:600;color:var(--encre);letter-spacing:-.02em;}
+.nav-name em{font-style:normal;color:var(--laiton);}
+.nav-links{list-style:none;display:flex;gap:24px;margin-left:auto;}
 .nav-links a{text-decoration:none;font-size:14.5px;font-weight:500;color:var(--encre-2);padding-bottom:2px;border-bottom:1px solid transparent;transition:border-color .18s,color .18s;}
 .nav-links a:hover{color:var(--encre);border-bottom-color:var(--laiton);}
 .nav-right{display:flex;align-items:center;gap:14px;}
 .nav-login{text-decoration:none;font-size:14.5px;font-weight:600;color:var(--encre);white-space:nowrap;}
 .nav-cta{text-decoration:none;background:var(--pin);color:#fff;font-size:14px;font-weight:600;padding:9px 17px;border-radius:7px;white-space:nowrap;transition:background .18s;}
 .nav-cta:hover{background:#173C30;}
-@media(max-width:900px){
-  .nav-links{display:none;}
-  .nav-in{gap:16px;}
-  .nav-right{margin-left:auto;}
-  .nav-login{display:none;}
-}
+@media(max-width:940px){.nav-links{display:none;}.nav-in{gap:14px;}.nav-right{margin-left:auto;}.nav-login{display:none;}}
 
 /* ---------- Sections ---------- */
-.section{padding:86px 24px;}
+.section{padding:88px 24px;}
 .section-soft{background:var(--papier-2);border-top:1px solid var(--trait);border-bottom:1px solid var(--trait);}
+.section-encre{background:var(--encre);color:#B7C3CA;}
+.section-encre .display{color:#fff;}
+.section-encre .lede{color:#B7C3CA;}
 .s-inner{max-width:var(--lg);margin:0 auto;}
 .s-head{max-width:62ch;margin-bottom:44px;}
 .s-head.center{margin-left:auto;margin-right:auto;text-align:center;}
 .s-head .display{margin-bottom:14px;}
-@media(max-width:640px){.section{padding:60px 20px;}}
-
-/* ---------- Hero ---------- */
-.hero{padding:64px 24px 78px;}
-.hero-in{max-width:var(--lg);margin:0 auto;}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;}
-.hero-h1{margin-bottom:20px;max-width:16ch;}
-.hero-h1 em{font-style:normal;color:var(--pin);}
-.hero-lede{margin-bottom:30px;}
-.hero-actions{display:flex;flex-wrap:wrap;gap:13px;margin-bottom:26px;}
-.hero-trust{display:flex;flex-wrap:wrap;gap:8px 26px;font-family:var(--mono);font-size:12.5px;color:var(--encre-3);}
-.hero-trust span{display:flex;align-items:center;gap:7px;}
-.hero-trust span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--laiton);flex:none;}
-@media(max-width:940px){
-  .hero-grid{grid-template-columns:1fr;gap:44px;}
-  .hero-h1{max-width:none;}
-}
+@media(max-width:640px){.section{padding:62px 20px;}}
 
 .btn-primary{display:inline-block;text-decoration:none;background:var(--pin);color:#fff;font-size:15.5px;font-weight:600;padding:14px 26px;border-radius:8px;transition:background .18s,transform .18s;}
 .btn-primary:hover{background:#173C30;transform:translateY(-1px);}
 .btn-ghost{display:inline-block;text-decoration:none;color:var(--encre);border:1px solid var(--trait);background:var(--papier);font-size:15.5px;font-weight:600;padding:14px 22px;border-radius:8px;transition:border-color .18s;}
 .btn-ghost:hover{border-color:var(--encre-3);}
 
-/* ---------- Le registre (élément signature) ---------- */
-.registre{background:var(--papier);border:1px solid var(--trait);border-radius:12px;padding:26px 26px 22px;box-shadow:0 1px 2px rgba(18,33,43,.04),0 12px 34px -22px rgba(18,33,43,.28);}
-.reg-head{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding-bottom:13px;border-bottom:1px solid var(--trait);margin-bottom:6px;}
-.reg-titre{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--encre);}
-.reg-note{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--encre-3);}
-.reg-ligne{display:grid;grid-template-columns:26px 1fr auto;gap:15px;align-items:start;padding:15px 0;border-bottom:1px solid var(--trait);}
-.reg-ligne:last-of-type{border-bottom:0;}
-.reg-case{width:22px;height:22px;border-radius:5px;border:1.5px solid var(--trait);background:var(--papier);display:grid;place-items:center;margin-top:2px;flex:none;}
-.reg-case svg{width:12px;height:12px;opacity:0;transform:scale(.6);transition:opacity .3s,transform .3s;}
-.reg-ligne.faite .reg-case{background:var(--laiton);border-color:var(--laiton);}
-.reg-ligne.faite .reg-case svg{opacity:1;transform:scale(1);}
-.reg-action{font-size:15.5px;color:var(--encre);font-weight:500;}
-.reg-effet{font-size:14px;color:var(--encre-3);margin-top:2px;}
-.reg-date{font-family:var(--mono);font-size:11.5px;color:var(--encre-3);white-space:nowrap;margin-top:4px;}
-.reg-ligne.a-faire{cursor:pointer;border-radius:8px;padding-left:8px;padding-right:8px;margin-left:-8px;margin-right:-8px;transition:background .18s;}
-.reg-ligne.a-faire:hover{background:var(--laiton-clair);}
-.reg-ligne.a-faire .reg-case{border-color:var(--laiton);border-style:dashed;}
-.reg-ligne.a-faire .reg-action{color:var(--pin);}
-.reg-pied{margin-top:16px;padding-top:15px;border-top:1px dashed var(--trait);font-size:14.5px;color:var(--encre-2);display:none;}
-.reg-pied.visible{display:block;animation:apparait .45s ease-out;}
-.reg-pied strong{color:var(--encre);font-weight:600;}
-.reg-pied a{color:var(--pin);font-weight:600;}
+/* ---------- Hero ---------- */
+.hero{padding:60px 24px 76px;}
+.hero-in{max-width:var(--lg);margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;}
+.hero-h1{margin-bottom:20px;max-width:15ch;}
+.hero-h1 em{font-style:normal;color:var(--pin);}
+.hero-nom{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--encre-3);margin-bottom:26px;}
+.hero-nom strong{color:var(--laiton);font-weight:500;}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px;margin-bottom:24px;}
+.hero-trust{display:flex;flex-wrap:wrap;gap:8px 24px;font-family:var(--mono);font-size:12.5px;color:var(--encre-3);}
+.hero-trust span{display:flex;align-items:center;gap:7px;}
+.hero-trust span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--laiton);flex:none;}
+@media(max-width:940px){.hero-in{grid-template-columns:1fr;gap:42px;}.hero-h1{max-width:none;}}
+
+/* ---------- Le carnet de route ---------- */
+.carnet{background:var(--papier);border:1px solid var(--trait);border-radius:12px;padding:26px 26px 22px;box-shadow:0 1px 2px rgba(18,33,43,.04),0 14px 38px -24px rgba(18,33,43,.32);}
+.carnet-head{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding-bottom:13px;border-bottom:1px solid var(--trait);margin-bottom:4px;}
+.carnet-titre{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--encre);}
+.carnet-note{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--encre-3);}
+.ligne{display:grid;grid-template-columns:26px 1fr auto;gap:15px;align-items:start;padding:15px 0;border-bottom:1px solid var(--trait);}
+.ligne:last-of-type{border-bottom:0;}
+.case{width:22px;height:22px;border-radius:5px;border:1.5px solid var(--trait);background:var(--papier);display:grid;place-items:center;margin-top:2px;flex:none;}
+.case svg{width:12px;height:12px;opacity:0;transform:scale(.6);transition:opacity .3s,transform .3s;}
+.ligne.faite .case{background:var(--laiton);border-color:var(--laiton);}
+.ligne.faite .case svg{opacity:1;transform:scale(1);}
+.ligne-action{font-size:15.5px;color:var(--encre);font-weight:500;}
+.ligne-effet{font-size:14px;color:var(--encre-3);margin-top:2px;}
+.ligne-date{font-family:var(--mono);font-size:11.5px;color:var(--encre-3);white-space:nowrap;margin-top:4px;}
+.ligne.a-faire{cursor:pointer;border-radius:8px;padding-left:8px;padding-right:8px;margin-left:-8px;margin-right:-8px;transition:background .18s;}
+.ligne.a-faire:hover{background:var(--laiton-clair);}
+.ligne.a-faire .case{border-color:var(--laiton);border-style:dashed;}
+.ligne.a-faire .ligne-action{color:var(--pin);}
+.carnet-pied{margin-top:16px;padding-top:15px;border-top:1px dashed var(--trait);font-size:14.5px;color:var(--encre-2);display:none;}
+.carnet-pied.visible{display:block;animation:apparait .45s ease-out;}
+.carnet-pied strong{color:var(--encre);font-weight:600;}
+.carnet-pied a{color:var(--pin);font-weight:600;}
 @keyframes apparait{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important;}}
 
-/* ---------- Situations ---------- */
-.situations{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--trait);}
-.situation{padding:28px 26px 30px;border-bottom:1px solid var(--trait);border-right:1px solid var(--trait);}
-.situation:last-child{border-right:0;}
-.situation-num{font-family:var(--mono);font-size:12px;color:var(--laiton);margin-bottom:12px;}
-.situation p{font-size:15.5px;color:var(--encre-2);}
-.situation strong{color:var(--encre);font-weight:600;}
-@media(max-width:800px){
-  .situations{grid-template-columns:1fr;}
-  .situation{border-right:0;}
-}
+/* ---------- Les obstacles ---------- */
+.obstacles{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);border-radius:12px;overflow:hidden;}
+.obstacle{background:var(--encre);padding:30px 26px 32px;}
+.obstacle-n{font-family:var(--mono);font-size:12px;color:var(--laiton);margin-bottom:14px;}
+.obstacle h3{color:#fff;margin-bottom:10px;}
+.obstacle p{font-size:14.8px;color:#B7C3CA;}
+@media(max-width:820px){.obstacles{grid-template-columns:1fr;}}
 
-/* ---------- Grille de cartes ---------- */
+/* ---------- Grilles ---------- */
 .grille-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--trait);border:1px solid var(--trait);border-radius:12px;overflow:hidden;}
 .carte{background:var(--papier);padding:28px 24px 30px;}
 .carte-num{font-family:var(--mono);font-size:12px;color:var(--laiton);margin-bottom:14px;}
 .carte h3{margin-bottom:9px;}
-.carte p{font-size:14.8px;color:var(--encre-2);}
+.carte p{font-size:14.8px;}
 @media(max-width:900px){.grille-4{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:540px){.grille-4{grid-template-columns:1fr;}}
-
-/* ---------- Parcours ---------- */
-.chemin{position:relative;padding-left:40px;max-width:760px;}
-.chemin::before{content:"";position:absolute;left:11px;top:12px;bottom:12px;width:1px;background:var(--trait);}
-.etape{position:relative;padding-bottom:30px;}
-.etape:last-child{padding-bottom:0;}
-.noeud{position:absolute;left:-40px;top:2px;width:23px;height:23px;border-radius:50%;display:grid;place-items:center;font-family:var(--mono);font-size:11px;background:var(--papier-2);border:1px solid var(--trait);color:var(--encre-3);}
-.noeud.faite{background:var(--laiton);border-color:var(--laiton);color:#fff;}
-.noeud.active{background:var(--pin);border-color:var(--pin);color:#fff;}
-.etape-haut{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-bottom:4px;}
-.etape-titre{font-family:var(--display);font-size:18px;font-weight:600;color:var(--encre);}
-.etiquette{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;padding:3px 8px;border-radius:4px;background:var(--papier);border:1px solid var(--trait);color:var(--encre-3);}
-.etiquette.faite{color:var(--laiton);border-color:#E4D2AC;background:var(--laiton-clair);}
-.etiquette.active{color:var(--pin);border-color:#BFD6C9;background:var(--pin-clair);}
-.etape-desc{font-size:15px;color:var(--encre-2);}
-.etape-meta{font-family:var(--mono);font-size:12px;color:var(--encre-3);margin-top:6px;display:flex;gap:18px;flex-wrap:wrap;}
-
-/* ---------- Anatomie ---------- */
-.anatomie{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;}
-.etape-lecon{border-top:2px solid var(--encre);padding-top:18px;}
-.etape-lecon .carte-num{color:var(--encre);}
-.etape-lecon h3{margin-bottom:8px;}
-.etape-lecon p{font-size:14.8px;}
-.etape-lecon strong{color:var(--encre);font-weight:600;}
-@media(max-width:800px){.anatomie{grid-template-columns:1fr;gap:26px;}}
 
 /* ---------- Formations ---------- */
 .formations-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--trait);border:1px solid var(--trait);border-radius:12px;overflow:hidden;}
@@ -187,7 +145,6 @@ h3{font-family:var(--display);font-weight:600;color:var(--encre);font-size:19px;
 .f-card.locked{opacity:.62;}
 .f-hublot{position:absolute;top:20px;right:20px;width:7px;height:7px;border-radius:50%;background:var(--trait);}
 .f-hublot.on{background:var(--pin);}
-.f-hublot.off{background:var(--trait);}
 .fc-num{font-family:var(--mono);font-size:12px;color:var(--laiton);margin-bottom:14px;}
 .fc-title{font-family:var(--display);font-size:17px;font-weight:600;color:var(--encre);line-height:1.28;margin-bottom:7px;}
 .fc-desc{font-size:14px;color:var(--encre-2);margin-bottom:12px;}
@@ -195,24 +152,51 @@ h3{font-family:var(--display);font-weight:600;color:var(--encre);font-size:19px;
 @media(max-width:1000px){.formations-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:560px){.formations-grid{grid-template-columns:1fr;}}
 
+/* ---------- Accompagnement ---------- */
+.accomp{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;}
+/* Carte d'échange : même traitement que le carnet, pour que les deux
+   éléments signature se répondent d'un bout à l'autre de la page. */
+.echange{background:var(--papier);border:1px solid var(--trait);border-radius:12px;padding:24px 24px 22px;
+  box-shadow:0 1px 2px rgba(18,33,43,.04),0 14px 38px -24px rgba(18,33,43,.3);}
+.echange-note{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--encre-3);padding-bottom:14px;border-bottom:1px solid var(--trait);margin-bottom:18px;}
+.bulle{margin-bottom:16px;}
+.bulle-qui{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--encre-3);margin-bottom:6px;}
+.bulle-txt{font-size:15px;line-height:1.6;color:var(--encre);background:var(--papier-2);
+  border-radius:10px 10px 10px 3px;padding:13px 15px;}
+.bulle.reponse .bulle-qui{color:var(--pin);}
+.bulle.reponse .bulle-txt{background:var(--pin-clair);border-radius:10px 10px 3px 10px;}
+.echange-pied{border-top:1px dashed var(--trait);padding-top:14px;font-size:13.5px;color:var(--encre-3);}
+.accomp ul{list-style:none;margin-top:22px;display:grid;gap:14px;}
+.accomp li{padding-left:28px;position:relative;font-size:15.5px;}
+.accomp li::before{content:"";position:absolute;left:0;top:6px;width:16px;height:16px;border-radius:4px;background:var(--laiton-clair);border:1px solid #E4D2AC;}
+.accomp li strong{color:var(--encre);font-weight:600;}
+@media(max-width:860px){.accomp{grid-template-columns:1fr;gap:32px;}}
+
 /* ---------- Tarifs ---------- */
-.tarifs{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:820px;}
-.tarif{background:var(--papier);border:1px solid var(--trait);border-radius:12px;padding:30px 28px 32px;display:flex;flex-direction:column;}
+.tarif-intro{background:var(--laiton-clair);border:1px solid #E4D2AC;border-radius:12px;padding:24px 26px;max-width:760px;margin-bottom:32px;}
+.tarif-intro h3{margin-bottom:9px;}
+.tarif-intro p{font-size:15px;color:#7A5A12;}
+.tarif-intro strong{color:#5E4409;font-weight:700;}
+.tarifs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.tarif{background:var(--papier);border:1px solid var(--trait);border-radius:12px;padding:28px 24px 30px;display:flex;flex-direction:column;}
 .tarif.mis-en-avant{border-color:var(--pin);box-shadow:0 14px 40px -30px rgba(30,75,60,.55);}
-.tarif-nom{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--encre-3);margin-bottom:16px;}
-.tarif-prix{font-family:var(--display);font-size:44px;font-weight:500;color:var(--encre);line-height:1;}
-.tarif-unite{font-family:var(--mono);font-size:12px;color:var(--encre-3);margin-top:8px;margin-bottom:20px;}
-.tarif ul{list-style:none;margin-bottom:26px;display:grid;gap:9px;}
-.tarif li{font-size:14.8px;color:var(--encre-2);display:flex;gap:10px;align-items:flex-start;}
-.tarif li::before{content:"";width:14px;height:14px;flex:none;margin-top:5px;border-radius:3px;background:var(--laiton-clair);border:1px solid #E4D2AC;}
+.tarif-nom{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--encre-3);margin-bottom:14px;}
+.tarif.mis-en-avant .tarif-nom{color:var(--pin);}
+.tarif-prix{font-family:var(--display);font-size:42px;font-weight:500;color:var(--encre);line-height:1;}
+.tarif-pour{font-size:14px;color:var(--encre-2);margin-top:12px;margin-bottom:18px;min-height:44px;}
+.tarif ul{list-style:none;display:grid;gap:8px;margin-bottom:24px;}
+.tarif li{font-size:14.5px;padding-left:20px;position:relative;}
+.tarif li::before{content:"";position:absolute;left:0;top:8px;width:12px;height:12px;border-radius:3px;background:var(--laiton-clair);border:1px solid #E4D2AC;}
 .tarif .btn-primary,.tarif .btn-ghost{margin-top:auto;text-align:center;}
-.tarif-note{font-family:var(--mono);font-size:12px;color:var(--encre-3);margin-top:18px;max-width:820px;line-height:1.7;}
-@media(max-width:720px){.tarifs{grid-template-columns:1fr;}}
+.tarif-note{font-family:var(--mono);font-size:12px;color:var(--encre-3);margin-top:20px;line-height:1.7;max-width:74ch;}
+@media(max-width:860px){.tarifs{grid-template-columns:1fr;}.tarif-pour{min-height:0;}}
 
 /* ---------- Cadre ---------- */
 .cadre{border-left:3px solid var(--brique);background:var(--brique-clair);border-radius:0 10px 10px 0;padding:26px 28px 28px;max-width:760px;}
 .cadre h3{margin-bottom:12px;}
-.cadre p{font-size:15px;color:var(--encre-2);}
+.cadre p{font-size:15px;}
 .cadre p + p{margin-top:11px;}
 .cadre strong{color:var(--encre);font-weight:600;}
 
@@ -233,12 +217,13 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
 .ft{max-width:var(--lg);margin:0 auto;}
 .ft-haut{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:flex-start;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.12);}
 .ft-brand{display:flex;align-items:center;gap:10px;}
-.ft-name{font-family:var(--display);font-size:18px;font-weight:600;color:#fff;}
-.ft-links{display:flex;flex-wrap:wrap;gap:22px;}
-.ft-links a{text-decoration:none;font-size:14px;color:#B7C3CA;transition:color .18s;}
+.ft-name{font-family:var(--display);font-size:19px;font-weight:600;color:#fff;letter-spacing:-.02em;}
+.ft-name em{font-style:normal;color:var(--laiton);}
+.ft-links{display:flex;flex-wrap:wrap;gap:20px;}
+.ft-links a{text-decoration:none;font-size:14px;color:#B7C3CA;}
 .ft-links a:hover{color:#fff;}
-.ft-mentions{font-size:13px;line-height:1.7;margin-top:24px;max-width:70ch;color:#8FA0A9;}
-.ft-copy{font-family:var(--mono);font-size:11.5px;color:#7A8A93;margin-top:22px;}
+.ft-mentions{font-size:13px;line-height:1.7;margin-top:22px;max-width:70ch;color:#8FA0A9;}
+.ft-copy{font-family:var(--mono);font-size:11.5px;color:#7A8A93;margin-top:20px;}
 </style>
 </head>
 <body>
@@ -247,13 +232,15 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
   <div class="nav-in">
     <a href="index.html" class="nav-logo">
       <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      <span class="nav-name">Petites Actions</span>
+      <span class="nav-name">Niou<em>Dem</em></span>
     </a>
     <ul class="nav-links">
+      <li><a href="#constat">Le constat</a></li>
       <li><a href="#methode">La méthode</a></li>
-      <li><a href="#parcours">Le parcours</a></li>
       <li><a href="#formations">Formations</a></li>
+      <li><a href="#accompagnement">Accompagnement</a></li>
       <li><a href="#tarifs">Tarifs</a></li>
+      <li><a href="qui-sommes-nous.html">Qui nous sommes</a></li>
     </ul>
     <div class="nav-right" id="navRight">
       <a href="connexion.html" class="nav-login">Se connecter</a>
@@ -262,97 +249,134 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
   </div>
 </nav>
 
-<!-- ============ HERO : LE REGISTRE ============ -->
+<!-- ============ HERO ============ -->
 <div class="hero">
   <div class="hero-in">
-    <div class="hero-grid">
-      <div>
-        <div class="eyebrow">Éducation financière</div>
-        <h1 class="display hero-h1">Tu n'as rien à rattraper. Juste <em>une action</em> à cocher.</h1>
-        <p class="lede hero-lede">Des leçons de cinq minutes, un quiz pour vérifier que c'est compris, et une chose concrète à faire dans la vraie vie. C'est tout. Et c'est ce qui sépare savoir de faire.</p>
-        <div class="hero-actions">
-          <a href="inscription.html" class="btn-primary">Ouvrir la première leçon</a>
-          <a href="#methode" class="btn-ghost">Voir comment ça marche</a>
-        </div>
-        <div class="hero-trust">
-          <span>Première formation entière, gratuite</span>
-          <span>Sans carte bancaire</span>
-          <span>Aucune promesse de rendement</span>
-        </div>
+    <div>
+      <div class="eyebrow">Éducation financière</div>
+      <h1 class="display hero-h1">Tu n'as rien à rattraper. Juste <em>une action</em> à cocher.</h1>
+      <p class="hero-nom"><strong>NiouDem</strong>, « on y va » en wolof.</p>
+      <p class="lede" style="margin-bottom:30px;">Personne ne t'a appris à gérer ton argent. Ni à l'école, ni à la maison. Ce n'est pas un manque d'intelligence, c'est un manque de transmission, et ça se rattrape. Ici on reprend depuis le début : d'où vient l'argent, où part le tien, comment le mettre à l'abri, et comment le faire travailler. Cinq minutes par leçon, une action concrète à la fin de chacune.</p>
+      <div class="hero-actions">
+        <a href="inscription.html" class="btn-primary">Ouvrir la première leçon</a>
+        <a href="#methode" class="btn-ghost">Voir comment ça marche</a>
+      </div>
+      <div class="hero-trust">
+        <span>Première formation entière, gratuite</span>
+        <span>Sans carte bancaire</span>
+        <span>Aucune promesse de rendement</span>
+      </div>
+    </div>
+
+    <div class="carnet">
+      <div class="carnet-head">
+        <div class="carnet-titre">Carnet de route</div>
+        <div class="carnet-note">Semaine 3</div>
       </div>
 
-      <div class="registre">
-        <div class="reg-head">
-          <div class="reg-titre">Le carnet de Sara</div>
-          <div class="reg-note">Semaine 3</div>
+      <div class="ligne faite">
+        <span class="case"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div>
+          <div class="ligne-action">Résilier deux abonnements oubliés</div>
+          <div class="ligne-effet">17 € par mois qui reviennent</div>
         </div>
+        <div class="ligne-date">Lun.</div>
+      </div>
 
-        <div class="reg-ligne faite">
-          <span class="reg-case"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <div>
-            <div class="reg-action">Résilier deux abonnements oubliés</div>
-            <div class="reg-effet">17 € par mois qui reviennent</div>
-          </div>
-          <div class="reg-date">Lun.</div>
+      <div class="ligne faite">
+        <span class="case"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div>
+          <div class="ligne-action">Calculer son reste à vivre réel</div>
+          <div class="ligne-effet">Un chiffre enfin connu, au lieu d'une intuition</div>
         </div>
+        <div class="ligne-date">Mer.</div>
+      </div>
 
-        <div class="reg-ligne faite">
-          <span class="reg-case"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <div>
-            <div class="reg-action">Calculer son reste à vivre réel</div>
-            <div class="reg-effet">Un chiffre enfin connu, au lieu d'une intuition</div>
-          </div>
-          <div class="reg-date">Mer.</div>
+      <div class="ligne a-faire" id="ligneAFaire" role="button" tabindex="0" aria-pressed="false">
+        <span class="case"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div>
+          <div class="ligne-action">Comprendre pourquoi 100 € valent moins qu'avant</div>
+          <div class="ligne-effet">Leçon 1 · 5 minutes · à cocher toi-même</div>
         </div>
+        <div class="ligne-date">Auj.</div>
+      </div>
 
-        <div class="reg-ligne a-faire" id="regLigne" role="button" tabindex="0" aria-pressed="false">
-          <span class="reg-case"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <div>
-            <div class="reg-action">Comprendre pourquoi 100 € valent moins qu'avant</div>
-            <div class="reg-effet">Leçon 1 · 5 minutes · à cocher toi-même</div>
-          </div>
-          <div class="reg-date">Auj.</div>
-        </div>
-
-        <div class="reg-pied" id="regPied">
-          <strong>Voilà, c'était ça.</strong> Une petite action, cochée. Répète-la trente fois et tu ne reconnaîtras plus ta situation. <a href="inscription.html">Commencer pour de vrai →</a>
-        </div>
+      <div class="carnet-pied" id="carnetPied">
+        <strong>Voilà, c'était ça.</strong> Une petite action, cochée. Répète-la trente fois et tu ne reconnaîtras plus ta situation. <a href="inscription.html">On y va →</a>
       </div>
     </div>
   </div>
 </div>
 
+<!-- ============ LE CONSTAT ============ -->
+<section class="section section-encre" id="constat">
+  <div class="s-inner">
+    <div class="s-head">
+      <div class="eyebrow">Le constat</div>
+      <h2 class="display">Un savoir rare. Pourtant indispensable.</h2>
+      <p class="lede">L'éducation financière manque à la plupart des gens, quelle que soit leur origine. Mais pour la diaspora et les communautés qui lui ressemblent, trois obstacles s'ajoutent presque toujours au tableau.</p>
+    </div>
+    <div class="obstacles">
+      <div class="obstacle">
+        <div class="obstacle-n">01</div>
+        <h3>La langue</h3>
+        <p>Le vocabulaire financier est une barrière à lui seul. Les contrats, les démarches, les conditions générales sont écrits pour des gens qui maîtrisent déjà les codes.</p>
+      </div>
+      <div class="obstacle">
+        <div class="obstacle-n">02</div>
+        <h3>La complexité</h3>
+        <p>Comprendre un placement, une fiscalité ou un crédit demande du temps, et souvent quelqu'un pour expliquer. Ce temps et cette personne, tout le monde ne les a pas.</p>
+      </div>
+      <div class="obstacle">
+        <div class="obstacle-n">03</div>
+        <h3>L'absence de relais</h3>
+        <p>C'est le plus lourd des trois : ne compter personne, dans son entourage, qui connaisse déjà le chemin. Aucun modèle proche à qui poser une question sans gêne.</p>
+      </div>
+    </div>
+    <p class="lede" style="margin-top:32px;">Aucun de ces obstacles n'est insurmontable. Ensemble, ils découragent. NiouDem existe pour les lever un par un. <a href="qui-sommes-nous.html" style="color:var(--laiton);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(184,134,47,.5);">D'où vient ce projet →</a></p>
+  </div>
+</section>
+
 <!-- ============ À QUI ÇA S'ADRESSE ============ -->
-<section class="section section-soft">
+<section class="section">
   <div class="s-inner">
     <div class="s-head">
       <div class="eyebrow">À qui ça s'adresse</div>
       <h2 class="display">Tu es au bon endroit si…</h2>
     </div>
-    <div class="situations">
-      <div class="situation">
-        <div class="situation-num">01</div>
-        <p>Tu as de l'argent qui <strong>dort sur un livret</strong> et tu sens confusément que ce n'est pas idéal, sans savoir quoi faire d'autre.</p>
+    <div class="grille-4">
+      <div class="carte">
+        <div class="carte-num">01</div>
+        <h3>Tu travailles dur sans avancer</h3>
+        <p>« À la fin du mois il ne reste rien, et je ne sais pas vraiment où ça part. » Ce n'est pas un problème de revenus, c'est un problème de structure.</p>
       </div>
-      <div class="situation">
-        <div class="situation-num">02</div>
-        <p>Tu as <strong>déjà essayé de comprendre</strong> — une vidéo, un article, un ami qui parlait d'ETF — et tu as décroché au bout de dix minutes de jargon.</p>
+      <div class="carte">
+        <div class="carte-num">02</div>
+        <h3>Tu as déjà essayé de comprendre</h3>
+        <p>Une vidéo, un article, un ami qui parlait d'ETF, et tu as décroché au bout de dix minutes de jargon. Ce n'est pas toi, c'est la façon dont c'était expliqué.</p>
       </div>
-      <div class="situation">
-        <div class="situation-num">03</div>
-        <p>Tu te dis qu'il est <strong>trop tard</strong>, ou qu'il faudrait déjà avoir de l'argent pour s'y intéresser. Les deux sont faux, et c'est précisément par là qu'on commence.</p>
+      <div class="carte">
+        <div class="carte-num">03</div>
+        <h3>Tu veux transmettre quelque chose</h3>
+        <p>« Mes parents n'avaient rien à me laisser. » Ce qui se construit aujourd'hui devient le point de départ de ceux qui viennent après.</p>
+      </div>
+      <div class="carte">
+        <div class="carte-num">04</div>
+        <h3>Tu penses qu'il est trop tard</h3>
+        <p>Ou qu'il faudrait déjà avoir de l'argent pour s'y intéresser. Les deux sont faux, et c'est précisément par là qu'on commence.</p>
       </div>
     </div>
+    <div class="refrain">NiouDem.</div>
   </div>
 </section>
 
 <!-- ============ LA MÉTHODE ============ -->
-<section class="section" id="methode">
+<section class="section section-soft" id="methode">
   <div class="s-inner">
     <div class="s-head center">
       <div class="eyebrow center">La méthode</div>
-      <h2 class="display">Quatre principes, et rien d'autre.</h2>
-      <p class="lede" style="margin-left:auto;margin-right:auto;">Petites Actions n'est pas une formation de plus. C'est une méthode construite pour que les notions restent, et surtout pour qu'elles servent.</p>
+      <h2 class="display">La méthode des petites actions.</h2>
+      <p class="lede" style="margin-left:auto;margin-right:auto;">Une grande décision financière se prend rarement. Une petite action se répète. C'est sur cette répétition qu'est construit tout le parcours.</p>
     </div>
     <div class="grille-4">
       <div class="carte">
@@ -368,146 +392,101 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       <div class="carte">
         <div class="carte-num">03</div>
         <h3>Une action concrète</h3>
-        <p>Une chose à faire ce soir, dans ta vraie vie. C'est le cœur du site : sans ce geste, une leçon n'est qu'un souvenir de plus, effacé en trois jours.</p>
+        <p>Une chose à faire ce soir, dans ta vraie vie. Sans ce geste, une leçon n'est qu'un souvenir de plus, effacé en trois jours.</p>
       </div>
       <div class="carte">
         <div class="carte-num">04</div>
-        <h3>Une progression visible</h3>
-        <p>Points, badges, séries de jours. Pas pour jouer, mais parce que voir le chemin parcouru est ce qui donne envie de revenir demain.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ LE PARCOURS ============ -->
-<section class="section section-soft" id="parcours">
-  <div class="s-inner">
-    <div class="s-head">
-      <div class="eyebrow">Le parcours</div>
-      <h2 class="display">Un chemin, pas un catalogue.</h2>
-      <p class="lede">Huit formations dans un ordre qui a du sens. On ne parle pas d'investir avant d'avoir parlé de budget, et pas de budget avant d'avoir compris ce qu'est vraiment l'argent.</p>
-    </div>
-    <div class="chemin">
-      <div class="etape">
-        <div class="noeud faite"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="etape-haut"><span class="etape-titre">Comprendre la monnaie</span><span class="etiquette faite">Terminé</span></div>
-        <div class="etape-desc">Les fondations : ce qu'est vraiment l'argent, et pourquoi il perd de la valeur pendant que tu dors.</div>
-        <div class="etape-meta"><span>14 leçons</span><span>280 points</span></div>
-      </div>
-      <div class="etape">
-        <div class="noeud faite"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="etape-haut"><span class="etape-titre">Psychologie de l'argent</span><span class="etiquette faite">Terminé</span></div>
-        <div class="etape-desc">Tes biais, tes croyances héritées, et les émotions qui décident à ta place.</div>
-        <div class="etape-meta"><span>12 leçons</span><span>240 points</span></div>
-      </div>
-      <div class="etape">
-        <div class="noeud active">3</div>
-        <div class="etape-haut"><span class="etape-titre">Maîtriser son budget</span><span class="etiquette active">En cours · 7 / 16</span></div>
-        <div class="etape-desc">La règle 50/30/20, la méthode des enveloppes, et l'épargne qui part toute seule le 2 du mois.</div>
-        <div class="etape-meta"><span>16 leçons</span><span>320 points</span></div>
-      </div>
-      <div class="etape">
-        <div class="noeud">4</div>
-        <div class="etape-haut"><span class="etape-titre">Premiers pas en bourse</span><span class="etiquette">À venir</span></div>
-        <div class="etape-desc">ETF, PEA, versements réguliers. Investir sans spéculer, et sans y passer ses soirées.</div>
-        <div class="etape-meta"><span>24 leçons</span><span>480 points</span></div>
-      </div>
-      <div class="etape">
-        <div class="noeud">5</div>
-        <div class="etape-haut"><span class="etape-titre">Bitcoin &amp; cryptomonnaies</span><span class="etiquette">À venir</span></div>
-        <div class="etape-desc">Comment ça fonctionne, comment on se fait avoir, et ce que dit le fisc français.</div>
-        <div class="etape-meta"><span>18 leçons</span><span>360 points</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ ANATOMIE D'UNE LEÇON ============ -->
-<section class="section">
-  <div class="s-inner">
-    <div class="s-head">
-      <div class="eyebrow">Anatomie d'une leçon</div>
-      <h2 class="display">Comprendre, vérifier, agir.</h2>
-      <p class="lede">Chaque leçon suit la même structure. La forme se répète pour que toute l'attention aille au fond.</p>
-    </div>
-    <div class="anatomie">
-      <div class="etape-lecon">
-        <div class="carte-num">01</div>
-        <h3>Une notion, expliquée</h3>
-        <p>Texte court, exemples pris dans la vie courante, parfois un schéma. <strong>Douze minutes maximum</strong> : assez pour comprendre, pas assez pour se perdre.</p>
-      </div>
-      <div class="etape-lecon">
-        <div class="carte-num">02</div>
-        <h3>Un quiz pour vérifier</h3>
-        <p>Deux ou trois questions. Si la réponse est fausse, <strong>l'explication apparaît immédiatement</strong>. Personne ne voit ton score, et il ne compte pas.</p>
-      </div>
-      <div class="etape-lecon">
-        <div class="carte-num">03</div>
-        <h3>Une action à cocher</h3>
-        <p>Une tâche simple, ce soir. <strong>« Calcule ton taux d'épargne du mois. »</strong> Cocher la case, c'est l'instant où la théorie devient ta situation.</p>
+        <h3>Un carnet qui se remplit</h3>
+        <p>Chaque action cochée s'inscrit dans ton carnet de route. Au bout de trois mois, tu n'y lis plus une progression : tu y lis ce que tu as changé.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============ LES FORMATIONS ============ -->
-<section class="section section-soft" id="formations">
+<section class="section" id="formations">
   <div class="s-inner">
     <div class="s-head">
-      <div class="eyebrow">Les formations</div>
-      <h2 class="display">Huit parcours, un seul accès.</h2>
-      <p class="lede">Du fonctionnement de la monnaie jusqu'à l'optimisation fiscale. Le premier est ouvert à tout le monde, gratuitement et en entier.</p>
+      <div class="eyebrow">Le parcours</div>
+      <h2 class="display">Huit formations, dans un ordre qui a du sens.</h2>
+      <p class="lede">On ne parle pas d'investir avant d'avoir parlé de budget, et pas de budget avant d'avoir compris ce qu'est vraiment l'argent. La première est ouverte à tout le monde, gratuitement et en entier.</p>
     </div>
     <div class="formations-grid">
       <div class="f-card" data-formation="monnaie" onclick="goFormation('monnaie')"><span class="f-hublot" id="hublot-monnaie"></span>
-        <div class="fc-num">00</div>
-        <div class="fc-title">Comprendre la monnaie</div>
+        <div class="fc-num">00</div><div class="fc-title">Comprendre la monnaie</div>
         <div class="fc-desc">D'où vient l'argent, et pourquoi il fond doucement quand il ne bouge pas.</div>
         <div class="fc-meta">14 leçons · 5 h</div>
       </div>
       <div class="f-card" data-formation="psychologie" onclick="goFormation('psychologie')"><span class="f-hublot" id="hublot-psychologie"></span>
-        <div class="fc-num">01</div>
-        <div class="fc-title">Psychologie de l'argent</div>
+        <div class="fc-num">01</div><div class="fc-title">Psychologie de l'argent</div>
         <div class="fc-desc">Tes biais, tes croyances, et les émotions qui décident à ta place.</div>
         <div class="fc-meta">12 leçons · 4 h</div>
       </div>
       <div class="f-card" data-formation="budget" onclick="goFormation('budget')"><span class="f-hublot" id="hublot-budget"></span>
-        <div class="fc-num">02</div>
-        <div class="fc-title">Maîtriser son budget</div>
+        <div class="fc-num">02</div><div class="fc-title">Maîtriser son budget</div>
         <div class="fc-desc">La règle 50/30/20 et l'épargne qui se fait sans y penser.</div>
         <div class="fc-meta">16 leçons · 5 h</div>
       </div>
       <div class="f-card" data-formation="bourse" onclick="goFormation('bourse')"><span class="f-hublot" id="hublot-bourse"></span>
-        <div class="fc-num">03</div>
-        <div class="fc-title">Premiers pas en bourse</div>
+        <div class="fc-num">03</div><div class="fc-title">Premiers pas en bourse</div>
         <div class="fc-desc">ETF, PEA, versements réguliers. Investir sans spéculer.</div>
         <div class="fc-meta">24 leçons · 8 h</div>
       </div>
       <div class="f-card" data-formation="crypto" onclick="goFormation('crypto')"><span class="f-hublot" id="hublot-crypto"></span>
-        <div class="fc-num">04</div>
-        <div class="fc-title">Bitcoin &amp; cryptomonnaies</div>
+        <div class="fc-num">04</div><div class="fc-title">Bitcoin &amp; cryptomonnaies</div>
         <div class="fc-desc">Le fonctionnement, les arnaques courantes, la fiscalité française.</div>
         <div class="fc-meta">18 leçons · 6 h</div>
       </div>
       <div class="f-card" data-formation="immobilier" onclick="goFormation('immobilier')"><span class="f-hublot" id="hublot-immobilier"></span>
-        <div class="fc-num">05</div>
-        <div class="fc-title">Investir dans la pierre</div>
+        <div class="fc-num">05</div><div class="fc-title">Investir dans la pierre</div>
         <div class="fc-desc">SCPI, LMNP, rendement locatif : ce que ça implique vraiment.</div>
         <div class="fc-meta">18 leçons · 6 h</div>
       </div>
       <div class="f-card" data-formation="epargne" onclick="goFormation('epargne')"><span class="f-hublot" id="hublot-epargne"></span>
-        <div class="fc-num">06</div>
-        <div class="fc-title">Épargne &amp; sécurité</div>
+        <div class="fc-num">06</div><div class="fc-title">Épargne &amp; sécurité</div>
         <div class="fc-desc">Fonds d'urgence, assurance-vie, PER. Se protéger avant de viser.</div>
         <div class="fc-meta">10 leçons · 3 h</div>
       </div>
       <div class="f-card" data-formation="fiscalite" onclick="goFormation('fiscalite')"><span class="f-hublot" id="hublot-fiscalite"></span>
-        <div class="fc-num">07</div>
-        <div class="fc-title">Optimisation fiscale</div>
+        <div class="fc-num">07</div><div class="fc-title">Optimisation fiscale</div>
         <div class="fc-desc">PEA, PER, LMNP, flat tax : payer ce qu'on doit, pas davantage.</div>
         <div class="fc-meta">20 leçons · 7 h</div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============ L'ACCOMPAGNEMENT ============ -->
+<section class="section section-soft" id="accompagnement">
+  <div class="s-inner">
+    <div class="accomp">
+      <div>
+        <div class="eyebrow">L'accompagnement</div>
+        <h2 class="display" style="margin-bottom:14px;">On n'y va pas seuls.</h2>
+        <p class="lede">Le troisième obstacle, celui de ne connaître personne qui ait déjà fait le chemin, ne se règle pas avec des leçons. Il se règle avec quelqu'un en face.</p>
+        <ul>
+          <li><strong>Un échange d'accueil, offert.</strong> Trente minutes pour regarder ta situation et décider ensemble par où commencer.</li>
+          <li><strong>Une communauté qui pose les mêmes questions.</strong> Celles qu'on n'ose pas poser à son banquier.</li>
+          <li><strong>Des réponses écrites quand tu bloques</strong> sur une notion, sans avoir à faire semblant d'avoir compris.</li>
+        </ul>
+      </div>
+      <div class="echange">
+        <div class="echange-note">Exemple d'échange</div>
+
+        <div class="bulle">
+          <div class="bulle-qui">Une question reçue</div>
+          <div class="bulle-txt">Ma banque me propose une assurance-vie avec 3&nbsp;% de frais d'entrée. Le conseiller dit que c'est normal. Je signe ou pas&nbsp;?</div>
+        </div>
+
+        <div class="bulle reponse">
+          <div class="bulle-qui">La réponse</div>
+          <div class="bulle-txt">On ne peut pas décider à ta place, mais voilà ce que ces 3&nbsp;% veulent dire concrètement&nbsp;: sur 1&nbsp;000&nbsp;€ versés, 970&nbsp;€ seulement sont réellement placés. Des contrats sans frais d'entrée existent. La vraie question à poser à ton conseiller&nbsp;: «&nbsp;quels sont les frais annuels de gestion&nbsp;?&nbsp;». C'est souvent là que se joue l'essentiel.</div>
+        </div>
+
+        <div class="echange-pied">Aucune recommandation personnalisée. On explique le mécanisme, tu décides.</div>
+      </div>
+    </div>
+    <div class="refrain">NiouDem.</div>
   </div>
 </section>
 
@@ -516,36 +495,54 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
   <div class="s-inner">
     <div class="s-head">
       <div class="eyebrow">Tarifs</div>
-      <h2 class="display">Un prix, une fois.</h2>
-      <p class="lede">Pas d'abonnement, pas de palier, pas d'offre qui expire dans 48 heures. Tu paies une fois, tu gardes l'accès.</p>
+      <h2 class="display">Le même contenu, trois prix.</h2>
     </div>
+
+    <div class="tarif-intro">
+      <h3>Pourquoi trois prix pour la même chose</h3>
+      <p>Un tarif unique écarterait forcément une partie de ceux à qui NiouDem s'adresse. On en propose donc trois, et c'est toi qui choisis celui qui correspond à ta situation. <strong>Aucun justificatif n'est demandé et aucune vérification n'est faite.</strong> Ceux qui prennent le tarif soutien financent ceux qui prennent le tarif solidaire : c'est aussi simple que ça.</p>
+    </div>
+
     <div class="tarifs">
       <div class="tarif">
-        <div class="tarif-nom">Découverte</div>
-        <div class="tarif-prix">0 €</div>
-        <div class="tarif-unite">sans engagement, sans carte</div>
+        <div class="tarif-nom">Solidaire</div>
+        <div class="tarif-prix">5 €</div>
+        <div class="tarif-pour">Si le tarif normal représente pour toi un effort réel.</div>
         <ul>
-          <li>La formation « Comprendre la monnaie » en entier</li>
-          <li>Quiz et actions inclus</li>
-          <li>Ta progression sauvegardée</li>
-          <li>Accès au Trading Lab</li>
+          <li>Les huit formations</li>
+          <li>Le carnet de route</li>
+          <li>La communauté</li>
         </ul>
-        <a href="inscription.html" class="btn-ghost">Commencer gratuitement</a>
+        <a href="inscription.html" class="btn-ghost">Commencer</a>
       </div>
+
       <div class="tarif mis-en-avant">
-        <div class="tarif-nom">Accès complet · bientôt</div>
-        <div class="tarif-prix">60 €</div>
-        <div class="tarif-unite">une fois, accès à vie — ouverture prochaine</div>
+        <div class="tarif-nom">Normal</div>
+        <div class="tarif-prix">25 €</div>
+        <div class="tarif-pour">Le prix qui fait vivre le projet et rend les deux autres possibles.</div>
         <ul>
           <li>Les huit formations, mises à jour comprises</li>
-          <li>Une session de coaching offerte</li>
-          <li>La communauté privée</li>
-          <li>Badges et statut de membre fondateur</li>
+          <li>Le carnet de route</li>
+          <li>Une session d'accompagnement offerte</li>
+          <li>La communauté</li>
         </ul>
-        <a href="inscription.html" class="btn-ghost">Créer un compte pour être prévenu</a>
+        <a href="inscription.html" class="btn-primary">Commencer</a>
+      </div>
+
+      <div class="tarif">
+        <div class="tarif-nom">Soutien</div>
+        <div class="tarif-prix">60 €</div>
+        <div class="tarif-pour">Tu paies pour toi, et tu finances un accès solidaire.</div>
+        <ul>
+          <li>Tout ce que contient le tarif normal</li>
+          <li>Deux sessions d'accompagnement</li>
+          <li>Un accès solidaire offert à quelqu'un</li>
+        </ul>
+        <a href="inscription.html" class="btn-ghost">Commencer</a>
       </div>
     </div>
-    <div class="tarif-note">L'offre complète n'est pas encore ouverte à la vente : le site est en phase de test et seule la formation gratuite est disponible. Sessions de coaching supplémentaires, à l'ouverture : 25 € la séance d'1 h 30. Le coaching porte sur la méthode et la compréhension, jamais sur le choix d'un placement précis.</div>
+
+    <div class="tarif-note">Paiement unique, sans abonnement. L'accès dit « à vie » s'entend pour toute la durée d'exploitation du service. Les formations ne sont pas encore ouvertes à la vente : le site est en phase de test, et seule la première formation, gratuite, est disponible.</div>
   </div>
 </section>
 
@@ -554,7 +551,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
   <div class="s-inner">
     <div class="s-head">
       <div class="eyebrow">Le cadre</div>
-      <h2 class="display">Ce que Petites Actions n'est pas.</h2>
+      <h2 class="display">Ce que NiouDem n'est pas.</h2>
     </div>
     <div class="cadre">
       <h3>Nous ne sommes pas conseillers en investissement.</h3>
@@ -575,19 +572,19 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
     <div class="questions">
       <div class="question">
         <h3>Et si je n'ai que 50 € par mois ?</h3>
-        <p>C'est largement assez, et c'est même le cas de figure pour lequel la méthode a été pensée. Les premières formations ne coûtent rien à appliquer : elles portent sur la compréhension et le budget, pas sur le placement.</p>
+        <p>C'est largement assez, et c'est le cas de figure pour lequel la méthode a été pensée. Les premières formations ne coûtent rien à appliquer : elles portent sur la compréhension et le budget, pas sur le placement.</p>
       </div>
       <div class="question">
         <h3>Je n'y connais absolument rien.</h3>
         <p>C'est le point de départ prévu. Aucune leçon ne suppose de connaissance préalable, et le parcours démarre par la question la plus basique de toutes : d'où vient l'argent.</p>
       </div>
       <div class="question">
-        <h3>Combien de temps ça va me prendre ?</h3>
-        <p>Cinq à douze minutes par leçon, à ton rythme. Rien n'expire, rien ne se ferme : tu peux t'arrêter deux semaines et reprendre là où tu en étais.</p>
+        <h3>Le tarif solidaire, c'est de la charité ?</h3>
+        <p>Non, c'est une répartition. Personne ne vérifie ton choix et personne ne le voit. Le tarif solidaire ne donne accès à rien de moins que le tarif normal : les huit formations sont exactement les mêmes.</p>
       </div>
       <div class="question">
-        <h3>Est-ce que je vais devoir investir ?</h3>
-        <p>Non. Quatre des huit formations n'ont rien à voir avec l'investissement. Tu peux très bien t'arrêter après le budget et l'épargne de précaution — beaucoup de gens y gagneraient davantage.</p>
+        <h3>Le site existe-t-il en wolof ?</h3>
+        <p>Pas encore, et nous préférons le dire plutôt que d'afficher une traduction à moitié faite. Le français est complet aujourd'hui ; l'anglais, le wolof et le soninké arrivent, langue par langue et page par page.</p>
       </div>
     </div>
   </div>
@@ -600,6 +597,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       <h2 class="display">Une leçon. Cinq minutes. Ce soir.</h2>
       <p>Pas besoin de tout savoir pour commencer. C'est même l'inverse : on commence pour savoir.</p>
       <a href="inscription.html" class="btn-primary">Ouvrir la première leçon</a>
+      <div class="refrain">NiouDem.</div>
     </div>
   </div>
 </section>
@@ -609,9 +607,10 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
     <div class="ft-haut">
       <div class="ft-brand">
         <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span class="ft-name">Petites Actions</span>
+        <span class="ft-name">Niou<em>Dem</em></span>
       </div>
       <div class="ft-links">
+        <a href="#constat">Le constat</a>
         <a href="#methode">La méthode</a>
         <a href="#formations">Formations</a>
         <a href="#tarifs">Tarifs</a>
@@ -620,8 +619,8 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
         <a href="mentions-legales.html#cgv">CGV</a>
       </div>
     </div>
-    <p class="ft-mentions">Petites Actions est un site de formation en éducation financière. Il ne fournit ni conseil en investissement personnalisé, ni service de gestion, ni intermédiation en produits financiers. Investir comporte un risque de perte en capital.</p>
-    <div class="ft-copy">© 2025 Petites Actions · Paris, France</div>
+    <p class="ft-mentions">NiouDem est un site de formation en éducation financière. Il ne fournit ni conseil en investissement personnalisé, ni service de gestion, ni intermédiation en produits financiers. Investir comporte un risque de perte en capital.</p>
+    <div class="ft-copy">© 2025 NiouDem · Méthode Petites Actions</div>
   </div>
 </footer>
 
@@ -632,16 +631,16 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 let FORMATIONS_UNLOCKED = false;
 
-/* --- Le registre : la première petite action se fait ici, avant l'inscription --- */
+/* Le carnet de route : la première petite action se fait ici, avant l'inscription. */
 (function(){
-  const ligne = document.getElementById('regLigne');
-  const pied = document.getElementById('regPied');
+  const ligne = document.getElementById('ligneAFaire');
+  const pied = document.getElementById('carnetPied');
   if(!ligne || !pied) return;
   function cocher(){
     if(ligne.classList.contains('faite')) return;
     ligne.classList.remove('a-faire');
     ligne.classList.add('faite');
-    ligne.setAttribute('aria-pressed', 'true');
+    ligne.setAttribute('aria-pressed','true');
     pied.classList.add('visible');
   }
   ligne.addEventListener('click', cocher);
@@ -657,14 +656,12 @@ function goFormation(f){
 
 function applyHublots(completed){
   FORMATIONS_UNLOCKED = completed;
-  const formations = ['monnaie','psychologie','budget','bourse','crypto','immobilier','epargne','fiscalite'];
-  formations.forEach(function(f){
+  ['monnaie','psychologie','budget','bourse','crypto','immobilier','epargne','fiscalite'].forEach(function(f){
     const dot = document.getElementById('hublot-' + f);
     const card = document.querySelector('[data-formation="' + f + '"]');
     if(!dot) return;
-    dot.classList.remove('on','off');
     const unlocked = (f === 'monnaie') || completed;
-    dot.classList.add(unlocked ? 'on' : 'off');
+    dot.classList.toggle('on', unlocked);
     if(card) card.classList.toggle('locked', !unlocked);
   });
 }
@@ -677,16 +674,11 @@ async function signOut(){
 (async function(){
   applyHublots(false);
   const { data: { session } } = await sb.auth.getSession();
-  if(!session){ return; }
+  if(!session) return;
 
   const { data: profile } = await sb.from('profiles').select('prenom, is_admin').eq('id', session.user.id).maybeSingle();
   const prenom = (profile && profile.prenom) ? profile.prenom : 'Toi';
 
-  /* Le lien d'administration n'est rendu que si le profil porte is_admin.
-     La politique RLS de profiles empêche de lire le drapeau d'un autre
-     compte : ce test ne peut donc pas être détourné pour l'afficher chez
-     quelqu'un d'autre. Les pages admin refont la vérification de leur
-     côté — masquer un lien n'est pas une protection. */
   const lienAdmin = (profile && profile.is_admin)
     ? '<a href="admin-retours.html" class="nav-login" style="color:var(--laiton);">Bêta</a>' +
       '<a href="admin.html" class="nav-login">Admin</a>'

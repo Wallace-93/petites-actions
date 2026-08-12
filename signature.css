@@ -1,0 +1,102 @@
+/* =====================================================================
+   NiouDem — feuille de signature
+   Chargée par les huit pages formation. Elle apporte trois choses :
+   un jeu d'icônes tracées à la main plutôt que des émojis, un emblème
+   propre à chaque formation, et une apparition au défilement.
+   Les couleurs viennent des variables déjà définies par chaque page.
+   ===================================================================== */
+
+/* ---------- Icônes tracées ----------
+   Toutes les icônes sont dessinées au trait, épaisseur constante,
+   dans la couleur d'accent. C'est le même geste que la coche du logo,
+   décliné : un seul vocabulaire graphique sur tout le site. */
+.nd-ico{
+  display:inline-block;vertical-align:-2px;
+  width:20px;height:20px;flex:none;
+  color:var(--green,#1E4B3C);
+}
+.nd-ico svg{width:100%;height:100%;display:block;}
+.nd-ico.or{color:var(--amber,#B8862F);}
+.nd-ico.brique{color:var(--coral,#A24332);}
+.nd-ico.grand{width:26px;height:26px;}
+
+/* Les anciennes pastilles à émoji deviennent des cartouches sobres */
+.oc-icon,.compare-icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:9px;
+  background:var(--amber-pale,#F6EFE0);
+  border:1px solid var(--amber-bord,#E4D2AC);
+  font-size:0;
+}
+.oc-icon .nd-ico,.compare-icon .nd-ico{width:18px;height:18px;color:var(--amber,#B8862F);}
+.compare-card.good .compare-icon{background:var(--green-pale,#E7EFEA);border-color:var(--green-bord,#BFD6C9);}
+.compare-card.good .compare-icon .nd-ico{color:var(--green,#1E4B3C);}
+
+/* ---------- Emblème de formation ----------
+   Un tracé unique par formation, construit sur la même grille : un
+   carnet ouvert dont le contenu change selon le sujet. On reconnaît
+   la famille avant de reconnaître le motif. */
+.nd-embleme{
+  width:100%;max-width:300px;height:auto;display:block;
+  color:var(--green,#1E4B3C);
+}
+.nd-embleme .trait{stroke:currentColor;fill:none;stroke-width:1.5;
+  stroke-linecap:round;stroke-linejoin:round;}
+.nd-embleme .trait-fin{stroke:currentColor;fill:none;stroke-width:1;opacity:.34;}
+.nd-embleme .plein{fill:var(--amber,#B8862F);}
+.nd-embleme .voile{fill:var(--amber-pale,#F6EFE0);}
+
+/* Le tracé se dessine à l'ouverture de la page, une seule fois. */
+.nd-embleme .anime{
+  stroke-dasharray:var(--l,600);stroke-dashoffset:var(--l,600);
+  animation:ndTrace 1.5s .15s cubic-bezier(.4,0,.2,1) forwards;
+}
+.nd-embleme .surgit{opacity:0;animation:ndSurgit .5s .95s ease-out forwards;}
+@keyframes ndTrace{to{stroke-dashoffset:0;}}
+@keyframes ndSurgit{to{opacity:1;}}
+
+/* ---------- Apparition au défilement ----------
+   Volontairement discrète : huit pixels et une opacité. Une page qui
+   parle d'argent ne doit pas donner l'impression de bouger sous les
+   doigts de celui qui la lit. */
+.nd-revele{opacity:0;transform:translateY(10px);
+  transition:opacity .55s cubic-bezier(.4,0,.2,1),transform .55s cubic-bezier(.4,0,.2,1);}
+.nd-revele.vu{opacity:1;transform:none;}
+
+/* ---------- Modules du programme ----------
+   La liste du programme devient un carnet : une case à cocher devant
+   chaque module, cochée quand on l'ouvre. C'est l'élément signature du
+   site appliqué au sommaire de la formation. */
+.module{transition:border-color .2s,background .2s;}
+.module:hover{border-color:var(--amber-bord,#E4D2AC);}
+.module-header{position:relative;}
+.module-case{
+  width:19px;height:19px;border-radius:5px;flex:none;
+  border:1.5px dashed var(--amber,#B8862F);
+  background:transparent;display:inline-grid;place-items:center;margin-right:12px;
+  transition:background .25s,border-color .25s,border-style .25s;
+}
+.module-case svg{width:11px;height:11px;opacity:0;transform:scale(.5);
+  transition:opacity .25s,transform .25s;}
+.module.open .module-case{background:var(--amber,#B8862F);border-color:var(--amber,#B8862F);border-style:solid;}
+.module.open .module-case svg{opacity:1;transform:scale(1);}
+
+/* ---------- Le refrain ---------- */
+.nd-refrain{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  margin:52px auto 0;font-family:var(--display,Georgia,serif);
+  font-size:22px;font-weight:600;color:var(--amber,#B8862F);letter-spacing:-.01em;
+}
+.nd-refrain::before,.nd-refrain::after{
+  content:"";height:1px;width:48px;background:var(--amber,#B8862F);opacity:.45;}
+
+/* ---------- Filet de séparation ---------- */
+.nd-filet{display:block;width:100%;max-width:1120px;margin:0 auto;height:1px;
+  background:linear-gradient(90deg,transparent,var(--bg-line,#DCDDD3) 18%,var(--bg-line,#DCDDD3) 82%,transparent);}
+
+@media(prefers-reduced-motion:reduce){
+  .nd-revele{opacity:1;transform:none;transition:none;}
+  .nd-embleme .anime{animation:none;stroke-dashoffset:0;}
+  .nd-embleme .surgit{animation:none;opacity:1;}
+  .module-case,.module-case svg{transition:none;}
+}
