@@ -66,6 +66,60 @@ h3{font-family:var(--display);font-weight:600;color:var(--encre);font-size:19px;
 .nav-cta:hover{background:#173C30;}
 @media(max-width:940px){.nav-links{display:none;}.nav-in{gap:14px;}.nav-right{margin-left:auto;}.nav-login{display:none;}}
 
+
+/* ---------- Barre de navigation, suite ---------- */
+.nav-links a{white-space:nowrap;}
+
+/* Bouton de compte : une seule pastille au lieu de six liens.
+   C'est ce qui faisait déborder la barre une fois connecté. */
+.compte{position:relative;}
+.compte-btn{display:flex;align-items:center;gap:9px;background:transparent;border:1px solid var(--trait);
+  border-radius:100px;padding:5px 12px 5px 5px;cursor:pointer;font-family:var(--texte);
+  font-size:14px;font-weight:600;color:var(--encre);transition:border-color .18s,background .18s;}
+.compte-btn:hover{border-color:var(--encre-3);background:var(--papier);}
+.compte-initiale{width:26px;height:26px;border-radius:50%;background:var(--pin);color:#fff;flex:none;
+  display:grid;place-items:center;font-family:var(--mono);font-size:12px;text-transform:uppercase;}
+.compte-fleche{width:9px;height:9px;flex:none;transition:transform .22s;}
+.compte.ouvert .compte-fleche{transform:rotate(180deg);}
+
+.compte-panneau{position:absolute;top:calc(100% + 10px);right:0;min-width:216px;background:var(--papier);
+  border:1px solid var(--trait);border-radius:11px;padding:7px;opacity:0;visibility:hidden;
+  transform:translateY(-6px);transition:opacity .18s,transform .18s,visibility .18s;
+  box-shadow:0 1px 2px rgba(18,33,43,.05),0 16px 40px -20px rgba(18,33,43,.4);}
+.compte.ouvert .compte-panneau{opacity:1;visibility:visible;transform:none;}
+.compte-panneau a{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:9px 12px;border-radius:7px;text-decoration:none;font-size:14.5px;color:var(--encre);
+  transition:background .15s;}
+.compte-panneau a:hover{background:var(--papier-2);}
+.compte-panneau .note{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--laiton);}
+.compte-panneau .sep{height:1px;background:var(--trait);margin:6px 4px;}
+.compte-panneau .quitter{color:var(--encre-3);font-size:14px;}
+
+/* Menu mobile */
+.burger{display:none;width:38px;height:38px;border:1px solid var(--trait);border-radius:9px;
+  background:transparent;cursor:pointer;padding:0;place-items:center;}
+.burger span{display:block;width:16px;height:1.5px;background:var(--encre);border-radius:2px;
+  position:relative;transition:transform .22s,opacity .22s;}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:16px;height:1.5px;
+  background:var(--encre);border-radius:2px;transition:transform .22s;}
+.burger span::before{top:-5px;}
+.burger span::after{top:5px;}
+.nav.deplie .burger span{transform:rotate(45deg);}
+.nav.deplie .burger span::before{transform:rotate(-90deg) translateX(5px);}
+.nav.deplie .burger span::after{opacity:0;}
+
+.voile-mobile{display:none;}
+@media(max-width:940px){
+  .burger{display:grid;}
+  .nav-links{position:absolute;top:100%;left:0;right:0;display:block;background:var(--papier);
+    border-bottom:1px solid var(--trait);padding:8px 24px 18px;margin:0;
+    max-height:0;overflow:hidden;opacity:0;transition:max-height .28s ease,opacity .2s,padding .28s;}
+  .nav.deplie .nav-links{max-height:340px;opacity:1;}
+  .nav-links li{border-bottom:1px solid var(--trait);}
+  .nav-links li:last-child{border-bottom:0;}
+  .nav-links a{display:block;padding:13px 0;font-size:16px;border-bottom:0;}
+}
+
 /* ---------- Sections ---------- */
 .section{padding:88px 24px;}
 .section-soft{background:var(--papier-2);border-top:1px solid var(--trait);border-bottom:1px solid var(--trait);}
@@ -235,8 +289,8 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       <span class="nav-name">Niou<em>Dem</em></span>
     </a>
     <ul class="nav-links">
-      <li><a href="#constat">Le constat</a></li>
-      <li><a href="#methode">La méthode</a></li>
+      <li><a href="#constat">Constat</a></li>
+      <li><a href="#methode">Méthode</a></li>
       <li><a href="#formations">Formations</a></li>
       <li><a href="#accompagnement">Accompagnement</a></li>
       <li><a href="#tarifs">Tarifs</a></li>
@@ -246,6 +300,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       <a href="connexion.html" class="nav-login">Se connecter</a>
       <a href="inscription.html" class="nav-cta">Commencer</a>
     </div>
+    <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false"><span></span></button>
   </div>
 </nav>
 
@@ -610,8 +665,8 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
         <span class="ft-name">Niou<em>Dem</em></span>
       </div>
       <div class="ft-links">
-        <a href="#constat">Le constat</a>
-        <a href="#methode">La méthode</a>
+        <a href="#constat">Constat</a>
+        <a href="#methode">Méthode</a>
         <a href="#formations">Formations</a>
         <a href="#tarifs">Tarifs</a>
         <a href="mentions-legales.html">Mentions légales</a>
@@ -649,6 +704,25 @@ let FORMATIONS_UNLOCKED = false;
   });
 })();
 
+
+/* Menu mobile */
+(function(){
+  const nav = document.querySelector('.nav');
+  const burger = document.getElementById('burger');
+  if(!nav || !burger) return;
+  burger.addEventListener('click', function(){
+    const ouvert = nav.classList.toggle('deplie');
+    burger.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+    burger.setAttribute('aria-label', ouvert ? 'Fermer le menu' : 'Ouvrir le menu');
+  });
+  nav.querySelectorAll('.nav-links a').forEach(function(a){
+    a.addEventListener('click', function(){
+      nav.classList.remove('deplie');
+      burger.setAttribute('aria-expanded','false');
+    });
+  });
+})();
+
 function goFormation(f){
   if(f === 'monnaie'){ window.location.href = 'monnaie.html'; return; }
   window.location.href = FORMATIONS_UNLOCKED ? (f + '.html') : 'monnaie.html';
@@ -679,17 +753,46 @@ async function signOut(){
   const { data: profile } = await sb.from('profiles').select('prenom, is_admin').eq('id', session.user.id).maybeSingle();
   const prenom = (profile && profile.prenom) ? profile.prenom : 'Toi';
 
-  const lienAdmin = (profile && profile.is_admin)
-    ? '<a href="admin-retours.html" class="nav-login" style="color:var(--laiton);">Bêta</a>' +
-      '<a href="admin.html" class="nav-login">Admin</a>'
+  /* Une fois connecté, tout passe derrière un seul bouton : six liens
+     ajoutés d'un coup faisaient déborder la barre. */
+  const liensAdmin = (profile && profile.is_admin)
+    ? '<div class="sep"></div>' +
+      '<a href="admin-retours.html">Tableau de bord<span class="note">Bêta</span></a>' +
+      '<a href="admin.html">Administration</a>'
     : '';
 
   document.getElementById('navRight').innerHTML =
-    '<span style="font-family:var(--mono);font-size:12.5px;color:var(--encre-3);">' + prenom + '</span>' +
-    lienAdmin +
-    '<a href="trading-lab.html" class="nav-login">Trading Lab</a>' +
     '<a href="lecons-monnaie.html" class="nav-cta">Continuer</a>' +
-    '<a href="#" onclick="signOut();return false;" class="nav-login">Déconnexion</a>';
+    '<div class="compte" id="compte">' +
+      '<button class="compte-btn" id="compteBtn" type="button" aria-haspopup="true" aria-expanded="false">' +
+        '<span class="compte-initiale">' + prenom.charAt(0) + '</span>' +
+        '<span>' + prenom + '</span>' +
+        '<svg class="compte-fleche" viewBox="0 0 12 12" fill="none" aria-hidden="true">' +
+          '<path d="M2 4.5L6 8.5L10 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+      '</button>' +
+      '<div class="compte-panneau" role="menu">' +
+        '<a href="lecons-monnaie.html">Reprendre ma leçon</a>' +
+        '<a href="trading-lab.html">Trading Lab</a>' +
+        liensAdmin +
+        '<div class="sep"></div>' +
+        '<a href="#" class="quitter" onclick="signOut();return false;">Se déconnecter</a>' +
+      '</div>' +
+    '</div>';
+
+  const compte = document.getElementById('compte');
+  const compteBtn = document.getElementById('compteBtn');
+  compteBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    const ouvert = compte.classList.toggle('ouvert');
+    compteBtn.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+  });
+  document.addEventListener('click', function(){
+    compte.classList.remove('ouvert');
+    compteBtn.setAttribute('aria-expanded','false');
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ compte.classList.remove('ouvert'); compteBtn.setAttribute('aria-expanded','false'); }
+  });
 
   const { data: badge } = await sb.from('badges').select('badge_name').eq('user_id', session.user.id).eq('badge_name','le_declic').maybeSingle();
   applyHublots(!!badge);
@@ -698,3 +801,4 @@ async function signOut(){
 <script src="retours.js" defer></script>
 </body>
 </html>
+
