@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Réserver un échange · NiouDem</title>
+<meta name="description" content="Vingt minutes pour regarder où tu en es et décider ensemble si l'accompagnement NiouDem a du sens pour toi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --encre:#12212B;--encre-2:#43555F;--encre-3:#7A8A93;
+  --papier:#FCFBF8;--papier-2:#EFF0EA;--trait:#DCDDD3;
+  --pin:#1E4B3C;--pin-clair:#E7EFEA;
+  --laiton:#B8862F;--laiton-clair:#F6EFE0;
+  --display:'Newsreader',Georgia,serif;
+  --texte:'Karla',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+body{font-family:var(--texte);background:var(--papier);color:var(--encre-2);font-size:16px;line-height:1.68;-webkit-font-smoothing:antialiased;}
+a{color:inherit;}
+:focus-visible{outline:2px solid var(--pin);outline-offset:3px;border-radius:3px;}
+
+.nav{border-bottom:1px solid var(--trait);background:var(--papier);}
+.nav-in{max-width:1120px;margin:0 auto;padding:15px 24px;display:flex;align-items:center;gap:22px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-mark{width:28px;height:28px;border-radius:7px;background:var(--pin);display:grid;place-items:center;flex:none;}
+.nav-mark svg{width:15px;height:15px;}
+.nav-name{font-family:var(--display);font-size:19px;font-weight:600;color:var(--encre);letter-spacing:-.02em;}
+.nav-name em,.ft-name em{font-style:normal;color:var(--laiton);}
+.nav-back{margin-left:auto;font-size:14.5px;font-weight:600;text-decoration:none;color:var(--encre);}
+
+.wrap{max-width:760px;margin:0 auto;padding:62px 24px 80px;}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--laiton);display:flex;align-items:center;gap:9px;margin-bottom:18px;}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--laiton);}
+h1{font-family:var(--display);font-weight:500;font-size:clamp(32px,4.4vw,48px);color:var(--encre);letter-spacing:-.018em;line-height:1.14;margin-bottom:16px;}
+.lede{font-size:17.5px;margin-bottom:34px;}
+h2{font-family:var(--display);font-weight:600;font-size:21px;color:var(--encre);margin:36px 0 12px;}
+p{margin-bottom:12px;}
+ul{list-style:none;display:grid;gap:10px;margin-bottom:16px;}
+li{padding-left:26px;position:relative;}
+li::before{content:"";position:absolute;left:0;top:9px;width:13px;height:13px;border-radius:4px;background:var(--laiton-clair);border:1px solid #E4D2AC;}
+
+.bloc{border:1px solid var(--trait);border-radius:12px;padding:28px 26px 30px;background:var(--papier);margin-bottom:22px;}
+.bloc h2{margin-top:0;}
+.btn{display:inline-block;text-decoration:none;background:var(--pin);color:#fff;font-size:15.5px;font-weight:600;padding:14px 26px;border-radius:8px;margin-top:8px;}
+.tbd{background:var(--laiton-clair);border-bottom:1px dashed var(--laiton);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:.88em;color:#7A5A12;}
+.note{font-family:var(--mono);font-size:12px;color:var(--encre-3);margin-top:14px;}
+
+footer{background:var(--encre);color:#B7C3CA;padding:44px 24px 36px;}
+.ft{max-width:1120px;margin:0 auto;}
+.ft-links{display:flex;flex-wrap:wrap;gap:18px;margin-bottom:18px;}
+.ft-links a{color:#B7C3CA;text-decoration:none;font-size:14px;}
+.ft-mentions{font-size:12.5px;line-height:1.7;color:#8FA0A9;max-width:70ch;}
+.ft-copy{font-family:var(--mono);font-size:11.5px;color:#7A8A93;margin-top:16px;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="nav-name">Niou<em>Dem</em></span>
+    </a>
+    <a href="accompagnement.html" class="nav-back">← L'accompagnement</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="eyebrow">Premier échange</div>
+  <h1>Vingt minutes, sans engagement.</h1>
+  <p class="lede">Avant toute formule, on prend le temps de regarder où tu en es. Si l'accompagnement n'est pas ce dont tu as besoin, on te le dira, et on t'indiquera par quelle leçon gratuite commencer.</p>
+
+  <div class="bloc">
+    <h2>Réserver un créneau</h2>
+    <p>Choisis directement l'horaire qui t'arrange dans l'agenda.</p>
+    <a href="#" class="btn"><span class="tbd">Lien de réservation à insérer</span></a>
+    <div class="note">À remplacer par ton lien d'agenda en ligne, puis à retirer ce bandeau.</div>
+  </div>
+
+  <div class="bloc">
+    <h2>Ou écrire simplement</h2>
+    <p>Si tu préfères poser tes questions par écrit avant de réserver quoi que ce soit : <span class="tbd">adresse@exemple.fr</span></p>
+    <p>Une réponse te parvient sous quarante-huit heures ouvrées.</p>
+  </div>
+
+  <h2>Ce qu'on regardera pendant cet échange</h2>
+  <ul>
+    <li>Où en est ta situation aujourd'hui, sans jugement et sans chiffres à justifier.</li>
+    <li>Ce que tu cherches vraiment : mettre de côté, comprendre, ou passer à l'acte.</li>
+    <li>Si tu as de quoi tenir un imprévu avant d'envisager d'investir.</li>
+    <li>Laquelle des deux formules a du sens, ou aucune des deux.</li>
+  </ul>
+
+  <h2>Ce qu'on ne fera pas</h2>
+  <p>Aucun produit financier ne te sera proposé ni vendu, aucun actif ne te sera recommandé, et aucune allocation ne te sera suggérée. NiouDem est un organisme de formation et n'exerce pas le conseil en investissement, qui est une activité réglementée. Ta stratégie reste la tienne, écrite par toi.</p>
+</div>
+
+<footer>
+  <div class="ft">
+    <div class="ft-links">
+      <a href="index.html">Accueil</a>
+      <a href="index.html#formations">Formations</a>
+      <a href="accompagnement.html">Accompagnement</a>
+      <a href="qui-sommes-nous.html">Qui nous sommes</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="mentions-legales.html#cgv">CGV</a>
+    </div>
+    <p class="ft-mentions">NiouDem est un site de formation en éducation financière. Il ne fournit ni conseil en investissement personnalisé, ni service de gestion, ni intermédiation en produits financiers. Investir comporte un risque de perte en capital.</p>
+    <div class="ft-copy">© 2025 NiouDem · Méthode Petites Actions</div>
+  </div>
+</footer>
+
+<script src="retours.js" defer></script>
+</body>
+</html>
