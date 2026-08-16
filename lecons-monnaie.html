@@ -439,6 +439,36 @@ async function setProgressServer(lessonNumber, value){
     completed: value,
     completed_at: value ? new Date().toISOString() : null
   }, { onConflict: 'user_id,formation,lesson_number' });
+
+  await majCarnet(lessonNumber, value);
+}
+
+/* Le carnet de route : l'action cochée s'inscrit dans le carnet personnel,
+   la décocher l'en retire. Une erreur ici ne doit jamais bloquer la
+   progression de la leçon, d'où le try/catch silencieux. */
+async function majCarnet(lessonNumber, value){
+  try {
+    const l = LESSONS[lessonNumber - 1];
+    if(!l) return;
+
+    if(!value){
+      await sb.from('carnet').delete()
+        .eq('user_id', CURRENT_USER.id)
+        .eq('formation', FORMATION)
+        .eq('lesson_number', lessonNumber);
+      return;
+    }
+
+    await sb.from('carnet').upsert({
+      user_id: CURRENT_USER.id,
+      formation: FORMATION,
+      lesson_number: lessonNumber,
+      titre: l.title || ('Leçon ' + lessonNumber),
+      action: l.action || ''
+    }, { onConflict: 'user_id,formation,lesson_number', ignoreDuplicates: true });
+  } catch(e){
+    console.warn('Carnet non mis à jour :', e);
+  }
 }
 
 let current = parseInt(new URLSearchParams(location.search).get('l')) || 1;
@@ -604,6 +634,7 @@ boot();
 </script>
 
 <div style="border-top:1px solid var(--bg-line);padding:22px 24px;text-align:center;font-size:12.5px;color:var(--ink-muted);background:var(--bg-soft);">
+  <a href="carnet.html" style="color:var(--ink-muted);margin:0 10px;">Mon carnet</a>
   <a href="qui-sommes-nous.html" style="color:var(--ink-muted);margin:0 10px;">Qui nous sommes</a>
   <a href="mentions-legales.html" style="color:var(--ink-muted);margin:0 10px;">Mentions légales</a>
   <a href="mentions-legales.html#confidentialite" style="color:var(--ink-muted);margin:0 10px;">Confidentialité</a>

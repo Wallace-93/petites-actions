@@ -239,6 +239,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:48px 24px 38px;}
     <h3>Durées de conservation</h3>
     <ul>
       <li><strong>Compte et progression :</strong> pendant toute la durée de vie du compte, puis <strong>trois ans</strong> à compter de la dernière connexion, avant suppression ou anonymisation.</li>
+      <li><strong>Comptes rendus de séances d'accompagnement :</strong> <strong>trois ans</strong> à compter de la dernière séance.</li>
       <li><strong>Pièces comptables et factures :</strong> <strong>dix ans</strong> à compter de la clôture de l'exercice, conformément au Code de commerce.</li>
       <li><strong>Journaux techniques :</strong> <strong>douze mois</strong> au maximum.</li>
     </ul>
@@ -277,26 +278,28 @@ footer{background:var(--encre);color:#B7C3CA;padding:48px 24px 38px;}
     <h3>4.1 Prestations et prix</h3>
     <p>Les prix sont indiqués en euros, toutes taxes comprises. <span class="tbd">Mention de TVA applicable : « TVA non applicable, art. 293 B du CGI » ou taux applicable</span></p>
     <ul>
-      <li><strong>Accès complet aux formations, tarif au choix du client : 5 €, 25 € ou 60 €.</strong> Le contenu et les droits d'accès sont strictement identiques quel que soit le tarif retenu : les huit formations, leurs mises à jour et la communauté. Le choix est libre et n'est soumis à aucune condition, aucun justificatif ni aucune vérification. Le tarif à 60 € inclut deux séances d'accompagnement, le tarif à 25 € une séance.</li>
-      <li><strong>Séance d'accompagnement supplémentaire, 25 €.</strong> Séance individuelle d'une heure trente, à distance.</li>
-      <li><strong>Formation « Comprendre la monnaie », gratuite,</strong> accessible après création d'un compte, sans paiement ni saisie de coordonnées bancaires.</li>
+      <li><strong>Les huit formations en ligne sont gratuites</strong> et le demeurent sans limitation de durée. Elles sont accessibles après création d'un compte, sans paiement ni saisie de coordonnées bancaires.</li>
+      <li><strong>La mise en route, 149 €.</strong> Deux séances individuelles d'une heure trente, à distance, en visioconférence avec partage d'écran, accompagnées d'un mémo écrit après chaque séance et de réponses écrites pendant les quatorze jours suivant la seconde séance.</li>
+      <li><strong>Le parcours en trente jours, 349 €.</strong> Trois séances individuelles d'une heure trente réparties sur un mois, comprenant les prestations de la mise en route, une séance de réglage à trente jours et des réponses écrites pendant toute la durée du parcours, sous quarante-huit heures ouvrées.</li>
+      <li><strong>Séance supplémentaire, 99 €.</strong> Séance individuelle d'une heure trente, à distance.</li>
+      <li><strong>Accès solidaire.</strong> Deux places par mois sont proposées à tarif réduit pour les personnes pour qui ces montants sont hors de portée. La prestation est identique. La demande se formule lors de l'entretien préalable et ne donne lieu à aucun justificatif.</li>
     </ul>
     <p>L'éditeur se réserve la possibilité de modifier ses prix à tout moment. Le prix applicable est celui affiché au moment de la commande.</p>
 
-    <h3>4.2 Durée de l'accès</h3>
-    <p>L'accès dit « à vie » s'entend pour <strong>toute la durée d'exploitation du service</strong>, sans limitation de temps ni renouvellement à payer. En cas d'arrêt définitif du service, le client en sera informé au moins <span class="tbd">trois</span> mois à l'avance et pourra télécharger les contenus des formations auxquelles il a accès.</p>
+    <h3>4.2 Durée et exécution des prestations</h3>
+    <p>Les formations en ligne restent accessibles pendant toute la durée d'exploitation du service. En cas d'arrêt définitif, les utilisateurs en seront informés au moins <span class="tbd">trois</span> mois à l'avance.</p>
+    <p>Les séances d'accompagnement sont planifiées d'un commun accord après l'entretien préalable. Elles doivent être consommées dans un délai de <span class="tbd">six</span> mois à compter du paiement. Une séance peut être annulée ou reportée sans frais jusqu'à <span class="tbd">48</span> heures avant l'horaire convenu ; passé ce délai, elle est considérée comme due, sauf cas de force majeure.</p>
 
     <h3>4.3 Commande et paiement</h3>
     <p>La commande est validée lors du paiement, effectué par carte bancaire via Stripe. Un e-mail de confirmation récapitulant la commande est adressé au client. L'accès aux contenus est ouvert immédiatement après confirmation du paiement.</p>
 
     <h3>4.4 Droit de rétractation</h3>
-    <p>Le client consommateur dispose en principe d'un délai de <strong>quatorze jours</strong> à compter de la conclusion du contrat pour se rétracter, sans motif ni pénalité (article L221-18 du Code de la consommation).</p>
-    <p>Toutefois, s'agissant de la fourniture d'un contenu numérique non fourni sur support matériel, ce droit ne peut plus être exercé lorsque l'exécution a commencé <strong>après accord préalable exprès du client et renoncement exprès de sa part à son droit de rétractation</strong> (article L221-28, 13° du même code).</p>
+    <p>Le client consommateur dispose d'un délai de <strong>quatorze jours</strong> à compter de la conclusion du contrat pour se rétracter, sans motif ni pénalité (article L221-18 du Code de la consommation). Les formations en ligne étant gratuites, ce droit ne concerne que les prestations d'accompagnement.</p>
+    <p>S'agissant d'une prestation de services, si le client demande expressément que l'exécution commence avant la fin de ce délai, il conserve son droit de rétractation mais devra régler la part de la prestation déjà fournie (article L221-25). Ce droit est en revanche <strong>définitivement perdu lorsque la prestation a été intégralement exécutée</strong> avant la fin du délai, à condition que le client ait donné son accord préalable exprès et reconnu perdre ce droit une fois la prestation pleinement exécutée.</p>
     <div class="alerte">
-      <p><strong>Condition de validité, à mettre en œuvre dans le tunnel de paiement.</strong> Cette exception ne s'applique que si le client coche lui-même, avant le paiement, une case <em>non pré-cochée</em> par laquelle il demande l'accès immédiat aux contenus et reconnaît perdre son droit de rétractation. Sans cette case, ni sans la confirmation de cet accord sur un support durable, le délai de quatorze jours court normalement, et il est porté à douze mois si l'information n'a pas été donnée.</p>
+      <p><strong>Condition de validité, à mettre en œuvre au moment du paiement.</strong> Ces règles ne s'appliquent que si le client coche lui-même, avant de payer, une case <em>non pré-cochée</em> par laquelle il demande que la première séance soit fixée avant la fin du délai de quatorze jours et reconnaît les conséquences de cette demande. Cet accord doit lui être confirmé sur un support durable, par courriel par exemple. À défaut d'information, le délai de rétractation est porté à douze mois.</p>
     </div>
-    <p>Tant que le client n'a ouvert aucune leçon payante, il peut demander l'annulation de sa commande et le remboursement intégral dans le délai de quatorze jours, en écrivant à l'adresse de contact ou en utilisant la fonctionnalité de rétractation en ligne accessible depuis son compte. Le remboursement intervient dans les quatorze jours suivant la demande, par le même moyen de paiement.</p>
-    <p>Les séances d'accompagnement peuvent être annulées ou reportées sans frais jusqu'à <span class="tbd">48</span> heures avant l'horaire convenu.</p>
+    <p>Tant qu'aucune séance n'a été tenue, le client peut demander l'annulation de sa commande et le remboursement intégral dans le délai de quatorze jours, en écrivant à l'adresse de contact ou en utilisant la fonctionnalité de rétractation en ligne accessible depuis son compte. Le remboursement intervient dans les quatorze jours suivant la demande, par le même moyen de paiement.</p>
 
     <h3>4.5 Garanties légales</h3>
     <p>Le client bénéficie de la garantie légale de conformité applicable aux contenus et services numériques (articles L224-25-12 et suivants du Code de la consommation) ainsi que de la garantie contre les vices cachés (articles 1641 et suivants du Code civil). En cas de défaut de conformité, il peut demander la mise en conformité du service et, à défaut, une réduction de prix ou la résolution du contrat.</p>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon carnet de route · NiouDem</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --encre:#12212B;--encre-2:#43555F;--encre-3:#7A8A93;
+  --papier:#FCFBF8;--papier-2:#EFF0EA;--trait:#DCDDD3;
+  --pin:#1E4B3C;--pin-clair:#E7EFEA;
+  --laiton:#B8862F;--laiton-clair:#F6EFE0;
+  --brique:#A24332;--brique-clair:#F8EDEA;
+  --display:'Newsreader',Georgia,serif;
+  --texte:'Karla',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+body{font-family:var(--texte);background:var(--papier);color:var(--encre-2);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+a{color:inherit;}
+:focus-visible{outline:2px solid var(--pin);outline-offset:3px;border-radius:3px;}
+
+/* Navigation */
+.nav{border-bottom:1px solid var(--trait);background:var(--papier);position:sticky;top:0;z-index:20;}
+.nav-in{max-width:900px;margin:0 auto;padding:15px 24px;display:flex;align-items:center;gap:18px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-mark{width:28px;height:28px;border-radius:7px;background:var(--pin);display:grid;place-items:center;flex:none;}
+.nav-mark svg{width:15px;height:15px;}
+.nav-name{font-family:var(--display);font-size:19px;font-weight:600;color:var(--encre);letter-spacing:-.02em;}
+.nav-name em{font-style:normal;color:var(--laiton);}
+.nav-right{margin-left:auto;display:flex;gap:16px;align-items:center;}
+.nav-right a{text-decoration:none;font-size:14.5px;font-weight:600;color:var(--encre);}
+
+.wrap{max-width:900px;margin:0 auto;padding:44px 24px 80px;}
+
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--laiton);display:flex;align-items:center;gap:9px;margin-bottom:16px;}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--laiton);}
+h1{font-family:var(--display);font-weight:500;font-size:clamp(30px,4.2vw,44px);color:var(--encre);letter-spacing:-.018em;line-height:1.14;margin-bottom:12px;}
+.sous{font-size:17px;max-width:60ch;margin-bottom:34px;}
+
+/* Bandeau de synthèse */
+.bilan{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--trait);border:1px solid var(--trait);border-radius:12px;overflow:hidden;margin-bottom:14px;}
+.bilan-case{background:var(--papier);padding:22px 22px 24px;}
+.bilan-n{font-family:var(--display);font-size:34px;font-weight:500;color:var(--encre);line-height:1;}
+.bilan-n.or{color:var(--laiton);}
+.bilan-l{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--encre-3);margin-top:9px;}
+@media(max-width:640px){.bilan{grid-template-columns:1fr;}}
+.bilan-note{font-size:13.5px;color:var(--encre-3);margin-bottom:36px;line-height:1.6;}
+
+/* Le carnet */
+.mois{margin-bottom:34px;}
+.mois-titre{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--encre-3);padding-bottom:11px;border-bottom:1px solid var(--trait);margin-bottom:6px;}
+.entree{display:grid;grid-template-columns:26px 1fr auto;gap:16px;align-items:start;padding:17px 0;border-bottom:1px solid var(--trait);}
+.entree:last-child{border-bottom:0;}
+.case{width:22px;height:22px;border-radius:6px;background:var(--laiton);display:grid;place-items:center;margin-top:2px;flex:none;}
+.case svg{width:12px;height:12px;}
+.entree-titre{font-size:16px;color:var(--encre);font-weight:600;font-family:var(--display);line-height:1.3;}
+.entree-action{font-size:14.5px;color:var(--encre-2);margin-top:5px;}
+.entree-meta{font-family:var(--mono);font-size:11.5px;color:var(--encre-3);margin-top:7px;display:flex;gap:14px;flex-wrap:wrap;}
+.entree-droite{text-align:right;white-space:nowrap;}
+.montant{font-family:var(--display);font-size:19px;font-weight:600;color:var(--pin);}
+.btn-effet{background:transparent;border:1px dashed var(--trait);border-radius:7px;padding:5px 10px;cursor:pointer;
+  font-family:var(--mono);font-size:11px;color:var(--encre-3);transition:border-color .18s,color .18s;}
+.btn-effet:hover{border-color:var(--laiton);color:var(--laiton);}
+.saisie{display:flex;gap:6px;align-items:center;justify-content:flex-end;}
+.saisie input{width:88px;border:1px solid var(--trait);border-radius:7px;padding:6px 9px;font-family:var(--mono);font-size:13px;text-align:right;background:#fff;color:var(--encre);}
+.saisie button{border:0;border-radius:7px;padding:7px 11px;cursor:pointer;font-size:13px;font-weight:600;font-family:var(--texte);background:var(--pin);color:#fff;}
+@media(max-width:600px){
+  .entree{grid-template-columns:22px 1fr;}
+  .entree-droite{grid-column:2;text-align:left;margin-top:10px;}
+  .saisie{justify-content:flex-start;}
+}
+
+/* Vide */
+.vide{text-align:center;padding:56px 24px;border:1px dashed var(--trait);border-radius:12px;}
+.vide-t{font-family:var(--display);font-size:21px;color:var(--encre);margin-bottom:9px;}
+.vide p{font-size:15px;max-width:46ch;margin:0 auto 22px;}
+.btn-primary{display:inline-block;text-decoration:none;background:var(--pin);color:#fff;font-size:15px;font-weight:600;padding:13px 24px;border-radius:8px;}
+.btn-ghost{display:inline-block;text-decoration:none;color:var(--encre);border:1px solid var(--trait);background:var(--papier);font-size:14.5px;font-weight:600;padding:11px 18px;border-radius:8px;cursor:pointer;font-family:var(--texte);}
+
+.actions-bas{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px;padding-top:26px;border-top:1px solid var(--trait);}
+.err{background:var(--brique-clair);border-left:3px solid var(--brique);border-radius:0 9px 9px 0;padding:16px 18px;font-size:14.5px;margin-bottom:22px;}
+
+/* Impression : le carnet devient un document que l'on garde. */
+@media print{
+  .nav,.actions-bas,.btn-effet,.saisie,.no-print{display:none !important;}
+  body{background:#fff;font-size:12pt;}
+  .wrap{padding:0;max-width:none;}
+  .bilan{break-inside:avoid;}
+  .entree{break-inside:avoid;}
+  .mois{break-inside:avoid-page;}
+  a{text-decoration:none;color:inherit;}
+}
+.impression-entete{display:none;}
+@media print{
+  .impression-entete{display:block;margin-bottom:24px;padding-bottom:14px;border-bottom:2px solid var(--encre);}
+  .impression-entete .marque{font-family:var(--display);font-size:20px;font-weight:600;color:var(--encre);}
+  .impression-entete .mention{font-family:var(--mono);font-size:9pt;color:var(--encre-3);margin-top:5px;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="nav-name">Niou<em>Dem</em></span>
+    </a>
+    <div class="nav-right">
+      <a href="index.html#formations">Formations</a>
+      <a href="index.html">← Retour</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap" id="app">
+  <div class="vide"><div class="vide-t">Chargement…</div></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+const SUPABASE_URL = 'https://pchkshpbzsybvtwxqvrf.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjaGtzaHBienN5YnZ0d3hxdnJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NDgwMTAsImV4cCI6MjEwMTUyNDAxMH0.3EqyBUDmHHJ79mdDD6dmpVwsuEA0h2hF-75Up9R2Snc';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let ENTREES = [];
+let PRENOM = '';
+let EDITION = null;
+
+const NOMS = {
+  monnaie:'Comprendre la monnaie', psychologie:"Psychologie de l'argent",
+  budget:'Maîtriser son budget', bourse:'Premiers pas en bourse',
+  crypto:'Bitcoin & cryptomonnaies', immobilier:'Investir dans la pierre',
+  epargne:'Épargne & sécurité', fiscalite:'Optimisation fiscale'
+};
+
+function echapper(t){
+  const d = document.createElement('div');
+  d.textContent = t == null ? '' : String(t);
+  return d.innerHTML;
+}
+
+function fmtEuros(n){
+  return Number(n).toLocaleString('fr-FR', { minimumFractionDigits:0, maximumFractionDigits:2 });
+}
+
+function moisLisible(iso){
+  const d = new Date(iso);
+  const s = d.toLocaleDateString('fr-FR', { month:'long', year:'numeric' });
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+function jourLisible(iso){
+  return new Date(iso).toLocaleDateString('fr-FR', { day:'2-digit', month:'short' });
+}
+
+/* Nombre de semaines écoulées depuis la première action : c'est la durée
+   du chemin parcouru, plus parlante qu'un nombre de leçons. */
+function semainesDepuisDebut(){
+  if(!ENTREES.length) return 0;
+  const premiere = new Date(ENTREES[ENTREES.length - 1].created_at).getTime();
+  return Math.max(1, Math.round((Date.now() - premiere) / (7*24*3600*1000)));
+}
+
+function rendre(){
+  const app = document.getElementById('app');
+
+  if(ENTREES.length === 0){
+    app.innerHTML =
+      '<div class="eyebrow">Mon carnet de route</div>' +
+      '<h1>Ton carnet est encore vide.</h1>' +
+      '<p class="sous">Il se remplira tout seul : chaque action que tu coches à la fin d\'une leçon vient s\'y inscrire, avec sa date. Au bout de quelques semaines, tu n\'y liras plus une progression, tu y liras ce que tu as changé.</p>' +
+      '<div class="vide">' +
+        '<div class="vide-t">Une première action suffit</div>' +
+        '<p>Cinq minutes, une leçon, une chose à faire ce soir.</p>' +
+        '<a href="lecons-monnaie.html" class="btn-primary">Ouvrir la première leçon</a>' +
+      '</div>';
+    return;
+  }
+
+  const total = ENTREES.reduce(function(s,e){
+    return s + (Number(e.effet_euros) || 0);
+  }, 0);
+  const chiffrees = ENTREES.filter(function(e){ return Number(e.effet_euros) > 0; }).length;
+
+  /* Regroupement par mois, du plus récent au plus ancien */
+  const parMois = [];
+  ENTREES.forEach(function(e){
+    const cle = moisLisible(e.created_at);
+    let groupe = parMois.find(function(g){ return g.cle === cle; });
+    if(!groupe){ groupe = { cle: cle, entrees: [] }; parMois.push(groupe); }
+    groupe.entrees.push(e);
+  });
+
+  const corps = parMois.map(function(g){
+    return '<div class="mois"><div class="mois-titre">' + echapper(g.cle) + '</div>' +
+      g.entrees.map(function(e){
+        const montant = Number(e.effet_euros);
+        const droite = EDITION === e.id
+          ? '<div class="saisie">' +
+              '<input type="number" min="0" step="1" id="champ-' + e.id + '" value="' + (montant || '') + '" placeholder="€ / mois" aria-label="Effet estimé en euros">' +
+              '<button onclick="enregistrer(' + e.id + ')">OK</button>' +
+            '</div>'
+          : (montant > 0
+              ? '<div class="montant">' + fmtEuros(montant) + ' €</div>' +
+                '<button class="btn-effet" onclick="editer(' + e.id + ')">modifier</button>'
+              : '<button class="btn-effet" onclick="editer(' + e.id + ')">chiffrer l\'effet</button>');
+
+        return '<div class="entree">' +
+          '<span class="case"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+          '<div>' +
+            '<div class="entree-titre">' + echapper(e.titre) + '</div>' +
+            '<div class="entree-action">' + echapper(e.action) + '</div>' +
+            '<div class="entree-meta"><span>' + echapper(NOMS[e.formation] || e.formation) + '</span><span>Leçon ' + e.lesson_number + '</span></div>' +
+          '</div>' +
+          '<div class="entree-droite"><div class="entree-meta" style="margin:0 0 6px;justify-content:flex-end;">' + jourLisible(e.created_at) + '</div>' + droite + '</div>' +
+        '</div>';
+      }).join('') + '</div>';
+  }).join('');
+
+  app.innerHTML =
+    '<div class="impression-entete">' +
+      '<div class="marque">NiouDem · Carnet de route' + (PRENOM ? ' de ' + echapper(PRENOM) : '') + '</div>' +
+      '<div class="mention">Document personnel. Les montants sont des estimations saisies par son auteur.</div>' +
+    '</div>' +
+    '<div class="no-print"><div class="eyebrow">Mon carnet de route</div>' +
+    '<h1>Voilà ce que tu as changé.</h1>' +
+    '<p class="sous">Chaque ligne est une action que tu as réellement faite, pas une leçon que tu as lue. C\'est la seule mesure qui compte.</p></div>' +
+
+    '<div class="bilan">' +
+      '<div class="bilan-case"><div class="bilan-n">' + ENTREES.length + '</div><div class="bilan-l">Actions réalisées</div></div>' +
+      '<div class="bilan-case"><div class="bilan-n or">' + fmtEuros(total) + ' €</div><div class="bilan-l">Effet estimé par mois</div></div>' +
+      '<div class="bilan-case"><div class="bilan-n">' + semainesDepuisDebut() + '</div><div class="bilan-l">Semaines de chemin</div></div>' +
+    '</div>' +
+    '<p class="bilan-note">L\'effet estimé additionne ce que tu as toi-même chiffré' +
+      (chiffrees < ENTREES.length ? ', sur ' + chiffrees + ' action' + (chiffrees > 1 ? 's' : '') + ' sur ' + ENTREES.length + '. Chiffrer les autres rendra ce total plus juste.' : '.') +
+      ' Il s\'agit de dépenses évitées ou d\'argent réorganisé, jamais d\'un rendement.</p>' +
+
+    corps +
+
+    '<div class="actions-bas">' +
+      '<button class="btn-ghost" onclick="window.print()">Imprimer ou enregistrer en PDF</button>' +
+      '<a href="index.html#formations" class="btn-ghost">Continuer une formation</a>' +
+    '</div>';
+}
+
+function editer(id){
+  EDITION = id;
+  rendre();
+  const champ = document.getElementById('champ-' + id);
+  if(champ){ champ.focus(); champ.select();
+    champ.addEventListener('keydown', function(e){
+      if(e.key === 'Enter') enregistrer(id);
+      if(e.key === 'Escape'){ EDITION = null; rendre(); }
+    });
+  }
+}
+
+async function enregistrer(id){
+  const champ = document.getElementById('champ-' + id);
+  if(!champ) return;
+  const brut = champ.value.trim();
+  const valeur = brut === '' ? null : Number(brut);
+  if(valeur !== null && (!Number.isFinite(valeur) || valeur < 0)){
+    champ.value = ''; return;
+  }
+
+  const entree = ENTREES.find(function(e){ return e.id === id; });
+  if(entree) entree.effet_euros = valeur;
+  EDITION = null;
+  rendre();
+
+  const { error } = await sb.from('carnet').update({ effet_euros: valeur }).eq('id', id);
+  if(error) console.error('Montant non enregistré :', error.message);
+}
+
+(async function(){
+  const app = document.getElementById('app');
+  const { data: { session } } = await sb.auth.getSession();
+  if(!session){ window.location.href = 'connexion.html'; return; }
+
+  const [profil, carnet] = await Promise.all([
+    sb.from('profiles').select('prenom').eq('id', session.user.id).maybeSingle(),
+    sb.from('carnet').select('*').order('created_at', { ascending:false })
+  ]);
+
+  if(carnet.error){
+    app.innerHTML = '<div class="err">Lecture du carnet impossible : ' + echapper(carnet.error.message) +
+      '<br><br>Vérifie que la table <code>carnet</code> a bien été créée (migration-4-carnet.sql).</div>';
+    return;
+  }
+
+  PRENOM = (profil.data && profil.data.prenom) ? profil.data.prenom : '';
+  ENTREES = carnet.data || [];
+  rendre();
+})();
+</script>
+<script src="retours.js" defer></script>
+</body>
+</html>

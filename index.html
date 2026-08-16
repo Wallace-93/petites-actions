@@ -134,6 +134,8 @@ h3{font-family:var(--display);font-weight:600;color:var(--encre);font-size:19px;
 .liste.encre li::before{background:rgba(184,134,47,.22);border-color:rgba(184,134,47,.6);}
 .liste.refus li::before{background:var(--brique-clair);border-color:#EBC9C1;}
 .carte p.appui{font-size:14px;color:var(--encre-3);margin-top:7px;}
+.liste.liste-large{max-width:78ch;gap:15px;}
+.liste.liste-large li{font-size:16.5px;}
 
 /* ---------- Sections ---------- */
 .section{padding:88px 24px;}
@@ -325,7 +327,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       <div class="eyebrow">Éducation financière</div>
       <h1 class="display hero-h1">Tu n'as rien à rattraper. Juste <em>une action</em> à cocher.</h1>
       <p class="hero-nom"><strong>NiouDem</strong>, « on y va » en wolof.</p>
-      <p class="lede" style="margin-bottom:30px;">Personne ne t'a appris à gérer ton argent. Ni à l'école, ni à la maison. Ce n'est pas un manque d'intelligence, c'est un manque de transmission, et ça se rattrape. Les huit formations sont gratuites, entièrement. Quand vient le moment de passer à l'acte, tu peux maintenant le faire accompagné.</p>
+      <p class="lede" style="margin-bottom:30px;">Personne ne t'a appris à gérer ton argent. Ni à l'école, ni à la maison. Ce n'est pas un manque d'intelligence, c'est un manque de transmission, et ça se rattrape. Les huit formations sont gratuites, entièrement. Quand vient le moment de passer à l'acte, tu peux le faire accompagné.</p>
       <div class="hero-actions">
         <a href="inscription.html" class="btn-primary">Ouvrir la première leçon</a>
         <a href="accompagnement.html" class="btn-ghost">Être accompagné</a>
@@ -413,32 +415,12 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       <div class="eyebrow">À qui ça s'adresse</div>
       <h2 class="display">Tu es au bon endroit si…</h2>
     </div>
-    <div class="grille-4">
-      <div class="carte">
-        <div class="carte-num">01</div>
-        <h3>Tu travailles dur sans avancer</h3>
-        <p>« À la fin du mois il ne reste rien. »</p>
-        <p class="appui">Rarement un problème de revenus. Presque toujours un problème de structure.</p>
-      </div>
-      <div class="carte">
-        <div class="carte-num">02</div>
-        <h3>Tu as déjà essayé de comprendre</h3>
-        <p>Une vidéo, un article, et tu as décroché en dix minutes de jargon.</p>
-        <p class="appui">Ce n'est pas toi. C'est la façon dont c'était expliqué.</p>
-      </div>
-      <div class="carte">
-        <div class="carte-num">03</div>
-        <h3>Tu veux transmettre quelque chose</h3>
-        <p>« Mes parents n'avaient rien à me laisser. »</p>
-        <p class="appui">Ce qui se construit maintenant devient le point de départ des suivants.</p>
-      </div>
-      <div class="carte">
-        <div class="carte-num">04</div>
-        <h3>Tu penses qu'il est trop tard</h3>
-        <p>Ou qu'il faudrait déjà avoir de l'argent pour s'y intéresser.</p>
-        <p class="appui">Les deux sont faux, et c'est par là qu'on commence.</p>
-      </div>
-    </div>
+    <ul class="liste liste-large">
+      <li><strong>« À la fin du mois il ne reste rien. »</strong> Rarement un problème de revenus, presque toujours un problème de structure.</li>
+      <li><strong>Tu as déjà essayé de comprendre.</strong> Une vidéo, un article, et tu as décroché en dix minutes de jargon. Ce n'est pas toi, c'est la façon dont c'était expliqué.</li>
+      <li><strong>« Mes parents n'avaient rien à me laisser. »</strong> Ce qui se construit maintenant devient le point de départ des suivants.</li>
+      <li><strong>Tu penses qu'il est trop tard,</strong> ou qu'il faudrait déjà avoir de l'argent pour s'y intéresser. Les deux sont faux.</li>
+    </ul>
     <div class="refrain">NiouDem.</div>
   </div>
 </section>
@@ -470,7 +452,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       <div class="carte">
         <div class="carte-num">04</div>
         <h3>Un carnet qui se remplit</h3>
-        <p>Au bout de trois mois, tu n'y lis plus une progression : tu y lis ce que tu as changé.</p>
+        <p>Au bout de trois mois, tu n'y lis plus une progression : tu y lis ce que tu as changé. <a href="carnet.html" style="color:var(--pin);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(30,75,60,.35);">Voir mon carnet</a></p>
       </div>
     </div>
   </div>
@@ -782,6 +764,7 @@ async function signOut(){
       '</button>' +
       '<div class="compte-panneau" role="menu">' +
         '<a href="lecons-monnaie.html">Reprendre ma leçon</a>' +
+        '<a href="carnet.html">Mon carnet de route</a>' +
         '<a href="trading-lab.html">Trading Lab</a>' +
         liensAdmin +
         '<div class="sep"></div>' +
