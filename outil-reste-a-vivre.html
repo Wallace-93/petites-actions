@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculer son reste à vivre · Outil gratuit · NiouDem</title>
+<meta name="description" content="Calcule ton reste à vivre réel en une minute : ce qu'il te reste vraiment chaque mois une fois toutes les charges fixes payées. Gratuit, sans inscription.">
+<link rel="canonical" href="https://nioudem.com/outil-reste-a-vivre.html">
+<meta property="og:title" content="Calculer son reste à vivre · Outil gratuit · NiouDem">
+<meta property="og:description" content="Calcule ton reste à vivre réel en une minute : ce qu'il te reste vraiment chaque mois une fois toutes les charges fixes payées. Gratuit, sans inscription.">
+<meta property="og:url" content="https://nioudem.com/outil-reste-a-vivre.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NiouDem">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="outils.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de reste à vivre","url":"https://nioudem.com/outil-reste-a-vivre.html","applicationCategory":"FinanceApplication","operatingSystem":"Tout navigateur","description":"Calcule ton reste à vivre réel en une minute : ce qu'il te reste vraiment chaque mois une fois toutes les charges fixes payées. Gratuit, sans inscription.","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"publisher":{"@type":"Organization","name":"NiouDem","url":"https://nioudem.com"}}</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="nav-name">Niou<em>Dem</em></span>
+    </a>
+    <div class="nav-right">
+      <a href="outils.html" class="nav-lien">Tous les outils</a>
+      <a href="index.html#formations" class="nav-lien">Formations</a>
+      <a href="inscription.html" class="nav-cta">Commencer</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap etroit">
+  <div class="eyebrow">Outil gratuit</div>
+  <h1>Combien te reste-t-il vraiment chaque mois ?</h1>
+  <p class="lede">La plupart des gens connaissent leur salaire et ignorent leur reste à vivre. C'est pourtant le seul chiffre qui décide de ce que tu peux mettre de côté. Une minute suffit pour le connaître.</p>
+
+  <div class="bloc">
+    <div class="calc">
+      <div class="calc-champs">
+        <div class="champ">
+          <label for="revenus">Ce qui entre chaque mois
+            <span class="aide">Salaire net, aides, pensions, revenus complémentaires. Tout ce qui arrive réellement sur le compte.</span>
+          </label>
+          <div class="champ-saisie">
+            <input type="number" id="revenus" min="0" step="10" value="2000" inputmode="decimal">
+            <span class="unite">€ / mois</span>
+          </div>
+        </div>
+
+        <div class="deux">
+          <div class="champ">
+            <label for="logement">Logement
+              <span class="aide">Loyer ou crédit, charges, électricité, eau, internet.</span>
+            </label>
+            <div class="champ-saisie">
+              <input type="number" id="logement" min="0" step="10" value="750" inputmode="decimal">
+              <span class="unite">€</span>
+            </div>
+          </div>
+          <div class="champ">
+            <label for="transport">Transport
+              <span class="aide">Abonnement, carburant, assurance, entretien.</span>
+            </label>
+            <div class="champ-saisie">
+              <input type="number" id="transport" min="0" step="10" value="150" inputmode="decimal">
+              <span class="unite">€</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="deux">
+          <div class="champ">
+            <label for="abonnements">Abonnements et assurances
+              <span class="aide">Téléphone, mutuelle, assurances, streaming, salle de sport.</span>
+            </label>
+            <div class="champ-saisie">
+              <input type="number" id="abonnements" min="0" step="5" value="120" inputmode="decimal">
+              <span class="unite">€</span>
+            </div>
+          </div>
+          <div class="champ">
+            <label for="credits">Crédits et pensions
+              <span class="aide">Crédit conso, découvert remboursé, pension versée.</span>
+            </label>
+            <div class="champ-saisie">
+              <input type="number" id="credits" min="0" step="10" value="0" inputmode="decimal">
+              <span class="unite">€</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="champ">
+          <label for="alimentation">Alimentation et vie courante
+            <span class="aide">Courses, cantine, pharmacie. Une moyenne suffit.</span>
+          </label>
+          <div class="champ-saisie">
+            <input type="number" id="alimentation" min="0" step="10" value="350" inputmode="decimal">
+            <span class="unite">€</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="resultat">
+        <div class="titre">Ton reste à vivre</div>
+        <div class="chiffre" id="reste">…</div>
+        <div class="chiffre-sous" id="resteSous">Ce qu'il te reste une fois tout payé.</div>
+
+        <div class="detail">
+          <div class="detail-case"><div class="detail-n" id="parJour">…</div><div class="detail-l">Par jour</div></div>
+          <div class="detail-case"><div class="detail-n or" id="tauxEpargne">…</div><div class="detail-l">Taux d'épargne possible</div></div>
+          <div class="detail-case"><div class="detail-n" id="charges">…</div><div class="detail-l">Charges fixes</div></div>
+        </div>
+
+        <div class="barres">
+          <div class="barre-ligne">
+            <span class="barre-nom">Besoins</span>
+            <span class="barre-piste"><span class="barre-jauge" id="bBesoins" style="width:0%"></span></span>
+            <span class="barre-val" id="vBesoins">…</span>
+          </div>
+          <div class="barre-ligne">
+            <span class="barre-nom">Reste à vivre</span>
+            <span class="barre-piste"><span class="barre-jauge or" id="bReste" style="width:0%"></span></span>
+            <span class="barre-val" id="vReste">…</span>
+          </div>
+        </div>
+
+        <div class="lecture" id="lecture"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <div class="action">
+      <h3>La petite action, ce soir</h3>
+      <p>Ouvre ton application bancaire et compare le chiffre ci-dessus à ce qu'il te restait réellement le mois dernier, la veille de ta paie. <strong>L'écart entre les deux, c'est ton budget invisible</strong> : les dépenses que tu ne comptes pas parce qu'elles ne ressemblent pas à des charges. C'est là que se trouve ta marge de manœuvre.</p>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <h2>Comment lire ce chiffre</h2>
+    <p>Le reste à vivre n'est pas de l'argent disponible pour les loisirs : c'est ce qui reste après les charges que tu ne peux pas éviter. Il sert à absorber les imprévus, à financer ce qui te fait plaisir, et surtout à épargner.</p>
+    <p>La règle des 50/30/20, enseignée dans la formation « Maîtriser son budget », propose un repère : environ la moitié du revenu pour les besoins, un peu moins d'un tiers pour les envies, et au moins un cinquième pour l'épargne. C'est un repère, pas une norme, et il se déforme fortement selon la région et la taille du foyer.</p>
+    <p>Un reste à vivre faible n'est pas un échec. C'est une information, et c'est la première chose à connaître avant de parler de placement.</p>
+  </div>
+
+  <div class="bloc">
+    <h2>Questions fréquentes</h2>
+    <div class="questions">
+      <div class="question">
+        <h3>Qu'est-ce que le reste à vivre exactement ?</h3>
+        <p>C'est ce qui reste de tes revenus mensuels une fois déduites toutes les charges fixes : logement, transport, abonnements, crédits et alimentation. Les organismes de crédit l'utilisent pour évaluer une capacité d'emprunt, mais il est surtout utile pour soi.</p>
+      </div>
+      <div class="question">
+        <h3>Faut-il inclure l'alimentation dans les charges ?</h3>
+        <p>Les banques la comptent généralement comme une charge incompressible, et c'est le choix retenu ici. Si tu préfères la traiter comme une dépense variable, mets zéro dans ce champ : ton reste à vivre augmentera d'autant, mais il faudra t'en souvenir en le lisant.</p>
+      </div>
+      <div class="question">
+        <h3>Mon reste à vivre est négatif, que faire ?</h3>
+        <p>Cela signifie que les charges fixes dépassent les revenus, situation qui mène au découvert permanent. La priorité n'est ni d'épargner ni d'investir, mais de réduire une charge fixe ou d'augmenter les revenus. Un point avec un travailleur social ou un conseiller en économie sociale et familiale, gratuit, est souvent plus utile que n'importe quel calcul.</p>
+      </div>
+      <div class="question">
+        <h3>Cet outil enregistre-t-il mes chiffres ?</h3>
+        <p>Non. Tout est calculé dans ton navigateur, rien n'est envoyé ni conservé. Tu peux fermer la page, il n'en restera aucune trace.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <div class="cadre">
+      <h3>Ce que cet outil n'est pas</h3>
+      <p>C'est un calculateur pédagogique. Il applique une formule à des chiffres que tu saisis, rien de plus. Il ne constitue ni un conseil en investissement, ni une recommandation personnalisée, et NiouDem ne vend aucun produit financier. Le résultat dépend entièrement de la justesse de ce que tu entres.</p>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <h2>Aller plus loin</h2>
+    <p style="margin-bottom:22px;">Ce calcul est le point de départ de la formation « Maîtriser son budget », gratuite comme les sept autres. Elle explique quoi faire de ce chiffre, et comment le faire grandir sans se priver.</p>
+    <div class="duo">
+      <a href="budget.html" class="btn-primary">Voir la formation budget</a>
+      <a href="outils.html" class="btn-ghost">Les autres outils</a>
+    </div>
+  </div>
+
+<script>
+(function(){
+  var champs = ['revenus','logement','transport','abonnements','credits','alimentation'];
+
+  function val(id){
+    var v = parseFloat(document.getElementById(id).value);
+    return Number.isFinite(v) && v >= 0 ? v : 0;
+  }
+  function euros(n){
+    return Math.round(n).toLocaleString('fr-FR') + ' €';
+  }
+
+  function calculer(){
+    var revenus = val('revenus');
+    var charges = val('logement') + val('transport') + val('abonnements') + val('credits') + val('alimentation');
+    var reste = revenus - charges;
+
+    document.getElementById('reste').textContent = euros(reste) + ' / mois';
+    document.getElementById('charges').textContent = euros(charges);
+    document.getElementById('parJour').textContent = euros(reste / 30.4);
+
+    var taux = revenus > 0 ? (reste / revenus) * 100 : 0;
+    document.getElementById('tauxEpargne').textContent = Math.round(taux) + ' %';
+    document.getElementById('tauxEpargne').className = 'detail-n ' + (taux < 10 ? 'alerte' : 'or');
+
+    var partCharges = revenus > 0 ? Math.min(100, (charges / revenus) * 100) : 0;
+    var partReste = Math.max(0, 100 - partCharges);
+    document.getElementById('bBesoins').style.width = partCharges + '%';
+    document.getElementById('bReste').style.width = partReste + '%';
+    document.getElementById('vBesoins').textContent = Math.round(partCharges) + ' %';
+    document.getElementById('vReste').textContent = Math.round(partReste) + ' %';
+
+    var texte;
+    if(revenus <= 0){
+      texte = 'Renseigne d\'abord ce qui entre chaque mois.';
+    } else if(reste < 0){
+      texte = '<strong>Tes charges fixes dépassent tes revenus de ' + euros(-reste) + ' par mois.</strong> Aucun placement ne règle ça : la seule voie est de réduire une charge fixe ou d\'augmenter les revenus. Ce n\'est pas une question de discipline, c\'est une question d\'arithmétique.';
+    } else if(taux < 10){
+      texte = 'Tes charges fixes absorbent <strong>' + Math.round(partCharges) + ' %</strong> de ce qui entre. C\'est beaucoup, et ça laisse peu de marge en cas d\'imprévu. Avant de penser à investir, la piste la plus rentable est de faire baisser une charge fixe : c\'est un gain qui se répète chaque mois, sans risque et sans effort renouvelé.';
+    } else if(taux < 25){
+      texte = 'Il te reste <strong>' + euros(reste) + ' par mois</strong>, soit ' + Math.round(taux) + ' % de tes revenus. C\'est une marge de manœuvre réelle. La question n\'est plus de savoir si tu peux mettre de côté, mais combien tu décides d\'automatiser le 2 du mois.';
+    } else {
+      texte = 'Il te reste <strong>' + euros(reste) + ' par mois</strong>, soit ' + Math.round(taux) + ' % de tes revenus, ce qui est confortable. Le risque, à ce niveau, n\'est pas de manquer : c\'est de laisser dormir cette somme sur un compte courant, où elle perd de la valeur chaque année.';
+    }
+    document.getElementById('lecture').innerHTML = texte;
+  }
+
+  champs.forEach(function(id){
+    var el = document.getElementById(id);
+    el.addEventListener('input', calculer);
+  });
+  calculer();
+})();
+</script>
+
+  <div class="refrain">NiouDem.</div>
+</div>
+
+<footer>
+  <div class="ft">
+    <div class="ft-haut">
+      <div class="ft-brand">
+        <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="ft-name">Niou<em>Dem</em></span>
+      </div>
+      <div class="ft-links">
+        <a href="index.html">Accueil</a>
+        <a href="outils.html">Outils gratuits</a>
+        <a href="index.html#formations">Formations</a>
+        <a href="accompagnement.html">Accompagnement</a>
+        <a href="qui-sommes-nous.html">Qui nous sommes</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+      </div>
+    </div>
+    <p class="ft-mentions">NiouDem est un site de formation en éducation financière. Il ne fournit ni conseil en investissement personnalisé, ni service de gestion, ni intermédiation en produits financiers. Investir comporte un risque de perte en capital.</p>
+    <div class="ft-copy">© 2025 NiouDem · Méthode Petites Actions</div>
+  </div>
+</footer>
+
+<script src="retours.js" defer></script>
+</body>
+</html>

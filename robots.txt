@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin.html
+Disallow: /admin-retours.html
+Disallow: /carnet.html
+Disallow: /succes.html
+Disallow: /nouveau-mot-de-passe.html
+
+Sitemap: https://nioudem.com/sitemap.xml

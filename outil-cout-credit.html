@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculer le coût réel d'un crédit · Outil gratuit · NiouDem</title>
+<meta name="description" content="Combien te coûte vraiment ce crédit ? Mensualité, intérêts totaux et prix réel de l'achat, calculés en une minute. Gratuit, sans inscription.">
+<link rel="canonical" href="https://nioudem.com/outil-cout-credit.html">
+<meta property="og:title" content="Calculer le coût réel d'un crédit · Outil gratuit · NiouDem">
+<meta property="og:description" content="Combien te coûte vraiment ce crédit ? Mensualité, intérêts totaux et prix réel de l'achat, calculés en une minute. Gratuit, sans inscription.">
+<meta property="og:url" content="https://nioudem.com/outil-cout-credit.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NiouDem">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="outils.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur du coût réel d'un crédit","url":"https://nioudem.com/outil-cout-credit.html","applicationCategory":"FinanceApplication","operatingSystem":"Tout navigateur","description":"Combien te coûte vraiment ce crédit ? Mensualité, intérêts totaux et prix réel de l'achat, calculés en une minute. Gratuit, sans inscription.","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"publisher":{"@type":"Organization","name":"NiouDem","url":"https://nioudem.com"}}</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="nav-name">Niou<em>Dem</em></span>
+    </a>
+    <div class="nav-right">
+      <a href="outils.html" class="nav-lien">Tous les outils</a>
+      <a href="index.html#formations" class="nav-lien">Formations</a>
+      <a href="inscription.html" class="nav-cta">Commencer</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap etroit">
+  <div class="eyebrow">Outil gratuit</div>
+  <h1>Ce crédit te coûte combien, en vrai ?</h1>
+  <p class="lede">Un vendeur parle en mensualités, parce qu'une mensualité paraît toujours petite. Le seul chiffre qui compte est ailleurs : le prix total que tu auras payé à la fin. Voici comment le connaître avant de signer.</p>
+
+  <div class="bloc">
+    <div class="calc">
+      <div class="calc-champs">
+        <div class="champ">
+          <label for="montant">Montant emprunté
+            <span class="aide">Le prix du bien, moins l'apport que tu verses au départ.</span>
+          </label>
+          <div class="champ-saisie">
+            <input type="number" id="montant" min="0" step="100" value="12000" inputmode="decimal">
+            <span class="unite">€</span>
+          </div>
+        </div>
+
+        <div class="deux">
+          <div class="champ">
+            <label for="taux">Taux annuel (TAEG)
+              <span class="aide">Il figure obligatoirement sur l'offre. C'est lui qu'il faut regarder, pas le taux nominal.</span>
+            </label>
+            <div class="champ-saisie">
+              <input type="number" id="taux" min="0" max="30" step="0.1" value="6.5" inputmode="decimal">
+              <span class="unite">% / an</span>
+            </div>
+          </div>
+          <div class="champ">
+            <label for="duree">Durée
+              <span class="aide">En mois. Soixante mois valent cinq ans.</span>
+            </label>
+            <div class="champ-saisie">
+              <input type="number" id="duree" min="1" max="360" step="1" value="60" inputmode="numeric">
+              <span class="unite">mois</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="champ">
+          <label for="assurance">Assurance emprunteur, si elle est prise
+            <span class="aide">Souvent facultative pour un crédit à la consommation. Laisse zéro si tu n'en as pas.</span>
+          </label>
+          <div class="champ-saisie">
+            <input type="number" id="assurance" min="0" step="1" value="0" inputmode="decimal">
+            <span class="unite">€ / mois</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="resultat">
+        <div class="titre">Le vrai prix</div>
+        <div class="chiffre" id="total">…</div>
+        <div class="chiffre-sous" id="totalSous">Ce que tu auras déboursé au terme du crédit.</div>
+
+        <div class="detail">
+          <div class="detail-case"><div class="detail-n" id="mensualite">…</div><div class="detail-l">Par mois</div></div>
+          <div class="detail-case"><div class="detail-n alerte" id="interets">…</div><div class="detail-l">Coût du crédit</div></div>
+          <div class="detail-case"><div class="detail-n or" id="surcout">…</div><div class="detail-l">Surcoût</div></div>
+        </div>
+
+        <div class="barres">
+          <div class="barre-ligne">
+            <span class="barre-nom">Ce que tu empruntes</span>
+            <span class="barre-piste"><span class="barre-jauge" id="bCapital" style="width:0%"></span></span>
+            <span class="barre-val" id="vCapital">…</span>
+          </div>
+          <div class="barre-ligne">
+            <span class="barre-nom">Ce que ça coûte</span>
+            <span class="barre-piste"><span class="barre-jauge alerte" id="bInterets" style="width:0%"></span></span>
+            <span class="barre-val" id="vInterets">…</span>
+          </div>
+        </div>
+
+        <div class="lecture" id="lecture"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <div class="action">
+      <h3>La petite action, ce soir</h3>
+      <p>Reprends le calcul en réduisant la durée de douze mois, sans rien changer d'autre. Regarde ce qui arrive au coût du crédit. <strong>Allonger la durée fait baisser la mensualité et monter la facture</strong> : c'est exactement ce qu'on te proposera si tu dis que c'est trop cher.</p>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <h2>Comment lire ce résultat</h2>
+    <p>La mensualité affichée est calculée avec la formule d'amortissement constant utilisée par tous les établissements. Elle suppose un taux fixe et des échéances régulières, ce qui est le cas de la grande majorité des crédits à la consommation.</p>
+    <p>Le TAEG, taux annuel effectif global, est celui qui inclut les frais de dossier et les garanties obligatoires. C'est le seul comparable d'un organisme à l'autre, et la loi impose de l'afficher. Quand une publicité met en avant un taux plus bas, c'est en général le taux nominal, qui ne veut pas dire grand-chose.</p>
+    <p>Le surcoût exprime les intérêts en pourcentage du montant emprunté. Il permet de répondre à une question simple : est-ce que ce que j'achète vaut le prix affiché, plus ce pourcentage en plus ?</p>
+  </div>
+
+  <div class="bloc">
+    <h2>Questions fréquentes</h2>
+    <div class="questions">
+      <div class="question">
+        <h3>Pourquoi ma banque annonce-t-elle un chiffre différent ?</h3>
+        <p>Les écarts viennent presque toujours des frais de dossier, de l'assurance, ou d'une première échéance décalée. Ce calcul donne l'ordre de grandeur exact du crédit lui-même. Pour comparer deux offres, fie-toi au TAEG et au coût total, jamais à la mensualité seule.</p>
+      </div>
+      <div class="question">
+        <h3>Un crédit est-il toujours une mauvaise idée ?</h3>
+        <p>Non. Il permet d'acquérir un bien durable dont on a besoin maintenant, et l'immobilier repose entièrement dessus. La question n'est pas d'être pour ou contre, mais de savoir ce qu'il coûte et si ce coût est justifié par ce qu'on achète.</p>
+      </div>
+      <div class="question">
+        <h3>Puis-je rembourser par anticipation ?</h3>
+        <p>Oui, c'est un droit. Pour un crédit à la consommation, des indemnités peuvent s'appliquer au-delà d'un certain montant remboursé par anticipation, et elles sont plafonnées par la loi. Elles sont souvent bien inférieures aux intérêts économisés.</p>
+      </div>
+      <div class="question">
+        <h3>Cet outil enregistre-t-il mes chiffres ?</h3>
+        <p>Non. Tout est calculé dans ton navigateur, rien n'est envoyé ni conservé.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <div class="cadre">
+      <h3>Ce que cet outil n'est pas</h3>
+      <p>C'est un calculateur pédagogique. Il applique une formule à des chiffres que tu saisis, rien de plus. Il ne constitue ni un conseil en investissement, ni une recommandation personnalisée, et NiouDem ne vend aucun produit financier. Le résultat dépend entièrement de la justesse de ce que tu entres.</p>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <h2>Aller plus loin</h2>
+    <p style="margin-bottom:22px;">Comprendre le coût d'un crédit, c'est le début. La formation « Maîtriser son budget » explique comment éviter d'en avoir besoin, et « Investir dans la pierre » traite du seul crédit qui construit quelque chose.</p>
+    <div class="duo">
+      <a href="budget.html" class="btn-primary">Voir la formation budget</a>
+      <a href="outils.html" class="btn-ghost">Les autres outils</a>
+    </div>
+  </div>
+
+<script>
+(function(){
+  function val(id, defaut){
+    var v = parseFloat(document.getElementById(id).value);
+    return Number.isFinite(v) && v >= 0 ? v : (defaut || 0);
+  }
+  function euros(n){ return Math.round(n).toLocaleString('fr-FR') + ' €'; }
+
+  /* Mensualite d'un pret amortissable a taux fixe.
+     m = C x i / (1 - (1+i)^-n), avec i le taux mensuel.
+     Le cas i = 0 doit etre traite a part, sinon division par zero. */
+  function mensualite(capital, tauxAnnuel, mois){
+    if(mois <= 0) return 0;
+    var i = tauxAnnuel / 100 / 12;
+    if(i === 0) return capital / mois;
+    return capital * i / (1 - Math.pow(1 + i, -mois));
+  }
+
+  function calculer(){
+    var capital = val('montant');
+    var taux = val('taux');
+    var mois = Math.max(1, Math.round(val('duree', 1)));
+    var assurance = val('assurance');
+
+    var m = mensualite(capital, taux, mois);
+    var mTotale = m + assurance;
+    var total = mTotale * mois;
+    var cout = total - capital;
+    var surcout = capital > 0 ? (cout / capital) * 100 : 0;
+
+    document.getElementById('total').textContent = euros(total);
+    document.getElementById('mensualite').textContent = euros(mTotale);
+    document.getElementById('interets').textContent = euros(cout);
+    document.getElementById('surcout').textContent = Math.round(surcout) + ' %';
+    document.getElementById('totalSous').textContent =
+      'Pour ' + euros(capital) + ' empruntés sur ' + mois + ' mois.';
+
+    var base = capital + Math.max(cout, 0);
+    document.getElementById('bCapital').style.width = (base > 0 ? capital / base * 100 : 0) + '%';
+    document.getElementById('bInterets').style.width = (base > 0 ? Math.max(cout,0) / base * 100 : 0) + '%';
+    document.getElementById('vCapital').textContent = euros(capital);
+    document.getElementById('vInterets').textContent = euros(cout);
+
+    var texte;
+    if(capital <= 0){
+      texte = 'Renseigne le montant que tu comptes emprunter.';
+    } else if(surcout < 5){
+      texte = 'Le crédit te coûte <strong>' + euros(cout) + '</strong>, soit ' + Math.round(surcout) + ' % du montant emprunté. C\'est faible, souvent le signe d\'un taux promotionnel ou d\'une durée courte. Vérifie qu\'aucun frais de dossier ne vient s\'ajouter en dehors du TAEG.';
+    } else if(surcout < 20){
+      texte = 'Le crédit te coûte <strong>' + euros(cout) + '</strong>, soit ' + Math.round(surcout) + ' % de plus que le prix affiché. Autrement dit, ce que tu achètes ne vaut pas ' + euros(capital) + ' pour toi, mais ' + euros(total) + '. C\'est ce chiffre-là qu\'il faut comparer à ce que le bien t\'apporte.';
+    } else {
+      texte = 'Le crédit te coûte <strong>' + euros(cout) + '</strong>, soit ' + Math.round(surcout) + ' % du montant emprunté. Tu rembourseras donc ' + euros(total) + ' pour ' + euros(capital) + ' reçus. À ce niveau, deux réflexes valent la peine : comparer au moins trois offres de TAEG, et te demander si attendre quelques mois pour payer comptant reste possible.';
+    }
+    document.getElementById('lecture').innerHTML = texte;
+  }
+
+  ['montant','taux','duree','assurance'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', calculer);
+  });
+  calculer();
+})();
+</script>
+
+  <div class="refrain">NiouDem.</div>
+</div>
+
+<footer>
+  <div class="ft">
+    <div class="ft-haut">
+      <div class="ft-brand">
+        <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="ft-name">Niou<em>Dem</em></span>
+      </div>
+      <div class="ft-links">
+        <a href="index.html">Accueil</a>
+        <a href="outils.html">Outils gratuits</a>
+        <a href="index.html#formations">Formations</a>
+        <a href="accompagnement.html">Accompagnement</a>
+        <a href="qui-sommes-nous.html">Qui nous sommes</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+      </div>
+    </div>
+    <p class="ft-mentions">NiouDem est un site de formation en éducation financière. Il ne fournit ni conseil en investissement personnalisé, ni service de gestion, ni intermédiation en produits financiers. Investir comporte un risque de perte en capital.</p>
+    <div class="ft-copy">© 2025 NiouDem · Méthode Petites Actions</div>
+  </div>
+</footer>
+
+<script src="retours.js" defer></script>
+</body>
+</html>

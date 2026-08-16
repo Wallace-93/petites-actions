@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Combien ton épargne perd-elle chaque année ? · Outil gratuit · NiouDem</title>
+<meta name="description" content="Ton livret rapporte moins que l'inflation ? Calcule ce que ton épargne perd réellement en pouvoir d'achat, année après année. Gratuit, sans inscription.">
+<link rel="canonical" href="https://nioudem.com/outil-inflation-epargne.html">
+<meta property="og:title" content="Combien ton épargne perd-elle chaque année ? · Outil gratuit · NiouDem">
+<meta property="og:description" content="Ton livret rapporte moins que l'inflation ? Calcule ce que ton épargne perd réellement en pouvoir d'achat, année après année. Gratuit, sans inscription.">
+<meta property="og:url" content="https://nioudem.com/outil-inflation-epargne.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NiouDem">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="outils.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de perte de pouvoir d'achat","url":"https://nioudem.com/outil-inflation-epargne.html","applicationCategory":"FinanceApplication","operatingSystem":"Tout navigateur","description":"Ton livret rapporte moins que l'inflation ? Calcule ce que ton épargne perd réellement en pouvoir d'achat, année après année. Gratuit, sans inscription.","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"publisher":{"@type":"Organization","name":"NiouDem","url":"https://nioudem.com"}}</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="nav-name">Niou<em>Dem</em></span>
+    </a>
+    <div class="nav-right">
+      <a href="outils.html" class="nav-lien">Tous les outils</a>
+      <a href="index.html#formations" class="nav-lien">Formations</a>
+      <a href="inscription.html" class="nav-cta">Commencer</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap etroit">
+  <div class="eyebrow">Outil gratuit</div>
+  <h1>Ton épargne perd de la valeur pendant que tu dors.</h1>
+  <p class="lede">Un livret qui rapporte 2 % quand les prix montent de 3 % ne te fait pas gagner 2 %. Il te fait perdre 1 %. C'est le calcul que personne ne fait, et c'est celui qui explique pourquoi une somme mise de côté achète moins d'année en année.</p>
+
+  <div class="bloc">
+    <div class="calc">
+      <div class="calc-champs">
+        <div class="champ">
+          <label for="somme">Ce que tu as mis de côté
+            <span class="aide">Livret A, LDDS, compte courant, épargne de précaution. Tout ce qui dort.</span>
+          </label>
+          <div class="champ-saisie">
+            <input type="number" id="somme" min="0" step="500" value="10000" inputmode="decimal">
+            <span class="unite">€</span>
+          </div>
+        </div>
+
+        <div class="deux">
+          <div class="champ">
+            <label for="rendement">Ce que ça te rapporte
+              <span class="aide">Le taux de ton livret. Zéro pour un compte courant.</span>
+            </label>
+            <div class="champ-saisie">
+              <input type="number" id="rendement" min="0" max="20" step="0.05" value="1.7" inputmode="decimal">
+              <span class="unite">% / an</span>
+            </div>
+          </div>
+          <div class="champ">
+            <label for="inflation">Hausse des prix
+              <span class="aide">L'inflation constatée. Cherche « inflation France INSEE » pour le chiffre du moment.</span>
+            </label>
+            <div class="champ-saisie">
+              <input type="number" id="inflation" min="0" max="30" step="0.1" value="2" inputmode="decimal">
+              <span class="unite">% / an</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="champ">
+          <label for="annees">Sur combien d'années
+            <span class="aide">La durée pendant laquelle cette somme reste où elle est.</span>
+          </label>
+          <div class="champ-saisie">
+            <input type="number" id="annees" min="1" max="50" step="1" value="10" inputmode="numeric">
+            <span class="unite">ans</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="resultat">
+        <div class="titre">Ce que ta somme achètera vraiment</div>
+        <div class="chiffre" id="pouvoir">…</div>
+        <div class="chiffre-sous" id="pouvoirSous">En pouvoir d'achat d'aujourd'hui.</div>
+
+        <div class="detail">
+          <div class="detail-case"><div class="detail-n" id="nominal">…</div><div class="detail-l">Ce que dira le relevé</div></div>
+          <div class="detail-case"><div class="detail-n alerte" id="perte">…</div><div class="detail-l">Valeur évaporée</div></div>
+          <div class="detail-case"><div class="detail-n or" id="tauxReel">…</div><div class="detail-l">Taux réel</div></div>
+        </div>
+
+        <div class="barres">
+          <div class="barre-ligne">
+            <span class="barre-nom">Aujourd'hui</span>
+            <span class="barre-piste"><span class="barre-jauge" style="width:100%"></span></span>
+            <span class="barre-val" id="vDepart">…</span>
+          </div>
+          <div class="barre-ligne">
+            <span class="barre-nom">Dans <span id="labelAnnees">10</span> ans</span>
+            <span class="barre-piste"><span class="barre-jauge or" id="bFin" style="width:0%"></span></span>
+            <span class="barre-val" id="vFin">…</span>
+          </div>
+        </div>
+
+        <div class="lecture" id="lecture"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <div class="action">
+      <h3>La petite action, ce soir</h3>
+      <p>Ouvre ton application bancaire et note le taux exact de ton livret. Puis cherche le dernier chiffre d'inflation publié par l'INSEE et fais la soustraction. <strong>Le résultat est ton taux réel</strong>, et c'est le seul qui dise si ton épargne progresse ou recule.</p>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <h2>Comment lire ce résultat</h2>
+    <p>Deux chiffres se répondent. Le premier, celui du relevé bancaire, monte toujours : les intérêts s'ajoutent. Le second, le pouvoir d'achat, dit ce que cette somme permettra réellement d'acheter, et il peut baisser en même temps que le premier monte. C'est cette contradiction qui rend l'inflation difficile à voir.</p>
+    <p>Le taux réel se calcule précisément ainsi : on divise un plus le rendement par un plus l'inflation. La soustraction simple donne un résultat très proche pour de petites valeurs, et c'est celle qu'on retient dans la vie courante.</p>
+    <p>Un taux réel négatif ne veut pas dire qu'il faut cesser d'épargner. L'épargne de précaution, celle qui couvre trois à six mois de charges, doit rester disponible et sans risque, même si elle perd un peu de valeur. La question se pose pour ce qui dort au-delà.</p>
+  </div>
+
+  <div class="bloc">
+    <h2>Questions fréquentes</h2>
+    <div class="questions">
+      <div class="question">
+        <h3>Faut-il retirer son argent du livret A ?</h3>
+        <p>Pas celui qui constitue ton matelas de sécurité : sa disponibilité immédiate vaut plus que son rendement. Ce calcul concerne surtout les sommes qui dorment sans objectif depuis des années, et qui pourraient être placées sur un horizon plus long.</p>
+      </div>
+      <div class="question">
+        <h3>Quel taux d'inflation faut-il mettre ?</h3>
+        <p>Celui publié par l'INSEE pour la France est le repère commun. Sur longue période, la moyenne se situe autour de 2 % par an, mais elle a dépassé 5 % en 2022 et 2023. Tester deux hypothèses, une basse et une haute, donne une idée plus honnête qu'un chiffre unique.</p>
+      </div>
+      <div class="question">
+        <h3>Placer permet-il d'échapper à l'inflation ?</h3>
+        <p>Certains actifs ont historiquement progressé plus vite que les prix, mais aucun ne le garantit, et tous comportent un risque de perte en capital. Personne ne peut promettre un rendement, et quiconque le fait vend autre chose que de l'information.</p>
+      </div>
+      <div class="question">
+        <h3>Cet outil enregistre-t-il mes chiffres ?</h3>
+        <p>Non. Tout est calculé dans ton navigateur, rien n'est envoyé ni conservé.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <div class="cadre">
+      <h3>Ce que cet outil n'est pas</h3>
+      <p>C'est un calculateur pédagogique. Il applique une formule à des chiffres que tu saisis, rien de plus. Il ne constitue ni un conseil en investissement, ni une recommandation personnalisée, et NiouDem ne vend aucun produit financier. Le résultat dépend entièrement de la justesse de ce que tu entres.</p>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <h2>Aller plus loin</h2>
+    <p style="margin-bottom:22px;">C'est le sujet de la toute première formation, « Comprendre la monnaie », gratuite et ouverte à tous. Elle explique d'où vient l'inflation et pourquoi elle ne se remarque presque jamais quand on la vit.</p>
+    <div class="duo">
+      <a href="monnaie.html" class="btn-primary">Voir la formation</a>
+      <a href="outils.html" class="btn-ghost">Les autres outils</a>
+    </div>
+  </div>
+
+<script>
+(function(){
+  function val(id, defaut){
+    var v = parseFloat(document.getElementById(id).value);
+    return Number.isFinite(v) && v >= 0 ? v : (defaut || 0);
+  }
+  function euros(n){ return Math.round(n).toLocaleString('fr-FR') + ' €'; }
+
+  function calculer(){
+    var somme = val('somme');
+    var r = val('rendement') / 100;
+    var infl = val('inflation') / 100;
+    var n = Math.max(1, Math.round(val('annees', 1)));
+
+    /* Le relevé bancaire capitalise les intérêts.
+       Le pouvoir d'achat, lui, se déflate par l'inflation. */
+    var nominal = somme * Math.pow(1 + r, n);
+    var pouvoir = nominal / Math.pow(1 + infl, n);
+    var perte = somme - pouvoir;
+    var tauxReel = ((1 + r) / (1 + infl) - 1) * 100;
+
+    document.getElementById('pouvoir').textContent = euros(pouvoir);
+    document.getElementById('nominal').textContent = euros(nominal);
+    document.getElementById('perte').textContent = (perte >= 0 ? '- ' : '+ ') + euros(Math.abs(perte));
+    document.getElementById('tauxReel').textContent = (tauxReel >= 0 ? '+' : '') + tauxReel.toFixed(2) + ' %';
+    document.getElementById('tauxReel').className = 'detail-n ' + (tauxReel < 0 ? 'alerte' : 'or');
+    document.getElementById('pouvoirSous').textContent =
+      'Ce que tes ' + euros(somme) + ' permettront d\'acheter dans ' + n + ' an' + (n > 1 ? 's' : '') + '.';
+
+    document.getElementById('labelAnnees').textContent = n;
+    document.getElementById('vDepart').textContent = euros(somme);
+    document.getElementById('vFin').textContent = euros(pouvoir);
+    document.getElementById('bFin').style.width = (somme > 0 ? Math.min(140, pouvoir / somme * 100) : 0) + '%';
+
+    var texte;
+    if(somme <= 0){
+      texte = 'Renseigne la somme qui dort actuellement.';
+    } else if(tauxReel < -0.05){
+      texte = 'Ton taux réel est de <strong>' + tauxReel.toFixed(2) + ' %</strong> par an. Dans ' + n + ' an' + (n > 1 ? 's' : '') + ', ton relevé affichera ' + euros(nominal) + ', mais cette somme n\'achètera que l\'équivalent de <strong>' + euros(pouvoir) + '</strong> d\'aujourd\'hui. La différence, ' + euros(perte) + ', ne part nulle part : elle s\'évapore sans que rien ne le signale.';
+    } else if(tauxReel < 0.05){
+      texte = 'Ton taux réel est proche de zéro : ton épargne conserve à peu près sa valeur, sans en gagner. C\'est exactement le rôle d\'une épargne de précaution, et c\'est très bien pour elle. La question se pose pour ce qui dort au-delà de trois à six mois de charges.';
+    } else {
+      texte = 'Ton taux réel est de <strong>+' + tauxReel.toFixed(2) + ' %</strong> par an : ton épargne progresse plus vite que les prix. C\'est rare sur un livret réglementé, alors vérifie que le rendement saisi est bien net et durable, et non une promotion des premiers mois.';
+    }
+    document.getElementById('lecture').innerHTML = texte;
+  }
+
+  ['somme','rendement','inflation','annees'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', calculer);
+  });
+  calculer();
+})();
+</script>
+
+  <div class="refrain">NiouDem.</div>
+</div>
+
+<footer>
+  <div class="ft">
+    <div class="ft-haut">
+      <div class="ft-brand">
+        <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="ft-name">Niou<em>Dem</em></span>
+      </div>
+      <div class="ft-links">
+        <a href="index.html">Accueil</a>
+        <a href="outils.html">Outils gratuits</a>
+        <a href="index.html#formations">Formations</a>
+        <a href="accompagnement.html">Accompagnement</a>
+        <a href="qui-sommes-nous.html">Qui nous sommes</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+      </div>
+    </div>
+    <p class="ft-mentions">NiouDem est un site de formation en éducation financière. Il ne fournit ni conseil en investissement personnalisé, ni service de gestion, ni intermédiation en produits financiers. Investir comporte un risque de perte en capital.</p>
+    <div class="ft-copy">© 2025 NiouDem · Méthode Petites Actions</div>
+  </div>
+</footer>
+
+<script src="retours.js" defer></script>
+</body>
+</html>
