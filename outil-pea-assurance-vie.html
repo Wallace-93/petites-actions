@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PEA ou assurance-vie : le comparateur · Outil gratuit · NiouDem</title>
+<meta name="description" content="PEA ou assurance-vie ? Compare ce qu'il te reste vraiment après frais et impôts, selon ta durée de placement. Gratuit, sans inscription.">
+<link rel="canonical" href="https://nioudem.com/outil-pea-assurance-vie.html">
+<meta property="og:title" content="PEA ou assurance-vie : le comparateur · Outil gratuit · NiouDem">
+<meta property="og:description" content="PEA ou assurance-vie ? Compare ce qu'il te reste vraiment après frais et impôts, selon ta durée de placement. Gratuit, sans inscription.">
+<meta property="og:url" content="https://nioudem.com/outil-pea-assurance-vie.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NiouDem">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="outils.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Comparateur PEA et assurance-vie","url":"https://nioudem.com/outil-pea-assurance-vie.html","applicationCategory":"FinanceApplication","operatingSystem":"Tout navigateur","description":"PEA ou assurance-vie ? Compare ce qu'il te reste vraiment après frais et impôts, selon ta durée de placement. Gratuit, sans inscription.","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"publisher":{"@type":"Organization","name":"NiouDem","url":"https://nioudem.com"}}</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="nav-name">Niou<em>Dem</em></span>
+    </a>
+    <div class="nav-right">
+      <a href="outils.html" class="nav-lien">Tous les outils</a>
+      <a href="index.html#formations" class="nav-lien">Formations</a>
+      <a href="inscription.html" class="nav-cta">Commencer</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap etroit">
+  <div class="eyebrow">Outil gratuit</div>
+  <h1>PEA ou assurance-vie : lequel te laisse le plus ?</h1>
+  <p class="lede">Les deux sont des enveloppes, c'est-à-dire des contenants avec leurs propres règles fiscales. La question n'est jamais « lequel rapporte le plus » mais « lequel me laisse le plus une fois les frais prélevés et l'impôt payé ». Deux chiffres suffisent à s'en faire une idée.</p>
+
+  <div class="bloc">
+    <div class="calc">
+      <div class="calc-champs">
+        <div class="deux">
+          <div class="champ">
+            <label for="initial">Versement de départ
+              <span class="aide">Ce que tu places au moment de l'ouverture.</span>
+            </label>
+            <div class="champ-saisie">
+              <input type="number" id="initial" min="0" step="500" value="5000" inputmode="decimal">
+              <span class="unite">€</span>
+            </div>
+          </div>
+          <div class="champ">
+            <label for="mensuel">Versement mensuel
+              <span class="aide">Zéro si tu ne comptes rien ajouter ensuite.</span>
+            </label>
+            <div class="champ-saisie">
+              <input type="number" id="mensuel" min="0" step="10" value="150" inputmode="decimal">
+              <span class="unite">€</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="deux">
+          <div class="champ">
+            <label for="annees">Durée avant retrait
+              <span class="aide">Déterminante : la fiscalité des deux enveloppes change avec le temps.</span>
+            </label>
+            <div class="champ-saisie">
+              <input type="number" id="annees" min="1" max="40" step="1" value="10" inputmode="numeric">
+              <span class="unite">ans</span>
+            </div>
+          </div>
+          <div class="champ">
+            <label for="rendement">Hypothèse de rendement brut
+              <span class="aide">Identique dans les deux enveloppes, pour ne comparer que frais et fiscalité.</span>
+            </label>
+            <div class="champ-saisie">
+              <input type="number" id="rendement" min="0" max="20" step="0.5" value="6" inputmode="decimal">
+              <span class="unite">% / an</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="deux">
+          <div class="champ">
+            <label for="fraisPea">Frais annuels du PEA
+              <span class="aide">Frais de courtage et frais internes des fonds. Autour de 0,3 % chez un courtier en ligne.</span>
+            </label>
+            <div class="champ-saisie">
+              <input type="number" id="fraisPea" min="0" max="5" step="0.05" value="0.3" inputmode="decimal">
+              <span class="unite">% / an</span>
+            </div>
+          </div>
+          <div class="champ">
+            <label for="fraisAv">Frais annuels de l'assurance-vie
+              <span class="aide">Frais de gestion sur unités de compte. De 0,5 % en ligne à plus de 1 % en agence.</span>
+            </label>
+            <div class="champ-saisie">
+              <input type="number" id="fraisAv" min="0" max="5" step="0.05" value="0.8" inputmode="decimal">
+              <span class="unite">% / an</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="champ">
+          <label for="fraisVersement">Frais sur versement de l'assurance-vie
+            <span class="aide">Zéro chez un courtier en ligne, jusqu'à 3 % ou plus en agence. C'est le poste le plus négociable.</span>
+          </label>
+          <div class="champ-saisie">
+            <input type="number" id="fraisVersement" min="0" max="6" step="0.1" value="0" inputmode="decimal">
+            <span class="unite">% par versement</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="resultat">
+        <div class="titre">Ce qu'il te reste, net d'impôt</div>
+        <div class="chiffre" id="gagnant">…</div>
+        <div class="chiffre-sous" id="gagnantSous">Comparaison à durée et rendement identiques.</div>
+
+        <div class="detail">
+          <div class="detail-case"><div class="detail-n or" id="netPea">…</div><div class="detail-l">PEA, net</div></div>
+          <div class="detail-case"><div class="detail-n" id="netAv">…</div><div class="detail-l">Assurance-vie, nette</div></div>
+          <div class="detail-case"><div class="detail-n" id="ecart">…</div><div class="detail-l">Écart</div></div>
+        </div>
+
+        <div class="barres">
+          <div class="barre-ligne">
+            <span class="barre-nom">PEA</span>
+            <span class="barre-piste"><span class="barre-jauge or" id="bPea" style="width:0%"></span></span>
+            <span class="barre-val" id="vPea">…</span>
+          </div>
+          <div class="barre-ligne">
+            <span class="barre-nom">Assurance-vie</span>
+            <span class="barre-piste"><span class="barre-jauge" id="bAv" style="width:0%"></span></span>
+            <span class="barre-val" id="vAv">…</span>
+          </div>
+        </div>
+
+        <div class="lecture" id="lecture"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <div class="cadre">
+      <h3>Ce que ce calcul ne dit pas</h3>
+      <p>Il compare deux enveloppes sur un seul critère, ce qui reste après frais et impôt. <strong>Il ignore volontairement plusieurs différences majeures.</strong> Le PEA ne peut contenir que des actions européennes ou des fonds qui les répliquent, il est plafonné à 150 000 € de versements, et tout retrait avant cinq ans entraîne sa fermeture. L'assurance-vie accepte n'importe quel support, autorise les retraits partiels à tout moment, donne accès au fonds en euros, et offre un cadre successoral avantageux que ce calcul ne chiffre pas du tout.</p>
+      <p><strong>Une précision sur le fonds en euros,</strong> puisqu'il est souvent présenté comme un placement sans risque. Sa garantie en capital est <strong>contractuelle et portée par l'assureur</strong>, pas par l'État. Ces fonds sont largement investis en obligations, dont des obligations d'État, et depuis 2016 la loi dite Sapin 2 autorise le Haut Conseil de stabilité financière à suspendre temporairement les retraits en cas de menace grave sur le système financier. Son rendement a par ailleurs été inférieur à l'inflation plusieurs années de suite, ce qui signifie une perte de pouvoir d'achat malgré un capital nominal préservé. Ce n'est une raison ni de le choisir, ni de l'éviter : c'est une raison de savoir ce que l'on signe.</p>
+      <p>La fiscalité retenue est celle d'un célibataire, sur des versements inférieurs à 150 000 €. Elle est simplifiée et peut évoluer. Ce n'est ni un conseil, ni une recommandation.</p>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <div class="action">
+      <h3>La petite action, ce soir</h3>
+      <p>Reprends le calcul en passant les frais annuels de l'assurance-vie de 0,8 à 2 %, ce qui reste courant en agence, et mets 3 % de frais sur versement. <strong>Regarde ce que devient l'écart.</strong> C'est la démonstration la plus parlante qui soit : sur longue durée, les frais pèsent souvent plus lourd que la fiscalité, et personne ne les met en avant au moment de la signature.</p>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <h2>Ce qu'il faut retenir des deux fiscalités</h2>
+    <p>Le PEA devient intéressant après cinq ans de détention : les gains ne subissent alors que les prélèvements sociaux, soit 17,2 %. Avant cinq ans, un retrait ferme le plan et les gains sont imposés au prélèvement forfaitaire unique de 30 %.</p>
+    <p>L'assurance-vie devient intéressante après huit ans : un abattement annuel s'applique sur les gains retirés, 4 600 € pour une personne seule et 9 200 € pour un couple, puis les gains restants sont taxés à 7,5 % d'impôt plus 17,2 % de prélèvements sociaux, pour des versements inférieurs à 150 000 €. Avant huit ans, c'est le prélèvement forfaitaire unique de 30 %.</p>
+    <p>Autrement dit, ces deux enveloppes récompensent la durée. C'est leur point commun le plus important, et la raison pour laquelle on les ouvre souvent tôt, quitte à n'y verser que de petites sommes au début : c'est la date d'ouverture qui fait courir le compteur.</p>
+  </div>
+
+  <div class="bloc">
+    <h2>Questions fréquentes</h2>
+    <div class="questions">
+      <div class="question">
+        <h3>Faut-il choisir l'un ou l'autre ?</h3>
+        <p>Beaucoup de gens détiennent les deux, parce qu'ils ne servent pas au même usage. Ce comparateur répond à une question précise, celle du net après impôt à durée égale. Il ne dit pas lequel correspond à ta situation, et c'est volontaire.</p>
+      </div>
+      <div class="question">
+        <h3>Pourquoi ouvrir un PEA même sans argent à y mettre ?</h3>
+        <p>Parce que le délai de cinq ans court à partir de la date d'ouverture, pas du premier versement important. Ouvrir tôt avec une petite somme fait démarrer le compteur, ce qui laisse toute liberté ensuite.</p>
+      </div>
+      <div class="question">
+        <h3>Les frais changent-ils vraiment quelque chose ?</h3>
+        <p>Énormément, et bien plus qu'on ne l'imagine, parce qu'ils se prélèvent chaque année sur un capital qui grossit. Un écart d'un point de frais annuel sur vingt ans ampute couramment le résultat final de quinze à vingt pour cent. Le test proposé plus haut le montre en une manipulation.</p>
+      </div>
+      <div class="question">
+        <h3>Le fonds en euros est-il vraiment sans risque ?</h3>
+        <p>Sans risque de perte nominale, oui, tant que l'assureur honore sa garantie. Mais un capital préservé qui rapporte moins que l'inflation perd du pouvoir d'achat, ce qui est arrivé plusieurs années de suite. Et la loi Sapin 2 permet de suspendre temporairement les retraits en cas de crise. Absence de volatilité ne veut pas dire absence de risque : ce sont deux choses différentes.</p>
+      </div>
+      <div class="question">
+        <h3>Cet outil enregistre-t-il mes chiffres ?</h3>
+        <p>Non. Tout est calculé dans ton navigateur, rien n'est envoyé ni conservé.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <div class="cadre">
+      <h3>Ce que cet outil n'est pas</h3>
+      <p>C'est un calculateur pédagogique. Il applique une formule à des chiffres que tu saisis, rien de plus. Il ne constitue ni un conseil en investissement, ni une recommandation personnalisée, et NiouDem ne vend aucun produit financier. Le résultat dépend entièrement de la justesse de ce que tu entres.</p>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <h2>Aller plus loin</h2>
+    <p style="margin-bottom:22px;">La formation « Optimisation fiscale » détaille ces enveloppes et leurs plafonds, et « Premiers pas en bourse » explique quoi mettre dedans. Les deux sont gratuites.</p>
+    <div class="duo">
+      <a href="fiscalite.html" class="btn-primary">Voir la formation fiscalité</a>
+      <a href="outils.html" class="btn-ghost">Les autres outils</a>
+    </div>
+  </div>
+
+<script>
+(function(){
+  var PS = 0.172;        /* prelevements sociaux */
+  var PFU = 0.30;        /* prelevement forfaitaire unique */
+  var IR_AV = 0.075;     /* impot sur le revenu, assurance-vie apres 8 ans */
+  var ABATTEMENT = 4600; /* abattement annuel, personne seule */
+
+  function val(id, defaut){
+    var v = parseFloat(document.getElementById(id).value);
+    return Number.isFinite(v) && v >= 0 ? v : (defaut || 0);
+  }
+  function euros(n){ return Math.round(n).toLocaleString('fr-FR') + ' €'; }
+
+  function valeurFinale(initial, mensuel, tauxNet, annees){
+    var m = Math.round(annees * 12);
+    var i = tauxNet / 100 / 12;
+    if(i === 0) return initial + mensuel * m;
+    var f = Math.pow(1 + i, m);
+    return initial * f + mensuel * (f - 1) / i;
+  }
+
+  function calculer(){
+    var initial = val('initial');
+    var mensuel = val('mensuel');
+    var annees = Math.max(1, Math.round(val('annees', 1)));
+    var brut = val('rendement');
+    var fPea = val('fraisPea');
+    var fAv = val('fraisAv');
+    var fVers = val('fraisVersement') / 100;
+
+    /* PEA : les frais annuels rognent le rendement. */
+    var versePea = initial + mensuel * annees * 12;
+    var brutPea = valeurFinale(initial, mensuel, brut - fPea, annees);
+    var gainsPea = Math.max(0, brutPea - versePea);
+    var impotPea = annees >= 5 ? gainsPea * PS : gainsPea * PFU;
+    var netPea = brutPea - impotPea;
+
+    /* Assurance-vie : les frais sur versement amputent chaque euro place. */
+    var verseAv = initial + mensuel * annees * 12;
+    var brutAv = valeurFinale(initial * (1 - fVers), mensuel * (1 - fVers), brut - fAv, annees);
+    var gainsAv = Math.max(0, brutAv - verseAv);
+    var impotAv;
+    if(annees >= 8){
+      var imposable = Math.max(0, gainsAv - ABATTEMENT);
+      impotAv = imposable * IR_AV + gainsAv * PS;
+    } else {
+      impotAv = gainsAv * PFU;
+    }
+    var netAv = brutAv - impotAv;
+
+    var ecart = netPea - netAv;
+    var base = Math.max(netPea, netAv, 1);
+
+    document.getElementById('netPea').textContent = euros(netPea);
+    document.getElementById('netAv').textContent = euros(netAv);
+    document.getElementById('ecart').textContent = euros(Math.abs(ecart));
+    document.getElementById('bPea').style.width = (netPea / base * 100) + '%';
+    document.getElementById('bAv').style.width = (netAv / base * 100) + '%';
+    document.getElementById('vPea').textContent = euros(netPea);
+    document.getElementById('vAv').textContent = euros(netAv);
+
+    var gagnant = Math.abs(ecart) < 1 ? 'Égalité' : (ecart > 0 ? 'PEA' : 'Assurance-vie');
+    document.getElementById('gagnant').textContent = gagnant + (Math.abs(ecart) < 1 ? '' : ', de ' + euros(Math.abs(ecart)));
+    document.getElementById('gagnantSous').textContent =
+      'Sur ' + annees + ' an' + (annees > 1 ? 's' : '') + ', pour ' + euros(versePea) + ' versés au total.';
+
+    var texte = '';
+    if(versePea <= 0){
+      texte = 'Indique un versement de départ ou un versement mensuel.';
+    } else {
+      if(annees < 5){
+        texte = '<strong>Attention à la durée.</strong> Avant cinq ans, un retrait du PEA le ferme définitivement et les gains sont taxés à 30 %. Avant huit ans, l\'assurance-vie subit le même taux. Sur une durée aussi courte, aucune de ces deux enveloppes ne donne le meilleur d\'elle-même : c\'est plutôt le signe qu\'il s\'agit d\'épargne de précaution, qui a sa place ailleurs. ';
+      } else if(annees < 8){
+        texte = '<strong>Entre cinq et huit ans, le PEA est avantagé.</strong> Ses gains ne subissent plus que 17,2 % de prélèvements sociaux, alors que l\'assurance-vie reste à 30 % tant que les huit ans ne sont pas atteints. ';
+      } else {
+        texte = '<strong>Passé huit ans, les deux enveloppes sont matures.</strong> Le PEA reste plus léger fiscalement, mais l\'abattement de 4 600 € de l\'assurance-vie réduit l\'écart, surtout si les gains sont modestes ou retirés progressivement. ';
+      }
+      var totalFrais = brutPea - valeurFinale(initial, mensuel, brut, annees);
+      texte += 'À noter : les seuls frais annuels du PEA t\'auront coûté environ ' + euros(Math.abs(totalFrais)) + ' sur la période, sans qu\'aucune ligne de relevé ne l\'affiche jamais.';
+    }
+    document.getElementById('lecture').innerHTML = texte;
+  }
+
+  ['initial','mensuel','annees','rendement','fraisPea','fraisAv','fraisVersement'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', calculer);
+  });
+  calculer();
+})();
+</script>
+
+  <div class="refrain">NiouDem.</div>
+</div>
+
+<footer>
+  <div class="ft">
+    <div class="ft-haut">
+      <div class="ft-brand">
+        <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="ft-name">Niou<em>Dem</em></span>
+      </div>
+      <div class="ft-links">
+        <a href="index.html">Accueil</a>
+        <a href="outils.html">Outils gratuits</a>
+        <a href="index.html#formations">Formations</a>
+        <a href="accompagnement.html">Accompagnement</a>
+        <a href="qui-sommes-nous.html">Qui nous sommes</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+      </div>
+    </div>
+    <p class="ft-mentions">NiouDem est un site de formation en éducation financière. Il ne fournit ni conseil en investissement personnalisé, ni service de gestion, ni intermédiation en produits financiers. Investir comporte un risque de perte en capital.</p>
+    <div class="ft-copy">© 2025 NiouDem · Méthode Petites Actions</div>
+  </div>
+</footer>
+
+<script src="retours.js" defer></script>
+</body>
+</html>

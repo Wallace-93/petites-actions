@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulateur de versements réguliers · Outil gratuit · NiouDem</title>
+<meta name="description" content="Que devient une petite somme versée chaque mois pendant des années ? Simule l'effet des versements réguliers et des intérêts composés. Gratuit, sans inscription.">
+<link rel="canonical" href="https://nioudem.com/outil-versements-reguliers.html">
+<meta property="og:title" content="Simulateur de versements réguliers · Outil gratuit · NiouDem">
+<meta property="og:description" content="Que devient une petite somme versée chaque mois pendant des années ? Simule l'effet des versements réguliers et des intérêts composés. Gratuit, sans inscription.">
+<meta property="og:url" content="https://nioudem.com/outil-versements-reguliers.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NiouDem">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="outils.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Simulateur de versements réguliers","url":"https://nioudem.com/outil-versements-reguliers.html","applicationCategory":"FinanceApplication","operatingSystem":"Tout navigateur","description":"Que devient une petite somme versée chaque mois pendant des années ? Simule l'effet des versements réguliers et des intérêts composés. Gratuit, sans inscription.","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"publisher":{"@type":"Organization","name":"NiouDem","url":"https://nioudem.com"}}</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="nav-name">Niou<em>Dem</em></span>
+    </a>
+    <div class="nav-right">
+      <a href="outils.html" class="nav-lien">Tous les outils</a>
+      <a href="index.html#formations" class="nav-lien">Formations</a>
+      <a href="inscription.html" class="nav-cta">Commencer</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap etroit">
+  <div class="eyebrow">Outil gratuit</div>
+  <h1>Que devient 100 € par mois, pendant vingt ans ?</h1>
+  <p class="lede">C'est la question qui décide de tout, et presque personne ne fait le calcul. Verser une petite somme régulièrement produit un résultat que l'intuition sous-estime largement, parce que le cerveau humain raisonne en addition quand les intérêts, eux, se multiplient.</p>
+
+  <div class="bloc">
+    <div class="calc">
+      <div class="calc-champs">
+        <div class="deux">
+          <div class="champ">
+            <label for="initial">Ce que tu places au départ
+              <span class="aide">Zéro convient parfaitement. Beaucoup commencent ainsi.</span>
+            </label>
+            <div class="champ-saisie">
+              <input type="number" id="initial" min="0" step="100" value="0" inputmode="decimal">
+              <span class="unite">€</span>
+            </div>
+          </div>
+          <div class="champ">
+            <label for="mensuel">Ce que tu verses chaque mois
+              <span class="aide">Le montant que tu peux tenir sans effort, même un mois difficile.</span>
+            </label>
+            <div class="champ-saisie">
+              <input type="number" id="mensuel" min="0" step="10" value="100" inputmode="decimal">
+              <span class="unite">€</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="deux">
+          <div class="champ">
+            <label for="annees">Pendant combien d'années
+              <span class="aide">C'est la durée qui fait le plus gros du travail, avant même le rendement.</span>
+            </label>
+            <div class="champ-saisie">
+              <input type="number" id="annees" min="1" max="50" step="1" value="20" inputmode="numeric">
+              <span class="unite">ans</span>
+            </div>
+          </div>
+          <div class="champ">
+            <label for="rendement">Hypothèse de rendement annuel
+              <span class="aide">Une hypothèse, pas une promesse. Voir l'avertissement plus bas.</span>
+            </label>
+            <div class="champ-saisie">
+              <input type="number" id="rendement" min="0" max="20" step="0.5" value="5" inputmode="decimal">
+              <span class="unite">% / an</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="resultat">
+        <div class="titre">Au bout du compte</div>
+        <div class="chiffre" id="final">…</div>
+        <div class="chiffre-sous" id="finalSous">Valeur du portefeuille au terme, avant impôts.</div>
+
+        <div class="detail">
+          <div class="detail-case"><div class="detail-n" id="verse">…</div><div class="detail-l">Sorti de ta poche</div></div>
+          <div class="detail-case"><div class="detail-n or" id="gains">…</div><div class="detail-l">Produit par les intérêts</div></div>
+          <div class="detail-case"><div class="detail-n" id="part">…</div><div class="detail-l">Part des intérêts</div></div>
+        </div>
+
+        <div class="barres">
+          <div class="barre-ligne">
+            <span class="barre-nom">Tes versements</span>
+            <span class="barre-piste"><span class="barre-jauge" id="bVerse" style="width:0%"></span></span>
+            <span class="barre-val" id="vVerse">…</span>
+          </div>
+          <div class="barre-ligne">
+            <span class="barre-nom">Les intérêts</span>
+            <span class="barre-piste"><span class="barre-jauge or" id="bGains" style="width:0%"></span></span>
+            <span class="barre-val" id="vGains">…</span>
+          </div>
+        </div>
+
+        <div class="lecture" id="lecture"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <div class="cadre">
+      <h3>Le chiffre ci-dessus n'arrivera pas</h3>
+      <p>Ce calcul suppose un rendement identique chaque année. <strong>Cela ne s'est jamais produit et ne se produira jamais.</strong> Un marché fait des années à plus vingt-cinq pour cent et des années à moins trente-cinq, et l'ordre dans lequel elles arrivent change fortement le résultat final. Ce simulateur montre un mécanisme, celui des intérêts qui produisent des intérêts. Il ne prédit rien, et le résultat réel sera différent, en mieux ou en moins bien.</p>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <div class="action">
+      <h3>La petite action, ce soir</h3>
+      <p>Refais le calcul en gardant tout identique mais en retirant cinq années de durée. Puis refais-le en gardant la durée et en divisant le versement par deux. <strong>Compare l'effet des deux</strong> : dans la plupart des cas, perdre cinq ans coûte plus cher que verser deux fois moins. C'est ce que veut dire l'expression « le temps fait le travail ».</p>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <h2>Comment lire ce résultat</h2>
+    <p>Le calcul applique la formule des versements périodiques capitalisés. Chaque versement produit des intérêts qui produisent eux-mêmes des intérêts, mécanisme qu'on appelle les intérêts composés. Son effet est faible les premières années, puis il devient l'essentiel du résultat.</p>
+    <p>C'est la raison pour laquelle la part des intérêts affichée ci-dessus grimpe avec la durée. Sur cinq ans, presque tout vient de ta poche. Sur trente ans, la majorité vient du temps.</p>
+    <p>Ce que le calcul ne montre pas : les frais, qui rognent le rendement chaque année, la fiscalité au moment du retrait, et surtout les périodes de baisse pendant lesquelles il faut continuer à verser sans rien changer. C'est là que la plupart des gens abandonnent, et c'est précisément ce que la régularité automatique permet d'éviter.</p>
+  </div>
+
+  <div class="bloc">
+    <h2>Questions fréquentes</h2>
+    <div class="questions">
+      <div class="question">
+        <h3>Quel rendement faut-il mettre ?</h3>
+        <p>Il n'y a pas de bonne réponse, seulement des hypothèses. Un livret réglementé tourne autour de deux pour cent. Sur les marchés actions mondiaux, la moyenne historique de long terme se situe entre sept et dix pour cent avant inflation, dividendes réinvestis, mais le passé ne garantit rien. Tester une hypothèse basse et une haute est plus honnête qu'un chiffre unique.</p>
+      </div>
+      <div class="question">
+        <h3>Vaut-il mieux verser tout d'un coup ou petit à petit ?</h3>
+        <p>Statistiquement, placer une somme disponible d'un seul coup donne un résultat légèrement supérieur en moyenne, parce que l'argent travaille plus longtemps. Verser régulièrement lisse en revanche le prix d'achat et rend la chose beaucoup plus facile à tenir quand les marchés baissent. Le meilleur plan est celui qu'on applique encore dans cinq ans.</p>
+      </div>
+      <div class="question">
+        <h3>Et si je dois m'arrêter en cours de route ?</h3>
+        <p>Ce n'est pas un échec, et rien n'est perdu : ce qui a déjà été versé continue de travailler. C'est d'ailleurs pourquoi il vaut mieux commencer avec un montant tenable qu'avec un montant ambitieux abandonné au troisième mois.</p>
+      </div>
+      <div class="question">
+        <h3>Cet outil enregistre-t-il mes chiffres ?</h3>
+        <p>Non. Tout est calculé dans ton navigateur, rien n'est envoyé ni conservé.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <div class="cadre">
+      <h3>Ce que cet outil n'est pas</h3>
+      <p>C'est un calculateur pédagogique. Il applique une formule à des chiffres que tu saisis, rien de plus. Il ne constitue ni un conseil en investissement, ni une recommandation personnalisée, et NiouDem ne vend aucun produit financier. Le résultat dépend entièrement de la justesse de ce que tu entres.</p>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <h2>Aller plus loin</h2>
+    <p style="margin-bottom:22px;">La formation « Premiers pas en bourse » explique où loger ces versements, comment les automatiser, et surtout quoi faire le jour où le portefeuille passe au rouge. Elle est gratuite, comme les sept autres.</p>
+    <div class="duo">
+      <a href="bourse.html" class="btn-primary">Voir la formation</a>
+      <a href="outils.html" class="btn-ghost">Les autres outils</a>
+    </div>
+  </div>
+
+<script>
+(function(){
+  function val(id, defaut){
+    var v = parseFloat(document.getElementById(id).value);
+    return Number.isFinite(v) && v >= 0 ? v : (defaut || 0);
+  }
+  function euros(n){ return Math.round(n).toLocaleString('fr-FR') + ' €'; }
+
+  /* Capitalisation de versements periodiques.
+     VF = C0 x (1+i)^m + V x ((1+i)^m - 1) / i
+     Le cas i = 0 se traite a part : la somme est alors lineaire. */
+  function valeurFinale(initial, mensuel, tauxAnnuel, annees){
+    var m = Math.round(annees * 12);
+    var i = tauxAnnuel / 100 / 12;
+    if(i === 0) return initial + mensuel * m;
+    var facteur = Math.pow(1 + i, m);
+    return initial * facteur + mensuel * (facteur - 1) / i;
+  }
+
+  function calculer(){
+    var initial = val('initial');
+    var mensuel = val('mensuel');
+    var annees = Math.max(1, Math.round(val('annees', 1)));
+    var taux = val('rendement');
+
+    var finale = valeurFinale(initial, mensuel, taux, annees);
+    var verse = initial + mensuel * annees * 12;
+    var gains = finale - verse;
+    var part = finale > 0 ? (gains / finale) * 100 : 0;
+
+    document.getElementById('final').textContent = euros(finale);
+    document.getElementById('verse').textContent = euros(verse);
+    document.getElementById('gains').textContent = euros(gains);
+    document.getElementById('part').textContent = Math.round(part) + ' %';
+    document.getElementById('finalSous').textContent =
+      'Après ' + annees + ' an' + (annees > 1 ? 's' : '') + ', avant frais et impôts.';
+
+    var base = Math.max(finale, 1);
+    document.getElementById('bVerse').style.width = (verse / base * 100) + '%';
+    document.getElementById('bGains').style.width = (Math.max(gains,0) / base * 100) + '%';
+    document.getElementById('vVerse').textContent = euros(verse);
+    document.getElementById('vGains').textContent = euros(gains);
+
+    var texte;
+    if(verse <= 0){
+      texte = 'Indique un versement mensuel ou une somme de départ.';
+    } else if(taux === 0){
+      texte = 'Sans aucun rendement, tu récupères exactement ce que tu as versé, soit <strong>' + euros(verse) + '</strong>. C\'est le point de comparaison utile : tout ce qui dépasse ce chiffre vient du travail de l\'argent, et tout ce qui reste en dessous vient de l\'inflation.';
+    } else {
+      var cinqAns = valeurFinale(initial, mensuel, taux, Math.max(1, annees - 5));
+      var coutRetard = finale - cinqAns;
+      texte = 'Tu aurais sorti <strong>' + euros(verse) + '</strong> de ta poche, et le temps aurait ajouté <strong>' + euros(gains) + '</strong>, soit ' + Math.round(part) + ' % du total. ' +
+        'Autre façon de le lire : commencer cinq ans plus tard, à versement identique, coûterait environ ' + euros(coutRetard) + '. C\'est le prix de l\'attente, et il ne se rattrape pas.';
+    }
+    document.getElementById('lecture').innerHTML = texte;
+  }
+
+  ['initial','mensuel','annees','rendement'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', calculer);
+  });
+  calculer();
+})();
+</script>
+
+  <div class="refrain">NiouDem.</div>
+</div>
+
+<footer>
+  <div class="ft">
+    <div class="ft-haut">
+      <div class="ft-brand">
+        <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="ft-name">Niou<em>Dem</em></span>
+      </div>
+      <div class="ft-links">
+        <a href="index.html">Accueil</a>
+        <a href="outils.html">Outils gratuits</a>
+        <a href="index.html#formations">Formations</a>
+        <a href="accompagnement.html">Accompagnement</a>
+        <a href="qui-sommes-nous.html">Qui nous sommes</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+      </div>
+    </div>
+    <p class="ft-mentions">NiouDem est un site de formation en éducation financière. Il ne fournit ni conseil en investissement personnalisé, ni service de gestion, ni intermédiation en produits financiers. Investir comporte un risque de perte en capital.</p>
+    <div class="ft-copy">© 2025 NiouDem · Méthode Petites Actions</div>
+  </div>
+</footer>
+
+<script src="retours.js" defer></script>
+</body>
+</html>
