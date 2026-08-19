@@ -120,6 +120,16 @@ p{max-width:68ch;}
 .formule .btn-primary,.formule .btn-ghost{margin-top:auto;text-align:center;}
 @media(max-width:860px){.formules{grid-template-columns:1fr;}.formule .promesse{min-height:0;}}
 
+
+/* Bandeau de lancement, a retirer quand les paiements seront ouverts */
+.bandeau-lancement{background:var(--laiton-clair);border:1px solid #E4D2AC;border-radius:12px;
+  padding:22px 26px;margin-bottom:30px;}
+.bandeau-lancement .titre{font-family:var(--display);font-size:18px;font-weight:600;color:#5E4409;margin-bottom:8px;}
+.bandeau-lancement p{font-size:15px;color:#7A5A12;line-height:1.66;max-width:none;}
+.bandeau-lancement strong{color:#5E4409;font-weight:700;}
+.tarif-indicatif{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--encre-3);margin-top:-14px;margin-bottom:18px;}
+
 /* Solidaire */
 .solidaire{background:var(--laiton-clair);border:1px solid #E4D2AC;border-radius:12px;padding:24px 26px;max-width:760px;margin-top:26px;}
 .solidaire h3{margin-bottom:9px;}
@@ -256,15 +266,22 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       <p class="lede">La première te met en route. La seconde t'accompagne jusqu'à ce que ça tienne tout seul, parce que le vrai décrochage n'arrive pas avant la première décision, mais après.</p>
     </div>
 
+    <div class="bandeau-lancement">
+      <div class="titre">Les réservations ouvrent bientôt</div>
+      <p>Soyons clairs sur où nous en sommes : la structure juridique est en cours de création, et le paiement en ligne n'est donc pas encore ouvert. Les tarifs ci-dessous sont ceux qui s'appliqueront à l'ouverture, affichés dès maintenant pour que tu saches à quoi t'attendre.</p>
+      <p style="margin-top:10px;"><strong>L'échange découverte, lui, est déjà possible et gratuit.</strong> Vingt minutes pour regarder où tu en es, sans aucun engagement et sans qu'aucun paiement ne te soit demandé. Si l'accompagnement n'est pas ce dont tu as besoin, on te le dira et on t'indiquera par quelle formation gratuite commencer.</p>
+    </div>
+
     <div class="formules">
       <div class="formule">
         <div class="formule-tag">Formule 1</div>
         <h3>Reprendre la main sur ses comptes</h3>
         <p class="promesse">Savoir enfin où part ton argent, et faire partir l'épargne toute seule.</p>
         <div class="formule-prix">
-          <span class="montant">149 €</span>
+          <span class="montant">150 €</span>
           <span class="unite">deux séances d'une heure trente</span>
         </div>
+        <div class="tarif-indicatif">Tarif à l'ouverture</div>
         <ul>
           <li><strong>Séance 1 :</strong> on regarde tes comptes ensemble et on repère où ça fuit.</li>
           <li><strong>Séance 2 :</strong> on met en place ton système, virement automatique compris.</li>
@@ -272,7 +289,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
           <li>La chasse aux charges fixes : abonnements, frais bancaires, assurances.</li>
           <li>Tes questions écrites pendant les deux semaines qui suivent.</li>
         </ul>
-        <a href="contact.html" class="btn-ghost">Réserver un premier échange</a>
+        <a href="contact.html" class="btn-ghost">Réserver l'échange gratuit</a>
       </div>
 
       <div class="formule">
@@ -280,9 +297,10 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
         <h3>Prendre en main son investissement</h3>
         <p class="promesse">Ne plus jamais être bloqué devant une interface de courtier. Débutants acceptés, et même attendus.</p>
         <div class="formule-prix">
-          <span class="montant">149 €</span>
+          <span class="montant">150 €</span>
           <span class="unite">deux séances d'une heure trente</span>
         </div>
+        <div class="tarif-indicatif">Tarif à l'ouverture</div>
         <ul>
           <li><strong>Séance 1 :</strong> les enveloppes, le choix du courtier, l'ouverture du compte.</li>
           <li><strong>Séance 2 :</strong> ton premier ordre, passé par toi, sur un montant que tu choisis.</li>
@@ -290,7 +308,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
           <li>Le repérage des frais qui ne se voient pas sur les relevés.</li>
           <li>Tes questions écrites pendant les deux semaines qui suivent.</li>
         </ul>
-        <a href="contact.html" class="btn-ghost">Réserver un premier échange</a>
+        <a href="contact.html" class="btn-ghost">Réserver l'échange gratuit</a>
       </div>
     </div>
 
@@ -300,9 +318,10 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
         <h3>Trente jours pour que ça tienne</h3>
         <p class="promesse">Les deux formules enchaînées, plus un mois de suivi. Parce que le découragement n'arrive presque jamais avant la première décision, mais toujours après.</p>
         <div class="formule-prix">
-          <span class="montant">349 €</span>
+          <span class="montant">350 €</span>
           <span class="unite">quatre séances et un suivi d'un mois</span>
         </div>
+        <div class="tarif-indicatif">Tarif à l'ouverture</div>
         <ul>
           <li><strong>Tout ce que contiennent les deux formules ci-dessus.</strong></li>
           <li><strong>Une séance de réglage à trente jours :</strong> on regarde ce que tu as fait, ce qui a coincé, et on ajuste.</li>
@@ -311,7 +330,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
           <li>Tes questions écrites pendant tout le mois, réponse sous 48 heures ouvrées.</li>
           <li>Un plan de relecture à six mois, que tu appliques seul.</li>
         </ul>
-        <a href="contact.html" class="btn-primary">Réserver un premier échange</a>
+        <a href="contact.html" class="btn-primary">Réserver l'échange gratuit</a>
       </div>
     </div>
 
