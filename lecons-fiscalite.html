@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Optimisation fiscale · Leçons · NiouDem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#12212B;--ink-soft:#43555F;--ink-muted:#7A8A93;--ink-faint:#96A3AA;
+  --bg:#FCFBF8;--bg-soft:#F5F4EE;--bg-mid:#EFF0EA;--bg-line:#DCDDD3;
+  --green:#1E4B3C;--green-light:#2A6350;--green-pale:#E7EFEA;--green-bord:#BFD6C9;
+  --amber:#B8862F;--amber-pale:#F6EFE0;--amber-bord:#E4D2AC;
+  --violet:#4A5C6B;--violet-pale:#EDF0F2;--violet-bord:#D4DBE0;
+  --coral:#A24332;--coral-pale:#F8EDEA;
+  --sans:'Karla',system-ui,-apple-system,sans-serif;
+  --display:'Newsreader',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+body{font-family:var(--sans);background:var(--bg-soft);color:var(--ink);-webkit-font-smoothing:antialiased;letter-spacing:-.01em;}
+a{color:inherit;}
+
+.nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--bg-line);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;font-size:15px;color:var(--ink);}
+.nav-mark{width:26px;height:26px;border-radius:8px;background:var(--green);display:flex;align-items:center;justify-content:center;}
+.nav-mark svg{width:14px;height:14px;}
+.nav-back{font-size:13px;font-weight:600;color:var(--ink-muted);text-decoration:none;}
+.nav-progress-pill{font-size:12px;font-weight:700;color:var(--green);background:var(--green-pale);padding:5px 12px;border-radius:100px;}
+
+.layout{display:grid;grid-template-columns:280px 1fr;max-width:1100px;margin:0 auto;min-height:calc(100vh - 60px);}
+.sidebar{border-right:1px solid var(--bg-line);background:var(--bg);padding:24px 16px;position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow-y:auto;}
+.sb-progress-bar{height:6px;background:var(--bg-mid);border-radius:100px;overflow:hidden;margin:0 10px 18px;}
+.sb-progress-fill{height:100%;background:var(--green);border-radius:100px;transition:width .3s;}
+.sb-item{display:flex;align-items:center;gap:10px;padding:10px 10px;border-radius:10px;cursor:pointer;margin-bottom:2px;font-size:13px;font-weight:600;color:var(--ink-muted);transition:background .15s;}
+.sb-item:hover{background:var(--bg-soft);}
+.sb-item.active{background:var(--green-pale);color:var(--green);}
+.sb-item.done{color:var(--ink);}
+.sb-item.locked{opacity:.45;cursor:not-allowed;}
+.sb-item.locked:hover{background:transparent;}
+.sb-check{width:20px;height:20px;border-radius:50%;background:var(--bg-mid);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--ink-faint);flex-shrink:0;}
+.sb-item.done .sb-check{background:var(--green);color:#fff;}
+.sb-item.active .sb-check{background:var(--green);color:#fff;}
+.sb-module-label{font-size:10.5px;font-weight:700;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.05em;padding:14px 10px 6px;}
+
+.main{padding:36px 40px 80px;max-width:720px;}
+.lesson-eyebrow{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:10px;}
+.lesson-title{font-size:28px;font-weight:800;letter-spacing:-.03em;color:var(--ink);margin-bottom:8px;line-height:1.15;}
+.lesson-meta{font-size:13px;color:var(--ink-faint);margin-bottom:32px;}
+
+.section-label{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-muted);margin:36px 0 16px;}
+.section-label .dot{width:6px;height:6px;border-radius:50%;background:var(--green);}
+.section-label.quiz .dot{background:var(--violet);}
+.section-label.action .dot{background:var(--amber);}
+
+.script-text p{font-size:15.5px;font-weight:400;color:var(--ink-soft);line-height:1.75;margin-bottom:18px;}
+
+.quiz-card{background:var(--bg);border:1px solid var(--bg-line);border-radius:16px;padding:24px;margin-bottom:14px;}
+.quiz-q{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:16px;line-height:1.5;}
+.quiz-opt{display:flex;align-items:flex-start;gap:12px;padding:13px 15px;border:1.5px solid var(--bg-line);border-radius:11px;margin-bottom:9px;cursor:pointer;transition:border-color .15s,background .15s;}
+.quiz-opt:hover{border-color:var(--ink-faint);}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-pale);}
+.quiz-opt.wrong{border-color:var(--coral);background:var(--coral-pale);}
+.quiz-opt.disabled{cursor:default;pointer-events:none;}
+.quiz-letter{width:24px;height:24px;border-radius:7px;background:var(--bg-soft);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--ink-muted);flex-shrink:0;}
+.quiz-opt.correct .quiz-letter{background:var(--green);color:#fff;}
+.quiz-opt.wrong .quiz-letter{background:var(--coral);color:#fff;}
+.quiz-opt-text{font-size:13.5px;font-weight:500;color:var(--ink);padding-top:2px;}
+.quiz-explain{display:none;font-size:13px;font-weight:400;color:var(--ink-muted);line-height:1.6;background:var(--bg-soft);border-radius:10px;padding:14px 16px;margin-top:8px;}
+.quiz-explain.show{display:block;}
+.quiz-explain strong{color:var(--ink);}
+
+.action-card{background:var(--amber-pale);border:1px solid var(--amber-bord);border-radius:16px;padding:22px 24px;}
+.action-text{font-size:14.5px;font-weight:500;color:var(--ink);line-height:1.65;margin-bottom:16px;}
+.action-check{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;}
+.action-box{width:22px;height:22px;border-radius:7px;border:2px solid var(--amber);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;transition:background .15s;}
+.action-box.checked{background:var(--amber);}
+.action-label{font-size:13px;font-weight:700;color:#8a6a00;}
+
+.lesson-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:1px solid var(--bg-line);}
+.nav-btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;border:none;cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:700;padding:13px 24px;border-radius:11px;text-decoration:none;transition:background .2s;}
+.nav-btn:hover{background:var(--ink-soft);}
+.nav-btn.ghost{background:var(--bg-mid);color:var(--ink-muted);}
+.nav-btn.ghost:hover{background:var(--bg-line);}
+.completion-badge{display:none;align-items:center;gap:8px;background:var(--green-pale);color:var(--green);font-size:12.5px;font-weight:700;padding:8px 16px;border-radius:100px;margin-bottom:20px;}
+.completion-badge.show{display:inline-flex;}
+
+@media(max-width:860px){
+  .layout{grid-template-columns:1fr;}
+  .sidebar{position:static;height:auto;border-right:none;border-bottom:1px solid var(--bg-line);}
+  .main{padding:28px 20px 60px;}
+}
+
+/* ===== Direction Encre & Laiton — surcouche typographique ===== */
+body{font-family:var(--sans);letter-spacing:0;}
+h1,h2,h3,h4,.hero-h1,.s-title,.cta-h2,.p-name,.mod-title,.c-title,.hc-title,
+.lecon-title,.q-title,.auth-title,.perf-title,.section-title,.edu-title,.tips-title{
+  font-family:var(--display);letter-spacing:-.015em;
+}
+.hero-h1,.s-title,.cta-h2,.auth-title{font-weight:500;letter-spacing:-.018em;line-height:1.16;}
+h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
+.s-tag,.f-copy,.hstat-label,.stat-label,.perf-note,.order-meta,.pos-value,
+.price-cell,.asset-label,.badge,.eyebrow,.nav-balance{font-family:var(--mono);}
+
+.nav-name em,.ft-name em{font-style:normal;color:var(--amber);}
+
+/* Mise en valeur dans le corps des lecons : le gras porte la notion a
+   retenir, l italique la nuance ou le terme technique. */
+.script-text strong{color:var(--ink,#12212B);font-weight:700;}
+.script-text em{font-style:italic;color:var(--ink-soft,#43555F);}
+.script-text u{text-decoration:none;background:linear-gradient(transparent 62%,var(--amber-pale,#F6EFE0) 62%);
+  box-shadow:inset 0 -1px 0 var(--amber,#B8862F);}
+.script-text p + p{margin-top:14px;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    NiouDem
+  </a>
+  <a href="budget.html" class="nav-back">← Retour au parcours</a>
+  <div style="display:flex;align-items:center;gap:14px;">
+    <span class="nav-progress-pill" id="navProgress">0/16 leçons</span>
+    <a href="#" onclick="signOut();return false;" style="font-size:12.5px;font-weight:600;color:var(--ink-muted);text-decoration:none;">Déconnexion</a>
+  </div>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar"></aside>
+  <main class="main" id="main"></main>
+</div>
+
+<script>
+/* ============ DONNÉES DES 16 LEÇONS — MAÎTRISER SON BUDGET ============ */
+const LESSONS = [
+{module:"Module 1 — Comprendre l'impôt avant de l'optimiser", title:"Comment ton impôt est réellement calculé", duration:"5 min",
+script:[
+"Avant de chercher à payer moins, il faut comprendre comment le montant est obtenu. C'est la leçon la plus utile de cette formation, parce que la plupart des mauvaises décisions fiscales viennent d'une méconnaissance du calcul, pas d'un manque d'astuce.",
+"L'impôt sur le revenu français est <strong>progressif par tranches</strong>. Cela signifie que ton revenu est découpé en morceaux, et que chaque morceau est taxé à son propre taux. Le barème comporte 5 tranches, allant de 0 % pour la première à 45 % pour la plus haute. Les seuils de ces tranches sont revalorisés chaque année, donc vérifie toujours ceux de l'année concernée plutôt que de te fier à un chiffre mémorisé.",
+"Le calcul se déroule en 4 étapes. <strong>1.</strong> On additionne tes revenus imposables. <strong>2.</strong> On applique un abattement de 10 % sur les salaires, censé couvrir les frais professionnels. <strong>3.</strong> On divise le résultat par ton nombre de parts fiscales. <strong>4.</strong> On applique le barème à ce quotient, puis on multiplie par le nombre de parts.",
+"Cette division puis multiplication n'est pas une coquetterie administrative. C'est ce qui fait qu'un couple avec enfants paie moins qu'un célibataire à revenu égal, et nous y reviendrons en détail.",
+"Retiens dès maintenant une conséquence essentielle : <strong>l'impôt ne se calcule pas sur ce que tu gagnes, mais sur ce qui reste après un parcours d'abattements et de divisions.</strong> C'est précisément dans ce parcours que se trouvent les leviers légaux. Optimiser sa fiscalité, ce n'est pas trouver une faille, c'est connaître les étapes du calcul et agir sur celles qui te concernent.",
+"Dernière remarque, et elle vaut pour toute la formation : les taux, seuils et plafonds évoluent presque chaque année en loi de finances. Les ordres de grandeur donnés ici servent à comprendre les mécanismes. <u>Avant toute décision, vérifie le chiffre en vigueur sur impots.gouv.fr</u>, qui est gratuit et fait autorité."
+],
+quiz:[
+{q:"Que signifie « impôt progressif par tranches » ?",opts:["Le taux augmente chaque année","Chaque morceau du revenu est taxé à son propre taux","L'impôt est prélevé progressivement sur 12 mois","Le taux dépend de la région"],correct:1,
+explain:"Le revenu est découpé en tranches, et chacune subit son propre taux. Aucun revenu n'est taxé entièrement au taux le plus élevé."},
+{q:"À quoi sert l'abattement de 10 % sur les salaires ?",opts:["À récompenser les salariés","À couvrir forfaitairement les frais professionnels","À compenser l'inflation","À financer la retraite"],correct:1,
+explain:"C'est une estimation forfaitaire des frais engagés pour travailler. On peut y renoncer et déclarer ses frais réels, ce que nous verrons plus loin."},
+{q:"Pourquoi vérifier les seuils chaque année ?",opts:["Parce qu'ils changent selon les départements","Parce qu'ils sont revalorisés en loi de finances","Parce qu'ils dépendent de la banque","Parce qu'ils varient selon l'âge"],correct:1,
+explain:"Les barèmes, plafonds et taux évoluent presque chaque année. Un chiffre mémorisé il y a 3 ans est probablement faux aujourd'hui."}
+],
+action:"Sors ton dernier avis d'imposition et repère 3 lignes : le revenu fiscal de référence, le nombre de parts, et le montant final. Ces 3 chiffres suffisent à comprendre toute la suite de cette formation, et beaucoup de gens ne les ont jamais regardés."
+},
+{module:"Module 1 — Comprendre l'impôt avant de l'optimiser", title:"Taux marginal et taux moyen : la confusion qui coûte cher", duration:"5 min",
+script:[
+"Voici l'erreur la plus répandue en matière fiscale, et elle pousse des gens à refuser des augmentations, des heures supplémentaires ou des promotions. La phrase qu'on entend est toujours la même : <em>« si je gagne plus, je change de tranche et je perds de l'argent »</em>. C'est faux, et voici pourquoi.",
+"Deux taux différents coexistent, et les confondre change tout. <strong>Le taux marginal</strong> est celui qui s'applique au dernier euro gagné, c'est-à-dire à la tranche la plus haute que tu atteins. <strong>Le taux moyen</strong> est le rapport entre l'impôt total et le revenu total, et il est toujours nettement inférieur.",
+"Prenons un exemple avec des chiffres simples. Imaginons un revenu imposable de 40 000 € pour 1 part. Les premiers milliers d'euros ne sont pas taxés du tout, la tranche suivante est taxée à 11 %, la suivante à 30 %. Résultat : le taux marginal est de 30 %, mais le taux moyen se situe autour de 13 à 15 %. <strong>Une augmentation de 1 000 € coûte donc 300 € d'impôt et rapporte 700 € nets.</strong> On ne perd jamais d'argent en gagnant plus.",
+"Pourquoi cette croyance est-elle si tenace ? Parce que quelques dispositifs, eux, fonctionnent par seuil et non par tranche. Certaines aides sociales, certaines exonérations locales ou certains plafonds de dispositifs peuvent basculer d'un coup au franchissement d'un montant. Ces effets existent réellement, mais ils concernent des prestations spécifiques, jamais le barème de l'impôt sur le revenu lui-même.",
+"Le taux marginal a une seconde utilité, bien plus intéressante. <strong>C'est lui qui mesure la valeur de chaque euro déductible.</strong> Si ton taux marginal est de 30 %, chaque euro que tu déduis de ton revenu imposable te fait économiser 30 centimes. Si ton taux marginal est de 0 % ou 11 %, ce même euro déduit ne rapporte presque rien.",
+"Cette règle a une conséquence directe et souvent ignorée : <u>les dispositifs de déduction ne sont intéressants qu'à partir d'un certain niveau d'imposition</u>. Un plan d'épargne retraite vendu à quelqu'un dont le taux marginal est de 11 % est un produit vendu à la mauvaise personne. Connaître son taux marginal, c'est donc savoir quels conseils écouter et lesquels ignorer."
+],
+quiz:[
+{q:"Que se passe-t-il quand on « change de tranche » ?",opts:["Tout le revenu est taxé au nouveau taux","Seule la partie du revenu au-delà du seuil subit le nouveau taux","On perd le bénéfice des tranches précédentes","L'impôt double"],correct:1,
+explain:"Seuls les euros situés au-dessus du seuil sont taxés davantage. Gagner plus rapporte toujours plus net."},
+{q:"À quoi sert de connaître son taux marginal ?",opts:["À calculer son salaire net","À mesurer combien rapporte réellement chaque euro déduit","À négocier avec l'administration","À déterminer sa date de déclaration"],correct:1,
+explain:"Un euro déduit rapporte exactement le taux marginal. À 30 %, il économise 30 centimes ; à 11 %, seulement 11."},
+{q:"À qui un dispositif de déduction profite-t-il le plus ?",opts:["À tout le monde de façon identique","Aux contribuables dont le taux marginal est élevé","Aux contribuables non imposables","Aux jeunes actifs"],correct:1,
+explain:"C'est pourquoi certains produits sont proposés à des personnes qui n'en tireront presque aucun bénéfice."}
+],
+action:"Cherche ton taux marginal d'imposition sur ton avis, ou calcule-le avec le simulateur officiel d'impots.gouv.fr. Note ce pourcentage quelque part : c'est la clé de lecture de tout ce qui suit, et la première question à poser à quiconque te proposera un placement défiscalisant."
+},
+{module:"Module 1 — Comprendre l'impôt avant de l'optimiser", title:"Les parts fiscales, et pourquoi elles changent tout", duration:"5 min",
+script:[
+"Le quotient familial est le mécanisme qui adapte l'impôt à la composition du foyer. C'est une particularité française, et c'est aussi l'un des leviers les plus puissants, parce qu'il agit sur l'étape de division du calcul, donc avant le barème.",
+"Le principe : chaque foyer dispose d'un nombre de parts. Une personne seule compte 1 part. Un couple marié ou pacsé compte 2 parts. Les 2 premiers enfants ajoutent chacun une demi-part, et à partir du troisième, chaque enfant ajoute une part entière. Des demi-parts supplémentaires existent dans des situations particulières, notamment pour les parents isolés ou les personnes titulaires de certaines cartes d'invalidité.",
+"L'effet est mécanique. Le revenu est divisé par le nombre de parts, le barème s'applique à ce quotient plus faible, puis le résultat est remultiplié. Comme le barème est progressif, diviser avant de taxer fait baisser le taux appliqué. <strong>Plus le foyer compte de parts, plus la progressivité est atténuée.</strong>",
+"Cet avantage est cependant plafonné. La réduction d'impôt procurée par chaque demi-part supplémentaire ne peut pas dépasser un certain montant, révisé annuellement. Ce plafonnement fait qu'au-delà d'un certain revenu, un enfant supplémentaire n'apporte plus l'économie proportionnelle qu'on pourrait attendre.",
+"Une question revient sans cesse chez les couples : <em>faut-il se marier ou se pacser pour payer moins d'impôts ?</em> La réponse honnête est : cela dépend, et le sens de l'écart compte. <strong>L'imposition commune est favorable quand les revenus des deux membres sont très différents</strong>, parce que la division lisse l'écart. Elle est neutre, voire légèrement défavorable dans certains cas, quand les revenus sont proches. Ce n'est donc jamais une raison suffisante pour se marier, mais c'est une information à connaître.",
+"Dernier point, souvent source d'erreurs coûteuses : le rattachement des enfants majeurs. Un étudiant de moins de 21 ans, ou de moins de 25 ans s'il poursuit des études, peut rester rattaché au foyer, ce qui conserve la part. Il peut aussi déclarer séparément, ce qui lui ouvre certains droits mais fait perdre la part au foyer. <u>Le bon choix se calcule, il ne se devine pas</u>, et le simulateur officiel permet de comparer les 2 hypothèses en quelques minutes."
+],
+quiz:[
+{q:"Combien de parts ajoute un troisième enfant ?",opts:["Une demi-part","Une part entière","Un quart de part","Aucune"],correct:1,
+explain:"Les 2 premiers enfants ajoutent une demi-part chacun, puis chaque enfant suivant ajoute une part entière."},
+{q:"Dans quel cas l'imposition commune est-elle la plus avantageuse ?",opts:["Quand les 2 revenus sont proches","Quand les 2 revenus sont très différents","Quand aucun des 2 n'est imposable","Elle est toujours identique"],correct:1,
+explain:"La division du revenu total par 2 parts lisse l'écart et fait baisser le taux appliqué. À revenus proches, l'effet est faible."},
+{q:"Que se passe-t-il si un enfant majeur se détache du foyer ?",opts:["Le foyer conserve la part","Le foyer perd la part correspondante","L'impôt du foyer est annulé","Rien ne change"],correct:1,
+explain:"Le détachement fait perdre l'avantage de la part, mais peut ouvrir d'autres droits à l'enfant. Le choix se calcule dans les 2 sens."}
+],
+action:"Vérifie sur ton avis d'imposition le nombre de parts retenu, et compare-le à ta situation familiale réelle d'aujourd'hui. Naissance, séparation, enfant devenu étudiant : ces changements ne sont pas pris en compte automatiquement, ils doivent être signalés."
+},
+{module:"Module 1 — Comprendre l'impôt avant de l'optimiser", title:"Le prélèvement à la source et le solde de l'année", duration:"5 min",
+script:[
+"Depuis 2019, l'impôt sur le revenu est prélevé directement sur le salaire ou la pension. Beaucoup de gens en ont conclu qu'ils n'avaient plus rien à faire, et c'est une erreur qui produit chaque année des régularisations désagréables.",
+"Le mécanisme est le suivant. L'administration calcule <strong>un taux de prélèvement à partir de ta dernière déclaration</strong>, donc à partir de tes revenus de l'année précédente. Ce taux est transmis à ton employeur, qui l'applique chaque mois. À l'issue de la déclaration suivante, l'impôt réellement dû est calculé, et l'écart donne lieu soit à un remboursement, soit à un complément à payer.",
+"D'où le point important : <strong>le prélèvement à la source est une avance, pas un solde.</strong> Si tes revenus ont augmenté en cours d'année, tu as payé sur la base d'un taux trop faible et tu devras compléter. S'ils ont baissé, tu as trop payé et tu seras remboursé.",
+"Tu peux agir sur ce taux à tout moment depuis ton espace sur impots.gouv.fr. Deux situations le justifient vraiment. En cas de <strong>hausse durable des revenus</strong>, actualiser le taux évite une régularisation lourde. En cas de <strong>baisse importante</strong>, perte d'emploi, passage à temps partiel, départ à la retraite, la demande de modulation à la baisse rétablit immédiatement du pouvoir d'achat au lieu d'attendre un an.",
+"Un choix mérite d'être connu par les couples : le <strong>taux individualisé</strong>. Par défaut, un couple se voit appliquer un taux unique, calculé sur les revenus communs. Si l'un gagne nettement plus que l'autre, le même pourcentage s'applique aux 2 salaires, ce qui pèse proportionnellement davantage sur le plus faible. Le taux individualisé répartit le prélèvement selon les revenus de chacun. <u>L'impôt total du foyer reste strictement identique</u>, seule la répartition change, et c'est parfois une question d'équité au sein du couple plus que de fiscalité.",
+"Il existe enfin le taux non personnalisé, dit taux neutre. Il permet de ne pas transmettre à l'employeur d'information sur les autres revenus du foyer. Il est en général plus élevé, la différence étant régularisée ensuite. C'est un choix de confidentialité, rarement un choix d'optimisation."
+],
+quiz:[
+{q:"Sur quoi repose le taux de prélèvement à la source ?",opts:["Sur les revenus du mois en cours","Sur la dernière déclaration, donc sur les revenus passés","Sur une moyenne nationale","Sur une estimation de l'employeur"],correct:1,
+explain:"C'est pourquoi une hausse de revenus en cours d'année crée un complément à payer l'année suivante."},
+{q:"Que change le taux individualisé dans un couple ?",opts:["Il réduit l'impôt total du foyer","Il répartit le prélèvement selon les revenus de chacun sans changer le total","Il supprime la déclaration commune","Il augmente l'impôt du plus haut revenu"],correct:1,
+explain:"L'impôt du foyer est identique. Seule la répartition entre les 2 salaires change, ce qui est souvent une question d'équité interne."},
+{q:"Quand faut-il demander une modulation à la baisse ?",opts:["Chaque année par principe","En cas de baisse importante et durable des revenus","Quand on change de banque","Jamais, c'est automatique"],correct:1,
+explain:"Perte d'emploi, temps partiel ou retraite : la modulation rétablit immédiatement du pouvoir d'achat au lieu d'attendre la régularisation."}
+],
+action:"Connecte-toi à ton espace particulier sur impots.gouv.fr et regarde ton taux actuel de prélèvement. Compare-le à ta situation réelle : si tes revenus ont changé de plus de 10 % depuis ta dernière déclaration, la modulation se fait en 5 minutes et évite une mauvaise surprise."
+},
+{module:"Module 2 — Réduire l'impôt sans rien acheter", title:"Déduction, réduction, crédit : 3 mots très différents", duration:"5 min",
+script:[
+"Ces 3 termes sont employés comme des synonymes dans le langage courant, y compris par des commerciaux. Ils désignent pourtant 3 mécanismes distincts, dont les effets varient du simple au triple selon ta situation. Les distinguer est ce qui te permettra d'évaluer seul n'importe quelle proposition.",
+"<strong>La déduction</strong> retire un montant de ton revenu imposable, <em>avant</em> le calcul de l'impôt. Son bénéfice réel dépend donc entièrement de ton taux marginal. Déduire 1 000 € rapporte 300 € à quelqu'un dont le taux marginal est de 30 %, et seulement 110 € à quelqu'un imposé à 11 %.",
+"<strong>La réduction d'impôt</strong> vient en soustraction de l'impôt lui-même, <em>après</em> le calcul. Elle vaut donc le même montant pour tout le monde, quel que soit le taux marginal. Mais elle a une limite décisive : <u>si ton impôt est nul, une réduction ne te rapporte rien</u>. Elle ne peut pas créer de remboursement.",
+"<strong>Le crédit d'impôt</strong> fonctionne comme la réduction, à une différence majeure près : <u>s'il dépasse l'impôt dû, l'excédent t'est remboursé</u>. C'est le seul des 3 mécanismes dont bénéficient aussi les foyers non imposables.",
+"Cette hiérarchie a une conséquence pratique très concrète. Pour un foyer faiblement imposé, les crédits d'impôt sont les seuls dispositifs réellement utiles, et les produits de défiscalisation reposant sur la déduction ne servent à rien. Pour un foyer fortement imposé, la déduction devient au contraire le levier le plus puissant, puisque sa valeur suit le taux marginal.",
+"Un dernier avertissement, qui vaut pour toute la suite. La plupart des réductions et crédits d'impôt entrent dans un <strong>plafonnement global des niches fiscales</strong>, fixé à 10 000 € par an pour la majorité des dispositifs. Ce plafond existe précisément pour empêcher l'accumulation. Quand on te vend un dispositif en promettant une économie, la première question à poser est de savoir s'il entre dans ce plafond, et si tu n'en consommes pas déjà une partie ailleurs.",
+"Retiens la règle générale : <strong>ne jamais acheter un produit pour son avantage fiscal seul.</strong> Un mauvais investissement défiscalisé reste un mauvais investissement, et l'économie d'impôt ne compensera jamais une perte en capital."
+],
+quiz:[
+{q:"Quelle différence essentielle entre réduction et crédit d'impôt ?",opts:["Aucune, ce sont des synonymes","Le crédit est remboursé s'il dépasse l'impôt dû, pas la réduction","La réduction s'applique aux entreprises seulement","Le crédit concerne uniquement l'immobilier"],correct:1,
+explain:"C'est ce qui rend le crédit d'impôt utile même pour un foyer non imposable, contrairement à la réduction."},
+{q:"De quoi dépend la valeur réelle d'une déduction ?",opts:["Du montant investi uniquement","Du taux marginal d'imposition","De l'âge du contribuable","De la durée de détention"],correct:1,
+explain:"Déduire 1 000 € rapporte 300 € à 30 % de taux marginal, et 110 € à 11 %. Le même produit n'a pas la même valeur selon les personnes."},
+{q:"À quoi sert le plafonnement global des niches fiscales ?",opts:["À empêcher l'accumulation d'avantages, généralement au-delà de 10 000 € par an","À limiter le nombre de déclarations","À plafonner le revenu imposable","À interdire l'investissement immobilier"],correct:0,
+explain:"Un dispositif présenté comme avantageux peut ne rien rapporter si le plafond est déjà consommé ailleurs."}
+],
+action:"Reprends la dernière proposition de placement défiscalisant qu'on t'a faite, ou cherches-en une en ligne. Détermine s'il s'agit d'une déduction, d'une réduction ou d'un crédit, puis calcule ce qu'elle rapporte à ton taux marginal. Beaucoup de propositions ne survivent pas à ce calcul."
+},
+{module:"Module 2 — Réduire l'impôt sans rien acheter", title:"Frais réels ou abattement de 10 % : comment choisir", duration:"5 min",
+script:[
+"Chaque salarié bénéficie automatiquement d'un abattement de 10 % sur ses salaires, censé couvrir les frais engagés pour travailler. Cet abattement est plafonné, et il est appliqué sans que tu aies rien à faire. Mais tu peux y renoncer et déclarer tes frais réels, ce qui devient intéressant dans certaines situations bien identifiées.",
+"Le calcul de comparaison est simple : si tes frais professionnels réels dépassent 10 % de ton salaire net imposable, l'option des frais réels te fait gagner de l'argent. Sur un salaire de 30 000 €, l'abattement représente 3 000 €. <strong>Il faut donc dépasser 3 000 € de frais réels pour que l'option devienne rentable.</strong>",
+"Quels frais peut-on retenir ? Principalement les trajets entre le domicile et le lieu de travail, évalués grâce au barème kilométrique publié chaque année par l'administration, qui tient compte de la puissance du véhicule et de la distance parcourue. S'y ajoutent les repas pris hors du domicile pour des raisons professionnelles, la formation professionnelle payée par toi-même, le matériel nécessaire à ton activité, et les frais de double résidence dans certaines conditions.",
+"Le cas typique où l'option est gagnante : <strong>un long trajet quotidien en voiture</strong>. Une distance de 40 kilomètres aller-retour, sur environ 220 jours travaillés, représente près de 9 000 kilomètres par an, ce qui dépasse largement l'abattement forfaitaire pour un salaire modeste.",
+"Attention à 2 pièges. Premier piège : <u>le choix est global, tu ne peux pas cumuler l'abattement et les frais réels</u>. Second piège : si tu optes pour les frais réels, tu dois réintégrer dans tes revenus imposables les remboursements de frais que ton employeur t'a versés, ce qui réduit parfois fortement l'intérêt de l'opération.",
+"Enfin, une règle de prudence : <strong>l'option des frais réels suppose de pouvoir justifier chaque montant.</strong> Conserve les justificatifs pendant au moins 3 ans, durée pendant laquelle l'administration peut demander des explications. Un tableau simple, mis à jour chaque mois, suffit largement et évite de reconstituer une année entière au moment de la déclaration."
+],
+quiz:[
+{q:"Quand l'option des frais réels devient-elle intéressante ?",opts:["Toujours, elle est plus avantageuse par principe","Quand les frais réels dépassent 10 % du salaire net imposable","Uniquement pour les cadres","Quand on travaille à domicile"],correct:1,
+explain:"L'abattement automatique vaut 10 %. Il faut donc dépasser ce montant en frais justifiés pour que l'option rapporte."},
+{q:"Quel est le cas le plus fréquent de bascule aux frais réels ?",opts:["Un abonnement de transport en commun","Un long trajet quotidien en voiture","L'achat d'un ordinateur","Le télétravail"],correct:1,
+explain:"Le barème kilométrique appliqué à une longue distance quotidienne dépasse rapidement l'abattement forfaitaire."},
+{q:"Que faut-il faire si l'employeur rembourse déjà certains frais ?",opts:["Rien de particulier","Réintégrer ces remboursements dans les revenus imposables","Les déduire une seconde fois","Renoncer automatiquement aux frais réels"],correct:1,
+explain:"C'est le piège classique : les remboursements doivent être ajoutés aux revenus, ce qui réduit parfois tout l'intérêt de l'option."}
+],
+action:"Calcule ce soir 10 % de ton salaire net imposable annuel, puis estime tes frais de trajet avec le barème kilométrique officiel. Si le second chiffre dépasse le premier, tu as probablement payé trop d'impôt les années précédentes, et la correction est possible."
+},
+{module:"Module 2 — Réduire l'impôt sans rien acheter", title:"Les charges déductibles que presque personne ne déclare", duration:"5 min",
+script:[
+"Certaines sommes se déduisent directement du revenu imposable, sans rien acheter ni souscrire. Elles correspondent à des dépenses que tu réalises déjà, et elles sont massivement sous-déclarées, non par fraude inversée mais par simple méconnaissance.",
+"<strong>La pension alimentaire versée à un enfant.</strong> Si tu verses une pension à un enfant mineur dont tu n'as pas la garde, dans le cadre d'une décision de justice, elle est déductible de ton revenu. Pour un enfant majeur non rattaché à ton foyer, une déduction reste possible dans la limite d'un plafond annuel révisé chaque année, y compris sans décision de justice si tu peux justifier de l'aide apportée.",
+"<strong>L'aide à un parent dans le besoin.</strong> Peu de gens savent que l'aide apportée à un ascendant, parent ou grand-parent, sans ressources suffisantes est déductible. Si tu héberges ce parent chez toi, une déduction forfaitaire est admise sans justificatif de dépense, ce qui est particulièrement simple.",
+"<strong>Les dons aux associations.</strong> Ils ouvrent droit à une réduction d'impôt, généralement de 66 % du montant versé dans la limite de 20 % du revenu imposable. Certains organismes venant en aide aux personnes en difficulté ouvrent droit à un taux majoré de 75 % dans une limite spécifique. C'est le dispositif au meilleur rapport entre simplicité et effet : <u>un don de 100 € coûte réellement 34 € après réduction</u>.",
+"<strong>Les cotisations versées sur un plan d'épargne retraite</strong>, déductibles dans la limite d'un plafond annuel indiqué sur ton avis d'imposition. Nous y consacrerons une leçon entière, car ce dispositif est aussi le plus mal vendu.",
+"Une remarque sur les années passées, et elle vaut de l'argent. <strong>Si tu découvres avoir oublié une charge déductible, tu peux corriger ta déclaration.</strong> Le service de correction en ligne est ouvert quelques semaines après la clôture, et au-delà, une réclamation reste possible jusqu'au 31 décembre de la deuxième année suivant celle de la mise en recouvrement. Beaucoup de gens ignorent qu'ils peuvent récupérer un trop-payé sur 2 années antérieures.",
+"Enfin, méfie-toi d'un réflexe fréquent : chercher des charges déductibles avant d'avoir vérifié son taux marginal. À 0 % ou 11 %, l'effort de collecte des justificatifs rapporte peu. Les crédits d'impôt, eux, restent utiles quel que soit le niveau d'imposition."
+],
+quiz:[
+{q:"Que coûte réellement un don de 100 € ouvrant droit à 66 % de réduction ?",opts:["100 €","66 €","34 €","0 €"],correct:2,
+explain:"La réduction rembourse 66 €, le coût net est donc de 34 €. C'est l'un des dispositifs les plus simples et les plus efficaces."},
+{q:"L'aide versée à un parent sans ressources est-elle déductible ?",opts:["Non, jamais","Oui, et une déduction forfaitaire existe en cas d'hébergement","Uniquement avec une décision de justice","Seulement après 75 ans"],correct:1,
+explain:"C'est l'une des déductions les plus méconnues. L'hébergement d'un ascendant ouvre droit à un forfait sans justificatif de dépense."},
+{q:"Peut-on corriger une déclaration passée ?",opts:["Non, jamais","Oui, par correction en ligne puis par réclamation dans un délai de 2 ans","Uniquement en cas d'erreur de l'administration","Seulement dans les 15 jours"],correct:1,
+explain:"Beaucoup de gens ignorent qu'ils peuvent récupérer un trop-payé sur les années antérieures dans ce délai."}
+],
+action:"Passe en revue ces 4 postes pour ta situation : pension alimentaire, aide à un parent, dons, épargne retraite. Si tu identifies une somme que tu as versée sans jamais la déclarer, note-la : elle est peut-être encore récupérable sur les 2 dernières années."
+},
+{module:"Module 2 — Réduire l'impôt sans rien acheter", title:"Les crédits d'impôt du quotidien", duration:"5 min",
+script:[
+"Les crédits d'impôt sont les seuls dispositifs qui profitent à tout le monde, y compris aux foyers non imposables, puisque l'excédent est remboursé. Ils concernent des dépenses ordinaires, et ils sont souvent oubliés par ceux qui y auraient droit.",
+"<strong>Le crédit d'impôt pour l'emploi à domicile</strong> est le plus important en volume. Il couvre 50 % des sommes versées pour un service rendu à ton domicile : ménage, jardinage, soutien scolaire, garde d'enfants, assistance aux personnes âgées. Le plafond de dépenses annuelles est fixé à 12 000 €, majoré selon la composition du foyer, ce qui représente un crédit maximal de 6 000 € dans le cas courant. Des plafonds spécifiques plus bas existent pour certaines prestations, notamment le jardinage et le dépannage informatique.",
+"Un dispositif d'avance immédiate permet désormais, dans de nombreux cas, de ne payer que la moitié du montant au moment de la prestation, plutôt que d'attendre le remboursement l'année suivante. <u>C'est un gain de trésorerie considérable</u>, et il est encore largement sous-utilisé.",
+"<strong>La garde d'enfants de moins de 6 ans hors du domicile</strong>, en crèche ou chez une assistante maternelle, ouvre droit à un crédit de 50 % des dépenses, dans une limite annuelle par enfant. Ce dispositif est distinct du précédent et se cumule avec lui.",
+"<strong>Les travaux de rénovation énergétique</strong> relèvent aujourd'hui principalement d'aides directes plutôt que de crédits d'impôt, avec des conditions de ressources et des exigences de qualification des entreprises. Le paysage a beaucoup changé ces dernières années, donc c'est typiquement le sujet où il faut vérifier l'état du droit au moment du projet, et non se fier à ce qu'on a entendu il y a 2 ans.",
+"Un point de méthode pour finir. Ces dispositifs supposent presque toujours un paiement traçable et une attestation de l'organisme ou du salarié. <strong>Payer en espèces fait perdre le bénéfice du crédit</strong>, quelle que soit la réalité de la prestation. Le réflexe utile est donc simple : dès qu'une dépense semble entrer dans une de ces catégories, conserver la facture et payer par un moyen laissant une trace."
+],
+quiz:[
+{q:"Quel est le taux du crédit d'impôt pour l'emploi à domicile ?",opts:["25 %","50 %","66 %","75 %"],correct:1,
+explain:"La moitié des sommes versées, dans la limite d'un plafond de dépenses de 12 000 € majoré selon le foyer."},
+{q:"Pourquoi un crédit d'impôt vaut-il mieux qu'une réduction pour un foyer modeste ?",opts:["Parce que son taux est plus élevé","Parce que l'excédent est remboursé même si l'impôt est nul","Parce qu'il est automatique","Parce qu'il n'est pas plafonné"],correct:1,
+explain:"C'est la différence décisive : une réduction ne rapporte rien à qui ne paie pas d'impôt, un crédit oui."},
+{q:"Que se passe-t-il si l'on paie une prestation en espèces ?",opts:["Rien, le crédit s'applique quand même","Le bénéfice du crédit d'impôt est perdu","Le taux est réduit de moitié","Il faut déclarer 2 fois"],correct:1,
+explain:"Le paiement doit être traçable et accompagné d'une attestation. C'est une cause fréquente de perte du bénéfice."}
+],
+action:"Fais la liste des services que tu paies déjà à domicile ou pour la garde de tes enfants. Vérifie ensuite si tu bénéficies de l'avance immédiate : si ce n'est pas le cas et que tu y as droit, l'activer réduit de moitié ce que tu avances chaque mois."
+},
+{module:"Module 3 — La fiscalité de tes placements", title:"Le prélèvement forfaitaire unique, le tronc commun", duration:"5 min",
+script:[
+"Depuis 2018, la plupart des revenus du capital sont soumis par défaut à un prélèvement unique de <strong>30 %</strong>, souvent appelé <em>flat tax</em>. Comprendre sa composition et son alternative permet de lire correctement tous les placements de cette formation.",
+"Ces 30 % se décomposent en 2 parties : <strong>12,8 % d'impôt sur le revenu</strong> et <strong>17,2 % de prélèvements sociaux</strong>. Cette distinction n'est pas anecdotique : plusieurs enveloppes permettent d'échapper à la première partie, aucune ne permet d'échapper à la seconde.",
+"Le prélèvement forfaitaire unique s'applique aux intérêts des comptes à terme, aux dividendes, aux plus-values de cession de valeurs mobilières, et aux plus-values sur crypto-actifs. Il ne s'applique pas aux livrets réglementés, totalement exonérés, ni aux revenus fonciers, qui suivent le barème progressif.",
+"Il existe une alternative importante : <strong>l'option pour le barème progressif</strong>. Elle se coche lors de la déclaration, s'applique à l'ensemble des revenus du capital de l'année, et devient intéressante quand ton taux marginal est faible. <u>Si ton taux marginal est de 0 % ou 11 %, le barème est presque toujours plus avantageux que 12,8 %</u>. Cette option ouvre en outre droit à un abattement de 40 % sur les dividendes, et à la déductibilité partielle de la contribution sociale généralisée.",
+"Le piège à connaître : <strong>l'option est globale et irrévocable pour l'année.</strong> Tu ne peux pas choisir le barème pour tes dividendes et le prélèvement forfaitaire pour tes plus-values. Le simulateur officiel permet de comparer les 2 hypothèses avant de cocher, et c'est un réflexe à prendre chaque année plutôt qu'une fois pour toutes, puisque les revenus varient.",
+"Un dernier point souvent mal compris. Sur les dividendes, un acompte de 12,8 % est prélevé à la source au moment du versement. Les foyers dont le revenu fiscal de référence est inférieur à un certain seuil peuvent demander à en être <strong>dispensés</strong>, en formulant la demande auprès de leur établissement <u>avant le 30 novembre de l'année précédente</u>. C'est une démarche gratuite, à faire une fois, et qui évite d'avancer un impôt qui sera remboursé un an plus tard."
+],
+quiz:[
+{q:"De quoi se composent les 30 % du prélèvement forfaitaire unique ?",opts:["30 % d'impôt sur le revenu","12,8 % d'impôt et 17,2 % de prélèvements sociaux","15 % d'impôt et 15 % de charges","20 % d'impôt et 10 % de contribution"],correct:1,
+explain:"Plusieurs enveloppes permettent d'échapper aux 12,8 %, aucune n'exonère des 17,2 % de prélèvements sociaux."},
+{q:"Quand l'option pour le barème progressif est-elle intéressante ?",opts:["Toujours","Quand le taux marginal est faible","Quand le taux marginal est élevé","Jamais"],correct:1,
+explain:"À 0 % ou 11 % de taux marginal, le barème bat les 12,8 % du prélèvement forfaitaire, et ouvre en plus l'abattement de 40 % sur dividendes."},
+{q:"Quelle particularité a l'option pour le barème ?",opts:["Elle se choisit placement par placement","Elle est globale pour tous les revenus du capital de l'année","Elle vaut pour 5 ans","Elle nécessite l'accord de la banque"],correct:1,
+explain:"Impossible de panacher. C'est pourquoi il faut simuler les 2 hypothèses avant de cocher, chaque année."}
+],
+action:"Si tu perçois des dividendes et que ton revenu fiscal de référence est modeste, vérifie si tu peux demander la dispense d'acompte. La demande se fait auprès de ton établissement avant le 30 novembre, prend quelques minutes, et évite d'avancer un impôt pendant un an."
+},
+{module:"Module 3 — La fiscalité de tes placements", title:"Le PEA, le cadre le plus léger après 5 ans", duration:"5 min",
+script:[
+"Le plan d'épargne en actions est l'enveloppe la plus avantageuse fiscalement pour investir en actions européennes. Sa règle principale tient en une phrase, et le reste en découle.",
+"<strong>Après 5 ans de détention, les gains ne subissent plus que les 17,2 % de prélèvements sociaux</strong>, l'impôt sur le revenu disparaissant totalement. Comparé aux 30 % du prélèvement forfaitaire unique, l'économie est de 12,8 points sur l'intégralité des plus-values, ce qui devient considérable sur longue durée.",
+"Le point le plus important de cette leçon, et le moins connu : <u>le délai de 5 ans court à partir de la date d'ouverture du plan, et non du premier versement significatif</u>. Ouvrir un PEA aujourd'hui avec 50 € fait démarrer le compteur. Dans 5 ans, tu disposeras d'une enveloppe mature que tu pourras alimenter librement. <strong>C'est probablement la décision la plus rentable par minute passée de toute cette formation.</strong>",
+"Les contraintes, maintenant, car elles sont réelles. Le PEA est plafonné à <strong>150 000 €</strong> de versements, ce qui n'est une limite que pour peu de gens. Il ne peut contenir que des actions européennes ou des fonds qui y sont éligibles, ce qui exclut en apparence les marchés américains ou mondiaux, mais des fonds indiciels éligibles répliquant des indices mondiaux existent, ce qui contourne largement cette limite.",
+"La contrainte la plus lourde concerne les retraits. <strong>Avant 5 ans, tout retrait entraîne la clôture du plan</strong> et l'imposition des gains au prélèvement forfaitaire unique. Après 5 ans, les retraits partiels sont libres et n'empêchent plus de continuer à verser. C'est la raison pour laquelle un PEA ne doit jamais contenir l'argent dont tu pourrais avoir besoin à court terme.",
+"Une variante mérite d'être connue : le <strong>PEA-PME</strong>, dédié aux petites et moyennes entreprises, dont le plafond se cumule avec celui du PEA classique dans une limite globale de <strong>225 000 €</strong>. Il concerne des entreprises plus petites, donc plus risquées, et s'adresse à des investisseurs avertis.",
+"Enfin, un mot sur la sortie. En cas de clôture après 5 ans, tu peux récupérer ton capital ou opter pour une rente viagère qui bénéficie d'un régime particulier. La première solution reste la plus simple et la plus souple dans l'immense majorité des situations."
+],
+quiz:[
+{q:"Quelle est la fiscalité des gains d'un PEA après 5 ans ?",opts:["Exonération totale","17,2 % de prélèvements sociaux uniquement","30 % comme les autres placements","12,8 % d'impôt uniquement"],correct:1,
+explain:"L'impôt sur le revenu disparaît, les prélèvements sociaux restent. L'économie est de 12,8 points par rapport au prélèvement forfaitaire unique."},
+{q:"À partir de quand court le délai de 5 ans ?",opts:["Du premier versement important","De la date d'ouverture du plan","Du premier achat d'actions","Du premier retrait"],correct:1,
+explain:"Ouvrir avec 50 € suffit à lancer le compteur. C'est l'action à plus fort rendement par minute passée de toute la formation."},
+{q:"Que provoque un retrait avant 5 ans ?",opts:["Une pénalité de 10 %","La clôture du plan et l'imposition des gains","Rien de particulier","Un blocage de 6 mois"],correct:1,
+explain:"C'est pourquoi un PEA ne doit jamais contenir l'argent dont on peut avoir besoin à court terme."}
+],
+action:"Si tu n'as pas encore de PEA et que tu envisages d'investir un jour, même dans 5 ans, ouvre-le maintenant avec le montant minimum accepté par l'établissement. L'opération prend une vingtaine de minutes en ligne et lance un compteur que rien d'autre ne peut rattraper ensuite."
+},
+{module:"Module 3 — La fiscalité de tes placements", title:"L'assurance-vie : les 8 ans et l'abattement", duration:"5 min",
+script:[
+"L'assurance-vie est l'enveloppe la plus détenue en France, et aussi la plus mal comprise. Ce n'est ni un placement, ni une assurance décès au sens courant : c'est un contenant fiscal qui peut abriter des supports très différents.",
+"Sa règle principale repose sur une durée. <strong>Après 8 ans de détention</strong>, les gains retirés bénéficient d'un abattement annuel de <strong>4 600 €</strong> pour une personne seule et <strong>9 200 €</strong> pour un couple soumis à imposition commune. Au-delà de cet abattement, les gains sont imposés à <strong>7,5 %</strong> pour la fraction correspondant à des primes inférieures à 150 000 €, auxquels s'ajoutent les 17,2 % de prélèvements sociaux.",
+"Avant 8 ans, c'est le prélèvement forfaitaire unique de 30 % qui s'applique. Comme pour le PEA, <u>le compteur démarre à l'ouverture du contrat</u>, ce qui justifie pleinement d'ouvrir tôt avec une somme modeste.",
+"Un point que presque personne ne comprend correctement : <strong>l'imposition ne porte que sur la part de gains contenue dans le retrait, jamais sur le capital.</strong> Si ton contrat vaut 20 000 € dont 4 000 € de gains, un retrait de 5 000 € est considéré comme contenant 20 % de gains, soit 1 000 €. Seuls ces 1 000 € entrent dans le calcul, et l'abattement de 4 600 € les absorbe entièrement. Concrètement, <strong>beaucoup de retraits après 8 ans ne supportent aucun impôt sur le revenu</strong>, seulement les prélèvements sociaux.",
+"Deuxième particularité, souvent la vraie raison de détenir ce contrat : <strong>la transmission</strong>. Les sommes versées avant 70 ans bénéficient d'un abattement propre par bénéficiaire, très supérieur aux abattements successoraux classiques, et échappent en grande partie aux droits de succession. C'est ce qui explique pourquoi la clause bénéficiaire mérite d'être relue à chaque événement familial.",
+"Enfin, les frais, qui sont le vrai sujet et dont on parle peu. Un contrat en agence peut prélever plusieurs pourcents à chaque versement et près de 1 % par an de frais de gestion, quand un contrat en ligne prélève souvent 0 % à l'entrée et environ 0,5 % par an. <u>Sur 20 ans, 1 point de frais annuel en plus ampute le résultat final d'environ 12 %, soit près d'un quart des gains.</u> L'avantage fiscal ne compense jamais un mauvais contrat : regarde les frais avant la fiscalité."
+],
+quiz:[
+{q:"Quel est l'abattement annuel sur les gains après 8 ans, pour une personne seule ?",opts:["1 000 €","4 600 €","9 200 €","150 000 €"],correct:1,
+explain:"9 200 € pour un couple soumis à imposition commune. Beaucoup de retraits restent ainsi sous le seuil d'imposition sur le revenu."},
+{q:"Sur quoi porte l'imposition lors d'un retrait ?",opts:["Sur la totalité du montant retiré","Sur la seule part de gains contenue dans le retrait","Sur le capital uniquement","Sur la plus-value latente totale"],correct:1,
+explain:"Un retrait est considéré comme composé de capital et de gains dans les mêmes proportions que le contrat. Seuls les gains sont imposés."},
+{q:"Que faut-il regarder avant la fiscalité dans un contrat ?",opts:["La notoriété de l'assureur","Les frais de versement et de gestion annuels","Le nombre de supports proposés","La durée minimale imposée"],correct:1,
+explain:"Sur 20 ans, 1 point de frais annuel supplémentaire coûte environ 12 % du résultat final. Aucun avantage fiscal ne compense cela."}
+],
+action:"Si tu détiens une assurance-vie, cherche 2 chiffres dans tes conditions : les frais sur versement et les frais de gestion annuels sur les unités de compte. S'ils dépassent nettement 0 % et 0,7 %, ouvre une seconde ligne ailleurs pour tes futurs versements, et laisse l'ancienne prendre de l'ancienneté fiscale."
+},
+{module:"Module 3 — La fiscalité de tes placements", title:"Le plan d'épargne retraite : l'avantage à l'entrée, l'impôt à la sortie", duration:"5 min",
+script:[
+"Le plan d'épargne retraite est le produit le plus vendu en fin d'année, et souvent aux mauvaises personnes. Son principe est simple, mais il contient un décalage temporel que beaucoup de vendeurs passent sous silence.",
+"Le mécanisme : <strong>les sommes versées sont déductibles de ton revenu imposable</strong>, dans la limite d'un plafond annuel indiqué en toutes lettres sur ton avis d'imposition. Verser 3 000 € réduit donc ton revenu imposable de 3 000 €, ce qui, à un taux marginal de 30 %, représente une économie immédiate de 900 €.",
+"Voici le point que l'on oublie de mentionner : <strong>cet avantage n'est pas un cadeau, c'est un report.</strong> À la sortie, au moment de la retraite, le capital retiré est imposé. La part correspondant à tes versements est soumise au barème progressif, et la part correspondant aux gains au prélèvement forfaitaire unique.",
+"L'opération n'est donc gagnante qu'à une condition : <u>que ton taux marginal à la retraite soit inférieur à ton taux marginal aujourd'hui</u>. C'est fréquemment le cas, les revenus baissant généralement à la retraite, mais ce n'est pas systématique. <strong>Pour quelqu'un imposé à 11 % aujourd'hui, l'opération n'a aucun intérêt</strong>, et peut même se retourner contre lui. C'est pourtant à ces personnes que le produit est souvent proposé.",
+"La seconde contrainte est plus lourde que la première : <strong>l'argent est bloqué jusqu'à la retraite.</strong> Des cas de déblocage anticipé existent, notamment l'achat de la résidence principale, l'invalidité, le décès du conjoint, le surendettement ou l'expiration des droits au chômage. En dehors de ces cas, la somme est inaccessible, parfois pendant 30 ans.",
+"Deux règles pratiques pour finir. Premièrement, <strong>ne jamais verser sur un plan retraite avant d'avoir un fonds d'urgence complet</strong> : bloquer de l'argent quand on n'a pas de matelas est le meilleur moyen de devoir emprunter au premier imprévu. Deuxièmement, la déduction n'est intéressante qu'à partir d'un taux marginal de 30 %, seuil en dessous duquel une assurance-vie ou un PEA, tous 2 disponibles, remplissent mieux le même rôle.",
+"Une astuce peu connue mérite d'être signalée : <u>les plafonds de déduction non utilisés des 3 années précédentes restent disponibles</u>, et ceux du conjoint peuvent être mutualisés. Une année exceptionnelle, prime importante ou revenu inhabituel, est le moment où ce dispositif prend réellement son sens."
+],
+quiz:[
+{q:"L'avantage fiscal du plan d'épargne retraite est-il définitif ?",opts:["Oui, l'impôt est effacé","Non, c'est un report : la sortie est imposée","Oui, sauf en cas de déblocage anticipé","Cela dépend de l'assureur"],correct:1,
+explain:"L'avantage à l'entrée se paie à la sortie. L'opération n'est gagnante que si le taux marginal a baissé entre-temps."},
+{q:"À partir de quel niveau d'imposition le dispositif devient-il réellement intéressant ?",opts:["Dès le premier euro d'impôt","À partir d'un taux marginal de 30 %","Uniquement à 45 %","Il est intéressant pour tous"],correct:1,
+explain:"En dessous, une assurance-vie ou un PEA remplissent mieux le même rôle sans bloquer l'argent."},
+{q:"Que faire des plafonds de déduction non utilisés ?",opts:["Ils sont perdus chaque année","Ils restent utilisables pendant 3 ans et sont mutualisables entre conjoints","Ils se transforment en crédit d'impôt","Ils doivent être déclarés séparément"],correct:1,
+explain:"C'est ce qui rend le dispositif pertinent lors d'une année exceptionnelle, prime importante ou revenu inhabituel."}
+],
+action:"Cherche sur ton avis d'imposition la ligne indiquant ton plafond d'épargne retraite disponible. Puis pose-toi la seule question qui compte : ton taux marginal actuel est-il d'au moins 30 %, et ton fonds d'urgence est-il complet ? Si l'une des 2 réponses est non, ce produit n'est pas pour toi cette année."
+},
+{module:"Module 3 — La fiscalité de tes placements", title:"Les crypto-actifs : ce que le fisc attend de toi", duration:"5 min",
+script:[
+"La fiscalité des crypto-actifs est mal connue, et les erreurs qu'elle provoque sont coûteuses parce qu'elles portent souvent sur des obligations déclaratives, dont les sanctions sont indépendantes du montant en jeu.",
+"Première règle, et elle surprend beaucoup de gens : <strong>l'échange d'une cryptomonnaie contre une autre n'est pas imposable.</strong> Tant que tu restes à l'intérieur de l'univers crypto, aucun impôt n'est dû. <strong>Le fait générateur est la conversion en monnaie ayant cours légal</strong>, l'euro par exemple, ou l'achat d'un bien ou d'un service payé en crypto.",
+"Deuxième règle : pour un particulier gérant son patrimoine privé, les plus-values de cession sont soumises au prélèvement forfaitaire unique de <strong>30 %</strong>, avec possibilité d'opter pour le barème progressif si celui-ci est plus favorable. Une exonération existe si <u>le total annuel des cessions ne dépasse pas 305 €</u>, ce qui vise les très petits mouvements.",
+"Le calcul de la plus-value est particulier et déroute souvent. On ne calcule pas ligne par ligne comme pour des actions : la formule rapporte le prix de cession à la valeur globale du portefeuille, en tenant compte du total des sommes investies. Concrètement, <strong>chaque cession partielle nécessite de connaître la valeur totale de ton portefeuille au moment de l'opération</strong>. C'est pourquoi tenir un registre au fil de l'eau est indispensable : le reconstituer a posteriori sur plusieurs années est un travail considérable.",
+"Troisième règle, la plus sanctionnée : <strong>les comptes ouverts sur des plateformes établies à l'étranger doivent être déclarés chaque année</strong>, même s'ils sont vides, même si aucune opération n'a été réalisée. Cette déclaration se fait sur un formulaire dédié joint à la déclaration de revenus. <u>L'amende forfaitaire par compte non déclaré est indépendante du montant détenu</u>, ce qui en fait l'erreur la plus fréquemment coûteuse pour de petits portefeuilles.",
+"Enfin, quelques situations relèvent de régimes différents et méritent un accompagnement spécifique : le minage, le jalonnement de jetons, les revenus tirés de protocoles de finance décentralisée, ou une activité d'achat et de revente exercée de manière habituelle et professionnelle. Ces cas sortent du cadre décrit ici.",
+"Retiens la hiérarchie : <strong>l'obligation de déclarer tes comptes étrangers est plus urgente que l'optimisation de tes plus-values</strong>, parce que la première se sanctionne indépendamment de tes gains."
+],
+quiz:[
+{q:"Quand la plus-value crypto devient-elle imposable ?",opts:["À chaque échange entre cryptomonnaies","Lors de la conversion en euros ou de l'achat d'un bien","Chaque 31 décembre","Dès l'achat initial"],correct:1,
+explain:"Les échanges crypto contre crypto sont neutres. C'est la sortie vers une monnaie ayant cours légal qui déclenche l'imposition."},
+{q:"Quelle obligation est la plus sévèrement sanctionnée ?",opts:["L'oubli d'une plus-value de faible montant","La non-déclaration d'un compte ouvert à l'étranger","L'absence de justificatifs d'achat","Le retard de paiement"],correct:1,
+explain:"L'amende est forfaitaire par compte et indépendante du montant détenu. Un compte vide non déclaré coûte autant qu'un compte garni."},
+{q:"Pourquoi tenir un registre au fil de l'eau ?",opts:["Parce que la loi impose un format précis","Parce que le calcul exige la valeur totale du portefeuille à chaque cession","Pour obtenir un taux réduit","Pour éviter la déclaration annuelle"],correct:1,
+explain:"La méthode de calcul française rapporte chaque cession à la valeur globale du portefeuille. Reconstituer cela après coup est très lourd."}
+],
+action:"Si tu détiens des crypto-actifs, liste ce soir toutes les plateformes où tu as un compte, et repère celles qui sont établies hors de France. Ce sont elles qui doivent figurer sur ta prochaine déclaration, même si le compte est vide."
+},
+{module:"Module 4 — L'immobilier face à l'impôt", title:"Revenus fonciers : micro-foncier ou régime réel", duration:"5 min",
+script:[
+"Louer un logement vide génère des revenus fonciers, imposés au barème progressif de l'impôt sur le revenu, auxquels s'ajoutent les 17,2 % de prélèvements sociaux. Ce cumul explique pourquoi la location nue est fiscalement lourde pour un contribuable fortement imposé.",
+"Deux régimes coexistent, et le choix entre les 2 constitue la principale décision fiscale d'un propriétaire bailleur.",
+"<strong>Le micro-foncier</strong> s'applique automatiquement si tes revenus fonciers bruts annuels ne dépassent pas <strong>15 000 €</strong>. Il consiste en un abattement forfaitaire de <strong>30 %</strong>, censé couvrir toutes tes charges. Sa force est la simplicité : aucun justificatif, quelques lignes sur la déclaration.",
+"<strong>Le régime réel</strong> permet de déduire les charges effectivement supportées : intérêts d'emprunt, primes d'assurance, taxe foncière, frais de gestion, et surtout travaux d'entretien, de réparation et d'amélioration. Il devient obligatoire au-delà de 15 000 €, et reste optionnel en dessous.",
+"La règle de décision est directe : <strong>si tes charges réelles dépassent 30 % de tes loyers, le régime réel est plus avantageux.</strong> C'est presque toujours le cas la première année d'un achat à crédit, où les intérêts d'emprunt sont au maximum, et lors de toute année de travaux importants.",
+"Attention à un piège qui coûte cher : <u>l'option pour le régime réel est irrévocable pendant 3 ans</u>. Elle se reconduit ensuite tacitement. Choisir le réel une année de gros travaux engage donc aussi les 2 années suivantes, pendant lesquelles il faudra continuer à justifier chaque charge.",
+"Une distinction essentielle mérite d'être retenue, car elle provoque de nombreux redressements. <strong>Les travaux d'entretien, de réparation et d'amélioration sont déductibles ; les travaux de construction, de reconstruction ou d'agrandissement ne le sont pas.</strong> Refaire une toiture est déductible, ajouter une véranda ne l'est pas. En cas de doute sur un chantier important, la question se pose avant les travaux, pas au moment de la déclaration."
+],
+quiz:[
+{q:"Quel est l'abattement du micro-foncier ?",opts:["10 %","30 %","50 %","71 %"],correct:1,
+explain:"30 % forfaitaires censés couvrir toutes les charges, sans aucun justificatif à fournir."},
+{q:"Quand le régime réel devient-il plus avantageux ?",opts:["Quand les charges dépassent 30 % des loyers","Quand les loyers dépassent 30 000 €","Toujours","Uniquement en cas de vente"],correct:0,
+explain:"C'est presque toujours le cas la première année d'un achat à crédit, et lors des années de travaux importants."},
+{q:"Quelle est la contrainte de l'option pour le régime réel ?",opts:["Elle coûte des frais de dossier","Elle est irrévocable pendant 3 ans","Elle interdit la location meublée","Elle impose un expert-comptable"],correct:1,
+explain:"Choisir le réel pour une année de travaux engage aussi les 2 années suivantes."}
+],
+action:"Si tu es propriétaire bailleur, additionne tes charges réelles de l'an dernier et compare-les à 30 % de tes loyers encaissés. Ce simple calcul te dit si tu as choisi le bon régime, et beaucoup de bailleurs découvrent qu'ils paient trop depuis des années."
+},
+{module:"Module 4 — L'immobilier face à l'impôt", title:"Le déficit foncier, un levier puissant et méconnu", duration:"5 min",
+script:[
+"Le déficit foncier est l'un des rares dispositifs qui ne suppose ni produit à acheter ni montage particulier. Il se produit naturellement quand les charges déductibles d'un bien loué dépassent les loyers encaissés, ce qui arrive typiquement lors d'une année de travaux.",
+"Le mécanisme comporte 2 étages, et c'est le second qui en fait la puissance. <strong>Premier étage :</strong> le déficit s'impute d'abord sur tes autres revenus fonciers, s'il y en a. <strong>Second étage :</strong> le solde s'impute sur ton revenu global, c'est-à-dire sur ton salaire, dans la limite de <strong>10 700 €</strong> par an.",
+"Cette imputation sur le revenu global est ce qui rend le dispositif intéressant, parce qu'elle réduit un revenu taxé à ton taux marginal. Pour quelqu'un imposé à 30 %, un déficit de 10 700 € représente une économie d'environ 3 200 € d'impôt sur le revenu, à laquelle s'ajoute l'effet sur les prélèvements sociaux des revenus fonciers.",
+"Deux précisions techniques importantes. La fraction du déficit provenant des <strong>intérêts d'emprunt</strong> ne peut jamais s'imputer sur le revenu global : elle reste cantonnée aux revenus fonciers. Et la part du déficit dépassant 10 700 € est <u>reportable sur les revenus fonciers des 10 années suivantes</u>, donc rien n'est perdu, seulement décalé.",
+"La contrepartie est une obligation de durée, et elle est stricte : <strong>le bien doit rester loué jusqu'au 31 décembre de la troisième année suivant celle de l'imputation.</strong> Vendre ou reprendre le logement pour soi avant ce terme entraîne la remise en cause de l'avantage, avec régularisation.",
+"Un conseil de méthode pour finir. Puisque le plafond est annuel, <strong>étaler des travaux importants sur 2 exercices est souvent plus efficace que de tout concentrer sur une seule année.</strong> Un chantier de 20 000 € réalisé intégralement en une année dépasse le plafond, alors que le même chantier réparti sur 2 années civiles peut être absorbé en totalité. La date de paiement des factures compte, pas celle du chantier."
+],
+quiz:[
+{q:"Dans quelle limite le déficit foncier s'impute-t-il sur le revenu global ?",opts:["5 000 €","10 700 €","15 000 €","Sans limite"],correct:1,
+explain:"Au-delà, le surplus reste reportable sur les revenus fonciers des 10 années suivantes."},
+{q:"Quelle charge ne peut pas s'imputer sur le revenu global ?",opts:["La taxe foncière","Les intérêts d'emprunt","Les frais de gestion","Les travaux de réparation"],correct:1,
+explain:"La fraction du déficit provenant des intérêts reste cantonnée aux revenus fonciers."},
+{q:"Quelle obligation accompagne le déficit foncier ?",opts:["Louer meublé pendant 5 ans","Maintenir le bien en location jusqu'à la fin de la troisième année suivante","Réaliser les travaux soi-même","Déclarer au régime micro-foncier"],correct:1,
+explain:"Vendre ou reprendre le logement avant ce terme entraîne la remise en cause de l'avantage."}
+],
+action:"Si tu envisages des travaux sur un bien loué, regarde le calendrier avant le devis. Répartir les paiements sur 2 années civiles permet souvent d'absorber la totalité du déficit dans le plafond annuel, au lieu d'en reporter une partie sur 10 ans."
+},
+{module:"Module 4 — L'immobilier face à l'impôt", title:"La location meublée, un régime à part", duration:"5 min",
+script:[
+"Louer meublé ne relève pas des revenus fonciers mais des bénéfices industriels et commerciaux. Ce changement de catégorie a des conséquences fiscales importantes, généralement favorables au bailleur, ce qui explique la popularité du statut.",
+"Deux régimes existent également ici. <strong>Le micro-BIC</strong> applique un abattement forfaitaire, historiquement de <strong>50 %</strong> pour une location meublée classique, contre 30 % en location nue. Les seuils et les taux applicables aux meublés de tourisme ont fait l'objet de plusieurs modifications récentes, avec des abattements réduits et des conditions particulières selon le classement du bien. <u>C'est typiquement le point à vérifier pour l'année en cours plutôt qu'à supposer.</u>",
+"<strong>Le régime réel</strong> est celui qui explique l'attrait du meublé, grâce à un mécanisme absent de la location nue : <strong>l'amortissement</strong>. Il permet de déduire chaque année une fraction de la valeur du bien et du mobilier, comme le ferait une entreprise pour ses machines. Cette charge est purement comptable, elle ne correspond à aucune sortie d'argent, et elle réduit pourtant le résultat imposable.",
+"L'effet est frappant : <strong>de nombreux loueurs en meublé au régime réel ne paient aucun impôt sur leurs loyers pendant des années</strong>, parce que l'amortissement absorbe le bénéfice. Ce n'est ni une astuce ni une zone grise, c'est le régime prévu.",
+"Trois contreparties, réelles. Le régime réel suppose une <strong>comptabilité</strong>, donc en pratique un expert-comptable, dont le coût annuel doit être mis en balance avec le gain. Le statut impose une immatriculation et des obligations déclaratives spécifiques. Et l'amortissement pratiqué influence le calcul de la plus-value lors de la revente, selon des règles qui ont évolué récemment.",
+"Enfin, la distinction entre loueur non professionnel et professionnel repose sur des critères de recettes et de part dans les revenus du foyer. Le passage d'un statut à l'autre modifie le traitement des déficits et des plus-values, et il peut survenir sans qu'on l'ait cherché, simplement parce que les loyers ont augmenté. <strong>C'est un point à surveiller chaque année</strong>, et l'une des rares situations où l'accompagnement d'un professionnel se justifie clairement."
+],
+quiz:[
+{q:"Dans quelle catégorie sont imposés les revenus d'une location meublée ?",opts:["Revenus fonciers","Bénéfices industriels et commerciaux","Traitements et salaires","Revenus de capitaux mobiliers"],correct:1,
+explain:"Ce changement de catégorie ouvre l'accès à des mécanismes absents de la location nue, dont l'amortissement."},
+{q:"Qu'est-ce que l'amortissement ?",opts:["Le remboursement du crédit","Une charge comptable déduite chaque année sans sortie d'argent","Une exonération de taxe foncière","Une réduction d'impôt forfaitaire"],correct:1,
+explain:"C'est ce qui permet à de nombreux loueurs de ne payer aucun impôt sur leurs loyers pendant des années."},
+{q:"Quelle est la principale contrainte du régime réel en meublé ?",opts:["Un plafond de loyers très bas","L'obligation de tenir une comptabilité, donc un coût annuel","L'interdiction de louer à des proches","Une durée minimale de 15 ans"],correct:1,
+explain:"Le coût de l'expert-comptable doit être mis en balance avec le gain fiscal attendu."}
+],
+action:"Si tu loues ou envisages de louer un bien, compare sur une feuille les 2 scénarios : location nue au micro-foncier, et location meublée au réel avec amortissement, en intégrant le coût comptable. L'écart annuel est souvent bien plus important que ce que l'on imagine."
+},
+{module:"Module 4 — L'immobilier face à l'impôt", title:"La plus-value immobilière et l'effet du temps", duration:"5 min",
+script:[
+"Vendre un bien immobilier plus cher qu'on ne l'a acheté génère une plus-value, imposée selon des règles très différentes de celles des placements financiers. La durée de détention y joue un rôle central.",
+"Première chose à savoir, et elle concerne la majorité des ventes : <strong>la résidence principale est totalement exonérée</strong>, sans condition de durée ni de montant. C'est l'exonération la plus large du droit fiscal français, et elle explique pourquoi la question ne se pose pas pour la plupart des ménages.",
+"Pour les autres biens, résidence secondaire ou investissement locatif, la plus-value est taxée à <strong>19 % au titre de l'impôt sur le revenu</strong> et <strong>17,2 % au titre des prélèvements sociaux</strong>, soit 36,2 % au total. Une surtaxe s'applique en outre aux plus-values les plus élevées.",
+"Mais ce taux s'applique après des abattements pour durée de détention, et c'est là que le calendrier devient déterminant. Les 2 abattements ne suivent pas le même rythme : <u>l'exonération est totale au bout de 22 ans pour l'impôt sur le revenu, et seulement au bout de 30 ans pour les prélèvements sociaux</u>. Cette différence de 8 années surprend beaucoup de vendeurs, qui croient être exonérés alors qu'ils doivent encore les prélèvements sociaux.",
+"Le calcul de la plus-value elle-même mérite attention, car il permet de la réduire légalement. Le prix d'acquisition peut être majoré des frais d'acquisition, retenus pour leur montant réel ou pour un forfait de 7,5 %, et des <strong>travaux réalisés</strong>, retenus pour leur montant réel justifié ou, après 5 ans de détention, pour un forfait de 15 % du prix d'achat sans avoir à produire de facture.",
+"D'où un réflexe qui vaut de l'argent : <strong>conserver toutes les factures de travaux dès l'achat</strong>. Sur un bien conservé 15 ans et rénové plusieurs fois, la différence entre le forfait de 15 % et les travaux réels peut représenter plusieurs dizaines de milliers d'euros de base imposable en moins.",
+"Enfin, d'autres cas d'exonération existent, notamment pour une première cession d'un logement autre que la résidence principale sous conditions strictes de remploi, ou pour les cessions de faible montant. Ces cas sont techniques et méritent une vérification précise avant de signer un compromis, pas après."
+],
+quiz:[
+{q:"Après combien d'années la plus-value est-elle totalement exonérée ?",opts:["15 ans pour tout","22 ans pour l'impôt et 30 ans pour les prélèvements sociaux","30 ans pour tout","Il n'y a jamais d'exonération"],correct:1,
+explain:"Cette différence de 8 années entre les 2 abattements surprend de nombreux vendeurs."},
+{q:"Quelle vente est totalement exonérée sans condition de durée ?",opts:["La résidence secondaire","La résidence principale","Un bien loué meublé","Un terrain constructible"],correct:1,
+explain:"C'est l'exonération la plus large du droit fiscal français, sans condition de durée ni de montant."},
+{q:"Pourquoi conserver ses factures de travaux ?",opts:["Pour la garantie décennale uniquement","Parce qu'elles majorent le prix d'acquisition et réduisent la plus-value imposable","Pour justifier le loyer","Pour l'assurance habitation"],correct:1,
+explain:"Un forfait de 15 % existe après 5 ans, mais les travaux réels justifiés le dépassent souvent largement."}
+],
+action:"Si tu possèdes un bien autre que ta résidence principale, crée dès ce soir un dossier, physique ou numérique, où tu ranges toutes les factures de travaux. Le jour de la vente, ce dossier vaudra beaucoup plus que le temps qu'il t'aura coûté."
+},
+{module:"Module 5 — Déclarer sans erreur", title:"Le calendrier et les pièges de la déclaration", duration:"5 min",
+script:[
+"La déclaration annuelle est devenue largement préremplie, ce qui a créé un faux sentiment de sécurité. L'administration connaît tes salaires et tes pensions, mais elle ignore une grande partie de ta situation, et c'est précisément là que se produisent les erreurs.",
+"Le calendrier suit toujours la même logique. La déclaration s'ouvre en avril, avec des dates limites échelonnées <strong>selon le numéro de département</strong>, généralement entre fin mai et début juin. L'avis d'imposition arrive durant l'été, et le solde éventuel est prélevé à l'automne. <u>Vérifie chaque année ta date limite précise</u>, car un simple retard entraîne une majoration.",
+"Ce que l'administration ne sait pas, et que tu dois lui dire : tes changements de situation familiale, la naissance d'un enfant, un mariage ou un divorce, les pensions alimentaires que tu verses, tes dons, tes frais réels si tu les choisis, tes revenus fonciers, tes comptes détenus à l'étranger, et tes plus-values non déclarées automatiquement.",
+"Une confusion coûteuse mérite d'être levée : <strong>déclarer n'est pas payer.</strong> Beaucoup de gens hésitent à déclarer un revenu modeste en pensant que cela déclenchera un impôt. Or de nombreux revenus déclarés ne génèrent aucune imposition, tandis que l'absence de déclaration constitue une infraction, même quand aucun impôt n'était dû.",
+"Trois pièges reviennent chaque année. <strong>1.</strong> Oublier de cocher l'option pour le barème progressif quand elle serait plus favorable, ce qui coûte des centaines d'euros aux petits revenus percevant des dividendes. <strong>2.</strong> Ne pas signaler un changement de situation familiale, ce qui fait perdre une part entière pendant un an. <strong>3.</strong> Omettre la déclaration d'un compte étranger, y compris de plateforme crypto, dont l'amende est forfaitaire.",
+"Un conseil de méthode simple et efficace : <strong>constitue un dossier « impôts » au fil de l'année</strong>, physique ou numérique, où tu déposes chaque justificatif au moment où tu le reçois. Attestation de don, facture de service à domicile, reçu de pension. Au moment de déclarer, tout est là, et la déclaration prend 20 minutes au lieu d'une soirée à chercher.",
+"Enfin, garde en tête le droit à l'erreur. <strong>Une erreur de bonne foi peut être corrigée</strong>, en ligne pendant la période de correction, ou par réclamation ensuite. La sanction ne frappe réellement que la dissimulation délibérée et le refus de régulariser."
+],
+quiz:[
+{q:"De quoi dépend la date limite de déclaration ?",opts:["De la profession","Du numéro de département","De l'âge","Du montant de l'impôt"],correct:1,
+explain:"Les dates sont échelonnées par zones. Un retard entraîne une majoration, il faut donc vérifier sa date chaque année."},
+{q:"Faut-il déclarer un revenu même s'il ne sera pas imposé ?",opts:["Non, c'est inutile","Oui, l'absence de déclaration est une infraction même sans impôt dû","Uniquement au-delà de 1 000 €","Seulement s'il vient de l'étranger"],correct:1,
+explain:"Déclarer n'est pas payer. Beaucoup de revenus déclarés ne génèrent aucune imposition, mais l'omission reste sanctionnable."},
+{q:"Que permet le droit à l'erreur ?",opts:["De ne jamais être sanctionné","De corriger une erreur de bonne foi sans être traité comme un fraudeur","De déclarer avec un an de retard","D'éviter les prélèvements sociaux"],correct:1,
+explain:"La sanction vise la dissimulation délibérée et le refus de régulariser, pas l'erreur reconnue et corrigée."}
+],
+action:"Crée ce soir un dossier nommé « impôts » suivi de l'année en cours, sur ton ordinateur ou dans une chemise. Dépose-y immédiatement les justificatifs que tu as déjà sous la main. C'est l'action la moins spectaculaire de cette formation, et celle qui te fera gagner le plus de temps."
+},
+{module:"Module 5 — Déclarer sans erreur", title:"Les erreurs les plus fréquentes, et comment les corriger", duration:"5 min",
+script:[
+"Cette leçon rassemble les erreurs que l'on retrouve le plus souvent, et surtout la façon de les réparer. Presque toutes se corrigent, et beaucoup permettent de récupérer de l'argent sur les années passées.",
+"<strong>Erreur 1 : croire que le prélèvement à la source suffit.</strong> Il ne s'agit que d'une avance calculée sur des revenus passés. La déclaration reste obligatoire chaque année, même sans changement de situation.",
+"<strong>Erreur 2 : ne pas signaler un changement de situation.</strong> Naissance, mariage, séparation, décès : ces événements modifient le nombre de parts et doivent être déclarés dans les 60 jours pour ajuster le prélèvement, puis repris dans la déclaration annuelle.",
+"<strong>Erreur 3 : oublier une charge déductible.</strong> Pension alimentaire, aide à un ascendant, dons : ce sont les plus souvent omis, généralement parce que le contribuable ignorait leur existence.",
+"<strong>Erreur 4 : conserver le régime micro par confort.</strong> De nombreux bailleurs restent au micro-foncier alors que le régime réel leur serait plus favorable, simplement parce qu'ils n'ont jamais fait le calcul.",
+"<strong>Erreur 5 : omettre un compte étranger</strong>, y compris un compte de plateforme crypto ou un compte bancaire en ligne domicilié hors de France. C'est l'erreur dont la sanction est la plus disproportionnée au regard des montants.",
+"Voici maintenant la partie utile : comment corriger. <strong>Pendant la période de correction en ligne</strong>, ouverte de l'été à la mi-décembre, tu modifies ta déclaration directement depuis ton espace, sans justification particulière. <u>Au-delà, la réclamation reste possible jusqu'au 31 décembre de la deuxième année suivant celle de la mise en recouvrement.</u> Concrètement, tu disposes de plus de 2 ans pour récupérer un trop-payé.",
+"La réclamation se fait par la messagerie sécurisée de ton espace, en expliquant simplement l'erreur et en joignant les justificatifs. <strong>Ce n'est ni un contentieux, ni une démarche risquée</strong> : c'est une procédure ordinaire, gratuite, et l'administration rembourse quand la demande est fondée. Beaucoup de gens n'osent pas la faire, ce qui représente chaque année des sommes considérables jamais réclamées."
+],
+quiz:[
+{q:"Jusqu'à quand peut-on réclamer un trop-payé ?",opts:["Jusqu'à la fin de la période de déclaration","Jusqu'au 31 décembre de la deuxième année suivant la mise en recouvrement","Pendant 10 ans","Ce n'est pas possible"],correct:1,
+explain:"Cela laisse plus de 2 ans pour corriger une omission et récupérer les sommes concernées."},
+{q:"Le prélèvement à la source dispense-t-il de déclarer ?",opts:["Oui, dans tous les cas","Non, la déclaration reste obligatoire chaque année","Oui, sauf en cas de changement d'employeur","Uniquement pour les salariés"],correct:1,
+explain:"Le prélèvement n'est qu'une avance calculée sur des revenus passés. Le solde se calcule à la déclaration."},
+{q:"Comment se fait une réclamation ?",opts:["Par courrier recommandé avec avocat","Par la messagerie sécurisée de l'espace particulier, avec justificatifs","Devant le tribunal administratif","Elle est impossible en ligne"],correct:1,
+explain:"C'est une procédure ordinaire et gratuite. Beaucoup n'osent pas la faire, ce qui laisse chaque année des sommes non réclamées."}
+],
+action:"Relis ton avis d'imposition des 2 dernières années à la lumière de cette formation. Si tu repères une charge oubliée ou un régime mal choisi, rédige une réclamation depuis ta messagerie sécurisée : la démarche prend 15 minutes et le délai court encore."
+},
+{module:"Module 5 — Déclarer sans erreur", title:"Optimiser dans la durée, sans monter d'usine à gaz", duration:"5 min",
+script:[
+"Cette dernière leçon rassemble ce qui précède en une méthode tenable. L'optimisation fiscale efficace ne repose pas sur des montages, mais sur quelques décisions bien ordonnées et répétées chaque année.",
+"<strong>Le principe directeur, à retenir avant tout le reste : ne jamais laisser la fiscalité décider d'un investissement.</strong> Un placement se juge d'abord sur sa qualité, son risque et sa liquidité. L'avantage fiscal est un bonus, jamais une raison. Cette règle seule évite la majorité des mauvaises décisions patrimoniales, et notamment les dispositifs immobiliers vendus pour leur réduction d'impôt.",
+"Voici l'ordre logique, cohérent avec tout ce que tu as vu. <strong>1.</strong> Connaître son taux marginal, qui détermine quels dispositifs ont un sens pour toi. <strong>2.</strong> Utiliser les crédits d'impôt du quotidien, qui profitent à tous. <strong>3.</strong> Déclarer les charges déductibles auxquelles tu as déjà droit. <strong>4.</strong> Ouvrir tôt les enveloppes à compteur, PEA et assurance-vie. <strong>5.</strong> Seulement ensuite, envisager un dispositif de déduction si ton taux marginal le justifie.",
+"Le calendrier compte aussi, et 2 moments dans l'année suffisent. <strong>En novembre et décembre</strong>, tu peux encore agir sur l'année en cours : verser sur un plan retraite, réaliser un don, payer des travaux, demander une dispense d'acompte. <strong>En avril et mai</strong>, tu déclares et tu vérifies les options, notamment celle du barème progressif.",
+"Méfie-toi particulièrement de la période de fin d'année. <u>C'est le moment où l'on vend le plus de produits défiscalisants, et où l'urgence sert d'argument.</u> Une offre présentée comme expirant le 31 décembre te prive précisément du temps nécessaire pour la comprendre. Si tu ne peux pas expliquer un produit à quelqu'un d'autre en 2 minutes, ne le signe pas.",
+"Un mot sur le moment où consulter un professionnel, car cette formation ne remplace pas tout. Un expert-comptable ou un avocat fiscaliste devient utile quand ta situation comporte des revenus de plusieurs catégories, une activité indépendante, de la location meublée au réel, une transmission à préparer, ou un patrimoine transfrontalier. <strong>Payer 500 € de conseil pour économiser 3 000 € d'impôt est un excellent investissement</strong> ; payer 500 € pour une situation simple ne l'est pas.",
+"Enfin, retiens ceci en refermant cette formation. L'optimisation fiscale n'est pas un sport de compétition. Elle consiste simplement à <strong>ne pas payer plus que ce que la loi prévoit</strong>, ce qui est un droit, et non à chercher les limites du système, ce qui devient un risque. La différence entre les 2 tient en une question : serais-tu à l'aise d'expliquer ce montage à un inspecteur ? Si oui, tu es dans l'optimisation. Si non, tu es ailleurs."
+],
+quiz:[
+{q:"Quel est le principe directeur de l'optimisation fiscale ?",opts:["Maximiser les réductions d'impôt chaque année","Ne jamais laisser la fiscalité décider d'un investissement","Investir en décembre","Multiplier les enveloppes"],correct:1,
+explain:"Un placement se juge sur sa qualité, son risque et sa liquidité. L'avantage fiscal est un bonus, jamais une raison d'acheter."},
+{q:"Pourquoi se méfier des offres de fin d'année ?",opts:["Parce qu'elles sont illégales","Parce que l'urgence prive du temps nécessaire pour comprendre","Parce que les taux sont plus élevés","Parce que l'administration les refuse"],correct:1,
+explain:"Une offre qui expire le 31 décembre empêche précisément de prendre le temps de l'évaluer."},
+{q:"Quelle question distingue l'optimisation du risque ?",opts:["Le montant économisé","Serais-je à l'aise d'expliquer ce montage à un inspecteur ?","Le produit est-il connu ?","L'a-t-on conseillé en banque ?"],correct:1,
+explain:"Ne pas payer plus que ce que la loi prévoit est un droit. Chercher les limites du système est un risque."}
+],
+action:"Note dans ton calendrier 2 rendez-vous annuels récurrents : un mi-novembre pour les décisions de fin d'année, un mi-avril pour la déclaration. Colle dans chacun la liste des points de cette leçon. C'est tout ce que demande une fiscalité bien tenue : 2 heures par an, aux 2 bons moments."
+}
+];
+
+/* ============ SUPABASE ============ */
+const SUPABASE_URL = 'https://pchkshpbzsybvtwxqvrf.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjaGtzaHBienN5YnZ0d3hxdnJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NDgwMTAsImV4cCI6MjEwMTUyNDAxMH0.3EqyBUDmHHJ79mdDD6dmpVwsuEA0h2hF-75Up9R2Snc';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const FORMATION = 'fiscalite';
+let CURRENT_USER = null;
+let PROGRESS_CACHE = {};
+
+async function requireAuth(){
+  const { data: { session } } = await sb.auth.getSession();
+  if(!session){
+    window.location.href = 'inscription.html?redirect=lecons-budget.html';
+    return null;
+  }
+  return session.user;
+}
+
+async function requireUnlock(userId){
+  const { data: badge } = await sb.from('badges').select('badge_name').eq('user_id', userId).eq('badge_name','le_declic').maybeSingle();
+  if(!badge){
+    window.location.href = 'lecons-monnaie.html';
+    return false;
+  }
+  return true;
+}
+
+async function signOut(){
+  await sb.auth.signOut();
+  window.location.href = 'index.html';
+}
+
+async function loadProgressFromServer(){
+  const { data } = await sb
+    .from('lesson_progress')
+    .select('lesson_number, completed')
+    .eq('user_id', CURRENT_USER.id)
+    .eq('formation', FORMATION);
+  const p = {};
+  if(data){ data.forEach(function(row){ if(row.completed) p[row.lesson_number] = true; }); }
+  PROGRESS_CACHE = p;
+  return p;
+}
+function getProgress(){ return PROGRESS_CACHE; }
+async function setProgressServer(lessonNumber, value){
+  PROGRESS_CACHE[lessonNumber] = value;
+  await sb.from('lesson_progress').upsert({
+    user_id: CURRENT_USER.id,
+    formation: FORMATION,
+    lesson_number: lessonNumber,
+    completed: value,
+    completed_at: value ? new Date().toISOString() : null
+  }, { onConflict: 'user_id,formation,lesson_number' });
+
+  await majCarnet(lessonNumber, value);
+}
+
+/* Le carnet de route : l'action cochée s'inscrit dans le carnet personnel,
+   la décocher l'en retire. Une erreur ici ne doit jamais bloquer la
+   progression de la leçon, d'où le try/catch silencieux. */
+async function majCarnet(lessonNumber, value){
+  try {
+    const l = LESSONS[lessonNumber - 1];
+    if(!l) return;
+
+    if(!value){
+      await sb.from('carnet').delete()
+        .eq('user_id', CURRENT_USER.id)
+        .eq('formation', FORMATION)
+        .eq('lesson_number', lessonNumber);
+      return;
+    }
+
+    await sb.from('carnet').upsert({
+      user_id: CURRENT_USER.id,
+      formation: FORMATION,
+      lesson_number: lessonNumber,
+      titre: l.title || ('Leçon ' + lessonNumber),
+      action: l.action || ''
+    }, { onConflict: 'user_id,formation,lesson_number', ignoreDuplicates: true });
+  } catch(e){
+    console.warn('Carnet non mis à jour :', e);
+  }
+}
+
+let current = parseInt(new URLSearchParams(location.search).get('l')) || 1;
+if(current < 1) current = 1;
+if(current > LESSONS.length) current = LESSONS.length;
+
+function isUnlocked(n){
+  if(n === 1) return true;
+  const progress = getProgress();
+  return !!progress[n-1];
+}
+
+function renderSidebar(){
+  const progress = getProgress();
+  const doneCount = Object.keys(progress).filter(k=>progress[k]).length;
+  document.getElementById('navProgress').textContent = doneCount + '/' + LESSONS.length + ' leçons';
+  const sbEl = document.getElementById('sidebar');
+  let html = '<div class="sb-progress-bar"><div class="sb-progress-fill" style="width:' + Math.round(doneCount/LESSONS.length*100) + '%"></div></div>';
+  let lastModule = '';
+  LESSONS.forEach(function(l, i){
+    const n = i+1;
+    if(l.module !== lastModule){ html += '<div class="sb-module-label">' + l.module.split(' — ')[0] + '</div>'; lastModule = l.module; }
+    const isDone = !!progress[n];
+    const isActive = n === current;
+    const unlocked = isUnlocked(n);
+    const lockedClass = unlocked ? '' : 'locked';
+    let iconContent = n;
+    if(isDone) iconContent = '✓';
+    else if(!unlocked) iconContent = '🔒';
+    html += '<div class="sb-item ' + (isActive?'active':'') + ' ' + (isDone?'done':'') + ' ' + lockedClass + '" onclick="goTo(' + n + ')">' +
+      '<span class="sb-check">' + iconContent + '</span>' + l.title + '</div>';
+  });
+  sbEl.innerHTML = html;
+}
+
+function goTo(n){
+  if(!isUnlocked(n)){
+    alert('Termine la leçon précédente pour débloquer celle-ci.');
+    return;
+  }
+  current = n;
+  history.replaceState(null, '', '?l=' + n);
+  render();
+  window.scrollTo(0,0);
+}
+
+let quizState = {};
+
+function allQuizCorrect(l){
+  for(let i=0;i<l.quiz.length;i++){ if(!quizState[i]) return false; }
+  return true;
+}
+
+function render(){
+  renderSidebar();
+  const l = LESSONS[current-1];
+  const progress = getProgress();
+  const done = !!progress[current];
+  quizState = {};
+  if(done){ l.quiz.forEach(function(q,i){ quizState[i] = true; }); }
+  const main = document.getElementById('main');
+  let quizHtml = '';
+  l.quiz.forEach(function(q, qi){
+    let optsHtml = '';
+    q.opts.forEach(function(opt, oi){
+      const preAnswered = done && oi === q.correct;
+      optsHtml += '<div class="quiz-opt ' + (preAnswered?'correct disabled':'') + '" id="q' + qi + 'o' + oi + '" onclick="answerQuiz(' + qi + ',' + oi + ',' + q.correct + ')">' +
+        '<span class="quiz-letter">' + String.fromCharCode(65+oi) + '</span><span class="quiz-opt-text">' + opt + '</span></div>';
+    });
+    quizHtml += '<div class="quiz-card"><div class="quiz-q">Question ' + (qi+1) + '. ' + q.q + '</div>' + optsHtml +
+      '<div class="quiz-explain ' + (done?'show':'') + '" id="exp' + qi + '"><strong>Explication : </strong>' + q.explain + '</div></div>';
+  });
+
+  const quizOk = allQuizCorrect(l);
+  const actionCardStyle = (!quizOk && !done) ? 'opacity:.5;pointer-events:none;' : '';
+
+  main.innerHTML =
+    (done ? '<div class="completion-badge show">✓ Leçon terminée</div>' : '') +
+    '<div class="lesson-eyebrow">' + l.module + '</div>' +
+    '<div class="lesson-title">' + (current) + '. ' + l.title + '</div>' +
+    '<div class="lesson-meta">' + l.duration + ' de lecture · Leçon ' + current + ' sur ' + LESSONS.length + '</div>' +
+    '<div class="section-label"><span class="dot"></span>Comprendre</div>' +
+    '<div class="script-text">' + l.script.map(function(p){return '<p>'+p+'</p>';}).join('') + '</div>' +
+    '<div class="section-label quiz"><span class="dot"></span>Vérifier</div>' +
+    quizHtml +
+    '<div class="section-label action"><span class="dot"></span>Petite action</div>' +
+    (!quizOk && !done ? '<div style="font-size:12.5px;font-weight:600;color:var(--coral);margin-bottom:10px;">Réponds correctement aux ' + l.quiz.length + ' questions pour débloquer cette action.</div>' : '') +
+    '<div class="action-card" id="actionCard" style="' + actionCardStyle + '">' +
+      '<div class="action-text">' + l.action + '</div>' +
+      '<div class="action-check" onclick="toggleAction()"><span class="action-box ' + (done?'checked':'') + '" id="actionBox">' + (done?'✓':'') + '</span><span class="action-label">Marquer cette leçon comme terminée</span></div>' +
+    '</div>' +
+    '<div class="lesson-nav">' +
+      (current > 1 ? '<button class="nav-btn ghost" onclick="goTo(' + (current-1) + ')">← Leçon précédente</button>' : '<span></span>') +
+      (current < LESSONS.length ? '<button class="nav-btn" onclick="goTo(' + (current+1) + ')">Leçon suivante →</button>' : '<a href="budget.html" class="nav-btn">Terminer le parcours →</a>') +
+    '</div>';
+}
+
+function answerQuiz(qi, oi, correct){
+  if(quizState[qi]) return; // déjà répondu correctement, verrouillé
+  const chosen = document.getElementById('q'+qi+'o'+oi);
+  if(chosen.classList.contains('disabled')) return;
+
+  if(oi === correct){
+    for(let k=0;k<10;k++){
+      const el = document.getElementById('q'+qi+'o'+k);
+      if(el){ el.classList.add('disabled'); }
+    }
+    chosen.classList.add('correct');
+    quizState[qi] = true;
+    document.getElementById('exp'+qi).classList.add('show');
+    const l = LESSONS[current-1];
+    const quizOk = allQuizCorrect(l);
+    const card = document.getElementById('actionCard');
+    if(quizOk && card){
+      card.style.opacity = '';
+      card.style.pointerEvents = '';
+      const lock = card.previousElementSibling;
+      if(lock && lock.textContent.indexOf('Réponds correctement') !== -1){ lock.style.display = 'none'; }
+    }
+  } else {
+    chosen.classList.add('wrong');
+    document.getElementById('exp'+qi).classList.add('show');
+    setTimeout(function(){ chosen.classList.remove('wrong'); }, 900);
+  }
+}
+
+async function toggleAction(){
+  const l = LESSONS[current-1];
+  const progress = getProgress();
+  const newValue = !progress[current];
+  if(newValue && !allQuizCorrect(l)){
+    alert('Réponds correctement à toutes les questions du quiz avant de valider cette leçon.');
+    return;
+  }
+  await setProgressServer(current, newValue);
+  render();
+}
+
+async function boot(){
+  document.getElementById('main').innerHTML = '<div style="padding:60px 0;text-align:center;color:var(--ink-faint);font-size:14px;">Chargement de ta progression…</div>';
+  const user = await requireAuth();
+  if(!user) return;
+  const unlocked = await requireUnlock(user.id);
+  if(!unlocked) return;
+  CURRENT_USER = user;
+  await loadProgressFromServer();
+
+  if(!isUnlocked(current)){
+    let lastUnlocked = 1;
+    for(let i=1;i<=LESSONS.length;i++){ if(isUnlocked(i)) lastUnlocked = i; else break; }
+    current = lastUnlocked;
+    history.replaceState(null, '', '?l=' + current);
+  }
+  render();
+}
+boot();
+</script>
+
+<div style="border-top:1px solid var(--bg-line);padding:22px 24px;text-align:center;font-size:12.5px;color:var(--ink-muted);background:var(--bg-soft);">
+  <a href="outils.html" style="color:var(--ink-muted);margin:0 10px;">Outils</a>
+  <a href="carnet.html" style="color:var(--ink-muted);margin:0 10px;">Mon carnet</a>
+  <a href="qui-sommes-nous.html" style="color:var(--ink-muted);margin:0 10px;">Qui nous sommes</a>
+  <a href="mentions-legales.html" style="color:var(--ink-muted);margin:0 10px;">Mentions légales</a>
+  <a href="mentions-legales.html#confidentialite" style="color:var(--ink-muted);margin:0 10px;">Confidentialité</a>
+  <a href="mentions-legales.html#cgv" style="color:var(--ink-muted);margin:0 10px;">CGV</a>
+</div>
+<script src="retours.js" defer></script>
+</body>
+</html>
