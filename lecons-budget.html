@@ -106,6 +106,14 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
 .price-cell,.asset-label,.badge,.eyebrow,.nav-balance{font-family:var(--mono);}
 
 .nav-name em,.ft-name em{font-style:normal;color:var(--amber);}
+
+/* Mise en valeur dans le corps des lecons : le gras porte la notion a
+   retenir, l italique la nuance ou le terme technique. */
+.script-text strong{color:var(--ink,#12212B);font-weight:700;}
+.script-text em{font-style:italic;color:var(--ink-soft,#43555F);}
+.script-text u{text-decoration:none;background:linear-gradient(transparent 62%,var(--amber-pale,#F6EFE0) 62%);
+  box-shadow:inset 0 -1px 0 var(--amber,#B8862F);}
+.script-text p + p{margin-top:14px;}
 </style>
 </head>
 <body>
@@ -572,7 +580,7 @@ function render(){
     '<div class="section-label quiz"><span class="dot"></span>Vérifier</div>' +
     quizHtml +
     '<div class="section-label action"><span class="dot"></span>Petite action</div>' +
-    (!quizOk && !done ? '<div style="font-size:12.5px;font-weight:600;color:var(--coral);margin-bottom:10px;">🔒 Réponds correctement aux ' + l.quiz.length + ' questions pour débloquer cette action.</div>' : '') +
+    (!quizOk && !done ? '<div style="font-size:12.5px;font-weight:600;color:var(--coral);margin-bottom:10px;">Réponds correctement aux ' + l.quiz.length + ' questions pour débloquer cette action.</div>' : '') +
     '<div class="action-card" id="actionCard" style="' + actionCardStyle + '">' +
       '<div class="action-text">' + l.action + '</div>' +
       '<div class="action-check" onclick="toggleAction()"><span class="action-box ' + (done?'checked':'') + '" id="actionBox">' + (done?'✓':'') + '</span><span class="action-label">Marquer cette leçon comme terminée</span></div>' +
