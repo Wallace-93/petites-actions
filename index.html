@@ -274,6 +274,19 @@ h3{font-family:var(--display);font-weight:600;color:var(--encre);font-size:19px;
 .tarif-indicatif{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
   color:var(--encre-3);margin-top:8px;}
 
+
+/* Ce qui est compris partout : la colonne qui rappelle que l'essentiel
+   est gratuit, y compris pour qui ne prend aucune formule. */
+.inclus{background:var(--pin-clair);border:1px solid #BFD6C9;border-radius:12px;
+  padding:24px 26px 26px;margin-top:22px;}
+.inclus-titre{font-family:var(--display);font-size:18px;font-weight:600;color:var(--pin);margin-bottom:14px;}
+.inclus-liste{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:12px 26px;}
+.inclus-liste li{position:relative;padding-left:26px;font-size:14.8px;color:var(--encre-2);}
+.inclus-liste li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:14px;border-radius:4px;
+  background:var(--papier);border:1px solid var(--pin);}
+.inclus-liste strong{color:var(--encre);font-weight:700;}
+@media(max-width:760px){.inclus-liste{grid-template-columns:1fr;}}
+
 /* ---------- Cadre ---------- */
 .cadre{border-left:3px solid var(--brique);background:var(--brique-clair);border-radius:0 10px 10px 0;padding:26px 28px 28px;max-width:760px;}
 .cadre h3{margin-bottom:12px;}
@@ -389,6 +402,23 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
   </div>
 </div>
 
+<!-- ============ À QUI ÇA S'ADRESSE ============ -->
+<section class="section">
+  <div class="s-inner">
+    <div class="s-head">
+      <div class="eyebrow">À qui ça s'adresse</div>
+      <h2 class="display">Tu es au bon endroit si…</h2>
+    </div>
+    <ul class="liste liste-large">
+      <li><strong>« À la fin du mois il ne reste rien. »</strong> Rarement un problème de revenus, presque toujours un problème de structure.</li>
+      <li><strong>Tu as déjà essayé de comprendre.</strong> Une vidéo, un article, et tu as décroché en dix minutes de jargon. Ce n'est pas toi, c'est la façon dont c'était expliqué.</li>
+      <li><strong>Tu es le premier de ta famille à te poser ces questions.</strong> Personne autour de toi ne peut te dire si ce qu'on te propose est correct, alors tu signes en espérant, ou tu ne signes rien du tout.</li>
+      <li><strong>Tu attends d'avoir plus d'argent pour t'y intéresser.</strong> C'est exactement l'inverse : on ne s'y met pas parce qu'on a de l'argent, on en a parce qu'on s'y est mis. Et le meilleur moment était il y a 10 ans, le deuxième est aujourd'hui.</li>
+    </ul>
+    <div class="refrain">NiouDem.</div>
+  </div>
+</section>
+
 <!-- ============ LE CONSTAT ============ -->
 <section class="section section-encre" id="constat">
   <div class="s-inner">
@@ -415,23 +445,6 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       </div>
     </div>
     <p class="lede" style="margin-top:32px;">Aucun de ces obstacles n'est insurmontable. Ensemble, ils découragent. NiouDem existe pour les lever un par un. <a href="qui-sommes-nous.html" style="color:var(--laiton);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(184,134,47,.5);">D'où vient ce projet →</a></p>
-  </div>
-</section>
-
-<!-- ============ À QUI ÇA S'ADRESSE ============ -->
-<section class="section">
-  <div class="s-inner">
-    <div class="s-head">
-      <div class="eyebrow">À qui ça s'adresse</div>
-      <h2 class="display">Tu es au bon endroit si…</h2>
-    </div>
-    <ul class="liste liste-large">
-      <li><strong>« À la fin du mois il ne reste rien. »</strong> Dans ces situations, il s'agit rarement d'un problème de revenus, c'est presque toujours un problème de structure.</li>
-      <li><strong>Tu as déjà essayé de comprendre.</strong> Une vidéo, un article d'éducation financière et tu as décroché en dix minutes de jargon. Ce n'est pas toi, c'est la façon dont c'était expliqué.</li>
-      <li><strong>« Je ne connais rien à la finance. »</strong> Pas de soucis, la methode Petites Actions est fait pour que des débutants puissent suivre.</li>
-      <li><strong>Tu penses qu'il est trop tard,</strong> ou qu'il faudrait déjà avoir de l'argent pour s'y intéresser. Les deux sont faux. A partir de 10 euros environ il est possible de passer un ordre d'achat.</li>
-    </ul>
-    <div class="refrain">NiouDem.</div>
   </div>
 </section>
 
@@ -527,7 +540,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
     <div class="accomp">
       <div>
         <div class="eyebrow">L'accompagnement</div>
-        <h2 class="display" style="margin-bottom:14px;">Le code de la route s'apprend seul,<br>la conduite, non.</h2>
+        <h2 class="display" style="margin-bottom:14px;">Le code s'apprend seul.<br>La conduite, non.</h2>
         <p class="lede">Les leçons donnent le savoir. Elles n'ont jamais fait ouvrir un compte à personne. Le troisième obstacle, celui de ne connaître personne qui ait déjà fait le chemin, ne se règle qu'avec quelqu'un en face.</p>
         <ul>
           <li><strong>Tu ouvres ton compte pendant la séance,</strong> après avoir comparé deux ou trois courtiers sur des critères que tu apprends à lire.</li>
@@ -617,33 +630,57 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       <p>L'accompagnement n'est pas encore ouvert au paiement : la structure est en cours de création. Les tarifs ci-dessous sont ceux qui s'appliqueront à l'ouverture. <strong>En revanche, l'échange découverte est déjà possible et il est gratuit</strong> : on regarde où tu en es, et si l'accompagnement n'est pas ce dont tu as besoin, on te le dira.</p>
     </div>
 
-    <div class="tarifs" style="grid-template-columns:repeat(2,1fr);max-width:820px;">
+    <div class="tarifs">
+      <div class="tarif">
+        <div class="tarif-nom">La consultation</div>
+        <div class="tarif-prix">29 €</div>
+        <div class="tarif-indicatif">Tarif à l'ouverture</div>
+        <div class="tarif-pour">Une question précise, une réponse claire. 45 minutes pour débloquer ce qui te bloque.</div>
+        <ul>
+          <li>Une séance de 45 minutes</li>
+          <li>Un mémo écrit après l'échange</li>
+          <li><strong>Déduite si tu prends une formule</strong> dans les 30 jours</li>
+        </ul>
+        <a href="accompagnement.html" class="btn-ghost">En savoir plus</a>
+      </div>
+
       <div class="tarif">
         <div class="tarif-nom">Reprendre la main sur ses comptes</div>
-        <div class="tarif-prix">150 €</div>
+        <div class="tarif-prix">99 €</div>
         <div class="tarif-indicatif">Tarif à l'ouverture</div>
         <div class="tarif-pour">Savoir enfin où part ton argent, et faire partir l'épargne toute seule.</div>
         <ul>
           <li>Deux séances d'une heure trente</li>
           <li>Ton système mis en place avec toi</li>
           <li>La chasse aux charges fixes</li>
+          <li>Tes questions écrites pendant 2 semaines</li>
         </ul>
         <a href="accompagnement.html" class="btn-ghost">En savoir plus</a>
       </div>
 
       <div class="tarif mis-en-avant">
         <div class="tarif-nom">Prendre en main son investissement</div>
-        <div class="tarif-prix">150 €</div>
+        <div class="tarif-prix">149 €</div>
         <div class="tarif-indicatif">Tarif à l'ouverture</div>
         <div class="tarif-pour">Ne plus être bloqué devant une interface de courtier. Débutants attendus.</div>
         <ul>
           <li>Deux séances d'une heure trente</li>
-          <li>Ton premier ordre, passé par toi</li>
-          <li>Ta règle écrite en dix lignes</li>
+          <li>Ton compte ouvert, ton premier ordre passé par toi</li>
+          <li>Ta règle d'investissement écrite en 10 lignes</li>
+          <li>Tes questions écrites pendant 2 semaines</li>
         </ul>
         <a href="accompagnement.html" class="btn-primary">En savoir plus</a>
       </div>
+    </div>
 
+    <div class="inclus">
+      <div class="inclus-titre">Compris dans toutes les formules, et même sans aucune</div>
+      <ul class="inclus-liste">
+        <li><strong>Le diagnostic de départ, gratuit.</strong> 20 minutes pour regarder où tu en es. Si l'accompagnement n'est pas ce dont tu as besoin, on te le dit.</li>
+        <li><strong>NiouDem Learn, gratuit.</strong> Les 8 formations en entier, 132 leçons, sans compte à rebours ni version limitée.</li>
+        <li><strong>Les 5 outils et le tableau de budget, gratuits.</strong> Sans inscription, et rien n'est enregistré.</li>
+        <li><strong>Le carnet de route et le Trading Lab, gratuits.</strong> Ta progression te suit, et elle t'appartient.</li>
+      </ul>
     </div>
 
     <div class="tarif-note">Deux places solidaires par mois, sans justificatif, pour qui ces montants sont hors de portée. Le contenu de l'accompagnement est strictement le même. Nous ne vendons aucun produit financier et ne percevons aucune commission : ta stratégie reste écrite par toi.</div>

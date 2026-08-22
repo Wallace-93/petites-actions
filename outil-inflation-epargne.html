@@ -16,6 +16,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="outils.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de perte de pouvoir d'achat","url":"https://nioudem.com/outil-inflation-epargne.html","applicationCategory":"FinanceApplication","operatingSystem":"Tout navigateur","description":"Ton livret rapporte moins que l'inflation ? Calcule ce que ton épargne perd réellement en pouvoir d'achat, année après année. Gratuit, sans inscription.","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"publisher":{"@type":"Organization","name":"NiouDem","url":"https://nioudem.com"}}</script>
+<style>
+/* ===== La note de marge =====
+   Sur les grands ecrans, les marges sont vides. Plutot qu'un encart
+   publicitaire, une note manuscrite comme dans un livre annote : elle
+   informe sans jamais interrompre la lecture. */
+.marge{display:none;}
+@media(min-width:1420px){
+  .marge{display:block;position:fixed;left:24px;top:50%;transform:translateY(-50%);
+    width:190px;z-index:20;}
+  .marge-trait{width:26px;height:1px;background:var(--laiton,#B8862F);margin-bottom:14px;}
+  .marge-sur{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--laiton,#B8862F);margin-bottom:9px;}
+  .marge-titre{font-family:var(--display,Georgia,serif);font-size:19px;font-weight:600;
+    color:var(--encre,#12212B);line-height:1.28;margin-bottom:9px;}
+  .marge-txt{font-size:13px;line-height:1.6;color:var(--encre-3,#7A8A93);margin-bottom:13px;}
+  .marge-lien{font-size:13px;font-weight:700;color:var(--pin,#1E4B3C);text-decoration:none;
+    border-bottom:1px solid rgba(30,75,60,.35);}
+  .marge-lien:hover{border-bottom-color:var(--pin,#1E4B3C);}
+  .marge-fermer{position:absolute;top:-6px;right:0;background:transparent;border:0;cursor:pointer;
+    color:var(--encre-3,#7A8A93);font-size:15px;line-height:1;padding:2px 4px;}
+}
+</style>
 </head>
 <body>
 
@@ -243,5 +265,14 @@
 </footer>
 
 <script src="retours.js" defer></script>
+
+<aside class="marge" id="margeLearn" aria-label="À propos de NiouDem Learn">
+  <button class="marge-fermer" onclick="document.getElementById('margeLearn').style.display='none'" aria-label="Masquer">&times;</button>
+  <div class="marge-trait"></div>
+  <div class="marge-sur">NiouDem Learn</div>
+  <div class="marge-titre">132 leçons, gratuites.</div>
+  <div class="marge-txt">Les 8 formations en entier, sans compte à rebours ni version limitée. Ce qui se paie ici, c'est du temps humain, jamais le savoir.</div>
+  <a href="index.html#formations" class="marge-lien">Commencer une formation →</a>
+</aside>
 </body>
 </html>
