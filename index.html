@@ -287,6 +287,36 @@ h3{font-family:var(--display);font-weight:600;color:var(--encre);font-size:19px;
 .inclus-liste strong{color:var(--encre);font-weight:700;}
 @media(max-width:760px){.inclus-liste{grid-template-columns:1fr;}}
 
+
+/* Note de marge : elle remplace la section outils, retiree de la page. */
+.marge{display:none;}
+@media(min-width:1420px){
+  .marge{display:block;position:fixed;left:24px;top:50%;transform:translateY(-50%);width:190px;z-index:20;}
+  .marge-trait{width:26px;height:1px;background:var(--laiton);margin-bottom:14px;}
+  .marge-sur{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--laiton);margin-bottom:9px;}
+  .marge-titre{font-family:var(--display);font-size:19px;font-weight:600;color:var(--encre);line-height:1.28;margin-bottom:9px;}
+  .marge-txt{font-size:13px;line-height:1.6;color:var(--encre-3);margin-bottom:13px;}
+  .marge-lien{font-size:13px;font-weight:700;color:var(--pin);text-decoration:none;border-bottom:1px solid rgba(30,75,60,.35);}
+  .marge-fermer{position:absolute;top:-6px;right:0;background:transparent;border:0;cursor:pointer;color:var(--encre-3);font-size:15px;line-height:1;padding:2px 4px;}
+}
+
+
+/* ===== Sections repliables =====
+   Un clic sur l'intitule enroule la section. Le trait du chapeau
+   devient le bouton : il pivote pour signaler l'etat. */
+.eyebrow.pliable{cursor:pointer;user-select:none;transition:color .18s;}
+.eyebrow.pliable:hover{color:#8E661F;}
+.eyebrow.pliable::after{content:"";width:9px;height:9px;border-right:1.6px solid currentColor;
+  border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);
+  transition:transform .25s cubic-bezier(.4,0,.2,1);margin-left:4px;}
+.section.replie .eyebrow.pliable::after{transform:rotate(-135deg) translateY(-2px);}
+.section .plie{overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1),opacity .25s;
+  max-height:4000px;opacity:1;}
+.section.replie .plie{max-height:0;opacity:0;}
+.section.replie .s-head{margin-bottom:0;}
+.section.replie{padding-top:34px;padding-bottom:34px;}
+@media(prefers-reduced-motion:reduce){.section .plie{transition:none;}}
+
 /* ---------- Cadre ---------- */
 .cadre{border-left:3px solid var(--brique);background:var(--brique-clair);border-radius:0 10px 10px 0;padding:26px 28px 28px;max-width:760px;}
 .cadre h3{margin-bottom:12px;}
@@ -425,18 +455,18 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
     <div class="s-head">
       <div class="eyebrow">Le constat</div>
       <h2 class="display">Un savoir rare. Pourtant indispensable.</h2>
-      <p class="lede">L'éducation financière manque à la plupart des gens, quelle que soit leur origine. Mais pour la diaspora et les communautés qui lui ressemblent, trois obstacles s'ajoutent presque toujours au tableau.</p>
+      <p class="lede">L'éducation financière manque à presque tout le monde. Mais pour la diaspora et les communautés qui lui ressemblent, 3 obstacles s'ajoutent au tableau.</p>
     </div>
     <div class="obstacles">
       <div class="obstacle">
         <div class="obstacle-n">01</div>
         <h3>La langue</h3>
-        <p>Contrats, démarches, conditions générales : tout est écrit pour des gens qui maîtrisent déjà les codes.</p>
+        <p>Contrats et conditions générales sont écrits pour des gens qui maîtrisent déjà les codes.</p>
       </div>
       <div class="obstacle">
         <div class="obstacle-n">02</div>
         <h3>La complexité</h3>
-        <p>Comprendre un placement demande du temps, et souvent quelqu'un pour expliquer. Tout le monde n'a ni l'un ni l'autre.</p>
+        <p>Comprendre un placement demande du temps, et quelqu'un pour expliquer. Tout le monde n'a ni l'un ni l'autre.</p>
       </div>
       <div class="obstacle">
         <div class="obstacle-n">03</div>
@@ -444,7 +474,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
         <p>Le plus lourd des trois : personne, autour de soi, à qui poser une question sans gêne.</p>
       </div>
     </div>
-    <p class="lede" style="margin-top:32px;">Aucun de ces obstacles n'est insurmontable. Ensemble, ils découragent. NiouDem existe pour les lever un par un. <a href="qui-sommes-nous.html" style="color:var(--laiton);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(184,134,47,.5);">D'où vient ce projet →</a></p>
+    <p class="lede" style="margin-top:28px;">Aucun n'est insurmontable. Ensemble, ils découragent. <a href="qui-sommes-nous.html" style="color:var(--laiton);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(184,134,47,.5);">D'où vient ce projet →</a></p>
   </div>
 </section>
 
@@ -569,50 +599,6 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
   </div>
 </section>
 
-<!-- ============ LES OUTILS ============ -->
-<section class="section section-soft" id="outils">
-  <div class="s-inner">
-    <div class="s-head">
-      <div class="eyebrow">Outils gratuits</div>
-      <h2 class="display">Cinq calculs, sans inscription.</h2>
-      <p class="lede">Pas besoin de compte pour s'en servir, et rien n'est enregistré. Chacun répond à une question précise et se termine par une chose à faire ce soir.</p>
-    </div>
-    <div class="grille-4" style="grid-template-columns:repeat(3,1fr);">
-      <a href="outil-reste-a-vivre.html" class="carte" style="text-decoration:none;">
-        <div class="carte-num">01</div>
-        <h3>Mon reste à vivre</h3>
-        <p>Ce qu'il te reste vraiment chaque mois, une fois toutes les charges fixes payées.</p>
-      </a>
-      <a href="outil-cout-credit.html" class="carte" style="text-decoration:none;">
-        <div class="carte-num">02</div>
-        <h3>Le vrai prix d'un crédit</h3>
-        <p>Un vendeur parle en mensualités. Voici ce que tu auras déboursé à la fin.</p>
-      </a>
-      <a href="outil-inflation-epargne.html" class="carte" style="text-decoration:none;">
-        <div class="carte-num">03</div>
-        <h3>Ce que perd mon épargne</h3>
-        <p>Ce que ta somme achètera réellement dans dix ans, inflation comprise.</p>
-      </a>
-      <a href="outil-versements-reguliers.html" class="carte" style="text-decoration:none;">
-        <div class="carte-num">04</div>
-        <h3>Que devient 100 € par mois</h3>
-        <p>L'effet des versements réguliers, et le prix des années où l'on attend.</p>
-      </a>
-      <a href="outil-pea-assurance-vie.html" class="carte" style="text-decoration:none;">
-        <div class="carte-num">05</div>
-        <h3>PEA ou assurance-vie</h3>
-        <p>Lequel te laisse le plus, une fois les frais et l'impôt déduits.</p>
-      </a>
-      <a href="budget-nioudem.xlsx" class="carte" style="text-decoration:none;" download>
-        <div class="carte-num">06</div>
-        <h3>Le tableau de budget</h3>
-        <p>Un classeur prêt à remplir, calculs intégrés, suivi semaine par semaine.</p>
-      </a>
-    </div>
-    <div style="margin-top:26px;"><a href="outils.html" class="btn-ghost">Voir tous les outils</a></div>
-  </div>
-</section>
-
 <!-- ============ LES FORMULES ============ -->
 <section class="section" id="formules">
   <div class="s-inner">
@@ -688,7 +674,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
 </section>
 
 <!-- ============ LE CADRE ============ -->
-<section class="section section-soft">
+<section class="section section-soft" id="cadre">
   <div class="s-inner">
     <div class="s-head">
       <div class="eyebrow">Le cadre</div>
@@ -696,19 +682,18 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
     </div>
     <div class="cadre">
       <h3>Nous ne sommes pas conseillers en investissement.</h3>
-      <ul class="liste refus" style="margin-bottom:16px;">
+      <ul class="liste refus" style="margin-bottom:14px;">
         <li>Aucune recommandation personnalisée, aucun actif conseillé.</li>
-        <li>Aucun produit financier vendu.</li>
-        <li><strong>Aucune commission</strong> perçue sur ce que tu souscrirais ailleurs.</li>
-        <li><strong>Aucun rendement garanti.</strong> Investir comporte un risque de perte en capital, y compris totale.</li>
+        <li>Aucun produit vendu, <strong>aucune commission</strong> perçue.</li>
+        <li><strong>Aucun rendement garanti.</strong> Investir comporte un risque de perte en capital.</li>
       </ul>
-      <p>Ce que nous faisons, en revanche : expliquer les mécanismes assez clairement pour que les décisions que tu prendras soient réellement les tiennes.</p>
+      <p>Ce que nous faisons : expliquer les mécanismes assez clairement pour que tes décisions soient réellement les tiennes.</p>
     </div>
   </div>
 </section>
 
 <!-- ============ QUESTIONS ============ -->
-<section class="section">
+<section class="section" id="questions">
   <div class="s-inner">
     <div class="s-head">
       <div class="eyebrow">Les questions qu'on nous pose</div>
@@ -721,7 +706,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       </div>
       <div class="question">
         <h3>Je n'y connais absolument rien.</h3>
-        <p>C'est le point de départ prévu. Le parcours démarre par la question la plus basique de toutes : d'où vient l'argent.</p>
+        <p>C'est le point de départ prévu. Le parcours démarre par la question la plus basique : d'où vient l'argent.</p>
       </div>
       <div class="question">
         <h3>Pourquoi tout donner gratuitement ?</h3>
@@ -729,7 +714,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       </div>
       <div class="question">
         <h3>Le site existe-t-il en wolof ?</h3>
-        <p>Pas encore, et nous préférons le dire plutôt que d'afficher une traduction à moitié faite. L'anglais, le wolof et le soninké arrivent, langue par langue.</p>
+        <p>Pas encore, et nous préférons le dire plutôt que d'afficher une traduction à moitié faite.</p>
       </div>
     </div>
   </div>
@@ -816,6 +801,49 @@ let FORMATIONS_UNLOCKED = false;
 
 /* Les huit formations sont désormais ouvertes à tous : plus aucun
    verrouillage, plus aucune dépendance au badge d'achèvement. */
+
+/* Repli des sections : le contenu est enveloppe a la volee, ce qui evite
+   de toucher au balisage de chaque section. */
+(function(){
+  const PLIABLES = ['constat', 'methode', 'cadre', 'questions'];
+  document.querySelectorAll('.section').forEach(function(sec){
+    const eyebrow = sec.querySelector('.eyebrow');
+    if(!eyebrow) return;
+    const cle = sec.id || (eyebrow.textContent || '').toLowerCase();
+    if(!PLIABLES.some(function(p){ return cle.indexOf(p) !== -1; })) return;
+
+    const inner = sec.querySelector('.s-inner');
+    if(!inner) return;
+
+    /* Tout ce qui suit le chapeau est enveloppe dans un conteneur pliable. */
+    const head = inner.querySelector('.s-head');
+    const pli = document.createElement('div');
+    pli.className = 'plie';
+    const aDeplacer = [];
+    if(head){
+      let n = head.nextSibling;
+      while(n){ aDeplacer.push(n); n = n.nextSibling; }
+      head.querySelectorAll('.lede, p').forEach(function(p){ aDeplacer.unshift(p); });
+    }
+    aDeplacer.forEach(function(n){ pli.appendChild(n); });
+    inner.appendChild(pli);
+
+    eyebrow.classList.add('pliable');
+    eyebrow.setAttribute('role', 'button');
+    eyebrow.setAttribute('tabindex', '0');
+    eyebrow.setAttribute('aria-expanded', 'true');
+
+    function basculer(){
+      const replie = sec.classList.toggle('replie');
+      eyebrow.setAttribute('aria-expanded', replie ? 'false' : 'true');
+    }
+    eyebrow.addEventListener('click', basculer);
+    eyebrow.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); basculer(); }
+    });
+  });
+})();
+
 function goFormation(f){
   window.location.href = f + '.html';
 }
@@ -888,5 +916,14 @@ async function signOut(){
 })();
 </script>
 <script src="retours.js" defer></script>
+
+<aside class="marge" id="margeOutils" aria-label="Les outils gratuits">
+  <button class="marge-fermer" onclick="document.getElementById('margeOutils').style.display='none'" aria-label="Masquer">&times;</button>
+  <div class="marge-trait"></div>
+  <div class="marge-sur">Outils gratuits</div>
+  <div class="marge-titre">5 calculs, sans inscription.</div>
+  <div class="marge-txt">Reste à vivre, coût réel d'un crédit, inflation, versements réguliers, PEA ou assurance-vie. Plus un tableau de budget à emporter.</div>
+  <a href="outils.html" class="marge-lien">Voir les outils →</a>
+</aside>
 </body>
 </html>
