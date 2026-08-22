@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
@@ -23,7 +24,6 @@
 body{font-family:var(--sans);background:var(--bg-soft);color:var(--ink);-webkit-font-smoothing:antialiased;letter-spacing:-.01em;}
 a{color:inherit;}
 
-/* NAV */
 .nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--bg-line);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px;}
 .nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;font-size:15px;color:var(--ink);}
 .nav-mark{width:26px;height:26px;border-radius:8px;background:var(--green);display:flex;align-items:center;justify-content:center;}
@@ -31,24 +31,21 @@ a{color:inherit;}
 .nav-back{font-size:13px;font-weight:600;color:var(--ink-muted);text-decoration:none;}
 .nav-progress-pill{font-size:12px;font-weight:700;color:var(--green);background:var(--green-pale);padding:5px 12px;border-radius:100px;}
 
-/* LAYOUT */
 .layout{display:grid;grid-template-columns:280px 1fr;max-width:1100px;margin:0 auto;min-height:calc(100vh - 60px);}
 .sidebar{border-right:1px solid var(--bg-line);background:var(--bg);padding:24px 16px;position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow-y:auto;}
-.sb-title{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);padding:0 10px;margin-bottom:12px;}
 .sb-progress-bar{height:6px;background:var(--bg-mid);border-radius:100px;overflow:hidden;margin:0 10px 18px;}
 .sb-progress-fill{height:100%;background:var(--green);border-radius:100px;transition:width .3s;}
 .sb-item{display:flex;align-items:center;gap:10px;padding:10px 10px;border-radius:10px;cursor:pointer;margin-bottom:2px;font-size:13px;font-weight:600;color:var(--ink-muted);transition:background .15s;}
 .sb-item:hover{background:var(--bg-soft);}
 .sb-item.active{background:var(--green-pale);color:var(--green);}
 .sb-item.done{color:var(--ink);}
-.sb-check{width:20px;height:20px;border-radius:50%;background:var(--bg-mid);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--ink-faint);flex-shrink:0;}
 .sb-item.locked{opacity:.45;cursor:not-allowed;}
 .sb-item.locked:hover{background:transparent;}
+.sb-check{width:20px;height:20px;border-radius:50%;background:var(--bg-mid);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--ink-faint);flex-shrink:0;}
 .sb-item.done .sb-check{background:var(--green);color:#fff;}
 .sb-item.active .sb-check{background:var(--green);color:#fff;}
 .sb-module-label{font-size:10.5px;font-weight:700;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.05em;padding:14px 10px 6px;}
 
-/* MAIN */
 .main{padding:36px 40px 80px;max-width:720px;}
 .lesson-eyebrow{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:10px;}
 .lesson-title{font-size:28px;font-weight:800;letter-spacing:-.03em;color:var(--ink);margin-bottom:8px;line-height:1.15;}
@@ -61,7 +58,6 @@ a{color:inherit;}
 
 .script-text p{font-size:15.5px;font-weight:400;color:var(--ink-soft);line-height:1.75;margin-bottom:18px;}
 
-/* QUIZ */
 .quiz-card{background:var(--bg);border:1px solid var(--bg-line);border-radius:16px;padding:24px;margin-bottom:14px;}
 .quiz-q{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:16px;line-height:1.5;}
 .quiz-opt{display:flex;align-items:flex-start;gap:12px;padding:13px 15px;border:1.5px solid var(--bg-line);border-radius:11px;margin-bottom:9px;cursor:pointer;transition:border-color .15s,background .15s;}
@@ -77,7 +73,6 @@ a{color:inherit;}
 .quiz-explain.show{display:block;}
 .quiz-explain strong{color:var(--ink);}
 
-/* ACTION */
 .action-card{background:var(--amber-pale);border:1px solid var(--amber-bord);border-radius:16px;padding:22px 24px;}
 .action-text{font-size:14.5px;font-weight:500;color:var(--ink);line-height:1.65;margin-bottom:16px;}
 .action-check{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;}
@@ -85,13 +80,11 @@ a{color:inherit;}
 .action-box.checked{background:var(--amber);}
 .action-label{font-size:13px;font-weight:700;color:#8a6a00;}
 
-/* NAV BUTTONS */
 .lesson-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:1px solid var(--bg-line);}
 .nav-btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;border:none;cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:700;padding:13px 24px;border-radius:11px;text-decoration:none;transition:background .2s;}
 .nav-btn:hover{background:var(--ink-soft);}
 .nav-btn.ghost{background:var(--bg-mid);color:var(--ink-muted);}
 .nav-btn.ghost:hover{background:var(--bg-line);}
-.nav-btn:disabled{opacity:.4;cursor:not-allowed;}
 .completion-badge{display:none;align-items:center;gap:8px;background:var(--green-pale);color:var(--green);font-size:12.5px;font-weight:700;padding:8px 16px;border-radius:100px;margin-bottom:20px;}
 .completion-badge.show{display:inline-flex;}
 
@@ -188,8 +181,16 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
   .borne{left:-26px;}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none !important;}}
+
+/* ===== Schemas des lecons ===== */
+.schema{margin:26px 0;padding:20px 18px 14px;border:1px solid var(--bg-line,#DCDDD3);
+  border-radius:12px;background:var(--bg,#FCFBF8);}
+.schema svg{width:100%;height:auto;display:block;}
+.schema figcaption{font-family:var(--mono,monospace);font-size:11.5px;line-height:1.55;
+  color:var(--ink-muted,#7A8A93);margin-top:14px;padding-top:12px;
+  border-top:1px solid var(--bg-line,#DCDDD3);}
+@media(max-width:620px){.schema{padding:14px 12px 10px;margin:20px -6px;}}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
 <body>
 
@@ -198,9 +199,9 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
     <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
     NiouDem
   </a>
-  <a href="monnaie.html" class="nav-back">← Retour au parcours</a>
+  <a href="budget.html" class="nav-back">← Retour au parcours</a>
   <div style="display:flex;align-items:center;gap:14px;">
-    <span class="nav-progress-pill" id="navProgress">0/14 leçons</span>
+    <span class="nav-progress-pill" id="navProgress">0/16 leçons</span>
     <a href="#" onclick="signOut();return false;" style="font-size:12.5px;font-weight:600;color:var(--ink-muted);text-decoration:none;">Déconnexion</a>
   </div>
 </nav>
@@ -211,261 +212,298 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
 </div>
 
 <script>
-/* ============ DONNÉES DES 14 LEÇONS ============ */
+/* ============ DONNÉES DES 16 LEÇONS — MAÎTRISER SON BUDGET ============ */
 const LESSONS = [
-{module:"Module 1 — Qu'est-ce que la monnaie ?", title:"L'origine de la monnaie", duration:"8 min",
+{module:"Module 1 — Qu'est-ce que la monnaie ?", title:"L'origine de la monnaie", duration:"5 min",
 script:[
-"Avant de parler d'investissement, de bourse ou d'épargne, il y a une question que presque personne ne se pose vraiment. Qu'est-ce que l'argent ? Pas au sens philosophique. Au sens concret, mécanique. D'où vient-il ? Pourquoi existe-t-il ? Et pourquoi est-ce que ça change tout de le comprendre ?",
-"Remontons quelques milliers d'années en arrière. À l'origine, les êtres humains échangeaient directement ce qu'ils produisaient. Un agriculteur échangeait du blé contre du bois. Un pêcheur échangeait du poisson contre des vêtements. C'est ce qu'on appelle le troc.",
-"Le problème du troc, c'est qu'il exige une double coïncidence des besoins. Il faut que tu aies exactement ce que l'autre veut, au moment où il le veut. C'est lourd, lent, et très limité.",
-"Les sociétés humaines ont alors inventé un intermédiaire accepté par tous en échange de n'importe quoi. Les premières formes de monnaie ont été des coquillages, du sel, du bétail. Puis les métaux précieux, le cuivre, l'argent, l'or.",
-"Pourquoi l'or ? Parce qu'il est rare, ne rouille pas, est facilement divisible, et sa quantité ne peut pas être manipulée facilement. C'est là que se trouve la première leçon fondamentale : une bonne monnaie est avant tout une réserve de valeur fiable. Ce n'est pas juste un bout de papier ou un chiffre sur un écran. C'est un outil qui doit préserver la valeur de votre travail dans le temps.",
-"Retenez bien cette phrase, parce que tout ce qui suit dans cette formation va tourner autour d'elle."
+"Avant de parler d'épargne ou d'investissement, il faut répondre à une question que presque personne ne se pose : <strong>qu'est-ce que l'argent, exactement ?</strong> Pas à quoi il sert, mais ce qu'il est. La réponse change la façon dont on le regarde ensuite, et c'est pour cela que cette formation commence ici.",
+"Imagine une société sans monnaie. Tu es boulanger, tu veux des chaussures. Tu dois trouver un cordonnier qui, au même moment, a besoin de pain, et qui estime qu'une paire de chaussures vaut exactement la quantité de pain que tu proposes. Cette coïncidence est si improbable que les économistes lui ont donné un nom : <em>la double coïncidence des besoins</em>. C'est le problème que la monnaie a été inventée pour résoudre.",
+"La solution trouvée partout dans le monde, indépendamment, a été la même : choisir un bien intermédiaire que tout le monde accepte. Le boulanger vend son pain contre ce bien, puis échange ce bien contre des chaussures. <strong>La monnaie n'est donc pas une invention de l'État, c'est une invention du commerce.</strong>",
+"Ce qui a servi de monnaie au fil de l'histoire est instructif : coquillages, sel, bétail, barres de fer, perles de verre. Le mot <em>salaire</em> vient d'ailleurs du sel, qui servait à payer les soldats romains. Toutes ces monnaies ont fini par disparaître, et toujours pour la même raison : <u>quand un bien devient trop facile à produire, il cesse de valoir quelque chose</u>.",
+"L'exemple le plus parlant est celui des perles de verre en Afrique de l'Ouest. Elles ont servi de monnaie pendant des siècles, parce qu'elles étaient difficiles à fabriquer localement. Puis les Européens sont arrivés avec des perles produites industriellement, à un coût dérisoire. En quelques décennies, l'épargne accumulée par des générations entières est devenue sans valeur, non parce que les gens avaient mal travaillé, mais <strong>parce que quelqu'un pouvait fabriquer leur monnaie plus vite qu'eux ne pouvaient l'épargner.</strong>",
+"Retiens cette phrase, car toute la suite de la formation en découle. L'or a fini par s'imposer précisément parce qu'il échappait à ce problème : personne ne peut en fabriquer, il faut l'extraire, et l'extraire coûte cher.",
+"Une dernière idée, plus profonde. Quand tu reçois ton salaire, tu ne reçois pas des euros. <strong>Tu reçois une créance sur le travail des autres</strong>, un droit de demander plus tard un bien ou un service à quelqu'un que tu ne connais pas. La monnaie est du temps de vie mis en réserve. C'est pour cela que la voir se déprécier n'est pas un sujet abstrait : c'est du travail déjà fourni qui s'efface."
 ],
 quiz:[
-{q:"Quel était le principal problème du système de troc ?",opts:["Il était trop lent à mettre en place","Il nécessitait que chaque partie ait exactement ce que l'autre voulait","Il ne fonctionnait qu'entre voisins","Il était réservé aux marchands"],correct:1,
-explain:"Le troc exige une « double coïncidence des besoins » : les deux parties doivent vouloir exactement ce que l'autre propose, au même moment. C'est ce qui le rend très limité."},
-{q:"Pourquoi l'or s'est-il imposé comme monnaie ?",opts:["Parce qu'il était beau et décoratif","Parce que les rois le décidaient","Parce qu'il est rare, durable, divisible et non manipulable","Parce qu'il était facile à trouver"],correct:2,
-explain:"L'or coche les quatre critères d'une bonne monnaie : rareté, durabilité, divisibilité et résistance à la manipulation."},
-{q:"Qu'est-ce qu'une bonne monnaie doit être avant tout ?",opts:["Contrôlée par un gouvernement stable","Disponible en grande quantité","Une réserve de valeur fiable dans le temps","Facile à imprimer"],correct:2,
-explain:"La fonction première d'une monnaie saine est de préserver la valeur du travail fourni dans le temps."}
+{q:"Quel problème la monnaie a-t-elle résolu ?",opts:["Le manque de matières premières","La double coïncidence des besoins dans le troc","Le besoin de payer des impôts","L'absence de banques"],correct:1,
+explain:"Il fallait qu'un boulanger voulant des chaussures trouve un cordonnier voulant du pain, au même moment et pour la même valeur. La monnaie supprime cette contrainte."},
+{q:"Pourquoi les perles de verre ont-elles cessé d'être une monnaie ?",opts:["Les gens ont préféré l'or","Elles sont devenues faciles à produire en masse","Un roi les a interdites","Elles se cassaient trop facilement"],correct:1,
+explain:"Quand un bien devient facile à produire, l'épargne accumulée dans ce bien s'efface. C'est le mécanisme central de toute cette formation."},
+{q:"Que représente vraiment ton salaire ?",opts:["Un bien matériel","Une créance sur le travail futur des autres","Une dette envers l'État","Une part de la richesse nationale"],correct:1,
+explain:"C'est du temps de travail mis en réserve. Sa dépréciation efface donc du travail déjà fourni."}
 ],
-action:"Ce soir, prends 5 minutes et note : à quoi as-tu consacré la majorité de ton énergie ce mois-ci ? Maintenant demande-toi : est-ce que la monnaie que tu reçois en échange préserve vraiment la valeur de cet effort dans le temps ?"
+action:"Ce soir, calcule combien d'heures de ton travail représente une dépense que tu envisages : divise son prix par ton salaire horaire net. Ce chiffre-là est le prix réel, et il change souvent la décision."
 },
-{module:"Module 1 — Qu'est-ce que la monnaie ?", title:"Les 3 fonctions d'une monnaie saine", duration:"10 min",
+{module:"Module 1 — Qu'est-ce que la monnaie ?", title:"Les 3 fonctions d'une monnaie saine", duration:"5 min",
 script:[
-"Dans la leçon précédente, on a vu pourquoi la monnaie a été inventée. Aujourd'hui on va voir pourquoi toutes les monnaies ne se valent pas, à travers trois fonctions qu'une monnaie saine doit remplir.",
-"Première fonction : l'unité de compte. Une monnaie sert à mesurer la valeur des choses, un langage commun aux échanges. Elle doit être stable pour que les mesures aient du sens.",
-"Deuxième fonction : le moyen d'échange. La monnaie sert à acheter et à vendre. Pour remplir cette fonction, elle doit être largement acceptée, facile à transporter, et divisible.",
-"Troisième fonction : la réserve de valeur. C'est là que ça devient crucial, et c'est là que beaucoup de monnaies modernes échouent. Une monnaie qui joue ce rôle permet de conserver le fruit de son travail dans le temps.",
-"Or l'inflation érode en permanence le pouvoir d'achat des monnaies modernes. L'euro d'aujourd'hui achète moins que l'euro d'il y a dix ans. Une monnaie qui échoue à remplir la troisième fonction vous vole silencieusement, chaque année, mécaniquement.",
-"C'est pour ça que laisser son argent dormir sur un compte courant n'est pas une décision neutre. C'est une décision qui coûte."
+"Une monnaie remplit 3 fonctions, et l'ordre dans lequel elle les perd raconte toujours la même histoire. Savoir les distinguer permet de comprendre ce qui se passe aujourd'hui avec l'euro, et ce qui s'est passé ailleurs avec des monnaies effondrées.",
+"<strong>Fonction 1 : l'intermédiaire des échanges.</strong> C'est la plus visible. La monnaie sert à acheter et à vendre sans troc. L'euro remplit parfaitement cette fonction, et c'est la raison pour laquelle la plupart des gens n'ont jamais réfléchi aux 2 autres.",
+"<strong>Fonction 2 : l'unité de compte.</strong> La monnaie sert à mesurer et à comparer la valeur des choses. C'est elle qui permet de dire qu'un vélo vaut 3 fois plus qu'un manteau. Une bonne unité de mesure doit être stable : personne n'accepterait un mètre qui raccourcit chaque année, et pourtant nous acceptons une unité monétaire qui perd de la valeur.",
+"<figure class=\"schema\"><svg viewBox=\"0 0 700 228\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><text x=\"200\" y=\"20\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" letter-spacing=\"1.4\" fill=\"#1E4B3C\">L'EURO LE FAIT BIEN</text><text x=\"560\" y=\"20\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" letter-spacing=\"1.4\" fill=\"#B8862F\">L'EURO LE FAIT MAL</text><text x=\"20\" y=\"44\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Servir aux échanges du quotidien</text><rect x=\"20\" y=\"54\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"54\" width=\"614\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"634\" y=\"54\" width=\"46\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"67\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\">excellent</text><text x=\"672\" y=\"67\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\"></text><text x=\"20\" y=\"100\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Mesurer et comparer les prix</text><rect x=\"20\" y=\"110\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"110\" width=\"475\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"495\" y=\"110\" width=\"185\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"123\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\">correct</text><text x=\"672\" y=\"123\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\"></text><text x=\"20\" y=\"156\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Conserver la valeur sur 20 ans</text><rect x=\"20\" y=\"166\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"166\" width=\"79\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"99\" y=\"166\" width=\"581\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"179\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\"></text><text x=\"672\" y=\"179\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\">environ -33 %</text></svg><figcaption>Une monnaie remplit 3 fonctions. L'euro en réussit 2, et échoue sur celle qui compte pour l'épargnant.</figcaption></figure>",
+"<strong>Fonction 3 : la réserve de valeur.</strong> La monnaie doit permettre de conserver du pouvoir d'achat dans le temps, pour reporter à plus tard le fruit de son travail. <u>C'est la fonction la plus importante pour l'épargnant, et c'est la première à se dégrader.</u>",
+"Prenons un exemple concret. Avec une inflation moyenne de 2 % par an, une somme perd environ <strong>18 % de son pouvoir d'achat en 10 ans</strong>, et environ 33 % en 20 ans. Sur une carrière entière, l'ordre de grandeur devient considérable. Ce n'est pas un accident : la Banque centrale européenne vise explicitement une inflation de 2 %, considérée comme le niveau souhaitable pour l'économie.",
+"Il y a là une tension qu'il faut nommer clairement, car elle explique presque tout le reste. <strong>Une inflation modérée est bonne pour l'économie et mauvaise pour l'épargnant.</strong> Elle encourage à dépenser et à investir plutôt qu'à thésauriser, elle allège le poids des dettes, elle facilite les ajustements de salaires. Mais celui qui laisse dormir son argent en supporte le coût.",
+"Ce n'est donc ni un complot ni une anomalie. C'est un arbitrage assumé par les institutions, dont la conséquence pratique est simple : <strong>l'euro remplit très bien 2 fonctions sur 3</strong>. Excellent moyen d'échange, unité de compte acceptable, mauvaise réserve de valeur sur le long terme. La conclusion pratique de toute cette formation tient d'ailleurs en une phrase : garde en euros ce dont tu as besoin à court terme, et conserve ailleurs ce que tu veux faire durer."
 ],
 quiz:[
-{q:"Quelle est la fonction d'unité de compte ?",opts:["Permettre d'acheter des biens partout dans le monde","Mesurer et comparer la valeur des choses avec un langage commun","Garantir que l'argent garde sa valeur dans le temps","Faciliter les échanges entre pays"],correct:1,
-explain:"L'unité de compte est le « mètre étalon » de l'économie. Elle permet de comparer des choses très différentes."},
-{q:"Quelle fonction les monnaies modernes comme l'euro remplissent-elles mal ?",opts:["L'unité de compte","Le moyen d'échange","La réserve de valeur","Aucune, l'euro remplit toutes ses fonctions"],correct:2,
-explain:"L'inflation érode en permanence le pouvoir d'achat de l'euro, qui perd donc sa capacité à préserver la valeur du travail dans le temps."},
-{q:"Laisser son argent sur un compte courant est une décision :",opts:["Neutre, l'argent ne perd pas de valeur s'il ne bouge pas","Sage, mieux vaut ne prendre aucun risque","Coûteuse, l'inflation réduit sa valeur chaque année","Dépend du montant épargné"],correct:2,
-explain:"L'inflation tourne autour de 3 à 5% par an. Un compte courant à 0% perd donc réellement de la valeur chaque année."}
+{q:"Quelle fonction se dégrade en premier ?",opts:["L'intermédiaire des échanges","L'unité de compte","La réserve de valeur","Elles se dégradent ensemble"],correct:2,
+explain:"C'est aussi la plus importante pour un épargnant, ce qui explique le décalage entre une monnaie qui fonctionne bien au quotidien et mal sur 20 ans."},
+{q:"Quelle perte de pouvoir d'achat représente 2 % d'inflation sur 10 ans ?",opts:["2 %","environ 18 %","environ 40 %","aucune"],correct:1,
+explain:"Environ 33 % sur 20 ans. L'effet est faible d'une année sur l'autre et considérable sur une carrière."},
+{q:"Pourquoi une inflation de 2 % est-elle visée volontairement ?",opts:["Pour enrichir les banques","Parce qu'elle encourage la dépense et l'investissement et allège les dettes","Par erreur de calcul","Pour financer les retraites"],correct:1,
+explain:"C'est un arbitrage assumé, bon pour l'économie et coûteux pour celui qui laisse dormir son argent."}
 ],
-action:"Prends un relevé bancaire d'il y a un an. Compare le solde à aujourd'hui. Applique mentalement le taux d'inflation de l'année (environ 3-4%) et calcule ce que ce solde représente vraiment en pouvoir d'achat réel."
+action:"Prends un relevé de compte d'il y a exactement 1 an et note ton solde d'épargne. Cherche le taux d'inflation de l'année écoulée, et applique-le à ce solde. La différence est ce que tu as perdu sans qu'aucune ligne ne l'affiche."
 },
-{module:"Module 1 — Qu'est-ce que la monnaie ?", title:"Pourquoi la monnaie n'est pas la richesse", duration:"9 min",
+{module:"Module 1 — Qu'est-ce que la monnaie ?", title:"Pourquoi la monnaie n'est pas la richesse", duration:"5 min",
 script:[
-"On va parler d'une confusion que presque tout le monde fait, et qui coûte très cher à ceux qui ne la voient pas : la monnaie n'est pas la richesse.",
-"Imaginez un pays qui multiplie par dix la quantité de billets en circulation. Est-ce que ce pays est dix fois plus riche ? Non. Il y a toujours le même nombre de maisons, de voitures, de denrées disponibles. Seul le nombre de billets a changé, et chaque billet vaut mécaniquement dix fois moins.",
-"La monnaie est un outil de représentation. Elle représente de la valeur, mais elle n'est pas la valeur elle-même. La vraie richesse, ce sont les actifs réels : une maison, un terrain, une entreprise, des compétences.",
-"L'histoire nous donne des exemples frappants : l'hyperinflation en Allemagne dans les années 1920, le Zimbabwe dans les années 2000, plus récemment le Venezuela. Ce ne sont pas des accidents, mais les conséquences logiques d'un système où la monnaie est créée sans lien avec la richesse réelle.",
-"L'euro est stable comparé à ces exemples extrêmes, mais il perd environ 2 à 4% de valeur chaque année. Sur 20 ans, c'est considérable.",
-"La vraie question n'est pas combien j'ai sur mon compte, mais combien d'actifs réels je possède. C'est tout l'objet des formations suivantes."
+"Voici une distinction qui paraît théorique et qui décide pourtant de la façon dont on construit un patrimoine. <strong>La monnaie n'est pas la richesse, elle en est le titre de propriété.</strong>",
+"La richesse réelle, ce sont les choses qui produisent ou qui servent : des terres, des immeubles, des machines, des entreprises, des compétences, des infrastructures. La monnaie, elle, ne produit rien. <em>Elle donne le droit d'y accéder.</em>",
+"L'expérience de pensée la plus parlante est la suivante. Imagine qu'on double du jour au lendemain la quantité d'euros en circulation, et que chacun voie son compte doubler. Sommes-nous 2 fois plus riches ? Non, évidemment : il y a toujours autant de logements, de voitures et de pain. Les prix doubleront simplement, et chacun se retrouvera exactement au même point. <u>Créer de la monnaie ne crée aucune richesse, cela redistribue seulement les droits sur la richesse existante.</u>",
+"Cette redistribution n'est jamais neutre, et c'est le point le plus important de la leçon. <strong>Ceux qui reçoivent la monnaie nouvelle en premier achètent aux anciens prix ; ceux qui la reçoivent en dernier achètent aux nouveaux prix.</strong> Les premiers servis sont généralement les acteurs financiers, les grandes entreprises et les emprunteurs importants. Les derniers servis sont les salariés, dont les revenus s'ajustent avec retard.",
+"Ce phénomène porte un nom, l'effet Cantillon, du nom d'un économiste du XVIIIe siècle. Il explique une part importante de l'écart de patrimoine que l'on observe entre ceux qui détiennent des actifs et ceux qui détiennent de la monnaie et un salaire.",
+"La conséquence pratique est directe et sans idéologie. <strong>Détenir de la monnaie, c'est se placer volontairement en fin de file.</strong> Détenir des actifs, c'est se rapprocher de la richesse réelle, celle dont le prix s'ajuste. Cela ne veut pas dire qu'il faut tout convertir : on a besoin de liquidités, et on l'a vu, l'épargne de précaution reste indispensable.",
+"Cela veut dire qu'il faut décider consciemment de la part qu'on laisse en monnaie, plutôt que de la subir. <strong>Le compte courant est un lieu de passage, pas un lieu de stockage.</strong>"
 ],
 quiz:[
-{q:"Si un gouvernement multiplie par dix la quantité de billets en circulation, que se passe-t-il ?",opts:["Le pays devient dix fois plus riche","Les prix baissent car il y a plus d'argent disponible","Chaque billet vaut dix fois moins, la richesse réelle ne change pas","L'économie se stabilise grâce à la liquidité supplémentaire"],correct:2,
-explain:"Multiplier la quantité de monnaie ne crée pas de richesse réelle. Les biens et services disponibles restent les mêmes."},
-{q:"Qu'est-ce que la richesse réelle ?",opts:["Le solde de son compte bancaire","Des actifs ayant une valeur intrinsèque, indépendante des décisions monétaires","La quantité de billets que l'on possède","Un salaire élevé et stable"],correct:1,
-explain:"La richesse réelle, ce sont des actifs comme l'immobilier, les métaux précieux, les entreprises, les compétences."},
-{q:"Quelle est la vraie question à se poser concernant son patrimoine ?",opts:["Combien ai-je d'argent sur mon compte en banque ?","Mon salaire augmente-t-il chaque année ?","Combien d'actifs réels est-ce que je possède ?","Est-ce que mon livret A est bien rempli ?"],correct:2,
-explain:"Accumuler de la monnaie n'est pas la même chose que construire de la richesse."}
+{q:"Que se passerait-il si tous les comptes doublaient du jour au lendemain ?",opts:["Chacun serait 2 fois plus riche","Les prix doubleraient et la richesse réelle serait inchangée","L'économie s'effondrerait immédiatement","Les banques feraient faillite"],correct:1,
+explain:"La quantité de logements, de voitures et de pain n'aurait pas bougé. Créer de la monnaie redistribue des droits, cela ne crée aucune richesse."},
+{q:"Qu'est-ce que l'effet Cantillon ?",opts:["Une taxe sur les transactions","L'avantage de ceux qui reçoivent la monnaie nouvelle en premier","Un indicateur de la Banque centrale","Une méthode de calcul de l'inflation"],correct:1,
+explain:"Les premiers servis achètent aux anciens prix, les derniers aux nouveaux. Cela explique une part de l'écart entre détenteurs d'actifs et détenteurs de salaires."},
+{q:"Quelle conclusion pratique en tirer ?",opts:["Ne jamais garder d'argent liquide","Décider consciemment de la part laissée en monnaie plutôt que la subir","Emprunter le plus possible","Convertir toute son épargne en or"],correct:1,
+explain:"L'épargne de précaution reste indispensable. Ce qui change, c'est de choisir cette part au lieu de la laisser s'installer par défaut."}
 ],
-action:"Fais deux colonnes : dans la première, note tout ce que tu possèdes en monnaie. Dans la seconde, tout ce que tu possèdes en actifs réels. Regarde l'équilibre entre les deux."
+action:"Fais 2 colonnes ce soir. À gauche, tout ce que tu possèdes en monnaie : comptes, livrets, liquidités. À droite, tout ce que tu possèdes en actifs réels. Regarde la proportion, sans jugement. C'est ton point de départ, et la plupart des gens sont surpris du déséquilibre."
 },
-{module:"Module 2 — L'étalon-or et sa disparition", title:"Bretton Woods", duration:"10 min",
+{module:"Module 2 — L'étalon-or et sa disparition", title:"Bretton Woods, l'ordre monétaire de 1944", duration:"5 min",
 script:[
-"Juillet 1944. Le monde est encore en guerre mais les Alliés réfléchissent déjà à l'après. La Première Guerre mondiale avait laissé un chaos économique mondial qui avait contribué aux conditions ayant mené à la Seconde Guerre.",
-"44 pays se réunissent dans un hôtel du New Hampshire pour créer un nouveau système monétaire mondial, ancré dans quelque chose de réel. La solution : toutes les monnaies seront indexées sur le dollar américain, et le dollar sur l'or, à 35 dollars l'once.",
-"N'importe quelle banque centrale peut échanger ses dollars contre de l'or physique. Ce système crée une limite naturelle à la création monétaire.",
-"Le système fonctionne bien pendant 30 ans. Mais les États-Unis dépensent massivement (guerre du Vietnam, programmes sociaux) et impriment trop de dollars. En 1971, leurs réserves d'or ne représentent plus qu'une fraction des dollars en circulation.",
-"Bretton Woods était une tentative de créer un système ancré dans la réalité, avec une discipline imposée par l'or. Cette discipline a été respectée jusqu'à devenir trop contraignante pour ceux qui tenaient les rênes."
+"Pour comprendre la monnaie d'aujourd'hui, il faut connaître 2 dates. La première est 1944, l'année où le système monétaire mondial actuel a été conçu, dans un hôtel du New Hampshire, alors que la Seconde Guerre mondiale n'était pas terminée.",
+"Le contexte est décisif. Les nations veulent éviter le désordre monétaire des années 1930, fait de dévaluations en chaîne et de guerres commerciales, qui a contribué à la crise puis au conflit. <strong>L'objectif est la stabilité</strong>, et 44 pays s'accordent sur une architecture commune.",
+"Le mécanisme est simple à décrire. Le dollar américain devient convertible en or à un taux fixe, <strong>35 dollars l'once</strong>. Toutes les autres monnaies sont rattachées au dollar par des taux de change fixes. Autrement dit, chaque monnaie est indirectement adossée à l'or, à travers le dollar.",
+"Pourquoi les États-Unis ? Parce qu'en 1944, ils détiennent l'essentiel des réserves d'or mondiales, leur territoire est intact, et leur économie est la seule en état de fonctionner à plein. La position n'est donc pas négociée, elle est constatée.",
+"Le système fonctionne, et bien, pendant environ 25 ans. Les échanges internationaux se développent, les taux de change ne varient pas, et <u>l'inflation reste faible dans la plupart des pays industrialisés</u>. Cette période est souvent citée comme celle de la plus forte progression du niveau de vie de l'histoire moderne.",
+"Mais le système contient une contradiction que l'économiste Robert Triffin identifie dès les années 1960, et qui porte son nom. <strong>Le monde a besoin de dollars pour commercer, donc les États-Unis doivent en émettre toujours plus. Mais plus ils en émettent, moins chaque dollar est réellement couvert par de l'or</strong>, et moins la promesse de convertibilité est crédible.",
+"Cette contradiction n'a pas de solution interne : le système doit soit freiner le commerce mondial, soit renoncer à la convertibilité. Les dépenses de la guerre du Vietnam et des programmes sociaux américains accélèrent le déséquilibre, et à la fin des années 1960, plusieurs États commencent à demander la conversion de leurs dollars en or. Ce qui nous mène à la seconde date, celle de la leçon suivante."
 ],
 quiz:[
-{q:"Quelle était l'idée centrale de Bretton Woods ?",opts:["Créer une monnaie unique mondiale","Indexer toutes les monnaies sur le dollar, lui-même indexé sur l'or","Donner aux États-Unis le contrôle total de l'économie mondiale","Interdire aux pays de créer leur propre monnaie"],correct:1,
-explain:"Ce double ancrage créait une discipline naturelle sur la création monétaire."},
-{q:"À quel taux le dollar était-il convertible en or ?",opts:["10 dollars l'once","100 dollars l'once","35 dollars l'once","Le taux variait selon les marchés"],correct:2,
-explain:"N'importe quelle banque centrale pouvait échanger ses dollars contre de l'or à ce taux fixe."},
-{q:"Pourquoi le système a-t-il commencé à vaciller dans les années 60 ?",opts:["L'or est devenu trop rare","Les États-Unis ont imprimé trop de dollars par rapport à leurs réserves d'or","Les autres pays ont refusé le dollar","Une crise mondiale a rendu le système obsolète"],correct:1,
-explain:"Les dépenses massives américaines ont conduit à l'impression de plus de dollars que les réserves d'or ne pouvaient couvrir."}
+{q:"À quel taux le dollar était-il convertible en or ?",opts:["1 dollar l'once","35 dollars l'once","100 dollars l'once","Il variait chaque année"],correct:1,
+explain:"Un taux fixe, auquel toutes les autres monnaies étaient rattachées par des changes fixes."},
+{q:"En quoi consiste le dilemme de Triffin ?",opts:["Les pays refusaient de commercer en dollars","Le monde a besoin de dollars, mais plus il y en a, moins ils sont couverts par l'or","L'or manquait dans les mines","Les taux de change étaient trop volatils"],correct:1,
+explain:"Une contradiction sans solution interne : le système devait soit freiner le commerce mondial, soit renoncer à la convertibilité."},
+{q:"Pourquoi les États-Unis étaient-ils au centre du système ?",opts:["Par un vote démocratique des 44 pays","Parce qu'ils détenaient l'essentiel des réserves d'or et la seule économie intacte","Parce qu'ils avaient inventé l'étalon-or","Parce que le dollar était la plus ancienne monnaie"],correct:1,
+explain:"La position n'a pas été négociée, elle a été constatée en 1944."}
 ],
-action:"Cherche « Bretton Woods 1944 résumé » et lis un contenu de 3-5 minutes sur le sujet. Note une idée qui t'a frappé et que tu n'avais pas retenue de la leçon."
+action:"Cherche « Bretton Woods 1944 » et lis un article de 5 minutes sur le sujet. Note une seule idée qui t'a surpris. Comprendre d'où vient le système actuel change la façon dont on interprète l'actualité économique."
 },
-{module:"Module 2 — L'étalon-or et sa disparition", title:"1971, le tournant Nixon", duration:"10 min",
+{module:"Module 2 — L'étalon-or et sa disparition", title:"1971, le tournant Nixon", duration:"5 min",
 script:[
-"Le 15 août 1971. Richard Nixon annonce à la télévision la suspension de la convertibilité du dollar en or. La promesse de Bretton Woods est rompue, unilatéralement.",
-"Ce moment s'appelle le Nixon Shock. Avant 1971, il y avait une limite naturelle à la création monétaire. Après, cette limite disparaît. Le dollar devient une monnaie fiduciaire, du latin « fides », la confiance.",
-"Quand la contrainte de l'or disparaît, les banques centrales créent de la monnaie de façon beaucoup plus agressive. En 1971, la masse monétaire américaine était d'environ 600 milliards de dollars. Aujourd'hui elle dépasse les 20 000 milliards. Multiplication par plus de 30 en 50 ans.",
-"C'est pour ça que l'immobilier, les actions, l'or ont explosé. Ce n'est pas que ces actifs valent tellement plus. C'est que la monnaie avec laquelle on les mesure vaut tellement moins.",
-"Le monde dans lequel vous gérez votre argent aujourd'hui est directement le produit de cette décision prise un dimanche soir en 1971."
+"La seconde date à retenir est le <strong>15 août 1971</strong>. Ce dimanche-là, le président américain Richard Nixon annonce à la télévision la suspension de la convertibilité du dollar en or. Il présente la mesure comme temporaire. Elle est définitive.",
+"Ce qui l'a provoquée : les réserves d'or américaines fondent depuis des années, parce que les États étrangers, la France en tête, demandent à convertir leurs dollars. Le stock d'or ne couvre plus qu'une fraction des dollars en circulation. Le choix se résume à honorer la convertibilité en asséchant les réserves, ou à y renoncer.",
+"Ce jour-là, le monde bascule dans un système entièrement nouveau, et jamais expérimenté à cette échelle : <strong>une monnaie sans aucun ancrage matériel</strong>. On parle de monnaie <em>fiduciaire</em>, du latin <em>fiducia</em>, la confiance. La valeur de l'euro que tu as en poche ne repose sur aucun métal, aucune marchandise, aucune promesse de conversion. Elle repose sur la confiance dans l'institution qui l'émet et dans l'économie qui l'accepte.",
+"<figure class=\"schema\"><svg viewBox=\"0 0 700 168\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><line x1=\"34\" y1=\"96\" x2=\"666\" y2=\"96\" stroke=\"#DCDDD3\" stroke-width=\"2\"/><path d=\"M666 96 l-9 -5 v10 z\" fill=\"#DCDDD3\"/><line x1=\"53\" y1=\"96\" x2=\"53\" y2=\"62\" stroke=\"#1E4B3C\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"53\" cy=\"96\" r=\"7\" fill=\"#1E4B3C\"/><circle cx=\"53\" cy=\"96\" r=\"12\" fill=\"none\" stroke=\"#1E4B3C\" stroke-width=\"1\" opacity=\".35\"/><text x=\"53\" y=\"52\" text-anchor=\"start\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">1944</text><text x=\"53\" y=\"122\" text-anchor=\"start\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12\" fill=\"#43555F\">Bretton Woods, le dollar adossé à l'or</text><line x1=\"299\" y1=\"96\" x2=\"299\" y2=\"62\" stroke=\"#A24332\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"299\" cy=\"96\" r=\"7\" fill=\"#A24332\"/><circle cx=\"299\" cy=\"96\" r=\"12\" fill=\"none\" stroke=\"#A24332\" stroke-width=\"1\" opacity=\".35\"/><text x=\"299\" y=\"52\" text-anchor=\"middle\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">1971</text><text x=\"299\" y=\"122\" text-anchor=\"middle\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12\" fill=\"#43555F\">Fin de la convertibilité</text><line x1=\"647\" y1=\"96\" x2=\"647\" y2=\"62\" stroke=\"#B8862F\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"647\" cy=\"96\" r=\"7\" fill=\"#B8862F\"/><circle cx=\"647\" cy=\"96\" r=\"12\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1\" opacity=\".35\"/><text x=\"647\" y=\"52\" text-anchor=\"end\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Aujourd'hui</text><text x=\"647\" y=\"122\" text-anchor=\"end\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12\" fill=\"#43555F\">Monnaie fiduciaire, sans ancrage</text></svg><figcaption>Depuis 1971, plus aucune limite physique n'encadre la création monétaire.</figcaption></figure>",
+"Il faut être précis et éviter le catastrophisme, car ce point est souvent mal utilisé. <u>Une monnaie fiduciaire n'est pas une monnaie sans valeur.</u> Elle a une valeur parce qu'elle est acceptée partout, qu'elle est exigée pour payer l'impôt, et que l'institution qui l'émet dispose d'outils pour défendre sa stabilité. Ce n'est pas rien.",
+"Ce qui change, en revanche, est fondamental : <strong>il n'existe plus de limite physique à la création monétaire.</strong> Sous l'étalon-or, émettre davantage supposait de détenir davantage d'or, donc d'en extraire, ce qui coûte cher et prend du temps. Depuis 1971, la quantité de monnaie dépend de décisions humaines et institutionnelles, pas d'une contrainte matérielle.",
+"C'est la raison pour laquelle beaucoup de graphiques économiques changent de pente autour de cette date : masse monétaire, dette publique, prix de l'immobilier, écarts de patrimoine. La corrélation ne prouve pas à elle seule la causalité, et les économistes en débattent sérieusement. Mais <strong>le changement de régime est réel, et il est daté.</strong>",
+"Retiens la conséquence pratique, qui est le vrai sujet de cette formation. Depuis 1971, <strong>l'épargne en monnaie n'est plus protégée par une contrainte extérieure.</strong> Elle dépend d'arbitrages politiques et institutionnels, qui peuvent être raisonnables, et qui ne t'appartiennent pas."
 ],
 quiz:[
-{q:"Qu'a annoncé Nixon le 15 août 1971 ?",opts:["La création d'une nouvelle monnaie mondiale","La suspension de la convertibilité du dollar en or","La fin des échanges commerciaux internationaux","La création du FMI"],correct:1,
-explain:"Cette décision a définitivement rompu le lien entre le dollar et l'or établi à Bretton Woods."},
-{q:"Qu'est-ce qu'une monnaie fiduciaire ?",opts:["Une monnaie garantie par des réserves d'or","Une monnaie émise uniquement par les banques privées","Une monnaie dont la valeur repose sur la confiance, non sur un actif réel","Une monnaie utilisée pour les transactions internationales"],correct:2,
-explain:"« Fiduciaire » vient du latin « fides », confiance. Elle ne vaut que parce que les gens y croient."},
-{q:"Par combien la masse monétaire américaine a-t-elle été multipliée depuis 1971 ?",opts:["Par 3","Par 10","Par plus de 30","Par 5"],correct:2,
-explain:"De 600 milliards à plus de 20 000 milliards de dollars en 50 ans."}
+{q:"Qu'a annoncé Nixon le 15 août 1971 ?",opts:["La création de l'euro","La suspension de la convertibilité du dollar en or","Une dévaluation du dollar de 50 %","La fin de la Réserve fédérale"],correct:1,
+explain:"Présentée comme temporaire, la mesure est devenue définitive et a fait basculer le monde en régime de monnaie fiduciaire."},
+{q:"Que signifie « monnaie fiduciaire » ?",opts:["Une monnaie garantie par l'or","Une monnaie dont la valeur repose sur la confiance et l'acceptation","Une monnaie électronique","Une monnaie émise par les banques privées"],correct:1,
+explain:"Du latin fiducia, la confiance. Elle n'est pas sans valeur : elle est acceptée partout et exigée pour payer l'impôt."},
+{q:"Quel est le changement fondamental apporté par 1971 ?",opts:["Les billets ont changé d'apparence","Il n'existe plus de limite physique à la création monétaire","Les banques ont été nationalisées","L'or est devenu illégal"],correct:1,
+explain:"Sous l'étalon-or, émettre supposait d'extraire du métal. Depuis, la quantité de monnaie dépend de décisions institutionnelles."}
 ],
-action:"Tape « WTFHappenedin1971 » dans ton navigateur. Parcours les graphiques 5 minutes. Note celui qui t'a le plus frappé."
+action:"Cherche un graphique de la masse monétaire de la zone euro ou des États-Unis depuis 1960. Regarde la pente avant et après 1971. Tu n'as rien à en conclure ce soir, seulement à voir de tes yeux ce dont parle cette leçon."
 },
-{module:"Module 2 — L'étalon-or et sa disparition", title:"Ce qui a changé depuis", duration:"11 min",
+{module:"Module 2 — L'étalon-or et sa disparition", title:"Ce qui a changé depuis", duration:"5 min",
 script:[
-"Qu'est-ce qui a vraiment changé depuis 1971 ? Premier changement : la création monétaire est devenue illimitée. La crise 2008 et le Covid en 2020 ont vu des milliers de milliards créés en quelques semaines.",
-"Deuxième changement : la dette est devenue le moteur de l'économie. La dette publique mondiale a explosé, et elle ne sera jamais remboursée au sens traditionnel : elle sera restructurée ou diluée par l'inflation.",
-"Troisième changement : l'épargne traditionnelle est devenue une stratégie perdante. Un livret A à 3% avec une inflation à 5%, c'est une perte nette de 2% par an, silencieuse mais certaine.",
-"Quatrième changement : les actifs réels sont devenus indispensables. Les grandes fortunes ne gardent pas leurs richesses en cash, elles les gardent dans des choses qui résistent à l'inflation.",
-"La bonne nouvelle : comprendre ce système est désormais accessible à tous. Il manquait juste quelqu'un pour l'expliquer clairement. C'est ce que NiouDem est là pour faire."
+"Un demi-siècle après 1971, quels effets concrets observe-t-on ? Cette leçon rassemble ce qui est mesuré et documenté, en distinguant soigneusement les faits des interprétations, parce que ce sujet attire beaucoup de discours excessifs dans les 2 sens.",
+"<strong>Fait 1 : la masse monétaire a crû beaucoup plus vite que la production.</strong> Dans la plupart des économies développées, la quantité de monnaie en circulation a progressé nettement plus rapidement que la quantité de biens et de services produits. Ce n'est pas contesté, c'est mesuré par les banques centrales elles-mêmes.",
+"<strong>Fait 2 : l'inflation des biens courants est restée modérée.</strong> Contrairement à ce qu'on pourrait attendre, les prix à la consommation ont augmenté lentement pendant des décennies, autour de 2 % par an, avec des épisodes plus vifs. La mondialisation et les gains de productivité ont largement absorbé la pression.",
+"<strong>Fait 3 : les prix des actifs ont explosé.</strong> Immobilier, actions, objets rares : ces prix ont progressé bien plus vite que les salaires. Un logement représentait en France l'équivalent de quelques années de revenu moyen il y a 50 ans ; il en représente aujourd'hui bien davantage dans les grandes villes.",
+"C'est ici que se trouve le mécanisme le plus utile à comprendre, et il explique le sentiment d'appauvrissement malgré une inflation officiellement basse. <u>L'argent créé ne se dirige pas prioritairement vers le pain et les légumes, il se dirige vers les actifs.</u> Résultat : le pouvoir d'achat courant se maintient à peu près, mais <strong>le pouvoir d'accès au patrimoine se dégrade fortement.</strong>",
+"Conséquence directe, et c'est le vrai enjeu social du sujet : <strong>épargner en monnaie ne permet plus de rattraper le prix des actifs.</strong> Celui qui met de côté sur un livret pour acheter un logement plus tard voit son objectif s'éloigner plus vite qu'il n'avance. Celui qui détient déjà des actifs voit son patrimoine progresser sans effort supplémentaire.",
+"Deux précautions pour finir, car l'honnêteté intellectuelle compte plus que l'effet de manche. Premièrement, ces évolutions ont d'autres causes que la monnaie : démographie, urbanisation, réglementation de la construction, baisse des taux d'intérêt. Deuxièmement, cette période a aussi vu progresser l'espérance de vie, l'accès aux soins et à l'information. <strong>Le tableau n'est pas noir, il est contrasté</strong>, et ta conclusion pratique reste la même : ce que tu veux faire durer ne doit pas rester en monnaie."
 ],
 quiz:[
-{q:"Depuis 1971, qu'est-il arrivé à la création monétaire ?",opts:["Elle est restée stable","Elle a diminué","Elle est devenue illimitée, sans contrainte liée à l'or","Elle a été confiée aux marchés privés"],correct:2,
-explain:"Sans la contrainte de l'or, les banques centrales peuvent créer de la monnaie par simple décision."},
-{q:"Pourquoi l'épargne traditionnelle est-elle devenue perdante ?",opts:["Les banques font faillite plus souvent","Les taux sont souvent inférieurs à l'inflation réelle","L'État taxe trop l'épargne","Les banques n'acceptent plus les dépôts"],correct:1,
-explain:"Un livret à 3% avec une inflation à 5% donne une perte nette de 2% par an."},
-{q:"Comment les grandes fortunes protègent-elles leur richesse ?",opts:["En gardant leurs liquidités en banque","En achetant des obligations d'État","En investissant dans des actifs réels qui résistent à l'inflation","En diversifiant en plusieurs monnaies"],correct:2,
-explain:"Immobilier, actions, or : des actifs qui maintiennent leur valeur malgré l'inflation."}
+{q:"Pourquoi l'inflation des biens courants est-elle restée modérée ?",opts:["Parce que la monnaie n'a pas augmenté","Parce que mondialisation et gains de productivité ont absorbé la pression","Parce que les prix sont plafonnés par la loi","Parce que les salaires ont baissé"],correct:1,
+explain:"La création monétaire s'est surtout dirigée vers les actifs plutôt que vers les biens de consommation courante."},
+{q:"Quelle est la conséquence pour un épargnant en monnaie ?",opts:["Son pouvoir d'achat courant s'effondre","Son pouvoir d'accès au patrimoine se dégrade","Il ne se passe rien","Son épargne double tous les 10 ans"],correct:1,
+explain:"L'objectif s'éloigne plus vite qu'on n'avance, alors que celui qui détient déjà des actifs progresse sans effort supplémentaire."},
+{q:"Quelle précaution intellectuelle faut-il garder ?",opts:["Tout attribuer à la création monétaire","Reconnaître d'autres causes : démographie, urbanisation, taux d'intérêt","Considérer que rien n'a changé","Ignorer les données officielles"],correct:1,
+explain:"La monnaie explique une partie du phénomène, pas la totalité. Un raisonnement honnête tient compte des autres facteurs."}
 ],
-action:"Ouvre ton appli bancaire. Note le taux de ton livret. Cherche « taux d'inflation France 2024 ». Fais la soustraction : c'est ce que ton épargne perd réellement chaque année."
+action:"Cherche le prix moyen du mètre carré dans ta ville il y a 20 ans, puis aujourd'hui. Compare l'évolution à celle du salaire moyen français sur la même période. L'écart entre les 2 courbes est le sujet exact de cette leçon."
 },
-{module:"Module 3 — Banques centrales et inflation", title:"Comment fonctionne la BCE", duration:"10 min",
+{module:"Module 3 — Banques centrales et inflation", title:"Comment fonctionne une banque centrale", duration:"5 min",
 script:[
-"La BCE a été créée en 1998. Son mandat officiel : maintenir la stabilité des prix, une inflation autour de 2% par an. Son outil principal : le taux directeur.",
-"Quand la BCE baisse ce taux, emprunter devient moins cher pour les banques, qui répercutent sur leurs clients. Les crédits baissent, l'économie s'accélère, mais l'inflation augmente aussi.",
-"Le deuxième outil, moins connu : l'assouplissement quantitatif (Quantitative Easing). La BCE crée de la monnaie et rachète des obligations d'États. Depuis 2015, elle a racheté des milliers de milliards.",
-"Cette monnaie créée cherche à se placer quelque part : elle gonfle les prix de l'immobilier, des actions, des actifs financiers. Ce qui avantage ceux qui possèdent déjà ces actifs.",
-"Comprendre la BCE, c'est comprendre pourquoi l'immobilier a autant augmenté, pourquoi votre épargne ne rapporte presque rien, et pourquoi investir dans des actifs réels est devenu une nécessité."
+"Les banques centrales sont citées dans toutes les actualités économiques, et presque personne ne sait ce qu'elles font concrètement. Voici l'essentiel, en évitant à la fois le jargon et la caricature.",
+"Une banque centrale n'est pas une banque pour les particuliers : <strong>c'est la banque des banques.</strong> La Banque centrale européenne, pour la zone euro, poursuit un objectif principal fixé par les traités : <u>la stabilité des prix, définie comme une inflation proche de 2 % à moyen terme</u>. Tout le reste découle de cet objectif.",
+"Son outil principal est <strong>le taux directeur</strong>, c'est-à-dire le taux auquel les banques commerciales se financent auprès d'elle. Ce taux se diffuse ensuite dans toute l'économie, et c'est ce qui te concerne directement : il influence le taux de ton crédit immobilier, celui de ton crédit à la consommation, et la rémunération de ton épargne.",
+"Le mécanisme fonctionne dans les 2 sens. <strong>Quand l'inflation est trop forte, la banque centrale monte les taux.</strong> Emprunter coûte plus cher, les ménages et les entreprises empruntent moins, la demande ralentit, et les prix se calment. Le prix à payer est un ralentissement de l'activité, et souvent une hausse du chômage. <strong>Quand l'économie ralentit trop, elle baisse les taux</strong>, ce qui stimule le crédit et l'activité, au risque de nourrir l'inflation et les bulles d'actifs.",
+"Un second outil est apparu après la crise de 2008 : <strong>l'assouplissement quantitatif</strong>, qui consiste pour la banque centrale à acheter massivement des obligations, notamment d'État, avec de la monnaie qu'elle crée. Cela fait baisser les taux de long terme et injecte des liquidités dans le système financier.",
+"Voici le point qu'il faut retenir pour toi, et il est concret. <strong>Ces décisions ne sont pas neutres pour ton patrimoine.</strong> Des taux bas favorisent les emprunteurs et les détenteurs d'actifs, et pénalisent les épargnants en livret. Des taux hauts font l'inverse. Une part importante de ce qui arrive à ton argent chaque année vient de décisions prises par une institution sur laquelle tu n'as aucune prise.",
+"La conclusion n'est pas de suivre l'actualité des banques centrales, ce qui ne servirait à rien. C'est de construire une organisation financière <strong>qui ne dépende pas de ces décisions</strong> : une épargne de précaution disponible, des actifs réels pour le long terme, et une dette à taux fixe plutôt que variable quand on emprunte."
 ],
 quiz:[
-{q:"Quel est le mandat officiel de la BCE ?",opts:["Financer les déficits des États","Maintenir la stabilité des prix, autour de 2% d'inflation","Contrôler les taux de change","Superviser les banques commerciales"],correct:1,
-explain:"Ni trop haute pour éroder le pouvoir d'achat, ni trop basse pour freiner l'économie."},
-{q:"Que se passe-t-il quand la BCE baisse son taux directeur ?",opts:["Les banques prêtent moins","L'inflation baisse mécaniquement","Emprunter devient moins cher, l'économie s'accélère mais l'inflation augmente","Les salaires augmentent automatiquement"],correct:2,
-explain:"Un taux plus bas rend l'emprunt moins coûteux, ce qui accélère l'économie mais fait aussi monter l'inflation."},
-{q:"Quel est l'effet du Quantitative Easing sur les actifs ?",opts:["Il fait baisser l'immobilier","Aucun effet","Il gonfle les prix des actifs réels car la monnaie créée cherche à se placer","Il profite uniquement aux banques"],correct:2,
-explain:"La monnaie créée gonfle mécaniquement les prix de l'immobilier, des actions et des obligations."}
+{q:"Quel est l'objectif principal de la Banque centrale européenne ?",opts:["Maximiser la croissance","La stabilité des prix, avec une inflation proche de 2 %","Financer les États","Protéger l'épargne des ménages"],correct:1,
+explain:"C'est un objectif fixé par les traités. La protection de l'épargne des particuliers n'en fait pas partie."},
+{q:"Que se passe-t-il quand la banque centrale monte ses taux ?",opts:["Le crédit devient moins cher","Emprunter coûte plus cher, la demande ralentit et les prix se calment","L'inflation augmente","Les salaires progressent"],correct:1,
+explain:"Le prix à payer est un ralentissement de l'activité, et souvent une hausse du chômage."},
+{q:"Quelle conclusion pratique en tirer ?",opts:["Suivre chaque annonce de la banque centrale","Construire une organisation qui ne dépende pas de ces décisions","Placer son épargne selon les taux du moment","Emprunter systématiquement à taux variable"],correct:1,
+explain:"Épargne disponible, actifs réels pour le long terme, dette à taux fixe : une structure qui tient quelle que soit la politique monétaire."}
 ],
-action:"Cherche « taux directeur BCE ». Note le taux actuel. Cherche « taux immobilier moyen France 2024 ». Compare les deux."
+action:"Cherche le taux directeur actuel de la Banque centrale européenne, puis le taux moyen des crédits immobiliers en France. Compare les 2. L'écart entre eux est, en grande partie, la marge du système bancaire."
 },
-{module:"Module 3 — Banques centrales et inflation", title:"L'inflation expliquée simplement", duration:"9 min",
+{module:"Module 3 — Banques centrales et inflation", title:"L'inflation expliquée simplement", duration:"5 min",
 script:[
-"L'inflation, c'est la hausse généralisée et durable des prix, mesurée par l'INSEE sur un panier représentatif de produits et services.",
-"Ce panier est une moyenne, qui peut masquer des réalités différentes. Si vous êtes locataire en ville, votre inflation réelle est probablement supérieure à l'inflation officielle.",
-"Il y a trois causes : la demande, les coûts de production, et la création monétaire. Cette troisième cause est structurelle depuis 1971, permanente contrairement aux deux autres.",
-"Si l'inflation est à 4% et votre livret rapporte 3%, vous perdez 1% de pouvoir d'achat par an. Sur 10 ans, 10 000€ d'épargne perdent environ 950€ de pouvoir d'achat réel.",
-"Pas spectaculaire en un an. Dévastateur sur une vie. Comprendre l'inflation n'est pas de l'économie théorique, c'est une question de survie financière personnelle."
+"L'inflation est le mot le plus employé et le moins compris de l'économie courante. Cette leçon sert à la définir précisément, puis à expliquer pourquoi le chiffre officiel te semble souvent faux.",
+"<strong>Définition : l'inflation est la hausse générale et durable du niveau des prix.</strong> Les 2 adjectifs comptent. <em>Générale</em>, car la hausse d'un seul produit n'est pas de l'inflation. <em>Durable</em>, car une flambée passagère n'en est pas non plus. Autre façon de le dire, plus utile pour un épargnant : l'inflation est la baisse du pouvoir d'achat de la monnaie.",
+"En France, elle est mesurée par l'INSEE à l'aide d'un <strong>panier de biens et services</strong> représentatif de la consommation moyenne des ménages, dont la composition est révisée régulièrement. Chaque poste y est pondéré selon son poids réel dans les dépenses : le logement pèse lourd, les biens électroniques beaucoup moins.",
+"D'où vient alors le décalage constant entre le chiffre annoncé et le sentiment des gens ? De 3 raisons précises, et aucune n'est un complot.",
+"<strong>1. Ton panier n'est pas le panier moyen.</strong> Si tu es locataire dans une grande ville avec une voiture, ton inflation personnelle est très supérieure à celle d'un propriétaire sans crédit vivant à la campagne. La moyenne ne décrit personne en particulier.",
+"<strong>2. La mémoire des prix est sélective.</strong> Nous retenons les hausses des produits achetés souvent, comme le carburant ou l'alimentation, et nous oublions les baisses de produits achetés rarement, comme l'électroménager ou les télécommunications.",
+"<strong>3. La qualité est prise en compte dans le calcul.</strong> Si un produit coûte 10 % de plus mais dure 2 fois plus longtemps, l'INSEE considère qu'une partie de la hausse correspond à une amélioration et non à de l'inflation. Cette méthode est défendable et discutée, mais elle explique une partie de l'écart perçu.",
+"Pour toi, la conclusion est simple et opérationnelle : <u>c'est ton inflation personnelle qui compte, pas la moyenne nationale</u>. Elle se calcule en comparant tes propres dépenses d'une année sur l'autre, poste par poste, ce qui est précisément ce que permet ton tableau de budget.",
+"Un dernier point à retenir, car il est contre-intuitif. <strong>Une inflation modérée n'est pas dangereuse pour celui qui investit ; elle l'est pour celui qui thésaurise.</strong> Les revenus, les loyers et les prix des actifs s'ajustent au fil du temps. Les euros posés sur un compte, eux, ne s'ajustent jamais."
 ],
 quiz:[
-{q:"Qu'est-ce que l'inflation ?",opts:["La hausse du prix d'un seul produit","La hausse généralisée et durable des prix","La baisse des actions en bourse","L'augmentation des impôts"],correct:1,
-explain:"L'inflation mesure la hausse d'un panier représentatif de biens et services, pas d'un seul produit."},
-{q:"Quelle est la cause structurelle et permanente de l'inflation ?",opts:["L'inflation par la demande","L'inflation par les coûts","L'inflation monétaire liée à la création excessive de monnaie","La spéculation"],correct:2,
-explain:"Depuis 1971, la création monétaire illimitée dilue mécaniquement la valeur de chaque unité."},
-{q:"Sur 10 ans avec 4% d'inflation et 3% de livret, que perd 10 000€ d'épargne ?",opts:["Rien","Environ 950€ de pouvoir d'achat réel","Exactement 1000€","Tout dépend des marchés"],correct:1,
-explain:"La perte cumulée sur 10 ans représente environ 950€ de pouvoir d'achat réel."}
+{q:"Quelle est la définition exacte de l'inflation ?",opts:["La hausse du prix du carburant","La hausse générale et durable du niveau des prix","La baisse des salaires","L'augmentation de la masse monétaire"],correct:1,
+explain:"Générale et durable : la hausse d'un seul produit ou une flambée passagère n'en sont pas."},
+{q:"Pourquoi le chiffre officiel semble-t-il souvent faux ?",opts:["Il est truqué","Parce que ton panier de consommation diffère du panier moyen","Parce qu'il est calculé tous les 5 ans","Parce qu'il exclut l'alimentation"],correct:1,
+explain:"S'y ajoutent la mémoire sélective des prix et la prise en compte de la qualité dans le calcul."},
+{q:"Qui subit le plus l'inflation ?",opts:["Celui qui investit","Celui qui laisse son argent dormir sur un compte","Celui qui emprunte","Celui qui possède un logement"],correct:1,
+explain:"Revenus, loyers et prix d'actifs s'ajustent avec le temps. Les euros posés sur un compte, jamais."}
 ],
-action:"Cherche « calculateur inflation INSEE ». Entre une somme que tu possédais il y a 10 ans et calcule ce qu'elle représente aujourd'hui."
+action:"Reprends ton tableau de budget et compare 3 postes entre l'an dernier et cette année : logement, alimentation, transport. Le pourcentage obtenu est ton inflation personnelle, et c'est le seul chiffre qui te concerne vraiment."
 },
-{module:"Module 3 — Banques centrales et inflation", title:"Calculer votre perte réelle", duration:"8 min",
+{module:"Module 3 — Banques centrales et inflation", title:"Calculer ta perte réelle", duration:"5 min",
 script:[
-"Il y a une notion essentielle : la différence entre taux nominal et taux réel. Le nominal, c'est le chiffre affiché par la banque. Le réel, c'est ce que vous gagnez vraiment après inflation.",
-"Si votre livret rapporte 3% et l'inflation est à 4,5%, votre taux réel est de -1,5%. Vous perdez du pouvoir d'achat même si votre solde augmente en valeur nominale. C'est le piège le plus répandu en finance personnelle.",
-"Calculons : prenez votre épargne totale, calculez le taux moyen pondéré, soustrayez l'inflation actuelle. Avec 10 000€ et un taux réel de -2,5%, vous perdez 250€ de pouvoir d'achat cette année.",
-"Sur 10 ans, la perte cumulée dépasse 2 300€ sur 10 000€ initiaux. Ce n'est pas une catastrophe, mais c'est un fait qu'il vaut mieux connaître.",
-"La bonne nouvelle : cette perte est évitable. C'est exactement ce que les formations suivantes vont vous apprendre à faire."
+"Cette leçon est la plus concrète du module. Elle consiste à mettre un chiffre sur quelque chose que personne ne voit passer : ce que ton épargne perd chaque année sans qu'aucune ligne de relevé ne l'indique.",
+"Le calcul repose sur une notion simple, <strong>le taux réel</strong>, qui se distingue du taux affiché sur ton livret, dit taux nominal. La formule exacte divise 1 plus le rendement par 1 plus l'inflation. Dans la vie courante, la soustraction donne un résultat très proche : <strong>taux réel égale rendement moins inflation.</strong>",
+"Prenons un exemple chiffré. Un livret rémunéré à 2 % pendant une année où l'inflation atteint 3 % donne un taux réel de moins 1 %. Sur 10 000 € placés, le relevé affichera 10 200 € en fin d'année, et pourtant <u>cette somme achètera moins de choses que les 10 000 € de départ</u>. C'est ce paradoxe qui rend l'inflation si difficile à percevoir : les 2 chiffres évoluent en sens contraire, et seul le premier est affiché.",
+"Le mécanisme s'aggrave avec le temps, parce qu'il se compose. Une perte de 1 % par an représente environ <strong>10 % de pouvoir d'achat sur 10 ans</strong>. Sur une épargne de précaution de 15 000 €, cela correspond à 1 500 € évaporés, sans qu'aucun prélèvement n'apparaisse nulle part.",
+"Faut-il en conclure qu'il faut vider ses livrets ? <strong>Non, et c'est important.</strong> L'épargne de précaution doit rester disponible et sans risque, même si elle perd un peu de valeur. Ce que tu paies, c'est une assurance : le droit de ne jamais être contraint de vendre un actif au mauvais moment. Personne ne reproche à son assurance habitation de ne rien rapporter.",
+"La bonne conclusion est celle-ci. <strong>Distingue les 3 étages de ton argent.</strong> Ce dont tu peux avoir besoin demain reste liquide, et tu acceptes qu'il perde un peu. Ce dont tu auras besoin dans 2 à 5 ans se place sur des supports sûrs et un peu mieux rémunérés. Ce dont tu n'auras pas besoin avant 8 ans ou plus n'a rien à faire en monnaie.",
+"L'erreur la plus fréquente n'est pas de détenir un livret, c'est d'y laisser dormir <strong>la totalité</strong> de son épargne pendant 10 ans, faute d'avoir jamais fait ce calcul."
 ],
 quiz:[
-{q:"Qu'est-ce que le taux réel d'une épargne ?",opts:["Le taux affiché par la banque","Le taux après frais bancaires","Le taux nominal moins l'inflation","Le taux garanti par l'État"],correct:2,
-explain:"Le taux réel est ce qu'on gagne vraiment en pouvoir d'achat, après déduction de l'inflation."},
-{q:"Avec 10 000€ et un taux réel de -2,5%, quelle est la perte annuelle ?",opts:["100€","150€","250€","500€"],correct:2,
-explain:"10 000 × -2,5% = 250€ de perte de pouvoir d'achat par an."},
-{q:"Pourquoi voir son solde augmenter ne signifie pas s'enrichir ?",opts:["Les banques prélèvent des frais cachés","La valeur nominale peut augmenter pendant que le pouvoir d'achat réel diminue","L'État prend une partie des intérêts","Les taux changent chaque mois"],correct:1,
-explain:"Si l'inflation dépasse le taux du livret, le pouvoir d'achat réel diminue malgré la hausse nominale."}
+{q:"Comment se calcule le taux réel, en approximation courante ?",opts:["Rendement plus inflation","Rendement moins inflation","Rendement multiplié par l'inflation","Rendement divisé par 2"],correct:1,
+explain:"La formule exacte divise 1 plus le rendement par 1 plus l'inflation, mais la soustraction en est très proche."},
+{q:"Un livret à 2 % avec 3 % d'inflation, que produit-il ?",opts:["Un gain de 2 %","Une perte de pouvoir d'achat de 1 %","Un résultat neutre","Un gain de 5 %"],correct:1,
+explain:"Le relevé affiche pourtant une progression. C'est ce paradoxe qui rend l'inflation invisible."},
+{q:"Faut-il vider ses livrets ?",opts:["Oui, immédiatement","Non, l'épargne de précaution doit rester disponible malgré la perte","Oui, sauf le livret A","Seulement si l'inflation dépasse 5 %"],correct:1,
+explain:"C'est le prix d'une assurance : le droit de ne jamais être contraint de vendre au mauvais moment."}
 ],
-action:"Note ton solde total d'épargne et le taux de chaque produit. Calcule ton taux moyen pondéré, soustrais l'inflation actuelle. C'est ton taux réel personnel."
+action:"Note le montant total de ton épargne et le taux moyen de tes livrets. Soustrais le dernier taux d'inflation publié, et applique le résultat à ton montant. Le chiffre obtenu est ta perte annuelle réelle, et beaucoup de gens le découvrent avec surprise."
 },
-{module:"Module 4 — Bonnes et mauvaises monnaies", title:"Les critères d'une monnaie saine", duration:"9 min",
+{module:"Module 4 — Bonnes et mauvaises monnaies", title:"Les critères d'une monnaie saine", duration:"5 min",
 script:[
-"Il existe six critères objectifs pour évaluer n'importe quelle monnaie : divisibilité, portabilité, durabilité, fongibilité, rareté, et résistance à la censure.",
-"La rareté est le critère le plus important pour une réserve de valeur. Une monnaie dont l'offre peut être augmentée à volonté se déprécie mécaniquement.",
-"L'euro excelle sur la divisibilité, la portabilité et la fongibilité. Il échoue sur la rareté et la résistance à la censure. L'or excelle sur la rareté et la durabilité, mais est limité sur la portabilité.",
-"Le Bitcoin excelle sur la divisibilité, la portabilité, la durabilité numérique, la rareté absolue et la résistance à la censure. Ses limites : la volatilité et l'adoption encore partielle.",
-"Aucune monnaie n'est parfaite. Mais comprendre ces critères vous permet de faire des choix éclairés sur la façon de conserver votre épargne."
+"Pourquoi certaines choses ont-elles servi de monnaie pendant des millénaires, et d'autres quelques décennies ? Les économistes ont dégagé <strong>6 critères</strong> qui permettent de comparer objectivement n'importe quelle monnaie, ancienne ou récente.",
+"<strong>1. La rareté.</strong> La quantité disponible doit être limitée et difficile à augmenter. C'est le critère décisif, celui qui a fait disparaître les coquillages et les perles de verre.",
+"<strong>2. La durabilité.</strong> La monnaie ne doit pas se dégrader avec le temps. Le bétail et le sel remplissaient mal ce critère, l'or parfaitement.",
+"<strong>3. La divisibilité.</strong> Il faut pouvoir la fractionner pour payer aussi bien une maison qu'un pain, sans perdre de valeur dans l'opération.",
+"<strong>4. La transportabilité.</strong> Elle doit pouvoir se déplacer facilement. C'est la faiblesse principale de l'or physique, et la raison historique pour laquelle les billets, initialement des reçus de dépôt, se sont imposés.",
+"<figure class=\"schema\"><svg viewBox=\"0 0 700 340\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><text x=\"200\" y=\"20\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" letter-spacing=\"1.4\" fill=\"#1E4B3C\">L'OR</text><text x=\"560\" y=\"20\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" letter-spacing=\"1.4\" fill=\"#B8862F\">L'EURO</text><text x=\"20\" y=\"44\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Rareté</text><rect x=\"20\" y=\"54\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"54\" width=\"581\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"601\" y=\"54\" width=\"79\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"67\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\">quantité limitée</text><text x=\"672\" y=\"67\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\"></text><text x=\"20\" y=\"100\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Durabilité</text><rect x=\"20\" y=\"110\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"110\" width=\"528\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"548\" y=\"110\" width=\"132\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"123\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\">inaltérable</text><text x=\"672\" y=\"123\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\"></text><text x=\"20\" y=\"156\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Divisibilité</text><rect x=\"20\" y=\"166\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"166\" width=\"165\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"185\" y=\"166\" width=\"495\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"179\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\"></text><text x=\"672\" y=\"179\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\">parfaite</text><text x=\"20\" y=\"212\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Transportabilité</text><rect x=\"20\" y=\"222\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"222\" width=\"99\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"119\" y=\"222\" width=\"561\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"235\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\"></text><text x=\"672\" y=\"235\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\">immédiate</text><text x=\"20\" y=\"268\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Vérifiabilité</text><rect x=\"20\" y=\"278\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"278\" width=\"409\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"429\" y=\"278\" width=\"251\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"291\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\">difficile</text><text x=\"672\" y=\"291\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\"></text></svg><figcaption>Aucune monnaie ne coche les 6 critères. Le choix se fait toujours entre des compromis.</figcaption></figure>",
+"<strong>5. La fongibilité.</strong> Chaque unité doit être équivalente à une autre. Un billet de 20 € en vaut un autre, ce qui n'est pas le cas de 2 diamants ou de 2 tableaux.",
+"<strong>6. La vérifiabilité.</strong> On doit pouvoir s'assurer facilement qu'elle est authentique.",
+"Applique maintenant ces critères à l'euro. Il excelle sur la durabilité, la divisibilité, la transportabilité, la fongibilité et la vérifiabilité. <u>Il échoue sur un seul critère, la rareté</u>, puisque la quantité peut être augmentée par décision institutionnelle. C'est exactement pourquoi il est excellent pour échanger et médiocre pour conserver.",
+"Ce classement explique aussi pourquoi l'or a dominé pendant des millénaires : il coche presque tout, sauf la transportabilité. Et pourquoi les monnaies numériques à quantité plafonnée intéressent tant de gens : elles cochent la rareté et la transportabilité, mais posent d'autres questions, notamment de stabilité et de vérifiabilité pour un non-spécialiste.",
+"Retiens le principe général, car il est plus utile que la liste : <strong>aucune monnaie ne coche les 6 critères parfaitement.</strong> Le choix n'est jamais entre une bonne et une mauvaise monnaie, mais entre des compromis. Ce qui compte est de savoir lequel tu utilises, et pour quel usage."
 ],
 quiz:[
-{q:"Quel est le critère le plus important pour une réserve de valeur ?",opts:["La portabilité","La fongibilité","La rareté","La divisibilité"],correct:2,
-explain:"Une monnaie dont l'offre est limitée et prévisible conserve sa valeur dans le temps."},
-{q:"Sur quel critère l'euro échoue-t-il principalement ?",opts:["La divisibilité","La portabilité","La rareté, car la BCE peut en créer à volonté","La fongibilité"],correct:2,
-explain:"L'euro peut être créé en quantités illimitées, ce qui affecte sa capacité à préserver la valeur."},
-{q:"Qu'est-ce que la résistance à la censure ?",opts:["La capacité à être utilisé anonymement","L'impossibilité pour une autorité de confisquer ou bloquer arbitrairement la monnaie","La protection contre la contrefaçon","L'absence de régulation"],correct:1,
-explain:"Un critère souvent négligé jusqu'au jour où un compte est bloqué ou des capitaux imposés à la sortie d'un pays."}
+{q:"Sur quel critère l'euro échoue-t-il ?",opts:["La divisibilité","La rareté","La durabilité","La fongibilité"],correct:1,
+explain:"Sa quantité peut être augmentée par décision institutionnelle. Il excelle sur les 5 autres critères."},
+{q:"Quelle est la faiblesse historique de l'or ?",opts:["Sa rareté","Sa transportabilité","Sa durabilité","Sa fongibilité"],correct:1,
+explain:"C'est la raison pour laquelle les billets, initialement des reçus de dépôt, se sont imposés."},
+{q:"Quel principe général retenir ?",opts:["L'or est la seule vraie monnaie","Aucune monnaie ne coche les 6 critères, il s'agit toujours d'un compromis","Les monnaies numériques sont supérieures","La rareté est le seul critère qui compte"],correct:1,
+explain:"Ce qui compte est de savoir quel compromis on utilise, et pour quel usage."}
 ],
-action:"Fais un tableau : 6 critères en lignes, 3 monnaies en colonnes (euro, or, Bitcoin). Attribue un point quand le critère est rempli."
+action:"Trace un tableau à 6 lignes, une par critère, et 3 colonnes : euro, or, et une monnaie numérique de ton choix. Attribue un point quand le critère est rempli. Tu obtiendras en 10 minutes une grille de lecture que peu de gens possèdent."
 },
-{module:"Module 4 — Bonnes et mauvaises monnaies", title:"Comparatif euro, or, Bitcoin", duration:"11 min",
+{module:"Module 4 — Bonnes et mauvaises monnaies", title:"Comparer l'euro, l'or et le Bitcoin", duration:"5 min",
 script:[
-"L'euro est excellent comme moyen d'échange quotidien mais médiocre comme réserve de valeur à long terme, à cause de la création illimitée.",
-"L'or a une histoire monétaire de plus de 5000 ans. Une once d'or achetait 35 dollars en 1971, aujourd'hui plus de 2000. Ce n'est pas que l'or vaut plus, c'est que le dollar vaut moins. Sa limite : pas de rendement direct.",
-"Le Bitcoin combine la rareté de l'or (offre plafonnée à 21 millions) avec la portabilité numérique. Sa faiblesse : la volatilité à court terme. Sur 10 ans, malgré ses krachs, il a été l'actif le plus performant au monde, sans garantie pour l'avenir.",
-"La conclusion n'est pas de vendre ses euros pour acheter du Bitcoin. C'est qu'un portefeuille diversifié entre différents types d'actifs est plus robuste qu'une épargne concentrée dans une seule monnaie qui se déprécie."
+"Appliquons la grille précédente à 3 objets très différents, en restant factuel. Cette leçon ne recommande rien : elle décrit des caractéristiques, et c'est à toi d'en tirer tes conclusions.",
+"<strong>L'euro.</strong> Quantité modifiable par décision institutionnelle. Parfaitement liquide, accepté partout dans la zone, garanti jusqu'à 100 000 € par déposant et par établissement par le mécanisme de garantie des dépôts. Perd du pouvoir d'achat de façon lente et régulière. <u>C'est l'outil idéal du court terme, et le pire du très long terme.</u>",
+"<strong>L'or.</strong> Quantité physiquement limitée, croissant d'environ 1,5 à 2 % par an par l'extraction minière. Aucun rendement : une once d'or reste une once d'or, elle ne produit ni intérêt ni dividende. Historiquement, il a conservé son pouvoir d'achat sur de très longues périodes, avec des variations fortes à court terme. Son prix peut stagner ou baisser pendant de nombreuses années consécutives. Contraintes concrètes : stockage, assurance, et fiscalité spécifique à la revente en France.",
+"<strong>Le Bitcoin.</strong> Quantité plafonnée par son protocole à 21 millions d'unités, ce qui est vérifiable par n'importe qui. Très facile à transporter et à diviser. Mais <strong>une volatilité considérable</strong>, avec des baisses de 70 % ou plus survenues à plusieurs reprises depuis sa création, une histoire courte de moins de 20 ans, un risque technique réel lié à la conservation des clés, et un environnement réglementaire encore mouvant.",
+"Ce que cette comparaison permet de comprendre, et qui vaut mieux qu'une recommandation : <strong>ces 3 objets ne servent pas au même usage.</strong> L'euro sert à vivre. L'or a historiquement servi à traverser de très longues périodes. Le Bitcoin est un actif jeune, très volatil, sur lequel les avis d'experts sérieux divergent profondément, et c'est un fait à connaître plutôt qu'à trancher.",
+"Deux mises en garde qui valent pour toute cette formation. Premièrement, <u>aucun de ces 3 objets ne produit de revenu</u>, contrairement à une entreprise ou à un bien loué. Détenir de l'or ou du Bitcoin, c'est parier sur la conservation ou la hausse d'un prix, pas percevoir un flux.",
+"Deuxièmement, méfie-toi de quiconque te présente l'un des 3 comme la solution évidente. <strong>Le discours qui promet la certitude est toujours celui qui vend quelque chose</strong>, et cette formation ne te vend rien : elle t'apprend à poser les bonnes questions."
 ],
 quiz:[
-{q:"Pourquoi le prix de l'or est-il passé de 35$ à plus de 2000$ l'once depuis 1971 ?",opts:["L'or est devenu plus rare","La demande industrielle a explosé","Principalement parce que le dollar a perdu de la valeur","Les investisseurs ont spéculé"],correct:2,
-explain:"En termes de pouvoir d'achat réel, l'or a surtout préservé sa valeur plutôt que de s'être apprécié."},
-{q:"Quelle est la caractéristique unique du Bitcoin ?",opts:["Sa rapidité de transaction","Son offre fixée à 21 millions, inscrite dans le code et immuable","Sa gestion par une banque centrale décentralisée","Son absence de volatilité"],correct:1,
-explain:"Personne ne peut décider d'en créer plus, ni gouvernement, ni banque centrale, ni son créateur."},
-{q:"Quelle est la principale limite de l'or comme monnaie ?",opts:["Sa valeur fluctue trop","Il est facile à falsifier","Sa portabilité limitée et l'absence de rendement direct","Les gouvernements peuvent en créer à volonté"],correct:2,
-explain:"L'or est difficile à transporter en grande quantité et ne génère ni dividendes ni intérêts."}
+{q:"Quelle est la limite de quantité du Bitcoin ?",opts:["Aucune","21 millions d'unités","100 millions","Fixée chaque année"],correct:1,
+explain:"Le plafond est inscrit dans le protocole et vérifiable par tous, ce qui le distingue d'une monnaie fiduciaire."},
+{q:"Quel point commun ont l'or et le Bitcoin ?",opts:["Ils sont garantis par l'État","Ils ne produisent aucun revenu","Ils sont peu volatils","Ils sont acceptés partout"],correct:1,
+explain:"Contrairement à une entreprise ou à un bien loué, les détenir revient à parier sur un prix, pas à percevoir un flux."},
+{q:"Que penser d'un discours qui présente l'un des 3 comme la solution évidente ?",opts:["Il est probablement fondé","Le discours qui promet la certitude vend généralement quelque chose","Il faut le suivre s'il vient d'un expert","Il n'a aucune importance"],correct:1,
+explain:"Sur ces sujets, les avis d'experts sérieux divergent profondément. La certitude affichée est un signal commercial."}
 ],
-action:"Cherche le prix actuel de l'or et du Bitcoin en euros. Note les deux. Dans 6 mois, reviens comparer."
+action:"Note aujourd'hui le prix de l'or et du Bitcoin en euros, avec la date. Range cette note et reviens la lire dans 6 mois. Observer soi-même la volatilité pendant quelques mois enseigne davantage que n'importe quel graphique commenté."
 },
-{module:"Module 4 — Bonnes et mauvaises monnaies", title:"Pourquoi certaines monnaies s'effondrent", duration:"10 min",
+{module:"Module 4 — Bonnes et mauvaises monnaies", title:"Pourquoi certaines monnaies s'effondrent", duration:"5 min",
 script:[
-"L'Allemagne des années 1920 : en 1921, 1 dollar = 60 marks. En 1923, 1 dollar = 4200 milliards de marks. Des gens tapissaient leurs murs avec des billets, moins cher que le papier peint.",
-"La spirale hyperinflationniste suit toujours le même schéma : l'État imprime, les prix montent, la vitesse de circulation s'accélère, la confiance s'effondre totalement.",
-"Zimbabwe, Venezuela, Argentine : d'autres exemples récents confirment ce schéma. Aucun pays n'est à l'abri.",
-"Ceux qui avaient diversifié leur épargne dans des actifs réels (or, immobilier, devises étrangères) ont mieux traversé ces crises que ceux qui avaient tout en monnaie locale.",
-"La leçon n'est pas de paniquer. C'est de comprendre."
+"L'hyperinflation semble être un phénomène lointain, réservé à d'autres pays et à d'autres époques. Elle mérite pourtant d'être comprise, parce qu'elle montre le mécanisme monétaire à l'état pur, en accéléré.",
+"La définition technique retenue par les économistes est une inflation supérieure à <strong>50 % par mois</strong>. À ce rythme, les prix doublent en moins de 2 mois. Le cas le plus extrême documenté est celui du Zimbabwe à la fin des années 2000, où l'inflation a atteint des ordres de grandeur qui rendent les chiffres presque abstraits.",
+"Le scénario est toujours le même, et il se déroule en 4 temps. <strong>1.</strong> Un État fait face à des dépenses qu'il ne peut plus financer par l'impôt ni par l'emprunt. <strong>2.</strong> Il finance ce déficit en créant de la monnaie. <strong>3.</strong> Les prix montent, ce qui creuse encore le déficit réel, donc l'État crée davantage de monnaie. <strong>4.</strong> La confiance se rompt : les gens cessent de détenir la monnaie et s'en débarrassent immédiatement, ce qui accélère encore la hausse des prix.",
+"Ce quatrième temps est le plus important à comprendre. <u>L'hyperinflation n'est pas seulement un phénomène mécanique, c'est un effondrement de la confiance.</u> Tant que les gens acceptent de détenir une monnaie, elle tient. Le jour où ils la refusent, aucune quantité d'or ou de décret ne la sauve.",
+"Que se passe-t-il alors concrètement ? <strong>L'épargne en monnaie est effacée</strong>, souvent en quelques mois, ce qui frappe le plus durement les retraités et les salariés modestes. Les gens se réfugient dans les devises étrangères, les biens réels et le troc. Les dettes libellées en monnaie locale, elles, s'effacent aussi, ce qui explique que les emprunteurs s'en sortent parfois mieux que les épargnants.",
+"Cela peut-il arriver en zone euro ? <strong>La probabilité est très faible</strong>, et il faut le dire clairement. L'euro repose sur une économie large et diversifiée, une banque centrale indépendante dont le mandat est la stabilité des prix, et une monnaie utilisée dans les échanges internationaux. Les hyperinflations frappent des économies fragiles, souvent en guerre, en effondrement institutionnel ou dépendantes d'une seule ressource.",
+"Alors pourquoi étudier ce cas ? Parce qu'il révèle une vérité qui vaut partout : <strong>la valeur d'une monnaie repose entièrement sur la confiance, et la confiance n'est pas une garantie.</strong> Cela n'appelle pas la peur, mais la prudence élémentaire : ne jamais concentrer 100 % de son patrimoine sur un seul type d'actif, quel qu'il soit."
 ],
 quiz:[
-{q:"Quelle est la première cause d'une hyperinflation ?",opts:["Une guerre civile","Un État qui imprime massivement de la monnaie pour ses dettes","Une spéculation excessive","Une baisse des exportations"],correct:1,
-explain:"Cette création excessive dilue la valeur de chaque unité de monnaie, déclenchant une spirale."},
-{q:"En 1923 en Allemagne, combien de marks fallait-il pour 1 dollar ?",opts:["600","6 millions","4200 milliards","42 millions"],correct:2,
-explain:"En deux ans seulement, une dévalorisation spectaculaire illustrant la vitesse d'un effondrement monétaire."},
-{q:"Qui s'en sort le mieux lors d'un effondrement monétaire ?",opts:["Ceux qui ont thésaurisé de la monnaie locale","Ceux qui ont diversifié en actifs réels","Ceux qui ont des comptes bien remplis","Ceux qui travaillent pour l'État"],correct:1,
-explain:"Or, immobilier, devises étrangères : leur patrimoine résiste bien mieux que la monnaie locale qui s'effondre."}
+{q:"À partir de quel seuil parle-t-on d'hyperinflation ?",opts:["10 % par an","50 % par mois","100 % par an","5 % par trimestre"],correct:1,
+explain:"À ce rythme, les prix doublent en moins de 2 mois, ce qui rend toute épargne en monnaie impossible."},
+{q:"Quel est le déclencheur final d'une hyperinflation ?",opts:["Une décision de la banque centrale","La rupture de confiance : les gens refusent de détenir la monnaie","Une pénurie d'or","Une invasion étrangère"],correct:1,
+explain:"Tant qu'elle est acceptée, une monnaie tient. Le jour où elle est refusée, aucun décret ne la sauve."},
+{q:"Quelle leçon en tirer pour la zone euro ?",opts:["Il faut tout convertir en devises étrangères","Le risque est très faible, mais la prudence impose de ne pas tout concentrer sur un seul actif","L'hyperinflation est imminente","Aucune leçon, le cas est trop différent"],correct:1,
+explain:"Ni peur ni déni : une diversification élémentaire suffit à traiter un risque faible mais non nul."}
 ],
-action:"Cherche « hyperinflation Zimbabwe » sur YouTube. Regarde une vidéo de 5 minutes. Note ce qui t'a frappé."
+action:"Regarde une vidéo documentaire de 5 minutes sur l'hyperinflation au Zimbabwe ou en Allemagne dans les années 1920. Note une seule chose qui t'a marqué. Voir le mécanisme en accéléré fait comprendre ce qui se joue au ralenti chez nous."
 },
-{module:"Module 5 — Reprendre le contrôle", title:"Les actifs qui préservent la valeur", duration:"10 min",
+{module:"Module 5 — Reprendre le contrôle", title:"Les actifs qui préservent la valeur", duration:"5 min",
 script:[
-"Cinq catégories d'actifs ont historiquement préservé ou augmenté la valeur face à l'inflation : l'immobilier, les actions, l'or, le Bitcoin, et les compétences.",
-"L'immobilier génère des revenus réguliers, peut être financé par emprunt (effet de levier), et suit l'inflation sur le long terme.",
-"Les actions offrent historiquement 7 à 10% par an sur le long terme, dividendes réinvestis. Accessible dès quelques dizaines d'euros par mois.",
-"L'or préserve le pouvoir d'achat sur de très longues périodes, utile comme assurance contre les crises. Le Bitcoin, avec son offre fixe, mérite une exposition modérée (1 à 5%) pour ceux qui comprennent sa volatilité.",
-"Souvent oubliée : les compétences et le capital humain. Investir dans sa capacité à générer des revenus est souvent l'investissement le plus rentable en début de parcours."
+"Après 12 leçons de constat, voici la partie constructive. Quels types d'actifs ont historiquement conservé du pouvoir d'achat, et selon quelle logique ? Cette leçon présente 5 catégories, sans en recommander aucune.",
+"<strong>1. Les entreprises, via les actions.</strong> Une entreprise vend des biens et des services dont les prix s'ajustent avec l'inflation, tout en versant potentiellement des dividendes. C'est la catégorie qui a le mieux progressé sur très longue période dans les économies développées, au prix d'une volatilité importante et d'un risque de perte réel. On y accède simplement par des fonds indiciels, sujet de la formation sur la bourse.",
+"<strong>2. L'immobilier.</strong> Les loyers s'indexent, le bien conserve une valeur d'usage, et l'accès au crédit permet l'effet de levier vu dans la formation dédiée. En contrepartie : illiquidité, gestion, fiscalité lourde en location nue, et concentration du risque sur un seul bien.",
+"<strong>3. Les métaux précieux.</strong> Ils ne produisent rien, mais ont traversé les siècles. Ils jouent surtout un rôle d'assurance contre les scénarios extrêmes, plutôt que de moteur de rendement.",
+"<figure class=\"schema\"><svg viewBox=\"0 0 700 400\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"20\" y=\"24\" width=\"190\" height=\"54\" rx=\"9\" fill=\"#EFF0EA\" stroke=\"#12212B\" stroke-width=\"1.5\"/><text x=\"115\" y=\"47\" text-anchor=\"middle\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14.5\" font-weight=\"600\" fill=\"#12212B\">Ton patrimoine</text><text x=\"115\" y=\"65\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"12\" fill=\"#7A8A93\">ce que tu possèdes</text><path d=\"M210 51 C 270 51, 270 66, 330 66\" fill=\"none\" stroke=\"#1E4B3C\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"66\" r=\"4\" fill=\"#1E4B3C\"/><rect x=\"344\" y=\"43\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#E7EFEA\" stroke=\"#1E4B3C\" stroke-width=\"1.3\"/><text x=\"360\" y=\"64\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Entreprises, via les actions</text><text x=\"664\" y=\"64\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#1E4B3C\">les prix s'ajustent</text><path d=\"M210 51 C 270 51, 270 128, 330 128\" fill=\"none\" stroke=\"#1E4B3C\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"128\" r=\"4\" fill=\"#1E4B3C\"/><rect x=\"344\" y=\"105\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#E7EFEA\" stroke=\"#1E4B3C\" stroke-width=\"1.3\"/><text x=\"360\" y=\"126\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Immobilier</text><text x=\"664\" y=\"126\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#1E4B3C\">loyers indexés, effet de levier</text><path d=\"M210 51 C 270 51, 270 190, 330 190\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"190\" r=\"4\" fill=\"#B8862F\"/><rect x=\"344\" y=\"167\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#F6EFE0\" stroke=\"#B8862F\" stroke-width=\"1.3\"/><text x=\"360\" y=\"188\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Métaux précieux</text><text x=\"664\" y=\"188\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#B8862F\">assurance, aucun rendement</text><path d=\"M210 51 C 270 51, 270 252, 330 252\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"252\" r=\"4\" fill=\"#B8862F\"/><rect x=\"344\" y=\"229\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#F6EFE0\" stroke=\"#B8862F\" stroke-width=\"1.3\"/><text x=\"360\" y=\"250\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Compétences</text><text x=\"664\" y=\"250\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#B8862F\">ni saisies, ni dévaluées</text><path d=\"M210 51 C 270 51, 270 314, 330 314\" fill=\"none\" stroke=\"#1E4B3C\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"314\" r=\"4\" fill=\"#1E4B3C\"/><rect x=\"344\" y=\"291\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#E7EFEA\" stroke=\"#1E4B3C\" stroke-width=\"1.3\"/><text x=\"360\" y=\"312\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Dette à taux fixe</text><text x=\"664\" y=\"312\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#1E4B3C\">l'inflation la rembourse</text></svg><figcaption>5 catégories qui ont historiquement préservé la valeur, chacune avec ses contreparties.</figcaption></figure>",
+"<strong>4. Les compétences.</strong> C'est la catégorie que personne ne cite et qui est souvent la plus rentable. <u>Une compétence ne peut être ni saisie, ni dévaluée, ni volée, et elle augmente directement ton revenu</u>, c'est-à-dire la source de toute épargne future. Une formation de quelques centaines d'euros qui débouche sur une augmentation change davantage une trajectoire que n'importe quel placement.",
+"<strong>5. La dette à taux fixe, quand elle finance un actif.</strong> C'est le plus contre-intuitif : emprunter à taux fixe sur 20 ans transfère une partie du coût de l'inflation vers le prêteur, puisque tu rembourses une somme fixe avec une monnaie qui se déprécie.",
+"Deux principes valent mieux que toute liste. <strong>Premier principe : la diversification n'est pas une preuve d'indécision, c'est la reconnaissance qu'on ne sait pas de quoi demain sera fait.</strong> Personne ne prévoit quelle catégorie surperformera.",
+"<strong>Second principe : la seule vraie règle est de ne pas laisser dormir sur un compte l'argent dont tu n'as pas besoin à court terme.</strong> Le reste, la répartition précise, dépend de ta situation, de ton horizon et de ta tolérance au risque, c'est-à-dire de choses que toi seul peux évaluer."
 ],
 quiz:[
-{q:"Quel est le rendement historique moyen des marchés actions sur le long terme ?",opts:["2 à 3% par an","5 à 6% par an","7 à 10% par an, dividendes réinvestis","15 à 20% par an"],correct:2,
-explain:"C'est bien au-dessus de l'inflation et accessible dès quelques dizaines d'euros par mois."},
-{q:"Quelle catégorie d'actifs est souvent oubliée mais très rentable pour qui part de zéro ?",opts:["L'or physique","Les cryptomonnaies","Les compétences et le capital humain","Les obligations d'État"],correct:2,
-explain:"Un actif productif que personne ne peut confisquer et qui génère des revenus durables."},
-{q:"Quelle allocation en Bitcoin peut avoir du sens pour qui comprend la volatilité ?",opts:["50% du portefeuille","20 à 30%","1 à 5%","0%, jamais recommandé"],correct:2,
-explain:"Une exposition modérée permet de bénéficier d'un potentiel de croissance sans exposer l'ensemble du patrimoine."}
+{q:"Quelle catégorie d'actif est la plus souvent oubliée ?",opts:["L'immobilier","Les compétences","Les actions","Les métaux précieux"],correct:1,
+explain:"Une compétence ne peut être ni saisie ni dévaluée, et elle augmente le revenu, source de toute épargne future."},
+{q:"Pourquoi une dette à taux fixe peut-elle protéger de l'inflation ?",opts:["Parce que la banque réduit la dette","Parce qu'on rembourse une somme fixe avec une monnaie qui se déprécie","Parce que les taux baissent avec l'inflation","Parce que l'État compense"],correct:1,
+explain:"Une partie du coût de l'inflation est transférée vers le prêteur, à condition que la dette finance un actif."},
+{q:"Que signifie diversifier ?",opts:["Ne pas savoir choisir","Reconnaître qu'on ignore quelle catégorie surperformera","Acheter le plus de produits possible","Changer de placement chaque année"],correct:1,
+explain:"Personne ne prévoit l'avenir. La diversification est une réponse rationnelle à cette incertitude, pas une indécision."}
 ],
-action:"Fais la liste de tes actifs actuels dans chacune des 5 catégories. Ce n'est pas un jugement, c'est un point de départ."
+action:"Liste tes actifs actuels dans ces 5 catégories, en incluant honnêtement tes compétences et tes diplômes. Repère celle où tu es le plus concentré. Ce n'est pas un jugement, c'est une photographie de ton exposition réelle."
 },
-{module:"Module 5 — Reprendre le contrôle", title:"Votre plan personnel de protection", duration:"9 min",
+{module:"Module 5 — Reprendre le contrôle", title:"Ton plan personnel de protection", duration:"5 min",
 script:[
-"Voici votre plan de protection contre l'érosion monétaire, en 4 étapes. Étape 1 : comprendre votre point de départ, ce que vous venez de faire dans les leçons précédentes.",
-"Étape 2 : construire votre fonds d'urgence, 3 à 6 mois de dépenses, avant tout investissement. Ce n'est pas un investissement, c'est une assurance.",
-"Étape 3 : commencer à investir régulièrement, même 50€ par mois. La stratégie DCA (Dollar Cost Averaging) lisse les points d'entrée et ne demande aucune expertise.",
-"Étape 4 : diversifier progressivement, immobilier, or, Bitcoin selon votre situation. La diversification réduit le risque global tout en maintenant un potentiel de croissance.",
-"Vous avez fait le plus difficile : décider de comprendre. Le reste, c'est de la méthode. NiouDem. On y va."
+"Dernière leçon de cette formation. Elle ne contient aucune information nouvelle : elle transforme les 13 précédentes en une méthode que tu peux appliquer, dans un ordre qui ne se discute pas.",
+"<strong>Étape 1 : sécuriser.</strong> Constitue une épargne de précaution disponible immédiatement, calibrée sur tes charges incompressibles. Accepte qu'elle perde un peu de pouvoir d'achat : c'est le prix de la liberté de ne jamais être contraint de vendre. Tant que cette étape n'est pas franchie, les suivantes sont prématurées.",
+"<strong>Étape 2 : comprendre avant d'agir.</strong> N'achète jamais un actif que tu ne peux pas expliquer en 2 minutes à quelqu'un d'autre. Cette règle simple élimine la quasi-totalité des mauvaises décisions financières, y compris celles qui semblent brillantes sur le moment. <u>La complexité n'est pas un gage de qualité, c'est souvent l'inverse.</u>",
+"<strong>Étape 3 : commencer petit et régulièrement.</strong> Mieux vaut investir 50 € par mois pendant 10 ans que 6 000 € en une fois après 10 ans d'hésitation. La régularité protège du mauvais timing, et surtout elle installe une habitude, ce qui est la vraie difficulté.",
+"<strong>Étape 4 : répartir.</strong> Ne concentre pas tout sur un seul type d'actif, y compris celui dont tout le monde parle en ce moment. La répartition exacte dépend de ton horizon et de ta situation, mais le principe ne varie pas.",
+"<strong>Étape 5 : tenir dans la durée.</strong> C'est l'étape où presque tout le monde échoue. Les marchés baissent régulièrement, les périodes de doute durent parfois des années, et l'envie d'agir devient forte au pire moment. <strong>Ne rien faire est souvent la décision la plus rentable et la plus difficile.</strong>",
+"Un mot sur ce que cette formation ne t'a pas donné, et c'est volontaire. Elle ne t'a dit ni quoi acheter, ni quand, ni combien. Ces réponses dépendent de ta situation, et quiconque te les donne sans la connaître ne te rend pas service.",
+"Ce que tu as, en revanche, c'est une compréhension du terrain : ce qu'est la monnaie, pourquoi elle se déprécie, qui décide, et ce qui préserve la valeur. <strong>Avec ça, tu peux évaluer seul les propositions qu'on te fera</strong>, ce qui est exactement l'objectif de NiouDem. La suite du parcours, budget, épargne, bourse, immobilier et fiscalité, précise chacun de ces points."
 ],
 quiz:[
-{q:"Quelle est la première étape avant d'investir ?",opts:["Ouvrir un PEA","Acheter de l'or physique","Construire un fonds d'urgence de 3 à 6 mois","Rembourser tous ses crédits"],correct:2,
-explain:"Le fonds d'urgence permet de ne jamais être forcé de vendre ses investissements au mauvais moment."},
-{q:"Qu'est-ce que le DCA (Dollar Cost Averaging) ?",opts:["Une stratégie de trading actif","Investir une somme fixe chaque mois indépendamment du marché","Diversifier en plusieurs devises","Calculer le rendement réel de ses placements"],correct:1,
-explain:"Cette stratégie lisse les points d'entrée et réduit le risque lié au timing, sans expertise nécessaire."},
-{q:"Quel est le message central de cette formation ?",opts:["Il faut tout mettre en Bitcoin","L'épargne en monnaie est inutile","Comprendre les mécanismes monétaires est la première étape pour protéger et faire croître son patrimoine","Le système financier est truqué"],correct:2,
-explain:"Comprendre pourquoi agir est la première étape. Les formations suivantes apprennent comment le faire."}
+{q:"Quelle est la première étape du plan ?",opts:["Investir en actions","Constituer une épargne de précaution disponible","Acheter de l'or","Rembourser son crédit immobilier"],correct:1,
+explain:"Tant que cette étape n'est pas franchie, les suivantes sont prématurées et exposent à la vente forcée."},
+{q:"Quelle règle élimine la plupart des mauvaises décisions ?",opts:["Suivre l'avis d'un professionnel","N'acheter que ce qu'on peut expliquer en 2 minutes","Diversifier au maximum","Attendre une baisse des marchés"],correct:1,
+explain:"La complexité n'est pas un gage de qualité. Ne pas pouvoir expliquer un produit est le signal le plus fiable qui soit."},
+{q:"Quelle étape fait échouer le plus grand nombre ?",opts:["Sécuriser","Comprendre","Commencer","Tenir dans la durée"],correct:3,
+explain:"Les marchés baissent régulièrement et l'envie d'agir devient forte au pire moment. Ne rien faire est souvent la décision la plus rentable."}
 ],
-action:"Écris ton plan personnel en 4 lignes, une par étape. Où en es-tu sur chacune aujourd'hui ? Reviens le lire dans 6 mois."
+action:"Écris ton plan personnel en 5 lignes, une par étape, en notant pour chacune où tu en es réellement aujourd'hui. Range cette feuille et donne-toi rendez-vous dans 6 mois pour la relire. C'est la dernière action de cette formation, et le point de départ de toutes les autres."
 }
 ];
 
@@ -478,14 +516,22 @@ const NOM_FORMATION = 'Comprendre la monnaie';
 let CURRENT_USER = null;
 let PROGRESS_CACHE = {};
 
-/* ============ GATE D'ACCÈS ============ */
 async function requireAuth(){
   const { data: { session } } = await sb.auth.getSession();
   if(!session){
-    window.location.href = 'inscription.html?redirect=lecons-monnaie.html';
+    window.location.href = 'inscription.html?redirect=lecons-budget.html';
     return null;
   }
   return session.user;
+}
+
+async function requireUnlock(userId){
+  const { data: badge } = await sb.from('badges').select('badge_name').eq('user_id', userId).eq('badge_name','le_declic').maybeSingle();
+  if(!badge){
+    window.location.href = 'lecons-monnaie.html';
+    return false;
+  }
+  return true;
 }
 
 async function signOut(){
@@ -493,9 +539,8 @@ async function signOut(){
   window.location.href = 'index.html';
 }
 
-/* ============ MOTEUR (Supabase) ============ */
 async function loadProgressFromServer(){
-  const { data, error } = await sb
+  const { data } = await sb
     .from('lesson_progress')
     .select('lesson_number, completed')
     .eq('user_id', CURRENT_USER.id)
@@ -550,7 +595,6 @@ async function majCarnet(lessonNumber, value){
 let current = parseInt(new URLSearchParams(location.search).get('l')) || 1;
 if(current < 1) current = 1;
 if(current > LESSONS.length) current = LESSONS.length;
-// isUnlocked defined below; re-clamp after definition happens in render() via goTo guard on load
 
 function isUnlocked(n){
   if(n === 1) return true;
@@ -688,7 +732,9 @@ function render(){
     '<div class="lesson-title">' + (current) + '. ' + l.title + '</div>' +
     '<div class="lesson-meta">' + l.duration + ' de lecture · Leçon ' + current + ' sur ' + LESSONS.length + '</div>' +
     '<div class="section-label"><span class="dot"></span>Comprendre</div>' +
-    '<div class="script-text">' + l.script.map(function(p){return '<p>'+p+'</p>';}).join('') + '</div>' +
+    '<div class="script-text">' + l.script.map(function(p){
+      return p.indexOf('<figure') === 0 ? p : '<p>' + p + '</p>';
+    }).join('') + '</div>' +
     '<div class="section-label quiz"><span class="dot"></span>Vérifier</div>' +
     quizHtml +
     '<div class="section-label action"><span class="dot"></span>Petite action</div>' +
@@ -699,7 +745,7 @@ function render(){
     '</div>' +
     '<div class="lesson-nav">' +
       (current > 1 ? '<button class="nav-btn ghost" onclick="goTo(' + (current-1) + ')">← Leçon précédente</button>' : '<span></span>') +
-      (current < LESSONS.length ? '<button class="nav-btn" onclick="goTo(' + (current+1) + ')">Leçon suivante →</button>' : '<a href="monnaie.html" class="nav-btn">Terminer le parcours →</a>') +
+      (current < LESSONS.length ? '<button class="nav-btn" onclick="goTo(' + (current+1) + ')">Leçon suivante →</button>' : '<a href="budget.html" class="nav-btn">Terminer le parcours →</a>') +
     '</div>';
 }
 
@@ -741,20 +787,15 @@ async function toggleAction(){
     return;
   }
   await setProgressServer(current, newValue);
-
-  const allDone = LESSONS.every(function(l,i){ return !!PROGRESS_CACHE[i+1]; });
-  if(allDone){
-    await sb.from('badges').upsert({ user_id: CURRENT_USER.id, badge_name: 'le_declic' }, { onConflict: 'user_id,badge_name' });
-    setTimeout(function(){ window.location.href = 'succes.html'; }, 600);
-    return;
-  }
   render();
 }
 
 async function boot(){
   document.getElementById('main').innerHTML = '<div style="padding:60px 0;text-align:center;color:var(--ink-faint);font-size:14px;">Chargement de ta progression…</div>';
   const user = await requireAuth();
-  if(!user) return; // requireAuth already redirects to inscription.html
+  if(!user) return;
+  const unlocked = await requireUnlock(user.id);
+  if(!unlocked) return;
   CURRENT_USER = user;
   await loadProgressFromServer();
 
