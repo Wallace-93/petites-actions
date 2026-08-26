@@ -181,6 +181,21 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
   .borne{left:-26px;}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none !important;}}
+
+/* ===== Schemas des lecons ===== */
+.schema{margin:26px 0;padding:20px 18px 14px;border:1px solid var(--bg-line,#DCDDD3);
+  border-radius:12px;background:var(--bg,#FCFBF8);}
+.schema svg{width:100%;height:auto;display:block;}
+.schema figcaption{font-family:var(--mono,monospace);font-size:11.5px;line-height:1.55;
+  color:var(--ink-muted,#7A8A93);margin-top:14px;padding-top:12px;
+  border-top:1px solid var(--bg-line,#DCDDD3);}
+@media(max-width:620px){.schema{padding:14px 12px 10px;margin:20px -6px;}}
+
+.script-text strong{color:var(--ink,#12212B);font-weight:700;}
+.script-text em{font-style:italic;color:var(--ink-soft,#43555F);}
+.script-text u{text-decoration:none;background:linear-gradient(transparent 62%,var(--amber-pale,#F6EFE0) 62%);
+  box-shadow:inset 0 -1px 0 var(--amber,#B8862F);}
+.script-text p + p{margin-top:14px;}
 </style>
 </head>
 <body>
@@ -205,277 +220,334 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
 <script>
 /* ============ DONNÉES DES 16 LEÇONS — MAÎTRISER SON BUDGET ============ */
 const LESSONS = [
-{module:"Module 1 — Faire le diagnostic", title:"Où va vraiment votre argent", duration:"9 min",
+{module:"Module 1 — Faire le diagnostic", title:"Où va vraiment ton argent", duration:"5 min",
 script:[
-"Où va mon argent ? Pas approximativement, vraiment. La plupart des gens ont une idée générale de leurs dépenses mais ne savent pas combien ils ont dépensé le mois dernier en restauration ou en achats en ligne.",
-"Les gens sous-estiment leurs dépenses de 20 à 40% en moyenne. Trois raisons : les petits montants s'accumulent de façon invisible, les dépenses par carte sont moins ressenties qu'en cash, et les abonnements oubliés sortent chaque mois sans qu'on les remarque.",
-"La première étape pour maîtriser son budget, c'est de regarder la réalité en face, sans jugement, avec de la curiosité. On ne peut améliorer que ce qu'on mesure."
+"Presque tout le monde croit savoir où passe son argent. Presque personne ne le sait réellement. Ce n'est pas un défaut de mémoire : c'est que <strong>nous retenons les grosses dépenses et oublions les petites</strong>, alors que ce sont les petites, répétées, qui font l'essentiel de l'écart.",
+"L'expérience à faire est simple et déroutante. Écris de mémoire ce que tu as dépensé le mois dernier, poste par poste. Puis ouvre tes relevés et compare. <u>L'écart moyen constaté est de 20 à 30 %</u>, presque toujours dans le même sens : on sous-estime.",
+"Trois mécanismes expliquent cet écart. <strong>1. Le prélèvement automatique est invisible.</strong> Ce qui part sans geste de ta part ne laisse aucune trace en mémoire, et c'est justement le cas de la majorité de tes charges. <strong>2. Le paiement sans contact supprime la douleur.</strong> Payer en espèces fait ressentir la dépense ; approcher une carte ne fait rien ressentir du tout, ce qui est mesuré et exploité. <strong>3. Les petites sommes ne se comptent pas.</strong> Un café à 2 €, cinq fois par semaine, représente 43 € par mois, soit plus de 500 € par an, et personne n'a le sentiment de dépenser 500 € en café.",
+"Le diagnostic ne sert pas à culpabiliser, et c'est important de le dire dès maintenant. <strong>Il sert à retrouver un pouvoir de décision.</strong> Une dépense qu'on connaît devient un choix ; une dépense qu'on ignore reste une fuite.",
+"La méthode que nous suivrons dans ce module tient en 3 temps. Observer un mois complet sans rien changer, ce qui est plus difficile qu'il n'y paraît. Classer ce qui a été observé, pour séparer ce qui se subit de ce qui se décide. Puis reconstruire, à partir de chiffres réels et non d'estimations.",
+"Une seule consigne pour ce mois d'observation, et elle change tout : <strong>note la dépense le jour même.</strong> Un budget reconstitué le dimanche soir de mémoire reproduit exactement l'erreur qu'on cherche à corriger.",
+"Enfin, sois prêt à une surprise. La plupart des gens qui font ce travail découvrent que leur problème n'est pas là où ils le croyaient. Ceux qui pensaient trop dépenser en loisirs trouvent des charges fixes trop lourdes ; ceux qui accusaient leur loyer découvrent des abonnements oubliés. <u>Le diagnostic déplace presque toujours le problème</u>, et c'est précisément pour ça qu'il faut le faire avant de décider quoi que ce soit."
 ],
 quiz:[
-{q:"De combien les gens sous-estiment-ils leurs dépenses en moyenne ?",opts:["De 5 à 10%","De 20 à 40%","De 50 à 60%","Ils les surestiment"],correct:1,
-explain:"Cette distorsion vient des petits montants invisibles, du paiement par carte, et des abonnements oubliés."},
-{q:"Pourquoi les paiements par carte génèrent-ils plus de dépenses qu'en espèces ?",opts:["Les commerçants appliquent des surcharges","Le geste est abstrait et réduit l'impact émotionnel","Les cartes proposent des offres spéciales","Les relevés arrivent trop tard"],correct:1,
-explain:"Payer en espèces crée une friction naturelle absente avec la carte."},
-{q:"Quelle est la première étape pour maîtriser son budget ?",opts:["Ouvrir un compte épargne","Réduire ses dépenses de 20%","Regarder la réalité de ses dépenses en face, sans jugement","Établir un budget prévisionnel"],correct:2,
-explain:"On ne peut améliorer que ce qu'on mesure."}
+{q:"Quel écart moyen sépare l'estimation de la réalité ?",opts:["Moins de 5 %","20 à 30 %","50 %","Il n'y a pas d'écart"],correct:1,
+explain:"Et presque toujours dans le même sens : on sous-estime ce qu'on dépense réellement."},
+{q:"Pourquoi les prélèvements automatiques échappent-ils à la mémoire ?",opts:["Parce qu'ils sont trop petits","Parce qu'ils ne demandent aucun geste, donc ne laissent aucune trace","Parce que la banque les masque","Parce qu'ils sont mensuels"],correct:1,
+explain:"C'est pourtant sur eux que porte la majorité des charges d'un foyer."},
+{q:"À quoi sert le diagnostic ?",opts:["À culpabiliser sur ses excès","À transformer des fuites subies en décisions conscientes","À réduire ses dépenses de moitié","À préparer sa déclaration d'impôts"],correct:1,
+explain:"Une dépense connue devient un choix. Une dépense ignorée reste une fuite."}
 ],
-action:"Ouvre ton appli bancaire, catégorise chaque dépense des 3 derniers mois en grandes familles. Calcule le total par catégorie."
+action:"Écris ce soir, de mémoire et sans regarder, ce que tu penses avoir dépensé le mois dernier dans 5 catégories. Range la feuille. Tu la compareras à la réalité dans 3 leçons, et l'écart sera ton vrai point de départ."
 },
-{module:"Module 1 — Faire le diagnostic", title:"Dépenses fixes et dépenses variables", duration:"8 min",
+{module:"Module 1 — Faire le diagnostic", title:"Dépenses fixes et dépenses variables", duration:"5 min",
 script:[
-"Les dépenses fixes reviennent chaque mois pour un montant identique : loyer, charges, abonnements, assurance. Prévisibles, stables, difficiles à modifier à court terme.",
-"Les dépenses variables fluctuent selon vos choix : alimentation, restauration, loisirs. Plus difficiles à anticiper mais bien plus faciles à modifier.",
-"Cette distinction calcule votre « reste à vivre » : revenus nets moins dépenses fixes. Elle indique aussi où concentrer vos efforts : réduire son loyer est difficile, réduire ses achats impulsifs est immédiat.",
-"Une troisième catégorie : les dépenses exceptionnelles (Noël, vacances, contrôle technique). Divisez-les par 12 et incluez-les comme épargne dédiée mensuelle pour éviter le choc budgétaire."
+"Toutes les dépenses ne se valent pas, et les traiter de la même façon est l'erreur qui rend la plupart des budgets inutiles. La distinction fondamentale est celle-ci : <strong>certaines dépenses se décident une fois et se répètent, d'autres se décident à chaque fois.</strong>",
+"<strong>Les charges fixes</strong> sont celles que tu paies quoi qu'il arrive : loyer ou crédit, énergie, assurances, transport, abonnements, remboursements. Elles ont une caractéristique décisive : <u>tu ne les décides qu'une fois, mais tu les paies chaque mois pendant des années.</u>",
+"<strong>Les dépenses variables</strong> dépendent de choix quotidiens : courses, sorties, vêtements, loisirs, imprévus. Elles sont visibles, elles se ressentent, et c'est précisément pour ça qu'on les surveille alors qu'elles pèsent souvent moins lourd.",
+"<figure class=\"schema\"><svg viewBox=\"0 0 700 228\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><text x=\"200\" y=\"20\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" letter-spacing=\"1.4\" fill=\"#1E4B3C\">CHARGES FIXES</text><text x=\"560\" y=\"20\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" letter-spacing=\"1.4\" fill=\"#B8862F\">DÉPENSES VARIABLES</text><text x=\"20\" y=\"44\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Effort à fournir</text><rect x=\"20\" y=\"54\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"54\" width=\"495\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"515\" y=\"54\" width=\"165\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"67\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\">une seule fois</text><text x=\"672\" y=\"67\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\">chaque jour</text><text x=\"20\" y=\"100\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Gain obtenu</text><rect x=\"20\" y=\"110\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"110\" width=\"528\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"548\" y=\"110\" width=\"132\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"123\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\">répété chaque mois</text><text x=\"672\" y=\"123\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\">ponctuel</text><text x=\"20\" y=\"156\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Résiste à la fatigue</text><rect x=\"20\" y=\"166\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"166\" width=\"561\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"581\" y=\"166\" width=\"99\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"179\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\">oui</text><text x=\"672\" y=\"179\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\">non</text></svg><figcaption>Un budget qui tient s'attaque d'abord à la structure des charges, pas à la volonté quotidienne.</figcaption></figure>",
+"Voici pourquoi cette distinction change tout, et c'est le cœur de cette leçon. <strong>Réduire une charge fixe demande un effort une seule fois et rapporte chaque mois.</strong> Renégocier une assurance à 15 € de moins prend 1 heure et rapporte 180 € par an, tous les ans, sans y repenser. <strong>Réduire une dépense variable demande un effort renouvelé en permanence</strong>, et l'effort finit toujours par céder.",
+"C'est la raison pour laquelle la plupart des budgets échouent : ils portent sur les dépenses variables, donc sur la volonté, qui s'épuise. Un budget qui tient s'attaque d'abord à la structure, pas au comportement.",
+"Un cas particulier mérite attention : les dépenses <em>semi-fixes</em>, celles qui reviennent régulièrement sans être mensuelles. Assurance annuelle, impôts, rentrée scolaire, entretien du véhicule, cadeaux de fin d'année. <strong>Elles sont la première cause de découvert</strong>, parce qu'elles n'apparaissent dans aucun budget mensuel et tombent toujours au mauvais moment.",
+"La parade est simple et je te la donne dès maintenant : additionne ces dépenses annuelles, divise par 12, et provisionne ce montant chaque mois sur un compte séparé. Une taxe foncière de 900 € cesse d'être un problème quand 75 € sont mis de côté chaque mois depuis un an."
 ],
 quiz:[
-{q:"Quelle est la différence entre dépenses fixes et variables ?",opts:["Les fixes sont plus importantes","Les fixes reviennent chaque mois pour un montant stable, les variables fluctuent","Les fixes sont obligatoires, les variables optionnelles","Les fixes concernent les besoins uniquement"],correct:1,
-explain:"Cette distinction détermine où concentrer ses efforts d'optimisation."},
-{q:"Comment calculer son « reste à vivre » ?",opts:["Revenus nets moins loisirs","Revenus bruts moins impôts","Revenus nets moins toutes les dépenses fixes","Revenus nets moins dettes"],correct:2,
-explain:"C'est la somme réellement disponible pour dépenses variables, épargne et investissement."},
-{q:"Comment gérer les dépenses exceptionnelles comme Noël ?",opts:["Payer par crédit","Les diviser par 12 et les épargner mensuellement","Les considérer comme des imprévus","Les réduire au maximum"],correct:1,
-explain:"600€ de cadeaux deviennent 50€/mois, bien plus gérable qu'un choc budgétaire."}
+{q:"Quelle est la caractéristique d'une charge fixe ?",opts:["Elle est toujours élevée","Elle se décide une fois et se paie chaque mois pendant des années","Elle ne peut pas être réduite","Elle varie selon la saison"],correct:1,
+explain:"C'est ce qui rend son optimisation si rentable : un effort unique produit un gain répété."},
+{q:"Pourquoi la plupart des budgets échouent-ils ?",opts:["Parce qu'ils sont trop précis","Parce qu'ils portent sur les dépenses variables, donc sur la volonté","Parce que les revenus sont trop faibles","Parce qu'ils sont mensuels"],correct:1,
+explain:"La volonté s'épuise. Un budget qui tient s'attaque d'abord à la structure des charges."},
+{q:"Quelle est la première cause de découvert ?",opts:["Les courses alimentaires","Les dépenses semi-fixes, annuelles ou irrégulières","Les loisirs","Le loyer"],correct:1,
+explain:"Elles n'apparaissent dans aucun budget mensuel et tombent toujours au mauvais moment. La parade est de les provisionner par douzièmes."}
 ],
-action:"Sépare tes dépenses en 3 colonnes : fixe, variable, exceptionnelle. Calcule ton reste à vivre."
+action:"Liste ce soir tes dépenses annuelles ou irrégulières : impôts, assurances, rentrée, entretien, fêtes. Additionne et divise par 12. Ce montant est celui que tu devrais provisionner chaque mois, et il explique probablement tes fins de mois difficiles."
 },
-{module:"Module 1 — Faire le diagnostic", title:"Identifier vos fuites invisibles", duration:"9 min",
+{module:"Module 1 — Faire le diagnostic", title:"Repérer les fuites invisibles", duration:"5 min",
 script:[
-"Une fuite invisible sort régulièrement de votre compte sans conscience ou sans valeur proportionnelle. Cinq catégories : les abonnements dormants (50 à 150€/mois de valeur nulle), les frais bancaires inutiles, les achats automatiques oubliés.",
-"Les dépenses de commodité : commander plutôt que cuisiner par fatigue, prendre un taxi par précipitation. Pas mauvaises en soi, problématiques quand systématiques et non choisies.",
-"Les dépenses sociales inconscientes : acheter parce que d'autres l'ont, offrir au-delà de ses moyens par peur de décevoir.",
-"Méthode : pour chaque dépense, demandez « Est-ce que ça m'apporte une valeur réelle et proportionnelle à son coût ? » Si non, c'est une fuite."
+"Les fuites invisibles sont des dépenses régulières dont tu ne tires plus aucune valeur. Elles ne relèvent ni du gaspillage ni du manque de discipline : elles relèvent de l'inertie, et elles se traitent en une seule séance.",
+"<strong>Fuite 1 : les abonnements dormants.</strong> Streaming, applications, salles de sport, services souscrits pour un essai gratuit et jamais résiliés. Le montant moyen retrouvé par les gens qui font cet audit se situe entre 30 et 80 € par mois. La méthode est directe : reprends tes 3 derniers relevés et surligne chaque ligne qui revient à l'identique.",
+"<strong>Fuite 2 : les frais bancaires.</strong> Tenue de compte, cotisation carte, assurance moyens de paiement rarement utile, commissions d'intervention en cas de découvert. Ces dernières sont plafonnées par la loi mais peuvent atteindre plusieurs dizaines d'euros par mois pour quelqu'un souvent à découvert. <u>C'est le poste où l'écart entre une banque traditionnelle et une banque en ligne est le plus fort</u>, et il se compte en centaines d'euros par an.",
+"<strong>Fuite 3 : les assurances doublons.</strong> Beaucoup de gens paient 2 fois la même garantie sans le savoir : une assurance téléphone alors que la carte bancaire couvre déjà l'appareil, une garantie voyage déjà incluse, une protection juridique présente dans le contrat habitation. Vérifier prend 30 minutes.",
+"<strong>Fuite 4 : les contrats jamais renégociés.</strong> Assurance auto, habitation, mutuelle, forfait mobile, énergie. Ces contrats augmentent silencieusement chaque année, et la fidélité n'y est jamais récompensée. La résiliation est aujourd'hui bien plus simple qu'avant pour l'auto et l'habitation après un an, et le changement de fournisseur d'énergie ou de forfait se fait en quelques minutes.",
+"<strong>Fuite 5 : les micro-dépenses automatisées.</strong> Achats en un clic, applications qui gardent la carte enregistrée, livraisons express payantes. Le remède le plus efficace n'est pas la volonté mais la friction : <strong>supprime tes cartes enregistrées.</strong> Devoir aller chercher son portefeuille suffit à annuler une part importante des achats impulsifs.",
+"Un ordre de grandeur pour te motiver : <strong>une séance de 2 heures sur ces 5 postes récupère couramment 50 à 150 € par mois</strong>, soit l'équivalent d'une augmentation nette, sans négociation et sans changer quoi que ce soit à ton mode de vie."
 ],
 quiz:[
-{q:"Qu'est-ce qu'une fuite invisible ?",opts:["Une dépense imprévue","Une dépense régulière sans conscience ou sans valeur proportionnelle","Une dépense cachée par les banques","Une dépense trop petite pour compter"],correct:1,
-explain:"Abonnements dormants, frais inutiles, achats automatiques oubliés en sont des exemples."},
-{q:"Comment les dépenses sociales inconscientes génèrent-elles des fuites ?",opts:["En comparant ses revenus aux autres","En créant des dépenses motivées par la pression sociale plutôt que ses priorités","En incitant à investir avec son entourage","En générant des dépenses de luxe"],correct:1,
-explain:"La pression sociale génère des dépenses qui ne correspondent pas à nos vraies priorités."},
-{q:"Quelle question identifie une fuite ?",opts:["Aurais-je pu payer moins cher ?","Correspond-elle à mes valeurs ?","M'apporte-t-elle une valeur réelle et proportionnelle à son coût ?","Était-elle planifiée ?"],correct:2,
-explain:"Ce filtre efficace n'exige pas de ne rien dépenser, mais que chaque euro soit un choix délibéré."}
+{q:"Comment repérer les abonnements dormants ?",opts:["En listant ses applications","En surlignant sur 3 relevés chaque ligne qui revient à l'identique","En appelant sa banque","En consultant ses courriels"],correct:1,
+explain:"La régularité identique d'un montant est la signature d'un abonnement, y compris ceux qu'on a oubliés."},
+{q:"Quel est le remède aux achats impulsifs en ligne ?",opts:["Se fixer un budget mensuel","Supprimer les cartes enregistrées pour créer une friction","Désinstaller les applications","Payer uniquement en espèces"],correct:1,
+explain:"La friction est plus efficace que la volonté : devoir chercher son portefeuille annule une part des achats impulsifs."},
+{q:"Combien récupère couramment une séance de 2 heures sur ces postes ?",opts:["5 à 10 € par mois","50 à 150 € par mois","300 € par mois","Rien de significatif"],correct:1,
+explain:"L'équivalent d'une augmentation nette, sans négociation et sans changer de mode de vie."}
 ],
-action:"Surligne en rouge chaque dépense sans valeur réelle sur ton relevé. Élimine la fuite la plus simple cette semaine."
+action:"Ouvre tes 3 derniers relevés et surligne toute ligne qui revient à l'identique. Ne résilie rien ce soir. Contente-toi d'additionner ce que tu ne peux pas justifier : ce chiffre décidera de ta motivation pour la suite."
 },
-{module:"Module 1 — Faire le diagnostic", title:"Votre bilan financier personnel", duration:"8 min",
+{module:"Module 1 — Faire le diagnostic", title:"Ton bilan financier personnel", duration:"5 min",
 script:[
-"Un bilan financier : d'un côté votre actif (tout ce que vous possédez), de l'autre votre passif (tout ce que vous devez). La différence est votre patrimoine net, votre richesse réelle.",
-"Actif : liquidités, investissements (PEA, assurance-vie), immobilier, autres actifs. Passif : crédit immobilier, crédits conso, dettes personnelles, découvert.",
-"Pour beaucoup qui débutent, ce chiffre est faible ou légèrement négatif. Ce n'est pas un problème, c'est un point de départ pour mesurer votre progression.",
-"Un second document, le tableau de flux : revenus moins dépenses, égale votre capacité d'épargne mensuelle, le carburant de la construction de patrimoine."
+"Le bilan est la photographie de ta situation à un instant donné. C'est un document d'une page, et pourtant très peu de gens l'ont jamais écrit. Il répond à une question que le solde du compte ne dit pas : <strong>que possèdes-tu réellement, une fois tes dettes retirées ?</strong>",
+"Il se construit en 2 colonnes. <strong>À gauche, ce que tu possèdes :</strong> comptes courants, livrets, épargne, valeur d'un bien immobilier, valeur d'un véhicule, placements éventuels. <strong>À droite, ce que tu dois :</strong> capital restant dû des crédits, découvert, dettes familiales, impayés.",
+"La différence entre les 2 colonnes est ton <strong>patrimoine net</strong>. C'est le seul chiffre qui mesure vraiment ta situation, et il peut être négatif, ce qui est extrêmement courant chez les jeunes actifs et chez tout propriétaire en début de crédit. <u>Un patrimoine net négatif n'est pas un échec, c'est une étape.</u>",
+"L'intérêt de ce bilan n'est pas le chiffre du jour, il est dans la <strong>comparaison d'une année sur l'autre</strong>. Un patrimoine net qui progresse de 3 000 € en un an dit quelque chose que ni ton salaire ni ton solde bancaire ne diront jamais : tu construis quelque chose.",
+"Deux erreurs classiques à éviter en le remplissant. La première est de surévaluer ses biens : une voiture vaut son prix de revente réel, pas son prix d'achat, et un logement vaut ce que le marché en donne, pas ce qu'on espère. La seconde est d'oublier des dettes, notamment les crédits à la consommation en cours et les sommes empruntées à des proches, qui sont des dettes même sans papier.",
+"Complète ce bilan avec 3 indicateurs qui tiennent en une ligne chacun. <strong>Ton taux d'endettement</strong>, c'est-à-dire tes mensualités de crédit rapportées à tes revenus, avec un repère courant autour de 35 %. <strong>Ton taux d'épargne</strong>, ce que tu mets de côté rapporté à tes revenus. Et <strong>ton fonds d'urgence en mois de charges</strong>, qui dit combien de temps tu tiendrais sans revenu.",
+"Ces 4 chiffres, patrimoine net et 3 indicateurs, forment ton tableau de bord. Ils prennent 30 minutes à établir la première fois, 10 minutes ensuite. <strong>Refais-les une fois par an, à date fixe</strong>, et tu auras en 5 ans une trajectoire que presque personne autour de toi ne peut montrer."
 ],
 quiz:[
-{q:"Comment calcule-t-on son patrimoine net ?",opts:["Revenus annuels moins dépenses annuelles","Actif total moins passif total","Épargne moins dettes en cours","Investissements moins crédits immobiliers"],correct:1,
-explain:"C'est la mesure la plus honnête de la richesse réelle à un instant donné."},
-{q:"Différence entre bilan patrimonial et tableau de flux ?",opts:["Le bilan concerne les actifs, le tableau les dépenses","Le bilan est une photo à un instant T, le tableau montre les mouvements mensuels","Le bilan est annuel, le tableau mensuel","Le bilan est pour investisseurs uniquement"],correct:1,
-explain:"Les deux sont complémentaires et nécessaires pour piloter ses finances avec clarté."},
-{q:"Que représente la capacité d'épargne mensuelle ?",opts:["Le montant qu'on décide d'épargner","Le maximum théorique possible","La différence entre revenus et dépenses totales","Le montant recommandé par les conseillers"],correct:2,
-explain:"C'est le carburant réel de la construction du patrimoine à long terme."}
+{q:"Comment se calcule le patrimoine net ?",opts:["Revenus moins dépenses","Ce que tu possèdes moins ce que tu dois","Épargne plus salaire annuel","Solde de tous les comptes"],correct:1,
+explain:"C'est le seul chiffre qui mesure la situation réelle, et il est souvent négatif en début de parcours."},
+{q:"Un patrimoine net négatif signifie-t-il un échec ?",opts:["Oui, toujours","Non, c'est très courant chez les jeunes actifs et en début de crédit immobilier","Oui, sauf pour les étudiants","Cela dépend de la banque"],correct:1,
+explain:"C'est une étape, pas un verdict. Ce qui compte est l'évolution d'une année sur l'autre."},
+{q:"Quel est l'intérêt principal du bilan ?",opts:["Le chiffre obtenu aujourd'hui","La comparaison d'une année sur l'autre","Le montrer à sa banque","Calculer ses impôts"],correct:1,
+explain:"Une progression de 3 000 € en un an dit ce que ni le salaire ni le solde bancaire ne diront jamais."}
 ],
-action:"Crée ton bilan financier : actif, passif, patrimoine net. Puis ton tableau de flux pour ta capacité d'épargne actuelle."
+action:"Établis ton bilan ce soir, en 2 colonnes, sur une seule page. Puis compare ta feuille d'estimation de la leçon 1 avec la réalité. L'écart entre les 2 est la mesure exacte de ce que tu ignorais il y a 4 leçons."
 },
-{module:"Module 2 — La règle 50/30/20", title:"La règle 50/30/20 expliquée", duration:"9 min",
+{module:"Module 2 — Structurer avec la règle 50/30/20", title:"La règle 50/30/20 expliquée", duration:"5 min",
 script:[
-"Popularisée par Elizabeth Warren, la règle 50/30/20 : 50% pour les besoins, 30% pour les envies, 20% pour l'épargne et le remboursement de dettes. Trois enveloppes, trois pourcentages, c'est tout.",
-"Les besoins : logement, alimentation de base, transport, factures, assurances obligatoires. Les envies : restaurant, loisirs, voyages, ce ne sont pas des dépenses irresponsables, elles font partie d'une vie équilibrée.",
-"L'épargne : fonds d'urgence, investissement, remboursement de dettes, la partie la plus importante pour construire votre patrimoine.",
-"Cette règle est un point de départ, pas une loi absolue. Si le loyer représente 40% des revenus, adaptez plutôt que d'abandonner. La direction compte plus que la perfection."
+"Cette règle est le repère budgétaire le plus utilisé au monde, et aussi le plus mal appliqué. Elle propose de répartir ses revenus nets en 3 blocs : <strong>50 % pour les besoins, 30 % pour les envies, 20 % pour l'épargne et le remboursement des dettes.</strong>",
+"<strong>Les besoins</strong> regroupent ce que tu paierais même en cherchant un emploi : logement, énergie, alimentation de base, transport, assurances, santé, remboursements minimums. <strong>Les envies</strong> couvrent tout ce qui améliore la vie sans être indispensable : restaurants, sorties, vêtements au-delà du nécessaire, abonnements de loisir, voyages. <strong>Le troisième bloc</strong> réunit l'épargne, l'investissement et le remboursement anticipé des dettes.",
+"La force de cette règle n'est pas la précision des pourcentages, c'est sa simplicité : <u>3 catégories se tiennent en tête, 15 catégories ne se tiennent pas.</u> Un budget qu'on n'arrive pas à mémoriser est un budget qu'on abandonne.",
+"<figure class=\"schema\"><svg viewBox=\"0 0 700 222\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"20\" y=\"138\" width=\"250\" height=\"52\" rx=\"9\" fill=\"#E7EFEA\" stroke=\"#1E4B3C\" stroke-width=\"1.4\"/><circle cx=\"46\" cy=\"164\" r=\"12\" fill=\"#1E4B3C\"/><text x=\"46\" y=\"168\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"12\" fill=\"#fff\">1</text><text x=\"70\" y=\"160\" font-family=\"Newsreader, Georgia, serif\" font-size=\"15\" font-weight=\"600\" fill=\"#12212B\">50 % : les besoins</text><text x=\"70\" y=\"177\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Logement, énergie, alimentation, transport, assurances.</text><rect x=\"20\" y=\"74\" width=\"450\" height=\"52\" rx=\"9\" fill=\"#FFFFFF\" stroke=\"#DCDDD3\" stroke-width=\"1.4\"/><circle cx=\"46\" cy=\"100\" r=\"12\" fill=\"#DCDDD3\"/><text x=\"46\" y=\"104\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"12\" fill=\"#fff\">2</text><text x=\"70\" y=\"96\" font-family=\"Newsreader, Georgia, serif\" font-size=\"15\" font-weight=\"600\" fill=\"#12212B\">30 % : les envies</text><text x=\"70\" y=\"113\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Sorties, loisirs, vêtements, voyages.</text><rect x=\"20\" y=\"10\" width=\"650\" height=\"52\" rx=\"9\" fill=\"#F6EFE0\" stroke=\"#B8862F\" stroke-width=\"1.4\"/><circle cx=\"46\" cy=\"36\" r=\"12\" fill=\"#B8862F\"/><text x=\"46\" y=\"40\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"12\" fill=\"#fff\">3</text><text x=\"70\" y=\"32\" font-family=\"Newsreader, Georgia, serif\" font-size=\"15\" font-weight=\"600\" fill=\"#12212B\">20 % : épargne et dettes</text><text x=\"70\" y=\"49\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Le bloc à défendre en premier, jamais celui qu'on sacrifie.</text></svg><figcaption>Un repère, pas une norme. Ce qui compte est de mesurer ton écart avec lui, pas de l'atteindre à tout prix.</figcaption></figure>",
+"Il faut cependant être honnête sur ses limites, et elles sont sérieuses en France. Dans les grandes agglomérations, le logement seul peut représenter 40 % des revenus, ce qui rend la barre des 50 % inatteignable pour beaucoup. Pour un revenu modeste, les besoins peuvent dépasser 70 %, et il ne reste alors rien à répartir.",
+"Cela ne rend pas la règle inutile, cela change son usage. <strong>Elle ne sert pas de norme à atteindre, mais de mesure de l'écart.</strong> Savoir que tes besoins pèsent 68 % au lieu de 50 % est une information précieuse : elle dit exactement où porter l'effort, et elle explique pourquoi épargner te semble impossible.",
+"Une variante est souvent plus réaliste pour démarrer, et je te la recommande si les 20 % te paraissent hors d'atteinte : commence par <strong>5 %</strong>, puis augmente d'un point tous les 6 mois. Un taux d'épargne de 5 % qui tient 3 ans vaut infiniment mieux qu'un objectif de 20 % abandonné au deuxième mois.",
+"Retiens le principe général qui compte davantage que les chiffres : <strong>l'épargne doit être un poste du budget, pas un reste.</strong> Tant qu'elle est ce qui reste à la fin, elle ne reste jamais."
 ],
 quiz:[
-{q:"Que comprend la catégorie « besoins » ?",opts:["Tout ce qui est prélevé automatiquement","Les dépenses indispensables : logement, alimentation, transport, assurances obligatoires","Les dépenses les plus importantes en montant","Les dépenses les plus satisfaisantes"],correct:1,
-explain:"Ce sont les dépenses qu'on ne peut éliminer sans impacter significativement sa vie."},
-{q:"Les loisirs sont-ils irresponsables selon cette règle ?",opts:["Oui, à éliminer pour maximiser l'épargne","Oui, sauf sous 10%","Non, ils font partie de la catégorie « envies » équilibrée","Ça dépend des revenus"],correct:2,
-explain:"La règle intègre explicitement 30% pour les envies, qui font partie d'une vie équilibrée."},
-{q:"Que faire si le loyer représente déjà 40% des revenus ?",opts:["Déménager immédiatement","Abandonner la règle","Adapter la règle et progresser dans la bonne direction","Chercher un revenu complémentaire"],correct:2,
-explain:"La règle est un point de départ, pas une loi absolue. La direction compte plus que la perfection immédiate."}
+{q:"Que couvre le bloc des 20 % ?",opts:["Les loisirs uniquement","L'épargne, l'investissement et le remboursement anticipé des dettes","Les impôts","Les charges fixes"],correct:1,
+explain:"Rembourser une dette chère par anticipation produit un rendement certain, d'où sa présence dans ce bloc."},
+{q:"Quelle est la vraie force de cette règle ?",opts:["La précision de ses pourcentages","Sa simplicité : 3 catégories se retiennent, 15 non","Son origine universitaire","Son adaptation à tous les revenus"],correct:1,
+explain:"Un budget qu'on n'arrive pas à mémoriser est un budget qu'on finit par abandonner."},
+{q:"Comment utiliser la règle quand les besoins dépassent 50 % ?",opts:["L'abandonner","S'en servir comme mesure de l'écart plutôt que comme norme","Réduire l'alimentation","Emprunter la différence"],correct:1,
+explain:"Savoir que les besoins pèsent 68 % dit exactement où porter l'effort, et pourquoi épargner semble impossible."}
 ],
-action:"Calcule quel pourcentage de tes revenus va dans chaque catégorie. Compare aux cibles 50/30/20. Identifie ton plus gros écart."
+action:"Calcule tes 3 pourcentages réels à partir du mois que tu viens d'observer. Ne cherche pas à les corriger ce soir. Le seul objectif est de connaître ton écart avec le repère, parce que c'est lui qui indiquera par où commencer."
 },
-{module:"Module 2 — La règle 50/30/20", title:"Les enveloppes budgétaires", duration:"9 min",
+{module:"Module 2 — Structurer avec la règle 50/30/20", title:"Les enveloppes budgétaires", duration:"5 min",
 script:[
-"Pour respecter les proportions, le concept d'enveloppes budgétaires, vieux comme l'argent, reste puissant transposé au numérique.",
-"Méthode des comptes multiples : un compte pour les besoins fixes (virement auto), un pour les envies (carte dédiée), un compte épargne (virement auto le jour du salaire). Sépare physiquement les enveloppes.",
-"Méthode des applications : Bankin', Linxo, YNAB créent des enveloppes virtuelles avec suivi en temps réel. Moins radicale mais plus facile à mettre en place.",
-"Principe clé : allouer l'argent avant de le dépenser, pas après. La plupart des gens dépensent puis espèrent épargner ce qui reste, il ne reste presque jamais rien."
+"La méthode des enveloppes est probablement la plus ancienne technique de budget qui existe, et elle reste la plus efficace pour une raison qui tient à la psychologie plus qu'aux mathématiques.",
+"Le principe d'origine : au début du mois, on répartit l'argent liquide dans des enveloppes physiques, une par poste. Quand une enveloppe est vide, on ne dépense plus dans cette catégorie. <strong>La contrainte est visible, matérielle, et elle ne se discute pas.</strong>",
+"Ce qui rend cette méthode supérieure à un tableau, c'est qu'elle transforme une abstraction en objet. <u>Un solde de compte ne dit pas ce qui est déjà engagé</u>, alors qu'une enveloppe vide le dit immédiatement. C'est la différence entre savoir qu'on a dépassé et le constater.",
+"La version moderne se pratique avec des comptes plutôt qu'avec du liquide, et la plupart des banques en ligne permettent d'ouvrir plusieurs comptes ou sous-comptes gratuitement. Une organisation qui fonctionne bien tient en 4 comptes : <strong>un compte pour les charges fixes</strong>, où arrive le salaire et d'où partent tous les prélèvements ; <strong>un compte pour les dépenses courantes</strong>, alimenté par un virement au début du mois, avec la carte associée ; <strong>un compte de provisions</strong> pour les dépenses annuelles ; <strong>un compte d'épargne</strong>, séparé et de préférence dans un autre établissement.",
+"L'effet le plus important de cette organisation est celui-ci : <strong>la carte que tu utilises au quotidien n'est plus reliée à la totalité de ton argent.</strong> Elle est reliée à ton budget courant, ce qui rend le dépassement visible sans qu'aucun effort de mémoire ne soit nécessaire.",
+"Deux conseils pratiques. <strong>Ne crée pas trop d'enveloppes</strong> : 4 comptes suffisent, 8 deviennent ingérables et tu abandonneras. Et <strong>prévois une enveloppe « divers »</strong>, volontairement, pour absorber ce qui n'entre nulle part. Un système sans soupape est un système qui casse au premier imprévu.",
+"Enfin, si tu préfères le liquide pour certaines catégories, notamment l'alimentation et les sorties, sache que ce choix n'a rien d'archaïque : <strong>payer en espèces fait ressentir la dépense</strong>, et cette sensation est exactement ce que le paiement sans contact a supprimé."
 ],
 quiz:[
-{q:"Quelle est l'idée centrale des enveloppes budgétaires ?",opts:["Dépenser uniquement en espèces","Allouer l'argent dans des catégories avant de dépenser","Réduire le nombre de catégories","Mettre de côté ce qui reste en fin de mois"],correct:1,
-explain:"Quand l'enveloppe d'une catégorie est vide, la dépense s'arrête jusqu'au mois suivant."},
-{q:"Pourquoi les comptes multiples sont-ils particulièrement efficaces ?",opts:["Meilleurs taux d'intérêt","Séparations physiques empêchant le mélange entre enveloppes","Réduction des frais bancaires","Automatisation de tous les paiements"],correct:1,
-explain:"Des comptes distincts créent des barrières physiques visibles immédiatement."},
-{q:"Quelle erreur classique la méthode des enveloppes corrige-t-elle ?",opts:["Trop dépenser en loisirs","Ne pas surveiller ses relevés","Dépenser d'abord et espérer épargner ce qui reste","Avoir trop de catégories"],correct:2,
-explain:"La méthode inverse la logique : l'épargne est prélevée en premier, on dépense dans ce qui reste."}
+{q:"Pourquoi une enveloppe est-elle plus efficace qu'un tableau ?",opts:["Elle est plus précise","Elle rend la contrainte visible et matérielle","Elle évite les frais bancaires","Elle est plus rapide à remplir"],correct:1,
+explain:"Un solde de compte ne dit pas ce qui est déjà engagé. Une enveloppe vide le dit immédiatement."},
+{q:"Quel est l'effet principal du compte de dépenses courantes séparé ?",opts:["Il rapporte des intérêts","La carte du quotidien n'est plus reliée à la totalité de l'argent","Il réduit les impôts","Il évite les prélèvements"],correct:1,
+explain:"Le dépassement devient visible sans aucun effort de mémoire ni de calcul."},
+{q:"Combien d'enveloppes faut-il créer ?",opts:["Une par poste de dépense","4 comptes suffisent, davantage devient ingérable","Au moins 10","Une seule"],correct:1,
+explain:"Un système trop fin finit abandonné. Prévois aussi une enveloppe « divers » comme soupape."}
 ],
-action:"Choisis ta méthode d'enveloppes. Ouvre un deuxième compte si besoin, configure un virement automatique d'épargne le jour du salaire."
+action:"Ouvre ce soir un second compte, gratuit, dans ta banque ou ailleurs, et destine-le à tes dépenses courantes. Tu y feras un virement au début du mois prochain. C'est la manipulation la plus efficace de toute cette formation."
 },
-{module:"Module 2 — La règle 50/30/20", title:"Ajustements selon votre revenu", duration:"8 min",
+{module:"Module 2 — Structurer avec la règle 50/30/20", title:"Adapter la règle à ton revenu", duration:"5 min",
 script:[
-"Revenus serrés (1000-1800€) : priorité absolue au fonds d'urgence, même 50€/mois. La règle devient 70/20/10 ou 80/15/5. L'habitude d'épargner compte plus que le montant.",
-"Revenus moyens (1800-3500€) : la règle 50/30/20 standard s'applique le mieux. L'enjeu : le lifestyle creep, chaque augmentation de revenu doit être partiellement redirigée vers l'épargne, pas intégralement dépensée.",
-"Revenus confortables (3500€+) : viser 30 à 50% d'épargne. Chaque point de pourcentage supplémentaire représente des montants significatifs qui, investis, produisent des effets importants.",
-"Quel que soit le niveau, connaître ses revenus, ses contraintes, et optimiser vers une épargne croissante."
+"La règle 50/30/20 a été pensée pour un revenu moyen dans un pays donné. Elle demande donc à être ajustée, et cette leçon donne des repères pour 4 situations très différentes.",
+"<strong>Revenu contraint, quand les besoins dépassent 70 %.</strong> Les pourcentages n'ont plus de sens ici, et prétendre le contraire serait malhonnête. La priorité est ailleurs : faire baisser une charge fixe importante, vérifier les aides auxquelles tu as droit, ce que très peu de gens font entièrement, et viser un premier palier d'épargne de 1 000 €, sans calendrier imposé. <u>Un objectif d'épargne à 20 % dans cette situation ne produit que de la culpabilité.</u>",
+"<strong>Revenu moyen.</strong> C'est la situation où la règle s'applique le mieux, avec un ajustement fréquent : 55 % pour les besoins, 25 % pour les envies, 20 % conservés pour l'épargne. Le bloc à défendre est le troisième, jamais le premier.",
+"<strong>Revenu confortable.</strong> Le piège change complètement de nature : ce n'est plus le manque, c'est <strong>l'inflation du mode de vie</strong>. Chaque augmentation est absorbée par une hausse du train de vie, et le taux d'épargne reste identique à 2 000 € comme à 4 000 € de revenu. La règle devient alors 45/25/30, voire davantage, et le seul mécanisme qui fonctionne consiste à <u>diriger la moitié de chaque augmentation vers l'épargne avant de s'habituer à la dépenser.</u>",
+"<strong>Revenu irrégulier</strong>, pour les indépendants, intermittents et saisonniers. La règle mensuelle ne fonctionne pas. La méthode adaptée consiste à calculer un revenu de référence à partir des 12 derniers mois, en retenant plutôt une année basse, à se verser ce montant fixe chaque mois depuis un compte tampon, et à laisser le surplus des bons mois financer les mauvais. <strong>Ce compte tampon est l'équivalent d'un salaire que tu te verses à toi-même</strong>, et il transforme un revenu chaotique en revenu prévisible.",
+"Un point commun à ces 4 situations mérite d'être souligné. <strong>Le taux d'épargne dépend moins du revenu qu'on ne le croit.</strong> Des gens à 1 800 € épargnent régulièrement, d'autres à 4 000 € n'y arrivent jamais. La différence tient à la structure des charges fixes et à l'automatisation, pas au montant qui entre.",
+"C'est une bonne nouvelle : cela signifie que le levier est à ta portée immédiatement, sans attendre une augmentation."
 ],
 quiz:[
-{q:"Qu'est-ce que le « lifestyle creep » ?",opts:["Une méthode pour augmenter ses revenus","La tendance à augmenter ses dépenses proportionnellement à chaque hausse de revenus","Une stratégie pour réduire ses dépenses","Un phénomène réservé aux hauts revenus"],correct:1,
-explain:"C'est l'un des principaux freins à la construction de patrimoine pour les revenus moyens."},
-{q:"Pour des revenus serrés, quelle est la priorité absolue ?",opts:["Atteindre rapidement 50/30/20 standard","Éliminer tous les loisirs","Un fonds d'urgence, même petit, automatique","Rembourser toutes ses dettes d'abord"],correct:2,
-explain:"50€/mois représentent 600€ en un an, la différence entre un imprévu géré et une déstabilisation totale."},
-{q:"Quel taux d'épargne viser avec des revenus confortables ?",opts:["20% comme tout le monde","10% suffisent","Au-delà de 20%, voire 30 à 50%","Le taux n'a pas d'importance"],correct:2,
-explain:"Chaque point de pourcentage supplémentaire accélère considérablement la construction du patrimoine."}
+{q:"Quelle priorité quand les besoins dépassent 70 % du revenu ?",opts:["Épargner 20 % quand même","Faire baisser une charge fixe, vérifier ses droits, viser un premier palier de 1 000 €","Réduire l'alimentation","Prendre un crédit"],correct:1,
+explain:"Imposer un objectif de 20 % dans cette situation ne produit que de la culpabilité, pas de l'épargne."},
+{q:"Quel est le piège d'un revenu confortable ?",opts:["Les impôts","L'inflation du mode de vie, qui absorbe chaque augmentation","La complexité bancaire","Le manque d'options de placement"],correct:1,
+explain:"Le taux d'épargne reste identique à 2 000 € comme à 4 000 €. La parade est de diriger la moitié de chaque hausse vers l'épargne."},
+{q:"Comment gérer un revenu irrégulier ?",opts:["Dépenser au fur et à mesure","Se verser un montant fixe depuis un compte tampon alimenté par les bons mois","Emprunter pendant les mois creux","Renoncer à tout budget"],correct:1,
+explain:"Ce compte tampon est un salaire qu'on se verse à soi-même, et il rend prévisible un revenu qui ne l'est pas."}
 ],
-action:"Détermine ta situation (serrée, moyenne, confortable). Calcule ton taux d'épargne actuel et compare-le à la cible recommandée."
+action:"Identifie laquelle des 4 situations est la tienne, et note le seul ajustement qui en découle. Si tu es en revenu irrégulier, calcule dès ce soir ton revenu de référence sur les 12 derniers mois en retenant l'hypothèse basse."
 },
-{module:"Module 2 — La règle 50/30/20", title:"Reconstruire votre budget", duration:"9 min",
+{module:"Module 2 — Structurer avec la règle 50/30/20", title:"Reconstruire ton budget", duration:"5 min",
 script:[
-"5 étapes pour reconstruire votre budget. Étape 1 : ancrer l'épargne en premier, décidez du montant avant tout, même 50€, en automatique le jour du salaire.",
-"Étape 2 : lister et totaliser les dépenses fixes, votre socle incompressible. Étape 3 : calculer l'enveloppe disponible pour les variables (revenus - épargne - fixes).",
-"Étape 4 : allouer cette enveloppe par sous-catégories réalistes, basées sur vos habitudes réelles. Étape 5 : réviser après le premier mois, certaines enveloppes seront trop serrées, d'autres trop généreuses, c'est normal.",
-"Un budget imparfait et appliqué vaut infiniment plus qu'un budget parfait jamais mis en place."
+"Tu as observé, classé, et tu connais tes écarts. Il est temps de construire le budget lui-même, à partir de chiffres réels et non d'intentions.",
+"<strong>Étape 1 : pars de la réalité, pas de l'idéal.</strong> Reprends la moyenne de tes 3 derniers mois, poste par poste. Un budget construit sur ce que tu voudrais dépenser est un budget faux dès le premier jour, et son échec te découragera d'en refaire un.",
+"<strong>Étape 2 : fixe l'épargne en premier.</strong> C'est la seule ligne qui doit être décidée avant les autres, et c'est l'inversion la plus importante de toute cette formation. Choisis un montant que tu es certain de tenir, même un mois difficile, quitte à ce qu'il paraisse ridicule.",
+"<strong>Étape 3 : bloque les charges fixes.</strong> Elles ne se négocient pas ce mois-ci, elles sont ce qu'elles sont. Note-les telles quelles, et garde la liste pour la séance de renégociation.",
+"<strong>Étape 4 : ce qui reste devient ton budget courant.</strong> Divise ce montant par 4,33 pour obtenir ton budget hebdomadaire. <u>Raisonner par semaine change tout</u> : un dépassement se corrige en 6 jours au lieu de 25, et l'échelle de temps reste compréhensible.",
+"<strong>Étape 5 : prévois la soupape.</strong> Ajoute une ligne « imprévus » d'environ 5 % du revenu. Un budget sans soupape casse au premier événement, et l'échec est alors attribué à la personne alors qu'il vient de la méthode.",
+"Trois erreurs à éviter, tirées de ce qui fait échouer les budgets. <strong>Trop de catégories</strong> : au-delà de 8, plus personne ne remplit. <strong>Trop de rigueur</strong> : un budget qui interdit tout plaisir sera abandonné, et une ligne de loisirs assumée est une garantie de durée. <strong>Trop d'ambition</strong> : vouloir réduire de 30 % dès le premier mois est le meilleur moyen de tout arrêter au deuxième.",
+"Un dernier conseil qui vaut pour la suite. <strong>Le premier budget est toujours faux</strong>, et c'est normal. Il devient juste au bout de 2 ou 3 mois d'ajustements. Ce n'est pas un document qu'on écrit une fois, c'est un instrument qu'on règle."
 ],
 quiz:[
-{q:"Quelle est la première étape de construction du budget ?",opts:["Lister ses dépenses fixes","Calculer son revenu net","Décider et automatiser son épargne avant de budgéter le reste","Définir ses objectifs long terme"],correct:2,
-explain:"C'est l'inversion de la logique classique qui consiste à épargner ce qui reste."},
-{q:"Comment calcule-t-on l'enveloppe variable disponible ?",opts:["Revenus nets moins dépenses fixes","Revenus nets moins épargne moins dépenses fixes","Revenus nets moins 30% pour les envies","Dépenses du mois précédent divisées par 1,2"],correct:1,
-explain:"C'est le budget réel disponible pour les dépenses variables du quotidien."},
-{q:"Pourquoi le premier budget ne sera-t-il jamais parfait ?",opts:["Les méthodes sont trop théoriques","Il est basé sur des estimations à tester face à la réalité","Les dépenses changent trop souvent","Il faut des années d'expérience"],correct:1,
-explain:"C'est un processus itératif, pas un document figé, à tester puis ajuster."}
+{q:"Sur quelle base construire son budget ?",opts:["Sur ce qu'on voudrait dépenser","Sur la moyenne réelle des 3 derniers mois","Sur les moyennes nationales","Sur le mois le plus économe"],correct:1,
+explain:"Un budget construit sur des intentions est faux dès le premier jour, et son échec décourage d'en refaire un."},
+{q:"Quelle ligne faut-il fixer en premier ?",opts:["Le loyer","L'épargne","L'alimentation","Les loisirs"],correct:1,
+explain:"C'est l'inversion décisive : l'épargne devient un poste du budget au lieu d'être ce qui reste à la fin."},
+{q:"Pourquoi raisonner par semaine plutôt que par mois ?",opts:["Parce que les salaires sont hebdomadaires","Parce qu'un dépassement se corrige en 6 jours au lieu de 25","Parce que c'est plus précis","Parce que les banques le recommandent"],correct:1,
+explain:"L'échelle de temps reste compréhensible et la correction possible, ce qui n'est pas le cas sur un mois entier."}
 ],
-action:"Construis ton budget en 5 étapes : épargne auto, dépenses fixes, enveloppe variable, répartition par sous-catégorie. Mets en place le virement d'épargne."
+action:"Construis ton budget ce soir avec le tableau NiouDem, à partir de tes chiffres réels. Fixe l'épargne en premier, puis les charges, puis divise le reste par 4,33. Tu obtiendras ton budget hebdomadaire, qui est le seul que tu auras à surveiller."
 },
-{module:"Module 3 — Automatiser et fluidifier", title:"Virements automatiques", duration:"8 min",
+{module:"Module 3 — Automatiser et fluidifier", title:"Les virements automatiques", duration:"5 min",
 script:[
-"Les gens qui automatisent leur épargne épargnent plus, plus régulièrement, avec moins d'effort. L'automatisation enlève la décision répétée, le plus grand ennemi de la bonne gestion.",
-"Premier virement : épargne de base, le jour du salaire, non négociable. Deuxième : investissement mensuel, indépendamment des conditions de marché. Troisième : dépenses fixes, vérifiez qu'elles partent du bon compte.",
-"Quatrième optionnel : enveloppes de dépenses variables si vous utilisez la méthode des comptes multiples.",
-"Règle importante : après avoir mis en place ces virements, ne regardez pas votre solde chaque semaine. Une fois par mois lors de votre revue suffit. La distance crée de la discipline."
+"L'automatisation est le seul dispositif de cette formation qui fonctionne même les mois où tu ne penses pas à ton budget. C'est ce qui en fait le plus important de tous.",
+"Le principe a été vu dans la formation sur l'épargne et mérite d'être répété ici : <strong>on épargne d'abord, on dépense ce qui reste.</strong> Techniquement, cela signifie un virement programmé le lendemain de la paie, exécuté sans aucune décision de ta part.",
+"Voici comment construire l'architecture complète, dans l'ordre. <strong>Jour 1 :</strong> le salaire arrive sur le compte principal. <strong>Jour 2 :</strong> un virement automatique part vers le compte d'épargne. <strong>Jour 2 également :</strong> un second virement alimente le compte de provisions pour les dépenses annuelles. <strong>Jour 3 :</strong> un troisième virement alimente le compte de dépenses courantes, celui relié à ta carte. <strong>Du 5 au 10 :</strong> les prélèvements des charges fixes partent du compte principal, qui n'a plus qu'eux à assumer.",
+"<figure class=\"schema\"><svg viewBox=\"0 0 700 338\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"20\" y=\"24\" width=\"190\" height=\"54\" rx=\"9\" fill=\"#EFF0EA\" stroke=\"#12212B\" stroke-width=\"1.5\"/><text x=\"115\" y=\"47\" text-anchor=\"middle\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14.5\" font-weight=\"600\" fill=\"#12212B\">Ton salaire</text><text x=\"115\" y=\"65\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"12\" fill=\"#7A8A93\">jour 1</text><path d=\"M210 51 C 270 51, 270 66, 330 66\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"66\" r=\"4\" fill=\"#B8862F\"/><rect x=\"344\" y=\"43\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#F6EFE0\" stroke=\"#B8862F\" stroke-width=\"1.3\"/><text x=\"360\" y=\"64\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Épargne, automatique</text><text x=\"664\" y=\"64\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#B8862F\">jour 2</text><path d=\"M210 51 C 270 51, 270 128, 330 128\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"128\" r=\"4\" fill=\"#B8862F\"/><rect x=\"344\" y=\"105\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#F6EFE0\" stroke=\"#B8862F\" stroke-width=\"1.3\"/><text x=\"360\" y=\"126\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Provisions annuelles</text><text x=\"664\" y=\"126\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#B8862F\">jour 2</text><path d=\"M210 51 C 270 51, 270 190, 330 190\" fill=\"none\" stroke=\"#1E4B3C\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"190\" r=\"4\" fill=\"#1E4B3C\"/><rect x=\"344\" y=\"167\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#E7EFEA\" stroke=\"#1E4B3C\" stroke-width=\"1.3\"/><text x=\"360\" y=\"188\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Budget courant, ta carte</text><text x=\"664\" y=\"188\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#1E4B3C\">jour 3</text><path d=\"M210 51 C 270 51, 270 252, 330 252\" fill=\"none\" stroke=\"#1E4B3C\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"252\" r=\"4\" fill=\"#1E4B3C\"/><rect x=\"344\" y=\"229\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#E7EFEA\" stroke=\"#1E4B3C\" stroke-width=\"1.3\"/><text x=\"360\" y=\"250\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Charges fixes, prélèvements</text><text x=\"664\" y=\"250\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#1E4B3C\">du 5 au 10</text></svg><figcaption>Au jour 3, tout est réparti : ce que tu vois sur ta carte est exactement ce que tu peux dépenser.</figcaption></figure>",
+"Ce séquencement produit un effet qu'aucune discipline ne reproduit : <u>au jour 3, tout est déjà réparti, et ce que tu vois sur ta carte est exactement ce que tu peux dépenser.</u> Le budget n'est plus un document à consulter, il est devenu la structure de tes comptes.",
+"Trois précautions avant de tout programmer. <strong>1. Garde un coussin</strong> de 100 à 200 € sur le compte principal, pour absorber un prélèvement plus élevé que prévu sans déclencher de frais de rejet. <strong>2. Vérifie les dates réelles</strong> de tes prélèvements, qui figurent sur tes relevés, plutôt que de te fier à ce que tu crois. <strong>3. Commence avec un montant d'épargne faible</strong>, et augmente-le une fois que le système a tourné 3 mois sans accroc.",
+"Une question revient souvent : que faire les mois où c'est trop juste ? La réponse est claire et il faut la connaître à l'avance. <strong>Tu peux annuler un virement d'épargne exceptionnellement, mais tu ne le supprimes jamais.</strong> Un virement suspendu se réactive ; un virement supprimé ne se recrée jamais.",
+"Enfin, un mot sur ce que cette automatisation change au-delà de l'argent. Elle supprime des dizaines de micro-décisions par mois, et donc la fatigue mentale qui va avec. <strong>C'est le seul système de cette formation qui te demande moins d'efforts à mesure que le temps passe.</strong>"
 ],
 quiz:[
-{q:"Pourquoi l'automatisation de l'épargne est-elle plus efficace ?",opts:["Elle génère de meilleurs rendements","Elle enlève la décision répétée et l'influence de l'émotion du moment","Elle est recommandée par les banques","Elle permet d'épargner plus qu'en manuel"],correct:1,
-explain:"Chaque décision manuelle s'expose aux raisons de ne pas la faire. L'automatisation contourne ce problème."},
-{q:"Quel est le premier virement à mettre en place ?",opts:["Vers son investissement","Pour ses dépenses variables","Vers son épargne de base, le jour du salaire","Pour ses dépenses fixes"],correct:2,
-explain:"L'épargne de base est non négociable et représente le fondement de toute la stratégie."},
-{q:"À quelle fréquence regarder son épargne automatisée ?",opts:["Tous les jours","Toutes les semaines","Une fois par mois lors d'une revue dédiée","Une fois par an"],correct:2,
-explain:"La distance crée de la discipline et évite les tentations."}
+{q:"Quand programmer le virement d'épargne ?",opts:["En fin de mois","Le lendemain de la paie","Le 15 du mois","Quand le solde le permet"],correct:1,
+explain:"Ce que tu ne vois jamais ne te manque pas. Un virement de fin de mois saute dès que le mois a été difficile."},
+{q:"Que faut-il garder sur le compte principal ?",opts:["Rien du tout","Un coussin de 100 à 200 € pour absorber un prélèvement plus élevé","La totalité du salaire","Uniquement le montant des charges"],correct:1,
+explain:"Il évite les frais de rejet, qui coûtent bien plus cher que le montant immobilisé."},
+{q:"Que faire un mois trop juste ?",opts:["Supprimer le virement d'épargne","L'annuler exceptionnellement sans jamais le supprimer","Emprunter la différence","Doubler le mois suivant"],correct:1,
+explain:"Un virement suspendu se réactive. Un virement supprimé ne se recrée pratiquement jamais."}
 ],
-action:"Configure aujourd'hui au moins un virement automatique vers ton épargne. Même 30 à 50€."
+action:"Programme ce soir les 3 virements automatiques dans ton application bancaire, aux bonnes dates. Si tu n'en programmes qu'un, que ce soit celui de l'épargne, avec un montant que tu ne remarqueras pas."
 },
-{module:"Module 3 — Automatiser et fluidifier", title:"Organiser ses comptes", duration:"8 min",
+{module:"Module 3 — Automatiser et fluidifier", title:"Organiser ses comptes", duration:"5 min",
 script:[
-"Un seul compte où tout est mélangé crée confusion et risque de dépassement. Une architecture à plusieurs niveaux clarifie tout.",
-"Niveau 1, compte de transit : le salaire arrive, les virements partent immédiatement, quasiment à zéro en fin de mois. Niveau 2, compte de dépenses fixes : reçoit le montant exact des prélèvements, pas de carte attachée.",
-"Niveau 3, compte de dépenses courantes : votre carte de débit principale, l'enveloppe variable, quand il est vide, l'enveloppe est épuisée. Niveau 4, compte épargne : reçoit l'épargne automatique, non touché sauf raisons définies.",
-"Niveau 5 optionnel, compte investissement : PEA ou assurance-vie, regardé une fois par mois ou trimestre. Avec les banques en ligne gratuites, ouvrir plusieurs comptes est simple et gratuit."
+"L'architecture de tes comptes fait plus pour ton budget que n'importe quel tableau. Cette leçon décrit une organisation qui fonctionne, et les cas particuliers qui demandent un ajustement.",
+"<strong>Le socle : 4 comptes.</strong> Un compte principal qui reçoit les revenus et supporte les charges fixes. Un compte courant secondaire pour les dépenses quotidiennes, avec la carte associée. Un compte de provisions pour les dépenses annuelles. Un livret d'épargne, dans un autre établissement si possible.",
+"Le fait de placer l'épargne <strong>ailleurs</strong> n'est pas un détail technique. La friction de quelques minutes nécessaire pour y accéder suffit à distinguer un vrai besoin d'une envie du moment, et c'est le dispositif le moins coûteux et le plus efficace de toute cette formation.",
+"<strong>Le cas du couple</strong> mérite un traitement à part, parce qu'il provoque plus de conflits que n'importe quel autre sujet financier. Trois organisations existent, et aucune n'est supérieure aux autres. <em>Tout en commun</em> : simple, mais supprime toute autonomie et rend chaque dépense personnelle visible. <em>Tout séparé</em> : autonome, mais complique le partage des charges et pénalise celui qui gagne le moins. <em>Le modèle mixte</em> : un compte joint alimenté au prorata des revenus pour les charges communes, et un compte personnel chacun.",
+"<u>Le modèle mixte au prorata est celui qui produit le moins de tensions</u>, parce qu'il traite la question de l'équité de façon explicite. Si l'un gagne 2 000 € et l'autre 3 000 €, chacun verse 40 % et 60 % des charges communes plutôt que la moitié. Ce qui reste sur le compte personnel n'a pas à être justifié, et c'est précisément ce qui évite les disputes.",
+"<strong>Le cas de l'indépendant</strong> impose une règle non négociable : un compte strictement dédié à l'activité, distinct du compte personnel. Non seulement pour la comptabilité, mais parce que mélanger rend impossible de savoir ce que l'activité rapporte réellement. Ajoute un troisième compte pour provisionner les cotisations et l'impôt, alimenté à chaque encaissement.",
+"Un conseil de simplicité pour finir. <strong>Résiste à la tentation de multiplier les comptes.</strong> Chaque compte supplémentaire ajoute un suivi, parfois des frais, et une occasion d'oublier. Quatre comptes bien utilisés valent mieux que 9 comptes ouverts avec enthousiasme et abandonnés en 3 mois."
 ],
 quiz:[
-{q:"Quel est le rôle du compte de transit ?",opts:["Concentrer les dépenses fixes","Recevoir le salaire et redistribuer automatiquement, se retrouvant à zéro en fin de mois","Servir de fonds d'urgence","Accumuler l'épargne mensuelle"],correct:1,
-explain:"Son rôle est de redistribuer immédiatement vers les autres comptes via virements automatiques."},
-{q:"Pourquoi ne pas attacher de carte au compte de dépenses fixes ?",opts:["Pour réduire les frais","Pour éviter d'y piocher pour des dépenses courantes","Ce sont généralement des comptes épargne","Pour prioriser les prélèvements"],correct:1,
-explain:"Ça évite de mettre en défaut un prélèvement important comme le loyer."},
-{q:"À quelle fréquence vérifier son architecture bancaire ?",opts:["Tous les jours","Toutes les semaines","Une fois par mois","Une fois par an"],correct:2,
-explain:"Une architecture bien configurée fonctionne de façon quasiment autonome."}
+{q:"Pourquoi placer son épargne dans un autre établissement ?",opts:["Pour un meilleur taux","Pour créer une friction qui distingue un besoin d'une envie","Pour la sécurité juridique","Pour réduire les frais"],correct:1,
+explain:"Quelques minutes de délai suffisent à faire la différence, et ce dispositif ne coûte rien."},
+{q:"Quelle organisation de couple produit le moins de tensions ?",opts:["Tout en commun","Le modèle mixte, avec un compte joint alimenté au prorata des revenus","Tout séparé","Un seul compte au nom d'une personne"],correct:1,
+explain:"Il traite l'équité de façon explicite, et le compte personnel n'a pas à être justifié."},
+{q:"Quelle règle s'impose à un indépendant ?",opts:["Ouvrir 6 comptes","Séparer strictement le compte d'activité du compte personnel","Utiliser un compte unique pour simplifier","Confier ses comptes à un tiers"],correct:1,
+explain:"Sans cette séparation, il devient impossible de savoir ce que l'activité rapporte réellement."}
 ],
-action:"Regarde ton architecture actuelle. Identifie le compte manquant pour compléter le système. Ouvre une banque en ligne si besoin."
+action:"Dessine sur une feuille l'organisation de tes comptes actuels, avec des flèches pour les flux. Puis dessine l'organisation cible. L'écart entre les 2 schémas te dira exactement combien d'ouvertures ou de fermetures il te reste à faire."
 },
-{module:"Module 3 — Automatiser et fluidifier", title:"Applications de suivi budgétaire", duration:"7 min",
+{module:"Module 3 — Automatiser et fluidifier", title:"Les applications de suivi", duration:"5 min",
 script:[
-"Trois catégories d'outils. Les agrégateurs bancaires (Bankin', Linxo) se connectent à vos comptes et catégorisent automatiquement, gratuit et efficace pour une vue d'ensemble.",
-"Les applications par enveloppes (YNAB) plus actives, vous saisissez chaque dépense, l'app montre en temps réel ce qui reste dans chaque enveloppe.",
-"Le suivi manuel simplifié, un tableur, moins automatique mais entièrement personnalisable.",
-"Le critère de sélection n'est pas la sophistication mais l'utilisation réelle : la meilleure application est celle qu'on ouvre régulièrement."
+"Les applications de gestion budgétaire promettent de tout automatiser. Elles rendent de vrais services et présentent de vraies limites, qu'il vaut mieux connaître avant de confier ses données bancaires à un tiers.",
+"<strong>Ce qu'elles font bien.</strong> Elles agrègent plusieurs banques dans une seule vue, catégorisent automatiquement les dépenses, repèrent les abonnements récurrents et produisent des graphiques mensuels. Pour quelqu'un qui déteste les tableaux, ce gain de friction est décisif.",
+"<strong>Ce qu'elles font mal.</strong> La catégorisation automatique se trompe souvent, notamment sur les paiements en ligne et les virements entre comptes, ce qui fausse les statistiques sans que tu t'en aperçoives. Et surtout, <u>elles montrent le passé sans jamais décider de l'avenir</u> : voir qu'on a dépensé 340 € en restaurants ne change rien tant qu'aucune limite n'a été fixée à l'avance.",
+"<strong>La question des données mérite d'être posée sérieusement.</strong> Ces applications accèdent à l'intégralité de tes opérations bancaires, ce qui constitue une information extrêmement précise sur ta vie. Avant d'en choisir une, vérifie 3 choses : qui l'édite et dans quel pays, quel est son modèle économique, et si elle revend ou exploite des données agrégées. <strong>Une application gratuite dont on ne comprend pas le modèle économique se rémunère forcément quelque part.</strong>",
+"Un point technique utile : depuis la réglementation européenne sur les services de paiement, l'accès aux comptes passe par des interfaces sécurisées et un agrément, ce qui est plus protecteur qu'auparavant. Vérifie que l'éditeur est bien agréé, l'information doit figurer sur son site.",
+"Ma recommandation est nuancée. <strong>Une application est un bon outil d'observation et un mauvais outil de décision.</strong> Elle remplace avantageusement la saisie manuelle pendant la phase de diagnostic. Mais le budget lui-même, c'est-à-dire les montants décidés à l'avance, doit vivre ailleurs : dans ton tableau, et surtout dans la structure de tes comptes.",
+"Si tu ne veux aucune application, sache que <strong>le tableau NiouDem et 4 comptes suffisent entièrement.</strong> Des gens tiennent un budget depuis 20 ans avec un carnet. L'outil n'a jamais été le facteur limitant."
 ],
 quiz:[
-{q:"Comment fonctionnent les agrégateurs bancaires ?",opts:["Saisie manuelle de chaque transaction","Connexion aux comptes pour importer et catégoriser automatiquement","Remplacent la déclaration fiscale","Réservés aux professionnels"],correct:1,
-explain:"Ils offrent une vue consolidée de vos finances automatiquement."},
-{q:"Quel est le critère principal pour choisir une application ?",opts:["Le nombre de fonctionnalités","La sécurité des données","Celle qu'on utilisera vraiment et régulièrement","Le coût"],correct:2,
-explain:"Un outil sophistiqué abandonné après une semaine ne vaut rien face à un tableau simple utilisé fidèlement."},
-{q:"YNAB appartient à quelle catégorie ?",opts:["Agrégateur bancaire","Application de budget par enveloppes","Application d'investissement","Comparateur bancaire"],correct:1,
-explain:"On y définit ses enveloppes et l'app montre en temps réel ce qu'il reste dans chacune."}
+{q:"Quelle est la principale limite de ces applications ?",opts:["Leur prix","Elles montrent le passé sans décider de l'avenir","Leur lenteur","Le nombre de banques compatibles"],correct:1,
+explain:"Voir qu'on a dépensé 340 € ne change rien tant qu'aucune limite n'a été fixée à l'avance."},
+{q:"Que vérifier avant d'en choisir une ?",opts:["Sa note sur les magasins d'applications","Qui l'édite, son modèle économique, et son agrément","Le nombre d'utilisateurs","La couleur de l'interface"],correct:1,
+explain:"Elle accède à l'intégralité de tes opérations. Une application gratuite se rémunère forcément quelque part."},
+{q:"Peut-on tenir un budget sans application ?",opts:["Non, c'est indispensable aujourd'hui","Oui, un tableau et 4 comptes suffisent entièrement","Uniquement avec un comptable","Seulement si les revenus sont fixes"],correct:1,
+explain:"L'outil n'a jamais été le facteur limitant. Des gens tiennent un budget depuis 20 ans avec un carnet."}
 ],
-action:"Installe Bankin' ou crée un tableur simple avec tes catégories. L'objectif : avoir un outil de suivi actif cette semaine."
+action:"Si tu utilises une application, vérifie ce soir 2 choses : son éditeur et son modèle économique. Si tu n'en utilises pas, ne la cherche pas, ton tableau suffit. Dans les 2 cas, l'important reste la structure de tes comptes."
 },
-{module:"Module 3 — Automatiser et fluidifier", title:"Configurer votre système", duration:"8 min",
+{module:"Module 3 — Automatiser et fluidifier", title:"Configurer ton système complet", duration:"5 min",
 script:[
-"Assemblons les briques. Un système complet a 4 composantes : automatisation de l'allocation, suivi en temps réel, rituel de revue hebdomadaire et mensuel, bilan trimestriel.",
-"Le jour du salaire, l'argent se répartit automatiquement. Votre application montre où vous en êtes. Un rituel hebdomadaire de 10 minutes, mensuel de 30 minutes. Tous les 3 mois, comparaison du patrimoine net.",
-"Ce système, une fois en place, ne demande plus que 30-40 minutes par semaine. Il y aura des mois difficiles, c'est normal, le système ne prétend pas éliminer l'imprévisible.",
-"Un mauvais mois avec un bon système reste un mois difficile. Un mauvais mois sans système, c'est le début d'une spirale."
+"Cette leçon assemble tout ce qui précède en une session unique. Compte 90 minutes, une seule fois, et ton budget fonctionnera ensuite presque sans toi.",
+"<strong>Bloc 1, 20 minutes : les comptes.</strong> Ouvre le compte de dépenses courantes s'il n'existe pas, ouvre le compte de provisions, et vérifie que ton livret d'épargne est bien dans un autre établissement. Nomme chaque compte explicitement dans ton application bancaire, la plupart le permettent : « charges », « courant », « provisions », « épargne ».",
+"<strong>Bloc 2, 20 minutes : les montants.</strong> Reprends ton budget. Note le montant de l'épargne mensuelle, le montant des provisions annuelles divisé par 12, et le budget courant mensuel. Ces 3 chiffres sont les seuls dont tu auras besoin.",
+"<strong>Bloc 3, 20 minutes : les virements.</strong> Programme les 3 virements automatiques aux bonnes dates, comme vu 3 leçons plus tôt. Vérifie que le compte principal conserve son coussin après leur exécution.",
+"<strong>Bloc 4, 20 minutes : le ménage.</strong> Résilie les abonnements repérés lors du diagnostic. Supprime les cartes enregistrées sur les sites marchands. Désactive les paiements en un clic. <u>Cette étape rapporte immédiatement plus que toutes les autres réunies.</u>",
+"<strong>Bloc 5, 10 minutes : les rituels.</strong> Programme dans ton calendrier le point hebdomadaire de 10 minutes et le point mensuel de 30 minutes, en récurrence, accrochés à quelque chose que tu fais déjà.",
+"Un conseil sur la manière de mener cette session : <strong>fais-la d'un seul tenant, sans téléphone.</strong> Étaler ces 5 blocs sur 5 soirs revient à payer 5 fois le coût de démarrage, et la plupart des gens abandonnent au troisième. Bloque le créneau comme un rendez-vous, parce que c'en est un.",
+"Ce que tu auras à la fin : un système où <strong>l'épargne part sans y penser, les charges sont isolées, le budget courant est visible sur une carte dédiée, et les dépenses annuelles sont provisionnées.</strong> À partir de là, tenir son budget ne demande plus que 10 minutes par semaine."
 ],
 quiz:[
-{q:"Quelles sont les 4 composantes d'un système budgétaire complet ?",opts:["Budget, épargne, investissement, retraite","Automatisation, suivi en temps réel, rituel de revue, bilan trimestriel","Compte courant, épargne, PEA, assurance-vie","Revenus, dépenses fixes, variables, épargne"],correct:1,
-explain:"Ces quatre éléments fonctionnent ensemble et se renforcent mutuellement."},
-{q:"Combien de temps devrait prendre la gestion une fois le système en place ?",opts:["1-2h par jour","1-2h par semaine","30-40 minutes par semaine","Aucun temps nécessaire"],correct:2,
-explain:"L'automatisation gère le reste, les rituels de revue suffisent."},
-{q:"Quelle est la fréquence du bilan patrimonial ?",opts:["Mensuelle","Hebdomadaire","Trimestrielle","Annuelle"],correct:2,
-explain:"Elle permet d'observer une progression réelle sans les variations trompeuses du court terme."}
+{q:"Combien de temps demande la configuration complète ?",opts:["10 minutes","Environ 90 minutes, une seule fois","Une journée entière","Un mois"],correct:1,
+explain:"Une session unique, d'un seul tenant. L'étaler revient à payer plusieurs fois le coût de démarrage."},
+{q:"Quel bloc rapporte immédiatement le plus ?",opts:["L'ouverture des comptes","Le ménage : résiliations et suppression des cartes enregistrées","Le calcul des montants","La programmation des rituels"],correct:1,
+explain:"Il produit un gain qui se répète chaque mois, dès le mois suivant, sans rien changer au mode de vie."},
+{q:"Combien de chiffres sont nécessaires au système ?",opts:["Un par catégorie de dépense","3 : épargne mensuelle, provisions, budget courant","Une dizaine","Aucun, tout est automatique"],correct:1,
+explain:"Toute la complexité apparente du budget se ramène à 3 montants et 3 virements."}
 ],
-action:"Assemble ton système : virements automatiques, application configurée, rappels calendrier pour tes rituels et ton bilan trimestriel."
+action:"Bloque dès maintenant un créneau de 90 minutes dans ton calendrier, dans les 7 prochains jours, intitulé « configuration budget ». Colle les 5 blocs dans la description. C'est la seule action de cette formation qui demande vraiment du temps."
 },
-{module:"Module 4 — Ancrer le rituel", title:"Le bilan mensuel en 15 minutes", duration:"7 min",
+{module:"Module 4 — Ancrer le rituel", title:"Le bilan mensuel en 15 minutes", duration:"5 min",
 script:[
-"Une fois par mois, 15 minutes pour regarder où vous en êtes. 5 questions : ai-je épargné le montant prévu ? Quelles enveloppes respectées ou dépassées ? Y a-t-il eu un imprévu, comment absorbé ?",
-"Mon patrimoine net a-t-il progressé ? Qu'est-ce que je vais ajuster le mois prochain ? Pas de jugement, juste des constats basés sur les données de votre application.",
-"La régularité de ce bilan compte plus que sa profondeur. Un bilan imparfait fait chaque mois vaut infiniment plus qu'un bilan parfait fait une fois par an.",
-"C'est piloter par les données plutôt que naviguer à vue."
+"Un système automatisé continue de tourner tout seul, mais il dérive doucement si personne ne le regarde. Le bilan mensuel est le seul rendez-vous obligatoire, et il tient en 15 minutes.",
+"<strong>Le moment : le lendemain de ta paie.</strong> Toujours le même, parce que tout est frais et parce que les ajustements que tu décideras s'appliqueront au mois qui commence, pas à celui qui s'achève.",
+"<strong>Minutes 1 à 5 : vérifier.</strong> Les 3 virements sont-ils bien partis ? Le compte principal a-t-il conservé son coussin ? Y a-t-il eu des frais bancaires, et si oui pourquoi ? Cette dernière question compte : <u>un frais bancaire est toujours le symptôme de quelque chose, jamais une fatalité.</u>",
+"<strong>Minutes 6 à 10 : comparer.</strong> Ouvre ton tableau et regarde le mois écoulé. Compare le budget courant prévu au réalisé. Une seule question : l'écart vient-il d'un imprévu ponctuel, ou d'un budget mal calibré dès le départ ?",
+"<strong>Minutes 11 à 15 : ajuster une seule chose.</strong> Une. Pas 5. Augmenter l'épargne de 10 €, résilier un abonnement, réhausser une ligne sous-estimée. <strong>Un ajustement mensuel appliqué vaut mieux que 5 ajustements notés et jamais faits.</strong>",
+"Trois pièges à éviter dans ce rituel. <strong>Ne le transforme pas en séance d'auto-évaluation.</strong> Tu regardes un système, pas ta valeur personnelle, et cette distinction fait la différence entre un rituel qui dure et un rendez-vous qu'on finit par éviter.",
+"<strong>Ne cherche pas la précision au centime.</strong> Un écart de 20 € n'a aucune signification, un écart de 200 € en a une. Et <strong>ne saute pas le rituel un mois difficile</strong> : c'est précisément le mois où il est le plus utile, parce que c'est là qu'un dérapage devient une habitude.",
+"Enfin, garde une trace : 3 lignes par mois suffisent, notant l'écart constaté et l'ajustement décidé. Au bout d'un an, ces 36 lignes racontent une trajectoire, et elles montrent surtout que les mois difficiles alternent avec les autres, ce qu'on oublie complètement quand on est dedans."
 ],
 quiz:[
-{q:"Quel est l'objectif du bilan mensuel ?",opts:["Calculer précisément ses revenus et dépenses","Maintenir une conscience régulière et ajuster le cap","Comparer exhaustivement au mois précédent","Vérifier les virements automatiques"],correct:1,
-explain:"Cinq questions simples, 15 minutes, un cap maintenu. La régularité prime sur la profondeur."},
-{q:"Que faire si une enveloppe a été dépassée ?",opts:["La réduire le mois suivant","Constater sans jugement et décider si un ajustement est nécessaire","Transférer le dépassement au mois suivant","Augmenter l'épargne pour compenser"],correct:1,
-explain:"Un dépassement est une information utile, pas un échec moral."},
-{q:"Que signifie « piloter par les données » ?",opts:["Utiliser des logiciels de trading","Baser ses décisions sur des données réelles plutôt que des impressions","Analyser des données économiques","Automatiser toutes les décisions"],correct:1,
-explain:"Des informations réelles collectées plutôt que des estimations floues."}
+{q:"Quand faire le bilan mensuel ?",opts:["Le dernier jour du mois","Le lendemain de la paie","Le premier dimanche du mois","Quand on y pense"],correct:1,
+explain:"Les ajustements décidés s'appliquent alors au mois qui commence, pas à celui qui s'achève."},
+{q:"Combien d'ajustements décider par bilan ?",opts:["Autant que nécessaire","Un seul","Au moins 3","Aucun, on observe seulement"],correct:1,
+explain:"Un ajustement appliqué vaut mieux que 5 notés et jamais faits."},
+{q:"Faut-il sauter le rituel un mois difficile ?",opts:["Oui, pour éviter de se décourager","Non, c'est précisément le mois où il est le plus utile","Oui, si l'écart dépasse 200 €","Cela n'a pas d'importance"],correct:1,
+explain:"C'est là qu'un dérapage devient une habitude si personne ne le regarde."}
 ],
-action:"Programme ton premier bilan mensuel dans ton calendrier. Note les 5 questions dans un document que tu ouvriras ce jour-là."
+action:"Programme le bilan mensuel dans ton calendrier, en récurrence, au lendemain de ta paie, avec les 3 blocs de 5 minutes dans la description. Fais le premier dès le mois prochain, même si ton système vient à peine d'être installé."
 },
-{module:"Module 4 — Ancrer le rituel", title:"Objectifs SMART financiers", duration:"9 min",
+{module:"Module 4 — Ancrer le rituel", title:"Des objectifs qui se tiennent", duration:"5 min",
 script:[
-"Un budget sans objectif manque de direction. SMART : Spécifique, Mesurable, Atteignable, Réaliste, Temporellement défini.",
-"Objectif vague : « je veux épargner plus. » Version SMART : « constituer un fonds d'urgence de 3600€, en épargnant 300€/mois pendant 12 mois, dès le 1er janvier. »",
-"Trois horizons : court terme (moins d'1 an, fonds d'urgence), moyen terme (1-5 ans, apport immobilier), long terme (5 ans+, indépendance financière).",
-"Avoir un objectif actif par horizon crée un système de motivation complet : le court terme pour rester motivé au quotidien, le long terme pour ancrer la démarche dans une vision de vie."
+"Un objectif financier vague ne produit rien. <em>« Mieux gérer mon argent »</em>, <em>« épargner davantage »</em>, <em>« faire attention »</em> : ces formulations ne permettent ni de commencer, ni de savoir si on a réussi.",
+"Un objectif utile réunit 4 propriétés, et il suffit d'en oublier une pour qu'il devienne inopérant.",
+"<strong>1. Un montant.</strong> Pas « épargner plus », mais « 100 € par mois ». Le chiffre transforme une intention en engagement vérifiable. <strong>2. Une échéance.</strong> Pas « un jour », mais « au 31 décembre ». Sans date, aucun objectif n'a de priorité, et il cède devant tout le reste.",
+"<strong>3. Une raison précise.</strong> C'est la propriété la plus négligée et la plus déterminante. <u>Un objectif sans raison est abandonné à la première tentation.</u> « 3 000 € pour un apport » ou « 2 mois de charges pour dormir tranquille » résistent, alors qu'« épargner » ne résiste à rien.",
+"<strong>4. Une première action datée.</strong> Ce que tu fais dans les 48 heures. Un objectif sans première action reste une intention, quelle que soit sa précision par ailleurs.",
+"Voici la reformulation d'un objectif classique. Version faible : <em>« je veux mettre de l'argent de côté »</em>. Version qui tient : <strong>« 1 200 € au 31 décembre, soit 100 € par mois, pour constituer mon premier palier d'urgence, avec un virement automatique programmé demain. »</strong> Même intention, probabilité de réussite sans commune mesure.",
+"Un conseil sur le nombre : <strong>un seul objectif financier à la fois.</strong> Trois objectifs simultanés se concurrencent pour la même somme, et aucun n'aboutit. Quand le premier est atteint, tu passes au suivant, et cette succession produit bien plus qu'une poursuite parallèle.",
+"Enfin, prévois la révision. Un objectif fixé il y a 6 mois peut avoir perdu son sens, parce que ta situation a changé. <strong>Réviser un objectif n'est pas abandonner</strong>, c'est ce qui distingue un plan vivant d'une liste de bonnes résolutions."
 ],
 quiz:[
-{q:"Que signifie le T de SMART ?",opts:["Tangible","Total","Temporellement défini","Transparent"],correct:2,
-explain:"Sans horizon temporel, l'objectif reste indéfiniment « pour plus tard »."},
-{q:"Lequel de ces objectifs est SMART ?",opts:["Je veux investir en bourse","Je veux épargner plus","Constituer un apport de 20 000€ en épargnant 500€/mois pendant 40 mois","Je veux être indépendant financièrement"],correct:2,
-explain:"Spécifique, mesurable, temporellement défini : tous les critères sont remplis."},
-{q:"Combien d'objectifs actifs avoir en parallèle ?",opts:["Un seul","Autant que possible","Un par horizon temporel : court, moyen, long terme","Deux maximum"],correct:2,
-explain:"Cela crée un système de motivation complet à tous les horizons."}
+{q:"Quelle propriété est la plus souvent oubliée ?",opts:["Le montant","L'échéance","La raison précise","La première action"],correct:2,
+explain:"Un objectif sans raison est abandonné à la première tentation. « Pour un apport » résiste, « épargner » ne résiste à rien."},
+{q:"Combien d'objectifs financiers mener en parallèle ?",opts:["Autant que possible","Un seul à la fois","Trois","Cinq maximum"],correct:1,
+explain:"Plusieurs objectifs se disputent la même somme, et aucun n'aboutit. La succession bat la simultanéité."},
+{q:"Que signifie réviser un objectif ?",opts:["Abandonner","Adapter un plan vivant à une situation qui a changé","Le reporter d'un an","Le diviser par deux"],correct:1,
+explain:"C'est ce qui distingue un plan d'une liste de bonnes résolutions."}
 ],
-action:"Formule un objectif SMART pour chaque horizon (court, moyen, long terme). Note-les dans ton journal de décisions."
+action:"Reformule ton objectif financier actuel avec les 4 propriétés : montant, échéance, raison, première action datée. Écris-le en une seule phrase et affiche-la là où tu la verras. Un seul objectif, pas trois."
 },
-{module:"Module 4 — Ancrer le rituel", title:"Libérer du capital pour investir", duration:"8 min",
+{module:"Module 4 — Ancrer le rituel", title:"Libérer du capital pour investir", duration:"5 min",
 script:[
-"Comment libérer du capital même sans l'impression d'en avoir les moyens ? Quatre sources : l'élimination des fuites (50-200€/mois sans changer de mode de vie), l'optimisation des dépenses fixes (renégocier tous les 2 ans, 30-100€ d'économies).",
-"L'augmentation des revenus, souvent la plus efficace : négociation salariale, revenu complémentaire, vente d'objets, mission freelance. Le réaménagement des dépenses variables : cuisiner en avance, éviter les achats d'impulsion.",
-"L'objectif n'est pas l'ascétisme mais financer son futur sans sacrifier son présent. Il est souvent possible de libérer 100 à 300€ supplémentaires par mois.",
-"200€ investis mensuellement sur 20 ans à 7% représentent environ 100 000€ de capital. Ce n'est pas de la magie, c'est de l'arithmétique et de la méthode."
+"Cette leçon fait le lien entre le budget et la suite du parcours. Une fois le système en place, une question se pose : <strong>combien peux-tu réellement investir, et à partir de quand ?</strong>",
+"L'ordre à respecter est celui vu dans la formation sur l'épargne, et il ne change pas. <strong>1.</strong> Le découvert comblé. <strong>2.</strong> Un premier palier d'urgence de 1 000 €. <strong>3.</strong> Les dettes à taux élevé remboursées. <strong>4.</strong> Le fonds d'urgence complet. <strong>5.</strong> Alors seulement, l'investissement.",
+"Beaucoup de gens veulent sauter directement à l'étape 5, et c'est compréhensible : c'est la seule qui semble produire quelque chose. Mais <u>investir sans matelas conduit à vendre au premier imprévu</u>, ce qui transforme une baisse temporaire en perte définitive.",
+"Une fois ces étapes franchies, le montant investissable se calcule simplement : c'est <strong>ton taux d'épargne moins ce que tu continues d'affecter aux provisions annuelles.</strong> Si tu épargnes 300 € par mois et que 100 € financent les dépenses annuelles, tu disposes de 200 € réellement investissables.",
+"Trois leviers permettent d'augmenter ce montant, par ordre d'efficacité. <strong>Le premier est la baisse des charges fixes</strong>, déjà travaillée : elle produit un gain permanent sans effort renouvelé. <strong>Le deuxième est l'affectation des augmentations</strong>, en dirigeant systématiquement la moitié de chaque hausse de revenu vers l'investissement avant de s'y habituer. <strong>Le troisième est l'augmentation des revenus</strong>, par la négociation ou la formation, qui est le levier le plus puissant et le plus lent.",
+"Un mot sur le montant de départ, parce qu'il bloque beaucoup de gens. <strong>Il n'existe pas de seuil minimum pour commencer à investir.</strong> Des versements de 50 € par mois produisent, sur 20 ans, un résultat que l'intuition sous-estime largement, et l'outil de simulation de NiouDem permet de le vérifier en une minute.",
+"Ce qui compte n'est pas le montant, c'est <strong>que le versement soit automatique et qu'il ne soit jamais interrompu.</strong> Un investisseur régulier à 50 € finit devant un investisseur irrégulier à 200 €, et cette phrase résume l'essentiel de ce que tu apprendras dans la formation suivante."
 ],
 quiz:[
-{q:"Quelle est la première source de capital libérable ?",opts:["L'augmentation du salaire","L'élimination des fuites invisibles","La réduction alimentaire","Le remboursement anticipé de crédits"],correct:1,
-explain:"Elle ne nécessite aucun changement de mode de vie."},
-{q:"À quelle fréquence remettre en concurrence ses contrats ?",opts:["Tous les mois","Tous les deux ans environ","Uniquement en cas de problème","Jamais"],correct:1,
-explain:"Le marché évolue constamment et les offres s'améliorent."},
-{q:"Que représentent 200€/mois pendant 20 ans à 7% ?",opts:["Environ 20 000€","Environ 48 000€","Environ 100 000€","Environ 200 000€"],correct:2,
-explain:"C'est l'illustration de la puissance des intérêts composés sur les petits montants réguliers."}
+{q:"Que se passe-t-il si l'on investit sans fonds d'urgence ?",opts:["Rien de particulier","On vend au premier imprévu, transformant une baisse temporaire en perte définitive","La banque refuse l'opération","Les rendements sont moindres"],correct:1,
+explain:"C'est la vente forcée, et c'est ce qui ruine la plupart des premiers investissements."},
+{q:"Quel levier produit un gain permanent sans effort renouvelé ?",opts:["La négociation salariale","La baisse des charges fixes","La réduction des loisirs","Le changement de banque"],correct:1,
+explain:"Un effort unique produit un gain qui se répète chaque mois, contrairement à la maîtrise des dépenses variables."},
+{q:"Existe-t-il un montant minimum pour investir ?",opts:["Oui, 1 000 €","Non, la régularité compte davantage que le montant","Oui, 500 € par mois","Cela dépend de la banque"],correct:1,
+explain:"Un investisseur régulier à 50 € finit devant un investisseur irrégulier à 200 €."}
 ],
-action:"Identifie 3 sources de capital libérable dans ton budget. Engage-toi à en libérer au moins une ce mois-ci."
+action:"Calcule ton montant investissable réel : ton épargne mensuelle moins tes provisions annuelles. Puis situe-toi sur les 5 étapes. Si tu n'as pas franchi la deuxième, ce montant n'est pas encore investissable, et c'est une information utile."
 },
-{module:"Module 4 — Ancrer le rituel", title:"Votre plan sur 12 mois", duration:"9 min",
+{module:"Module 4 — Ancrer le rituel", title:"Ton plan sur 12 mois", duration:"5 min",
 script:[
-"Votre feuille de route sur 12 mois, en 4 trimestres. T1, les fondations : diagnostic complet, mise en place du système, première optimisation.",
-"T2, la consolidation : vous vivez avec votre système, les enveloppes sont calibrées, vous formalisez vos objectifs SMART et investissez les premiers euros libérés.",
-"T3, l'accélération : votre système est mature, vous augmentez votre taux d'épargne, vous explorez les formations suivantes pour savoir où investir.",
-"T4, la projection : bilan de l'année, patrimoine progressé, taux d'épargne augmenté, système fonctionnel, objectifs pour l'année suivante.",
-"Vous avez maintenant tous les outils : diagnostic, méthode, automatisation, rituels, vision. La suite vous apprendra à faire travailler le capital libéré. NiouDem. On y va."
+"Dernière leçon de cette formation. Elle projette tout ce qui précède sur une année, découpée en 4 trimestres avec un objectif unique chacun.",
+"<strong>Trimestre 1 : voir et alléger.</strong> Le mois 1 est consacré à l'observation, sans rien changer. Le mois 2 à la session de configuration de 90 minutes et au ménage sur les charges fixes. Le mois 3 à laisser tourner le système et à faire le premier bilan mensuel. <u>À la fin de ce trimestre, tu devrais avoir récupéré entre 50 et 150 € par mois</u> sans avoir modifié ton mode de vie.",
+"<strong>Trimestre 2 : sécuriser.</strong> L'objectif unique est le premier palier de 1 000 €. Rien d'autre. Le virement automatique fait le travail, tu ne fais que les bilans mensuels et un ajustement par mois.",
+"<strong>Trimestre 3 : renforcer.</strong> Deux chantiers : porter le fonds d'urgence vers sa cible complète, calculée sur tes charges incompressibles, et rembourser par anticipation la dette la plus chère s'il en reste une. C'est aussi le moment d'ouvrir les enveloppes à compteur, PEA et assurance-vie, même avec un montant symbolique, puisque le délai fiscal court depuis l'ouverture.",
+"<figure class=\"schema\"><svg viewBox=\"0 0 700 168\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><line x1=\"34\" y1=\"96\" x2=\"666\" y2=\"96\" stroke=\"#DCDDD3\" stroke-width=\"2\"/><path d=\"M666 96 l-9 -5 v10 z\" fill=\"#DCDDD3\"/><line x1=\"34\" y1=\"96\" x2=\"34\" y2=\"62\" stroke=\"#1E4B3C\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"34\" cy=\"96\" r=\"7\" fill=\"#1E4B3C\"/><circle cx=\"34\" cy=\"96\" r=\"12\" fill=\"none\" stroke=\"#1E4B3C\" stroke-width=\"1\" opacity=\".35\"/><text x=\"34\" y=\"52\" text-anchor=\"start\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">T1</text><text x=\"34\" y=\"122\" text-anchor=\"start\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12\" fill=\"#43555F\">Voir et alléger</text><line x1=\"243\" y1=\"96\" x2=\"243\" y2=\"62\" stroke=\"#B8862F\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"243\" cy=\"96\" r=\"7\" fill=\"#B8862F\"/><circle cx=\"243\" cy=\"96\" r=\"12\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1\" opacity=\".35\"/><text x=\"243\" y=\"52\" text-anchor=\"middle\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">T2</text><text x=\"243\" y=\"122\" text-anchor=\"middle\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12\" fill=\"#43555F\">1 000 € de sécurité</text><line x1=\"451\" y1=\"96\" x2=\"451\" y2=\"62\" stroke=\"#B8862F\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"451\" cy=\"96\" r=\"7\" fill=\"#B8862F\"/><circle cx=\"451\" cy=\"96\" r=\"12\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1\" opacity=\".35\"/><text x=\"451\" y=\"52\" text-anchor=\"middle\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">T3</text><text x=\"451\" y=\"122\" text-anchor=\"middle\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12\" fill=\"#43555F\">Fonds complet, dettes</text><line x1=\"666\" y1=\"96\" x2=\"666\" y2=\"62\" stroke=\"#1E4B3C\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"666\" cy=\"96\" r=\"7\" fill=\"#1E4B3C\"/><circle cx=\"666\" cy=\"96\" r=\"12\" fill=\"none\" stroke=\"#1E4B3C\" stroke-width=\"1\" opacity=\".35\"/><text x=\"666\" y=\"52\" text-anchor=\"end\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">T4</text><text x=\"666\" y=\"122\" text-anchor=\"end\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12\" fill=\"#43555F\">Premier versement</text></svg><figcaption>Un seul objectif par trimestre. C'est ce qui rend le plan tenable sur 12 mois.</figcaption></figure>",
+"<strong>Trimestre 4 : projeter.</strong> Le système tourne, le matelas existe. Tu fais ton bilan annuel complet, tu recalcules ton patrimoine net et tes 3 indicateurs, et tu décides du premier versement d'investissement. C'est ici que commence la formation suivante.",
+"Voici ce que ce plan produit, et je le formule prudemment parce que cela dépend de ta situation de départ : un budget qui tient sans effort quotidien, quelques dizaines d'euros récupérés chaque mois, un fonds d'urgence constitué, et une trajectoire mesurable.",
+"<strong>Une dernière chose, la plus importante de cette formation.</strong> Tu vas rater des mois. Un imprévu, une période chargée, un découragement. Ce n'est pas l'exception, c'est le déroulement normal. La seule règle qui compte est celle vue plus tôt : <em>ne jamais rater 2 fois de suite.</em>",
+"Ceux qui réussissent ne sont pas ceux qui n'ont jamais dérapé. <strong>Ce sont ceux qui ont recommencé le mois suivant.</strong>"
 ],
 quiz:[
-{q:"Quel est l'objectif du premier trimestre ?",opts:["Commencer à investir en bourse","Maximiser son taux d'épargne","Poser les fondations : diagnostic, système, première optimisation","Atteindre l'équilibre 50/30/20"],correct:2,
-explain:"Ces trois mois créent la base sur laquelle tout le reste s'appuie."},
-{q:"Qu'est-ce qui est normal dans ce plan sur 12 mois ?",opts:["Une progression linéaire sans accroc","Atteindre 50/30/20 dès le premier mois","Des mois difficiles et des ajustements","Un doublement du patrimoine en un an"],correct:2,
-explain:"Ce qui compte n'est pas la perfection de chaque mois mais la direction générale."},
-{q:"Quel est le meilleur indicateur de succès à la fin des 12 mois ?",opts:["Avoir respecté chaque enveloppe tous les mois","Un patrimoine net qui a progressé et un taux d'épargne augmenté","Avoir atteint tous ses objectifs SMART","N'avoir eu aucune dépense imprévue"],correct:1,
-explain:"Ces indicateurs montrent que le système fonctionne, indépendamment de la perfection de chaque mois."}
+{q:"Que fait-on pendant le premier mois ?",opts:["On résilie tous ses abonnements","On observe sans rien changer","On ouvre un compte-titres","On rembourse ses dettes"],correct:1,
+explain:"Un budget construit sur des chiffres réels commence toujours par un mois d'observation honnête."},
+{q:"Quel est l'objectif unique du deuxième trimestre ?",opts:["Investir en bourse","Le premier palier d'urgence de 1 000 €","Rembourser le crédit immobilier","Ouvrir 4 comptes"],correct:1,
+explain:"Un seul objectif à la fois. Le virement automatique fait le travail pendant que tu fais les bilans."},
+{q:"Quelle est la règle qui décide de la réussite ?",opts:["Ne jamais dépasser son budget","Ne jamais rater 2 fois de suite","Épargner au moins 20 %","Vérifier ses comptes chaque jour"],correct:1,
+explain:"Ceux qui réussissent ne sont pas ceux qui n'ont jamais dérapé, mais ceux qui ont recommencé le mois suivant."}
 ],
-action:"Construis ta feuille de route sur 12 mois : 2-3 actions prioritaires par trimestre, et tes indicateurs de succès pour la fin de l'année."
+action:"Écris les 4 trimestres dans ton calendrier, avec un seul objectif par trimestre. Puis reviens au mois 1 et commence l'observation dès demain. Tu as maintenant la méthode complète, il ne manque que les 30 premiers jours."
 }
 ];
 
@@ -704,7 +776,9 @@ function render(){
     '<div class="lesson-title">' + (current) + '. ' + l.title + '</div>' +
     '<div class="lesson-meta">' + l.duration + ' de lecture · Leçon ' + current + ' sur ' + LESSONS.length + '</div>' +
     '<div class="section-label"><span class="dot"></span>Comprendre</div>' +
-    '<div class="script-text">' + l.script.map(function(p){return '<p>'+p+'</p>';}).join('') + '</div>' +
+    '<div class="script-text">' + l.script.map(function(p){
+      return p.indexOf('<figure') === 0 ? p : '<p>' + p + '</p>';
+    }).join('') + '</div>' +
     '<div class="section-label quiz"><span class="dot"></span>Vérifier</div>' +
     quizHtml +
     '<div class="section-label action"><span class="dot"></span>Petite action</div>' +
