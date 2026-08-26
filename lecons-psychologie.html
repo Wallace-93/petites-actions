@@ -181,6 +181,21 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
   .borne{left:-26px;}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none !important;}}
+
+/* ===== Schemas des lecons ===== */
+.schema{margin:26px 0;padding:20px 18px 14px;border:1px solid var(--bg-line,#DCDDD3);
+  border-radius:12px;background:var(--bg,#FCFBF8);}
+.schema svg{width:100%;height:auto;display:block;}
+.schema figcaption{font-family:var(--mono,monospace);font-size:11.5px;line-height:1.55;
+  color:var(--ink-muted,#7A8A93);margin-top:14px;padding-top:12px;
+  border-top:1px solid var(--bg-line,#DCDDD3);}
+@media(max-width:620px){.schema{padding:14px 12px 10px;margin:20px -6px;}}
+
+.script-text strong{color:var(--ink,#12212B);font-weight:700;}
+.script-text em{font-style:italic;color:var(--ink-soft,#43555F);}
+.script-text u{text-decoration:none;background:linear-gradient(transparent 62%,var(--amber-pale,#F6EFE0) 62%);
+  box-shadow:inset 0 -1px 0 var(--amber,#B8862F);}
+.script-text p + p{margin-top:14px;}
 </style>
 </head>
 <body>
@@ -205,219 +220,254 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
 <script>
 /* ============ DONNÉES DES 12 LEÇONS — PSYCHOLOGIE DE L'ARGENT ============ */
 const LESSONS = [
-{module:"Module 1 — Vos fondations mentales", title:"D'où viennent vos croyances sur l'argent", duration:"9 min",
+{module:"Module 1 — Tes fondations mentales", title:"D'où viennent tes croyances sur l'argent", duration:"5 min",
 script:[
-"Votre rapport à l'argent n'est pas né de vous. Il a été construit, progressivement, par votre environnement, votre famille, votre culture, votre histoire, souvent sans que vous en ayez conscience.",
-"Pensez à la première fois que vous avez entendu parler d'argent dans votre famille. « L'argent ne pousse pas dans les arbres. » « Les riches sont des voleurs. » Ces phrases, répétées des centaines de fois, deviennent des croyances profondes qui guident vos comportements financiers à l'âge adulte.",
-"Un enfant qui grandit dans un foyer où l'argent est source de conflits associera inconsciemment l'argent à la tension. À l'âge adulte, il sabote souvent ses propres succès financiers sans comprendre pourquoi.",
-"La bonne nouvelle : ces croyances, aussi profondes soient-elles, ont été apprises. Elles peuvent être désapprises, remplacées par des croyances plus utiles, basées sur des faits et non sur des peurs héritées.",
-"L'objectif de ce module n'est pas de vous culpabiliser ni de critiquer votre famille. C'est de vous aider à identifier ce qui, dans votre fonctionnement actuel, vous aide, et ce qui vous freine."
+"Avant de parler de placements, il faut regarder quelque chose de plus déterminant : <strong>ce que tu penses de l'argent sans jamais l'avoir décidé.</strong> Ces pensées gouvernent tes décisions bien avant que le raisonnement n'intervienne, et elles ne viennent pas de toi.",
+"Les recherches en psychologie financière situent la formation de ces croyances <u>avant l'âge de 7 ans</u>, par observation. Un enfant n'écoute pas ce qu'on dit de l'argent, il regarde ce qu'on en fait : les silences à table, les disputes de fin de mois, la façon dont un parent sort son portefeuille ou évite un magasin.",
+"Ces observations se figent en règles, presque toujours formulées comme des évidences. <em>L'argent ne fait pas le bonheur. Les riches sont malhonnêtes. Il faut travailler dur pour en gagner. Ce n'est pas pour les gens comme nous. On n'en parle pas.</em> Ces phrases ont l'air de sagesse populaire. Ce sont en réalité des instructions, et tu les appliques encore.",
+"Un exemple qui revient constamment. Quelqu'un qui a grandi en entendant <em>« l'argent file entre les doigts »</em> aura tendance à dépenser rapidement ce qu'il reçoit, non par manque de discipline, mais parce qu'une part de lui considère que le garder est impossible. La croyance produit le comportement, qui confirme la croyance.",
+"Il y a une bonne nouvelle, et elle est solide. <strong>Une croyance identifiée perd une grande partie de son pouvoir.</strong> Tant qu'elle reste implicite, elle agit comme une évidence ; dès qu'elle est nommée, elle redevient une opinion, donc quelque chose qui se discute.",
+"C'est exactement le travail de ce premier module, et il n'a rien de thérapeutique : il s'agit de repérer les règles que tu appliques sans les avoir choisies. Tu n'as pas à les combattre ni à t'en vouloir de les avoir. Tu as seulement à savoir qu'elles sont là quand une décision financière se présente.",
+"Une précision utile pour finir. Ces croyances ne sont pas toutes fausses ni nuisibles. <strong>Certaines protègent</strong> : la méfiance envers les promesses trop belles a sauvé beaucoup de gens. Le but n'est pas de tout effacer, mais de trier ce qui te sert de ce qui te freine."
 ],
 quiz:[
-{q:"D'où viennent principalement nos croyances sur l'argent ?",opts:["De notre éducation scolaire","De nos lectures et formations","De notre environnement familial et culturel pendant l'enfance","De nos expériences professionnelles"],correct:2,
-explain:"Nos croyances les plus profondes se forment pendant l'enfance, dans notre environnement familial et culturel."},
-{q:"Que se passe-t-il chez quelqu'un qui a entendu que « les riches sont sans scrupules » ?",opts:["Il devient plus motivé à s'enrichir","Il développe une résistance inconsciente à s'enrichir","Il n'est pas affecté, c'est une opinion","Il cherche à aider les pauvres"],correct:1,
-explain:"Il sabote souvent ses propres succès financiers pour rester cohérent avec l'image de « quelqu'un de bien »."},
-{q:"Peut-on changer ses croyances sur l'argent ?",opts:["Non, trop profondes","Oui, mais avec un thérapeute uniquement","Oui, elles ont été apprises et peuvent être remplacées","Oui, mais seulement après une mauvaise enfance"],correct:2,
-explain:"Les croyances limitantes ont été apprises et peuvent être désapprises, avec conscience et pratique."}
+{q:"À quel âge se forment principalement les croyances sur l'argent ?",opts:["À l'adolescence","Avant 7 ans, par observation","Au premier emploi","À la naissance du premier enfant"],correct:1,
+explain:"Un enfant n'écoute pas ce qu'on dit de l'argent, il regarde ce qu'on en fait. Les règles se figent bien avant tout raisonnement."},
+{q:"Que se passe-t-il quand une croyance est identifiée ?",opts:["Elle disparaît immédiatement","Elle redevient une opinion, donc quelque chose qui se discute","Elle se renforce","Elle est remplacée par une autre"],correct:1,
+explain:"Tant qu'elle reste implicite, elle agit comme une évidence. Nommée, elle perd l'essentiel de son pouvoir."},
+{q:"Faut-il effacer toutes ses croyances sur l'argent ?",opts:["Oui, elles sont toutes nuisibles","Non, certaines protègent, il s'agit de trier","Oui, sauf celles héritées des grands-parents","Cela n'a aucune importance"],correct:1,
+explain:"La méfiance envers les promesses trop belles, par exemple, a sauvé beaucoup de gens. On trie, on n'efface pas."}
 ],
-action:"Écris les 3 phrases sur l'argent que tu as le plus entendues dans ton enfance. Pour chacune, note si tu y crois encore et comment elle influence ton comportement financier."
+action:"Écris ce soir 3 phrases sur l'argent que tu as entendues dans ton enfance, telles qu'elles étaient dites. Ne les commente pas, ne les juge pas. Le simple fait de les voir écrites suffit pour ce soir."
 },
-{module:"Module 1 — Vos fondations mentales", title:"Les 5 archétypes financiers", duration:"10 min",
+{module:"Module 1 — Tes fondations mentales", title:"Les 5 rapports à l'argent", duration:"5 min",
 script:[
-"Les psychologues en finance comportementale ont identifié des archétypes financiers, des profils types de comportement avec l'argent. Personne n'est un seul archétype pur, mais la plupart des gens se reconnaissent dans un ou deux.",
-"Le gardien accumule mais a du mal à dépenser ou investir, même quand ça ne rapporte rien. Sa peur : manquer. Son angle mort : l'inaction qui coûte en opportunités.",
-"Le dépensier vit dans le présent, a du mal à épargner même en gagnant bien. Sa peur : se priver. Son angle mort : l'absence de filet de sécurité.",
-"L'évitant préfère ne pas penser à l'argent, reporte les décisions indéfiniment. Sa peur : regarder la réalité en face. Son angle mort : l'évitement a un coût réel.",
-"Le bâtisseur a une vision long terme, investit, planifie, parfois au détriment du présent. L'inconscient dépense ce qui vient, sans stratégie, flexible mais souvent stressé quand ça ne passe plus.",
-"Connaître son archétype dominant, c'est comprendre ses forces et ses angles morts, le point de départ pour construire une relation plus saine avec l'argent."
+"Les psychologues qui étudient le rapport à l'argent décrivent des profils récurrents. Ce ne sont ni des catégories étanches ni un test de personnalité : ce sont des tendances, et <strong>la plupart des gens en reconnaissent 2 chez eux</strong>, une dominante et une secondaire qui apparaît sous stress.",
+"<strong>Le gardien.</strong> Il épargne beaucoup, contrôle tout, et vit l'argent comme une sécurité à préserver. Sa force est la discipline. Sa faiblesse est l'anxiété : il conserve souvent des sommes importantes sur des supports peu rémunérés, non par ignorance, mais parce que bouger l'inquiète.",
+"<strong>Le dépensier.</strong> L'argent est fait pour circuler, pour vivre et pour partager. Sa force est la générosité et la capacité à profiter du présent. Sa faiblesse est l'absence de réserve : le moindre imprévu devient une crise, et l'épargne ne démarre jamais.",
+"<figure class=\"schema\"><svg viewBox=\"0 0 700 340\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><text x=\"200\" y=\"20\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" letter-spacing=\"1.4\" fill=\"#1E4B3C\">CE QUI AIDE</text><text x=\"560\" y=\"20\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" letter-spacing=\"1.4\" fill=\"#B8862F\">CE QUI COÛTE</text><text x=\"20\" y=\"44\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Le gardien</text><rect x=\"20\" y=\"54\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"54\" width=\"363\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"383\" y=\"54\" width=\"297\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"67\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\">discipline</text><text x=\"672\" y=\"67\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\">immobilisme</text><text x=\"20\" y=\"100\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Le dépensier</text><rect x=\"20\" y=\"110\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"110\" width=\"277\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"297\" y=\"110\" width=\"383\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"123\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\">générosité</text><text x=\"672\" y=\"123\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\">aucune réserve</text><text x=\"20\" y=\"156\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">L'évitant</text><rect x=\"20\" y=\"166\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"166\" width=\"79\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"99\" y=\"166\" width=\"581\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"179\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\"></text><text x=\"672\" y=\"179\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\">inaction coûteuse</text><text x=\"20\" y=\"212\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Le joueur</text><rect x=\"20\" y=\"222\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"222\" width=\"231\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"251\" y=\"222\" width=\"429\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"235\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\">audace</text><text x=\"672\" y=\"235\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\">confond investir et parier</text><text x=\"20\" y=\"268\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Le bâtisseur</text><rect x=\"20\" y=\"278\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"278\" width=\"581\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"601\" y=\"278\" width=\"79\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"291\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\">régularité, méthode</text><text x=\"672\" y=\"291\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\"></text></svg><figcaption>Personne n'est un seul profil. Repère ta dominante, puis celle vers laquelle tu bascules sous stress.</figcaption></figure>",
+"<strong>L'évitant.</strong> Il n'ouvre pas ses relevés, repousse les décisions et ressent un malaise réel devant les sujets financiers. Cette attitude passe pour de la négligence alors qu'elle relève souvent de la honte. C'est le profil qui paie le plus cher, parce que l'inaction a un coût qui ne se voit jamais.",
+"<strong>Le joueur.</strong> Il cherche le coup, la performance, l'histoire à raconter. Sa force est l'audace et une vraie tolérance au risque. Sa faiblesse est la confusion entre investir et parier, et une surestimation systématique de ses propres résultats passés.",
+"<strong>Le bâtisseur.</strong> Il pense en années, accepte le risque mesuré et automatise ses décisions. C'est le profil le plus efficace, et il faut préciser une chose importante : <u>presque personne ne l'est naturellement, on le devient par méthode.</u>",
+"Le mécanisme le plus utile à retenir est le suivant. <strong>Sous stress, chacun bascule vers son profil de secours</strong>, et c'est là que se prennent les mauvaises décisions. Un gardien devient évitant quand les marchés baissent. Un dépensier devient joueur quand il manque d'argent. Repérer ce basculement au moment où il survient, c'est déjà l'essentiel du travail."
 ],
 quiz:[
-{q:"Quel est le principal angle mort du gardien ?",opts:["Il dépense trop","Il évite ses relevés bancaires","L'inaction qui lui fait manquer des opportunités","Il fait trop confiance aux autres"],correct:2,
-explain:"Le gardien épargne bien mais garde tout sur des comptes sûrs à faible rendement, subissant l'inflation sans agir."},
-{q:"Quel archétype remet les décisions financières à plus tard ?",opts:["Le bâtisseur","Le dépensier","L'évitant","L'inconscient"],correct:2,
-explain:"L'évitant préfère ne pas penser à l'argent, les décisions sont reportées indéfiniment par peur de la réalité."},
-{q:"Pourquoi connaître son archétype financier dominant ?",opts:["Pour changer de personnalité","Pour se comparer aux autres","Pour conscientiser ses automatismes et les ajuster","Pour choisir un conseiller"],correct:2,
-explain:"Cette conscience permet d'ajuster les comportements qui desservent sans renier sa nature profonde."}
+{q:"Quel profil paie le plus cher son rapport à l'argent ?",opts:["Le dépensier","L'évitant","Le joueur","Le gardien"],correct:1,
+explain:"L'inaction a un coût qui ne se voit jamais, et cette attitude relève souvent de la honte plutôt que de la négligence."},
+{q:"Le bâtisseur est-il un profil naturel ?",opts:["Oui, on naît ainsi","Non, on le devient par méthode","Uniquement chez les héritiers","Seulement après 50 ans"],correct:1,
+explain:"C'est le profil le plus efficace, et il s'acquiert par des règles et des automatismes, pas par tempérament."},
+{q:"Que se passe-t-il sous stress ?",opts:["Le profil se renforce","On bascule vers un profil de secours, souvent moins favorable","Le raisonnement s'améliore","Rien ne change"],correct:1,
+explain:"Un gardien devient évitant quand les marchés baissent, un dépensier devient joueur quand il manque d'argent."}
 ],
-action:"Identifie l'archétype qui te ressemble le plus, puis le deuxième. Pour chacun, note un exemple concret de comportement qui t'a aidé et un qui t'a nui."
+action:"Identifie ton profil dominant et celui vers lequel tu bascules quand la situation se tend. Écris les 2 sur la même feuille que tes 3 phrases d'hier. C'est ta carte de départ, et elle servira dans toutes les leçons suivantes."
 },
-{module:"Module 1 — Vos fondations mentales", title:"Cartographier vos croyances limitantes", duration:"9 min",
+{module:"Module 1 — Tes fondations mentales", title:"Cartographier tes croyances limitantes", duration:"5 min",
 script:[
-"Une croyance inconsciente a beaucoup plus de pouvoir qu'une croyance consciente. Dès qu'on la met en lumière, on peut l'examiner et décider si elle mérite encore de prendre autant de place.",
-"Croyances limitantes courantes : « Je ne suis pas fait pour l'argent » (faux, c'est une compétence qui s'apprend). « L'argent corrompt » (l'argent amplifie ce qu'on est déjà, il ne change pas la nature d'une personne).",
-"« Je ne mérite pas d'être riche » (souvent liée à une faible estime de soi). « Parler d'argent c'est vulgaire » (empêche les conversations importantes en famille, en négociation). « L'investissement c'est trop risqué pour moi » (souvent née d'une méconnaissance, pas d'une analyse réelle).",
-"La méthode : écrivez « Ce que je crois sur l'argent » et laissez venir les phrases sans filtre, même celles qui semblent honteuses. Pour chacune, demandez-vous : d'où vient cette croyance ? Est-elle vraie, ou juste quelque chose qu'on m'a appris à croire ?"
+"Cette leçon est un exercice, et il vaut mieux le faire lentement. Il s'agit de transformer des impressions diffuses en phrases précises, parce qu'<strong>une croyance vague est indéboulonnable, alors qu'une croyance formulée se teste.</strong>",
+"La méthode tient en 3 étapes. <strong>1. Repérer.</strong> Pense à une décision financière que tu repousses depuis longtemps : ouvrir un compte, demander une augmentation, parler d'argent avec un proche. Écris la phrase qui te vient quand tu y penses.",
+"<strong>2. Remonter à la source.</strong> Demande-toi où tu as entendu cette phrase pour la première fois. Beaucoup de gens découvrent qu'elle appartient à quelqu'un d'autre, souvent un parent, parfois un professeur ou un ancien conjoint. <u>Une croyance dont on identifie le propriétaire cesse d'être une vérité pour devenir un héritage</u>, et un héritage se refuse.",
+"<strong>3. Confronter aux faits.</strong> Cherche un contre-exemple réel, dans ta vie ou autour de toi. Si ta phrase est <em>« je suis nul avec l'argent »</em>, cherche une situation où tu as bien géré quelque chose, même modeste. La croyance n'a pas besoin d'être détruite, il suffit qu'elle cesse d'être absolue.",
+"Voici les 4 phrases que l'on rencontre le plus souvent, avec ce qu'elles cachent. <em>« Ce n'est pas pour les gens comme nous »</em> cache une question d'appartenance, pas de compétence. <em>« Je ne suis pas doué pour les chiffres »</em> confond l'arithmétique et la décision, alors que gérer son argent demande surtout de la régularité. <em>« Il faut avoir de l'argent pour en gagner »</em> est vrai pour certains montages, faux pour l'immense majorité des situations. <em>« Parler d'argent, c'est vulgaire »</em> est la plus coûteuse de toutes, parce qu'elle empêche de comparer, de négocier et de demander.",
+"Un mot sur ce que cette leçon n'est pas. Ce n'est pas de la pensée positive, et répéter des affirmations ne change rien. <strong>Ce qui change une croyance, c'est une expérience contraire</strong>, même minuscule. C'est précisément pour cela que chaque leçon de NiouDem se termine par une action : une croyance ne se démonte pas par le raisonnement, elle se démonte par la preuve.",
+"Enfin, sois indulgent avec toi-même en faisant cet exercice. Ces croyances ont été utiles à un moment, souvent pour se protéger d'une déception. <strong>Les remercier avant de les ranger fonctionne mieux que de les combattre.</strong>"
 ],
 quiz:[
-{q:"Pourquoi conscientiser ses croyances limitantes plutôt que les laisser inconscientes ?",opts:["Pour les partager avec son entourage","Une croyance inconsciente guide sans pouvoir être questionnée","Pour prouver que sa famille avait tort","Les croyances conscientes sont plus puissantes"],correct:1,
-explain:"Dès qu'on la met en lumière, on peut l'analyser et décider si elle mérite encore de guider nos comportements."},
-{q:"La croyance « l'argent corrompt » est-elle fondée ?",opts:["Oui, les riches sont moins honnêtes","Non, l'argent amplifie ce qu'on est déjà","Ça dépend du montant","Oui, le pouvoir corrompt toujours"],correct:1,
-explain:"L'argent n'a pas de valeur morale en lui-même, il amplifie les traits existants d'une personne."},
-{q:"Quelle est la première étape pour cartographier ses croyances ?",opts:["Lire des livres de développement personnel","Consulter un thérapeute","Écrire sans filtre toutes ses croyances, même gênantes","Analyser ses dépenses"],correct:2,
-explain:"Les croyances gênantes ou irrationnelles sont souvent les plus importantes à examiner."}
+{q:"Pourquoi remonter à la source d'une croyance ?",opts:["Pour blâmer ses parents","Parce qu'une croyance dont on identifie le propriétaire devient un héritage, donc refusable","Pour la dater précisément","Ce n'est pas nécessaire"],correct:1,
+explain:"Elle cesse d'être une vérité pour devenir quelque chose que quelqu'un d'autre a pensé avant toi."},
+{q:"Quelle croyance est la plus coûteuse ?",opts:["« Je ne suis pas doué pour les chiffres »","« Parler d'argent, c'est vulgaire »","« L'argent ne fait pas le bonheur »","« Il faut travailler dur »"],correct:1,
+explain:"Elle empêche de comparer, de négocier et de demander, c'est-à-dire les 3 gestes qui rapportent le plus."},
+{q:"Qu'est-ce qui change réellement une croyance ?",opts:["La répétition d'affirmations positives","Une expérience contraire, même minuscule","La lecture d'un livre","Le temps qui passe"],correct:1,
+explain:"C'est pourquoi chaque leçon se termine par une action : la preuve défait ce que le raisonnement ne défait pas."}
 ],
-action:"Prends 15 minutes, écris sans censure tout ce que tu crois sur l'argent. Entoure celle qui a le plus d'impact négatif. Note d'où elle vient et si elle est vraie objectivement."
+action:"Applique les 3 étapes à une seule croyance, celle qui te bloque le plus. Repère la phrase, cherche qui l'a dite en premier, trouve un contre-exemple réel. Une seule croyance ce soir, traitée sérieusement, vaut mieux que 5 survolées."
 },
-{module:"Module 2 — Biais cognitifs coûteux", title:"Aversion à la perte et biais de statu quo", duration:"10 min",
+{module:"Module 2 — Les biais qui coûtent cher", title:"Aversion à la perte et statu quo", duration:"5 min",
 script:[
-"Kahneman et Tversky ont démontré que la douleur de perdre est environ deux fois plus intense que le plaisir de gagner l'équivalent. Perdre 100€ fait deux fois plus souffrir que gagner 100€ ne fait plaisir.",
-"Conséquence 1 : on garde trop longtemps des investissements perdants, car vendre officialise la perte. Conséquence 2 : on vend trop vite les gagnants, par peur de les voir disparaître. C'est l'inverse de ce qu'il faudrait faire.",
-"Le biais de statu quo, c'est la préférence pour la situation actuelle même quand un changement serait bénéfique. On garde le même livret depuis 10 ans, la même banque malgré des frais excessifs, on ne commence pas à investir parce que ça demande d'agir.",
-"Changer demande un effort, rester ne demande rien. Comprendre ces biais, c'est apprendre à les reconnaître avant d'agir, ou de ne pas agir."
+"Les biais cognitifs sont des raccourcis mentaux automatiques. Ils ont été utiles à l'espèce et ils sont désastreux en finance, parce que les marchés récompensent exactement les comportements que notre cerveau évite. Cette leçon en présente 2, les plus coûteux.",
+"<strong>L'aversion à la perte.</strong> Les travaux de Kahneman et Tversky, qui ont valu un prix Nobel d'économie, ont établi que <u>la douleur d'une perte est environ 2 fois plus intense que le plaisir d'un gain équivalent.</u> Perdre 100 € fait à peu près 2 fois plus mal que gagner 100 € ne fait plaisir.",
+"Les conséquences sont massives et concrètes. On garde une position perdante en espérant revenir à l'équilibre, ce qui transforme une petite perte en grande. On vend trop tôt une position gagnante pour sécuriser le plaisir, ce qui coupe les meilleurs résultats. Et surtout, <strong>on n'investit pas du tout</strong>, parce que le risque de perdre pèse plus lourd dans l'esprit que la certitude de perdre à l'inflation.",
+"<figure class=\"schema\"><svg viewBox=\"0 0 700 172\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><text x=\"200\" y=\"20\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" letter-spacing=\"1.4\" fill=\"#1E4B3C\">DOULEUR RESSENTIE</text><text x=\"560\" y=\"20\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" letter-spacing=\"1.4\" fill=\"#B8862F\">PLAISIR RESSENTI</text><text x=\"20\" y=\"44\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Perdre 100 €</text><rect x=\"20\" y=\"54\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"54\" width=\"449\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"469\" y=\"54\" width=\"211\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"67\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\">intensité 2</text><text x=\"672\" y=\"67\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\"></text><text x=\"20\" y=\"100\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Gagner 100 €</text><rect x=\"20\" y=\"110\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"110\" width=\"224\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"244\" y=\"110\" width=\"436\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"123\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\"></text><text x=\"672\" y=\"123\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\">intensité 1</text></svg><figcaption>L'aversion à la perte : la douleur pèse environ 2 fois plus lourd que le plaisir équivalent. C'est ce déséquilibre qui fait vendre au mauvais moment.</figcaption></figure>",
+"Ce dernier point mérite d'être souligné : <em>ne rien faire semble sans risque, alors que c'est la seule option dont la perte est certaine.</em>",
+"<strong>Le biais de statu quo.</strong> À situation égale, nous préférons ne rien changer. C'est pourquoi des millions de personnes conservent un contrat trop cher, une banque trop chère ou un livret mal rémunéré pendant des années. Changer demande une décision, garder n'en demande aucune, et notre cerveau traite l'absence de décision comme une absence de risque.",
+"Ces 2 biais se renforcent l'un l'autre, et c'est ce qui les rend puissants. L'aversion à la perte rend le changement effrayant, le statu quo rend l'immobilité confortable. Le résultat est une inertie qui peut durer 10 ans.",
+"La parade est technique, pas morale, et c'est important : <strong>on ne corrige pas un biais par la volonté, on le contourne par une règle.</strong> Décider à l'avance, par écrit, ce qu'on fera dans telle situation, puis automatiser ce qui peut l'être. Un virement automatique ne connaît ni la peur ni l'inertie."
 ],
 quiz:[
-{q:"Selon la recherche, perdre 100€ est ressenti comment par rapport à en gagner 100€ ?",opts:["De la même façon","Deux fois moins intensément","Deux fois plus intensément","Cinq fois plus intensément"],correct:2,
-explain:"Cette asymétrie explique de nombreux comportements irrationnels en matière d'investissement."},
-{q:"Quelle est la conséquence de l'aversion à la perte sur un portefeuille ?",opts:["On investit trop vite","On garde les perdants trop longtemps et on vend les gagnants trop vite","On diversifie trop","On prend plus de risques"],correct:1,
-explain:"C'est exactement l'inverse de la stratégie optimale."},
-{q:"Comment le biais de statu quo se manifeste-t-il en finance ?",opts:["En prenant trop de risques","En changeant trop souvent de banque","En restant dans des produits sous-optimaux par résistance au changement","En dépensant impulsivement"],correct:2,
-explain:"On garde le même livret ou la même banque même quand un changement serait objectivement bénéfique."}
+{q:"Quelle est l'intensité relative d'une perte selon Kahneman et Tversky ?",opts:["Identique à un gain","Environ 2 fois plus forte qu'un gain équivalent","5 fois plus forte","Plus faible qu'un gain"],correct:1,
+explain:"Ce déséquilibre explique qu'on garde ses positions perdantes et qu'on vende trop tôt les gagnantes."},
+{q:"Pourquoi ne rien faire semble-t-il sans risque ?",opts:["Parce que c'est effectivement sans risque","Parce que le cerveau traite l'absence de décision comme une absence de risque","Parce que l'inflation est faible","Parce que les banques le garantissent"],correct:1,
+explain:"C'est pourtant la seule option dont la perte est certaine, puisque l'inflation agit sans qu'on décide quoi que ce soit."},
+{q:"Comment neutraliser un biais ?",opts:["Par la volonté et la discipline","Par une règle décidée à l'avance et automatisée","En lisant davantage","En consultant un expert à chaque décision"],correct:1,
+explain:"Un virement automatique ne connaît ni la peur ni l'inertie. La règle remplace la volonté au moment où elle manque."}
 ],
-action:"Identifie une situation où le biais de statu quo joue un rôle dans ta vie financière. Note ce que tu perdrais à changer, et ce que tu gagnerais."
+action:"Repère un contrat que tu gardes depuis plus de 3 ans sans l'avoir comparé : assurance, forfait, banque. Ne le change pas ce soir. Contente-toi de comparer une offre concurrente et de noter l'écart annuel. C'est le prix de ton statu quo."
 },
-{module:"Module 2 — Biais cognitifs coûteux", title:"Effet de dotation et biais de confirmation", duration:"9 min",
+{module:"Module 2 — Les biais qui coûtent cher", title:"Effet de dotation et biais de confirmation", duration:"5 min",
 script:[
-"L'effet de dotation, c'est surévaluer ce qu'on possède simplement parce qu'on le possède. Une expérience classique : les propriétaires d'une tasse demandent en moyenne deux fois plus pour la vendre que ce que les non-propriétaires paieraient pour la même tasse.",
-"En finance : garder une action héritée même si l'analyse montre qu'il faudrait la vendre, garder une maison familiale trop grande, ne pas renégocier son prêt par attachement à sa banque historique.",
-"Le biais de confirmation, c'est chercher les informations qui confirment ce qu'on croit déjà et ignorer celles qui le contredisent. Dangereux en finance : on ne cherche que les analyses qui disent qu'une action va monter, on ignore les signaux d'alarme.",
-"Remède pour l'effet de dotation : « Si je ne possédais pas cet actif aujourd'hui, est-ce que je l'achèterais à ce prix, dans les conditions actuelles ? » Remède pour la confirmation : chercher activement les arguments contre sa position."
+"Deux autres biais méritent d'être connus, parce qu'ils agissent après la décision d'achat et empêchent de la corriger.",
+"<strong>L'effet de dotation.</strong> Nous accordons plus de valeur à ce que nous possédons qu'à ce que nous pourrions acquérir. L'expérience classique consiste à donner une tasse à un groupe et à lui demander à quel prix il la revendrait, puis à demander à un autre groupe combien il paierait pour la même. <u>Les propriétaires demandent systématiquement plus que les acheteurs n'offrent</u>, alors que la tasse est identique.",
+"En finance, cet effet produit 2 comportements coûteux. On surestime la valeur d'un bien immobilier qu'on possède, ce qui fait rater des ventes et allonge les délais. Et on conserve une action ou un placement <em>parce qu'il est à nous</em>, sans jamais se demander si on l'achèterait aujourd'hui au prix du marché.",
+"Cette dernière question est d'ailleurs le meilleur antidote, et elle se pose en une phrase : <strong>si je ne détenais pas cet actif, l'achèterais-je maintenant à ce prix ?</strong> Si la réponse est non, le conserver n'est plus une décision, c'est une habitude.",
+"<strong>Le biais de confirmation.</strong> Nous cherchons les informations qui confirment ce que nous pensons déjà, et nous écartons celles qui le contredisent. Après avoir acheté quelque chose, nous lisons surtout les avis favorables et trouvons les critiques mal informées.",
+"Ce biais est devenu bien plus puissant qu'avant, pour une raison mécanique : <u>les algorithmes des réseaux sociaux sélectionnent ce qui te ressemble.</u> Quelqu'un qui s'intéresse à un actif ne verra bientôt que des contenus enthousiastes à son sujet, ce qui ressemble à un consensus alors que ce n'est qu'un reflet.",
+"La parade est simple à énoncer et inconfortable à pratiquer : <strong>cherche activement l'argument contraire avant de décider, pas après.</strong> Pour tout investissement envisagé, consacre autant de temps à comprendre pourquoi quelqu'un de sérieux s'y oppose qu'à écouter ceux qui le défendent. Si tu ne trouves aucun argument contraire crédible, c'est en général que tu n'as pas assez cherché."
 ],
 quiz:[
-{q:"Qu'est-ce que l'effet de dotation ?",opts:["Dépenser plus quand on a de l'argent","Surévaluer ce qu'on possède simplement parce qu'on le possède","Offrir ses biens aux autres","Accumuler des objets sans valeur"],correct:1,
-explain:"Les propriétaires demandent en moyenne deux fois plus pour vendre un objet que les non-propriétaires ne paieraient."},
-{q:"Comment le biais de confirmation affecte-t-il les décisions d'investissement ?",opts:["Il pousse à trop diversifier","Il pousse à chercher uniquement les infos qui confirment ses convictions","Il pousse à suivre les experts","Il pousse à prendre trop de risques"],correct:1,
-explain:"On ignore les signaux d'alarme importants qui contredisent ce qu'on veut croire."},
-{q:"Quelle question contrer l'effet de dotation sur un investissement ?",opts:["Combien ai-je payé cet actif ?","Qu'en pensent les autres ?","L'achèterais-je à ce prix aujourd'hui, dans les conditions actuelles ?","Depuis quand le détiens-je ?"],correct:2,
-explain:"Cette question permet de se défaire de l'attachement et d'évaluer l'actif plus objectivement."}
+{q:"Qu'est-ce que l'effet de dotation ?",opts:["Une aide financière de l'État","Le fait de surévaluer ce que l'on possède déjà","Un impôt sur les donations","La tendance à trop diversifier"],correct:1,
+explain:"Les propriétaires demandent systématiquement plus que les acheteurs n'offrent, pour un objet identique."},
+{q:"Quelle question neutralise cet effet ?",opts:["Combien ai-je payé ce bien ?","Si je ne le détenais pas, l'achèterais-je aujourd'hui à ce prix ?","Depuis combien de temps je le possède ?","Qui d'autre en possède ?"],correct:1,
+explain:"Si la réponse est non, le conserver n'est plus une décision, c'est une habitude."},
+{q:"Pourquoi le biais de confirmation s'est-il renforcé ?",opts:["Parce que l'information est plus rare","Parce que les algorithmes sélectionnent ce qui nous ressemble","Parce que les experts sont moins nombreux","Parce que les marchés sont plus volatils"],correct:1,
+explain:"Un flux entièrement enthousiaste ressemble à un consensus alors qu'il n'est qu'un reflet de soi-même."}
 ],
-action:"Identifie un actif que tu possèdes depuis longtemps sans le questionner. Pose la question clé et note ta réponse honnête."
+action:"Choisis un investissement ou un produit financier qui t'attire en ce moment. Cherche 20 minutes uniquement des arguments contre, écrits par des gens sérieux. Note le meilleur d'entre eux. S'il ne te fait pas changer d'avis, ta décision en sortira renforcée."
 },
-{module:"Module 2 — Biais cognitifs coûteux", title:"Audit de vos 3 dernières décisions", duration:"8 min",
+{module:"Module 2 — Les biais qui coûtent cher", title:"L'audit de tes 3 dernières décisions", duration:"5 min",
 script:[
-"On va appliquer les biais vus dans ce module à votre réalité. Identifiez trois décisions financières prises au cours des 12 à 24 derniers mois, grandes ou petites, y compris une décision de ne pas agir.",
-"Pour chacune, posez quatre questions : quelle était la décision et le contexte ? Quelles émotions la guidaient ? Quel biais reconnaissez-vous maintenant ? Avec ce que vous savez maintenant, auriez-vous fait pareil ?",
-"L'objectif n'est pas de se flageller sur des décisions passées, mais de développer une conscience de ses propres automatismes. La prochaine décision importante, vous la prendrez avec plus de recul.",
-"C'est ça, l'éducation financière en action : pas juste des concepts théoriques, une capacité améliorée à prendre de meilleures décisions dans la vraie vie."
+"Cette leçon applique les 4 biais précédents à ta propre histoire. C'est l'exercice le plus inconfortable de la formation, et le plus formateur, parce qu'il transforme des notions abstraites en preuves personnelles.",
+"Choisis 3 décisions financières prises au cours des 2 dernières années. Elles n'ont pas besoin d'être importantes : un achat de plus de 300 €, un contrat souscrit, un placement, un abonnement, une opportunité refusée. <strong>Prends-en une dont tu es fier, une que tu regrettes, et une dont tu ne sais pas quoi penser.</strong>",
+"Pour chacune, réponds à 5 questions, par écrit. <strong>1.</strong> Quel était le déclencheur exact : un besoin réel, une émotion, une conversation, une publicité ? <strong>2.</strong> Combien de temps s'est écoulé entre l'idée et la décision ? <strong>3.</strong> Quelles informations avais-je, et lesquelles me manquaient ? <strong>4.</strong> Ai-je cherché un avis contraire ? <strong>5.</strong> Avec le recul, referais-je la même chose ?",
+"Ce que les gens découvrent le plus souvent tient en 3 constats. <u>Les meilleures décisions ont presque toutes été lentes.</u> Les pires ont été prises dans un état émotionnel particulier : euphorie, peur, fatigue, ou pression sociale. Et dans presque tous les cas de regret, l'information manquante était disponible, mais on ne l'a pas cherchée.",
+"Ce troisième constat est le plus important, parce qu'il est réparable. <strong>La différence entre une bonne et une mauvaise décision est rarement l'intelligence : c'est le temps qu'on s'est accordé.</strong>",
+"Une précision pour éviter un contresens fréquent. <em>Une bonne décision peut avoir un mauvais résultat, et une mauvaise décision peut avoir un bon résultat.</em> Acheter au hasard un actif qui monte reste une mauvaise décision, simplement chanceuse. Juge le processus, pas le résultat, sinon tu tireras exactement les mauvaises leçons.",
+"Garde cet audit. Le relire dans 1 an, en y ajoutant les décisions de l'année, est l'un des exercices les plus rentables qui existent, et presque personne ne le fait."
 ],
 quiz:[
-{q:"Quel est l'objectif d'un audit de ses décisions financières passées ?",opts:["Calculer précisément les pertes et gains","Identifier les biais pour mieux les reconnaître à l'avenir","Comparer ses performances au marché","Trouver des responsables"],correct:1,
-explain:"L'audit n'est pas un exercice de culpabilisation mais d'apprentissage."},
-{q:"Quelle question identifie l'aversion à la perte dans une décision passée ?",opts:["Ai-je bien diversifié ?","Ai-je gardé quelque chose trop longtemps pour éviter d'officialiser une perte ?","Ai-je comparé les offres ?","Ai-je demandé un avis expert ?"],correct:1,
-explain:"L'aversion à la perte pousse à garder des investissements perdants pour éviter la douleur psychologique."},
-{q:"Une décision de ne pas agir compte-t-elle dans cet audit ?",opts:["Non, seules les actions comptent","Oui, l'inaction a des conséquences financières réelles","Ça dépend du montant","Seulement après 6 mois"],correct:1,
-explain:"Ne pas ouvrir un PEA, ne pas changer de banque, sont des décisions à part entière, souvent guidées par des biais."}
+{q:"Quel est le point commun des meilleures décisions financières ?",opts:["Elles ont été rapides","Elles ont été lentes","Elles suivaient un conseil d'expert","Elles portaient sur de petits montants"],correct:1,
+explain:"Le temps accordé à la décision compte davantage que l'intelligence de celui qui la prend."},
+{q:"Que faut-il juger dans une décision passée ?",opts:["Le résultat obtenu","Le processus suivi","L'avis de l'entourage","Le montant engagé"],correct:1,
+explain:"Une bonne décision peut avoir un mauvais résultat, et l'inverse. Juger le résultat conduit à tirer les mauvaises leçons."},
+{q:"Qu'est-ce qui manquait le plus souvent dans les décisions regrettées ?",opts:["De l'argent","Une information pourtant disponible, mais non cherchée","Un conseiller","De la chance"],correct:1,
+explain:"C'est le constat le plus encourageant, parce que c'est le seul qui soit entièrement réparable."}
 ],
-action:"Fais l'audit de tes 3 dernières décisions financières avec les 4 questions. 15 minutes maximum, l'honnêteté prime sur l'exhaustivité."
+action:"Fais l'audit de tes 3 décisions ce soir, par écrit, avec les 5 questions. Compte 20 minutes. Range la feuille avec ta carte de profil, et note dans ton calendrier une relecture dans 1 an."
 },
-{module:"Module 3 — Émotions et argent", title:"Peur, cupidité, impatience", duration:"10 min",
+{module:"Module 3 — Émotions et argent", title:"Peur, cupidité, impatience", duration:"5 min",
 script:[
-"Warren Buffett : « Soyez craintif quand les autres sont cupides, et cupide quand les autres sont craintifs. » Presque impossible à suivre car ça demande de résister à deux émotions très puissantes.",
-"La peur nous pousse à vendre quand les marchés baissent, au pire moment, cristallisant la perte et ratant souvent la remontée. L'investisseur moyen obtient des rendements inférieurs aux marchés car il achète cher (euphorie) et vend bas (peur).",
-"La cupidité pousse à prendre trop de risques en période de bulle, investissant dans des actifs surévalués. Les bulles suivent toujours le même schéma : les premiers entrent bas, les cupides entrent juste avant le sommet, et perdent le plus.",
-"L'impatience combat directement l'outil le plus puissant de l'investisseur : le temps. Elle pousse à changer de stratégie trop souvent, à chercher des raccourcis, conduisant à de moins bons résultats que la patience.",
-"Comprendre ces trois émotions permet de se prémunir contre leurs effets les plus dévastateurs, pas de les éliminer, mais de les reconnaître avant d'agir."
+"Trois émotions expliquent la majorité des mauvaises décisions financières. Elles ne sont ni des défauts ni des faiblesses de caractère : ce sont des réactions normales, qui deviennent coûteuses uniquement parce qu'elles arrivent au mauvais moment.",
+"<strong>La peur.</strong> Elle survient quand les marchés baissent, quand un revenu devient incertain, quand une échéance approche. Sa signature est simple à reconnaître : <u>elle pousse à agir vite pour faire cesser un inconfort</u>, alors que la situation demande précisément de ne rien faire.",
+"Le mécanisme est bien documenté. Après une forte baisse, les particuliers vendent massivement, ce qui matérialise leurs pertes, puis rachètent après la remontée, donc plus cher. Ils font le contraire de ce qu'il faudrait, non par ignorance, mais parce que la douleur devient insupportable.",
+"<strong>La cupidité.</strong> Elle apparaît quand quelque chose monte fort et que d'autres en profitent. Sa signature est la peur de rater, et elle est renforcée par l'exposition sociale : voir quelqu'un gagner produit une sensation bien plus forte que lire une statistique. C'est ce mécanisme qu'exploitent les promoteurs de placements douteux, qui montrent toujours des gagnants et jamais des perdants.",
+"<strong>L'impatience.</strong> C'est la plus discrète et probablement la plus coûteuse. Elle ne provoque aucune catastrophe, elle empêche simplement le temps de faire son travail. Elle se manifeste par le changement de stratégie tous les 6 mois, la vérification quotidienne d'un portefeuille, ou l'abandon d'un plan qui n'a pas encore eu le temps de produire quoi que ce soit.",
+"Un point important pour éviter la culpabilité inutile. <strong>Ces 3 émotions ne se suppriment pas.</strong> Aucune méthode ne rend insensible, et les professionnels les ressentent aussi. Ce qui les distingue est qu'ils ont prévu à l'avance ce qu'ils feraient quand elles se présenteraient.",
+"C'est précisément l'objet des 2 leçons suivantes : construire les règles qui prennent le relais quand l'émotion arrive. Une règle écrite à froid vaut mieux qu'une décision prise à chaud, et c'est vrai même pour quelqu'un de parfaitement rationnel le reste du temps."
 ],
 quiz:[
-{q:"Pourquoi les investisseurs moyens sous-performent-ils les marchés ?",opts:["Ils ne prennent pas assez de risques","Ils achètent quand les marchés sont euphoriques et vendent quand ils baissent","Ils diversifient trop","Ils ne consultent pas d'experts"],correct:1,
-explain:"La peur pousse à vendre bas, la cupidité pousse à acheter cher, exactement l'inverse d'une bonne stratégie."},
-{q:"Qui perd le plus lors de l'éclatement d'une bulle spéculative ?",opts:["Les premiers entrés","Ceux qui ont diversifié","Ceux entrés juste avant le sommet, poussés par la cupidité","Ceux qui ont investi peu"],correct:2,
-explain:"Ils entrent au prix le plus élevé et perdent le plus quand la bulle éclate."},
-{q:"Comment l'impatience nuit-elle à la construction de patrimoine ?",opts:["Elle pousse à trop épargner","Elle pousse à changer de stratégie et prendre des risques excessifs pour accélérer","Elle rend trop méfiant","Elle n'a pas d'effet réel"],correct:1,
-explain:"L'impatience combat l'outil le plus puissant de l'investisseur : le temps et les intérêts composés."}
+{q:"Quelle est la signature de la peur en finance ?",opts:["Elle pousse à attendre","Elle pousse à agir vite pour faire cesser un inconfort","Elle améliore l'analyse","Elle n'a aucun effet mesurable"],correct:1,
+explain:"Elle survient précisément dans les situations qui demandent de ne rien faire, d'où les ventes après les baisses."},
+{q:"Quelle émotion est la plus discrète et la plus coûteuse ?",opts:["La peur","La cupidité","L'impatience","La colère"],correct:2,
+explain:"Elle ne provoque aucune catastrophe visible, elle empêche simplement le temps de produire ses effets."},
+{q:"Peut-on supprimer ces émotions ?",opts:["Oui, avec de l'expérience","Non, on prévoit à l'avance ce qu'on fera quand elles arrivent","Oui, en déléguant ses décisions","Seulement en investissant peu"],correct:1,
+explain:"Les professionnels les ressentent aussi. Ce qui les distingue est la règle écrite à froid."}
 ],
-action:"Rappelle-toi une décision guidée par la peur, une par la cupidité, une par l'impatience. Note le contexte et ce qu'il aurait été optimal de faire."
+action:"Repense à la dernière fois où tu as pris une décision d'argent sous le coup d'une émotion. Identifie laquelle des 3 c'était, et ce qu'elle t'a coûté ou fait rater. Écris-le en 2 lignes : c'est la base de ton pare-feu."
 },
-{module:"Module 3 — Émotions et argent", title:"Construire un pare-feu émotionnel", duration:"9 min",
+{module:"Module 3 — Émotions et argent", title:"Construire ton pare-feu émotionnel", duration:"5 min",
 script:[
-"Un pare-feu émotionnel n'élimine pas les émotions, il empêche qu'elles prennent le contrôle des décisions financières. Cinq éléments le composent.",
-"1. Une stratégie écrite avant d'investir, rédigée à tête reposée, à relire pendant la tempête. 2. La règle des 48 heures : aucune décision financière significative immédiatement, laissez l'émotion se dissiper.",
-"3. L'automatisation : un virement automatique se fait indépendamment de votre état d'esprit, même quand vous avez peur, même quand les marchés baissent, souvent le meilleur moment.",
-"4. Limiter la consommation d'information financière en temps réel : les médias créent de l'urgence et de l'anxiété sans pertinence pour votre stratégie de long terme. 5. Un journal de décisions : notez chaque décision, l'émotion ressentie, la raison rationnelle. Vous verrez des patterns.",
-"Ces cinq éléments ne garantissent pas l'absence d'erreurs, mais réduisent considérablement leur fréquence et leur gravité."
+"Un pare-feu émotionnel est un ensemble de dispositifs décidés à froid, qui s'interposent entre une émotion et une décision. L'idée n'est pas de mieux se contrôler, mais de <strong>rendre la mauvaise décision plus difficile à prendre que la bonne.</strong>",
+"<strong>Dispositif 1 : le délai obligatoire.</strong> Toute décision financière au-dessus d'un montant que tu fixes toi-même, par exemple 300 €, attend 72 heures. Aucune exception, y compris pour les offres qui expirent. <u>Une opportunité qui ne survit pas à 3 jours de réflexion n'en était pas une</u>, et l'urgence est le principal outil de ceux qui vendent mal.",
+"<strong>Dispositif 2 : la règle écrite à l'avance.</strong> Avant d'investir, écris ce que tu feras si la valeur baisse de 20 %, de 30 %, de 50 %. Le plus souvent, la bonne réponse est <em>ne rien faire et continuer à verser</em>. Mais ce qui compte n'est pas la réponse, c'est de l'avoir écrite avant, quand tu étais calme.",
+"<figure class=\"schema\"><svg viewBox=\"0 0 700 338\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"20\" y=\"24\" width=\"190\" height=\"54\" rx=\"9\" fill=\"#EFF0EA\" stroke=\"#12212B\" stroke-width=\"1.5\"/><text x=\"115\" y=\"47\" text-anchor=\"middle\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14.5\" font-weight=\"600\" fill=\"#12212B\">Une émotion</text><text x=\"115\" y=\"65\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"12\" fill=\"#7A8A93\">peur, envie, urgence</text><path d=\"M210 51 C 270 51, 270 66, 330 66\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"66\" r=\"4\" fill=\"#B8862F\"/><rect x=\"344\" y=\"43\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#F6EFE0\" stroke=\"#B8862F\" stroke-width=\"1.3\"/><text x=\"360\" y=\"64\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Délai de 72 heures</text><text x=\"664\" y=\"64\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#B8862F\">filtre 1</text><path d=\"M210 51 C 270 51, 270 128, 330 128\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"128\" r=\"4\" fill=\"#B8862F\"/><rect x=\"344\" y=\"105\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#F6EFE0\" stroke=\"#B8862F\" stroke-width=\"1.3\"/><text x=\"360\" y=\"126\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Règle écrite à froid</text><text x=\"664\" y=\"126\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#B8862F\">filtre 2</text><path d=\"M210 51 C 270 51, 270 190, 330 190\" fill=\"none\" stroke=\"#1E4B3C\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"190\" r=\"4\" fill=\"#1E4B3C\"/><rect x=\"344\" y=\"167\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#E7EFEA\" stroke=\"#1E4B3C\" stroke-width=\"1.3\"/><text x=\"360\" y=\"188\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Virement automatique</text><text x=\"664\" y=\"188\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#1E4B3C\">filtre 3</text><path d=\"M210 51 C 270 51, 270 252, 330 252\" fill=\"none\" stroke=\"#1E4B3C\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"252\" r=\"4\" fill=\"#1E4B3C\"/><rect x=\"344\" y=\"229\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#E7EFEA\" stroke=\"#1E4B3C\" stroke-width=\"1.3\"/><text x=\"360\" y=\"250\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Décision</text><text x=\"664\" y=\"250\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#1E4B3C\">ce qui reste passe</text></svg><figcaption>Le pare-feu ne supprime pas l'émotion : il place des filtres entre elle et la décision.</figcaption></figure>",
+"<strong>Dispositif 3 : l'automatisation.</strong> Tout ce qui est automatique échappe à l'émotion. Un virement programmé continue de partir pendant les périodes de doute, ce qui produit exactement l'effet recherché : investir aussi quand les prix sont bas, moment où personne n'en a envie.",
+"<strong>Dispositif 4 : la fréquence de consultation.</strong> Regarder son portefeuille tous les jours multiplie les occasions de voir une baisse, donc de ressentir de la peur. <strong>Une consultation par mois suffit largement</strong> pour un investissement de long terme, et une par trimestre est encore mieux. Ce dispositif ne coûte rien et il est l'un des plus efficaces.",
+"<strong>Dispositif 5 : le témoin.</strong> Choisis une personne à qui tu annonces tes décisions importantes avant de les prendre. Pas pour obtenir son avis, mais parce que devoir formuler à voix haute ce qu'on s'apprête à faire révèle immédiatement ce qui ne tient pas debout.",
+"Ces 5 dispositifs ont un point commun qui explique leur efficacité : <strong>ils sont mis en place quand tout va bien, et ils agissent quand tout va mal.</strong> C'est l'inverse de la volonté, qui est justement absente au moment où on en aurait besoin."
 ],
 quiz:[
-{q:"Pourquoi écrire sa stratégie avant d'investir ?",opts:["Pour la partager avec un conseiller","Pour que le moi rationnel guide le moi émotionnel lors des turbulences","Pour un document légal","Pour comparer aux autres investisseurs"],correct:1,
-explain:"Relire ce qu'on a écrit à tête reposée aide à ne pas décider uniquement sous le coup de l'émotion."},
-{q:"Quel est l'avantage principal de l'automatisation des investissements ?",opts:["Battre les marchés plus facilement","Retirer la dimension émotionnelle en investissant automatiquement","Garantir les meilleurs rendements","Investir sans connaissances"],correct:1,
-explain:"Les virements automatiques se font même quand on a peur, souvent le meilleur moment pour investir."},
-{q:"Pourquoi limiter l'information financière en temps réel ?",opts:["L'information est souvent fausse","Les médias créent urgence et anxiété qui perturbent la stratégie long terme","C'est réservé aux professionnels","Pour gagner du temps"],correct:1,
-explain:"Un investisseur de long terme n'a aucune raison de vérifier les cours quotidiennement."}
+{q:"Que dit la règle du délai obligatoire ?",opts:["Attendre 1 mois avant tout achat","Toute décision au-dessus d'un montant fixé attend 72 heures","Ne jamais décider seul","Décider uniquement le week-end"],correct:1,
+explain:"Une opportunité qui ne survit pas à 3 jours n'en était pas une. L'urgence est l'outil principal des mauvais vendeurs."},
+{q:"À quelle fréquence consulter un portefeuille de long terme ?",opts:["Chaque jour","Chaque semaine","Une fois par mois, voire par trimestre","Jamais"],correct:2,
+explain:"Chaque consultation est une occasion de voir une baisse, donc de ressentir de la peur et d'agir à contretemps."},
+{q:"Quel est le point commun des 5 dispositifs ?",opts:["Ils coûtent de l'argent","Ils sont mis en place quand tout va bien et agissent quand tout va mal","Ils nécessitent un professionnel","Ils s'appliquent uniquement aux gros montants"],correct:1,
+explain:"C'est l'inverse de la volonté, qui manque précisément au moment où on en aurait besoin."}
 ],
-action:"Mets en place au moins deux des cinq éléments cette semaine. Le plus simple : commence ton journal de décisions avec ta dernière décision financière."
+action:"Choisis 2 dispositifs sur les 5 et mets-les en place ce soir. Le délai de 72 heures ne demande qu'une décision, et la fréquence de consultation qu'un réglage de notifications. Les 3 autres viendront plus tard."
 },
-{module:"Module 3 — Émotions et argent", title:"Protocole de décision sous stress", duration:"8 min",
+{module:"Module 3 — Émotions et argent", title:"Décider quand tout va mal", duration:"5 min",
 script:[
-"Que faire précisément quand une décision doit être prise sous pression ? Un protocole en 5 étapes.",
-"1. Pause : arrêtez-vous physiquement, levez-vous, respirez. Une décision dans les 5 minutes suivant un choc est presque toujours mauvaise. 2. Nommez l'émotion : peur, enthousiasme, FOMO ? Nommer une émotion réduit l'activité de l'amygdale et affaiblit son emprise.",
-"3. Revenez à votre stratégie : relisez ce que vous avez écrit à tête reposée, est-ce cohérent avec votre plan ? 4. Appliquez la règle des 48 heures : dites que vous devez réfléchir, quiconque presse de décider immédiatement ne travaille pas pour vous.",
-"5. Consultez quelqu'un de confiance qui vous dira la vérité, même inconfortable, pas ce que vous voulez entendre.",
-"Ce protocole ne garantit pas l'absence d'erreur, mais garantit plus de recul et de cohérence avec vos objectifs de long terme."
+"Il arrive que la situation impose de décider vite, sous pression réelle : perte d'emploi, séparation, dépense imprévue importante, chute brutale des marchés. Les dispositifs de la leçon précédente supposent du temps. Cette leçon donne un protocole pour les moments où il n'y en a pas.",
+"<strong>Étape 1 : nommer l'émotion, à voix haute ou par écrit.</strong> Cela paraît anodin et c'est mesuré : mettre un mot sur ce qu'on ressent en réduit l'intensité. Dis simplement <em>« j'ai peur »</em> ou <em>« je suis en colère »</em>. Tu ne cherches pas à te calmer, seulement à reprendre une place d'observateur.",
+"<strong>Étape 2 : séparer l'urgent du pressant.</strong> Très peu de décisions financières sont réellement urgentes. Une échéance de loyer l'est. Une opportunité d'investissement ne l'est jamais. Pose-toi la question : <u>que se passe-t-il concrètement si je décide dans 48 heures ?</u> Dans 9 cas sur 10, la réponse est : rien.",
+"<strong>Étape 3 : réduire le champ.</strong> Sous stress, notre capacité de décision s'effondre. N'essaie pas de résoudre toute la situation. Identifie la <strong>seule prochaine action</strong>, la plus petite possible : passer un appel, ouvrir un relevé, écrire un message. Une action minuscule accomplie vaut mieux qu'un plan complet non commencé.",
+"<strong>Étape 4 : chercher un avis extérieur, pas un avis rassurant.</strong> La différence est essentielle. Un avis rassurant confirme ce que tu veux entendre et te maintient dans ton état. Un avis extérieur pose des questions que tu n'as pas envisagées. Choisis quelqu'un de calme plutôt que quelqu'un d'accord.",
+"<strong>Étape 5 : décider, puis écrire pourquoi.</strong> Note en 3 lignes la décision prise et ses raisons, datées. Cela sert 2 fois : sur le moment, écrire oblige à clarifier ; plus tard, relire permet de juger le processus plutôt que le résultat, comme vu dans l'audit.",
+"Un dernier point, et il est important à entendre. <strong>En situation de vraie difficulté financière, l'aide existe et elle est gratuite.</strong> Les points conseil budget, les travailleurs sociaux et les associations de consommateurs accompagnent sans rien vendre. Y avoir recours n'est pas un échec : c'est exactement le genre de décision qu'un plan bien construit prévoit."
 ],
 quiz:[
-{q:"Pourquoi nommer l'émotion ressentie aide-t-il à mieux décider ?",opts:["Pour mieux expliquer sa situation","Ça réduit l'activité de l'amygdale et affaiblit l'emprise de l'émotion","Pour comparer aux autres","Ça oblige à réfléchir plus longtemps"],correct:1,
-explain:"Ce simple acte de labellisation émotionnelle aide à retrouver un état plus rationnel."},
-{q:"Que signifie qu'on vous presse de décider immédiatement ?",opts:["L'opportunité est vraiment unique","La personne est enthousiaste et partage une bonne opportunité","Cette personne n'a probablement pas vos intérêts en tête","Il faut suivre son instinct"],correct:2,
-explain:"Une vraie opportunité peut attendre 48 heures, la pression court-circuite la réflexion rationnelle."},
-{q:"Quelle est la première étape du protocole ?",opts:["Appeler un conseiller","Relire sa stratégie","Faire une pause physique pour calmer le système nerveux","Analyser les données"],correct:2,
-explain:"La pause interrompt le cycle de réaction émotionnelle avant toute réflexion."}
+{q:"Pourquoi nommer l'émotion avant de décider ?",opts:["Pour se justifier","Parce que mettre un mot sur ce qu'on ressent en réduit l'intensité","Pour gagner du temps","Pour convaincre les autres"],correct:1,
+explain:"L'objectif n'est pas de se calmer mais de reprendre une place d'observateur de sa propre situation."},
+{q:"Quelle question distingue l'urgent du pressant ?",opts:["Combien cela coûte-t-il ?","Que se passe-t-il concrètement si je décide dans 48 heures ?","Qui d'autre est concerné ?","Ai-je déjà vécu cela ?"],correct:1,
+explain:"Dans 9 cas sur 10, la réponse est : rien. Une opportunité d'investissement n'est jamais urgente."},
+{q:"Quel type d'avis faut-il chercher sous stress ?",opts:["Un avis rassurant","Un avis extérieur, de quelqu'un de calme plutôt que d'accord","L'avis du vendeur","Aucun, il faut décider seul"],correct:1,
+explain:"Un avis rassurant confirme ce qu'on veut entendre. Un avis extérieur pose les questions qu'on n'a pas envisagées."}
 ],
-action:"Écris le protocole en 5 étapes sur une note dans ton téléphone, pour l'avoir sous la main le jour où tu en auras besoin."
+action:"Recopie les 5 étapes dans une note de ton téléphone, intitulée « avant de décider ». Tu n'en auras pas besoin ce soir, et c'est précisément pour ça qu'il faut la créer maintenant."
 },
-{module:"Module 4 — Reprogrammer et agir", title:"3 rituels financiers hebdomadaires", duration:"8 min",
+{module:"Module 4 — Reprogrammer et agir", title:"3 rituels financiers qui tiennent", duration:"5 min",
 script:[
-"La transformation financière vient de petites actions répétées, pas d'une grande décision unique. Trois rituels hebdomadaires simples peuvent tout transformer sur 12 mois.",
-"Rituel 1, le bilan du lundi (10 min) : ouvrez votre appli bancaire, notez vos dépenses de la semaine, identifiez une dépense regrettée et une non regrettée. L'objectif : maintenir une conscience financière continue.",
-"Rituel 2, la question du jeudi (5 min) : « Quelle est la prochaine action financière que je reporte depuis trop longtemps ? » Notez-la, engagez-vous à la faire avant dimanche. Ça combat directement la procrastination.",
-"Rituel 3, la revue du dimanche (15 min) : regardez votre situation globale, vos progrès, ce qui a fonctionné, ce qui peut être amélioré. Notez aussi dans votre journal de décisions.",
-"Trente minutes par semaine, moins de 2 heures par mois, pour transformer complètement votre rapport à vos finances."
+"Les bonnes intentions ne survivent pas à un mois chargé. Ce qui tient, ce sont les rituels : des gestes courts, à date fixe, qui finissent par ne plus demander de décision. Voici les 3 seuls qui comptent vraiment.",
+"<strong>Rituel 1 : le point de 10 minutes, une fois par semaine.</strong> Toujours le même jour, à la même heure. Tu regardes ton solde, tes dépenses de la semaine, et tu notes une seule chose à ajuster. Pas de tableau complexe, pas d'analyse : un coup d'œil et une note. <u>C'est la régularité qui produit l'effet, pas la profondeur.</u>",
+"<strong>Rituel 2 : le point de 30 minutes, une fois par mois.</strong> Le lendemain de ta paie. Tu vérifies que le virement d'épargne est bien parti, tu regardes le mois écoulé dans ton tableau de budget, et tu ajustes le montant si nécessaire. C'est aussi le moment de résilier ce qui ne sert plus.",
+"<strong>Rituel 3 : la revue d'1 heure, une fois par an.</strong> Celle décrite dans la formation sur l'épargne : fonds d'urgence, virements, charges fixes, contrats, frais, projets. Une seule heure, à une date liée à un repère existant pour ne pas l'oublier.",
+"Trois conseils pour que ces rituels tiennent. <strong>1. Accroche-les à une habitude existante</strong> plutôt qu'à une intention : après le café du dimanche matin, après avoir sorti les poubelles. L'habitude ancienne sert de déclencheur à la nouvelle.",
+"<strong>2. Commence ridiculement petit.</strong> 5 minutes par semaine pendant 3 mois valent infiniment mieux qu'une heure abandonnée au bout de 2 semaines. On augmente ensuite, jamais l'inverse.",
+"<strong>3. Prévois l'échec.</strong> Tu vas sauter des semaines, c'est certain. La règle qui sauve les habitudes tient en une phrase : <em>ne jamais rater 2 fois de suite.</em> Un oubli est un accident, 2 oublis sont un abandon qui commence.",
+"Un mot sur le temps que tout cela demande. Une fois installés, ces 3 rituels représentent environ <strong>10 heures par an</strong>. C'est peu comparé au temps consacré à gagner cet argent, et c'est pourtant ce qui décide de ce qu'il en reste."
 ],
 quiz:[
-{q:"Quel est l'objectif du bilan du lundi ?",opts:["Calculer précisément revenus et dépenses","Maintenir une conscience financière continue","Identifier des opportunités d'investissement","Comparer aux dépenses du mois précédent"],correct:1,
-explain:"10 minutes pour rester en contact avec sa situation financière réelle, pas une analyse exhaustive."},
-{q:"Quel biais le rituel du jeudi combat-il directement ?",opts:["L'aversion à la perte","L'effet de dotation","Le biais de statu quo et la procrastination","Le biais de confirmation"],correct:2,
-explain:"Nommer l'action reportée et s'engager à la réaliser combat directement la tendance à l'inaction."},
-{q:"Combien de temps par semaine ces trois rituels représentent-ils ?",opts:["1 heure","30 minutes","2 heures","45 minutes"],correct:1,
-explain:"10 + 5 + 15 minutes font 30 minutes par semaine, moins de 2 heures par mois."}
+{q:"Quelle est la fréquence du premier rituel ?",opts:["Quotidienne","Hebdomadaire, 10 minutes","Mensuelle","Trimestrielle"],correct:1,
+explain:"Un coup d'œil et une note à ajuster. C'est la régularité qui produit l'effet, pas la profondeur de l'analyse."},
+{q:"Comment ancrer une nouvelle habitude ?",opts:["En se motivant chaque matin","En l'accrochant à une habitude existante qui sert de déclencheur","En se fixant un objectif ambitieux","En prévenant son entourage"],correct:1,
+explain:"Après le café du dimanche, après les poubelles : l'ancienne habitude déclenche la nouvelle sans effort de volonté."},
+{q:"Quelle règle sauve une habitude ?",opts:["Ne jamais rater","Ne jamais rater 2 fois de suite","Rattraper le lendemain","Recommencer chaque trimestre"],correct:1,
+explain:"Un oubli est un accident, 2 oublis consécutifs sont un abandon qui commence."}
 ],
-action:"Mets les trois rituels dans ton agenda cette semaine : lundi, jeudi, dimanche, avec des rappels."
+action:"Programme dès ce soir le rituel hebdomadaire dans ton calendrier, en récurrence, accroché à quelque chose que tu fais déjà. Dix minutes, un jour fixe. C'est le seul des 3 à mettre en place aujourd'hui."
 },
-{module:"Module 4 — Reprogrammer et agir", title:"Sortir de la procrastination financière", duration:"9 min",
+{module:"Module 4 — Reprogrammer et agir", title:"Sortir de la procrastination financière", duration:"5 min",
 script:[
-"La procrastination financière est le problème le plus répandu et le moins reconnu. Elle a quatre causes identifiées.",
-"1. La surcharge cognitive : face à une tâche trop complexe, le cerveau préfère l'inaction. Solution : décomposer. « Ouvrir un PEA chez Fortuneo, 20 min » plutôt que « m'occuper de mes finances ».",
-"2. La peur de l'échec : on n'agit pas par peur de mal faire, oubliant que l'inaction est aussi une décision, souvent la plus coûteuse. Solution : accepter l'imperfection, commencer petit maintenant.",
-"3. L'absence de connexion émotionnelle avec le futur : notre cerveau a du mal à se projeter. Solution : concrétiser ce futur avec des détails précis et personnels.",
-"4. La pression sociale de l'immédiateté : le monde valorise la gratification immédiate. Solution : créer des victoires immédiates, célébrer chaque petite action financière prise."
+"Presque tout le monde repousse au moins une démarche financière : ouvrir un compte, résilier un contrat, relancer un impayé, regarder une situation qu'on préfère ignorer. Cette leçon explique pourquoi, et donne 4 moyens d'en sortir.",
+"La procrastination financière n'est pas de la paresse. Elle a 3 causes identifiées, et reconnaître la sienne change la solution à appliquer.",
+"<strong>Cause 1 : la peur de découvrir.</strong> Ne pas ouvrir ses relevés protège d'une information désagréable. C'est un mécanisme d'évitement classique, et il coûte cher parce que la situation empire pendant qu'on ne regarde pas.",
+"<strong>Cause 2 : la complexité perçue.</strong> Une tâche floue paralyse. <em>« M'occuper de mon épargne »</em> n'est pas une tâche, c'est un sujet. Le cerveau ne sait pas par où commencer, donc il ne commence pas.",
+"<strong>Cause 3 : l'absence de récompense immédiate.</strong> Résilier un abonnement inutile rapporte 15 € par mois, ce qui ne procure aucune satisfaction sur le moment. Notre cerveau est bien plus sensible aux gains immédiats qu'aux gains différés, et c'est le même mécanisme qui rend l'épargne difficile.",
+"Quatre moyens d'en sortir, à choisir selon la cause. <strong>La règle des 2 minutes :</strong> toute tâche qui prend moins de 2 minutes se fait immédiatement, sans être notée ni planifiée. Elle élimine à elle seule une bonne partie de la liste.",
+"<strong>Le découpage :</strong> transforme le sujet en première action minuscule. Pas <em>« m'occuper de mon épargne »</em> mais <em>« ouvrir l'application et noter le solde »</em>. Une tâche doit pouvoir se faire sans réfléchir.",
+"<strong>La session unique :</strong> bloque 45 minutes dans ton agenda, sans téléphone, pour traiter d'un coup les 5 démarches en attente. <u>Le coût de démarrage n'est alors payé qu'une seule fois</u>, ce qui rend cette méthode bien plus efficace que d'étaler.",
+"<strong>L'engagement annoncé :</strong> dis à quelqu'un ce que tu vas faire et quand. Le simple fait d'avoir annoncé change fortement la probabilité de passer à l'acte, et c'est aussi ce qui rend un accompagnement efficace au-delà de son contenu.",
+"Retiens ceci : <strong>ce n'est pas la motivation qui manque, c'est la première action qui est trop grosse.</strong> Réduis-la jusqu'à ce qu'elle devienne ridicule, et elle se fera."
 ],
 quiz:[
-{q:"Quelle est la cause principale de la procrastination financière ?",opts:["Le manque d'argent","Le manque d'éducation","La surcharge cognitive face à des décisions complexes et floues","Le manque de temps"],correct:2,
-explain:"Face à une tâche trop complexe, le cerveau préfère l'inaction à l'erreur potentielle."},
-{q:"Comment concrétiser la connexion avec son futur financier ?",opts:["Calculer précisément sa retraite","Lire des témoignages de réussite","Mettre des détails précis et personnels sur son futur idéal","Parler de ses projets à ses proches"],correct:2,
-explain:"Notre cerveau se connecte mieux à un futur concret qu'à un futur abstrait."},
-{q:"Pourquoi célébrer les petites victoires financières ?",opts:["Pour montrer ses progrès","Elles créent de l'élan et compensent la pression de la gratification immédiate","Pour rester motivé à dépenser moins","Ce sont les seules accessibles pour un débutant"],correct:1,
-explain:"Dans un monde qui valorise l'immédiateté, ces petites victoires créent un élan psychologique."}
+{q:"Quelle est la première cause de procrastination financière ?",opts:["La paresse","La peur de découvrir une information désagréable","Le manque de temps","L'absence de conseiller"],correct:1,
+explain:"C'est un évitement, pas un défaut de caractère. Et il coûte cher parce que la situation empire pendant qu'on ne regarde pas."},
+{q:"Pourquoi « m'occuper de mon épargne » ne fonctionne pas ?",opts:["C'est trop long","Ce n'est pas une tâche mais un sujet, le cerveau ne sait pas par où commencer","Cela demande un professionnel","C'est trop coûteux"],correct:1,
+explain:"Une tâche doit pouvoir se faire sans réfléchir : « ouvrir l'application et noter le solde » est une tâche."},
+{q:"Pourquoi la session unique de 45 minutes est-elle efficace ?",opts:["Parce qu'elle est plus courte","Parce que le coût de démarrage n'est payé qu'une seule fois","Parce qu'elle est plus agréable","Parce qu'elle évite les erreurs"],correct:1,
+explain:"Étaler 5 démarches sur 5 jours revient à payer 5 fois le coût de démarrage, qui est justement le vrai obstacle."}
 ],
-action:"Identifie une action financière repoussée depuis plus d'un mois. Décompose-la en action précise de moins de 30 minutes, avec une date cette semaine. Puis fais-la."
+action:"Écris la liste des démarches financières que tu repousses. Pour chacune, note la première action, celle qui prend moins de 2 minutes. Fais-en une seule ce soir, la plus petite. La liste perdra la moitié de son poids."
 },
-{module:"Module 4 — Reprogrammer et agir", title:"Votre plan d'action 30 jours", duration:"9 min",
+{module:"Module 4 — Reprogrammer et agir", title:"Ton plan sur 30 jours", duration:"5 min",
 script:[
-"Vous avez maintenant les fondations de la psychologie financière : croyances, biais, émotions, habitudes. Voici votre plan sur 30 jours, en 4 semaines.",
-"Semaine 1, le diagnostic : bilan complet de votre situation actuelle, revenus, dépenses, épargne, dettes. Relisez vos croyances limitantes du module 1, choisissez-en une à travailler activement.",
-"Semaine 2, la structure : mettez en place les trois rituels hebdomadaires, créez votre journal de décisions, écrivez votre stratégie d'investissement même simple.",
-"Semaine 3, l'action : prenez une action financière concrète que vous reportiez. Pas besoin que ce soit parfait, besoin que ce soit fait.",
-"Semaine 4, la consolidation : bilan des 3 semaines, ce qui a fonctionné, ce qui a été difficile, ce que vous maintenez, ce que vous ajustez. Définissez vos objectifs pour les 30 prochains jours.",
-"Vous avez fait le plus difficile. La suite, les formations budget, bourse, immobilier, vous donnera les outils techniques. Mais sans ce travail psychologique, ces outils seraient bien moins efficaces."
+"Dernière leçon. Elle rassemble les 11 précédentes en un plan de 30 jours, volontairement modeste, parce qu'un plan ambitieux abandonné au dixième jour ne vaut rien.",
+"<strong>Semaine 1 : voir.</strong> Aucune décision, aucun changement. Tu notes tes dépenses au fil des jours, tu relis tes 3 croyances et ton profil, et tu mets en place le rituel hebdomadaire de 10 minutes. L'objectif est uniquement de regarder sans rien corriger, ce qui est plus difficile qu'il n'y paraît.",
+"<strong>Semaine 2 : alléger.</strong> Tu attaques les charges fixes : abonnements oubliés, contrats jamais renégociés, frais bancaires. Une session unique de 45 minutes suffit à traiter l'essentiel. <u>C'est la semaine qui rapporte le plus d'argent par heure passée</u>, et de loin.",
+"<strong>Semaine 3 : automatiser.</strong> Tu programmes le virement d'épargne le lendemain de ta paie, vers un compte séparé, avec un montant délibérément trop bas. Tu mets aussi en place le délai de 72 heures et tu règles la fréquence de consultation de tes comptes.",
+"<figure class=\"schema\"><svg viewBox=\"0 0 700 168\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><line x1=\"34\" y1=\"96\" x2=\"666\" y2=\"96\" stroke=\"#DCDDD3\" stroke-width=\"2\"/><path d=\"M666 96 l-9 -5 v10 z\" fill=\"#DCDDD3\"/><line x1=\"34\" y1=\"96\" x2=\"34\" y2=\"62\" stroke=\"#1E4B3C\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"34\" cy=\"96\" r=\"7\" fill=\"#1E4B3C\"/><circle cx=\"34\" cy=\"96\" r=\"12\" fill=\"none\" stroke=\"#1E4B3C\" stroke-width=\"1\" opacity=\".35\"/><text x=\"34\" y=\"52\" text-anchor=\"start\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Semaine 1</text><text x=\"34\" y=\"122\" text-anchor=\"start\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12\" fill=\"#43555F\">Voir, sans corriger</text><line x1=\"243\" y1=\"96\" x2=\"243\" y2=\"62\" stroke=\"#B8862F\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"243\" cy=\"96\" r=\"7\" fill=\"#B8862F\"/><circle cx=\"243\" cy=\"96\" r=\"12\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1\" opacity=\".35\"/><text x=\"243\" y=\"52\" text-anchor=\"middle\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Semaine 2</text><text x=\"243\" y=\"122\" text-anchor=\"middle\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12\" fill=\"#43555F\">Alléger les charges fixes</text><line x1=\"451\" y1=\"96\" x2=\"451\" y2=\"62\" stroke=\"#B8862F\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"451\" cy=\"96\" r=\"7\" fill=\"#B8862F\"/><circle cx=\"451\" cy=\"96\" r=\"12\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1\" opacity=\".35\"/><text x=\"451\" y=\"52\" text-anchor=\"middle\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Semaine 3</text><text x=\"451\" y=\"122\" text-anchor=\"middle\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12\" fill=\"#43555F\">Automatiser l'épargne</text><line x1=\"666\" y1=\"96\" x2=\"666\" y2=\"62\" stroke=\"#1E4B3C\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"666\" cy=\"96\" r=\"7\" fill=\"#1E4B3C\"/><circle cx=\"666\" cy=\"96\" r=\"12\" fill=\"none\" stroke=\"#1E4B3C\" stroke-width=\"1\" opacity=\".35\"/><text x=\"666\" y=\"52\" text-anchor=\"end\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Semaine 4</text><text x=\"666\" y=\"122\" text-anchor=\"end\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12\" fill=\"#43555F\">Décider une seule chose</text></svg><figcaption>Un plan de 30 jours volontairement modeste : c'est ce qui le rend tenable jusqu'au bout.</figcaption></figure>",
+"<strong>Semaine 4 : décider une chose.</strong> Une seule décision que tu repoussais : ouvrir un livret dédié, ouvrir une enveloppe pour lancer un compteur fiscal, résilier un contrat important, ou demander un rendez-vous. Une seule, mais faite.",
+"Ce que ce plan produit est modeste et réel : quelques dizaines d'euros récupérés chaque mois, une épargne qui démarre, des dispositifs qui te protègent de tes propres réactions, et surtout <strong>la preuve que tu peux tenir quelque chose.</strong> C'est cette dernière chose qui compte le plus, parce qu'elle défait la croyance la plus répandue de toutes.",
+"Un mot pour finir cette formation. Tu as passé 12 leçons à regarder ce qui se joue dans ta tête quand il est question d'argent. Ce travail est rarement fait, et il explique pourquoi 2 personnes aux revenus identiques n'ont pas du tout le même patrimoine 20 ans plus tard.",
+"<strong>Les formations suivantes sont techniques : budget, épargne, bourse, immobilier, fiscalité.</strong> Elles te donneront des outils. Mais aucun outil ne fonctionne chez quelqu'un qui n'a pas fait ce premier travail, et c'est pourquoi cette formation vient si tôt dans le parcours."
 ],
 quiz:[
-{q:"Pourquoi un plan sur 30 jours plutôt que 6 mois ?",opts:["30 jours suffisent pour tout changer","Assez long pour créer des habitudes, assez court pour maintenir la motivation","Les résultats arrivent toujours en 30 jours","Il faut revoir la formation tous les mois"],correct:1,
-explain:"30 jours permet de créer de nouvelles habitudes tout en gardant des objectifs concrets et motivants."},
-{q:"Quelle est l'action principale de la semaine 3 ?",opts:["Faire le bilan des semaines précédentes","Mettre en place les rituels","Prendre une action concrète qu'on reportait","Définir ses objectifs suivants"],correct:2,
-explain:"Après le diagnostic et la structure, il s'agit de faire quelque chose de tangible, pas parfaitement, mais concrètement."},
-{q:"Pourquoi le travail psychologique précède-t-il les formations techniques ?",opts:["Il faut être riche psychologiquement d'abord","Les outils techniques sans ce travail seraient bien moins efficaces","La psychologie est plus importante que la technique","La technique s'apprend seule"],correct:1,
-explain:"Un investisseur qui comprend ses automatismes émotionnels utilisera bien mieux les outils techniques."}
+{q:"Que fait-on pendant la première semaine ?",opts:["On résilie ses abonnements","On regarde sans rien corriger","On ouvre un compte-titres","On établit un budget complet"],correct:1,
+explain:"Observer sans corriger est plus difficile qu'il n'y paraît, et c'est ce qui rend les corrections suivantes justes."},
+{q:"Quelle semaine rapporte le plus d'argent par heure passée ?",opts:["La semaine 1","La semaine 2, sur les charges fixes","La semaine 3","La semaine 4"],correct:1,
+explain:"Une session de 45 minutes sur les abonnements et contrats produit un gain qui se répète chaque mois."},
+{q:"Quel est le principal acquis de ce plan ?",opts:["Un rendement élevé","La preuve que tu peux tenir quelque chose","Un portefeuille diversifié","Une réduction d'impôt"],correct:1,
+explain:"C'est ce qui défait la croyance la plus répandue, celle de ne pas être capable de s'y tenir."}
 ],
-action:"Écris ton plan sur 30 jours, une à deux actions concrètes par semaine. Partage-le avec quelqu'un de confiance : l'annoncer multiplie les chances de le réaliser."
+action:"Écris les 4 semaines dans ton calendrier, une par une, avec l'intitulé de chacune. Ne planifie rien d'autre. Puis commence la semaine 1 dès demain matin, en notant ta première dépense de la journée."
 }
 ];
 
@@ -646,7 +696,9 @@ function render(){
     '<div class="lesson-title">' + (current) + '. ' + l.title + '</div>' +
     '<div class="lesson-meta">' + l.duration + ' de lecture · Leçon ' + current + ' sur ' + LESSONS.length + '</div>' +
     '<div class="section-label"><span class="dot"></span>Comprendre</div>' +
-    '<div class="script-text">' + l.script.map(function(p){return '<p>'+p+'</p>';}).join('') + '</div>' +
+    '<div class="script-text">' + l.script.map(function(p){
+      return p.indexOf('<figure') === 0 ? p : '<p>' + p + '</p>';
+    }).join('') + '</div>' +
     '<div class="section-label quiz"><span class="dot"></span>Vérifier</div>' +
     quizHtml +
     '<div class="section-label action"><span class="dot"></span>Petite action</div>' +
