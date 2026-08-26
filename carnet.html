@@ -124,6 +124,15 @@ h2{font-family:var(--display);font-weight:500;font-size:26px;color:var(--encre);
   .impression-entete .mention{font-family:var(--mono);font-size:9pt;color:var(--encre-3);margin-top:5px;}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
+
+/* Les bornes plantées : les formations achevées, consultables à nouveau. */
+.bornes{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;}
+.borne-c{background:var(--papier);border:1px solid var(--trait);border-radius:12px;padding:18px 18px 20px;
+  cursor:pointer;text-align:left;font-family:var(--texte);transition:border-color .18s,transform .18s;}
+.borne-c:hover{border-color:var(--laiton);transform:translateY(-2px);}
+.borne-num{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--laiton);margin-bottom:10px;}
+.borne-nom{font-family:var(--display);font-size:16px;font-weight:600;color:var(--encre);line-height:1.28;}
+.borne-meta{font-family:var(--mono);font-size:10.5px;color:var(--encre-3);margin-top:9px;}
 </style>
 </head>
 <body>
@@ -279,6 +288,34 @@ function dessinerCarte(ev){
   '</div></div>';
 }
 
+
+/* Les formations achevées deviennent des bornes, que l'on peut rouvrir. */
+function blocBornes(){
+  const parFormation = {};
+  PROGRESSION.forEach(function(p){
+    if(!p.completed) return;
+    parFormation[p.formation] = (parFormation[p.formation] || 0) + 1;
+  });
+
+  const finies = FORMATIONS.filter(function(f){
+    return (parFormation[f.cle] || 0) >= f.lecons;
+  });
+  if(!finies.length) return '';
+
+  const cartes = finies.map(function(f){
+    return '<button class="borne-c" onclick="ouvrirCarte(\'' + f.cle + '\', ' + f.lecons +
+      ', ' + JSON.stringify(PRENOM) + ', ' + semainesDepuisDebut() + ')">' +
+      '<div class="borne-num">Étape franchie</div>' +
+      '<div class="borne-nom">' + echapper(f.nom) + '</div>' +
+      '<div class="borne-meta">' + f.lecons + ' leçons · ' + f.lecons + ' actions</div>' +
+    '</button>';
+  }).join('');
+
+  return '<div class="bloc bornes-plantees"><h2>Les bornes que tu as plantées</h2>' +
+    '<p class="bloc-sous">Une par formation achevée. Clique pour rouvrir la carte et l\'enregistrer.</p>' +
+    '<div class="bornes">' + cartes + '</div></div>';
+}
+
 function rendre(){
   const app = document.getElementById('app');
   const ev = chronologie();
@@ -391,6 +428,8 @@ function rendre(){
       '<p class="bloc-sous">Chaque notion listée ici correspond à une leçon que tu as validée par le quiz, puis à une action que tu as faite dans la vraie vie.</p>' +
       blocsNotions + '</div>' : '') +
 
+    blocBornes() +
+
     blocJalons +
 
     '<div class="actions-bas">' +
@@ -428,6 +467,7 @@ function rendre(){
   rendre();
 })();
 </script>
+<script src="accomplissement.js"></script>
 <script src="retours.js" defer></script>
 </body>
 </html>

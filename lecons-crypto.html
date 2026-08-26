@@ -423,7 +423,7 @@ script:[
 "Le principe est déroutant au premier abord. Tes crypto-actifs ne sont stockés nulle part : <u>ils sont inscrits sur la blockchain, et ce que tu détiens est la clé qui permet de les déplacer.</u> Un portefeuille ne contient donc pas d'actifs, il contient une clé.",
 "<strong>La clé publique</strong> est ton adresse de réception, que tu peux communiquer sans risque. <strong>La clé privée</strong> autorise les mouvements : quiconque la détient contrôle les actifs, définitivement et sans recours.",
 "<strong>La phrase de récupération</strong>, souvent appelée <em>seed phrase</em>, est une suite de 12 ou 24 mots générée à la création du portefeuille. Elle permet de régénérer l'ensemble des clés. C'est donc <strong>l'élément le plus sensible qui soit</strong> : qui la possède possède tout, et qui la perd perd tout.",
-"<figure class=\"schema\"><svg viewBox=\"0 0 700 338\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"20\" y=\"24\" width=\"190\" height=\"54\" rx=\"9\" fill=\"#EFF0EA\" stroke=\"#12212B\" stroke-width=\"1.5\"/><text x=\"115\" y=\"47\" text-anchor=\"middle\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14.5\" font-weight=\"600\" fill=\"#12212B\">Ta phrase de récupération</text><text x=\"115\" y=\"65\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"12\" fill=\"#7A8A93\">12 ou 24 mots</text><path d=\"M210 51 C 270 51, 270 66, 330 66\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"66\" r=\"4\" fill=\"#B8862F\"/><rect x=\"344\" y=\"43\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#F6EFE0\" stroke=\"#B8862F\" stroke-width=\"1.3\"/><text x=\"360\" y=\"64\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Sur papier ou métal</text><text x=\"664\" y=\"64\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#B8862F\">jamais numérique</text><path d=\"M210 51 C 270 51, 270 128, 330 128\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"128\" r=\"4\" fill=\"#B8862F\"/><rect x=\"344\" y=\"105\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#F6EFE0\" stroke=\"#B8862F\" stroke-width=\"1.3\"/><text x=\"360\" y=\"126\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Plusieurs copies, lieux distincts</text><text x=\"664\" y=\"126\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#B8862F\">feu, eau, vol</text><path d=\"M210 51 C 270 51, 270 190, 330 190\" fill=\"none\" stroke=\"#A24332\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"190\" r=\"4\" fill=\"#A24332\"/><rect x=\"344\" y=\"167\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#F8EDEA\" stroke=\"#A24332\" stroke-width=\"1.3\"/><text x=\"360\" y=\"188\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Jamais communiquée</text><text x=\"664\" y=\"188\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#A24332\">aucun support ne la demande</text><path d=\"M210 51 C 270 51, 270 252, 330 252\" fill=\"none\" stroke=\"#1E4B3C\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"252\" r=\"4\" fill=\"#1E4B3C\"/><rect x=\"344\" y=\"229\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#E7EFEA\" stroke=\"#1E4B3C\" stroke-width=\"1.3\"/><text x=\"360\" y=\"250\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Testée avant tout transfert</text><text x=\"664\" y=\"250\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#1E4B3C\">une sauvegarde non testée n'en est pas une</text></svg><figcaption>Qui la possède possède tout, qui la perd perd tout. C'est l'élément le plus sensible de toute la formation.</figcaption></figure>",
+"<figure class=\"schema\"><svg viewBox=\"0 0 700 338\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"20\" y=\"24\" width=\"190\" height=\"54\" rx=\"9\" fill=\"#EFF0EA\" stroke=\"#12212B\" stroke-width=\"1.5\"/><text x=\"115\" y=\"47\" text-anchor=\"middle\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14.5\" font-weight=\"600\" fill=\"#12212B\">Ta phrase de récupération</text><text x=\"115\" y=\"65\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"12\" fill=\"#7A8A93\">12 ou 24 mots</text><path d=\"M210 51 C 270 51, 270 66, 330 66\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"66\" r=\"4\" fill=\"#B8862F\"/><rect x=\"344\" y=\"43\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#F6EFE0\" stroke=\"#B8862F\" stroke-width=\"1.3\"/><text x=\"360\" y=\"64\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Sur papier ou métal</text><text x=\"664\" y=\"64\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#B8862F\">jamais numérique</text><path d=\"M210 51 C 270 51, 270 128, 330 128\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"128\" r=\"4\" fill=\"#B8862F\"/><rect x=\"344\" y=\"105\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#F6EFE0\" stroke=\"#B8862F\" stroke-width=\"1.3\"/><text x=\"360\" y=\"120\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Plusieurs copies, lieux distincts</text><text x=\"360\" y=\"137\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11\" fill=\"#B8862F\">feu, eau, vol</text><path d=\"M210 51 C 270 51, 270 190, 330 190\" fill=\"none\" stroke=\"#A24332\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"190\" r=\"4\" fill=\"#A24332\"/><rect x=\"344\" y=\"167\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#F8EDEA\" stroke=\"#A24332\" stroke-width=\"1.3\"/><text x=\"360\" y=\"182\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Jamais communiquée</text><text x=\"360\" y=\"199\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11\" fill=\"#A24332\">aucun support ne la demande</text><path d=\"M210 51 C 270 51, 270 252, 330 252\" fill=\"none\" stroke=\"#1E4B3C\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"252\" r=\"4\" fill=\"#1E4B3C\"/><rect x=\"344\" y=\"229\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#E7EFEA\" stroke=\"#1E4B3C\" stroke-width=\"1.3\"/><text x=\"360\" y=\"244\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Testée avant tout transfert</text><text x=\"360\" y=\"261\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11\" fill=\"#1E4B3C\">une sauvegarde non testée n'en est pas une</text></svg><figcaption>Qui la possède possède tout, qui la perd perd tout. C'est l'élément le plus sensible de toute la formation.</figcaption></figure>",
 "Quatre règles de conservation, et aucune n'est optionnelle. <strong>1. Jamais sous forme numérique.</strong> Pas de photo, pas de fichier, pas de cloud, pas de gestionnaire de mots de passe. Une phrase de récupération se note sur papier, ou mieux sur métal.",
 "<strong>2. Plusieurs copies, en lieux différents.</strong> Un incendie ou un dégât des eaux détruit un support unique. <strong>3. Jamais communiquée à qui que ce soit</strong>, y compris à un support technique : <u>aucun support légitime ne demandera jamais ta phrase de récupération.</u> <strong>4. Vérifiée</strong> : teste la restauration avec un petit montant avant d'y placer une somme importante.",
 "Un point que presque personne n'anticipe et qui mérite une vraie réflexion : <strong>que se passe-t-il si tu disparais ?</strong> Sans transmission organisée, ces actifs sont perdus pour tes proches, définitivement. Prévoir cela suppose un dispositif réfléchi, qui protège de ton vivant tout en permettant l'accès après.",
@@ -869,6 +869,34 @@ async function toggleAction(){
   }
   await setProgressServer(current, newValue);
   render();
+
+  /* La formation vient-elle de s'achever ? Si oui, on plante la borne.
+     On ne la montre qu'au moment du basculement, jamais en revenant
+     sur une leçon déjà validée. */
+  if(newValue) verifierFinDeParcours();
+}
+
+async function verifierFinDeParcours(){
+  const progress = getProgress();
+  const faites = Object.keys(progress).filter(function(k){ return progress[k]; }).length;
+  if(faites < LESSONS.length) return;
+
+  let prenom = '';
+  let semaines = 1;
+  try {
+    const { data } = await sb.from('profiles').select('prenom').eq('id', CURRENT_USER.id).maybeSingle();
+    if(data && data.prenom) prenom = data.prenom;
+
+    const { data: dates } = await sb.from('lesson_progress')
+      .select('completed_at').eq('user_id', CURRENT_USER.id).eq('formation', FORMATION)
+      .not('completed_at', 'is', null).order('completed_at', { ascending: true }).limit(1);
+    if(dates && dates.length){
+      const debut = new Date(dates[0].completed_at).getTime();
+      semaines = Math.max(1, Math.round((Date.now() - debut) / (7*24*3600*1000)));
+    }
+  } catch(e){ console.warn('Carte : données partielles', e); }
+
+  ouvrirCarte(FORMATION, LESSONS.length, prenom, semaines);
 }
 
 async function boot(){
@@ -900,5 +928,6 @@ boot();
   <a href="mentions-legales.html#cgv" style="color:var(--ink-muted);margin:0 10px;">CGV</a>
 </div>
 <script src="retours.js" defer></script>
+<script src="accomplissement.js"></script>
 </body>
 </html>

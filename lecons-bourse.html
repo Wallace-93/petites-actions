@@ -990,6 +990,34 @@ async function toggleAction(){
   }
   await setProgressServer(current, newValue);
   render();
+
+  /* La formation vient-elle de s'achever ? Si oui, on plante la borne.
+     On ne la montre qu'au moment du basculement, jamais en revenant
+     sur une leçon déjà validée. */
+  if(newValue) verifierFinDeParcours();
+}
+
+async function verifierFinDeParcours(){
+  const progress = getProgress();
+  const faites = Object.keys(progress).filter(function(k){ return progress[k]; }).length;
+  if(faites < LESSONS.length) return;
+
+  let prenom = '';
+  let semaines = 1;
+  try {
+    const { data } = await sb.from('profiles').select('prenom').eq('id', CURRENT_USER.id).maybeSingle();
+    if(data && data.prenom) prenom = data.prenom;
+
+    const { data: dates } = await sb.from('lesson_progress')
+      .select('completed_at').eq('user_id', CURRENT_USER.id).eq('formation', FORMATION)
+      .not('completed_at', 'is', null).order('completed_at', { ascending: true }).limit(1);
+    if(dates && dates.length){
+      const debut = new Date(dates[0].completed_at).getTime();
+      semaines = Math.max(1, Math.round((Date.now() - debut) / (7*24*3600*1000)));
+    }
+  } catch(e){ console.warn('Carte : données partielles', e); }
+
+  ouvrirCarte(FORMATION, LESSONS.length, prenom, semaines);
 }
 
 async function boot(){
@@ -1021,5 +1049,6 @@ boot();
   <a href="mentions-legales.html#cgv" style="color:var(--ink-muted);margin:0 10px;">CGV</a>
 </div>
 <script src="retours.js" defer></script>
+<script src="accomplissement.js"></script>
 </body>
 </html>
