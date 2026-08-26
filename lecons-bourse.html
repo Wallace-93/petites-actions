@@ -172,6 +172,21 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
   .borne{left:-26px;}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none !important;}}
+
+/* ===== Schemas des lecons ===== */
+.schema{margin:26px 0;padding:20px 18px 14px;border:1px solid var(--bg-line,#DCDDD3);
+  border-radius:12px;background:var(--bg,#FCFBF8);}
+.schema svg{width:100%;height:auto;display:block;}
+.schema figcaption{font-family:var(--mono,monospace);font-size:11.5px;line-height:1.55;
+  color:var(--ink-muted,#7A8A93);margin-top:14px;padding-top:12px;
+  border-top:1px solid var(--bg-line,#DCDDD3);}
+@media(max-width:620px){.schema{padding:14px 12px 10px;margin:20px -6px;}}
+
+.script-text strong{color:var(--ink,#12212B);font-weight:700;}
+.script-text em{font-style:italic;color:var(--ink-soft,#43555F);}
+.script-text u{text-decoration:none;background:linear-gradient(transparent 62%,var(--amber-pale,#F6EFE0) 62%);
+  box-shadow:inset 0 -1px 0 var(--amber,#B8862F);}
+.script-text p + p{margin-top:14px;}
 </style>
 </head>
 <body>
@@ -196,341 +211,501 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
 <script>
 /* ============ DONNÉES DES 24 LEÇONS — PREMIERS PAS EN BOURSE ============ */
 const LESSONS = [
-{module:"Module 1 — Comment fonctionne la bourse ?", title:"La bourse expliquée simplement", duration:"9 min",
+{module:"Module 1 — Comment fonctionne la bourse", title:"La bourse expliquée simplement", duration:"5 min",
 script:[
-"La bourse est un marché où des acheteurs et des vendeurs échangent des titres financiers, actions, obligations, fonds. Elle répond à un besoin fondamental : les entreprises ont besoin de capitaux pour se développer.",
-"En achetant une action, vous devenez copropriétaire d'une fraction de l'entreprise. Si elle prospère, votre part prend de la valeur ; si elle distribue des bénéfices, vous en recevez une partie sous forme de dividendes.",
-"La bourse n'est pas un casino. Un casino a une espérance négative pour le joueur. La bourse a une espérance positive sur le long terme, car les entreprises créent de la valeur et l'économie croît.",
-"Sur les 100 dernières années, les marchés actions mondiaux ont progressé en moyenne de 7 à 10% par an, malgré les guerres, les crises, les krachs."
+"La bourse souffre d'une réputation double : celle du casino pour les uns, celle du club réservé pour les autres. Les 2 sont fausses, et cette leçon explique ce qu'elle est réellement.",
+"<strong>Une action est une part d'entreprise.</strong> Rien de plus. Détenir une action, c'est posséder une fraction minuscule d'une société : de ses usines, de ses marques, de ses contrats et de ses bénéfices futurs. Si l'entreprise gagne de l'argent, tu y as droit à proportion de ce que tu détiens.",
+"La bourse est simplement <strong>le lieu où ces parts s'échangent</strong>. Elle existe parce qu'une entreprise a besoin de capitaux pour se développer, et que des gens acceptent de les lui fournir en échange d'une part de ce qu'elle produira. Ce mécanisme a financé la quasi-totalité des entreprises que tu connais.",
+"D'où vient alors l'image du casino ? De la confusion entre 2 activités qui n'ont presque rien en commun. <strong>Investir</strong>, c'est acheter une part d'entreprise pour la conserver des années, en pariant sur sa capacité à produire de la valeur. <strong>Spéculer</strong>, c'est acheter pour revendre plus cher à court terme, en pariant sur le mouvement du prix. <u>Le premier repose sur l'économie réelle, le second sur l'anticipation du comportement des autres.</u>",
+"Cette formation ne traite que du premier, et il faut le dire clairement : <strong>tout ce qui promet des gains rapides relève du second</strong>, avec des résultats bien documentés. Les études sur les particuliers actifs à court terme montrent qu'une large majorité y perd de l'argent.",
+"Un mot sur le prix, parce qu'il déroute souvent. Le cours d'une action ne reflète pas ce que l'entreprise vaut aujourd'hui, mais <strong>ce que les acheteurs et les vendeurs anticipent de son avenir.</strong> C'est pourquoi une action peut baisser alors que l'entreprise annonce des bénéfices : le marché attendait mieux. Comprendre cela évite beaucoup d'incompréhensions.",
+"Retiens l'essentiel : la bourse n'est ni un jeu ni un privilège. C'est un mécanisme de financement, accessible avec quelques dizaines d'euros, dont le résultat dépend surtout de la durée pendant laquelle tu acceptes de ne pas y toucher."
 ],
 quiz:[
-{q:"Qu'est-ce qu'une action ?",opts:["Un prêt accordé à une entreprise","Une fraction de propriété d'une entreprise donnant droit à une part des bénéfices","Un contrat d'assurance financier","Un bon de réduction"],correct:1,explain:"L'actionnaire participe aux succès de l'entreprise via la hausse du cours et les dividendes."},
-{q:"Différence entre marché primaire et secondaire ?",opts:["Le primaire est réservé aux grandes entreprises","Le primaire est celui où l'entreprise lève des capitaux, le secondaire celui des échanges entre investisseurs","Le primaire concerne les obligations","Le primaire est plus sûr"],correct:1,explain:"Sur le marché secondaire, l'entreprise ne reçoit rien, ce sont des échanges entre investisseurs."},
-{q:"Pourquoi la bourse a-t-elle une espérance positive contrairement à un casino ?",opts:["Les autorités protègent les investisseurs","Les entreprises créent de la valeur réelle et l'économie croît dans le temps","Les cours sont manipulés à la hausse","Les dividendes compensent toujours les pertes"],correct:1,explain:"Sur le long terme, les marchés reflètent la création de valeur réelle par les entreprises."}
+{q:"Qu'est-ce qu'une action ?",opts:["Un prêt fait à une entreprise","Une part de propriété d'une entreprise","Une promesse de rendement","Un contrat d'assurance"],correct:1,
+explain:"Tu possèdes une fraction de ses usines, de ses marques et de ses bénéfices futurs."},
+{q:"Qu'est-ce qui distingue investir de spéculer ?",opts:["Le montant engagé","L'horizon : la valeur produite par l'entreprise contre le mouvement du prix à court terme","Le type de courtier","La fiscalité applicable"],correct:1,
+explain:"Le premier repose sur l'économie réelle, le second sur l'anticipation du comportement des autres."},
+{q:"Pourquoi une action peut-elle baisser malgré de bons résultats ?",opts:["Par erreur du marché","Parce que le cours reflète les anticipations, et que le marché attendait mieux","Parce que les dividendes sont versés","Parce que la bourse est irrationnelle"],correct:1,
+explain:"Le prix intègre l'avenir espéré, pas la performance passée. C'est la source d'incompréhension la plus fréquente."}
 ],
-action:"Cherche le cours du CAC 40 il y a 20 ans et compare-le à aujourd'hui. Calcule le rendement total sur cette période."
+action:"Choisis une entreprise dont tu utilises les produits chaque semaine. Cherche 5 minutes qui elle est, ce qu'elle vend et si elle est cotée. L'objectif n'est pas d'acheter, mais de constater que la bourse parle d'entreprises que tu connais déjà."
 },
-{module:"Module 1 — Comment fonctionne la bourse ?", title:"Pourquoi les marchés montent sur le long terme", duration:"9 min",
+{module:"Module 1 — Comment fonctionne la bourse", title:"Pourquoi les marchés montent sur le long terme", duration:"5 min",
 script:[
-"Cinq raisons expliquent pourquoi les marchés actions montent sur le long terme : la croissance économique, l'innovation constante, l'inflation qui gonfle mécaniquement les bénéfices nominaux, les dividendes réinvestis, et la sélection naturelle des indices.",
-"Les indices se renouvellent en permanence : les entreprises qui échouent sont retirées et remplacées par des plus performantes, rendant les indices structurellement plus performants que la moyenne.",
-"Ces raisons n'éliminent pas les krachs. Un marché qui monte sur le long terme peut parfaitement perdre 30 à 50% sur quelques mois. C'est normal et prévisible.",
-"Ce qui compte, c'est de comprendre que ces baisses sont temporaires et ont toujours été suivies de reprises."
+"Sur de longues périodes, les grands indices boursiers mondiaux ont progressé. Ce n'est ni une loi de la nature ni une garantie, et comprendre <em>pourquoi</em> permet de savoir dans quelles conditions cela pourrait cesser.",
+"<strong>Raison 1 : les entreprises réinvestissent leurs bénéfices.</strong> Une société qui gagne de l'argent peut le distribuer ou l'employer à se développer. Ce réinvestissement produit de nouveaux bénéfices, qui financent de nouveaux développements. C'est le même mécanisme que les intérêts composés, appliqué à l'économie productive.",
+"<strong>Raison 2 : la population et la productivité augmentent.</strong> Plus de personnes produisent et consomment, et chacune produit davantage grâce aux outils et aux connaissances accumulées. Une part de la hausse vient simplement de là.",
+"<strong>Raison 3 : l'inflation gonfle les chiffres.</strong> Les prix montent, donc les chiffres d'affaires et les bénéfices montent aussi, en euros courants. Une partie de la performance affichée n'est donc pas un enrichissement réel, ce que la formation sur la monnaie t'a appris à distinguer.",
+"<strong>Raison 4 : les indices se renouvellent.</strong> Point rarement expliqué et pourtant décisif. Un indice n'est pas une liste figée : les entreprises en difficulté en sortent, les entreprises en croissance y entrent. <u>L'indice se nettoie donc en permanence</u>, ce qui explique une part de sa progression et pourquoi il est plus robuste qu'une action isolée.",
+"Maintenant les limites, parce qu'elles comptent autant. Cette progression n'est <strong>ni régulière ni garantie</strong>. Il existe des périodes de 10 ans, et parfois davantage, sans progression. Certains marchés nationaux ont mis des décennies à retrouver un sommet. Et le passé ne dit rien de certain sur l'avenir.",
+"La conclusion pratique tient en une phrase, et c'est celle qui gouverne toute la formation : <strong>ce raisonnement ne vaut que sur des durées longues et sur un ensemble large d'entreprises.</strong> Il ne s'applique ni à une action isolée, ni à un horizon de 2 ans."
 ],
 quiz:[
-{q:"Pourquoi l'inflation contribue-t-elle à la hausse des cours boursiers ?",opts:["Elle rend les obligations moins attractives","Les revenus et bénéfices des entreprises augmentent mécaniquement en valeur nominale","Les banques centrales baissent les taux","Elle ne contribue pas à la hausse"],correct:1,explain:"Les entreprises voient leurs revenus augmenter nominalement, ce qui se traduit par des cours plus élevés."},
-{q:"Qu'est-ce que la « sélection naturelle » des marchés ?",opts:["Seuls les meilleurs investisseurs survivent","Les entreprises qui échouent sont retirées des indices et remplacées par de meilleures","Les marchés sélectionnent les meilleures périodes","Les petites entreprises remplacent les grandes"],correct:1,explain:"Ce mécanisme fait que les indices reflètent toujours les meilleures entreprises du moment."},
-{q:"Quelle attitude adopter face à un krach pour un investisseur long terme ?",opts:["Vendre rapidement","Attendre de voir jusqu'où ça descend","Maintenir sa position, les baisses ont toujours été temporaires","Acheter des obligations"],correct:2,explain:"Les investisseurs qui ont maintenu leur position pendant les crises ont toujours été récompensés."}
+{q:"Quel mécanisme rarement expliqué contribue à la hausse des indices ?",opts:["L'intervention des banques centrales","Le renouvellement permanent des entreprises qui composent l'indice","La spéculation","Les dividendes"],correct:1,
+explain:"Les entreprises en difficulté sortent, les entreprises en croissance entrent. L'indice se nettoie en continu."},
+{q:"La progression des marchés est-elle garantie ?",opts:["Oui, sur 10 ans","Non, il existe des périodes longues sans progression","Oui, si l'on diversifie","Oui, dans les pays développés"],correct:1,
+explain:"Certains marchés ont mis des décennies à retrouver un sommet. Le passé ne garantit rien."},
+{q:"À quoi s'applique ce raisonnement ?",opts:["À toute action, sur toute durée","À un ensemble large d'entreprises, sur une durée longue","Aux entreprises technologiques","Aux marchés émergents uniquement"],correct:1,
+explain:"Il ne vaut ni pour une action isolée, ni pour un horizon de 2 ans."}
 ],
-action:"Cherche le graphique du S&P 500 sur 50 ans. Identifie les 5 plus grands krachs et note leur durée de récupération."
+action:"Cherche un graphique d'un indice mondial sur 30 ans, puis regarde les périodes de baisse : 2000, 2008, 2020. Note combien de temps chacune a duré. Ce chiffre te servira le jour où tu vivras la suivante."
 },
-{module:"Module 1 — Comment fonctionne la bourse ?", title:"Actions, ETF et fonds", duration:"10 min",
+{module:"Module 1 — Comment fonctionne la bourse", title:"Actions, fonds et trackers", duration:"5 min",
 script:[
-"Une action individuelle représente une fraction de propriété d'une entreprise spécifique. Potentiel de gain élevé, mais risque de concentration important si on ne détient que quelques titres.",
-"Un ETF réplique la performance d'un indice entier : en un seul titre, vous achetez une exposition à des centaines d'entreprises. Diversification instantanée, frais très bas (0,10 à 0,30% par an), liquidité totale.",
-"Plus de 90% des fonds gérés activement sous-performent leur indice de référence sur 10 ans. La gestion active coûte cher en frais sans générer de surperformance durable.",
-"Pour un investisseur particulier qui débute, les ETF passifs sont la meilleure option dans la grande majorité des cas."
+"Trois façons d'investir en bourse coexistent, et le choix entre elles détermine à la fois ton risque et le temps que tu devras y consacrer.",
+"<strong>Acheter des actions en direct.</strong> Tu choisis toi-même les entreprises. C'est la voie la plus exigeante : elle demande d'analyser des comptes, de suivre l'actualité de chaque société, et d'accepter qu'une entreprise puisse perdre l'essentiel de sa valeur. <u>Détenir 5 actions n'est pas de la diversification</u>, c'est une concentration du risque sur 5 paris.",
+"<strong>Les fonds gérés activement.</strong> Une équipe de gestion sélectionne les titres pour toi et cherche à faire mieux que le marché. Tu délègues le travail, en contrepartie de frais annuels qui se situent fréquemment entre 1,5 et 2,5 %. Le point à connaître est documenté depuis des décennies : <strong>sur des périodes longues, une majorité de ces fonds ne parvient pas à dépasser leur indice de référence après frais.</strong>",
+"<figure class=\"schema\"><svg viewBox=\"0 0 700 228\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><text x=\"200\" y=\"20\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" letter-spacing=\"1.4\" fill=\"#1E4B3C\">FONDS INDICIEL</text><text x=\"560\" y=\"20\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" letter-spacing=\"1.4\" fill=\"#B8862F\">FONDS GÉRÉ ACTIVEMENT</text><text x=\"20\" y=\"44\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Frais annuels</text><rect x=\"20\" y=\"54\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"54\" width=\"561\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"581\" y=\"54\" width=\"99\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"67\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\">0,2 à 0,4 %</text><text x=\"672\" y=\"67\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\">1,5 à 2,5 %</text><text x=\"20\" y=\"100\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Objectif</text><rect x=\"20\" y=\"110\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"110\" width=\"330\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"350\" y=\"110\" width=\"330\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"123\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\">reproduire l'indice</text><text x=\"672\" y=\"123\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\">battre l'indice</text><text x=\"20\" y=\"156\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Résultat après frais sur longue durée</text><rect x=\"20\" y=\"166\" width=\"660\" height=\"18\" rx=\"5\" fill=\"#EFF0EA\"/><rect x=\"20\" y=\"166\" width=\"475\" height=\"18\" rx=\"5\" fill=\"#E7EFEA\"/><rect x=\"495\" y=\"166\" width=\"185\" height=\"18\" rx=\"5\" fill=\"#F6EFE0\"/><text x=\"28\" y=\"179\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#1E4B3C\">suit l'indice</text><text x=\"672\" y=\"179\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"11.5\" fill=\"#8E661F\">majorité en dessous</text></svg><figcaption>L'écart de frais paraît anodin. Sur 20 ans, 1 point de plus ampute le résultat final d'environ 12 %.</figcaption></figure>",
+"<strong>Les fonds indiciels, souvent appelés trackers ou ETF.</strong> Ils ne cherchent pas à battre le marché, seulement à le reproduire. Un fonds qui suit un indice mondial détient des centaines d'entreprises dans des dizaines de pays. Leurs frais annuels sont bien plus faibles, souvent entre 0,2 et 0,4 %.",
+"Cet écart de frais paraît anodin et il ne l'est pas. <strong>Sur 20 ans, 1 point de frais annuel en plus ampute le résultat final d'environ 12 %</strong>, soit près d'un quart des gains, comme le montre le comparateur disponible dans les outils NiouDem.",
+"Il faut préciser une chose pour rester honnête : <em>un fonds indiciel ne protège pas des baisses.</em> Si les marchés mondiaux chutent de 30 %, il chute de 30 %. Ce qu'il apporte n'est pas la sécurité, c'est <strong>la disparition du risque lié à une entreprise particulière</strong>, ce qui est très différent.",
+"Ce module continuera sur les fonds indiciels, non parce qu'ils seraient supérieurs en toute circonstance, mais parce qu'ils demandent le moins de compétences et de temps, ce qui correspond à quelqu'un qui débute."
 ],
 quiz:[
-{q:"Quel est le principal risque des actions individuelles pour un débutant ?",opts:["Les frais de transaction","La difficulté d'accès aux marchés","La concentration du risque sur peu d'entreprises","La faible liquidité"],correct:2,explain:"Si une entreprise fait faillite ou sous-performe, l'impact sur le portefeuille peut être dévastateur."},
-{q:"Qu'est-ce qui distingue un ETF d'un fonds actif ?",opts:["Un ETF investit uniquement en actions","Un ETF réplique passivement un indice avec des frais bas, un fonds actif est géré avec des frais élevés","Un ETF est réservé aux professionnels","Un ETF garantit le capital"],correct:1,explain:"La gestion active génère des frais plus élevés et sous-performe en moyenne son indice sur le long terme."},
-{q:"Quel pourcentage de fonds actifs sous-performe son indice sur 10 ans ?",opts:["Environ 50%","Environ 70%","Plus de 90%","Environ 30%"],correct:2,explain:"C'est l'argument principal en faveur de la gestion passive via les ETF."}
+{q:"Détenir 5 actions, est-ce diversifié ?",opts:["Oui, c'est suffisant","Non, c'est une concentration du risque sur 5 paris","Oui, si elles sont dans des secteurs différents","Cela dépend du montant"],correct:1,
+explain:"La diversification suppose des centaines de titres, ce qu'un particulier ne peut pas construire seul."},
+{q:"Que montrent les études sur les fonds gérés activement ?",opts:["Ils battent presque toujours leur indice","Une majorité ne dépasse pas leur indice après frais sur longue période","Ils sont plus risqués","Ils sont réservés aux professionnels"],correct:1,
+explain:"Les frais de 1,5 à 2,5 % par an pèsent lourd et sont difficiles à compenser durablement."},
+{q:"Qu'apporte réellement un fonds indiciel ?",opts:["Une protection contre les baisses","La disparition du risque lié à une entreprise particulière","Un rendement garanti","Une exonération d'impôt"],correct:1,
+explain:"Si les marchés chutent de 30 %, il chute de 30 %. Ce n'est pas de la sécurité, c'est de la diversification."}
 ],
-action:"Recherche l'ETF Amundi ou iShares MSCI World. Note ses frais annuels et compare-les à un fonds actif de ta banque."
+action:"Cherche les frais annuels du dernier produit d'épargne qu'on t'a proposé, en cherchant les mots « frais de gestion » dans la documentation. Compare-les à 0,3 %. L'écart obtenu est ce que tu paies chaque année, indépendamment de la performance."
 },
-{module:"Module 1 — Comment fonctionne la bourse ?", title:"Les indices boursiers", duration:"8 min",
+{module:"Module 1 — Comment fonctionne la bourse", title:"Les indices boursiers", duration:"5 min",
 script:[
-"Un indice boursier mesure la performance d'un groupe d'actions sélectionnées selon des critères définis, un thermomètre d'un marché. Le CAC 40 mesure les 40 plus grandes capitalisations françaises, le S&P 500 les 500 plus grandes américaines, le MSCI World plus de 1500 entreprises dans 23 pays développés.",
-"Ces indices servent de référence pour évaluer un portefeuille, et donnent une vision instantanée de l'état d'un marché.",
-"Pour un débutant, les deux indices les plus importants sont le S&P 500 et le MSCI World, qui couvrent la majorité de la capitalisation mondiale.",
-"Les grands indices sont pondérés par capitalisation boursière : dans le MSCI World, les entreprises américaines représentent environ 65% de l'indice."
+"Un indice est un panier d'entreprises dont on suit la valeur globale. Il sert de thermomètre à un marché, et de référence pour les fonds indiciels. Savoir ce que chacun contient évite l'erreur la plus fréquente des débutants.",
+"<strong>Les indices nationaux</strong> suivent les grandes entreprises d'un pays : le CAC 40 en France, une quarantaine de sociétés, ou les grands indices américains, japonais et britanniques. Leur défaut est évident une fois nommé : <u>un indice national concentre le risque sur une seule économie</u>, et parfois sur quelques secteurs dominants.",
+"<strong>Les indices régionaux</strong> couvrent une zone, comme l'Europe ou les marchés émergents. <strong>Les indices mondiaux</strong> couvrent les entreprises des pays développés, voire du monde entier, et rassemblent alors plus d'un millier de sociétés dans des dizaines de pays.",
+"Un point que presque personne ne vérifie et qui change beaucoup de choses : <strong>la pondération.</strong> La plupart des indices sont pondérés par la capitalisation, c'est-à-dire que les plus grosses entreprises y pèsent le plus. Conséquence concrète : dans un indice mondial, <u>les entreprises américaines représentent aujourd'hui une part majoritaire</u>, et un petit nombre de sociétés technologiques y pèse un poids considérable.",
+"Autrement dit, croire qu'on est diversifié mondialement en achetant un indice monde est partiellement vrai. La diversification est réelle en nombre d'entreprises, moins réelle en répartition géographique et sectorielle. <strong>Ce n'est pas un défaut caché, c'est une caractéristique à connaître.</strong>",
+"Deuxième point de vigilance : la différence entre un indice <em>prix</em> et un indice <em>rendement total</em>. Le premier ne compte que l'évolution des cours, le second réintègre les dividendes versés. L'écart entre les 2 sur longue période est très important, et beaucoup de comparaisons trouvées en ligne mélangent les 2, ce qui fausse tout.",
+"Retiens la question à poser devant n'importe quel indice : <strong>combien d'entreprises, de quels pays, et selon quelle pondération ?</strong> Ces 3 réponses figurent toujours dans la documentation du fonds qui le suit."
 ],
 quiz:[
-{q:"À quoi sert un indice boursier ?",opts:["À fixer le prix des actions individuelles","À mesurer la performance d'un groupe d'actions sélectionnées","À garantir les rendements des fonds","À réguler les marchés"],correct:1,explain:"Il sert de thermomètre d'un marché et de référence pour évaluer un portefeuille."},
-{q:"Différence entre MSCI World et MSCI ACWI ?",opts:["Le World est réservé aux professionnels","L'ACWI inclut en plus les pays émergents","Le World contient moins d'entreprises","L'ACWI est plus récent"],correct:1,explain:"Le MSCI ACWI, All Country World Index, s'étend aux pays émergents comme la Chine et le Brésil."},
-{q:"Quelle est la part approximative des entreprises américaines dans le MSCI World ?",opts:["30%","50%","65%","80%"],correct:2,explain:"En raison de la pondération par capitalisation, un ETF MSCI World expose fortement à l'économie américaine."}
+{q:"Quel est le défaut d'un indice national ?",opts:["Il est trop cher","Il concentre le risque sur une seule économie","Il ne verse pas de dividendes","Il est réservé aux résidents"],correct:1,
+explain:"Et souvent sur quelques secteurs dominants de cette économie."},
+{q:"Que signifie une pondération par capitalisation ?",opts:["Chaque entreprise pèse pareil","Les plus grosses entreprises pèsent le plus dans l'indice","La pondération change chaque jour","Les dividendes sont réinvestis"],correct:1,
+explain:"C'est pourquoi un indice mondial est majoritairement américain et fortement exposé à quelques géants."},
+{q:"Quelle différence entre indice prix et rendement total ?",opts:["Aucune","Le second réintègre les dividendes versés","Le second exclut les frais","Le premier est calculé en euros"],correct:1,
+explain:"L'écart est très important sur longue période, et beaucoup de comparaisons en ligne mélangent les 2."}
 ],
-action:"Recherche les 5 premières entreprises du CAC 40 par poids, puis celles du S&P 500. Observe la différence de profil sectoriel."
+action:"Choisis un indice mondial et cherche sa composition : nombre d'entreprises, répartition par pays, et poids des 10 premières lignes. Ces informations sont publiques et prennent 10 minutes à trouver. Beaucoup d'investisseurs ne les ont jamais regardées."
 },
-{module:"Module 2 — Choisir son broker", title:"PEA versus CTO", duration:"10 min",
+{module:"Module 2 — Choisir son enveloppe et son courtier", title:"PEA ou compte-titres", duration:"5 min",
 script:[
-"Le PEA, créé pour encourager l'investissement en actions européennes, offre après 5 ans une exonération d'impôt sur le revenu (seuls 17,2% de prélèvements sociaux restent dus). Sans PEA, la flat tax est de 30%.",
-"Plafond de versement : 150 000€. Investissements limités aux actions et ETF européens, ou ETF mondiaux via structure synthétique. Tout retrait avant 5 ans entraîne la clôture et une taxation à 30%.",
-"Le CTO n'a aucun plafond ni restriction, mais les gains sont soumis à la flat tax de 30% quelle que soit la durée de détention.",
-"Stratégie recommandée : maximiser le PEA en priorité, utiliser le CTO en complément une fois le PEA alimenté."
+"Avant de choisir quoi acheter, il faut choisir où le loger. Deux enveloppes existent pour investir en bourse, et leur différence est essentiellement fiscale.",
+"<strong>Le plan d'épargne en actions.</strong> Après 5 ans de détention, les gains ne subissent plus que les prélèvements sociaux de 17,2 %, l'impôt sur le revenu disparaissant. En contrepartie, il est plafonné à <u>150 000 €</u> de versements et ne peut contenir que des actions européennes ou des fonds éligibles. Tout retrait avant 5 ans entraîne sa clôture.",
+"<strong>Le compte-titres ordinaire.</strong> Aucun plafond, aucune restriction géographique, aucune contrainte de durée. En contrepartie, les gains sont soumis au prélèvement forfaitaire unique de 30 %, à chaque vente réalisée avec plus-value.",
+"<figure class=\"schema\"><svg viewBox=\"0 0 700 168\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><line x1=\"34\" y1=\"96\" x2=\"666\" y2=\"96\" stroke=\"#DCDDD3\" stroke-width=\"2\"/><path d=\"M666 96 l-9 -5 v10 z\" fill=\"#DCDDD3\"/><line x1=\"34\" y1=\"96\" x2=\"34\" y2=\"62\" stroke=\"#1E4B3C\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"34\" cy=\"96\" r=\"7\" fill=\"#1E4B3C\"/><circle cx=\"34\" cy=\"96\" r=\"12\" fill=\"none\" stroke=\"#1E4B3C\" stroke-width=\"1\" opacity=\".35\"/><text x=\"34\" y=\"52\" text-anchor=\"start\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Ouverture</text><text x=\"34\" y=\"122\" text-anchor=\"start\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12\" fill=\"#43555F\">Le compteur démarre</text><line x1=\"382\" y1=\"96\" x2=\"382\" y2=\"62\" stroke=\"#B8862F\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"382\" cy=\"96\" r=\"7\" fill=\"#B8862F\"/><circle cx=\"382\" cy=\"96\" r=\"12\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1\" opacity=\".35\"/><text x=\"382\" y=\"52\" text-anchor=\"middle\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">5 ans</text><text x=\"382\" y=\"122\" text-anchor=\"middle\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12\" fill=\"#43555F\">PEA : 17,2 % seulement</text><line x1=\"666\" y1=\"96\" x2=\"666\" y2=\"62\" stroke=\"#B8862F\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"666\" cy=\"96\" r=\"7\" fill=\"#B8862F\"/><circle cx=\"666\" cy=\"96\" r=\"12\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1\" opacity=\".35\"/><text x=\"666\" y=\"52\" text-anchor=\"end\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Au-delà</text><text x=\"666\" y=\"122\" text-anchor=\"end\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12\" fill=\"#43555F\">Retraits partiels libres</text></svg><figcaption>Le délai court depuis l'ouverture, pas depuis le premier versement important. Ouvrir tôt ne coûte presque rien.</figcaption></figure>",
+"La restriction européenne du PEA semble éliminatoire pour qui veut investir mondialement. Elle ne l'est pas, et voici pourquoi : <strong>certains fonds indiciels domiciliés en Europe reproduisent des indices mondiaux tout en restant éligibles au PEA</strong>, grâce à un mécanisme de réplication que nous verrons dans le module suivant. Cette possibilité existe, elle est légale, et elle est largement utilisée.",
+"Comment choisir ? La question se ramène à 3 critères. <strong>Ton horizon :</strong> si tu peux laisser l'argent au moins 5 ans, le PEA devient nettement plus favorable. <strong>Ton besoin de liberté :</strong> si tu veux investir hors d'Europe en direct, le compte-titres est nécessaire. <strong>Ton plafond :</strong> au-delà de 150 000 € de versements, le compte-titres prend le relais.",
+"Un conseil qui ne coûte rien et que presque personne n'applique : <u>le délai de 5 ans court à partir de la date d'ouverture, pas du premier versement important.</u> Ouvrir un PEA aujourd'hui avec le minimum accepté lance le compteur, même si tu n'y verses rien pendant 3 ans.",
+"Beaucoup de gens détiennent les 2 enveloppes, sans que ce soit une hésitation : le PEA pour le cœur du portefeuille de long terme, le compte-titres pour ce qui n'y entre pas."
 ],
 quiz:[
-{q:"Quel est le principal avantage fiscal du PEA après 5 ans ?",opts:["Exonération totale de tous les impôts","Exonération de l'impôt sur le revenu, seuls 17,2% de prélèvements sociaux restent dus","Réduction de 50% de la flat tax","Déductibilité des versements"],correct:1,explain:"Sans PEA, la flat tax totale serait de 30% au lieu de 17,2%."},
-{q:"Quel est le plafond de versement d'un PEA individuel ?",opts:["75 000€","100 000€","150 000€","250 000€"],correct:2,explain:"Ce plafond concerne les versements, la valeur totale peut dépasser ce montant grâce à la performance."},
-{q:"Pourquoi peut-on investir dans un ETF MSCI World via un PEA ?",opts:["La règle ne s'applique pas aux ETF","Certains ETF utilisent une structure synthétique domiciliée en Europe","Le MSCI World contient une majorité d'entreprises européennes","Les gestionnaires ont une dérogation"],correct:1,explain:"Cette structure technique permet de bénéficier de la diversification mondiale et de l'avantage fiscal du PEA."}
+{q:"Quelle est la fiscalité du PEA après 5 ans ?",opts:["Exonération totale","17,2 % de prélèvements sociaux uniquement","30 % comme le compte-titres","12,8 % d'impôt seulement"],correct:1,
+explain:"L'impôt sur le revenu disparaît, ce qui représente 12,8 points d'économie sur les gains."},
+{q:"La restriction européenne empêche-t-elle d'investir mondialement ?",opts:["Oui, totalement","Non, certains fonds éligibles reproduisent des indices mondiaux","Oui, sauf pour les gros portefeuilles","Uniquement pour les actions américaines"],correct:1,
+explain:"Un mécanisme de réplication permet cette éligibilité, et il est largement utilisé."},
+{q:"À partir de quand court le délai de 5 ans ?",opts:["Du premier versement important","De la date d'ouverture du plan","Du premier achat de titres","De la première année fiscale complète"],correct:1,
+explain:"Ouvrir avec le minimum accepté lance le compteur, même sans verser davantage pendant des années."}
 ],
-action:"Compare les offres PEA de Fortuneo, Boursorama et Saxo Banque : frais de courtage, frais de gestion, ETF disponibles."
+action:"Vérifie si tu détiens déjà un PEA et depuis quand. Si tu n'en as pas et que tu envisages d'investir un jour, note que l'ouverture prend une vingtaine de minutes et qu'elle lance un compteur que rien ne rattrape ensuite."
 },
-{module:"Module 2 — Choisir son broker", title:"Comparatif des meilleurs courtiers", duration:"9 min",
+{module:"Module 2 — Choisir son enveloppe et son courtier", title:"Comment comparer les courtiers", duration:"5 min",
 script:[
-"Trois catégories de courtiers en France. Les banques traditionnelles ont des frais 2 à 5 fois plus élevés que les courtiers en ligne, un manque à gagner réel sur le long terme.",
-"Les courtiers en ligne (Boursorama, Fortuneo, Bourse Direct) offrent des frais compétitifs. Les néo-courtiers (Trade Republic, Degiro) proposent parfois zéro frais de courtage sur les ETF, mais une offre parfois moins large.",
-"Trois critères de sélection : les frais de courtage (rédhibitoires si fixes et élevés pour de petits montants), les ETF disponibles, et la régulation (AMF, ségrégation des actifs).",
-"Pour commencer, Fortuneo ou Boursorama sont deux choix sûrs et bien établis en France."
+"Cette leçon ne classe aucun établissement et n'en recommande aucun. Elle donne les critères qui permettent de comparer, parce que le paysage change chaque année et qu'une liste serait périmée avant d'être utile.",
+"<strong>Critère 1 : les frais de courtage.</strong> C'est ce que tu paies à chaque ordre passé. Les écarts sont considérables, de quelques dizaines de centimes à plusieurs euros par ordre. Pour un investisseur régulier qui passe un ordre par mois, <u>un écart de 3 € par ordre représente 36 € par an</u>, ce qui pèse fortement sur de petits versements.",
+"<strong>Critère 2 : les frais de garde et de tenue de compte.</strong> Certains établissements facturent la simple détention des titres, d'autres non. Ces frais sont particulièrement pénalisants parce qu'ils s'appliquent que tu agisses ou non.",
+"<strong>Critère 3 : l'univers disponible.</strong> Tous les courtiers ne proposent pas les mêmes fonds. Vérifie que ceux qui t'intéressent sont accessibles, et à quel montant minimum par ordre.",
+"<strong>Critère 4 : le versement programmé.</strong> Point souvent négligé et pourtant décisif pour la méthode enseignée ici. Certains courtiers permettent d'automatiser un investissement mensuel, d'autres non. <strong>Sans automatisation, la régularité repose sur ta volonté</strong>, et tu as appris dans la formation sur la psychologie ce que vaut la volonté au mauvais moment.",
+"<strong>Critère 5 : la solidité et la protection.</strong> Vérifie que l'établissement est agréé pour exercer en France et qu'il relève d'un mécanisme de garantie des titres. Les titres que tu détiens t'appartiennent et sont ségrégués des comptes du courtier, mais l'agrément reste la première vérification à faire.",
+"<strong>Critère 6 : la fiscalité gérée ou non.</strong> Certains courtiers établissent l'imprimé fiscal unique et préremplissent tes obligations déclaratives, d'autres te laissent tout calculer. Pour un compte-titres actif, cette différence représente plusieurs heures par an.",
+"Une mise en garde pour finir. <strong>Méfie-toi des comparatifs en ligne qui affichent des liens de parrainage.</strong> Le classement y suit souvent la rémunération plutôt que la qualité. Compare toi-même sur ces 6 critères : cela prend 1 heure et te concerne pour 20 ans."
 ],
 quiz:[
-{q:"Pourquoi les banques traditionnelles sont-elles moins recommandées pour investir ?",opts:["Elles n'offrent pas de PEA","Leurs frais sont 2 à 5 fois plus élevés que les courtiers en ligne","Leurs plateformes sont moins sécurisées","Elles n'ont pas accès aux marchés internationaux"],correct:1,explain:"Sur le long terme, ces frais supplémentaires représentent un manque à gagner réel."},
-{q:"Qu'est-ce que la ségrégation des actifs chez un courtier ?",opts:["La séparation selon le niveau de risque","La séparation entre actifs des clients et actifs propres du courtier","La protection contre la volatilité","La répartition automatique des actifs"],correct:1,explain:"En cas de faillite du courtier, les actifs des clients ne peuvent pas être saisis."},
-{q:"Pour un investisseur à 100€/mois, quel niveau de frais fixes par ordre est rédhibitoire ?",opts:["1€","5€","10€","0,5%"],correct:2,explain:"10€ sur 100€ représentent 10% de frais immédiatement ponctionnés, clairement rédhibitoire."}
+{q:"Pourquoi le versement programmé est-il un critère décisif ?",opts:["Il réduit les frais","Sans automatisation, la régularité repose sur la volonté","Il est obligatoire pour le PEA","Il améliore le rendement"],correct:1,
+explain:"Et la volonté est précisément ce qui manque pendant les périodes de baisse, quand il faudrait continuer à verser."},
+{q:"Quels frais s'appliquent même sans agir ?",opts:["Les frais de courtage","Les frais de garde et de tenue de compte","Les frais de transfert","Aucun"],correct:1,
+explain:"C'est ce qui les rend particulièrement pénalisants pour un investisseur passif."},
+{q:"Que penser des comparatifs en ligne ?",opts:["Ils sont neutres et fiables","Beaucoup affichent des liens de parrainage et classent selon leur rémunération","Ils sont interdits","Ils sont établis par les autorités"],correct:1,
+explain:"Comparer soi-même sur 6 critères prend 1 heure et engage 20 ans de détention."}
 ],
-action:"Trouve la grille tarifaire PEA de Fortuneo ou Boursorama. Note le coût d'un ordre de 100€ et compare à ta banque actuelle."
+action:"Établis un tableau à 6 colonnes, une par critère, et compare 3 établissements de ton choix. N'utilise que leurs documents tarifaires officiels, jamais un comparatif. Le tableau obtenu vaut mieux que n'importe quel classement."
 },
-{module:"Module 2 — Choisir son broker", title:"Ouvrir son PEA pas à pas", duration:"8 min",
+{module:"Module 2 — Choisir son enveloppe et son courtier", title:"Ouvrir son plan, étape par étape", duration:"5 min",
 script:[
-"Avec un courtier en ligne, l'ouverture prend 15 à 30 minutes. Étapes : choisir son courtier, rassembler pièce d'identité et justificatif de domicile, remplir le formulaire en ligne, vérification d'identité (procédure KYC), attendre la validation (24-72h).",
-"Une fois validé : effectuer un premier virement, même petit, puis configurer un virement automatique mensuel vers le PEA.",
-"Point important : l'ouverture du PEA fait démarrer le compteur des 5 ans. Plus tôt vous l'ouvrez, même à 0€, plus tôt vous bénéficierez de l'avantage fiscal total.",
-"Ouvrez votre PEA maintenant, même sans capital immédiat à y investir."
+"L'ouverture d'un plan d'épargne en actions bloque beaucoup de gens, alors qu'elle prend une vingtaine de minutes. Voici le déroulé complet, pour supprimer l'inconnu.",
+"<strong>Étape 1 : les pièces à préparer.</strong> Une pièce d'identité en cours de validité, un justificatif de domicile de moins de 3 mois, un relevé d'identité bancaire, et parfois un justificatif de revenus ou de situation professionnelle. Les rassembler avant de commencer évite d'abandonner en cours de route, ce qui est la première cause d'échec.",
+"<strong>Étape 2 : le questionnaire de connaissance.</strong> L'établissement est tenu de t'interroger sur ton expérience, tes objectifs et ta tolérance au risque. Ce n'est ni un examen ni une formalité : <u>réponds honnêtement</u>, y compris pour dire que tu débutes. Un questionnaire faussé conduit à te proposer des produits inadaptés, et il te prive d'une protection prévue pour toi.",
+"<strong>Étape 3 : le versement initial.</strong> Souvent quelques dizaines d'euros suffisent, parfois moins. Rappelle-toi que l'objectif de ce premier versement n'est pas d'investir, c'est de <strong>lancer le compteur des 5 ans.</strong>",
+"<strong>Étape 4 : la validation.</strong> Comptez de quelques heures à quelques jours selon l'établissement. Tu recevras un numéro de compte et des identifiants.",
+"<strong>Étape 5 : le premier ordre.</strong> Il se passe depuis l'interface, en cherchant le fonds par son identifiant, puis en choisissant le type d'ordre. Retiens 2 types seulement : <strong>l'ordre au marché</strong>, exécuté immédiatement au prix disponible, et <strong>l'ordre à cours limité</strong>, exécuté seulement si le prix atteint la limite que tu fixes. <u>Pour un investissement régulier de long terme, l'ordre à cours limité évite les mauvaises surprises</u> sur les fonds peu échangés.",
+"Une chose à savoir pour ne pas s'inquiéter : entre le moment où tu passes ton ordre et son exécution, quelques minutes à quelques heures peuvent s'écouler selon le marché et l'heure. C'est normal, et l'interface indique l'état de l'ordre.",
+"Dernier point, plus important que tous les autres : <strong>le premier ordre est celui qui coûte le plus d'effort psychologique et le moins d'argent.</strong> Fais-le avec un montant volontairement petit. Ce n'est pas un investissement, c'est un apprentissage."
 ],
 quiz:[
-{q:"Quels documents sont nécessaires pour ouvrir un PEA en ligne ?",opts:["Fiche de paie et avis d'imposition","Pièce d'identité, justificatif de domicile de moins de 3 mois, et RIB","Attestation d'employeur","Pièce d'identité et justificatif de revenus"],correct:1,explain:"C'est tout ce qui est nécessaire pour l'ouverture en ligne."},
-{q:"Pourquoi ouvrir son PEA tôt même sans capital disponible ?",opts:["Pour les offres de bienvenue","Le délai de 5 ans commence dès l'ouverture du compte","Pour réserver sa place avant les plafonds","Pour les meilleurs cours d'entrée"],correct:1,explain:"Le compteur des 5 ans démarre dès l'ouverture, indépendamment des versements."},
-{q:"Qu'est-ce que la procédure KYC ?",opts:["Une évaluation des connaissances financières","Une vérification d'identité imposée par la réglementation","Un questionnaire de satisfaction","Une validation de la situation financière"],correct:1,explain:"Know Your Customer vise à prévenir le blanchiment d'argent et le financement du terrorisme."}
+{q:"Que faut-il faire avant de commencer l'ouverture ?",opts:["Choisir ses fonds","Rassembler toutes les pièces justificatives","Prévenir sa banque actuelle","Calculer sa fiscalité"],correct:1,
+explain:"L'abandon en cours de route faute de justificatif est la première cause d'échec de l'ouverture."},
+{q:"Comment répondre au questionnaire de connaissance ?",opts:["En surestimant son expérience pour accéder à plus de produits","Honnêtement, y compris pour dire qu'on débute","En laissant le conseiller le remplir","Peu importe, il est indicatif"],correct:1,
+explain:"Un questionnaire faussé conduit à des produits inadaptés et te prive d'une protection prévue pour toi."},
+{q:"Quel type d'ordre convient à un investissement régulier ?",opts:["L'ordre au marché systématiquement","L'ordre à cours limité, qui évite les mauvaises surprises","L'ordre à seuil de déclenchement","Peu importe"],correct:1,
+explain:"Sur les fonds peu échangés, le prix d'exécution peut s'écarter sensiblement de celui affiché."}
 ],
-action:"Si tu n'as pas encore de PEA, lance la procédure d'ouverture aujourd'hui. Sinon, vérifie que ton virement automatique est bien configuré."
+action:"Rassemble ce soir tes 3 justificatifs dans un dossier sur ton ordinateur : identité, domicile, relevé bancaire. Tu n'ouvres rien ce soir. Mais le jour où tu décideras, l'obstacle principal aura déjà disparu."
 },
-{module:"Module 2 — Choisir son broker", title:"Ouvrir votre compte", duration:"7 min",
+{module:"Module 2 — Choisir son enveloppe et son courtier", title:"Passer ton premier ordre", duration:"5 min",
 script:[
-"Trois conseils pratiques pour l'ouverture : choisissez un moment avec 30 minutes devant vous sans être pressé, n'hésitez pas trop longtemps entre deux bons courtiers, répondez honnêtement au questionnaire de profil investisseur.",
-"Une fois le compte ouvert : familiarisez-vous avec l'interface avant d'investir, explorez où se trouvent les ETF et comment passer un ordre.",
-"Stockez vos identifiants dans un gestionnaire de mots de passe sécurisé, jamais dans un fichier non protégé.",
-"Le compte ouvert, vous avez franchi l'obstacle principal. Tout le reste est de la méthode."
+"Cette leçon est la plus courte en explications et la plus importante en effet. Elle consiste à franchir le seul obstacle qui sépare réellement quelqu'un qui a lu de quelqu'un qui investit.",
+"<strong>Le montant : petit, volontairement.</strong> 50 € suffisent, 20 € aussi selon les frais. Ce premier ordre ne vise aucun rendement. Il vise à <u>transformer une inquiétude abstraite en geste connu.</u>",
+"Ce que tu vas ressentir mérite d'être annoncé, parce que c'est universel et que personne ne le dit. Au moment de valider, tu auras un doute : le sentiment de faire quelque chose d'irréversible et de mal maîtrisé. <strong>Ce doute n'est pas un signal d'alerte, c'est la sensation normale d'une première fois.</strong> Il disparaît au deuxième ordre.",
+"Le déroulé pratique tient en 5 gestes. Tu te connectes, tu cherches le fonds par son identifiant, tu saisis le montant ou le nombre de parts, tu choisis le type d'ordre, tu valides. Un récapitulatif s'affiche avant confirmation, avec les frais : <strong>lis-le, c'est le seul moment où tu verras le coût réel de l'opération.</strong>",
+"Les jours suivants, une chose va se produire et il faut la prévoir : <strong>ton investissement va varier, probablement à la baisse à un moment.</strong> Sur 50 €, cela représente quelques centimes. C'est précisément l'intérêt de commencer petit : tu apprends à ressentir la variation sur un montant qui ne fait pas mal.",
+"Une règle pour ce premier mois, et elle compte plus que le choix du fonds : <u>ne consulte pas ton compte tous les jours.</u> Une consultation par semaine au maximum. Tu apprends à ne pas réagir, ce qui est la compétence la plus rentable de tout l'investissement.",
+"Enfin, note quelque part la date et le montant de ce premier ordre. Dans 10 ans, cette ligne aura plus de valeur à tes yeux que son montant, parce qu'elle marquera le jour où le sujet a cessé d'être théorique."
 ],
 quiz:[
-{q:"Quel conseil suivre lors du questionnaire de profil investisseur ?",opts:["Déclarer un profil dynamique pour plus de produits","Répondre honnêtement à son niveau réel","Laisser le profil par défaut","Déclarer un profil prudent systématiquement"],correct:1,explain:"Cela permet au courtier de proposer des produits adaptés à la situation réelle."},
-{q:"Pourquoi explorer l'interface avant de passer son premier ordre ?",opts:["Pour tester la plateforme","Pour se familiariser et éviter les erreurs lors du premier investissement","Pour tester les délais d'exécution","Pour comparer les cours"],correct:1,explain:"Comprendre la plateforme à tête reposée évite les erreurs sous la pression d'un premier ordre réel."},
-{q:"Où stocker ses identifiants de connexion à son courtier ?",opts:["Un fichier texte sur le bureau","Un gestionnaire de mots de passe sécurisé","Les favoris du navigateur","Un e-mail à soi-même"],correct:1,explain:"Un fichier non protégé est vulnérable en cas de piratage."}
+{q:"Quel montant pour un premier ordre ?",opts:["Au moins 1 000 €","Un montant volontairement petit, 50 € suffisent","La totalité de son épargne disponible","Le maximum autorisé"],correct:1,
+explain:"Ce premier ordre ne vise aucun rendement, il transforme une inquiétude abstraite en geste connu."},
+{q:"Que signifie le doute ressenti au moment de valider ?",opts:["Qu'il faut renoncer","C'est la sensation normale d'une première fois, elle disparaît au deuxième ordre","Que le montant est trop élevé","Que le fonds est mal choisi"],correct:1,
+explain:"Personne ne le dit, et c'est pourtant universel. Le prévoir suffit à ne pas y céder."},
+{q:"Quelle règle appliquer le premier mois ?",opts:["Suivre les cours chaque jour","Ne pas consulter son compte plus d'une fois par semaine","Vendre si ça baisse","Renforcer immédiatement"],correct:1,
+explain:"Tu apprends à ne pas réagir, ce qui est la compétence la plus rentable de tout l'investissement."}
 ],
-action:"Si ton PEA n'est pas ouvert, lance la procédure maintenant. Sinon, explore l'interface 10 minutes pour trouver les ETF disponibles."
+action:"Si ton compte est ouvert, passe ton premier ordre ce soir avec le plus petit montant possible. Note la date et le montant sur ton carnet. Si ton compte n'est pas encore ouvert, cette action attendra, et c'est très bien : elle sera la première du mois prochain."
 },
-{module:"Module 3 — Les ETF", title:"Qu'est-ce qu'un ETF", duration:"10 min",
+{module:"Module 3 — Les fonds indiciels", title:"Qu'est-ce qu'un fonds indiciel", duration:"5 min",
 script:[
-"Un ETF (Exchange Traded Fund) réplique la performance d'un indice et se négocie en continu comme une action, contrairement à un fonds traditionnel valorisé une fois par jour.",
-"Trois caractéristiques : la réplication fidèle d'un indice sans chercher à le battre, la négociation en temps réel offrant liquidité, et des frais très bas (TER entre 0,10 et 0,30% contre 1 à 2% pour un fonds actif).",
-"Sur 30 ans, avec 10 000€ initiaux et 7% de rendement brut, la différence entre 0,20% et 1,50% de frais annuels représente plus de 20 000€ d'écart de capital final.",
-"Pour débuter, les ETF actions mondiales ou américaines sont les plus appropriés."
+"Un fonds indiciel, souvent appelé tracker ou ETF, est un fonds dont l'unique objectif est de reproduire la performance d'un indice. Il n'essaie pas de faire mieux, seulement de coller au plus près.",
+"Le mécanisme est simple à comprendre. Le fonds détient les titres de l'indice, dans les mêmes proportions. Quand tu achètes une part, tu deviens propriétaire d'une fraction de l'ensemble. <strong>Avec 50 €, tu détiens une part infinitésimale de plusieurs centaines d'entreprises</strong>, ce qui serait impossible à reproduire toi-même.",
+"Ce qui distingue un fonds indiciel d'un fonds classique tient en 3 points. <strong>1. Les frais.</strong> Pas d'équipe de gestion à rémunérer, donc des frais annuels souvent situés entre 0,2 et 0,4 % contre 1,5 à 2,5 % pour un fonds géré. <strong>2. La transparence.</strong> Sa composition est publique et connue en permanence. <strong>3. La négociabilité.</strong> Il s'achète et se vend en bourse comme une action, tout au long de la journée.",
+"Trois notions figurent dans toute documentation et méritent d'être comprises. <strong>L'encours</strong> est le montant total géré par le fonds : <u>un encours important réduit le risque de fermeture du fonds</u>, événement qui n'entraîne pas de perte mais impose des démarches et une fiscalité non choisie.",
+"<strong>L'écart de suivi</strong> mesure la différence entre la performance du fonds et celle de son indice. Plus il est faible, mieux le fonds fait son travail. <strong>La liquidité</strong> indique la facilité à acheter ou vendre : sur un fonds peu échangé, l'écart entre le prix d'achat et le prix de vente s'élargit, ce qui constitue un coût invisible.",
+"Un point de vocabulaire qui embrouille beaucoup de débutants : <em>ETF</em> signifie fonds négocié en bourse, ce qui décrit son mode d'échange, pas sa stratégie. <strong>La quasi-totalité des ETF sont indiciels, mais certains ne le sont pas</strong>, et certains utilisent un effet de levier ou parient à la baisse. Ces derniers sont des produits spéculatifs qui n'ont rien à voir avec ce que décrit cette formation.",
+"La règle de prudence qui en découle : <u>si le nom d'un fonds contient un multiplicateur, le mot « short », « leveraged » ou « inverse », ce n'est pas un fonds indiciel classique.</u> Ne l'achète pas sans avoir compris exactement ce qu'il fait."
 ],
 quiz:[
-{q:"Qu'est-ce que le TER d'un ETF ?",opts:["Le taux d'erreur de réplication","Le Total Expense Ratio, le total des frais annuels","Le taux d'exposition au risque","Le temps d'exécution recommandé"],correct:1,explain:"C'est le principal indicateur de coût à comparer entre ETF similaires."},
-{q:"Différence de négociation entre ETF et fonds traditionnel ?",opts:["L'ETF ne peut être acheté que mensuellement","L'ETF se négocie en continu, le fonds traditionnel une fois par jour","L'ETF est réservé aux professionnels","L'ETF n'est pas éligible au PEA"],correct:1,explain:"Un ETF se négocie en temps réel exactement comme une action."},
-{q:"Impact de 0,20% vs 1,50% de frais sur 30 ans avec 10 000€ à 7% ?",opts:["5000€ d'écart","10 000€ d'écart","Plus de 20 000€ d'écart","Impact négligeable"],correct:2,explain:"L'effet des intérêts composés amplifie considérablement l'impact des frais dans le temps."}
+{q:"Quel est l'objectif d'un fonds indiciel ?",opts:["Battre le marché","Reproduire la performance d'un indice","Garantir le capital","Verser un revenu mensuel"],correct:1,
+explain:"Il ne cherche pas à faire mieux, seulement à coller au plus près, ce qui permet des frais très faibles."},
+{q:"Que mesure l'écart de suivi ?",opts:["Le risque du fonds","La différence entre la performance du fonds et celle de son indice","Les frais annuels","La volatilité"],correct:1,
+explain:"Plus il est faible, mieux le fonds fait le travail pour lequel tu le paies."},
+{q:"Que signale un multiplicateur ou le mot « short » dans le nom d'un fonds ?",opts:["Une meilleure performance","Un produit spéculatif qui n'est pas un fonds indiciel classique","Une exonération fiscale","Une gestion active"],correct:1,
+explain:"Effet de levier ou pari à la baisse : ces produits n'ont rien à voir avec ce que décrit cette formation."}
 ],
-action:"Compare le TER de l'Amundi MSCI World UCITS ETF et d'un fonds commun de ta banque. Calcule l'impact sur 20 ans."
+action:"Ouvre la fiche d'un fonds indiciel mondial et cherche 4 informations : frais annuels, encours, écart de suivi, nombre de lignes détenues. Ces 4 chiffres figurent dans le document d'information clé, et ils prennent 5 minutes à trouver."
 },
-{module:"Module 3 — Les ETF", title:"Capitalisant versus distribuant", duration:"8 min",
+{module:"Module 3 — Les fonds indiciels", title:"Capitalisant ou distribuant", duration:"5 min",
 script:[
-"Un ETF distribuant reverse les dividendes collectés aux investisseurs, généralement trimestriellement. Un ETF capitalisant les réinvestit automatiquement, augmentant mécaniquement la valeur de chaque part.",
-"L'ETF capitalisant est généralement préférable en phase de construction du patrimoine : effet des intérêts composés maximisé, et dans un PEA, réinvestissement automatique sans friction fiscale.",
-"En dehors d'un PEA, les dividendes distribués sont soumis à la flat tax de 30% ; avec un capitalisant, la fiscalité est différée jusqu'à la vente.",
-"L'ETF distribuant devient pertinent quand on souhaite percevoir des revenus réguliers, typiquement à la retraite."
+"Un même indice peut être suivi par 2 versions d'un fonds, et le choix entre elles a des conséquences réelles sur ton résultat final. C'est pourtant l'une des questions les moins posées par les débutants.",
+"<strong>Un fonds distribuant</strong> te verse les dividendes des entreprises qu'il détient, généralement une à quatre fois par an. Tu reçois de l'argent sur ton compte, que tu peux dépenser ou réinvestir toi-même.",
+"<strong>Un fonds capitalisant</strong> ne verse rien : il réinvestit automatiquement les dividendes dans le fonds. Ta part prend mécaniquement de la valeur, sans qu'aucun mouvement n'apparaisse sur ton compte.",
+"Trois différences pratiques en découlent. <strong>1. La fiscalité.</strong> Sur un compte-titres, un dividende versé est imposable l'année où tu le reçois, même si tu le réinvestis immédiatement. Un fonds capitalisant ne déclenche aucune imposition tant que tu ne vends pas. <u>Sur un compte-titres et sur longue durée, la version capitalisante est donc fiscalement plus efficace.</u>",
+"<strong>2. Les frais.</strong> Réinvestir manuellement un dividende suppose de passer un ordre, donc de payer des frais de courtage. Le fonds capitalisant le fait sans frais supplémentaires et sans que tu y penses.",
+"<strong>3. L'effet psychologique.</strong> Recevoir un dividende procure une satisfaction réelle, et beaucoup d'investisseurs y tiennent. Mais cette satisfaction a un coût, et il faut le connaître : <strong>un dividende dépensé est un dividende qui ne travaille plus.</strong>",
+"Dans un plan d'épargne en actions, la question fiscale disparaît puisque rien n'est imposé tant que tu ne retires pas. Le choix devient alors une question de commodité, et le capitalisant reste plus simple parce qu'il ne demande aucun geste.",
+"Une exception mérite d'être nommée. <strong>Si ton objectif est de percevoir un revenu régulier</strong>, par exemple à la retraite, le distribuant devient pertinent : il produit un flux sans avoir à vendre de parts. C'est le seul cas où je le choisirais, et il ne concerne pas quelqu'un qui construit son capital."
 ],
 quiz:[
-{q:"Que fait un ETF capitalisant avec les dividendes ?",opts:["Il les distribue trimestriellement","Il les conserve en cash","Il les réinvestit automatiquement, augmentant la valeur de chaque part","Il réduit ses frais de gestion"],correct:2,explain:"Cela permet de bénéficier pleinement de l'effet des intérêts composés."},
-{q:"Pourquoi un ETF capitalisant est-il préférable dans un PEA ?",opts:["Frais inférieurs","Réinvestissement automatique sans friction ni action manuelle","Pas de prélèvements sociaux","Meilleures performances brutes"],correct:1,explain:"Les dividendes restent dans l'enveloppe fiscale sans aucune action de l'investisseur."},
-{q:"Quand un ETF distribuant est-il préférable ?",opts:["Au tout début de l'investissement","Quand on veut des revenus réguliers, par exemple à la retraite","Toujours dans un CTO","Jamais"],correct:1,explain:"Pour percevoir des revenus réguliers sans vendre de parts."}
+{q:"Que fait un fonds capitalisant des dividendes ?",opts:["Il les verse chaque trimestre","Il les réinvestit automatiquement dans le fonds","Il les conserve en liquidités","Il les reverse à l'État"],correct:1,
+explain:"La part prend mécaniquement de la valeur, sans aucun mouvement visible sur le compte."},
+{q:"Pourquoi le capitalisant est-il plus efficace sur un compte-titres ?",opts:["Ses frais sont plus faibles","Aucune imposition n'est déclenchée tant qu'on ne vend pas","Il est mieux répliqué","Il est plus liquide"],correct:1,
+explain:"Un dividende versé est imposable l'année de sa perception, même s'il est réinvesti immédiatement."},
+{q:"Dans quel cas le distribuant devient-il pertinent ?",opts:["Pour construire son capital","Quand l'objectif est de percevoir un revenu régulier","Pour réduire le risque","Pour investir en PEA"],correct:1,
+explain:"Il produit un flux sans avoir à vendre de parts, ce qui est utile à la retraite mais pas en phase de construction."}
 ],
-action:"Recherche un ETF MSCI World capitalisant et un distribuant. Note leurs TER et vérifie lequel est éligible PEA."
+action:"Regarde si le fonds qui t'intéresse existe en version capitalisante et en version distribuante. Elles portent souvent le même nom avec une mention « Acc » ou « Dist ». Note laquelle correspond à ton objectif actuel."
 },
-{module:"Module 3 — Les ETF", title:"Réplication physique versus synthétique", duration:"8 min",
+{module:"Module 3 — Les fonds indiciels", title:"Réplication physique ou synthétique", duration:"5 min",
 script:[
-"Un ETF à réplication physique détient réellement les actions de l'indice. Transparent, mais parfois par échantillonnage pour les indices très larges.",
-"Un ETF synthétique conclut un contrat d'échange (swap) avec une banque qui garantit la performance de l'indice, sans détenir directement les actions. Utile pour répliquer des indices inaccessibles physiquement et, en France, pour rendre des ETF mondiaux éligibles au PEA.",
-"Le risque de contrepartie (la banque du swap fait faillite) est encadré par la réglementation UCITS, limité à 10% des actifs du fonds.",
-"Pour un débutant : préférer le physique quand c'est possible, utiliser le synthétique pour accéder au PEA avec des indices mondiaux."
+"Un fonds indiciel peut reproduire son indice de 2 façons. La différence est technique, elle est mal expliquée partout, et elle explique pourtant comment un fonds mondial peut être éligible au plan d'épargne en actions.",
+"<strong>La réplication physique.</strong> Le fonds achète réellement les titres de l'indice. S'il suit un indice de 1 500 entreprises, il détient effectivement ces entreprises, ou un échantillon représentatif quand le nombre est trop élevé. C'est la méthode la plus intuitive et la plus transparente.",
+"<strong>La réplication synthétique.</strong> Le fonds détient un panier de titres différent, puis conclut un contrat d'échange avec une banque, appelé <em>swap</em>. Par ce contrat, la banque s'engage à lui verser exactement la performance de l'indice visé, en échange de la performance du panier détenu.",
+"Cela paraît compliqué, et voici à quoi ça sert concrètement : <strong>le fonds peut détenir des actions européennes, donc rester éligible au PEA, tout en délivrant la performance d'un indice mondial.</strong> C'est le mécanisme qui rend possible ce que je t'annonçais dans le module précédent.",
+"Quels risques ? Le principal est le <strong>risque de contrepartie</strong> : si la banque partenaire fait défaut, le fonds pourrait ne pas recevoir ce qui lui est dû. La réglementation européenne encadre ce risque en le plafonnant à <u>10 % de la valeur du fonds</u>, et en pratique les émetteurs le réduisent souvent bien davantage par des garanties déposées quotidiennement.",
+"Il ne faut ni dramatiser ni minimiser. <strong>Le risque existe, il est encadré, et il est différent du risque de marché</strong>, qui reste de très loin le plus important. Quelqu'un qui refuserait la réplication synthétique par prudence tout en investissant 100 % en actions se protégerait d'un risque secondaire en assumant le principal.",
+"Comment savoir laquelle un fonds utilise ? L'information figure dans le document d'information clé, sous les termes <em>réplication physique</em>, <em>directe</em> ou <em>synthétique</em>. <strong>C'est une vérification de 30 secondes</strong>, et elle fait partie des choses à regarder avant d'acheter."
 ],
 quiz:[
-{q:"Que détient réellement un ETF à réplication physique ?",opts:["Un contrat d'échange avec une banque","Les actions qui composent l'indice, dans les bonnes proportions","Des obligations d'entreprises","Un mix d'actions et de dérivés"],correct:1,explain:"Le fonds détient directement les actions dans les proportions de leur poids dans l'indice."},
-{q:"Pourquoi les ETF synthétiques sont-ils utiles pour le PEA français ?",opts:["Frais de gestion plus bas","Ils permettent de répliquer des indices mondiaux tout en étant éligibles PEA","Ils sont plus sûrs","Meilleure réplication de l'indice"],correct:1,explain:"La structure synthétique permet la domiciliation européenne requise pour le PEA."},
-{q:"Comment le risque de contrepartie est-il encadré ?",opts:["Par des stops de perte automatiques","Par une limite de 10% imposée par la réglementation UCITS","Par des contrats de couverture de change","Par une garantie de rachat quotidien"],correct:1,explain:"Cette limite encadre et minimise fortement ce risque."}
+{q:"En quoi consiste la réplication synthétique ?",opts:["Le fonds achète les titres de l'indice","Le fonds détient un autre panier et échange sa performance via un contrat avec une banque","Le fonds simule les cours","Le fonds emprunte les titres"],correct:1,
+explain:"C'est ce mécanisme qui permet à un fonds mondial de rester éligible au PEA."},
+{q:"Quel risque spécifique porte la réplication synthétique ?",opts:["Un risque de change","Un risque de contrepartie, encadré à 10 % de la valeur du fonds","Un risque de liquidité","Aucun risque supplémentaire"],correct:1,
+explain:"Il est encadré par la réglementation et reste secondaire par rapport au risque de marché."},
+{q:"Où trouver l'information sur le mode de réplication ?",opts:["Auprès du courtier uniquement","Dans le document d'information clé du fonds","Elle n'est pas publique","Sur les forums spécialisés"],correct:1,
+explain:"C'est une vérification de 30 secondes, à faire avant tout achat."}
 ],
-action:"Recherche un ETF PEA MSCI World. Identifie son type de réplication et pourquoi elle est nécessaire pour l'éligibilité PEA."
+action:"Ouvre le document d'information clé d'un fonds mondial éligible au PEA et cherche le mot « réplication ». Comprendre ce que fait réellement un produit avant de l'acheter est exactement ce que cette formation cherche à t'apprendre."
 },
-{module:"Module 3 — Les ETF", title:"Les ETF monde incontournables", duration:"9 min",
+{module:"Module 3 — Les fonds indiciels", title:"Comment lire la fiche d'un fonds", duration:"5 min",
 script:[
-"Le MSCI World regroupe plus de 1500 entreprises dans 23 pays développés, TER entre 0,12 et 0,38%. C'est le premier ETF que la plupart des investisseurs devraient acheter.",
-"Le S&P 500 (500 plus grandes entreprises américaines, TER 0,07 à 0,15%) est un sous-ensemble du MSCI World. Les marchés émergents (Chine, Inde, Brésil) offrent un potentiel supérieur avec plus de volatilité, TER 0,18 à 0,40%.",
-"Un portefeuille simple : 80% MSCI World + 20% marchés émergents, ou encore plus simple, 100% MSCI World pour démarrer.",
-"La simplicité est une vertu : un portefeuille simple maintenu 20 ans surpasse presque toujours un portefeuille complexe abandonné en cours de route."
+"Cette leçon ne te dira pas quel fonds acheter, et c'est volontaire : NiouDem n'émet aucune recommandation. Elle t'apprend à lire une fiche, ce qui te rend capable de juger n'importe quel produit qu'on te présentera, aujourd'hui ou dans 10 ans.",
+"Tout fonds distribué en Europe publie un <strong>document d'information clé</strong>, standardisé et gratuit, de quelques pages. C'est le seul document qui compte, et il contient 8 informations à vérifier.",
+"<strong>1. L'indice suivi.</strong> Quel panier, combien d'entreprises, quels pays. <strong>2. Les frais courants annuels.</strong> Exprimés en pourcentage, prélevés chaque année sur l'encours, qu'il monte ou qu'il baisse. <strong>3. Le mode de réplication</strong>, physique ou synthétique, vu dans la leçon précédente.",
+"<strong>4. La devise et la couverture de change.</strong> Un fonds mondial détient des actifs en dollars et dans d'autres monnaies. Sauf mention d'une couverture, <u>tu supportes le risque de change en plus du risque de marché</u>, ce qui joue dans les 2 sens et que beaucoup de débutants ignorent totalement.",
+"<strong>5. L'encours total</strong>, indicateur de solidité et de pérennité du fonds. <strong>6. L'indicateur de risque</strong>, noté de 1 à 7 par la réglementation. Un fonds actions mondial se situe généralement dans le haut de l'échelle, et c'est normal.",
+"<strong>7. L'éligibilité</strong> aux enveloppes : PEA, assurance-vie, plan d'épargne retraite. <strong>8. Le scénario de performance défavorable</strong>, obligatoire depuis quelques années. C'est la section la plus utile et la moins lue : elle chiffre ce que tu perdrais dans un scénario adverse. <strong>Si ce chiffre te fait peur, le produit n'est pas adapté à toi</strong>, et c'est exactement à quoi il sert.",
+"Une dernière chose sur la performance passée. Elle figure sur les fiches, elle est encadrée d'un avertissement, et cet avertissement est justifié : <u>choisir un fonds sur sa performance des 3 dernières années est l'erreur la plus répandue.</u> Ce qui a le mieux performé récemment n'a aucune raison particulière de continuer.",
+"Regarde plutôt les frais, l'écart de suivi et l'encours. Ce sont les seuls éléments dont tu peux dire quelque chose de fiable à l'avance."
 ],
 quiz:[
-{q:"Combien d'entreprises regroupe approximativement le MSCI World ?",opts:["Environ 100","Environ 500","Plus de 1500 dans 23 pays développés","Environ 5000"],correct:2,explain:"C'est l'un des indices les plus diversifiés disponibles pour les investisseurs particuliers."},
-{q:"Quel est le TER typique d'un ETF S&P 500 ?",opts:["0,50 à 1,00%","0,07 à 0,15%","1,00 à 2,00%","0,30 à 0,50%"],correct:1,explain:"Parmi les plus faibles de l'industrie de la gestion d'actifs."},
-{q:"Quel portefeuille simple est recommandé pour débuter ?",opts:["10 ETF couvrant tous les secteurs","Un mix actions/obligations complexe","100% MSCI World, ou MSCI World + marchés émergents","Un ETF par secteur économique"],correct:2,explain:"Un ou deux ETF bien diversifiés maintenus longtemps surpassent des portefeuilles trop complexes."}
+{q:"Quel document doit être consulté avant tout achat ?",opts:["La brochure commerciale","Le document d'information clé, standardisé et gratuit","Le rapport annuel","L'avis du courtier"],correct:1,
+explain:"Quelques pages, un format imposé, et 8 informations essentielles à vérifier."},
+{q:"Que supportes-tu en plus du risque de marché sur un fonds mondial ?",opts:["Un risque de crédit","Le risque de change, sauf mention d'une couverture","Un risque fiscal","Aucun risque supplémentaire"],correct:1,
+explain:"Il joue dans les 2 sens et beaucoup de débutants l'ignorent totalement."},
+{q:"Quelle est l'erreur la plus répandue dans le choix d'un fonds ?",opts:["Regarder les frais","Choisir sur la performance des 3 dernières années","Vérifier l'encours","Comparer les indices"],correct:1,
+explain:"Ce qui a le mieux performé récemment n'a aucune raison particulière de continuer."}
 ],
-action:"Compare l'Amundi MSCI World et l'iShares Core MSCI World : TER, taille du fonds, éligibilité PEA. Note ton choix."
+action:"Télécharge le document d'information clé d'un fonds et remplis les 8 points sur une feuille. Compte 15 minutes la première fois, 3 minutes ensuite. Cette grille est ce que tu utiliseras pour juger tous les produits qu'on te proposera."
 },
-{module:"Module 4 — La stratégie DCA", title:"Pourquoi investir régulièrement", duration:"9 min",
+{module:"Module 4 — Investir régulièrement", title:"Pourquoi la régularité bat le timing", duration:"5 min",
 script:[
-"Personne ne peut deviner le bon moment pour investir, pas même les experts. Le Dollar Cost Averaging (DCA) consiste à investir une somme fixe régulièrement, indépendamment des conditions de marché.",
-"Ce mécanisme fait qu'on achète naturellement plus de parts quand les prix sont bas, moins quand ils sont élevés, réduisant le prix d'achat moyen sur le long terme.",
-"Avantage psychologique majeur : le DCA élimine la tentation du market timing, qui échoue systématiquement pour la grande majorité des investisseurs.",
-"Règle utile : à chaque augmentation de revenus, consacrez au moins la moitié à votre investissement mensuel."
+"Investir régulièrement une somme fixe, quel que soit le niveau des marchés, porte un nom : l'investissement programmé, souvent désigné par son sigle anglais DCA. C'est la méthode la plus enseignée aux débutants, et il faut comprendre ce qu'elle fait réellement.",
+"Le principe : tu verses le même montant à date fixe, sans jamais te demander si le moment est bon. Quand les prix sont élevés, ton versement achète moins de parts. Quand ils sont bas, il en achète davantage. <strong>Mécaniquement, tu achètes plus quand c'est moins cher</strong>, sans avoir rien décidé.",
+"Il faut être précis sur ce que cette méthode apporte, parce qu'elle est souvent survendue. <u>Statistiquement, investir une somme disponible en une seule fois donne en moyenne un résultat légèrement supérieur</u>, simplement parce que l'argent travaille plus longtemps. Ce n'est donc pas une méthode mathématiquement optimale.",
+"<figure class=\"schema\"><svg viewBox=\"0 0 700 276\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"20\" y=\"24\" width=\"190\" height=\"54\" rx=\"9\" fill=\"#EFF0EA\" stroke=\"#12212B\" stroke-width=\"1.5\"/><text x=\"115\" y=\"47\" text-anchor=\"middle\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14.5\" font-weight=\"600\" fill=\"#12212B\">Versement fixe</text><text x=\"115\" y=\"65\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"12\" fill=\"#7A8A93\">chaque mois</text><path d=\"M210 51 C 270 51, 270 66, 330 66\" fill=\"none\" stroke=\"#A24332\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"66\" r=\"4\" fill=\"#A24332\"/><rect x=\"344\" y=\"43\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#F8EDEA\" stroke=\"#A24332\" stroke-width=\"1.3\"/><text x=\"360\" y=\"64\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Marché haut</text><text x=\"664\" y=\"64\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#A24332\">achète moins de parts</text><path d=\"M210 51 C 270 51, 270 128, 330 128\" fill=\"none\" stroke=\"#1E4B3C\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"128\" r=\"4\" fill=\"#1E4B3C\"/><rect x=\"344\" y=\"105\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#E7EFEA\" stroke=\"#1E4B3C\" stroke-width=\"1.3\"/><text x=\"360\" y=\"126\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Marché moyen</text><text x=\"664\" y=\"126\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#1E4B3C\">achète normalement</text><path d=\"M210 51 C 270 51, 270 190, 330 190\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1.8\"/><circle cx=\"330\" cy=\"190\" r=\"4\" fill=\"#B8862F\"/><rect x=\"344\" y=\"167\" width=\"336\" height=\"46\" rx=\"8\" fill=\"#F6EFE0\" stroke=\"#B8862F\" stroke-width=\"1.3\"/><text x=\"360\" y=\"188\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">Marché bas</text><text x=\"664\" y=\"188\" text-anchor=\"end\" font-family=\"IBM Plex Mono, monospace\" font-size=\"13\" fill=\"#B8862F\">achète plus de parts</text></svg><figcaption>Mécaniquement, tu achètes davantage quand c'est moins cher, sans avoir rien décidé.</figcaption></figure>",
+"Son avantage est ailleurs, et il est décisif. <strong>Elle supprime la décision.</strong> Or la décision est précisément là où les particuliers perdent de l'argent : en attendant le bon moment qui ne vient jamais, en arrêtant de verser pendant les baisses, en investissant massivement après une hausse.",
+"Elle apporte aussi une chose que les statistiques ne mesurent pas : <strong>la tranquillité.</strong> Quelqu'un qui verse 150 € par mois ne vit pas une baisse de 20 % comme quelqu'un qui a placé 20 000 € la semaine précédente. La méthode optimale sur le papier n'est pas celle qu'on tient dans la vraie vie.",
+"Un point souvent mal compris : <strong>le versement programmé ne protège pas des pertes.</strong> Si les marchés baissent durablement, ton portefeuille baisse aussi. Ce qu'il évite, c'est de concentrer l'ensemble de son investissement sur une seule date, qui peut être la pire.",
+"La conclusion pratique est celle-ci. Si tu disposes d'une somme importante et que tu es certain de ne pas paniquer, l'investir progressivement sur 6 à 12 mois est un compromis raisonnable. Si tu construis ton capital mois après mois, ce qui est le cas de la plupart des gens, <strong>le versement programmé n'est pas un choix parmi d'autres : c'est le seul qui corresponde à ta situation.</strong>"
 ],
 quiz:[
-{q:"Qu'est-ce que le Dollar Cost Averaging ?",opts:["N'investir que lors des baisses","Investir une somme fixe à intervalles réguliers, indépendamment du marché","Acheter au prix le plus bas possible","Convertir des devises en dollars"],correct:1,explain:"Cette approche élimine la nécessité de choisir le bon moment d'investissement."},
-{q:"Pourquoi le DCA génère-t-il un prix d'achat moyen favorable ?",opts:["Il permet d'investir uniquement en baisse","Une somme fixe achète plus de parts quand les prix sont bas, moins quand ils sont hauts","Les courtiers appliquent des remises","Il optimise les frais de transaction"],correct:1,explain:"Sur le long terme, ce mécanisme fait baisser le prix d'achat moyen."},
-{q:"Quelle règle accélère la construction de patrimoine lors d'une hausse de revenus ?",opts:["Investir 100% de l'augmentation","Utiliser 100% pour son niveau de vie","Consacrer au moins la moitié à l'investissement mensuel","Attendre 6 mois avant d'investir"],correct:2,explain:"Ce mécanisme simple crée une progression automatique de la capacité d'investissement."}
+{q:"Que fait mécaniquement un versement régulier ?",opts:["Il garantit un gain","Il achète plus de parts quand les prix sont bas","Il réduit les frais","Il protège des baisses"],correct:1,
+explain:"Sans aucune décision de ta part, ce qui est précisément son intérêt."},
+{q:"Le versement programmé est-il mathématiquement optimal ?",opts:["Oui, toujours","Non, investir en une fois donne en moyenne un résultat légèrement supérieur","Oui, sur 20 ans","Cela dépend du fonds"],correct:1,
+explain:"Son avantage est comportemental : il supprime la décision, là où les particuliers perdent de l'argent."},
+{q:"Que ne fait pas le versement programmé ?",opts:["Supprimer la décision","Protéger des pertes en cas de baisse durable","Lisser le prix d'achat","Faciliter l'automatisation"],correct:1,
+explain:"Il évite de concentrer tout son investissement sur une seule date, ce qui est différent d'une protection."}
 ],
-action:"Calcule ton DCA cible mensuel selon ta capacité d'épargne. Même 50€, l'important est la régularité."
+action:"Utilise le simulateur de versements réguliers dans les outils NiouDem avec ton montant envisagé et une durée de 20 ans. Puis refais le calcul en retirant 5 ans. L'écart entre les 2 est le prix de l'attente."
 },
-{module:"Module 4 — La stratégie DCA", title:"Calculer son montant mensuel", duration:"8 min",
+{module:"Module 4 — Investir régulièrement", title:"Calculer ton montant mensuel", duration:"5 min",
 script:[
-"Ordre de priorité avant d'investir en bourse : d'abord le fonds d'urgence (3 à 6 mois de dépenses), puis les dettes à taux élevé (supérieur à 5-6%, un remboursement équivaut à un investissement garanti), puis l'investissement mensuel.",
-"Dimension psychologique : le montant investi doit être maintenable même lors des baisses de 30%. Mieux vaut commencer modeste et durable que trop haut et abandonner au premier krach.",
-"Règle pragmatique : commencez avec 50% de votre capacité théorique, vivez avec 3 mois, puis augmentez progressivement à 75% puis 100%.",
-"Mieux vaut 50€ investis pendant 20 ans que 200€ investis pendant 2 ans."
+"Le bon montant n'est pas le plus élevé possible. C'est celui que tu pourras verser sans interruption pendant des années, y compris pendant un mois difficile.",
+"Le calcul se fait en 3 temps, à partir de ce que la formation sur le budget t'a permis d'établir. <strong>1.</strong> Prends ton épargne mensuelle totale. <strong>2.</strong> Retire ce qui alimente encore ton fonds d'urgence s'il n'est pas complet, et ce que tu provisionnes pour tes dépenses annuelles. <strong>3.</strong> Ce qui reste est ton montant investissable.",
+"Applique ensuite une règle de prudence que je te recommande vivement : <strong>commence à 70 % de ce montant.</strong> Si le calcul donne 200 €, commence à 140 €. La marge restante absorbera les mois imprévus sans que tu aies à interrompre le versement, et <u>tu pourras toujours augmenter, alors qu'une baisse est vécue comme un échec.</u>",
+"Trois vérifications avant de programmer quoi que ce soit. <strong>Le fonds d'urgence est-il constitué ?</strong> S'il ne l'est pas, ce montant n'est pas investissable et doit d'abord aller là. <strong>Les dettes chères sont-elles remboursées ?</strong> Rembourser un crédit à 6 % est un rendement certain de 6 %, que peu de placements égalent avec certitude. <strong>Les frais du courtier sont-ils compatibles ?</strong> Verser 30 € par mois avec 3 € de frais par ordre revient à perdre 10 % à l'entrée.",
+"Ce dernier point mérite une solution pratique : si tes frais sont élevés au regard de ton montant, <strong>verse tous les 2 ou 3 mois plutôt que chaque mois.</strong> Tu conserves la régularité tout en divisant les frais par 2 ou 3, et l'effet sur le résultat est négligeable.",
+"Une question fréquente : faut-il augmenter le montant avec le temps ? Oui, et le meilleur mécanisme est celui vu dans la formation sur le budget : <strong>diriger la moitié de chaque augmentation de revenu vers le versement</strong>, avant de s'habituer à la dépenser. Le niveau de vie ne baisse jamais, et le montant investi progresse sans effort.",
+"Retiens ceci : <strong>un versement de 50 € qui tient 15 ans bat un versement de 300 € abandonné au bout de 8 mois.</strong> Cette phrase résume la totalité de ce module."
 ],
 quiz:[
-{q:"Quelle est la première priorité avant d'investir en bourse ?",opts:["Maximiser son PEA","Rembourser son crédit immobilier","Constituer un fonds d'urgence de 3 à 6 mois","Ouvrir une assurance-vie"],correct:2,explain:"Sans ce filet de sécurité, un imprévu pourrait forcer une vente au pire moment."},
-{q:"Quand rembourser ses dettes avant d'investir ?",opts:["Toujours","Quand les taux dépassent 5 à 6%","Uniquement pour l'immobilier","Jamais en priorité"],correct:1,explain:"Rembourser une dette à taux élevé équivaut à un investissement garanti supérieur au rendement moyen des marchés."},
-{q:"Pourquoi commencer avec 50% de sa capacité théorique ?",opts:["Pour réserver le reste","Pour s'assurer que le montant est maintenable lors des baisses","Par obligation réglementaire","Pour laisser le temps aux marchés de prouver leur rendement"],correct:1,explain:"Cela évite l'abandon lors du premier krach en testant son engagement progressivement."}
+{q:"À quel pourcentage du montant calculé faut-il commencer ?",opts:["100 %","Environ 70 %","50 %","120 %"],correct:1,
+explain:"La marge absorbe les mois imprévus. Augmenter est facile, baisser est vécu comme un échec."},
+{q:"Que faire si les frais de courtage sont élevés au regard du montant ?",opts:["Changer de fonds","Verser tous les 2 ou 3 mois plutôt que chaque mois","Renoncer à investir","Augmenter fortement le montant"],correct:1,
+explain:"La régularité est conservée, les frais divisés, et l'effet sur le résultat final est négligeable."},
+{q:"Quel mécanisme fait progresser le montant sans effort ?",opts:["Augmenter de 10 % chaque année","Diriger la moitié de chaque augmentation de revenu vers le versement","Réduire ses loisirs","Attendre une prime"],correct:1,
+explain:"Le niveau de vie ne baisse jamais, et l'investissement progresse à chaque hausse de revenu."}
 ],
-action:"Calcule ton montant mensuel en appliquant les 3 priorités : fonds d'urgence, dettes, investissement à 50% de ta capacité théorique."
+action:"Calcule ton montant investissable, applique les 70 %, et vérifie tes 3 conditions préalables. Si l'une n'est pas remplie, note laquelle : c'est ton prochain objectif, et il passe avant l'investissement."
 },
-{module:"Module 4 — La stratégie DCA", title:"Automatiser ses investissements", duration:"7 min",
+{module:"Module 4 — Investir régulièrement", title:"Automatiser tes investissements", duration:"5 min",
 script:[
-"Configurez un virement automatique vers votre PEA le jour du salaire, puis un ordre d'achat récurrent d'ETF si votre courtier le propose. Sinon, un ordre manuel mensuel le même jour chaque mois.",
-"Type d'ordre : au marché (exécution immédiate au meilleur prix) ou limité (protection contre les variations soudaines). Fréquence mensuelle pour la plupart des investisseurs.",
-"Règle de non-intervention : une fois automatisé, ne regardez pas votre portefeuille tous les jours. Une fois par mois est largement suffisant.",
-"Configurez une fois, ignorez intelligemment, récoltez à long terme."
+"Un versement automatique est ce qui transforme une intention en résultat. Cette leçon décrit comment le mettre en place, et surtout ce qu'il faut prévoir pour qu'il survive aux périodes difficiles.",
+"Deux niveaux d'automatisation existent, et il faut les distinguer. <strong>Le virement de trésorerie</strong> déplace l'argent de ton compte bancaire vers ton compte d'investissement. <strong>L'ordre programmé</strong> achète effectivement les parts. Certains établissements proposent les 2, d'autres seulement le premier.",
+"Si ton courtier ne propose pas l'ordre programmé, tu devras passer l'ordre à la main. Ce n'est pas rédhibitoire, à une condition : <u>fixe une date précise et récurrente dans ton calendrier</u>, par exemple le 5 de chaque mois, et traite-la comme un rendez-vous et non comme une intention.",
+"Le séquencement complet se règle une fois. Le lendemain de la paie, un virement part vers le compte d'investissement. Trois jours plus tard, délai nécessaire à la réception des fonds, l'ordre s'exécute ou tu le passes. Ce décalage évite l'échec le plus fréquent : un ordre programmé qui ne s'exécute pas faute de liquidités disponibles.",
+"Voici maintenant le point qui compte le plus, et il n'est pas technique. <strong>Écris dès aujourd'hui ce que tu feras quand les marchés baisseront de 30 %.</strong> Pas si, quand : cela s'est produit plusieurs fois par décennie. La réponse à écrire, dans l'immense majorité des cas, est <em>« je continue à verser sans rien changer »</em>.",
+"Cette phrase écrite à froid vaut infiniment plus que n'importe quelle analyse produite à chaud. <u>Les périodes de baisse sont précisément celles où les versements achètent le plus de parts</u>, et donc celles qui construisent le résultat des années suivantes. Interrompre à ce moment revient à renoncer au bénéfice de toute la méthode.",
+"Une dernière précaution : <strong>prévois une règle de suspension</strong>, plutôt que d'improviser. Par exemple : je suspends les versements uniquement si mon fonds d'urgence descend sous 1 mois de charges, et je les reprends dès qu'il est reconstitué. Une règle écrite empêche de confondre une difficulté personnelle réelle avec une inquiétude passagère sur les marchés."
 ],
 quiz:[
-{q:"Quelle est la méthode la plus simple pour automatiser ses investissements ?",opts:["Un robot-advisor","Un virement automatique vers le PEA et un ordre récurrent d'ETF","Des alertes téléphone pour investir manuellement","Un conseiller financier"],correct:1,explain:"Si le courtier ne propose pas d'ordre récurrent, un ordre manuel mensuel de 10 minutes suffit."},
-{q:"Différence entre ordre au marché et ordre limité ?",opts:["L'un est réservé aux actions","L'ordre au marché s'exécute immédiatement au meilleur prix, l'ordre limité fixe un prix maximum","L'ordre au marché est moins coûteux","L'ordre limité garantit une exécution immédiate"],correct:1,explain:"Le limité protège contre des variations soudaines mais peut ne pas s'exécuter."},
-{q:"À quelle fréquence regarder son portefeuille automatisé ?",opts:["Tous les jours","Chaque semaine","Une fois par mois lors de la revue mensuelle","Une fois par an"],correct:2,explain:"Regarder trop souvent augmente les risques de décisions émotionnelles."}
+{q:"Pourquoi décaler l'ordre de quelques jours après le virement ?",opts:["Pour obtenir un meilleur prix","Pour laisser le temps aux fonds d'arriver et éviter un ordre non exécuté","Pour réduire les frais","C'est une obligation réglementaire"],correct:1,
+explain:"C'est l'échec le plus fréquent des ordres programmés : des liquidités qui ne sont pas encore disponibles."},
+{q:"Que faut-il écrire avant même de commencer ?",opts:["Un objectif de rendement","Ce qu'on fera quand les marchés baisseront de 30 %","La liste des fonds à surveiller","Un calendrier de revente"],correct:1,
+explain:"Pas si, quand : cela s'est produit plusieurs fois par décennie. La réponse écrite à froid vaut mieux que l'analyse à chaud."},
+{q:"À quoi sert une règle de suspension écrite ?",opts:["À vendre au bon moment","À distinguer une difficulté personnelle réelle d'une inquiétude passagère sur les marchés","À réduire l'imposition","À changer de courtier"],correct:1,
+explain:"Sans règle, on suspend pour de mauvaises raisons, précisément quand il faudrait continuer."}
 ],
-action:"Configure ton virement automatique mensuel vers ton PEA aujourd'hui. Active les ordres récurrents si disponibles."
+action:"Écris ce soir 2 phrases et range-les avec tes documents : ce que tu feras en cas de baisse de 30 %, et dans quelles conditions précises tu suspendrais tes versements. Elles ne serviront pas cette année, et elles vaudront cher le jour venu."
 },
-{module:"Module 4 — La stratégie DCA", title:"Simuler 10 ans de DCA", duration:"8 min",
+{module:"Module 4 — Investir régulièrement", title:"Ce que produisent 10 ans de versements", duration:"5 min",
 script:[
-"À 7% de rendement annuel moyen : 100€/mois sur 10 ans donnent environ 17 200€ pour 12 000€ investis. 200€/mois donnent environ 34 500€ pour 24 000€ investis. 500€/mois donnent environ 86 000€ pour 60 000€ investis.",
-"Sur 20 ans, 100€/mois donnent environ 52 000€ pour 24 000€ investis : les intérêts composés représentent plus de 50% du capital final.",
-"Ces simulations supposent un rendement constant, ce qui n'arrive jamais en réalité (certaines années +20%, d'autres -30%), mais donnent des ordres de grandeur basés sur les moyennes historiques.",
-"Le temps est le multiplicateur le plus puissant à votre disposition, et il commence à travailler dès le premier euro investi."
+"Cette leçon met des chiffres sur la méthode, avec un avertissement qui compte plus que les chiffres eux-mêmes : <strong>aucune simulation ne se réalise telle quelle.</strong> Elles servent à comprendre un mécanisme, jamais à prévoir un résultat.",
+"Prenons un versement de 150 € par mois pendant 10 ans, soit 18 000 € sortis de ta poche. Avec une hypothèse de rendement annuel de 5 %, le capital final approche 23 300 €. <strong>Environ 5 300 € proviennent donc du temps</strong>, sans effort supplémentaire de ta part.",
+"Prolonge à 20 ans, avec le même versement : 36 000 € versés, et un capital d'environ 61 700 €. <u>La part produite par le temps passe de 23 % à 42 % du total.</u> C'est le point essentiel : l'effet ne croît pas proportionnellement à la durée, il s'accélère.",
+"Voici la comparaison la plus parlante, et je te conseille de la refaire toi-même dans l'outil. Quelqu'un qui verse 150 € pendant 20 ans obtient davantage que quelqu'un qui verse 300 € pendant 10 ans, alors que le second a sorti la même somme de sa poche. <strong>La durée pèse plus lourd que le montant.</strong>",
+"Maintenant l'honnêteté nécessaire. <strong>Ce rendement de 5 % constant n'existera pas.</strong> La réalité alterne des années à plus 20 % et des années à moins 25 %, et l'ordre dans lequel elles surviennent change le résultat final. Une forte baisse en début de parcours, quand le capital est faible, pèse peu ; la même baisse à 2 ans de l'échéance pèse énormément.",
+"Cette dernière remarque a une conséquence pratique importante, que nous verrons dans le module suivant : <u>on réduit progressivement l'exposition au risque à mesure que l'échéance approche</u>, précisément pour cette raison.",
+"Retiens 2 choses de cette leçon. <strong>Le temps fait la majorité du travail</strong>, ce qui plaide pour commencer tôt avec peu plutôt que tard avec beaucoup. Et <strong>une simulation n'est pas une prévision</strong> : elle montre un mécanisme, et quiconque te présente un chiffre comme un objectif atteignable te vend quelque chose."
 ],
 quiz:[
-{q:"200€/mois pendant 10 ans à 7% donnent quel capital final estimé ?",opts:["24 000€","28 000€","Environ 34 500€","Environ 50 000€"],correct:2,explain:"24 000€ investis, avec environ 10 500€ générés par les intérêts composés."},
-{q:"Sur quelle durée les intérêts composés dépassent-ils 50% du capital final ?",opts:["5 ans","Environ 20 ans","30 ans seulement","Jamais au-delà de 30%"],correct:1,explain:"L'effet composé s'accélère exponentiellement avec le temps."},
-{q:"Pourquoi ces simulations ne prédisent-elles pas exactement l'avenir ?",opts:["Les rendements ne peuvent être calculés","Elles supposent un rendement constant alors qu'il varie fortement chaque année","Les frais ne sont pas inclus","L'inflation annule toujours les gains"],correct:1,explain:"Ces simulations donnent des ordres de grandeur basés sur des moyennes historiques, pas des prévisions exactes."}
+{q:"Que montre la comparaison entre 150 € sur 20 ans et 300 € sur 10 ans ?",opts:["Les 2 sont équivalents","La durée pèse plus lourd que le montant","Le montant pèse plus lourd","Cela dépend des frais"],correct:1,
+explain:"La même somme sortie de la poche produit un résultat supérieur quand elle est étalée plus longtemps."},
+{q:"Pourquoi une baisse en fin de parcours pèse-t-elle plus qu'au début ?",opts:["Les frais augmentent avec le temps","Parce que le capital exposé est bien plus important","Parce que la fiscalité change","Ce n'est pas le cas"],correct:1,
+explain:"C'est ce qui justifie de réduire progressivement l'exposition au risque à mesure que l'échéance approche."},
+{q:"Que vaut une simulation ?",opts:["Une prévision fiable","L'illustration d'un mécanisme, jamais une prévision","Un engagement du courtier","Une moyenne garantie"],correct:1,
+explain:"Quiconque présente un chiffre de simulation comme un objectif atteignable vend quelque chose."}
 ],
-action:"Utilise un calculateur d'intérêts composés en ligne avec ton DCA cible, 7% et 20 ans, puis compare avec 30 ans."
+action:"Ouvre le simulateur de versements réguliers et fais 3 essais : ton montant sur 10 ans, sur 20 ans, puis avec un rendement de 3 % au lieu de 5 %. Le troisième essai est le plus instructif, parce qu'il montre la sensibilité du résultat à une hypothèse."
 },
-{module:"Module 5 — Construire son portefeuille", title:"Définir son profil de risque", duration:"9 min",
+{module:"Module 5 — Construire son portefeuille", title:"Définir ton profil de risque", duration:"5 min",
 script:[
-"Le profil de risque combine deux dimensions : la tolérance émotionnelle aux fluctuations (comment réagissez-vous à une perte de 30% ?) et l'horizon temporel (dans combien d'années aurez-vous besoin de cet argent ?).",
-"Plus l'horizon est long, plus vous pouvez vous permettre une exposition élevée aux actions, car le marché a le temps de se remettre d'un krach.",
-"En pratique : horizon supérieur à 10 ans, 80 à 100% d'actions. Horizon 5 à 10 ans, 60% actions / 40% obligations. Horizon inférieur à 5 ans, la bourse n'est pas adaptée, préférer l'épargne sécurisée.",
-"Le meilleur portefeuille est celui que vous pouvez maintenir pendant un krach, pas celui qui a la meilleure performance théorique."
+"Le profil de risque est présenté partout comme une question de tempérament. C'est une erreur : <strong>il dépend d'abord de ta situation, ensuite seulement de ton caractère.</strong>",
+"Trois éléments objectifs le déterminent, et il faut les traiter dans cet ordre.",
+"<strong>1. Ton horizon.</strong> C'est le facteur le plus important. Dans combien de temps auras-tu besoin de cet argent ? À moins de 3 ans, les actions n'ont pas leur place, quel que soit ton tempérament. Au-delà de 10 ans, une baisse temporaire cesse d'être un problème.",
+"<strong>2. Ta capacité à encaisser.</strong> Elle ne se mesure pas en émotion mais en euros : que se passe-t-il concrètement si ce capital perd 40 % pendant 3 ans ? Si la réponse est <em>« rien, je n'y touche pas »</em>, ta capacité est réelle. Si c'est <em>« je ne peux pas acheter mon logement »</em>, elle ne l'est pas.",
+"<strong>3. Ta tolérance psychologique.</strong> C'est le seul facteur subjectif, et il est réel. Quelqu'un qui ne dort plus quand son portefeuille baisse finira par vendre au pire moment. <u>Un portefeuille théoriquement optimal qu'on ne supporte pas est un mauvais portefeuille.</u>",
+"Voici le test le plus honnête que je connaisse, et il vaut mieux que n'importe quel questionnaire : <strong>regarde ce que tu as fait en mars 2020, ou pendant la dernière baisse que tu as vécue.</strong> As-tu vendu, attendu, ou renforcé ? Le comportement passé prédit mieux que l'intention déclarée.",
+"Si tu n'as jamais rien vécu, la méthode reste la même que pour le premier ordre : <strong>commence petit et observe tes réactions.</strong> Investir 500 € et ressentir une baisse de 15 % t'apprendra plus sur toi qu'une heure de questionnaire.",
+"Une mise en garde pour finir. Les questionnaires réglementaires que les établissements font remplir servent une vraie fonction de protection, mais ils sont souvent remplis avec optimisme, parce qu'un profil « prudent » donne accès à moins de produits. <strong>Se surestimer dans ce questionnaire revient à désactiver une protection prévue pour soi.</strong>"
 ],
 quiz:[
-{q:"Qu'est-ce que le profil de risque en investissement ?",opts:["Une évaluation de la solidité psychologique","L'adéquation entre tolérance émotionnelle et horizon temporel","Une mesure de la volatilité du portefeuille","Un score attribué par le courtier"],correct:1,explain:"Ces deux dimensions définissent ensemble la composition optimale du portefeuille."},
-{q:"Pour quel horizon la bourse est-elle déconseillée ?",opts:["Supérieur à 10 ans","Entre 5 et 10 ans","Inférieur à 5 ans","Toujours recommandée"],correct:2,explain:"Le temps de récupération après un krach pourrait être insuffisant avant d'avoir besoin de l'argent."},
-{q:"Allocation en actions appropriée pour un horizon supérieur à 10 ans ?",opts:["20 à 40%","40 à 60%","80 à 100%","100% en obligations"],correct:2,explain:"Les marchés ont toujours eu le temps de se remettre de n'importe quel krach sur un tel horizon."}
+{q:"Quel est le facteur le plus déterminant du profil de risque ?",opts:["Le tempérament","L'horizon de placement","Le montant investi","L'âge"],correct:1,
+explain:"À moins de 3 ans, les actions n'ont pas leur place quel que soit le caractère de l'investisseur."},
+{q:"Comment mesurer sa capacité à encaisser une baisse ?",opts:["Par un questionnaire en ligne","En euros : que se passe-t-il concrètement si ce capital perd 40 % pendant 3 ans","Par son niveau de revenus","Par son expérience passée uniquement"],correct:1,
+explain:"La capacité est objective : elle dépend de ce que cet argent devait financer et quand."},
+{q:"Quel est le meilleur prédicteur de ton comportement futur ?",opts:["Ton intention déclarée","Ce que tu as fait lors de la dernière baisse vécue","Ton profil déclaré au courtier","Ton niveau de connaissances"],correct:1,
+explain:"Le comportement passé prédit mieux que l'intention, et c'est pourquoi il vaut mieux commencer petit."}
 ],
-action:"Réponds honnêtement : réaction à une perte de 30%, et horizon temporel. Déduis ton profil et l'allocation actions correspondante."
+action:"Réponds par écrit à une seule question : si ce que tu investis perdait 40 % pendant 3 ans, qu'est-ce que ça changerait concrètement dans ta vie ? La réponse détermine ton horizon réel, et donc tout le reste."
 },
-{module:"Module 5 — Construire son portefeuille", title:"Allocation selon son horizon", duration:"8 min",
+{module:"Module 5 — Construire son portefeuille", title:"Répartir selon ton horizon", duration:"5 min",
 script:[
-"Trois classes d'actifs : les actions (performance élevée, volatilité élevée), les obligations (rendement modéré, volatilité faible, rôle d'amortisseur), les liquidités (sécurité totale, rendement faible).",
-"La règle des 100 : pourcentage d'actions = 100 moins l'âge. À 30 ans, 70% d'actions. Certains experts préfèrent la règle des 110 ou 120 pour tenir compte de l'espérance de vie allongée.",
-"Exemple profil dynamique horizon long : 90% MSCI World + 10% marchés émergents. Exemple profil équilibré : 60% MSCI World + 20% émergents + 20% obligataire mondial.",
-"Ces allocations doivent évoluer avec l'âge, la situation et les objectifs."
+"L'allocation, c'est la répartition de ton capital entre des actifs de nature différente. C'est la décision qui explique la majeure partie de ton résultat, bien davantage que le choix des fonds eux-mêmes.",
+"Trois grandes catégories suffisent à raisonner. <strong>Les actifs sans risque de perte nominale</strong> : livrets, fonds en euros. <strong>Les obligations</strong>, qui sont des prêts consentis à des États ou des entreprises, moins volatiles que les actions mais pas sans risque. <strong>Les actions</strong>, les plus volatiles et les plus productives sur longue durée.",
+"Le principe d'allocation tient en une phrase : <strong>plus l'échéance est proche, moins la part d'actions doit être élevée.</strong> Ce n'est pas une question de prudence morale, c'est une question de temps disponible pour absorber une baisse.",
+"<figure class=\"schema\"><svg viewBox=\"0 0 700 286\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"20\" y=\"202\" width=\"250\" height=\"52\" rx=\"9\" fill=\"#E7EFEA\" stroke=\"#1E4B3C\" stroke-width=\"1.4\"/><circle cx=\"46\" cy=\"228\" r=\"12\" fill=\"#1E4B3C\"/><text x=\"46\" y=\"232\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"12\" fill=\"#fff\">1</text><text x=\"70\" y=\"224\" font-family=\"Newsreader, Georgia, serif\" font-size=\"15\" font-weight=\"600\" fill=\"#12212B\">Moins de 3 ans</text><text x=\"70\" y=\"241\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Aucune action. Supports sans risque de perte.</text><rect x=\"20\" y=\"138\" width=\"383\" height=\"52\" rx=\"9\" fill=\"#FFFFFF\" stroke=\"#DCDDD3\" stroke-width=\"1.4\"/><circle cx=\"46\" cy=\"164\" r=\"12\" fill=\"#DCDDD3\"/><text x=\"46\" y=\"168\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"12\" fill=\"#fff\">2</text><text x=\"70\" y=\"160\" font-family=\"Newsreader, Georgia, serif\" font-size=\"15\" font-weight=\"600\" fill=\"#12212B\">3 à 8 ans</text><text x=\"70\" y=\"177\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Part d'actions minoritaire, complétée d'obligations.</text><rect x=\"20\" y=\"74\" width=\"517\" height=\"52\" rx=\"9\" fill=\"#FFFFFF\" stroke=\"#DCDDD3\" stroke-width=\"1.4\"/><circle cx=\"46\" cy=\"100\" r=\"12\" fill=\"#DCDDD3\"/><text x=\"46\" y=\"104\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"12\" fill=\"#fff\">3</text><text x=\"70\" y=\"96\" font-family=\"Newsreader, Georgia, serif\" font-size=\"15\" font-weight=\"600\" fill=\"#12212B\">8 à 15 ans</text><text x=\"70\" y=\"113\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Part d'actions majoritaire défendable.</text><rect x=\"20\" y=\"10\" width=\"650\" height=\"52\" rx=\"9\" fill=\"#F6EFE0\" stroke=\"#B8862F\" stroke-width=\"1.4\"/><circle cx=\"46\" cy=\"36\" r=\"12\" fill=\"#B8862F\"/><text x=\"46\" y=\"40\" text-anchor=\"middle\" font-family=\"IBM Plex Mono, monospace\" font-size=\"12\" fill=\"#fff\">4</text><text x=\"70\" y=\"32\" font-family=\"Newsreader, Georgia, serif\" font-size=\"15\" font-weight=\"600\" fill=\"#12212B\">Plus de 15 ans</text><text x=\"70\" y=\"49\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12.5\" fill=\"#43555F\">Allocation très largement en actions.</text></svg><figcaption>L'horizon détermine l'allocation, pas le tempérament. Ce sont des repères à ajuster, pas une norme.</figcaption></figure>",
+"Voici des repères, à ajuster et non à appliquer mécaniquement. <u>Horizon inférieur à 3 ans : aucune action.</u> L'argent reste sur des supports sans risque de perte. Horizon de 3 à 8 ans : une part d'actions minoritaire, complétée d'obligations et de liquidités. Horizon supérieur à 8 ans : une part d'actions majoritaire devient défendable. Horizon supérieur à 15 ans sans besoin identifié : une allocation très largement en actions se justifie.",
+"Une méthode ancienne consiste à retenir un pourcentage d'actions égal à 100 moins son âge. Elle a le mérite de la simplicité et le défaut de l'imprécision : <strong>elle ignore complètement l'horizon réel du projet.</strong> Quelqu'un de 55 ans qui prépare une transmission a un horizon de 30 ans, pas de 10.",
+"Deux erreurs fréquentes méritent d'être nommées. <strong>La première est la fausse diversification</strong> : détenir 5 fonds qui suivent tous des indices d'actions mondiales n'est pas diversifier, c'est acheter la même chose 5 fois avec 5 lignes de frais. <strong>La seconde est de raisonner sur le portefeuille seul</strong>, en oubliant que ton fonds d'urgence, ton épargne de projet et ton éventuel bien immobilier font aussi partie de ton patrimoine.",
+"Regarde toujours ton allocation à l'échelle de <strong>tout ce que tu possèdes</strong>, pas seulement du compte d'investissement. Quelqu'un qui détient 100 % d'actions sur son compte-titres mais 3 ans de charges en livret n'est pas exposé à 100 % en actions."
 ],
 quiz:[
-{q:"Quel est le rôle des obligations dans un portefeuille ?",opts:["Maximiser le rendement long terme","Servir d'amortisseur en réduisant la volatilité globale","Générer des revenus mensuels","Protéger contre l'inflation"],correct:1,explain:"Elles sont moins volatiles et résistent mieux lors des krachs, réduisant la volatilité globale."},
-{q:"Que donne la règle des 100 pour un investisseur de 35 ans ?",opts:["35% actions, 65% obligations","65% actions, 35% obligations ou liquidités","100% actions jusqu'à 35 ans","35% de ses revenus"],correct:1,explain:"100 moins 35 donne 65% d'actions recommandé."},
-{q:"Pourquoi les jeunes investisseurs peuvent avoir une allocation actions plus élevée ?",opts:["Ils ont plus de revenus","Leur horizon long leur donne le temps de surmonter les krachs","Meilleure tolérance psychologique","Les actions sont moins risquées pour eux"],correct:1,explain:"Sur de longues périodes, les marchés actions ont toujours récupéré après les krachs."}
+{q:"Quel principe gouverne l'allocation ?",opts:["Plus on est jeune, plus on prend de risque","Plus l'échéance est proche, moins la part d'actions est élevée","Il faut toujours 50 % d'actions","L'allocation dépend des frais"],correct:1,
+explain:"C'est une question de temps disponible pour absorber une baisse, pas de prudence morale."},
+{q:"Qu'est-ce que la fausse diversification ?",opts:["Investir dans un seul pays","Détenir 5 fonds qui suivent tous des indices d'actions mondiales","Détenir des obligations","Investir progressivement"],correct:1,
+explain:"C'est acheter la même chose 5 fois, avec 5 lignes de frais et aucune diversification supplémentaire."},
+{q:"À quelle échelle faut-il regarder son allocation ?",opts:["Au compte d'investissement seul","À l'échelle de tout ce qu'on possède","Par enveloppe fiscale","Par courtier"],correct:1,
+explain:"Quelqu'un avec 3 ans de charges en livret n'est pas exposé à 100 % en actions, même si son compte-titres l'est."}
 ],
-action:"Définis ton allocation cible en pourcentages. Identifie les ETF spécifiques disponibles chez ton courtier pour chaque catégorie."
+action:"Liste tout ce que tu possèdes, y compris ton fonds d'urgence et ton épargne de projet, et calcule la part réellement exposée aux actions. Ce pourcentage est probablement bien plus faible que tu ne le penses."
 },
-{module:"Module 5 — Construire son portefeuille", title:"Le rééquilibrage annuel", duration:"8 min",
+{module:"Module 5 — Construire son portefeuille", title:"Le rééquilibrage annuel", duration:"5 min",
 script:[
-"Au fil du temps, les classes d'actifs progressent différemment, déséquilibrant l'allocation cible. Exemple : 80/20 devient 83/17 après une forte hausse des actions sur un an.",
-"Le rééquilibrage ramène le portefeuille à sa cible, idéalement en investissant sélectivement les nouveaux apports dans les actifs sous-pondérés, plutôt qu'en vendant (évite frais et fiscalité).",
-"Trois raisons de rééquilibrer : maintenir le niveau de risque souhaité, discipline d'investissement (acheter bas, vendre haut mécaniquement), performance potentiellement légèrement améliorée.",
-"Fréquence recommandée : annuelle, lors du bilan annuel. Plus souvent génère des frais inutiles sans bénéfice significatif."
+"Une allocation décidée aujourd'hui se déforme toute seule. Si les actions montent plus vite que le reste, leur part augmente mécaniquement, et ton portefeuille devient plus risqué que ce que tu avais choisi, sans que tu aies rien décidé.",
+"Le rééquilibrage consiste à ramener périodiquement les proportions à leur cible. Concrètement : si tu visais 70 % d'actions et que tu es à 80 %, tu vends une partie des actions ou, mieux, <strong>tu diriges tes versements suivants vers ce qui a baissé</strong> jusqu'à retrouver ta cible.",
+"Cette seconde méthode est nettement préférable pour 2 raisons. Elle ne déclenche <u>aucune vente, donc aucune fiscalité et aucun frais de courtage</u>. Et elle correspond à ce que tu fais déjà, puisque tu verses chaque mois.",
+"À quelle fréquence ? <strong>Une fois par an suffit</strong>, et c'est même préférable à davantage. Rééquilibrer trop souvent multiplie les frais et l'imposition pour un bénéfice qui n'est pas démontré. Une variante consiste à ne rééquilibrer que lorsque l'écart dépasse un seuil, par exemple 5 points, ce qui évite d'agir pour rien.",
+"Le rééquilibrage a un effet secondaire qui déroute au premier abord : <strong>il oblige à vendre ce qui a monté et à acheter ce qui a baissé.</strong> C'est exactement l'inverse de ce que l'instinct commande, et c'est précisément pour ça qu'il faut le faire à date fixe plutôt qu'au jugé.",
+"Il faut cependant être honnête sur ses limites. <u>Le rééquilibrage n'améliore pas nécessairement la performance</u>, et sur longue période une allocation laissée telle quelle a parfois fait mieux. Ce qu'il fait de façon certaine, c'est <strong>maintenir ton niveau de risque à celui que tu as choisi</strong>, ce qui est sa vraie fonction.",
+"Un conseil pratique : rattache ce rendez-vous à ta revue annuelle, celle vue dans la formation sur l'épargne. Une seule séance d'une heure, une fois par an, couvre le rééquilibrage, la vérification des frais et le contrôle du fonds d'urgence."
 ],
 quiz:[
-{q:"Pourquoi un portefeuille équilibré se déséquilibre-t-il avec le temps ?",opts:["Les gestionnaires modifient la composition","Les classes d'actifs progressent à des rythmes différents","Les frais s'appliquent différemment","Les virements ne sont pas proportionnels"],correct:1,explain:"Cela modifie leurs proportions relatives, éloignant le portefeuille de sa cible initiale."},
-{q:"Pourquoi rééquilibrer via les nouveaux apports plutôt qu'en vendant ?",opts:["Les ventes déclenchent des pénalités fiscales en PEA","Cela évite frais de transaction et événements fiscaux hors PEA","Les marchés se rééquilibrent naturellement","Les ETF ne peuvent être vendus partiellement"],correct:1,explain:"Rééquilibrer via les apports évite les frais et la fiscalité liés à la vente."},
-{q:"Fréquence de rééquilibrage recommandée ?",opts:["Mensuelle","Trimestrielle","Annuelle, lors du bilan annuel","À chaque écart de 1%"],correct:2,explain:"Rééquilibrer plus souvent génère des frais inutiles sans amélioration significative."}
+{q:"Pourquoi une allocation se déforme-t-elle seule ?",opts:["À cause des frais","Parce que les actifs ne progressent pas au même rythme","À cause de l'inflation","Parce que les indices changent"],correct:1,
+explain:"La part de ce qui monte le plus augmente mécaniquement, rendant le portefeuille plus risqué que prévu."},
+{q:"Quelle méthode de rééquilibrage est préférable ?",opts:["Vendre ce qui a monté","Diriger les versements suivants vers ce qui a baissé","Tout vendre et racheter","Changer de fonds"],correct:1,
+explain:"Aucune vente, donc aucune fiscalité ni frais de courtage, et cela correspond à ce que tu fais déjà chaque mois."},
+{q:"Quelle est la vraie fonction du rééquilibrage ?",opts:["Améliorer la performance","Maintenir le niveau de risque à celui qu'on a choisi","Réduire les frais","Optimiser la fiscalité"],correct:1,
+explain:"Il n'améliore pas nécessairement la performance, et c'est important de le savoir avant de s'y astreindre."}
 ],
-action:"Si tu as un portefeuille existant, compare ton allocation actuelle à ta cible. Sinon, note la date de ton premier rééquilibrage prévu."
+action:"Ajoute une ligne « rééquilibrage » dans le rendez-vous annuel déjà présent dans ton calendrier. Note à côté ta cible d'allocation en pourcentage. Sans cible écrite, il n'y a rien à rééquilibrer."
 },
-{module:"Module 5 — Construire son portefeuille", title:"Votre portefeuille idéal", duration:"9 min",
+{module:"Module 5 — Construire son portefeuille", title:"Écrire ta règle d'investissement", duration:"5 min",
 script:[
-"Le portefeuille idéal n'est pas celui à la meilleure performance théorique, mais celui que vous pouvez maintenir pendant un krach de 40%.",
-"Cinq décisions suffisent : l'enveloppe (PEA en priorité), le courtier, l'allocation cible selon votre profil, les ETF spécifiques (capitalisant, TER le plus bas, éligible PEA), le montant mensuel et la date de début.",
-"Exemple concret : Marie, 32 ans, horizon 33 ans, profil dynamique, 200€/mois. PEA Fortuneo, 85% MSCI World + 15% marchés émergents, DCA le 5 de chaque mois, rééquilibrage annuel en janvier.",
-"Simple, clair, actionnable, et parfaitement adapté à la grande majorité des investisseurs qui débutent."
+"Cette leçon produit le document le plus utile de toute la formation : ta règle d'investissement, écrite par toi, en 10 lignes. C'est aussi le livrable central de l'accompagnement NiouDem, et tu peux parfaitement l'écrire seul.",
+"Pourquoi l'écrire ? Parce qu'une décision prise à froid et notée résiste à une émotion ressentie à chaud. <strong>Sans document, tu improviseras au pire moment</strong>, et tu improviseras mal, comme la formation sur la psychologie l'a montré.",
+"Ta règle contient 10 points, et chacun tient en une phrase. <strong>1.</strong> Pourquoi j'investis, avec un objectif précis. <strong>2.</strong> Mon horizon, en années. <strong>3.</strong> Mon montant mensuel. <strong>4.</strong> L'enveloppe utilisée. <strong>5.</strong> Ce que je détiens, en une ou 2 lignes maximum.",
+"<strong>6.</strong> Mon allocation cible, en pourcentages. <strong>7.</strong> Ce que je fais si les marchés baissent de 30 % : la réponse est presque toujours <em>je continue à verser sans rien changer</em>. <strong>8.</strong> Ce que je fais si un actif monte fortement : je rééquilibre à la date prévue, je ne renforce pas dans l'euphorie.",
+"<strong>9.</strong> Dans quelles conditions précises je suspends mes versements, formulées en termes de situation personnelle et jamais de niveau de marché. <strong>10.</strong> Quand je relis ce document : une fois par an, à date fixe.",
+"Une règle importante sur la forme : <u>tout ce qui ne tient pas sur une page ne sera pas relu.</u> Résiste à l'envie de tout prévoir. Une règle courte et appliquée bat une stratégie détaillée et oubliée.",
+"Un test de validité avant de la ranger. Relis ton document et demande-toi : <strong>est-ce que quelqu'un d'autre pourrait l'appliquer à ma place sans me poser de question ?</strong> Si la réponse est non, c'est qu'il reste des zones floues, et les zones floues sont exactement là où l'émotion s'engouffre.",
+"Range ce document là où tu le retrouveras, et surtout <strong>relis-le avant chaque décision importante.</strong> Dans 5 ans, tu constateras que sa principale valeur n'aura pas été de te guider, mais de t'avoir empêché d'agir."
 ],
 quiz:[
-{q:"Comment est défini le « portefeuille idéal » dans cette leçon ?",opts:["Le meilleur rendement théorique","La diversification la plus étendue","Celui qu'on peut maintenir pendant un krach de 40%","Celui recommandé par les experts"],correct:2,explain:"Le meilleur portefeuille théorique est inutile si on le vend en panique lors du premier krach."},
-{q:"Combien de décisions fondamentales pour construire son portefeuille ?",opts:["10 à 20","5 : enveloppe, courtier, allocation, ETF, montant et date","Une seule : choisir le bon ETF","Ça dépend de chaque situation"],correct:1,explain:"Cinq décisions suffisent pour un portefeuille complet et efficace."},
-{q:"Dans l'exemple de Marie, quel ETF représente 85% de son portefeuille ?",opts:["Marchés émergents","MSCI World capitalisant éligible PEA","S&P 500","Obligataire mondial"],correct:1,explain:"85% MSCI World pour l'exposition mondiale diversifiée, 15% marchés émergents pour la croissance."}
+{q:"Pourquoi écrire sa règle d'investissement ?",opts:["Pour la montrer à son courtier","Parce qu'une décision prise à froid résiste à une émotion ressentie à chaud","C'est une obligation réglementaire","Pour calculer sa fiscalité"],correct:1,
+explain:"Sans document, on improvise au pire moment, et on improvise mal."},
+{q:"Quelle contrainte de forme s'impose ?",opts:["Au moins 5 pages détaillées","Tout doit tenir sur une page, sinon ce ne sera pas relu","Un format imposé par l'AMF","Une mise à jour mensuelle"],correct:1,
+explain:"Une règle courte et appliquée bat une stratégie détaillée et oubliée."},
+{q:"Quel test valide le document ?",opts:["L'avis d'un professionnel","Quelqu'un d'autre pourrait-il l'appliquer sans poser de question ?","Sa performance simulée","Sa conformité au questionnaire du courtier"],correct:1,
+explain:"Les zones floues sont exactement là où l'émotion s'engouffre le jour venu."}
 ],
-action:"Construis ton portefeuille : enveloppe, courtier, allocation en %, ETF choisis, montant mensuel et date de départ."
+action:"Écris tes 10 lignes ce soir, sur une seule page. Ne cherche pas la perfection : une version imparfaite écrite aujourd'hui vaut mieux qu'une version parfaite écrite jamais. Tu la réviseras à ta revue annuelle."
 },
-{module:"Module 6 — Psychologie et erreurs", title:"5 erreurs classiques", duration:"10 min",
+{module:"Module 6 — Tenir dans la durée", title:"Les 5 erreurs qui reviennent toujours", duration:"5 min",
 script:[
-"Erreur 1, le market timing : attendre le bon moment n'arrive jamais psychologiquement. Rater les 10 meilleures journées boursières sur 20 ans réduit le rendement de plus de moitié. Solution : le DCA.",
-"Erreur 2, vendre lors des krachs : le krach Covid 2020 a vu -35% en un mois, récupéré en 6 mois. Vendre cristallise la perte et fait rater la reprise.",
-"Erreur 3, se disperser avec trop d'actifs : au-delà d'un certain nombre d'ETF, la diversification supplémentaire n'apporte rien, elle complexifie inutilement.",
-"Erreur 4, ignorer les frais : 1% de frais supplémentaires peut représenter des dizaines de milliers d'euros sur 30 ans. Erreur 5, arrêter d'investir lors des baisses : c'est l'inverse de ce qu'il faut faire, les baisses sont des soldes."
+"Ces 5 erreurs représentent l'essentiel des pertes des investisseurs particuliers. Aucune ne relève d'un manque d'intelligence, toutes relèvent de mécanismes prévisibles.",
+"<strong>Erreur 1 : chercher le bon moment.</strong> Attendre une baisse pour entrer conduit le plus souvent à ne jamais entrer, puis à entrer après une hausse par peur de rater. <u>Le temps passé hors du marché coûte davantage que le prix d'entrée</u>, et c'est mesuré.",
+"<strong>Erreur 2 : réagir à l'actualité.</strong> Une information relayée partout est déjà intégrée dans les prix au moment où tu la lis. Agir dessus revient à arriver après tout le monde, en payant des frais pour le privilège.",
+"<strong>Erreur 3 : concentrer sur ce qu'on connaît.</strong> Investir uniquement dans son pays, son secteur ou l'entreprise qui l'emploie procure un sentiment de maîtrise trompeur. Le cas le plus grave est celui du salarié fortement investi dans sa propre entreprise : <strong>si elle va mal, il perd son emploi et son épargne en même temps.</strong>",
+"<strong>Erreur 4 : changer de stratégie tous les 6 mois.</strong> Passer d'une approche à une autre parce que la première n'a rien produit revient à vendre bas et acheter haut, méthodiquement. Une stratégie médiocre appliquée 15 ans bat une excellente stratégie changée 4 fois.",
+"<strong>Erreur 5 : ignorer les frais.</strong> Ils sont le seul élément dont tu es certain à l'avance. Un point de frais annuel en plus ampute le résultat final d'environ 12 % sur 20 ans, soit près d'un quart des gains, et personne ne t'en parlera spontanément.",
+"Ces 5 erreurs ont un point commun : <strong>elles consistent toutes à agir.</strong> C'est ce qui les rend difficiles à éviter, parce que ne rien faire donne le sentiment de négliger son argent alors que c'est souvent la meilleure décision disponible.",
+"Le remède est celui que tu connais maintenant : <u>une règle écrite, des versements automatiques, une consultation espacée, et un rendez-vous annuel.</u> Ce dispositif ne demande aucune compétence particulière, seulement de l'avoir mis en place avant d'en avoir besoin."
 ],
 quiz:[
-{q:"Pourquoi rater les 10 meilleures journées boursières réduit-il fortement le rendement ?",opts:["Elles déterminent la valorisation finale","Elles sont concentrées après les krachs, impossibles à anticiper","Les ETF ne sont pas négociables ces jours-là","Les frais sont réduits ces jours-là"],correct:1,explain:"Un investisseur qui pratique le market timing risque de manquer ces journées cruciales."},
-{q:"Que s'est-il passé pour ceux qui ont vendu lors du krach de mars 2020 ?",opts:["Ils ont bien protégé leur capital","Ils ont cristallisé leurs pertes et raté la reprise en moins de 6 mois","Ils n'ont pas été affectés","Ils ont bénéficié d'une déduction fiscale"],correct:1,explain:"La reprise rapide a récompensé ceux qui ont maintenu leur position."},
-{q:"Pourquoi continuer à investir lors d'une baisse est-il avantageux ?",opts:["Les courtiers appliquent des remises","Une somme fixe achète plus de parts à prix bas, améliorant le prix moyen","Les dividendes sont plus élevés","Les ETF se rééquilibrent automatiquement"],correct:1,explain:"C'est le principe même du DCA : les baisses sont, paradoxalement, des opportunités."}
+{q:"Que coûte le fait d'attendre le bon moment ?",opts:["Rien, c'est prudent","Le temps passé hors du marché coûte davantage que le prix d'entrée","Uniquement des frais","Cela dépend des marchés"],correct:1,
+explain:"Et l'attente se termine souvent par une entrée après une hausse, par peur de rater."},
+{q:"Pourquoi le salarié investi dans son entreprise prend-il un risque particulier ?",opts:["La fiscalité est défavorable","Si elle va mal, il perd son emploi et son épargne en même temps","Les frais sont plus élevés","C'est interdit"],correct:1,
+explain:"Le sentiment de maîtrise est trompeur : c'est la concentration de risque la plus dangereuse qui existe."},
+{q:"Quel est le point commun des 5 erreurs ?",opts:["Elles viennent d'un manque de connaissances","Elles consistent toutes à agir","Elles concernent les gros portefeuilles","Elles sont liées aux frais"],correct:1,
+explain:"Ne rien faire donne le sentiment de négliger son argent, alors que c'est souvent la meilleure décision disponible."}
 ],
-action:"Évalue ta susceptibilité à chacune des 5 erreurs sur une échelle de 1 à 5. Note une règle personnelle pour éviter la plus probable."
+action:"Relis ces 5 erreurs et note honnêtement celle vers laquelle tu penches. Puis écris quel dispositif de ta règle d'investissement te protège de celle-là précisément. Si aucun ne le fait, ta règle a une lacune à combler."
 },
-{module:"Module 6 — Psychologie et erreurs", title:"Gérer les krachs boursiers", duration:"9 min",
+{module:"Module 6 — Tenir dans la durée", title:"Traverser un krach", duration:"5 min",
 script:[
-"Un krach arrivera, c'est une certitude statistique : corrections de 10%+ en moyenne 1 à 2 fois par an, krachs de 20%+ tous les 3 à 5 ans.",
-"Préparation : comprendre la normalité des krachs (toujours suivis de reprises), connaître son point de douleur émotionnel avant d'investir, avoir un plan écrit à relire pendant la tempête.",
-"Pour ceux qui en ont les moyens, les krachs sont des opportunités d'achat à prix réduit. Sinon, maintenir simplement son DCA est déjà une excellente décision.",
-"Éviter les informations en continu pendant les krachs : les médias amplifient la peur, moins on consomme, plus on prend de bonnes décisions."
+"Un krach n'est pas un accident exceptionnel, c'est un événement récurrent. Les marchés connaissent des baisses supérieures à 20 % plusieurs fois par décennie, et une baisse de 10 % survient en moyenne environ une fois par an.",
+"Ce qui compte n'est donc pas de savoir s'il arrivera, mais <strong>ce que tu feras ce jour-là.</strong> Et la réponse doit être écrite avant, parce qu'au moment où cela se produit, 3 choses arrivent simultanément.",
+"<strong>La presse titrera sur l'effondrement</strong>, parce que la peur retient l'attention. <strong>Ton entourage te conseillera de sortir</strong>, souvent avec sincérité. Et <strong>ton propre cerveau te présentera la vente comme une décision raisonnable</strong>, en habillant la peur d'arguments qui sembleront excellents.",
+"Voici les faits utiles à connaître. Historiquement, les marchés larges ont fini par retrouver puis dépasser leurs sommets, avec des délais très variables, de quelques mois à plusieurs années. <u>Ceux qui ont vendu pendant les baisses ont matérialisé leur perte et manqué la remontée</u>, qui se produit souvent de façon concentrée sur quelques journées imprévisibles.",
+"Il faut immédiatement ajouter la nuance honnête : <strong>rien ne garantit que cela se reproduise.</strong> Ce sont des régularités historiques, pas des lois. Un investisseur sérieux vit avec cette incertitude plutôt que de la nier.",
+"Pour toi, en pratique, 4 gestes. <strong>1. Ne consulte pas ton portefeuille pendant la panique</strong>, chaque consultation étant une occasion de céder. <strong>2. Relis ta règle</strong>, écrite précisément pour ce moment. <strong>3. Continue tes versements</strong> : ce sont ceux qui achètent le plus de parts. <strong>4. Ne fais rien d'autre.</strong>",
+"Un renversement de perspective peut aider, et il est exact. <strong>Si tu es en phase de construction, une baisse est une bonne nouvelle</strong> : tu achètes les mêmes entreprises moins cher pendant des mois. Ce n'est un problème que pour celui qui doit vendre bientôt, ce qui est précisément la situation qu'une allocation adaptée à l'horizon permet d'éviter."
 ],
 quiz:[
-{q:"Fréquence moyenne des corrections de 10%+ ?",opts:["Tous les 5 à 10 ans","1 à 2 fois par an","Tous les 3 ans","Imprévisible"],correct:1,explain:"Cette fréquence élevée souligne l'importance de se préparer psychologiquement à l'avance."},
-{q:"Pourquoi connaître son « point de douleur » avant d'investir ?",opts:["Pour vendre exactement à ce niveau","Pour s'assurer que son allocation est adaptée à sa tolérance réelle","Pour informer son courtier","Pour savoir quand contacter un conseiller"],correct:1,explain:"Mieux vaut ajuster son allocation avant le krach que le découvrir en pleine tempête."},
-{q:"Pourquoi limiter l'information financière en temps réel pendant un krach ?",opts:["Les informations sont inexactes","Les médias amplifient la peur et le risque de décisions émotionnelles","Ça génère des frais","Les marchés sont fermés"],correct:1,explain:"Moins on consomme d'informations pendant un krach, plus on prend de bonnes décisions."}
+{q:"À quelle fréquence surviennent les baisses supérieures à 20 % ?",opts:["Une fois par siècle","Plusieurs fois par décennie","Une fois tous les 30 ans","Jamais sur les indices larges"],correct:1,
+explain:"Et une baisse de 10 % survient en moyenne environ une fois par an. Ce n'est pas un accident, c'est le fonctionnement normal."},
+{q:"Que fait ton cerveau pendant un krach ?",opts:["Il analyse froidement","Il habille la peur d'arguments qui semblent excellents","Il ignore la situation","Il devient plus performant"],correct:1,
+explain:"C'est pourquoi la règle doit être écrite avant, quand le raisonnement est encore disponible."},
+{q:"Pourquoi une baisse est-elle une bonne nouvelle en phase de construction ?",opts:["Parce que les frais baissent","Parce qu'on achète les mêmes entreprises moins cher pendant des mois","Parce que la fiscalité s'améliore","Ce n'est jamais une bonne nouvelle"],correct:1,
+explain:"Ce n'est un problème que pour celui qui doit vendre bientôt, situation qu'une allocation adaptée évite."}
 ],
-action:"Écris ton protocole de krach personnel : ce que tu feras si ton portefeuille perd 30%. Conserve-le dans un endroit accessible."
+action:"Cherche l'historique d'un indice mondial et repère 3 baisses passées. Note pour chacune sa profondeur et le temps qu'il a fallu pour retrouver le niveau d'avant. Ces 3 chiffres te serviront le jour où tu vivras la prochaine."
 },
-{module:"Module 6 — Psychologie et erreurs", title:"L'art de la patience active", duration:"8 min",
+{module:"Module 6 — Tenir dans la durée", title:"La patience active", duration:"5 min",
 script:[
-"La patience active n'est pas la passivité : c'est le résultat d'une décision informée, combinée à un engagement continu (DCA mensuel, rééquilibrage annuel, révision de stratégie).",
-"L'ennemi principal est l'illusion de contrôle : plus un investisseur particulier est actif, moins ses performances sont bonnes en moyenne, à cause des frais et des erreurs émotionnelles accumulées.",
-"Trois pratiques : rappeler régulièrement pourquoi vous investissez, réduire la visibilité de votre portefeuille, être entouré d'une communauté partageant la même philosophie de long terme.",
-"L'inertie réfléchie bat l'hyperactivité."
+"Investir sur le long terme ressemble à ne rien faire, et c'est ce qui le rend difficile. Cette leçon distingue l'inaction utile de la négligence, parce que les 2 se ressemblent de l'extérieur et n'ont rien à voir.",
+"<strong>La patience passive</strong> consiste à oublier ses comptes, à ne jamais vérifier ses frais, à laisser une allocation dériver pendant 10 ans. Ce n'est pas de la patience, c'est de l'abandon, et cela finit par coûter cher.",
+"<strong>La patience active</strong> consiste à ne pas toucher au portefeuille, tout en entretenant le système autour. Concrètement, ce sont 4 gestes par an et pas un de plus.",
+"<strong>Geste 1 : verser, chaque mois, automatiquement.</strong> C'est la seule action réellement continue, et elle ne demande rien puisqu'elle est programmée.",
+"<strong>Geste 2 : vérifier les frais, une fois par an.</strong> Frais du courtier, frais des fonds, frais de tenue de compte. Ce sont les seuls éléments certains, et ils changent parfois sans qu'on te prévienne.",
+"<strong>Geste 3 : rééquilibrer, une fois par an</strong>, si l'écart avec ta cible dépasse le seuil que tu as fixé. <strong>Geste 4 : relire ta règle</strong>, et l'ajuster uniquement si ta vie a changé, jamais parce que les marchés ont bougé.",
+"Cette distinction est essentielle et je la répète : <u>on modifie une stratégie quand sa situation personnelle change, jamais quand le marché change.</u> Un mariage, un enfant, un changement de métier, un projet immobilier sont des raisons valables. Une baisse de 25 % n'en est pas une.",
+"Un dernier point, sur ce qu'il faut faire du temps ainsi libéré. Puisque ton portefeuille ne demande que 4 gestes par an, <strong>l'essentiel de ton énergie financière est mieux employée ailleurs</strong> : à augmenter tes revenus, à réduire tes charges fixes, à te former. Ces 3 leviers produisent bien plus, sur 10 ans, que n'importe quelle optimisation de portefeuille.",
+"C'est peut-être la conclusion la plus utile de cette formation : <strong>une fois le système en place, le meilleur investissement n'est plus financier.</strong>"
 ],
 quiz:[
-{q:"Différence entre patience active et passivité ?",opts:["La patience active implique de surveiller quotidiennement","La passivité vient d'un manque de connaissance, la patience active d'une décision informée et d'un engagement continu","Réservée aux investisseurs expérimentés","Aucune différence réelle"],correct:1,explain:"La patience active combine décision consciente et discipline continue."},
-{q:"Que montre la recherche sur activité de trading et performance ?",opts:["Les plus actifs performent mieux","Les plus actifs ont en moyenne des performances inférieures","La relation varie selon les conditions","Aucun impact significatif"],correct:1,explain:"Les frais de transaction et erreurs émotionnelles s'accumulent chez les investisseurs les plus actifs."},
-{q:"Comment réduire la tentation d'intervenir sur son portefeuille ?",opts:["Surveiller plusieurs fois par jour","Réduire la visibilité du portefeuille et s'entourer d'une communauté de long terme","Restreindre l'accès avec un mot de passe complexe","Confier la gestion à un conseiller"],correct:1,explain:"La communauté renforce la discipline individuelle en normalisant la patience."}
+{q:"Qu'est-ce que la patience passive ?",opts:["Une stratégie recommandée","L'abandon : ne jamais vérifier ses frais ni son allocation","Verser sans regarder les marchés","Rééquilibrer chaque année"],correct:1,
+explain:"Elle ressemble à de la patience vue de l'extérieur, et elle finit par coûter cher."},
+{q:"Quand modifie-t-on une stratégie ?",opts:["Quand les marchés baissent fortement","Quand sa situation personnelle change","Chaque année par principe","Quand un nouveau fonds apparaît"],correct:1,
+explain:"Mariage, enfant, projet immobilier sont des raisons valables. Une baisse de 25 % n'en est pas une."},
+{q:"Où l'énergie financière est-elle le mieux employée une fois le système en place ?",opts:["À optimiser son portefeuille","À augmenter ses revenus, réduire ses charges fixes et se former","À suivre l'actualité économique","À diversifier davantage"],correct:1,
+explain:"Ces 3 leviers produisent bien plus sur 10 ans que n'importe quelle optimisation de portefeuille."}
 ],
-action:"Définis ta règle de consultation de portefeuille (max 1 fois/semaine ou mois). Note-la dans ton journal de décisions."
+action:"Note dans ton calendrier les 4 gestes annuels, à la même date que ta revue. Puis choisis une compétence à développer cette année. C'est le seul investissement qui n'a ni frais ni volatilité."
 },
-{module:"Module 6 — Psychologie et erreurs", title:"Votre plan sur 5 ans", duration:"9 min",
+{module:"Module 6 — Tenir dans la durée", title:"Ton plan sur 5 ans", duration:"5 min",
 script:[
-"Plan en 4 phases sur 5 ans. Phase 1 (3 premiers mois), l'installation : PEA ouvert, virements configurés, premier investissement.",
-"Phase 2 (mois 4-24), la régularité : DCA mensuel, revue mensuelle, premier krach traversé sereinement. C'est la phase où beaucoup abandonnent car les résultats ne semblent pas encore spectaculaires.",
-"Phase 3 (mois 25-48), l'accélération : capital visible, DCA augmenté progressivement, diversification vers d'autres formations (immobilier, fiscalité).",
-"Phase 4 (mois 49-60), la consolidation : avantage fiscal du PEA atteint (5 ans), bilan des progrès, nouveaux objectifs. Ce plan garantit une méthode, pas une performance. NiouDem. On y va."
+"Dernière leçon de cette formation. Elle projette les 23 précédentes sur 5 ans, année par année, avec un objectif unique par période.",
+"<strong>Année 1 : mettre en place.</strong> Ouvrir l'enveloppe, passer le premier ordre avec un petit montant, programmer le versement automatique, écrire ta règle en 10 lignes. À la fin de cette année, le système existe et tu as vécu au moins une variation à la baisse. <u>C'est le seul objectif qui compte : que le dispositif tourne.</u>",
+"<strong>Année 2 : tenir sans rien changer.</strong> Aucune nouveauté. Tu verses, tu fais ta revue annuelle, tu relis ta règle. Cette année est la plus ennuyeuse et la plus formatrice, parce que c'est celle où l'envie d'optimiser apparaît.",
+"<strong>Année 3 : ajuster.</strong> Ton montant a peut-être évolué avec tes revenus, ton horizon s'est précisé, un projet est apparu. Tu ajustes l'allocation si la situation le justifie, et tu vérifies que tes frais sont toujours compétitifs.",
+"<figure class=\"schema\"><svg viewBox=\"0 0 700 168\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><line x1=\"34\" y1=\"96\" x2=\"666\" y2=\"96\" stroke=\"#DCDDD3\" stroke-width=\"2\"/><path d=\"M666 96 l-9 -5 v10 z\" fill=\"#DCDDD3\"/><line x1=\"34\" y1=\"96\" x2=\"34\" y2=\"62\" stroke=\"#1E4B3C\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"34\" cy=\"96\" r=\"7\" fill=\"#1E4B3C\"/><circle cx=\"34\" cy=\"96\" r=\"12\" fill=\"none\" stroke=\"#1E4B3C\" stroke-width=\"1\" opacity=\".35\"/><text x=\"34\" y=\"52\" text-anchor=\"start\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">An 1</text><text x=\"34\" y=\"122\" text-anchor=\"start\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12\" fill=\"#43555F\">Mettre en place</text><line x1=\"192\" y1=\"96\" x2=\"192\" y2=\"62\" stroke=\"#B8862F\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"192\" cy=\"96\" r=\"7\" fill=\"#B8862F\"/><circle cx=\"192\" cy=\"96\" r=\"12\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1\" opacity=\".35\"/><text x=\"192\" y=\"52\" text-anchor=\"middle\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">An 2</text><text x=\"192\" y=\"122\" text-anchor=\"middle\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12\" fill=\"#43555F\">Tenir sans rien changer</text><line x1=\"350\" y1=\"96\" x2=\"350\" y2=\"62\" stroke=\"#B8862F\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"350\" cy=\"96\" r=\"7\" fill=\"#B8862F\"/><circle cx=\"350\" cy=\"96\" r=\"12\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1\" opacity=\".35\"/><text x=\"350\" y=\"52\" text-anchor=\"middle\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">An 3</text><text x=\"350\" y=\"122\" text-anchor=\"middle\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12\" fill=\"#43555F\">Ajuster</text><line x1=\"508\" y1=\"96\" x2=\"508\" y2=\"62\" stroke=\"#B8862F\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"508\" cy=\"96\" r=\"7\" fill=\"#B8862F\"/><circle cx=\"508\" cy=\"96\" r=\"12\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"1\" opacity=\".35\"/><text x=\"508\" y=\"52\" text-anchor=\"middle\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">An 4</text><text x=\"508\" y=\"122\" text-anchor=\"middle\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12\" fill=\"#43555F\">Élargir si besoin</text><line x1=\"666\" y1=\"96\" x2=\"666\" y2=\"62\" stroke=\"#1E4B3C\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"666\" cy=\"96\" r=\"7\" fill=\"#1E4B3C\"/><circle cx=\"666\" cy=\"96\" r=\"12\" fill=\"none\" stroke=\"#1E4B3C\" stroke-width=\"1\" opacity=\".35\"/><text x=\"666\" y=\"52\" text-anchor=\"end\" font-family=\"Newsreader, Georgia, serif\" font-size=\"14\" font-weight=\"600\" fill=\"#12212B\">An 5</text><text x=\"666\" y=\"122\" text-anchor=\"end\" font-family=\"Karla, system-ui, sans-serif\" font-size=\"12\" fill=\"#43555F\">Mesurer</text></svg><figcaption>Un objectif par année. La deuxième est la plus ennuyeuse et la plus formatrice.</figcaption></figure>",
+"<strong>Année 4 : élargir si nécessaire.</strong> Si ton plafond approche ou si un nouvel objectif se dessine, tu peux ouvrir une seconde enveloppe. Ce n'est pas une obligation, et beaucoup de gens n'en ont jamais besoin.",
+"<strong>Année 5 : mesurer.</strong> Tu compares ton patrimoine net à celui du début, tu relis tes 5 revues annuelles, et tu observes ce qui a réellement produit du résultat. La plupart des gens découvrent que ce sont les versements réguliers et la baisse des charges fixes, pas les choix de placement.",
+"Ce que tu auras à la fin, formulé prudemment : un capital construit à ton rythme, un système qui tourne sans effort, et surtout <strong>l'expérience d'avoir traversé au moins une baisse sans vendre.</strong> Cette expérience ne s'achète pas et ne se lit pas, elle se vit une fois.",
+"Un mot pour refermer cette formation. Tu sais maintenant ce qu'est une action, comment fonctionne une enveloppe, ce que coûtent les frais, et pourquoi la régularité bat le timing. <strong>Ce savoir ne te rendra pas riche</strong>, et quiconque te promet le contraire vend quelque chose.",
+"Ce qu'il te donne est plus modeste et plus solide : <strong>la capacité d'évaluer seul ce qu'on te proposera, et de ne plus jamais signer quelque chose que tu ne comprends pas.</strong>"
 ],
 quiz:[
-{q:"Quelle est la phase la plus critique pour éviter l'abandon ?",opts:["L'installation des 3 premiers mois","La régularité (mois 4-24), résultats encore peu visibles","L'accélération (mois 25-48)","La consolidation (mois 49-60)"],correct:1,explain:"Les intérêts composés ne sont pas encore visibles, générant le plus grand risque d'abandon."},
-{q:"Pourquoi la cinquième année est-elle importante pour le PEA ?",opts:["Les marchés sont historiquement haussiers cette année-là","L'exonération d'impôt sur le revenu est atteinte","Les ETF doublent généralement de valeur","Le plafond du PEA est atteint"],correct:1,explain:"C'est le jalon fiscal qui marque l'atteinte de l'avantage fiscal maximal du PEA."},
-{q:"Que garantit ce plan sur 5 ans ?",opts:["Une performance minimum de 7% par an","L'absence de krachs","Une méthode rigoureuse et des habitudes ancrées","Un doublement du capital investi"],correct:2,explain:"Sur le long terme, c'est la méthode disciplinée qui génère les résultats, pas une garantie de performance."}
+{q:"Quel est l'unique objectif de la première année ?",opts:["Obtenir un rendement de 5 %","Que le dispositif existe et tourne","Diversifier au maximum","Atteindre 10 000 € investis"],correct:1,
+explain:"Ouvrir, verser, écrire sa règle, et vivre une première variation à la baisse."},
+{q:"Pourquoi la deuxième année est-elle la plus formatrice ?",opts:["Les gains y sont les plus forts","Parce que c'est celle où l'envie d'optimiser apparaît","Parce que la fiscalité change","Parce qu'on rééquilibre"],correct:1,
+explain:"Ne rien changer pendant une année entière est un apprentissage à part entière."},
+{q:"Que découvrent la plupart des gens au bout de 5 ans ?",opts:["Que le choix des fonds a tout décidé","Que les versements réguliers et la baisse des charges fixes ont produit l'essentiel","Qu'il fallait investir davantage en une fois","Que la gestion active était préférable"],correct:1,
+explain:"Les choix de placement pèsent bien moins que la régularité et la structure des charges."}
 ],
-action:"Construis ton plan sur 5 ans avec les jalons de chaque phase. Fixe ta date de début, idéalement maintenant."
+action:"Écris les 5 années dans ton carnet, avec un objectif par année. Puis reviens à l'année 1 et note la seule action qui te sépare de son démarrage. Tu as la méthode complète, il ne manque que la première ligne."
 }
 ];
 
@@ -759,7 +934,9 @@ function render(){
     '<div class="lesson-title">' + (current) + '. ' + l.title + '</div>' +
     '<div class="lesson-meta">' + l.duration + ' de lecture · Leçon ' + current + ' sur ' + LESSONS.length + '</div>' +
     '<div class="section-label"><span class="dot"></span>Comprendre</div>' +
-    '<div class="script-text">' + l.script.map(function(p){return '<p>'+p+'</p>';}).join('') + '</div>' +
+    '<div class="script-text">' + l.script.map(function(p){
+      return p.indexOf('<figure') === 0 ? p : '<p>' + p + '</p>';
+    }).join('') + '</div>' +
     '<div class="section-label quiz"><span class="dot"></span>Vérifier</div>' +
     quizHtml +
     '<div class="section-label action"><span class="dot"></span>Petite action</div>' +
