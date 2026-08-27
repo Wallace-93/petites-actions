@@ -290,6 +290,19 @@ function dessinerCarte(ev){
 
 
 /* Les formations achevées deviennent des bornes, que l'on peut rouvrir. */
+
+
+/* Un bloc secondaire ne doit jamais empecher la page de s'afficher. */
+function bloc(fn){
+  try { return fn(); }
+  catch(e){ console.warn('Bloc ignore :', e); return ''; }
+}
+
+function ouvrirBorne(el){
+  if(typeof ouvrirCarte !== 'function') return;
+  ouvrirCarte(el.dataset.cle, parseInt(el.dataset.lecons, 10), PRENOM, parseInt(el.dataset.semaines, 10));
+}
+
 function blocBornes(){
   const parFormation = {};
   PROGRESSION.forEach(function(p){
@@ -302,9 +315,21 @@ function blocBornes(){
   });
   if(!finies.length) return '';
 
+  /* Le nombre de semaines se calcule ici, a partir de la premiere lecon
+     validee dans cette formation. */
+  function semainesDe(cle){
+    const dates = PROGRESSION
+      .filter(function(p){ return p.formation === cle && p.completed && p.completed_at; })
+      .map(function(p){ return new Date(p.completed_at).getTime(); });
+    if(!dates.length) return 1;
+    return Math.max(1, Math.round((Date.now() - Math.min.apply(null, dates)) / (7*24*3600*1000)));
+  }
+
+  /* Les donnees passent par des attributs plutot que par l'appel direct :
+     un prenom contenant une apostrophe casserait l'attribut. */
   const cartes = finies.map(function(f){
-    return '<button class="borne-c" onclick="ouvrirCarte(\'' + f.cle + '\', ' + f.lecons +
-      ', ' + JSON.stringify(PRENOM) + ', ' + semainesDepuisDebut() + ')">' +
+    return '<button class="borne-c" data-cle="' + f.cle + '" data-lecons="' + f.lecons +
+      '" data-semaines="' + semainesDe(f.cle) + '" onclick="ouvrirBorne(this)">' +
       '<div class="borne-num">Étape franchie</div>' +
       '<div class="borne-nom">' + echapper(f.nom) + '</div>' +
       '<div class="borne-meta">' + f.lecons + ' leçons · ' + f.lecons + ' actions</div>' +
@@ -428,7 +453,7 @@ function rendre(){
       '<p class="bloc-sous">Chaque notion listée ici correspond à une leçon que tu as validée par le quiz, puis à une action que tu as faite dans la vraie vie.</p>' +
       blocsNotions + '</div>' : '') +
 
-    blocBornes() +
+    bloc(blocBornes) +
 
     blocJalons +
 
