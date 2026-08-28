@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Optimisation fiscale · Leçons · NiouDem</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -622,7 +623,7 @@ let PROGRESS_CACHE = {};
 async function requireAuth(){
   const { data: { session } } = await sb.auth.getSession();
   if(!session){
-    window.location.href = 'inscription.html?redirect=lecons-budget.html';
+    window.location.href = 'inscription.html?redirect=lecons-fiscalite.html';
     return null;
   }
   return session.user;

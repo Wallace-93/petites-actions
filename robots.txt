@@ -1,10 +1,15 @@
 User-agent: *
 Allow: /
 
+# Espaces protégés : accessibles seulement après connexion
 Disallow: /admin.html
 Disallow: /admin-retours.html
 Disallow: /carnet.html
 Disallow: /succes.html
+Disallow: /connexion.html
+Disallow: /mot-de-passe-oublie.html
 Disallow: /nouveau-mot-de-passe.html
+Disallow: /trading-lab.html
+Disallow: /lecons-
 
 Sitemap: https://nioudem.com/sitemap.xml
