@@ -93,20 +93,19 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
 
 <div class="hero">
   <div class="confetti">
-    <span style="left:10%;animation-delay:0s;">🎉</span>
-    <span style="left:25%;animation-delay:.4s;">✨</span>
-    <span style="left:45%;animation-delay:.8s;">🎊</span>
-    <span style="left:65%;animation-delay:.2s;">✨</span>
-    <span style="left:80%;animation-delay:1.1s;">🎉</span>
-    <span style="left:92%;animation-delay:.6s;">✨</span>
+    <span style="left:10%;animation-delay:0s;"></span>
+    <span style="left:25%;animation-delay:.4s;"></span>
+    <span style="left:45%;animation-delay:.8s;"></span>
+    <span style="left:65%;animation-delay:.2s;"></span>
+    <span style="left:80%;animation-delay:1.1s;"></span>
+    <span style="left:92%;animation-delay:.6s;"></span>
   </div>
   <div class="badge-wrap">
-    <div class="hero-tag">Formation 0 terminée</div>
-    <div class="badge-circle">🏅</div>
+    <div class="hero-tag">Première formation terminée</div>
     <div class="hero-title">Bravo<span id="heroName">,</span> tu as tout validé <span>sincèrement.</span></div>
     <p class="hero-sub">14 leçons, 42 quiz répondus, 14 petites actions réalisées. Tu viens de poser les vraies fondations. Ce que tu sais maintenant, la majorité des gens ne l'apprendront jamais.</p>
     <div class="badge-name-card">
-      <div class="badge-name">🏅 Badge débloqué : Le Déclic</div>
+      <div class="badge-name">Badge débloqué : Le Déclic</div>
       <div class="badge-desc">Décerné à ceux qui terminent leur première formation jusqu'au bout, sans raccourci.</div>
     </div>
   </div>
@@ -116,23 +115,26 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
   <div class="offer-card">
     <div class="offer-badge">Tu as terminé la première formation</div>
     <div class="offer-eyebrow">La suite du parcours</div>
-    <div class="offer-title">Sept formations t'attendent</div>
-    <div class="offer-per">Les sept formations suivantes sont ouvertes, gratuitement.</div>
+    <div class="offer-title">7 formations t'attendent</div>
+    <div class="offer-per">Les 7 formations suivantes sont désormais déverrouillées, gratuitement.</div>
     <ul class="offer-features">
-      <li>Les sept formations suivantes</li>
+      <li>Les 7 formations suivantes</li>
       <li>Le carnet de route et l'accompagnement</li>
       <li>La communauté</li>
     </ul>
-    <a href="index.html#formations" class="offer-btn">Continuer avec la formation suivante</a>
-    <div class="offer-timer">Ouverture prochaine : le site est en phase de test. Ta progression est conservée.</div>
+    <a href="lecons-psychologie.html" class="offer-btn">Continuer : Psychologie de l'argent</a>
+    <div class="offer-timer">Ta progression est conservée, et ton carnet de route la retrace.</div>
   </div>
-  <a href="index.html" class="skip-link">Plus tard, retour à l'accueil</a>
+  <a href="index.html" class="skip-link">Plus tard, retour au site</a>
 </div>
 
 <script>
 const SUPABASE_URL = 'https://pchkshpbzsybvtwxqvrf.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjaGtzaHBienN5YnZ0d3hxdnJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NDgwMTAsImV4cCI6MjEwMTUyNDAxMH0.3EqyBUDmHHJ79mdDD6dmpVwsuEA0h2hF-75Up9R2Snc';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+/* Exposé pour que le widget de retours réutilise ce client plutôt
+   que d'en créer un second sur la même clé de stockage. */
+window.sb = sb;
 
 (async function(){
   const { data: { session } } = await sb.auth.getSession();

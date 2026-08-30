@@ -191,6 +191,17 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
   color:var(--ink-muted,#7A8A93);margin-top:14px;padding-top:12px;
   border-top:1px solid var(--bg-line,#DCDDD3);}
 @media(max-width:620px){.schema{padding:14px 12px 10px;margin:20px -6px;}}
+
+/* Sortie de leçon : on peut toujours s'arrêter sans se sentir coincé. */
+.lesson-sortie{display:flex;flex-wrap:wrap;align-items:center;gap:9px;justify-content:center;
+  margin-top:24px;padding-top:18px;border-top:1px solid var(--bg-line);
+  font-size:13.5px;color:var(--ink-faint);}
+.lesson-sortie a{color:var(--ink-muted);text-decoration:none;font-weight:600;}
+.lesson-sortie a:hover{color:var(--green);}
+
+.bandeau-verrou{background:var(--amber-pale,#F6EFE0);border:1px solid #E4D2AC;border-radius:11px;
+  padding:14px 18px;margin-bottom:22px;font-size:14.5px;color:#7A5A12;line-height:1.6;}
+.bandeau-verrou strong{color:#5E4409;}
 </style>
 </head>
 <body>
@@ -512,6 +523,9 @@ action:"Écris ton plan personnel en 5 lignes, une par étape, en notant pour ch
 const SUPABASE_URL = 'https://pchkshpbzsybvtwxqvrf.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjaGtzaHBienN5YnZ0d3hxdnJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NDgwMTAsImV4cCI6MjEwMTUyNDAxMH0.3EqyBUDmHHJ79mdDD6dmpVwsuEA0h2hF-75Up9R2Snc';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+/* Exposé pour que le widget de retours réutilise ce client plutôt
+   que d'en créer un second sur la même clé de stockage. */
+window.sb = sb;
 const FORMATION = 'monnaie';
 const NOM_FORMATION = 'Comprendre la monnaie';
 let CURRENT_USER = null;
@@ -529,7 +543,7 @@ async function requireAuth(){
 async function requireUnlock(userId){
   const { data: badge } = await sb.from('badges').select('badge_name').eq('user_id', userId).eq('badge_name','le_declic').maybeSingle();
   if(!badge){
-    window.location.href = 'lecons-monnaie.html';
+    window.location.href = 'lecons-monnaie.html?verrou=1';
     return false;
   }
   return true;
@@ -746,7 +760,13 @@ function render(){
     '</div>' +
     '<div class="lesson-nav">' +
       (current > 1 ? '<button class="nav-btn ghost" onclick="goTo(' + (current-1) + ')">← Leçon précédente</button>' : '<span></span>') +
-      (current < LESSONS.length ? '<button class="nav-btn" onclick="goTo(' + (current+1) + ')">Leçon suivante →</button>' : '<a href="budget.html" class="nav-btn">Terminer le parcours →</a>') +
+      (current < LESSONS.length ? '<button class="nav-btn" onclick="goTo(' + (current+1) + ')">Leçon suivante →</button>' : '<a href="lecons-psychologie.html" class="nav-btn">Psychologie de l\'argent →</a>') +
+    '</div>' +
+
+    '<div class="lesson-sortie">' +
+      '<a href="index.html#formations">Sommaire des formations</a><span>·</span>' +
+      '<a href="carnet.html">Mon carnet</a><span>·</span>' +
+      '<a href="index.html">Retour au site</a>' +
     '</div>';
 }
 
@@ -796,6 +816,24 @@ async function toggleAction(){
   if(newValue) verifierFinDeParcours();
 }
 
+/* Première formation terminée : le badge Le Déclic est accordé côté
+   serveur, puis la page de célébration s'affiche. C'est ce badge qui
+   déverrouille les 7 formations suivantes. */
+async function accorderDeclic(){
+  const progress = getProgress();
+  const faites = Object.keys(progress).filter(function(k){ return progress[k]; }).length;
+  if(faites < LESSONS.length) return false;
+
+  try {
+    const { data, error } = await sb.rpc('accorder_declic', { nb_lecons: LESSONS.length });
+    if(error){ console.warn('Badge non accordé :', error.message); return false; }
+    return data === true;
+  } catch(e){
+    console.warn('Badge non accordé :', e);
+    return false;
+  }
+}
+
 async function verifierFinDeParcours(){
   const progress = getProgress();
   const faites = Object.keys(progress).filter(function(k){ return progress[k]; }).length;
@@ -816,6 +854,12 @@ async function verifierFinDeParcours(){
     }
   } catch(e){ console.warn('Carte : données partielles', e); }
 
+  const declic = await accorderDeclic();
+  if(declic){
+    /* Première formation : célébration complète, badge compris. */
+    window.location.href = 'succes.html';
+    return;
+  }
   ouvrirCarte(FORMATION, LESSONS.length, prenom, semaines);
 }
 
@@ -848,7 +892,23 @@ boot();
   <a href="mentions-legales.html#confidentialite" style="color:var(--ink-muted);margin:0 10px;">Confidentialité</a>
   <a href="mentions-legales.html#cgv" style="color:var(--ink-muted);margin:0 10px;">CGV</a>
 </div>
-<script src="retours.js" defer></script>
+<script src="retours.js" defer>
+/* Arrive ici depuis une formation verrouillee : on explique pourquoi. */
+(function(){
+  if(new URLSearchParams(location.search).get('verrou') !== '1') return;
+  document.addEventListener('DOMContentLoaded', function(){
+    const cible = document.getElementById('main');
+    if(!cible) return;
+    const d = document.createElement('div');
+    d.className = 'bandeau-verrou';
+    d.id = 'bandeauVerrou';
+    d.innerHTML = '<strong>Cette formation n\'est pas encore ouverte.</strong> ' +
+      'Les 7 formations suivantes se déverrouillent une fois « Comprendre la monnaie » terminée, ' +
+      'action comprise. C\'est la seule condition, et elle existe pour que les bases soient posées.';
+    cible.prepend(d);
+  });
+})();
+</script>
 <script src="accomplissement.js"></script>
 </body>
 </html>

@@ -188,6 +188,13 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
 .script-text u{text-decoration:none;background:linear-gradient(transparent 62%,var(--amber-pale,#F6EFE0) 62%);
   box-shadow:inset 0 -1px 0 var(--amber,#B8862F);}
 .script-text p + p{margin-top:14px;}
+
+/* Sortie de leçon : on peut toujours s'arrêter sans se sentir coincé. */
+.lesson-sortie{display:flex;flex-wrap:wrap;align-items:center;gap:9px;justify-content:center;
+  margin-top:24px;padding-top:18px;border-top:1px solid var(--bg-line);
+  font-size:13.5px;color:var(--ink-faint);}
+.lesson-sortie a{color:var(--ink-muted);text-decoration:none;font-weight:600;}
+.lesson-sortie a:hover{color:var(--green);}
 </style>
 </head>
 <body>
@@ -593,6 +600,9 @@ action:"Ouvre ton carnet de route et regarde le chemin parcouru depuis la premi�
 const SUPABASE_URL = 'https://pchkshpbzsybvtwxqvrf.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjaGtzaHBienN5YnZ0d3hxdnJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NDgwMTAsImV4cCI6MjEwMTUyNDAxMH0.3EqyBUDmHHJ79mdDD6dmpVwsuEA0h2hF-75Up9R2Snc';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+/* Exposé pour que le widget de retours réutilise ce client plutôt
+   que d'en créer un second sur la même clé de stockage. */
+window.sb = sb;
 const FORMATION = 'crypto';
 const NOM_FORMATION = 'Bitcoin &amp; cryptomonnaies';
 let CURRENT_USER = null;
@@ -610,7 +620,7 @@ async function requireAuth(){
 async function requireUnlock(userId){
   const { data: badge } = await sb.from('badges').select('badge_name').eq('user_id', userId).eq('badge_name','le_declic').maybeSingle();
   if(!badge){
-    window.location.href = 'lecons-monnaie.html';
+    window.location.href = 'lecons-monnaie.html?verrou=1';
     return false;
   }
   return true;
@@ -827,7 +837,13 @@ function render(){
     '</div>' +
     '<div class="lesson-nav">' +
       (current > 1 ? '<button class="nav-btn ghost" onclick="goTo(' + (current-1) + ')">← Leçon précédente</button>' : '<span></span>') +
-      (current < LESSONS.length ? '<button class="nav-btn" onclick="goTo(' + (current+1) + ')">Leçon suivante →</button>' : '<a href="crypto.html" class="nav-btn">Terminer le parcours →</a>') +
+      (current < LESSONS.length ? '<button class="nav-btn" onclick="goTo(' + (current+1) + ')">Leçon suivante →</button>' : '<a href="carnet.html" class="nav-btn">Voir mon carnet de route →</a>') +
+    '</div>' +
+
+    '<div class="lesson-sortie">' +
+      '<a href="index.html#formations">Sommaire des formations</a><span>·</span>' +
+      '<a href="carnet.html">Mon carnet</a><span>·</span>' +
+      '<a href="index.html">Retour au site</a>' +
     '</div>';
 }
 

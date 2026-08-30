@@ -197,10 +197,23 @@
   }
 
   /* ---------- démarrage ---------- */
+  /* Deux clients d'authentification partageant la même clé de stockage
+     peuvent se gêner au rafraîchissement du jeton. On réutilise donc
+     celui de la page quand il existe, et on n'en crée un qu'à défaut. */
+  function clientPartage() {
+    if (window.sb && window.sb.from) return window.sb;
+    if (window.__sbNioudem) return window.__sbNioudem;
+
+    window.__sbNioudem = window.supabase.createClient(URL_SB, CLE_SB, {
+      auth: { persistSession: false, autoRefreshToken: false }
+    });
+    return window.__sbNioudem;
+  }
+
   function demarrer() {
     chargerSupabase(function () {
       try {
-        client = window.supabase.createClient(URL_SB, CLE_SB);
+        client = clientPartage();
         construire();
       } catch (e) {
         console.warn('Widget de retours non initialisé :', e);

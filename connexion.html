@@ -101,6 +101,9 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
 const SUPABASE_URL = 'https://pchkshpbzsybvtwxqvrf.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjaGtzaHBienN5YnZ0d3hxdnJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NDgwMTAsImV4cCI6MjEwMTUyNDAxMH0.3EqyBUDmHHJ79mdDD6dmpVwsuEA0h2hF-75Up9R2Snc';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+/* Exposé pour que le widget de retours réutilise ce client plutôt
+   que d'en créer un second sur la même clé de stockage. */
+window.sb = sb;
 
 (async function(){
   const { data: { session } } = await sb.auth.getSession();

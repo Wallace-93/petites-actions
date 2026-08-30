@@ -32,6 +32,10 @@ a{color:inherit;}
 .nav-lien{text-decoration:none;font-size:14.5px;font-weight:600;color:var(--encre);white-space:nowrap;}
 .nav-cta{text-decoration:none;background:var(--pin);color:#fff;font-size:14px;font-weight:600;padding:9px 17px;border-radius:7px;white-space:nowrap;}
 @media(max-width:620px){.nav-lien{display:none;}}
+/* La connexion reste accessible meme quand les autres liens disparaissent. */
+.nav-connexion{text-decoration:none;font-size:14px;font-weight:600;color:var(--encre);white-space:nowrap;}
+.nav-connexion:hover{color:var(--pin);}
+@media(max-width:620px){.nav-connexion{font-size:13px;}}
 
 /* ---------- Structure ---------- */
 .wrap{max-width:940px;margin:0 auto;padding:52px 24px 76px;}
