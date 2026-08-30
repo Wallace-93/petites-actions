@@ -586,13 +586,26 @@ async function requireAuth(){
   return session.user;
 }
 
+const PAGE_PORTE = 'lecons-monnaie.html';
+
 async function requireUnlock(userId){
-  const { data: badge } = await sb.from('badges').select('badge_name').eq('user_id', userId).eq('badge_name','le_declic').maybeSingle();
-  if(!badge){
-    window.location.href = 'lecons-monnaie.html?verrou=1';
-    return false;
+  /* La formation d'entrée n'est jamais verrouillée : la vérifier ici
+     provoquerait une redirection de la page vers elle-même, donc une
+     boucle infinie. */
+  if(FORMATION === 'monnaie') return true;
+
+  const { data: badge } = await sb.from('badges')
+    .select('badge_name').eq('user_id', userId).eq('badge_name','le_declic').maybeSingle();
+  if(badge) return true;
+
+  /* Garde-fou : ne jamais rediriger vers la page courante. */
+  const ici = window.location.pathname.split('/').pop() || 'index.html';
+  if(ici === PAGE_PORTE){
+    console.warn('Verrou actif sur la page d\'entrée : redirection ignorée.');
+    return true;
   }
-  return true;
+  window.location.href = PAGE_PORTE + '?verrou=1';
+  return false;
 }
 
 async function signOut(){
