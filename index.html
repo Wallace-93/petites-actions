@@ -113,16 +113,27 @@ h3{font-family:var(--display);font-weight:600;color:var(--encre);font-size:19px;
 @media(max-width:940px){
   .burger{display:grid;}
   .nav-links{position:absolute;top:100%;left:0;right:0;display:block;background:var(--papier);
-    border-bottom:1px solid var(--trait);padding:8px 24px 18px;margin:0;
-    max-height:0;overflow:hidden;opacity:0;transition:max-height .28s ease,opacity .2s,padding .28s;}
-  .nav.deplie .nav-links{max-height:340px;opacity:1;}
+    border-bottom:1px solid var(--trait);padding:0 24px;margin:0;
+    max-height:0;overflow:hidden;opacity:0;
+    transition:max-height .3s ease,opacity .22s,padding .3s;
+    box-shadow:0 18px 32px -24px rgba(18,33,43,.4);}
+  /* La hauteur suit le contenu : avec 7 entrées, une valeur fixe coupait
+     la dernière, c'est-à-dire justement « Se connecter ». */
+  .nav.deplie .nav-links{max-height:min(78vh, 560px);opacity:1;padding:8px 24px 20px;
+    overflow-y:auto;-webkit-overflow-scrolling:touch;}
   .nav-links li{border-bottom:1px solid var(--trait);}
   .nav-links li:last-child{border-bottom:0;}
   .nav-links a{display:block;padding:13px 0;font-size:16px;border-bottom:0;}
-  /* Le lien de connexion disparait de la barre : on le remet dans le menu,
-     sinon un inscrit n'a plus que le bouton d'inscription sous les yeux. */
-  .nav-li-mobile{display:list-item;}
-  .nav-li-mobile a{color:var(--pin);font-weight:700;}
+  /* Le lien de connexion devient un bloc à part, détaché de la liste :
+     c'est une action, pas une rubrique du site. */
+  .nav-li-mobile{display:list-item;border-bottom:0 !important;margin-top:14px;
+    padding-top:14px;border-top:1px solid var(--trait);}
+  .nav-li-mobile a{display:block;text-align:center;background:var(--pin);color:#fff;
+    font-weight:700;border-radius:9px;padding:13px 16px;}
+  .nav-li-mobile a:hover{background:#173b2f;}
+  .nav-li-mobile .sur{display:block;font-family:var(--mono);font-size:10.5px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--encre-3);
+    text-align:center;margin-bottom:10px;font-weight:400;}
 }
 
 
@@ -370,7 +381,10 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       <li><a href="#methode">Méthode</a></li>
       <li><a href="qui-sommes-nous.html">Qui nous sommes</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li class="nav-li-mobile"><a href="connexion.html">Se connecter</a></li>
+      <li class="nav-li-mobile">
+        <span class="sur">Déjà inscrit ?</span>
+        <a href="connexion.html">Se connecter</a>
+      </li>
     </ul>
     <div class="nav-right" id="navRight">
       <a href="connexion.html" class="nav-login">Se connecter</a>
