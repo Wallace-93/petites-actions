@@ -202,6 +202,18 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
 .bandeau-verrou{background:var(--amber-pale,#F6EFE0);border:1px solid #E4D2AC;border-radius:11px;
   padding:14px 18px;margin-bottom:22px;font-size:14.5px;color:#7A5A12;line-height:1.6;}
 .bandeau-verrou strong{color:#5E4409;}
+
+/* La porte d'inscription, en fin de module ouvert. */
+.porte{background:var(--green-pale,#E7EFEA);border:1px solid #BFD6C9;border-radius:14px;
+  padding:26px 26px 24px;margin-top:32px;}
+.porte-sur{font-family:var(--mono,monospace);font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--green,#1E4B3C);margin-bottom:10px;}
+.porte-titre{font-family:var(--display,Georgia,serif);font-size:22px;font-weight:600;
+  color:var(--ink,#12212B);line-height:1.2;margin-bottom:9px;}
+.porte-txt{font-size:15px;color:var(--ink-soft,#43555F);line-height:1.62;margin-bottom:18px;max-width:60ch;}
+.porte-btns{display:flex;flex-wrap:wrap;gap:10px;}
+.porte-btns .nav-btn.ghost{background:transparent;color:var(--ink,#12212B);border:1px solid var(--bg-line,#DCDDD3);}
+.porte-note{font-family:var(--mono,monospace);font-size:11px;color:var(--ink-faint,#7A8A93);margin-top:14px;}
 </style>
 </head>
 <body>
@@ -531,13 +543,27 @@ const NOM_FORMATION = 'Comprendre la monnaie';
 let CURRENT_USER = null;
 let PROGRESS_CACHE = {};
 
+/* Les leçons du module 1 sont ouvertes sans compte : on ne demande pas
+   de s'inscrire avant d'avoir montré ce que vaut le contenu. */
+const LECONS_LIBRES = 3;
+const CLE_LOCALE = 'nioudem_progres_monnaie';
+
 async function requireAuth(){
   const { data: { session } } = await sb.auth.getSession();
-  if(!session){
-    window.location.href = 'inscription.html?redirect=lecons-monnaie.html';
-    return null;
-  }
-  return session.user;
+  return session ? session.user : null;
+}
+
+function progresLocal(){
+  try { return JSON.parse(localStorage.getItem(CLE_LOCALE) || '{}'); }
+  catch(e){ return {}; }
+}
+
+function enregistrerLocal(n, valeur){
+  try {
+    const p = progresLocal();
+    if(valeur) p[n] = true; else delete p[n];
+    localStorage.setItem(CLE_LOCALE, JSON.stringify(p));
+  } catch(e){ /* navigation privée : on continue sans mémoire */ }
 }
 
 const PAGE_PORTE = 'lecons-monnaie.html';
@@ -568,6 +594,8 @@ async function signOut(){
 }
 
 async function loadProgressFromServer(){
+  if(!CURRENT_USER){ PROGRESS_CACHE = progresLocal(); return PROGRESS_CACHE; }
+
   const { data } = await sb
     .from('lesson_progress')
     .select('lesson_number, completed')
@@ -575,12 +603,31 @@ async function loadProgressFromServer(){
     .eq('formation', FORMATION);
   const p = {};
   if(data){ data.forEach(function(row){ if(row.completed) p[row.lesson_number] = true; }); }
+
+  /* Reprise de ce qui a été fait avant l'inscription. */
+  const local = progresLocal();
+  const aReprendre = Object.keys(local).filter(function(n){ return !p[n]; });
+  if(aReprendre.length){
+    for(const n of aReprendre){
+      p[n] = true;
+      await sb.from('lesson_progress').upsert({
+        user_id: CURRENT_USER.id, formation: FORMATION,
+        lesson_number: parseInt(n, 10), completed: true,
+        completed_at: new Date().toISOString()
+      }, { onConflict: 'user_id,formation,lesson_number' });
+    }
+    try { localStorage.removeItem(CLE_LOCALE); } catch(e){}
+  }
+
   PROGRESS_CACHE = p;
   return p;
 }
 function getProgress(){ return PROGRESS_CACHE; }
 async function setProgressServer(lessonNumber, value){
   PROGRESS_CACHE[lessonNumber] = value;
+
+  if(!CURRENT_USER){ enregistrerLocal(lessonNumber, value); return; }
+
   await sb.from('lesson_progress').upsert({
     user_id: CURRENT_USER.id,
     formation: FORMATION,
@@ -626,6 +673,8 @@ if(current > LESSONS.length) current = LESSONS.length;
 
 function isUnlocked(n){
   if(n === 1) return true;
+  /* Sans compte, le parcours s'arrête à la fin du module ouvert. */
+  if(!CURRENT_USER && n > LECONS_LIBRES) return false;
   const progress = getProgress();
   return !!progress[n-1];
 }
@@ -776,6 +825,8 @@ function render(){
       (current < LESSONS.length ? '<button class="nav-btn" onclick="goTo(' + (current+1) + ')">Leçon suivante →</button>' : '<a href="lecons-psychologie.html" class="nav-btn">Psychologie de l\'argent →</a>') +
     '</div>' +
 
+    (!CURRENT_USER && current >= LECONS_LIBRES ? porteInscription() : '') +
+
     '<div class="lesson-sortie">' +
       '<a href="index.html#formations">Sommaire des formations</a><span>·</span>' +
       '<a href="carnet.html">Mon carnet</a><span>·</span>' +
@@ -876,14 +927,39 @@ async function verifierFinDeParcours(){
   ouvrirCarte(FORMATION, LESSONS.length, prenom, semaines);
 }
 
+
+/* Fin du module ouvert : on demande le compte au moment où la personne
+   a vu ce que vaut la suite, pas avant. */
+function porteInscription(){
+  const faites = Object.keys(getProgress()).filter(function(k){ return getProgress()[k]; }).length;
+  return '<div class="porte">' +
+    '<div class="porte-sur">Fin du module 1</div>' +
+    '<div class="porte-titre">Tu as lu ' + faites + ' leçon' + (faites > 1 ? 's' : '') + ' sur ' + LESSONS.length + '.</div>' +
+    '<p class="porte-txt">La suite est gratuite aussi. Un compte sert seulement à retenir où tu en es, ' +
+      'd\'un appareil à l\'autre, et à garder la trace des actions que tu as faites.</p>' +
+    '<div class="porte-btns">' +
+      '<a href="inscription.html?redirect=lecons-monnaie.html" class="nav-btn">Créer mon compte, gratuit</a>' +
+      '<a href="connexion.html?redirect=lecons-monnaie.html" class="nav-btn ghost">J\'ai déjà un compte</a>' +
+    '</div>' +
+    '<div class="porte-note">Ta progression de ces 3 leçons sera reprise automatiquement.</div>' +
+  '</div>';
+}
+
 async function boot(){
   document.getElementById('main').innerHTML = '<div style="padding:60px 0;text-align:center;color:var(--ink-faint);font-size:14px;">Chargement de ta progression…</div>';
   const user = await requireAuth();
-  if(!user) return;
-  const unlocked = await requireUnlock(user.id);
-  if(!unlocked) return;
+  if(user){
+    const unlocked = await requireUnlock(user.id);
+    if(!unlocked) return;
+  }
   CURRENT_USER = user;
   await loadProgressFromServer();
+
+  /* Sans compte, on ne va pas au-delà du module 1. */
+  if(!CURRENT_USER && current > LECONS_LIBRES){
+    current = LECONS_LIBRES;
+    history.replaceState(null, '', '?l=' + current);
+  }
 
   if(!isUnlocked(current)){
     let lastUnlocked = 1;
