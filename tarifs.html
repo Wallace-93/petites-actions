@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarifs · NiouDem</title>
+<meta name="description" content="NiouDem Learn est gratuit : 8 formations, 132 leçons, les outils et le tableau de budget. Seul l'accompagnement individuel est payant, à partir de 29 €.">
+<link rel="canonical" href="https://nioudem.com/tarifs.html">
+<meta property="og:title" content="Tarifs · NiouDem">
+<meta property="og:description" content="Le savoir est gratuit. Le temps humain ne l'est pas. Deux formules d'accompagnement, et tout le reste offert.">
+<meta property="og:url" content="https://nioudem.com/tarifs.html">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="outils.css">
+<style>
+/* ===== Page tarifs =====
+   Présentation empruntée aux opérateurs : une colonne gratuite qui reste
+   toujours visible, et les formules payantes à côté. Le gratuit n'est pas
+   une note de bas de page, c'est la première colonne. */
+.grille-tarifs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--trait);
+  border:1px solid var(--trait);border-radius:14px;overflow:hidden;margin-bottom:26px;}
+.col{background:var(--papier);padding:30px 24px 28px;display:flex;flex-direction:column;}
+.col.offerte{background:var(--pin-clair);}
+.col.phare{background:var(--papier);box-shadow:inset 0 3px 0 var(--laiton);}
+
+.col-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--encre-3);margin-bottom:14px;}
+.col.offerte .col-tag{color:var(--pin);}
+.col.phare .col-tag{color:var(--laiton);}
+.col-nom{font-family:var(--display);font-size:21px;font-weight:600;color:var(--encre);
+  line-height:1.22;margin-bottom:12px;}
+.col-prix{font-family:var(--display);font-size:40px;font-weight:500;color:var(--encre);
+  line-height:1;letter-spacing:-.02em;}
+.col-prix .unite{font-family:var(--texte);font-size:14px;font-weight:600;color:var(--encre-3);
+  display:block;margin-top:7px;letter-spacing:0;}
+.col-indic{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--encre-3);margin-top:9px;}
+.col-pour{font-size:14.8px;color:var(--encre-2);line-height:1.6;margin:18px 0 20px;}
+
+.col ul{list-style:none;display:grid;gap:10px;margin-bottom:22px;}
+.col li{position:relative;padding-left:24px;font-size:14.5px;color:var(--encre-2);line-height:1.55;}
+.col li::before{content:"";position:absolute;left:0;top:6px;width:13px;height:13px;border-radius:4px;
+  background:var(--papier);border:1.5px solid var(--pin);}
+.col.offerte li::before{background:var(--pin);border-color:var(--pin);}
+.col li strong{color:var(--encre);}
+.col .btn-bas{margin-top:auto;}
+@media(max-width:900px){.grille-tarifs{grid-template-columns:1fr;}}
+
+.bandeau-lancement{background:var(--laiton-clair);border:1px solid #E4D2AC;border-radius:12px;
+  padding:20px 24px;margin-bottom:28px;}
+.bandeau-lancement .titre{font-family:var(--display);font-size:17px;font-weight:600;color:#5E4409;margin-bottom:7px;}
+.bandeau-lancement p{font-size:14.8px;color:#7A5A12;line-height:1.65;max-width:none;}
+.bandeau-lancement strong{color:#5E4409;font-weight:700;}
+
+.compris{background:var(--pin-clair);border:1px solid #BFD6C9;border-radius:12px;padding:24px 26px 26px;}
+.compris h3{color:var(--pin);margin-bottom:14px;}
+.compris ul{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:12px 26px;}
+.compris li{position:relative;padding-left:24px;font-size:14.8px;color:var(--encre-2);}
+.compris li::before{content:"";position:absolute;left:0;top:6px;width:13px;height:13px;border-radius:4px;
+  background:var(--papier);border:1px solid var(--pin);}
+.compris strong{color:var(--encre);}
+@media(max-width:760px){.compris ul{grid-template-columns:1fr;}}
+
+.tableau{width:100%;border-collapse:collapse;font-size:14.5px;}
+.tableau th,.tableau td{padding:13px 14px;border-bottom:1px solid var(--trait);text-align:left;}
+.tableau th{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--encre-3);font-weight:400;}
+.tableau td:first-child{color:var(--encre);font-weight:600;}
+.tableau .oui{color:var(--pin);font-weight:700;}
+.tableau .non{color:var(--encre-3);}
+@media(max-width:640px){.tableau th:nth-child(2),.tableau td:nth-child(2){display:none;}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="nav-name">Niou<em>Dem</em></span>
+    </a>
+    <div class="nav-right">
+      <a href="index.html#formations" class="nav-lien">Formations</a>
+      <a href="accompagnement.html" class="nav-lien">Accompagnement</a>
+      <a href="connexion.html" class="nav-connexion">Se connecter</a>
+      <a href="lecons-monnaie.html" class="nav-cta">Commencer</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="etroit">
+    <div class="eyebrow">Tarifs</div>
+    <h1>Le savoir est gratuit. Le temps humain ne l'est pas.</h1>
+    <p class="lede">Tout ce qui peut être appris seul est offert, sans condition et sans limite de durée. Ce qui se paie, c'est la présence de quelqu'un en face de toi au moment où tu passes à l'acte, parce que ce temps-là ne se duplique pas.</p>
+  </div>
+
+  <div class="bandeau-lancement">
+    <div class="titre">Les réservations ouvrent bientôt</div>
+    <p>L'accompagnement n'est pas encore ouvert au paiement, la structure étant en cours de création. Les tarifs ci-dessous sont ceux qui s'appliqueront à l'ouverture. <strong>L'échange découverte, lui, est déjà possible et gratuit</strong> : on regarde où tu en es, et si l'accompagnement n'est pas ce dont tu as besoin, on te le dit.</p>
+  </div>
+
+  <div class="grille-tarifs">
+    <div class="col offerte">
+      <div class="col-tag">NiouDem Learn</div>
+      <div class="col-nom">Tout apprendre, seul</div>
+      <div class="col-prix">0 €<span class="unite">pour toujours</span></div>
+      <div class="col-pour">Les 8 formations en entier, les outils, le tableau de budget. Sans compte à rebours ni version limitée.</div>
+      <ul>
+        <li><strong>132 leçons</strong> réparties en 8 formations</li>
+        <li><strong>5 calculateurs</strong> et un tableau de budget</li>
+        <li>Le carnet de route et le Trading Lab</li>
+        <li>Les 3 premières leçons <strong>sans même créer de compte</strong></li>
+      </ul>
+      <div class="btn-bas"><a href="lecons-monnaie.html" class="btn-primary">Ouvrir la première leçon</a></div>
+    </div>
+
+    <div class="col">
+      <div class="col-tag">Formule 1</div>
+      <div class="col-nom">Reprendre la main sur ses comptes</div>
+      <div class="col-prix">99 €<span class="unite">2 séances d'1 h 30</span></div>
+      <div class="col-indic">Tarif à l'ouverture</div>
+      <div class="col-pour">Savoir enfin où part ton argent, et faire partir l'épargne toute seule.</div>
+      <ul>
+        <li>On regarde tes comptes ensemble et on repère les fuites</li>
+        <li>Ton système mis en place avec toi, virement compris</li>
+        <li>La chasse aux charges fixes et aux frais bancaires</li>
+        <li>Tes questions écrites pendant 2 semaines</li>
+      </ul>
+      <div class="btn-bas"><a href="accompagnement.html" class="btn-ghost">En savoir plus</a></div>
+    </div>
+
+    <div class="col phare">
+      <div class="col-tag">Formule 2 · la plus demandée</div>
+      <div class="col-nom">Prendre en main son investissement</div>
+      <div class="col-prix">149 €<span class="unite">2 séances d'1 h 30</span></div>
+      <div class="col-indic">Tarif à l'ouverture</div>
+      <div class="col-pour">Ne plus être bloqué devant une interface de courtier. Débutants attendus.</div>
+      <ul>
+        <li>Les enveloppes, le choix du courtier, l'ouverture du compte</li>
+        <li><strong>Ton premier ordre, passé par toi</strong>, sur le montant que tu choisis</li>
+        <li>Ta règle d'investissement écrite en 10 lignes</li>
+        <li>Tes questions écrites pendant 2 semaines</li>
+      </ul>
+      <div class="btn-bas"><a href="accompagnement.html" class="btn-primary">En savoir plus</a></div>
+    </div>
+  </div>
+
+  <div class="bloc etroit" style="margin-bottom:34px;">
+    <p style="font-size:14.8px;color:var(--encre-2);">Une question précise plutôt qu'un parcours entier ? <strong>La consultation à 29 €</strong> dure 45 minutes et se conclut par un mémo écrit. Son montant est <strong>déduit intégralement</strong> si tu prends une formule dans les 30 jours qui suivent.</p>
+  </div>
+
+  <div class="bloc">
+    <div class="compris">
+      <h3>Compris dans toutes les formules, et même sans aucune</h3>
+      <ul>
+        <li><strong>Le diagnostic de départ, gratuit.</strong> 20 minutes pour regarder où tu en es. Si l'accompagnement n'est pas ce qu'il te faut, on te le dit.</li>
+        <li><strong>NiouDem Learn en entier.</strong> Les 8 formations, sans condition et sans date limite.</li>
+        <li><strong>Les outils et le tableau de budget.</strong> Sans inscription, et rien n'est enregistré.</li>
+        <li><strong>Le carnet de route.</strong> Ta progression te suit, et elle t'appartient.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bloc etroit">
+    <h2>Ce qui change entre les deux</h2>
+    <p style="margin-bottom:20px;">Les deux formules ont le même format et le même prix de départ. Ce qui les distingue, c'est le moment de ta vie financière où tu te trouves.</p>
+    <table class="tableau">
+      <thead>
+        <tr><th>Ta situation</th><th>Ce qu'il te faut</th><th>La formule</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Il ne reste rien à la fin du mois</td><td>Comprendre où part l'argent</td><td class="oui">Formule 1</td></tr>
+        <tr><td>Tu mets de côté sans savoir quoi en faire</td><td>Ouvrir et passer à l'acte</td><td class="oui">Formule 2</td></tr>
+        <tr><td>Tu as une question précise</td><td>Une réponse claire</td><td class="oui">Consultation</td></tr>
+        <tr><td>Tu veux d'abord comprendre seul</td><td>Du temps et de la méthode</td><td class="oui">NiouDem Learn</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:20px;font-size:14.5px;color:var(--encre-3);">Les deux formules peuvent se suivre l'une après l'autre, dans l'ordre qui te convient. Il n'y a ni abonnement, ni engagement, ni renouvellement automatique.</p>
+  </div>
+
+  <div class="bloc etroit">
+    <h2>Deux places solidaires chaque mois</h2>
+    <p>Pour qui ces montants sont hors de portée, deux places par mois sont proposées à tarif réduit. La prestation est strictement identique. La demande se formule pendant l'échange découverte et ne donne lieu à aucun justificatif.</p>
+  </div>
+
+  <div class="bloc etroit">
+    <div class="cadre">
+      <h3>Ce que nous ne faisons pas</h3>
+      <p>Aucune recommandation personnalisée, aucun actif conseillé, aucun produit financier vendu, aucune commission perçue sur ce que tu souscrirais ailleurs. Aucun rendement garanti : investir comporte un risque de perte en capital. Ce que nous faisons, c'est expliquer les mécanismes assez clairement pour que tes décisions soient réellement les tiennes.</p>
+    </div>
+  </div>
+
+  <div class="bloc etroit">
+    <h2>Questions fréquentes</h2>
+    <div class="questions">
+      <div class="question">
+        <h3>Pourquoi les formations sont-elles gratuites ?</h3>
+        <p>Parce qu'un savoir gardé derrière un péage reste réservé à ceux qui l'ont déjà. Le contenu se duplique sans coût supplémentaire, contrairement à une séance individuelle. Facturer l'un et pas l'autre est simplement cohérent.</p>
+      </div>
+      <div class="question">
+        <h3>Y a-t-il un abonnement ?</h3>
+        <p>Non. Chaque formule se paie une fois, pour ce qu'elle contient. Aucun renouvellement automatique, aucune durée minimale, rien à résilier.</p>
+      </div>
+      <div class="question">
+        <h3>Que se passe-t-il si l'accompagnement ne me convient pas ?</h3>
+        <p>Le diagnostic de départ est gratuit et sert précisément à le déterminer. S'il apparaît que ce n'est pas ce dont tu as besoin, on te le dit et on t'oriente vers la formation qui traite ton sujet.</p>
+      </div>
+      <div class="question">
+        <h3>Pourquoi les tarifs sont-ils annoncés comme indicatifs ?</h3>
+        <p>La structure juridique est en cours de création, le paiement en ligne n'est donc pas encore ouvert. Les montants affichés sont ceux qui s'appliqueront, publiés à l'avance pour que tu saches à quoi t'attendre.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bloc etroit">
+    <h2>Par où commencer</h2>
+    <p style="margin-bottom:22px;">Si tu hésites, commence par la première leçon : elle est gratuite, elle dure 6 minutes, et elle ne demande aucun compte. L'échange découverte, lui, reste ouvert quand tu veux.</p>
+    <div class="duo">
+      <a href="lecons-monnaie.html" class="btn-primary">Ouvrir la première leçon</a>
+      <a href="https://calendar.app.google/ivANmMynLoPoud7H8" class="btn-ghost" target="_blank" rel="noopener">Réserver l'échange gratuit</a>
+    </div>
+  </div>
+
+  <div class="refrain">NiouDem.</div>
+</div>
+
+<footer>
+  <div class="ft">
+    <div class="ft-haut">
+      <div class="ft-brand">
+        <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="ft-name">Niou<em>Dem</em></span>
+      </div>
+      <div class="ft-links">
+        <a href="index.html">Accueil</a>
+        <a href="index.html#formations">Formations</a>
+        <a href="outils.html">Outils gratuits</a>
+        <a href="accompagnement.html">Accompagnement</a>
+        <a href="qui-sommes-nous.html">Qui nous sommes</a>
+        <a href="contact.html">Contact</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+      </div>
+    </div>
+    <p class="ft-mentions">NiouDem est un site de formation en éducation financière. Il ne fournit ni conseil en investissement personnalisé, ni service de gestion, ni intermédiation en produits financiers. Investir comporte un risque de perte en capital.</p>
+    <div class="ft-copy">© 2025 NiouDem · Méthode Petites Actions</div>
+  </div>
+</footer>
+
+<script src="retours.js" defer></script>
+</body>
+</html>
