@@ -365,6 +365,55 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
 .ft-links a:hover{color:#fff;}
 .ft-mentions{font-size:13px;line-height:1.7;margin-top:22px;max-width:70ch;color:#8FA0A9;}
 .ft-copy{font-family:var(--mono);font-size:11.5px;color:#7A8A93;margin-top:20px;}
+
+/* ---------- Par où commencer : les situations ----------
+   Le cœur de la page d'accueil. On n'entre plus par le catalogue mais
+   par une phrase que le visiteur reconnaît. Chaque case s'ouvre sur le
+   parcours de formations qui répond à cette situation précise. */
+.section-laiton{background:var(--laiton-clair);border-top:1px solid var(--laiton-bord,#E4D2AC);border-bottom:1px solid var(--laiton-bord,#E4D2AC);}
+.situations{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:16px;margin-top:38px;align-items:start;}
+.situ{background:var(--papier);border:1px solid var(--trait);border-radius:14px;overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s;}
+.situ:hover{border-color:#E4D2AC;box-shadow:0 1px 2px rgba(18,33,43,.04),0 16px 34px -26px rgba(18,33,43,.34);transform:translateY(-1px);}
+.situ[open]{border-color:var(--laiton);box-shadow:0 1px 2px rgba(18,33,43,.04),0 18px 40px -26px rgba(18,33,43,.4);}
+.situ-head{list-style:none;cursor:pointer;padding:22px 22px 20px;display:flex;gap:14px;align-items:flex-start;}
+.situ-head::-webkit-details-marker{display:none;}
+.situ-head:focus-visible{outline:2px solid var(--laiton);outline-offset:-3px;}
+.situ-case{width:20px;height:20px;border-radius:6px;flex:none;margin-top:2px;border:1.5px dashed var(--laiton);display:inline-grid;place-items:center;transition:background .25s,border-style .25s;}
+.situ-case svg{width:11px;height:11px;opacity:0;transform:scale(.5);transition:opacity .25s,transform .25s;}
+.situ[open] .situ-case{background:var(--laiton);border-style:solid;}
+.situ[open] .situ-case svg{opacity:1;transform:scale(1);}
+.situ-dit{display:block;font-family:var(--display);font-size:19px;font-weight:600;color:var(--encre);line-height:1.3;margin-bottom:7px;}
+.situ-puis{display:block;font-size:14.5px;color:var(--encre-2);line-height:1.55;}
+.situ-puis b{color:var(--pin);font-weight:600;}
+.situ-corps{padding:0 22px 22px 56px;}
+.situ-etiq{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--encre-3);padding-top:16px;border-top:1px solid var(--trait);margin-bottom:12px;}
+.situ-pas{display:flex;align-items:baseline;gap:11px;padding:7px 0;font-size:15px;}
+.situ-pas span{font-family:var(--mono);font-size:11.5px;color:var(--laiton);flex:none;width:14px;}
+.situ-pas a{color:var(--encre);text-decoration:none;border-bottom:1px solid var(--trait);font-weight:500;transition:border-color .18s,color .18s;}
+.situ-pas a:hover{color:var(--pin);border-color:var(--pin);}
+.situ-pied{margin-top:16px;padding-top:14px;border-top:1px solid var(--trait);display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;justify-content:space-between;}
+.situ-compte{font-family:var(--mono);font-size:11.5px;color:var(--encre-3);}
+.situ-suite{font-size:13.5px;color:var(--encre-2);}
+.situ-suite a{color:var(--laiton);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(184,134,47,.5);}
+.situ-neuf{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:#6E4F15;background:#F1E2C2;border-radius:5px;padding:3px 8px;margin-left:9px;vertical-align:2px;}
+.situ-rien{margin-top:34px;text-align:center;font-size:15px;color:var(--encre-2);}
+.situ-rien a{color:var(--pin);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(30,75,60,.35);}
+.catalogue{margin-top:44px;}
+.catalogue-head{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;font-family:var(--texte);font-size:14.5px;font-weight:600;color:var(--encre-2);}
+.catalogue-head::-webkit-details-marker{display:none;}
+.catalogue-head:hover{color:var(--pin);}
+.catalogue-head::after{content:"";width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .2s;}
+.catalogue[open] .catalogue-head::after{transform:rotate(-135deg) translateY(-2px);}
+@media(max-width:640px){
+  .situ-head{padding:18px 18px 16px;}
+  .situ-corps{padding:0 18px 18px 18px;}
+  .situ-dit{font-size:17.5px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .situ,.situ-case,.situ-case svg,.catalogue-head::after{transition:none;}
+  .situ:hover{transform:none;}
+}
+
 </style>
 </head>
 <body>
@@ -377,7 +426,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
     </a>
     <ul class="nav-links">
       <li><a href="accompagnement.html">Accompagnement</a></li>
-      <li><a href="#formations">Formations</a></li>
+      <li><a href="#commencer">Formations</a></li>
       <li><a href="outils.html">Outils</a></li>
       <li><a href="tarifs.html">Tarifs</a></li>
       <li><a href="#methode">Méthode</a></li>
@@ -535,14 +584,124 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
 </section>
 
 <!-- ============ LES FORMATIONS ============ -->
-<section class="section" id="formations">
+<section class="section section-laiton" id="commencer">
   <div class="s-inner">
     <div class="s-head">
-      <div class="eyebrow">NiouDem Learn</div>
-      <h2 class="display">Huit formations, dans un ordre qui a du sens.</h2>
-      <p class="lede">On parle d'abord de ce qu'est l'argent, ensuite de budget, et seulement après d'investir. Les huit sont ouvertes à tout le monde, gratuitement et en entier. Il suffit d'un compte pour que ta progression soit conservée.</p>
+      <div class="eyebrow">Par où commencer</div>
+      <h2 class="display">Dis-nous où tu en es. On te donne le chemin.</h2>
+      <p class="lede">Huit formations, c'est beaucoup quand on ne sait pas laquelle ouvrir. Alors coche la phrase qui ressemble le plus à ta situation : tu verras les formations à suivre, dans l'ordre, et ce que tu sauras faire à la fin. Tout est gratuit et ouvert en entier.</p>
     </div>
-    <div class="formations-grid">
+    <div class="situations">
+      <details class="situ">
+        <summary class="situ-head">
+          <span class="situ-case"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6.4l2.6 2.6L10 3.2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>
+            <span class="situ-dit">Il ne me reste rien à la fin du mois.</span>
+            <span class="situ-puis">Tu vois où part chaque euro, tu dégages une marge, et <b>tu mets de côté sans y penser</b>.</span>
+          </span>
+        </summary>
+        <div class="situ-corps">
+          <div class="situ-etiq">Ton parcours, dans cet ordre</div>
+          <div class="situ-pas"><span>1</span><a href="lecons-psychologie.html">Psychologie de l'argent</a></div><div class="situ-pas"><span>2</span><a href="lecons-budget.html">Maîtriser son budget</a></div><div class="situ-pas"><span>3</span><a href="lecons-epargne.html">Épargne &amp; sécurité</a></div>
+          <div class="situ-pied">
+            <span class="situ-compte">39 leçons, gratuites</span>
+            <span class="situ-suite">Accompagnement : <a href="accompagnement.html">Formule 1, 99 €</a></span>
+          </div>
+        </div>
+      </details>
+      <details class="situ">
+        <summary class="situ-head">
+          <span class="situ-case"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6.4l2.6 2.6L10 3.2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>
+            <span class="situ-dit">J'ai de l'argent qui dort sur mon Livret A.</span>
+            <span class="situ-puis">Tu sais pourquoi il fond doucement, et <b>tu choisis où le mettre en connaissance de cause</b>.</span>
+          </span>
+        </summary>
+        <div class="situ-corps">
+          <div class="situ-etiq">Ton parcours, dans cet ordre</div>
+          <div class="situ-pas"><span>1</span><a href="lecons-monnaie.html">Comprendre la monnaie</a></div><div class="situ-pas"><span>2</span><a href="lecons-epargne.html">Épargne &amp; sécurité</a></div><div class="situ-pas"><span>3</span><a href="lecons-bourse.html">Premiers pas en bourse</a></div>
+          <div class="situ-pied">
+            <span class="situ-compte">49 leçons, gratuites</span>
+            <span class="situ-suite">Accompagnement : <a href="accompagnement.html">Formule 2, 149 €</a></span>
+          </div>
+        </div>
+      </details>
+      <details class="situ">
+        <summary class="situ-head">
+          <span class="situ-case"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6.4l2.6 2.6L10 3.2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>
+            <span class="situ-dit">Je veux investir, mais j'ai peur de me faire plumer.</span>
+            <span class="situ-puis">Tu passes ton premier ordre toi-même, <b>en comprenant ce que tu achètes et ce que ça coûte</b>.</span>
+          </span>
+        </summary>
+        <div class="situ-corps">
+          <div class="situ-etiq">Ton parcours, dans cet ordre</div>
+          <div class="situ-pas"><span>1</span><a href="lecons-psychologie.html">Psychologie de l'argent</a></div><div class="situ-pas"><span>2</span><a href="lecons-bourse.html">Premiers pas en bourse</a></div><div class="situ-pas"><span>3</span><a href="lecons-fiscalite.html">Optimisation fiscale</a></div>
+          <div class="situ-pied">
+            <span class="situ-compte">56 leçons, gratuites</span>
+            <span class="situ-suite">Accompagnement : <a href="accompagnement.html">Formule 2, 149 €</a></span>
+          </div>
+        </div>
+      </details>
+      <details class="situ">
+        <summary class="situ-head">
+          <span class="situ-case"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6.4l2.6 2.6L10 3.2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>
+            <span class="situ-dit">On est deux, et l'argent crée des tensions.<span class="situ-neuf">Nouveau</span></span>
+            <span class="situ-puis">Un budget commun qui tient, et <b>une règle claire sur qui paie quoi</b>, décidée ensemble.</span>
+          </span>
+        </summary>
+        <div class="situ-corps">
+          <div class="situ-etiq">Ton parcours, dans cet ordre</div>
+          <div class="situ-pas"><span>1</span><a href="lecons-budget.html">Maîtriser son budget</a></div><div class="situ-pas"><span>2</span><a href="lecons-psychologie.html">Psychologie de l'argent</a></div>
+          <div class="situ-pied">
+            <span class="situ-compte">28 leçons, gratuites</span>
+            <span class="situ-suite">Accompagnement : <a href="accompagnement.html">Gestion budgétaire à deux, 2 à 3 séances</a></span>
+          </div>
+        </div>
+      </details>
+      <details class="situ">
+        <summary class="situ-head">
+          <span class="situ-case"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6.4l2.6 2.6L10 3.2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>
+            <span class="situ-dit">Je prépare un achat immobilier.</span>
+            <span class="situ-puis">Tu sais ce que la banque va regarder, <b>combien d'apport viser et ce que le crédit coûte en tout</b>.</span>
+          </span>
+        </summary>
+        <div class="situ-corps">
+          <div class="situ-etiq">Ton parcours, dans cet ordre</div>
+          <div class="situ-pas"><span>1</span><a href="lecons-budget.html">Maîtriser son budget</a></div><div class="situ-pas"><span>2</span><a href="lecons-epargne.html">Épargne &amp; sécurité</a></div><div class="situ-pas"><span>3</span><a href="lecons-immobilier.html">Investir dans la pierre</a></div>
+          <div class="situ-pied">
+            <span class="situ-compte">44 leçons, gratuites</span>
+            <span class="situ-suite">Accompagnement : <a href="accompagnement.html">Formule 1, 99 €</a></span>
+          </div>
+        </div>
+      </details>
+      <details class="situ">
+        <summary class="situ-head">
+          <span class="situ-case"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6.4l2.6 2.6L10 3.2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>
+            <span class="situ-dit">On me parle de bitcoin partout, je n'y comprends rien.</span>
+            <span class="situ-puis">Tu distingues le fonctionnement réel des promesses, <b>et tu repères une arnaque avant d'y entrer</b>.</span>
+          </span>
+        </summary>
+        <div class="situ-corps">
+          <div class="situ-etiq">Ton parcours, dans cet ordre</div>
+          <div class="situ-pas"><span>1</span><a href="lecons-monnaie.html">Comprendre la monnaie</a></div><div class="situ-pas"><span>2</span><a href="lecons-crypto.html">Bitcoin &amp; cryptomonnaies</a></div><div class="situ-pas"><span>3</span><a href="lecons-fiscalite.html">Optimisation fiscale</a></div>
+          <div class="situ-pied">
+            <span class="situ-compte">52 leçons, gratuites</span>
+            <span class="situ-suite">Accompagnement : <a href="accompagnement.html">Consultation, 29 €</a></span>
+          </div>
+        </div>
+      </details>
+    </div>
+    <p class="situ-rien">Aucune ne te ressemble vraiment ? <a href="contact.html">Dis-nous en deux lignes où tu en es</a> et on te répond avec un parcours.</p>
+
+    <details class="catalogue" id="formations">
+      <summary class="catalogue-head">Voir les huit formations dans l'ordre</summary>
+      <p class="lede" style="margin-top:20px;">On parle d'abord de ce qu'est l'argent, ensuite de budget, et seulement après d'investir. Il suffit d'un compte pour que ta progression soit conservée.</p>
+      <div class="formations-grid" style="margin-top:22px;">
+
       <div class="f-card" data-formation="monnaie" onclick="goFormation('monnaie')"><span class="f-hublot" id="hublot-monnaie"></span>
         <div class="fc-num">00</div><div class="fc-title">Comprendre la monnaie</div>
         <div class="fc-desc">D'où vient l'argent, et pourquoi il fond doucement quand il dort.</div>
@@ -583,7 +742,8 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
         <div class="fc-desc">PEA, PER, LMNP, flat tax : payer ce qu'on doit, pas davantage.</div>
         <div class="fc-meta">20 leçons · 1 h 40</div>
       </div>
-    </div>
+      </div>
+    </details>
   </div>
 </section>
 
@@ -700,7 +860,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       </div>
       <div class="ft-links">
         <a href="accompagnement.html">Accompagnement</a>
-        <a href="#formations">Formations</a>
+        <a href="#commencer">Formations</a>
         <a href="outils.html">Outils</a>
         <a href="tarifs.html">Tarifs</a>
         <a href="#methode">Méthode</a>
