@@ -414,6 +414,27 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
   .situ:hover{transform:none;}
 }
 
+
+/* ---------- Ajustements d'accueil ----------
+   Le bloc "ce que ça coûte" passe sur fond encre : sur ce fond, le
+   bouton vert sapin n'est plus lisible, il devient laiton.
+   Le cadre légal est resserré : il doit être présent, pas imposant.
+   Et le sous-titre de la méthode est ramené sous son titre. */
+#cout .btn-primary{background:var(--laiton);color:#12212B;}
+#cout .btn-primary:hover{background:#C9963A;}
+.section-mince{padding:52px 24px;}
+.s-head-mince{margin-bottom:24px;}
+.s-head-mince .display{font-size:clamp(24px,2.4vw,29px);}
+.section-mince .cadre{padding:20px 22px 21px;border-radius:0 8px 8px 0;}
+.section-mince .cadre h3{font-size:17px;margin-bottom:9px;}
+.section-mince .cadre p,.section-mince .cadre .liste li{font-size:14.5px;}
+#methode .s-head .display{margin-bottom:0;}
+#methode .s-head .lede{margin-top:-5px;}
+@media(max-width:640px){
+  .section-mince{padding:44px 20px;}
+  #methode .s-head .lede{margin-top:-4px;}
+}
+
 </style>
 </head>
 <body>
@@ -747,43 +768,8 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
   </div>
 </section>
 
-<!-- ============ L'ACCOMPAGNEMENT ============ -->
-<section class="section section-soft" id="accompagnement">
-  <div class="s-inner">
-    <div class="accomp">
-      <div>
-        <div class="eyebrow">L'accompagnement</div>
-        <h2 class="display" style="margin-bottom:14px;">Le code de la route s'apprend seul.<br>La conduite, non.</h2>
-        <p class="lede">Les leçons donnent le savoir. Elles restent des mots tant que rien n'est fait. Le troisième obstacle, celui de ne connaître personne qui ait déjà fait le chemin, ne se règle qu'avec quelqu'un en face.</p>
-        <ul>
-          <li><strong>Tu ouvres ton compte pendant la séance,</strong> après avoir comparé deux ou trois courtiers sur des critères que tu apprends à lire.</li>
-          <li><strong>Tu passes ton premier ordre toi-même,</strong> sur un montant que tu choisis, en comprenant chaque champ de l'écran.</li>
-          <li><strong>Tu repars avec ta règle écrite</strong> en dix lignes : combien, quand, dans quoi, et dans quels cas tu ne touches à rien.</li>
-        </ul>
-        <a href="accompagnement.html" class="btn-primary" style="margin-top:26px;">Voir les deux formules</a>
-      </div>
-      <div class="echange">
-        <div class="echange-note">Exemple d'échange</div>
-
-        <div class="bulle">
-          <div class="bulle-qui">Une question reçue</div>
-          <div class="bulle-txt">Ma banque me propose une assurance-vie avec 3&nbsp;% de frais d'entrée. Le conseiller dit que c'est normal. Je signe ou pas&nbsp;?</div>
-        </div>
-
-        <div class="bulle reponse">
-          <div class="bulle-qui">La réponse</div>
-          <div class="bulle-txt">On ne peut pas décider à ta place, mais voilà ce que ces 3&nbsp;% veulent dire concrètement&nbsp;: sur 1&nbsp;000&nbsp;€ versés, 970&nbsp;€ seulement sont réellement placés. Des contrats sans frais d'entrée existent. La vraie question à poser à ton conseiller&nbsp;: «&nbsp;quels sont les frais annuels de gestion&nbsp;?&nbsp;». C'est souvent là que se joue l'essentiel.</div>
-        </div>
-
-        <div class="echange-pied">Aucune recommandation personnalisée. On explique le mécanisme, tu décides.</div>
-      </div>
-    </div>
-    <div class="refrain">NiouDem.</div>
-  </div>
-</section>
-
 <!-- ============ RENVOI TARIFS ============ -->
-<section class="section section-soft">
+<section class="section section-encre" id="cout">
   <div class="s-inner" style="text-align:center;">
     <div class="eyebrow" style="justify-content:center;">Ce que ça coûte</div>
     <h2 class="display" style="margin-bottom:12px;">Le savoir est gratuit. Le temps humain ne l'est pas.</h2>
@@ -793,9 +779,9 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
 </section>
 
 <!-- ============ LE CADRE ============ -->
-<section class="section section-soft" id="cadre">
+<section class="section section-soft section-mince" id="cadre">
   <div class="s-inner">
-    <div class="s-head">
+    <div class="s-head s-head-mince">
       <div class="eyebrow">Le cadre</div>
       <h2 class="display">Ce que NiouDem n'est pas.</h2>
     </div>
@@ -1051,3 +1037,4 @@ async function signOut(){
 </aside>
 </body>
 </html>
+
