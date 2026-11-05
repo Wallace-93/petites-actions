@@ -6,21 +6,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trading Lab · NiouDem</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --ink:#12212B;--ink-soft:#43555F;--ink-muted:#7A8A93;--ink-faint:#96A3AA;
-  --bg:#FCFBF8;--bg-soft:#F5F4EE;--bg-mid:#EFF0EA;--bg-line:#DCDDD3;
-  --green:#1E4B3C;--green-light:#2A6350;--green-pale:#E7EFEA;--green-bord:#BFD6C9;
-  --amber:#B8862F;--amber-pale:#F6EFE0;--amber-bord:#E4D2AC;
-  --violet:#4A5C6B;--violet-pale:#EDF0F2;
-  --coral:#A24332;--coral-pale:#F8EDEA;
-  --sans:'Karla',system-ui,-apple-system,sans-serif;
-  --display:'Newsreader',Georgia,serif;
-  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --ink:#171C45;--ink-soft:#44496B;--ink-muted:#6B7094;--ink-faint:#9599B5;
+  --bg:#FFFFFF;--bg-soft:#F6F7FB;--bg-mid:#F0F1F7;--bg-line:#DCDEEA;
+  --green:#2B3A8F;--green-light:#3B4BA8;--green-pale:#E9EBF7;--green-bord:#C5CAEB;
+  --amber:#C27C00;--amber-pale:#FDF2DA;--amber-bord:#F0D49A;
+  --violet:#4D5675;--violet-pale:#EEF0F5;
+  --coral:#A3213D;--coral-pale:#FAEAEE;
+  --sans:'Archivo',system-ui,-apple-system,sans-serif;
+  --display:'Archivo',system-ui,sans-serif;
+  --mono:'Archivo',system-ui,sans-serif;
 }
 body{font-family:var(--sans);background:var(--bg-soft);color:var(--ink);-webkit-font-smoothing:antialiased;letter-spacing:-.01em;}
 a{color:inherit;}
@@ -36,7 +36,7 @@ a{color:inherit;}
 .hero-left p{font-size:12.5px;color:rgba(255,255,255,.45);max-width:420px;line-height:1.5;}
 .hero-stats{display:flex;gap:28px;}
 .hstat{text-align:right;}
-.hstat-label{font-size:10.5px;font-weight:600;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px;}
+.hstat-label{font-size:13.5px;font-weight:600;color:rgba(255,255,255,.35);text-transform:none;letter-spacing:0;margin-bottom:3px;}
 .hstat-value{font-size:22px;font-weight:800;color:#fff;letter-spacing:-.02em;}
 .hstat-value.pos{color:var(--green-light);}
 .hstat-value.neg{color:var(--coral);}
@@ -55,7 +55,7 @@ a{color:inherit;}
 
 .assets-table{background:var(--bg);border:1px solid var(--bg-line);border-radius:16px;overflow:hidden;margin-bottom:26px;}
 table{width:100%;border-collapse:collapse;}
-th{text-align:left;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-faint);padding:12px 16px;background:var(--bg-soft);border-bottom:1px solid var(--bg-line);}
+th{text-align:left;font-size:13.5px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink-faint);padding:12px 16px;background:var(--bg-soft);border-bottom:1px solid var(--bg-line);}
 td{padding:13px 16px;font-size:13px;color:var(--ink-soft);border-bottom:1px solid var(--bg-line);vertical-align:middle;}
 tr:last-child td{border-bottom:none;}
 .asset-name{display:flex;align-items:center;gap:10px;cursor:pointer;}
@@ -87,7 +87,7 @@ tr:last-child td{border-bottom:none;}
 .tip-item{font-size:12px;color:#6b5200;line-height:1.55;padding:7px 0;border-bottom:1px solid rgba(138,106,0,.12);}
 .tip-item:last-child{border-bottom:none;}
 
-.edu-card{background:var(--violet-pale);border:1px solid #D4DBE0;border-radius:16px;padding:20px;margin-top:26px;}
+.edu-card{background:var(--violet-pale);border:1px solid #D5D9E6;border-radius:16px;padding:20px;margin-top:26px;}
 .edu-title{font-size:14px;font-weight:800;color:var(--violet);margin-bottom:10px;display:flex;align-items:center;gap:6px;}
 .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px;}
 .edu-col{background:var(--bg);border-radius:12px;padding:14px 16px;}
@@ -121,7 +121,7 @@ tr:last-child td{border-bottom:none;}
 .modal-tab{flex:1;text-align:center;padding:9px;border-radius:9px;font-size:12.5px;font-weight:700;cursor:pointer;background:var(--bg-soft);color:var(--ink-muted);}
 .modal-tab.active.buy{background:var(--green);color:#fff;}
 .modal-tab.active.sell{background:var(--coral);color:#fff;}
-.modal-field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;}
+.modal-field label{display:block;font-size:11px;font-weight:700;text-transform:none;color:var(--ink-muted);margin-bottom:6px;}
 .modal-field input{width:100%;background:var(--bg-soft);border:1.5px solid var(--bg-line);border-radius:10px;padding:11px 13px;font-family:var(--sans);font-size:15px;font-weight:600;color:var(--ink);outline:none;margin-bottom:12px;}
 .modal-summary{background:var(--bg-soft);border-radius:10px;padding:12px 14px;font-size:12.5px;color:var(--ink-muted);margin-bottom:16px;line-height:1.7;}
 .modal-summary strong{color:var(--ink);}
@@ -152,6 +152,7 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
 
 .nav-name em,.ft-name em{font-style:normal;color:var(--amber);}
 </style>
+<link rel="stylesheet" href="identite.css">
 </head>
 <body>
 
@@ -540,7 +541,7 @@ function renderPerfChart(){
     type: 'line',
     data: { labels, datasets: [{
       data,
-      borderColor: isPositive ? '#1E4B3C' : '#A24332',
+      borderColor: isPositive ? '#2B3A8F' : '#A3213D',
       backgroundColor: isPositive ? 'rgba(22,163,74,0.08)' : 'rgba(251,107,79,0.08)',
       borderWidth: 2, tension: 0.3, fill: true, pointRadius: 0, pointHoverRadius: 4
     }]},
@@ -548,8 +549,8 @@ function renderPerfChart(){
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
-        x: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#96A3AA' } },
-        y: { grid: { color: '#EFF0EA' }, ticks: { font: { size: 10 }, color: '#96A3AA', callback: v => '$'+v } }
+        x: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#9599B5' } },
+        y: { grid: { color: '#F0F1F7' }, ticks: { font: { size: 10 }, color: '#9599B5', callback: v => '$'+v } }
       }
     }
   });
@@ -587,7 +588,7 @@ async function loadAssetChart(days){
     assetChartInstance = new Chart(canvas, {
       type: 'line',
       data: { labels, datasets: [{
-        data, borderColor: isPositive ? '#1E4B3C' : '#A24332',
+        data, borderColor: isPositive ? '#2B3A8F' : '#A3213D',
         backgroundColor: isPositive ? 'rgba(22,163,74,0.08)' : 'rgba(251,107,79,0.08)',
         borderWidth: 2, tension: 0.3, fill: true, pointRadius: 0
       }]},

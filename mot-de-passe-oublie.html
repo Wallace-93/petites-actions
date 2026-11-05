@@ -6,18 +6,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mot de passe oublié · NiouDem</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --ink:#12212B;--ink-muted:#7A8A93;--ink-faint:#96A3AA;
-  --bg:#FCFBF8;--bg-soft:#F5F4EE;--bg-line:#DCDDD3;
-  --green:#1E4B3C;--green-pale:#E7EFEA;--green-bord:#BFD6C9;
-  --coral:#A24332;
-  --sans:'Karla',system-ui,-apple-system,sans-serif;
-  --display:'Newsreader',Georgia,serif;
-  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --ink:#171C45;--ink-muted:#6B7094;--ink-faint:#9599B5;
+  --bg:#FFFFFF;--bg-soft:#F6F7FB;--bg-line:#DCDEEA;
+  --green:#2B3A8F;--green-pale:#E9EBF7;--green-bord:#C5CAEB;
+  --coral:#A3213D;
+  --sans:'Archivo',system-ui,-apple-system,sans-serif;
+  --display:'Archivo',system-ui,sans-serif;
+  --mono:'Archivo',system-ui,sans-serif;
 }
 body{font-family:var(--sans);background:var(--bg-soft);color:var(--ink);-webkit-font-smoothing:antialiased;letter-spacing:-.01em;min-height:100vh;display:flex;flex-direction:column;}
 a{color:inherit;}
@@ -30,7 +30,7 @@ a{color:inherit;}
 .form-card{background:var(--bg);border:1px solid var(--bg-line);border-radius:20px;padding:36px 32px;width:100%;max-width:400px;}
 .form-title{font-size:20px;font-weight:800;color:var(--ink);margin-bottom:6px;letter-spacing:-.02em;}
 .form-sub{font-size:13px;font-weight:400;color:var(--ink-muted);margin-bottom:24px;line-height:1.55;}
-.field label{display:block;font-size:11.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:7px;}
+.field label{display:block;font-size:13.5px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink-muted);margin-bottom:7px;}
 .field input{width:100%;background:var(--bg-soft);border:1.5px solid var(--bg-line);border-radius:11px;padding:12px 14px;font-family:var(--sans);font-size:14px;font-weight:500;color:var(--ink);outline:none;margin-bottom:16px;}
 .field input:focus{border-color:var(--green);}
 .submit-btn{width:100%;background:var(--green);color:#fff;border:none;cursor:pointer;font-family:var(--sans);font-size:15px;font-weight:700;padding:14px;border-radius:12px;transition:background .2s;margin-bottom:14px;}
@@ -40,7 +40,7 @@ a{color:inherit;}
 .form-note a{color:var(--green);font-weight:600;text-decoration:none;}
 .success-box{background:var(--green-pale);border:1px solid var(--green-bord);border-radius:12px;padding:16px;font-size:13px;color:#0f7a35;line-height:1.6;display:none;}
 .success-box.show{display:block;}
-.form-error{background:#F8EDEA;border:1px solid #FFC4AD;border-radius:10px;padding:11px 14px;font-size:12.5px;color:var(--coral);margin-bottom:16px;display:none;}
+.form-error{background:#FAEAEE;border:1px solid #FFC4AD;border-radius:10px;padding:11px 14px;font-size:12.5px;color:var(--coral);margin-bottom:16px;display:none;}
 .form-error.show{display:block;}
 
 /* ===== Direction Encre & Laiton — surcouche typographique ===== */
@@ -54,8 +54,9 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
 .s-tag,.f-copy,.hstat-label,.stat-label,.perf-note,.order-meta,.pos-value,
 .price-cell,.asset-label,.badge,.eyebrow,.nav-balance{font-family:var(--mono);}
 
-.nav-name em,.ft-name em{font-style:normal;color:#B8862F;}
+.nav-name em,.ft-name em{font-style:normal;color:#C27C00;}
 </style>
+<link rel="stylesheet" href="identite.css">
 </head>
 <body>
 

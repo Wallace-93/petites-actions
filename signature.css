@@ -13,24 +13,24 @@
 .nd-ico{
   display:inline-block;vertical-align:-2px;
   width:20px;height:20px;flex:none;
-  color:var(--green,#1E4B3C);
+  color:var(--green,#2B3A8F);
 }
 .nd-ico svg{width:100%;height:100%;display:block;}
-.nd-ico.or{color:var(--amber,#B8862F);}
-.nd-ico.brique{color:var(--coral,#A24332);}
+.nd-ico.or{color:var(--amber,#C27C00);}
+.nd-ico.brique{color:var(--coral,#A3213D);}
 .nd-ico.grand{width:26px;height:26px;}
 
 /* Les anciennes pastilles à émoji deviennent des cartouches sobres */
 .oc-icon,.compare-icon{
   display:inline-flex;align-items:center;justify-content:center;
   width:34px;height:34px;border-radius:9px;
-  background:var(--amber-pale,#F6EFE0);
-  border:1px solid var(--amber-bord,#E4D2AC);
+  background:var(--amber-pale,#FDF2DA);
+  border:1px solid var(--amber-bord,#F0D49A);
   font-size:0;
 }
-.oc-icon .nd-ico,.compare-icon .nd-ico{width:18px;height:18px;color:var(--amber,#B8862F);}
-.compare-card.good .compare-icon{background:var(--green-pale,#E7EFEA);border-color:var(--green-bord,#BFD6C9);}
-.compare-card.good .compare-icon .nd-ico{color:var(--green,#1E4B3C);}
+.oc-icon .nd-ico,.compare-icon .nd-ico{width:18px;height:18px;color:var(--amber,#C27C00);}
+.compare-card.good .compare-icon{background:var(--green-pale,#E9EBF7);border-color:var(--green-bord,#C5CAEB);}
+.compare-card.good .compare-icon .nd-ico{color:var(--green,#2B3A8F);}
 
 /* ---------- Emblème de formation ----------
    Un tracé unique par formation, construit sur la même grille : un
@@ -38,13 +38,13 @@
    la famille avant de reconnaître le motif. */
 .nd-embleme{
   width:100%;max-width:300px;height:auto;display:block;
-  color:var(--green,#1E4B3C);
+  color:var(--green,#2B3A8F);
 }
 .nd-embleme .trait{stroke:currentColor;fill:none;stroke-width:1.5;
   stroke-linecap:round;stroke-linejoin:round;}
 .nd-embleme .trait-fin{stroke:currentColor;fill:none;stroke-width:1;opacity:.34;}
-.nd-embleme .plein{fill:var(--amber,#B8862F);}
-.nd-embleme .voile{fill:var(--amber-pale,#F6EFE0);}
+.nd-embleme .plein{fill:var(--amber,#C27C00);}
+.nd-embleme .voile{fill:var(--amber-pale,#FDF2DA);}
 
 /* Le tracé se dessine à l'ouverture de la page, une seule fois. */
 .nd-embleme .anime{
@@ -68,31 +68,31 @@
    chaque module, cochée quand on l'ouvre. C'est l'élément signature du
    site appliqué au sommaire de la formation. */
 .module{transition:border-color .2s,background .2s;}
-.module:hover{border-color:var(--amber-bord,#E4D2AC);}
+.module:hover{border-color:var(--amber-bord,#F0D49A);}
 .module-header{position:relative;}
 .module-case{
   width:19px;height:19px;border-radius:5px;flex:none;
-  border:1.5px dashed var(--amber,#B8862F);
+  border:1.5px dashed var(--amber,#C27C00);
   background:transparent;display:inline-grid;place-items:center;margin-right:12px;
   transition:background .25s,border-color .25s,border-style .25s;
 }
 .module-case svg{width:11px;height:11px;opacity:0;transform:scale(.5);
   transition:opacity .25s,transform .25s;}
-.module.open .module-case{background:var(--amber,#B8862F);border-color:var(--amber,#B8862F);border-style:solid;}
+.module.open .module-case{background:var(--amber,#C27C00);border-color:var(--amber,#C27C00);border-style:solid;}
 .module.open .module-case svg{opacity:1;transform:scale(1);}
 
 /* ---------- Le refrain ---------- */
 .nd-refrain{
   display:flex;align-items:center;justify-content:center;gap:14px;
-  margin:52px auto 0;font-family:var(--display,Georgia,serif);
-  font-size:22px;font-weight:600;color:var(--amber,#B8862F);letter-spacing:-.01em;
+  margin:52px auto 0;font-family:var(--display,'Archivo',sans-serif);
+  font-size:22px;font-weight:600;color:var(--amber,#C27C00);letter-spacing:-.01em;
 }
 .nd-refrain::before,.nd-refrain::after{
-  content:"";height:1px;width:48px;background:var(--amber,#B8862F);opacity:.45;}
+  content:"";height:1px;width:48px;background:var(--amber,#C27C00);opacity:.45;}
 
 /* ---------- Filet de séparation ---------- */
 .nd-filet{display:block;width:100%;max-width:1120px;margin:0 auto;height:1px;
-  background:linear-gradient(90deg,transparent,var(--bg-line,#DCDDD3) 18%,var(--bg-line,#DCDDD3) 82%,transparent);}
+  background:linear-gradient(90deg,transparent,var(--bg-line,#DCDEEA) 18%,var(--bg-line,#DCDEEA) 82%,transparent);}
 
 @media(prefers-reduced-motion:reduce){
   .nd-revele{opacity:1;transform:none;transition:none;}
