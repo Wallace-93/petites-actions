@@ -7,18 +7,18 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --encre:#12212B;--encre-2:#43555F;--encre-3:#7A8A93;
-  --papier:#FCFBF8;--papier-2:#EFF0EA;--trait:#DCDDD3;
-  --pin:#1E4B3C;--pin-clair:#E7EFEA;
-  --laiton:#B8862F;--laiton-clair:#F6EFE0;
-  --brique:#A24332;--brique-clair:#F8EDEA;
-  --display:'Newsreader',Georgia,serif;
-  --texte:'Karla',system-ui,-apple-system,sans-serif;
-  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --encre:#171C45;--encre-2:#44496B;--encre-3:#6B7094;
+  --papier:#FFFFFF;--papier-2:#F0F1F7;--trait:#DCDEEA;
+  --pin:#2B3A8F;--pin-clair:#E9EBF7;
+  --laiton:#C27C00;--laiton-clair:#FDF2DA;
+  --brique:#A3213D;--brique-clair:#FAEAEE;
+  --display:'Archivo',system-ui,sans-serif;
+  --texte:'Archivo',system-ui,-apple-system,sans-serif;
+  --mono:'Archivo',system-ui,sans-serif;
 }
 body{font-family:var(--texte);background:var(--papier);color:var(--encre-2);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;}
 a{color:inherit;}
@@ -35,7 +35,7 @@ a{color:inherit;}
 .nav-right a{text-decoration:none;font-size:14.5px;font-weight:600;color:var(--encre);}
 
 .wrap{max-width:940px;margin:0 auto;padding:44px 24px 80px;}
-.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--laiton);display:flex;align-items:center;gap:9px;margin-bottom:16px;}
+.eyebrow{font-family:var(--mono);font-size:13.5px;letter-spacing:0;text-transform:none;color:var(--laiton);display:flex;align-items:center;gap:9px;margin-bottom:16px;}
 .eyebrow::before{content:"";width:22px;height:1px;background:var(--laiton);}
 h1{font-family:var(--display);font-weight:500;font-size:clamp(30px,4.2vw,44px);color:var(--encre);letter-spacing:-.018em;line-height:1.14;margin-bottom:12px;}
 h2{font-family:var(--display);font-weight:500;font-size:26px;color:var(--encre);letter-spacing:-.015em;margin-bottom:8px;}
@@ -45,7 +45,7 @@ h2{font-family:var(--display);font-weight:500;font-size:26px;color:var(--encre);
 
 /* La carte */
 .carte{background:var(--papier);border:1px solid var(--trait);border-radius:14px;padding:22px 20px 16px;
-  box-shadow:0 1px 2px rgba(18,33,43,.04),0 14px 38px -28px rgba(18,33,43,.3);}
+  box-shadow:0 1px 2px rgba(23,28,69,.04),0 14px 38px -28px rgba(23,28,69,.3);}
 .carte svg{width:100%;height:auto;display:block;}
 .legende{display:flex;flex-wrap:wrap;gap:10px 24px;padding-top:16px;margin-top:6px;border-top:1px solid var(--trait);
   font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--encre-3);}
@@ -53,14 +53,14 @@ h2{font-family:var(--display);font-weight:500;font-size:26px;color:var(--encre);
 .pastille{width:11px;height:11px;border-radius:50%;flex:none;}
 .pastille.savoir{background:var(--pin);}
 .pastille.seance{background:var(--laiton);}
-.pastille.ecart{background:var(--brique-clair);border:1px solid #E8C4BC;border-radius:2px;}
+.pastille.ecart{background:var(--brique-clair);border:1px solid #EFC3CD;border-radius:2px;}
 
 /* Chiffres */
 .bilan{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--trait);border:1px solid var(--trait);border-radius:12px;overflow:hidden;margin-top:22px;}
 .bilan-case{background:var(--papier);padding:20px 20px 22px;}
 .bilan-n{font-family:var(--display);font-size:32px;font-weight:500;color:var(--encre);line-height:1;}
 .bilan-n.or{color:var(--laiton);}
-.bilan-l{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--encre-3);margin-top:9px;}
+.bilan-l{font-family:var(--mono);font-size:13.5px;letter-spacing:0;text-transform:none;color:var(--encre-3);margin-top:9px;}
 @media(max-width:640px){.bilan{grid-template-columns:1fr;}}
 
 /* Étapes des formations */
@@ -84,9 +84,9 @@ h2{font-family:var(--display);font-weight:500;font-size:26px;color:var(--encre);
 
 /* Notions */
 .notions{display:flex;flex-wrap:wrap;gap:8px;}
-.notion{background:var(--pin-clair);border:1px solid #BFD6C9;border-radius:100px;padding:6px 14px;font-size:13.5px;color:var(--pin);}
+.notion{background:var(--pin-clair);border:1px solid #C5CAEB;border-radius:100px;padding:6px 14px;font-size:13.5px;color:var(--pin);}
 .notions-groupe{margin-bottom:22px;}
-.notions-titre{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--encre-3);margin-bottom:10px;}
+.notions-titre{font-family:var(--mono);font-size:13.5px;letter-spacing:0;text-transform:none;color:var(--encre-3);margin-bottom:10px;}
 
 /* Jalons */
 .jalons{position:relative;padding-left:34px;}
@@ -134,6 +134,7 @@ h2{font-family:var(--display);font-weight:500;font-size:26px;color:var(--encre);
 .borne-nom{font-family:var(--display);font-size:16px;font-weight:600;color:var(--encre);line-height:1.28;}
 .borne-meta{font-family:var(--mono);font-size:10.5px;color:var(--encre-3);margin-top:9px;}
 </style>
+<link rel="stylesheet" href="identite.css">
 </head>
 <body>
 
@@ -246,9 +247,9 @@ function dessinerCarte(ev){
     if(e.type !== 'seance') return '';
     const x = n === 1 ? (L - dX) : xPour(i);
     const y = yPour(e.niveau);
-    return '<g><line x1="' + x.toFixed(1) + '" y1="' + y.toFixed(1) + '" x2="' + x.toFixed(1) + '" y2="' + (y - 26).toFixed(1) + '" stroke="#B8862F" stroke-width="1.2"/>' +
-      '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="6" fill="#B8862F"/>' +
-      '<path d="M' + x.toFixed(1) + ' ' + (y - 26).toFixed(1) + ' h20 l-5 6 5 6 h-20 z" fill="#F6EFE0" stroke="#B8862F" stroke-width="1"/></g>';
+    return '<g><line x1="' + x.toFixed(1) + '" y1="' + y.toFixed(1) + '" x2="' + x.toFixed(1) + '" y2="' + (y - 26).toFixed(1) + '" stroke="#C27C00" stroke-width="1.2"/>' +
+      '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="6" fill="#C27C00"/>' +
+      '<path d="M' + x.toFixed(1) + ' ' + (y - 26).toFixed(1) + ' h20 l-5 6 5 6 h-20 z" fill="#FDF2DA" stroke="#C27C00" stroke-width="1"/></g>';
   }).join('');
 
   const dernier = points[points.length - 1];
@@ -258,30 +259,30 @@ function dessinerCarte(ev){
   '<svg viewBox="0 0 ' + L + ' ' + H + '" role="img" aria-label="Carte du chemin parcouru">' +
     '<defs>' +
       '<pattern id="hachures" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">' +
-        '<line x1="0" y1="0" x2="0" y2="7" stroke="#E8C4BC" stroke-width="2.4"/></pattern>' +
+        '<line x1="0" y1="0" x2="0" y2="7" stroke="#EFC3CD" stroke-width="2.4"/></pattern>' +
     '</defs>' +
 
     /* l'écart, hachuré, qui se referme */
     '<path d="' + zoneEcart + '" fill="url(#hachures)" opacity=".55"/>' +
 
     /* la ligne haute : ce que sait celui d'en face */
-    '<line x1="' + gX + '" y1="' + hY + '" x2="' + (L - dX) + '" y2="' + hY + '" stroke="#12212B" stroke-width="1.4" stroke-dasharray="6 5"/>' +
-    '<text x="' + gX + '" y="' + (hY - 14) + '" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#12212B" letter-spacing="1.4">CE QUE SAIT CELUI QUI VEND</text>' +
+    '<line x1="' + gX + '" y1="' + hY + '" x2="' + (L - dX) + '" y2="' + hY + '" stroke="#171C45" stroke-width="1.4" stroke-dasharray="6 5"/>' +
+    '<text x="' + gX + '" y="' + (hY - 14) + '" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#171C45" letter-spacing="1.4">CE QUE SAIT CELUI QUI VEND</text>' +
 
     /* le sol */
-    '<line x1="' + gX + '" y1="' + bY + '" x2="' + (L - dX) + '" y2="' + bY + '" stroke="#DCDDD3" stroke-width="1"/>' +
-    '<text x="' + gX + '" y="' + (bY + 24) + '" font-family="IBM Plex Mono, monospace" font-size="12" fill="#7A8A93" letter-spacing="1.2">TON POINT DE DÉPART</text>' +
+    '<line x1="' + gX + '" y1="' + bY + '" x2="' + (L - dX) + '" y2="' + bY + '" stroke="#DCDEEA" stroke-width="1"/>' +
+    '<text x="' + gX + '" y="' + (bY + 24) + '" font-family="IBM Plex Mono, monospace" font-size="12" fill="#6B7094" letter-spacing="1.2">TON POINT DE DÉPART</text>' +
 
     /* la courbe : ton savoir */
-    '<path d="' + ligne + '" fill="none" stroke="#1E4B3C" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>' +
-    '<circle cx="' + dernier[0].toFixed(1) + '" cy="' + dernier[1].toFixed(1) + '" r="7" fill="#1E4B3C"/>' +
-    '<circle cx="' + dernier[0].toFixed(1) + '" cy="' + dernier[1].toFixed(1) + '" r="13" fill="none" stroke="#1E4B3C" stroke-width="1" opacity=".35"/>' +
+    '<path d="' + ligne + '" fill="none" stroke="#2B3A8F" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>' +
+    '<circle cx="' + dernier[0].toFixed(1) + '" cy="' + dernier[1].toFixed(1) + '" r="7" fill="#2B3A8F"/>' +
+    '<circle cx="' + dernier[0].toFixed(1) + '" cy="' + dernier[1].toFixed(1) + '" r="13" fill="none" stroke="#2B3A8F" stroke-width="1" opacity=".35"/>' +
 
     marqueurs +
 
     /* mesure de l'écart restant */
-    '<line x1="' + (L - dX - 4) + '" y1="' + hY + '" x2="' + (L - dX - 4) + '" y2="' + dernier[1].toFixed(1) + '" stroke="#A24332" stroke-width="1"/>' +
-    '<text x="' + (L - dX - 12) + '" y="' + ((hY + dernier[1]) / 2).toFixed(1) + '" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#A24332">écart : ' + Math.round(100 - niveauFinal) + '%</text>' +
+    '<line x1="' + (L - dX - 4) + '" y1="' + hY + '" x2="' + (L - dX - 4) + '" y2="' + dernier[1].toFixed(1) + '" stroke="#A3213D" stroke-width="1"/>' +
+    '<text x="' + (L - dX - 12) + '" y="' + ((hY + dernier[1]) / 2).toFixed(1) + '" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#A3213D">écart : ' + Math.round(100 - niveauFinal) + '%</text>' +
   '</svg>' +
 
   '<div class="legende">' +
@@ -353,7 +354,7 @@ function rendre(){
     app.innerHTML =
       '<div class="eyebrow">Mon carnet de route</div>' +
       '<h1>Ta carte est encore vierge.</h1>' +
-      '<p class="sous">Elle se dessinera toute seule. Chaque leçon terminée et chaque séance d\'accompagnement rapprochent ta ligne de celle d\'en face, celle de ceux qui savaient déjà.</p>' +
+      '<p class="sous">Elle se remplit toute seule : chaque leçon terminée et chaque séance d\'accompagnement y laissent une trace.</p>' +
       '<div class="vide">' +
         '<div class="vide-t">Le premier trait se trace en cinq minutes</div>' +
         '<p>Une leçon, une vérification, une chose à faire ce soir.</p>' +

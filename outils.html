@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="NiouDem">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="outils.css">
 <style>
 /* ===== La note de marge =====
@@ -24,19 +24,20 @@
 @media(min-width:1420px){
   .marge{display:block;position:fixed;left:24px;top:50%;transform:translateY(-50%);
     width:190px;z-index:20;}
-  .marge-trait{width:26px;height:1px;background:var(--laiton,#B8862F);margin-bottom:14px;}
-  .marge-sur{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.13em;
-    text-transform:uppercase;color:var(--laiton,#B8862F);margin-bottom:9px;}
-  .marge-titre{font-family:var(--display,Georgia,serif);font-size:19px;font-weight:600;
-    color:var(--encre,#12212B);line-height:1.28;margin-bottom:9px;}
-  .marge-txt{font-size:13px;line-height:1.6;color:var(--encre-3,#7A8A93);margin-bottom:13px;}
-  .marge-lien{font-size:13px;font-weight:700;color:var(--pin,#1E4B3C);text-decoration:none;
-    border-bottom:1px solid rgba(30,75,60,.35);}
-  .marge-lien:hover{border-bottom-color:var(--pin,#1E4B3C);}
+  .marge-trait{width:26px;height:1px;background:var(--laiton,#C27C00);margin-bottom:14px;}
+  .marge-sur{font-family:var(--mono,'Archivo',sans-serif);font-size:13.5px;letter-spacing:0;
+    text-transform:none;color:var(--laiton,#C27C00);margin-bottom:9px;}
+  .marge-titre{font-family:var(--display,'Archivo',sans-serif);font-size:19px;font-weight:600;
+    color:var(--encre,#171C45);line-height:1.28;margin-bottom:9px;}
+  .marge-txt{font-size:13px;line-height:1.6;color:var(--encre-3,#6B7094);margin-bottom:13px;}
+  .marge-lien{font-size:13px;font-weight:700;color:var(--pin,#2B3A8F);text-decoration:none;
+    border-bottom:1px solid rgba(43,58,143,.35);}
+  .marge-lien:hover{border-bottom-color:var(--pin,#2B3A8F);}
   .marge-fermer{position:absolute;top:-6px;right:0;background:transparent;border:0;cursor:pointer;
-    color:var(--encre-3,#7A8A93);font-size:15px;line-height:1;padding:2px 4px;}
+    color:var(--encre-3,#6B7094);font-size:15px;line-height:1;padding:2px 4px;}
 }
 </style>
+<link rel="stylesheet" href="identite.css">
 </head>
 <body>
 
@@ -58,8 +59,8 @@
 <div class="wrap">
   <div class="etroit">
     <div class="eyebrow">Outils gratuits</div>
-    <h1>Cinq calculs, et un tableau à emporter.</h1>
-    <p class="lede">Aucune inscription, aucun compte, aucune donnée enregistrée. Tout se calcule dans ton navigateur, et tu peux fermer la page sans laisser de trace. Ces outils répondent chacun à une question précise, et chacun se termine par une chose à faire ce soir.</p>
+    <h1>5 calculateurs gratuits et un tableau de budget.</h1>
+    <p class="lede">Pas d'inscription, pas de compte, rien n'est enregistré. Tout se calcule sur ton appareil. Chaque outil répond à une question précise et te donne une chose à faire le soir même.</p>
   </div>
 
   <div class="bloc">
@@ -67,12 +68,12 @@
       <a href="outil-reste-a-vivre.html" class="outil">
         <div class="outil-n">01</div>
         <div class="outil-t">Mon reste à vivre</div>
-        <div class="outil-d">Combien te reste-t-il vraiment chaque mois, une fois toutes les charges fixes payées ? C'est le chiffre qui décide de tout le reste.</div>
+        <div class="outil-d">Combien te reste-t-il vraiment chaque mois, une fois toutes tes dépenses fixes payées ? C'est le chiffre le plus important.</div>
       </a>
       <a href="outil-cout-credit.html" class="outil">
         <div class="outil-n">02</div>
         <div class="outil-t">Le vrai prix d'un crédit</div>
-        <div class="outil-d">Un vendeur parle en mensualités. Voici ce que tu auras réellement déboursé à la fin, et de combien le prix affiché a gonflé.</div>
+        <div class="outil-d">Le vendeur te parle de mensualités. Ici, tu vois combien tu auras vraiment payé à la fin, et de combien le prix a augmenté.</div>
       </a>
       <a href="outil-inflation-epargne.html" class="outil">
         <div class="outil-n">03</div>
@@ -82,26 +83,26 @@
       <a href="outil-versements-reguliers.html" class="outil">
         <div class="outil-n">04</div>
         <div class="outil-t">Que devient 100 € par mois</div>
-        <div class="outil-d">L'effet des versements réguliers sur vingt ans, et le prix réel des cinq années où l'on attend avant de commencer.</div>
+        <div class="outil-d">Ce que donnent des versements réguliers sur 20 ans, et ce que tu perds si tu attends 5 ans avant de commencer.</div>
       </a>
       <a href="outil-pea-assurance-vie.html" class="outil">
         <div class="outil-n">05</div>
         <div class="outil-t">PEA ou assurance-vie</div>
-        <div class="outil-d">Lequel te laisse le plus une fois les frais prélevés et l'impôt payé, selon la durée pendant laquelle tu gardes ton argent.</div>
+        <div class="outil-d">Lequel te rapporte le plus, après les frais et les impôts, selon le temps que tu gardes ton argent placé.</div>
       </a>
       <a href="budget-nioudem.xlsx" class="outil" download>
-        <div class="outil-n">06 · à télécharger</div>
+        <div class="outil-n">06, à télécharger</div>
         <div class="outil-t">Le tableau de budget</div>
-        <div class="outil-d">Un classeur prêt à remplir, avec les calculs déjà intégrés, les catégories de dépenses et le suivi semaine par semaine. À toi de le modifier comme tu veux.</div>
+        <div class="outil-d">Un fichier prêt à remplir. Les calculs sont déjà faits, les dépenses sont classées, et tu suis ton budget semaine par semaine. Tu peux le modifier comme tu veux.</div>
       </a>
     </div>
   </div>
 
   <div class="bloc etroit">
     <h2>Le tableau de budget, en détail</h2>
-    <p>C'est un classeur qui s'ouvre dans Excel, dans Google Sheets ou dans LibreOffice, et qui t'appartient une fois téléchargé. Rien n'est envoyé nulle part, tu peux le modifier entièrement, ajouter tes propres catégories ou supprimer ce qui ne te sert pas.</p>
-    <p>Il contient cinq onglets. Un mode d'emploi, une page où tu saisis tes revenus, tes charges fixes et ton épargne, un journal où tu notes tes dépenses au fil des jours, un tableau de bord qui se remplit tout seul, et un suivi hebdomadaire qui te dit chaque semaine si tu es dans les clous.</p>
-    <p>Les cellules à remplir sont écrites en bleu, tout le reste se calcule automatiquement. Le budget par semaine se déduit de ce qu'il te reste une fois les charges et l'épargne retirées, et chaque dépense est rattachée à sa semaine à partir de sa date.</p>
+    <p>C'est un fichier qui s'ouvre dans Excel, Google Sheets ou LibreOffice. Une fois téléchargé, il est à toi. Rien n'est envoyé nulle part. Tu peux tout modifier, ajouter tes catégories ou supprimer ce qui ne te sert pas.</p>
+    <p>Il y a 5 onglets : un mode d'emploi, une page pour tes revenus, tes dépenses fixes et ton épargne, un journal pour noter tes dépenses au jour le jour, un résumé qui se remplit tout seul, et un suivi qui te dit chaque semaine si tu respectes ton budget.</p>
+    <p>Tu remplis les cases en bleu, le reste se calcule tout seul. Ton budget de la semaine, c'est ce qu'il te reste une fois les dépenses fixes et l'épargne retirées. Chaque dépense est rangée dans la bonne semaine grâce à sa date.</p>
     <div class="duo" style="margin-top:22px;">
       <a href="budget-nioudem.xlsx" class="btn-primary" download>Télécharger le tableau</a>
       <a href="budget.html" class="btn-ghost">La formation budget, gratuite</a>
@@ -110,22 +111,22 @@
 
   <div class="bloc etroit">
     <h2>Pourquoi ces outils sont gratuits</h2>
-    <p>Parce qu'un savoir gardé derrière un péage reste réservé à ceux qui l'ont déjà. Les huit formations de NiouDem sont gratuites pour la même raison. Ce qui se paie ici, c'est du temps humain : l'accompagnement individuel, le jour où tu veux passer à l'acte.</p>
-    <p>Tu peux donc utiliser ces calculateurs autant que tu veux sans jamais rien devoir. Si l'un d'eux te sert, partage-le plutôt que de nous remercier.</p>
+    <p>Si ces outils étaient payants, seuls ceux qui ont déjà de l'argent en profiteraient. C'est aussi pour ça que les 8 formations sont gratuites. Ce qui est payant, c'est l'accompagnement, quand une personne passe du temps avec toi.</p>
+    <p>Utilise-les autant que tu veux. Si l'un d'eux t'aide, partage-le autour de toi.</p>
   </div>
 
   <div class="bloc etroit">
     <div class="cadre">
       <h3>Ce que ces outils ne sont pas</h3>
-      <p>Ce sont des calculateurs pédagogiques. Ils appliquent une formule à des chiffres que tu saisis, rien de plus. Ils ne constituent ni un conseil en investissement, ni une recommandation personnalisée. NiouDem ne vend aucun produit financier et ne perçoit aucune commission.</p>
+      <p>Ces calculateurs servent à apprendre. Ils font un calcul avec les chiffres que tu entres, rien de plus. Ce n'est pas un conseil en investissement. NiouDem ne vend aucun produit financier et ne touche aucune commission.</p>
     </div>
   </div>
 
   <div class="bloc etroit">
     <h2>Et ensuite</h2>
-    <p style="margin-bottom:22px;">Chaque outil renvoie vers la formation qui traite le sujet en profondeur. Elles sont gratuites, elles durent cinq minutes par leçon, et elles se terminent toujours par une action concrète.</p>
+    <p style="margin-bottom:22px;">Chaque outil te propose la formation qui va plus loin sur le sujet. Elles sont gratuites, chaque leçon dure environ 5 minutes et se termine par une action concrète.</p>
     <div class="duo">
-      <a href="index.html#formations" class="btn-primary">Voir les huit formations</a>
+      <a href="index.html#formations" class="btn-primary">Voir les 8 formations</a>
       <a href="accompagnement.html" class="btn-ghost">Être accompagné</a>
     </div>
   </div>
@@ -152,7 +153,7 @@
       </div>
     </div>
     <p class="ft-mentions">NiouDem est un site de formation en éducation financière. Il ne fournit ni conseil en investissement personnalisé, ni service de gestion, ni intermédiation en produits financiers. Investir comporte un risque de perte en capital.</p>
-    <div class="ft-copy">© 2025 NiouDem · Méthode Petites Actions</div>
+    <div class="ft-copy">© 2026 NiouDem, méthode Petites Actions</div>
   </div>
 </footer>
 
@@ -164,7 +165,7 @@
   <div class="marge-sur">NiouDem Learn</div>
   <div class="marge-titre">132 leçons, gratuites.</div>
   <div class="marge-txt">Les 8 formations en entier, sans compte à rebours ni version limitée. Ce qui se paie ici, c'est du temps humain, jamais le savoir.</div>
-  <a href="index.html#formations" class="marge-lien">Commencer une formation →</a>
+  <a href="index.html#formations" class="marge-lien">Commencer une formation</a>
 </aside>
 </body>
 </html>

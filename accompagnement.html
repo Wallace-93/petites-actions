@@ -8,18 +8,18 @@
 <meta name="description" content="Deux formules d'accompagnement individuel : reprendre la main sur ses comptes, ou prendre en main son investissement. Les formations NiouDem Learn restent gratuites.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --encre:#12212B;--encre-2:#43555F;--encre-3:#7A8A93;
-  --papier:#FCFBF8;--papier-2:#EFF0EA;--trait:#DCDDD3;
-  --pin:#1E4B3C;--pin-clair:#E7EFEA;
-  --laiton:#B8862F;--laiton-clair:#F6EFE0;
-  --brique:#A24332;--brique-clair:#F8EDEA;
-  --display:'Newsreader',Georgia,serif;
-  --texte:'Karla',system-ui,-apple-system,sans-serif;
-  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --encre:#171C45;--encre-2:#44496B;--encre-3:#6B7094;
+  --papier:#FFFFFF;--papier-2:#F0F1F7;--trait:#DCDEEA;
+  --pin:#2B3A8F;--pin-clair:#E9EBF7;
+  --laiton:#C27C00;--laiton-clair:#FDF2DA;
+  --brique:#A3213D;--brique-clair:#FAEAEE;
+  --display:'Archivo',system-ui,sans-serif;
+  --texte:'Archivo',system-ui,-apple-system,sans-serif;
+  --mono:'Archivo',system-ui,sans-serif;
   --lg:1120px;
 }
 html{scroll-behavior:smooth;}
@@ -34,7 +34,7 @@ h3{font-family:var(--display);font-weight:600;color:var(--encre);font-size:19px;
 .lede{font-size:17.5px;color:var(--encre-2);max-width:60ch;}
 p{max-width:68ch;}
 
-.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--laiton);display:flex;align-items:center;gap:9px;margin-bottom:18px;}
+.eyebrow{font-family:var(--mono);font-size:13.5px;letter-spacing:0;text-transform:none;color:var(--laiton);display:flex;align-items:center;gap:9px;margin-bottom:18px;}
 .eyebrow::before{content:"";width:22px;height:1px;background:var(--laiton);flex:none;}
 .eyebrow.center{justify-content:center;}
 
@@ -43,7 +43,7 @@ p{max-width:68ch;}
 .refrain::before,.refrain::after{content:"";height:1px;width:48px;background:var(--laiton);opacity:.45;}
 
 /* Navigation */
-.nav{position:sticky;top:0;z-index:50;background:rgba(252,251,248,.93);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--trait);}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.93);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--trait);}
 .nav-in{max-width:var(--lg);margin:0 auto;padding:15px 24px;display:flex;align-items:center;gap:24px;}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
 .nav-mark{width:28px;height:28px;border-radius:7px;background:var(--pin);display:grid;place-items:center;flex:none;}
@@ -58,9 +58,9 @@ p{max-width:68ch;}
 /* Sections */
 .section{padding:82px 24px;}
 .section-soft{background:var(--papier-2);border-top:1px solid var(--trait);border-bottom:1px solid var(--trait);}
-.section-encre{background:var(--encre);color:#B7C3CA;}
+.section-encre{background:var(--encre);color:#C3C7E3;}
 .section-encre .display{color:#fff;}
-.section-encre .lede,.section-encre p{color:#B7C3CA;}
+.section-encre .lede,.section-encre p{color:#C3C7E3;}
 .s-inner{max-width:var(--lg);margin:0 auto;}
 .s-head{max-width:62ch;margin-bottom:40px;}
 .s-head.center{margin-left:auto;margin-right:auto;text-align:center;}
@@ -68,7 +68,7 @@ p{max-width:68ch;}
 @media(max-width:640px){.section{padding:58px 20px;}}
 
 .btn-primary{display:inline-block;text-decoration:none;background:var(--pin);color:#fff;font-size:15.5px;font-weight:600;padding:14px 26px;border-radius:8px;transition:background .18s,transform .18s;}
-.btn-primary:hover{background:#173C30;transform:translateY(-1px);}
+.btn-primary:hover{background:#1F2B72;transform:translateY(-1px);}
 .btn-ghost{display:inline-block;text-decoration:none;color:var(--encre);border:1px solid var(--trait);background:var(--papier);font-size:15.5px;font-weight:600;padding:14px 22px;border-radius:8px;}
 
 /* En-tête */
@@ -83,11 +83,11 @@ p{max-width:68ch;}
 .bascule{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.12);
   border:1px solid rgba(255,255,255,.12);border-radius:12px;overflow:hidden;}
 .bascule-col{background:var(--encre);padding:30px 28px 32px;}
-.bascule-col .titre{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px;}
-.bascule-col.avant .titre{color:#8FA0A9;}
+.bascule-col .titre{font-family:var(--mono);font-size:13.5px;letter-spacing:0;text-transform:none;margin-bottom:18px;}
+.bascule-col.avant .titre{color:#9AA0C8;}
 .bascule-col.apres .titre{color:var(--laiton);}
 .bascule-col ul{list-style:none;display:grid;gap:12px;}
-.bascule-col li{padding-left:26px;position:relative;font-size:15.5px;color:#B7C3CA;}
+.bascule-col li{padding-left:26px;position:relative;font-size:15.5px;color:#C3C7E3;}
 .bascule-col li::before{content:"";position:absolute;left:0;top:8px;width:12px;height:12px;border-radius:3px;
   border:1px solid rgba(255,255,255,.28);}
 .bascule-col.apres li{color:#fff;}
@@ -105,8 +105,8 @@ p{max-width:68ch;}
 /* Formules */
 .formules{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch;}
 .formule{background:var(--papier);border:1px solid var(--trait);border-radius:14px;padding:32px 30px 34px;display:flex;flex-direction:column;}
-.formule.principale{border-color:var(--pin);box-shadow:0 16px 44px -32px rgba(30,75,60,.6);}
-.formule-tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--encre-3);margin-bottom:14px;}
+.formule.principale{border-color:var(--pin);box-shadow:0 16px 44px -32px rgba(43,58,143,.6);}
+.formule-tag{font-family:var(--mono);font-size:13.5px;letter-spacing:0;text-transform:none;color:var(--encre-3);margin-bottom:14px;}
 .formule.principale .formule-tag{color:var(--pin);}
 .formule h3{font-size:24px;margin-bottom:8px;}
 .formule .promesse{font-size:15.5px;color:var(--encre-2);margin-bottom:22px;min-height:50px;}
@@ -116,25 +116,25 @@ p{max-width:68ch;}
 .formule ul{list-style:none;display:grid;gap:11px;margin-bottom:26px;}
 .formule li{font-size:15px;padding-left:26px;position:relative;}
 .formule li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:14px;border-radius:4px;
-  background:var(--laiton-clair);border:1px solid #E4D2AC;}
+  background:var(--laiton-clair);border:1px solid #F0D49A;}
 .formule li strong{color:var(--encre);font-weight:600;}
 .formule .btn-primary,.formule .btn-ghost{margin-top:auto;text-align:center;}
 @media(max-width:860px){.formules{grid-template-columns:1fr;}.formule .promesse{min-height:0;}}
 
 
 /* Bandeau de lancement, a retirer quand les paiements seront ouverts */
-.bandeau-lancement{background:var(--laiton-clair);border:1px solid #E4D2AC;border-radius:12px;
+.bandeau-lancement{background:var(--laiton-clair);border:1px solid #F0D49A;border-radius:12px;
   padding:22px 26px;margin-bottom:30px;}
-.bandeau-lancement .titre{font-family:var(--display);font-size:18px;font-weight:600;color:#5E4409;margin-bottom:8px;}
-.bandeau-lancement p{font-size:15px;color:#7A5A12;line-height:1.66;max-width:none;}
-.bandeau-lancement strong{color:#5E4409;font-weight:700;}
-.tarif-indicatif{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+.bandeau-lancement .titre{font-family:var(--display);font-size:18px;font-weight:600;color:#5C3A00;margin-bottom:8px;}
+.bandeau-lancement p{font-size:15px;color:#7A4D00;line-height:1.66;max-width:none;}
+.bandeau-lancement strong{color:#5C3A00;font-weight:700;}
+.tarif-indicatif{font-family:var(--mono);font-size:13.5px;letter-spacing:0;text-transform:none;
   color:var(--encre-3);margin-top:-14px;margin-bottom:18px;}
 
 /* Solidaire */
-.solidaire{background:var(--laiton-clair);border:1px solid #E4D2AC;border-radius:12px;padding:24px 26px;max-width:760px;margin-top:26px;}
+.solidaire{background:var(--laiton-clair);border:1px solid #F0D49A;border-radius:12px;padding:24px 26px;max-width:760px;margin-top:26px;}
 .solidaire h3{margin-bottom:9px;}
-.solidaire p{font-size:15px;color:#7A5A12;}
+.solidaire p{font-size:15px;color:#7A4D00;}
 
 /* Cadre */
 .cadre{border-left:3px solid var(--brique);background:var(--brique-clair);border-radius:0 10px 10px 0;padding:26px 28px 28px;max-width:760px;}
@@ -155,16 +155,16 @@ p{max-width:68ch;}
 .cloture p{margin:0 auto 28px;font-size:17px;}
 
 /* Pied de page */
-footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
+footer{background:var(--encre);color:#C3C7E3;padding:52px 24px 40px;}
 .ft{max-width:var(--lg);margin:0 auto;}
 .ft-haut{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:flex-start;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.12);}
 .ft-brand{display:flex;align-items:center;gap:10px;}
 .ft-name{font-family:var(--display);font-size:19px;font-weight:600;color:#fff;letter-spacing:-.02em;}
 .ft-links{display:flex;flex-wrap:wrap;gap:20px;}
-.ft-links a{text-decoration:none;font-size:14px;color:#B7C3CA;}
+.ft-links a{text-decoration:none;font-size:14px;color:#C3C7E3;}
 .ft-links a:hover{color:#fff;}
-.ft-mentions{font-size:13px;line-height:1.7;margin-top:22px;max-width:70ch;color:#8FA0A9;}
-.ft-copy{font-family:var(--mono);font-size:11.5px;color:#7A8A93;margin-top:20px;}
+.ft-mentions{font-size:13px;line-height:1.7;margin-top:22px;max-width:70ch;color:#9AA0C8;}
+.ft-copy{font-family:var(--mono);font-size:11.5px;color:#6B7094;margin-top:20px;}
 
 /* ===== La note de marge =====
    Sur les grands ecrans, les marges sont vides. Plutot qu'un encart
@@ -174,19 +174,20 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
 @media(min-width:1420px){
   .marge{display:block;position:fixed;left:24px;top:50%;transform:translateY(-50%);
     width:190px;z-index:20;}
-  .marge-trait{width:26px;height:1px;background:var(--laiton,#B8862F);margin-bottom:14px;}
-  .marge-sur{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.13em;
-    text-transform:uppercase;color:var(--laiton,#B8862F);margin-bottom:9px;}
-  .marge-titre{font-family:var(--display,Georgia,serif);font-size:19px;font-weight:600;
-    color:var(--encre,#12212B);line-height:1.28;margin-bottom:9px;}
-  .marge-txt{font-size:13px;line-height:1.6;color:var(--encre-3,#7A8A93);margin-bottom:13px;}
-  .marge-lien{font-size:13px;font-weight:700;color:var(--pin,#1E4B3C);text-decoration:none;
-    border-bottom:1px solid rgba(30,75,60,.35);}
-  .marge-lien:hover{border-bottom-color:var(--pin,#1E4B3C);}
+  .marge-trait{width:26px;height:1px;background:var(--laiton,#C27C00);margin-bottom:14px;}
+  .marge-sur{font-family:var(--mono,'Archivo',sans-serif);font-size:13.5px;letter-spacing:0;
+    text-transform:none;color:var(--laiton,#C27C00);margin-bottom:9px;}
+  .marge-titre{font-family:var(--display,'Archivo',sans-serif);font-size:19px;font-weight:600;
+    color:var(--encre,#171C45);line-height:1.28;margin-bottom:9px;}
+  .marge-txt{font-size:13px;line-height:1.6;color:var(--encre-3,#6B7094);margin-bottom:13px;}
+  .marge-lien{font-size:13px;font-weight:700;color:var(--pin,#2B3A8F);text-decoration:none;
+    border-bottom:1px solid rgba(43,58,143,.35);}
+  .marge-lien:hover{border-bottom-color:var(--pin,#2B3A8F);}
   .marge-fermer{position:absolute;top:-6px;right:0;background:transparent;border:0;cursor:pointer;
-    color:var(--encre-3,#7A8A93);font-size:15px;line-height:1;padding:2px 4px;}
+    color:var(--encre-3,#6B7094);font-size:15px;line-height:1;padding:2px 4px;}
 }
 </style>
+<link rel="stylesheet" href="identite.css">
 </head>
 <body>
 
@@ -198,7 +199,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
     </a>
     <div class="nav-right">
       <a href="connexion.html" class="nav-login">Se connecter</a>
-      <a href="index.html" class="nav-login">← Retour au site</a>
+      <a href="index.html" class="nav-login">Retour au site</a>
       <a href="#formules" class="nav-cta">Voir les formules</a>
     </div>
   </div>
@@ -208,13 +209,13 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
 <header class="entete">
   <div class="entete-in">
     <div class="eyebrow">L'accompagnement</div>
-    <h1 class="display">Le code de la route s'apprend seul. <em>La conduite, non.</em></h1>
-    <p class="lede">NiouDem se compose de deux choses. <strong>NiouDem Learn</strong>, ce sont les huit formations en ligne : elles sont gratuites, et elles le resteront. <strong>L'accompagnement</strong>, c'est ce que tu lis ici : quelqu'un en face de toi, au moment précis où tu passes à l'acte. Lire, c'est une chose. Ouvrir un compte, c'en est une autre.</p>
+    <h1 class="display">Le code de la route s'apprend seul. La conduite, non.</h1>
+    <p class="lede">NiouDem, c'est deux choses. <strong>NiouDem Learn</strong> : les 8 formations en ligne, gratuites, et elles le resteront. <strong>L'accompagnement</strong> : une personne à tes côtés au moment où tu te lances. Lire sur le sujet, c'est une chose. Ouvrir un compte pour de vrai, c'en est une autre.</p>
     <div class="entete-actions">
       <a href="#formules" class="btn-primary">Voir les deux formules</a>
-      <a href="index.html#formations" class="btn-ghost">Commencer par NiouDem Learn, gratuit</a>
+      <a href="index.html#commencer" class="btn-ghost">Commencer par les formations gratuites</a>
     </div>
-    <div class="entete-note">Séances individuelles en visio, écran partagé. Aucune vente de produit financier.</div>
+    <div class="entete-note">Séances individuelles en visio, avec ton écran partagé. On ne vend aucun produit financier.</div>
   </div>
 </header>
 
@@ -223,8 +224,8 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
   <div class="s-inner">
     <div class="s-head">
       <div class="eyebrow">Le vrai blocage</div>
-      <h2 class="display">Le savoir est presque toujours là. C'est le geste qui coince. C'est le premier geste.</h2>
-      <p class="lede">La plupart des gens qui veulent investir ont déjà lu des articles, regardé des vidéos, retenu trois sigles. Ils savent à peu près ce qu'est un ETF. Et pourtant leur argent dort toujours sur un livret, parfois depuis des années.</p>
+      <h2 class="display">Tu sais déjà beaucoup. Ce qui bloque, c'est de se lancer.</h2>
+      <p class="lede">La plupart des gens qui veulent investir ont déjà lu des articles et regardé des vidéos. Ils savent à peu près ce qu'est un ETF. Pourtant, leur argent reste sur un livret, parfois depuis des années.</p>
     </div>
 
     <div class="bascule">
@@ -233,19 +234,19 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
         <ul>
           <li>Tu as compris le principe, mais tu n'as jamais rien ouvert.</li>
           <li>Tu hésites entre plusieurs courtiers, sans savoir sur quoi les comparer.</li>
-          <li>L'interface te fait peur : tu crains de cliquer au mauvais endroit.</li>
-          <li>Tu hésites sur le montant et sur le rythme.</li>
-          <li>Tu repousses, et chaque mois qui passe renforce l'idée que c'est compliqué.</li>
+          <li>Le site du courtier te fait peur : tu as peur de cliquer au mauvais endroit.</li>
+          <li>Tu ne sais pas combien mettre, ni à quel rythme.</li>
+          <li>Tu repousses, et plus le temps passe, plus ça te paraît compliqué.</li>
         </ul>
       </div>
       <div class="bascule-col apres">
         <div class="titre">Là où tu seras</div>
         <ul>
           <li>Ton compte est ouvert, à ton nom, chez un courtier que tu as choisi.</li>
-          <li>Tu sais lire une grille de frais et repérer ce qui coûte vraiment.</li>
-          <li>Tu as passé un ordre toi-même et tu sais ce que chaque champ signifie.</li>
-          <li>Tu as écrit ta règle : combien, quand, dans quoi, et quand tu ne fais rien.</li>
-          <li>Tu sais quoi faire le jour où les marchés baissent de vingt pour cent.</li>
+          <li>Tu sais lire une liste de frais et voir ce qui coûte vraiment.</li>
+          <li>Tu as passé un ordre toi-même et tu comprends chaque case à remplir.</li>
+          <li>Tu as écrit ta règle : combien, quand, dans quoi, et quand ne rien faire.</li>
+          <li>Tu sais quoi faire le jour où la bourse baisse de 20 %.</li>
         </ul>
       </div>
     </div>
@@ -257,24 +258,24 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
   <div class="s-inner">
     <div class="s-head">
       <div class="eyebrow">Comment ça se passe</div>
-      <h2 class="display">On ne t'explique pas. Tu fais, et j'explique pendant.</h2>
-      <p class="lede">Chaque séance se tient en visio avec ton écran partagé. Tu tiens la souris du début à la fin, et c'est volontaire : ce que quelqu'un fait à ta place, tu devras le redemander le mois suivant.</p>
+      <h2 class="display">C'est toi qui fais. On t'explique au fur et à mesure.</h2>
+      <p class="lede">Chaque séance se passe en visio, avec ton écran partagé. C'est toi qui tiens la souris du début à la fin. Si quelqu'un le fait à ta place, tu ne sauras pas le refaire le mois suivant.</p>
     </div>
     <div class="deroule">
       <div class="etape">
         <div class="etape-n">01</div>
         <h3>On regarde d'où tu pars</h3>
-        <p>Ce que tu as déjà, ce que tu peux mettre de côté sans te mettre en difficulté, et ce que tu veux vraiment. Cette étape sert surtout à vérifier une chose : que tu as de quoi tenir un imprévu avant d'investir quoi que ce soit.</p>
+        <p>Ce que tu as déjà, ce que tu peux mettre de côté sans te mettre en difficulté, et ce que tu veux vraiment. On vérifie surtout que tu as une réserve pour les imprévus avant d'investir.</p>
       </div>
       <div class="etape">
         <div class="etape-n">02</div>
-        <h3>Tu ouvres et tu manipules</h3>
-        <p>Comparaison de deux ou trois courtiers sur des critères que tu apprends à lire, ouverture du compte, découverte de l'interface. Ordre au marché, ordre à cours limité, frais de courtage : tu vois où c'est, et ce qui se passe quand tu cliques.</p>
+        <h3>Tu ouvres ton compte et tu pratiques</h3>
+        <p>On compare 2 ou 3 courtiers, tu ouvres ton compte et tu découvres le site. Types d'ordres, frais : tu vois où tout se trouve et ce qui se passe quand tu cliques.</p>
       </div>
       <div class="etape">
         <div class="etape-n">03</div>
         <h3>Tu écris ta règle</h3>
-        <p>Le document le plus utile de tout le parcours tient en dix lignes que tu rédiges toi-même. Combien, à quelle date, dans quoi, et surtout dans quels cas tu ne touches à rien. C'est cette règle qui te tiendra quand les marchés bougeront.</p>
+        <p>Dix lignes, écrites par toi. Combien, à quelle date, dans quoi, et surtout dans quels cas tu ne touches à rien. Quand la bourse bougera, c'est cette règle qui t'évitera de paniquer.</p>
       </div>
     </div>
   </div>
@@ -286,20 +287,20 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
     <div class="s-head">
       <div class="eyebrow">Les formules</div>
       <h2 class="display">Deux façons d'y aller.</h2>
-      <p class="lede">Deux formules, deux moments de vie différents. La première pour ceux qui peinent à mettre de côté. La seconde pour ceux qui y arrivent et cherchent quoi en faire. Les deux commencent par un échange gratuit, et peuvent se suivre l'une après l'autre.</p>
+      <p class="lede">La formule 1, si tu as du mal à mettre de côté. La formule 2, si tu épargnes déjà et que tu ne sais pas quoi faire de cet argent. Les deux commencent par un échange gratuit. Tu peux suivre l'une puis l'autre.</p>
     </div>
 
     <div class="bandeau-lancement">
       <div class="titre">Les réservations ouvrent bientôt</div>
-      <p>Soyons clairs sur où nous en sommes : la structure juridique est en cours de création, et le paiement en ligne n'est donc pas encore ouvert. Les tarifs ci-dessous sont ceux qui s'appliqueront à l'ouverture, affichés dès maintenant pour que tu saches à quoi t'attendre.</p>
-      <p style="margin-top:10px;"><strong>L'échange découverte, lui, est déjà possible et gratuit.</strong> Vingt minutes pour regarder où tu en es, sans aucun engagement et sans qu'aucun paiement ne te soit demandé. Si l'accompagnement n'est pas ce dont tu as besoin, on te le dira et on t'indiquera par quelle formation gratuite commencer.</p>
+      <p>L'entreprise est en cours de création, donc le paiement en ligne n'est pas encore ouvert. Les prix ci-dessous seront ceux appliqués à l'ouverture. On les affiche dès maintenant pour que tu saches à quoi t'attendre.</p>
+      <p style="margin-top:10px;"><strong>L'échange découverte, lui, est déjà possible et gratuit.</strong> 20 minutes pour faire le point, sans engagement et sans rien payer. Si tu n'as pas besoin d'accompagnement, on te le dira et on t'indiquera quelle formation gratuite suivre.</p>
     </div>
 
     <div class="formules" style="grid-template-columns:1fr;margin-bottom:20px;">
       <div class="formule">
         <div class="formule-tag">Pour commencer</div>
         <h3>La consultation</h3>
-        <p class="promesse">Une question précise, une réponse claire. Pour ceux qui cherchent juste à débloquer un point précis.</p>
+        <p class="promesse">Une question précise, une réponse claire. Pour débloquer un point qui te bloque.</p>
         <div class="formule-prix">
           <span class="montant">29 €</span>
           <span class="unite">une séance de 45 minutes</span>
@@ -307,10 +308,10 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
         <div class="tarif-indicatif">Tarif à l'ouverture</div>
         <ul>
           <li>45 minutes en visio sur le sujet de ton choix.</li>
-          <li>Un mémo écrit après la séance, avec ce qui a été dit et ce qu'il te reste à faire.</li>
-          <li><strong>Déduite intégralement</strong> si tu prends l'une des 2 formules ci-dessous dans les 30 jours.</li>
+          <li>Un résumé écrit après la séance : ce qu'on s'est dit et ce qu'il te reste à faire.</li>
+          <li><strong>Remboursée en totalité</strong> sur le prix d'une formule, si tu en prends une dans les 30 jours.</li>
         </ul>
-        <div class="tarif-indicatif" style="margin-top:0;margin-bottom:16px;">Le diagnostic préalable reste gratuit</div>
+        <div class="tarif-indicatif" style="margin-top:0;margin-bottom:16px;">Le premier échange reste gratuit</div>
         <a href="https://calendar.app.google/ivANmMynLoPoud7H8" class="btn-ghost" target="_blank" rel="noopener">Réserver l'échange gratuit</a>
         <div style="font-size:13.5px;color:var(--encre-3);margin-top:10px;">Tu préfères écrire d'abord ? <a href="contact.html" style="color:var(--pin);font-weight:600;">Poser une question</a></div>
       </div>
@@ -320,17 +321,17 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       <div class="formule">
         <div class="formule-tag">Formule 1</div>
         <h3>Reprendre la main sur ses comptes</h3>
-        <p class="promesse">Savoir enfin où part ton argent, et faire partir l'épargne toute seule.</p>
+        <p class="promesse">Savoir enfin où part ton argent, et mettre de côté automatiquement.</p>
         <div class="formule-prix">
           <span class="montant">99 €</span>
           <span class="unite">deux séances d'une heure trente</span>
         </div>
         <div class="tarif-indicatif">Tarif à l'ouverture</div>
         <ul>
-          <li><strong>Séance 1 :</strong> on regarde tes comptes ensemble et on repère où ça fuit.</li>
+          <li><strong>Séance 1 :</strong> on regarde tes comptes ensemble et on repère où part l'argent.</li>
           <li><strong>Séance 2 :</strong> on met en place ton système, virement automatique compris.</li>
-          <li>Ton tableau de budget rempli avec toi, et non téléchargé puis oublié.</li>
-          <li>La chasse aux charges fixes : abonnements, frais bancaires, assurances.</li>
+          <li>Ton tableau de budget, rempli avec toi (pas téléchargé puis oublié).</li>
+          <li>On fait le tri dans tes dépenses fixes : abonnements, frais bancaires, assurances.</li>
           <li>Tes questions écrites pendant les deux semaines qui suivent.</li>
         </ul>
         <div class="tarif-indicatif" style="margin-top:0;margin-bottom:16px;">Commence toujours par l'échange gratuit</div>
@@ -341,17 +342,17 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       <div class="formule">
         <div class="formule-tag">Formule 2</div>
         <h3>Prendre en main son investissement</h3>
-        <p class="promesse">Te sentir à l'aise devant l'interface d'un courtier. Débutants acceptés, et même attendus.</p>
+        <p class="promesse">Être à l'aise sur le site d'un courtier. Les débutants sont les bienvenus.</p>
         <div class="formule-prix">
           <span class="montant">149 €</span>
           <span class="unite">deux séances d'une heure trente</span>
         </div>
         <div class="tarif-indicatif">Tarif à l'ouverture</div>
         <ul>
-          <li><strong>Séance 1 :</strong> les enveloppes, le choix du courtier, l'ouverture du compte.</li>
-          <li><strong>Séance 2 :</strong> ton premier ordre, passé par toi, sur un montant que tu choisis.</li>
-          <li>Ta règle d'investissement écrite, en dix lignes, de ta main.</li>
-          <li>Le repérage des frais cachés dans les relevés.</li>
+          <li><strong>Séance 1 :</strong> PEA, assurance-vie, compte-titres : lequel choisir, chez quel courtier, et l'ouverture du compte.</li>
+          <li><strong>Séance 2 :</strong> tu passes ton premier ordre toi-même, avec le montant que tu choisis.</li>
+          <li>Ta règle d'investissement, écrite par toi en dix lignes.</li>
+          <li>On repère ensemble les frais cachés dans tes relevés.</li>
           <li>Tes questions écrites pendant les deux semaines qui suivent.</li>
         </ul>
         <div class="tarif-indicatif" style="margin-top:0;margin-bottom:16px;">Commence toujours par l'échange gratuit</div>
@@ -362,7 +363,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
 
     <div class="solidaire">
       <h3>Un accès solidaire, chaque mois</h3>
-      <p>Deux places par mois sont réservées à des personnes pour qui ces montants sont hors de portée. Le contenu de l'accompagnement est strictement le même. Aucun justificatif n'est demandé : il suffit de le dire lors du premier échange, et personne d'autre n'en saura rien.</p>
+      <p>Chaque mois, 2 places sont proposées à tarif réduit pour les personnes qui ne peuvent pas payer ces montants. L'accompagnement est exactement le même. Aucun justificatif n'est demandé : dis-le pendant le premier échange, et personne d'autre ne le saura.</p>
     </div>
   </div>
 </section>
@@ -373,11 +374,11 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
     <div class="s-head">
       <div class="eyebrow">Qui te reçoit</div>
       <h2 class="display">Une personne, pas un service client.</h2>
-      <p class="lede">Les séances sont assurées par un accompagnant NiouDem, ancien professionnel de la banque, retenu à la main. La règle vaut pour tous, sans exception : <strong>on explique des mécanismes et on pose des questions, la décision reste la tienne.</strong></p>
+      <p class="lede">Les séances sont menées par un ancien professionnel de la banque, choisi avec soin. La règle est la même pour tous : <strong>on t'explique comment ça marche et on te pose des questions. C'est toi qui décides.</strong></p>
     </div>
     <div class="cadre" style="border-left-color:var(--pin);background:var(--pin-clair);">
-      <h3>Ce à quoi s'engage toute personne qui accompagne pour NiouDem</h3>
-      <p>Ne recommander aucun actif, aucun produit, aucune allocation. Ne percevoir aucune commission d'un établissement, d'un courtier ou d'un assureur. Nommer les frais, y compris ceux qui dérangent. Dire « je ne sais pas » plutôt qu'inventer. Et le dire clairement quand l'accompagnement n'est pas ce dont tu as besoin.</p>
+      <h3>Ce que promet chaque personne qui accompagne pour NiouDem</h3>
+      <p>Ne te conseiller aucun produit ni aucune répartition. Ne toucher aucune commission d'une banque, d'un courtier ou d'un assureur. Te dire tous les frais, même ceux qui fâchent. Dire « je ne sais pas » plutôt qu'inventer. Et te dire franchement si tu n'as pas besoin d'accompagnement.</p>
     </div>
   </div>
 </section>
@@ -391,9 +392,9 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
     </div>
     <div class="cadre">
       <h3>Ce que l'accompagnement est, et ce qu'il n'est pas.</h3>
-      <p>NiouDem est un organisme de formation. Pendant les séances, <strong>on t'explique des mécanismes et on te pose des questions. La décision finale te revient, toujours.</strong> Aucun actif ne t'est recommandé, aucune allocation ne t'est proposée, et ta stratégie est écrite par toi, avec tes mots et tes chiffres.</p>
-      <p>C'est une obligation, pas une posture : le conseil en investissement personnalisé est une activité réglementée, que NiouDem n'exerce pas. Nous ne vendons aucun produit financier et ne percevons <strong>aucune commission</strong> d'une banque, d'un courtier ou d'un assureur. Notre seule rémunération est celle que tu vois sur cette page.</p>
-      <p><strong>Aucun rendement n'est garanti.</strong> Investir comporte un risque de perte en capital, y compris de la totalité des sommes engagées. Savoir passer un ordre protège d'une seule chose : décider sans comprendre. C'est déjà beaucoup.</p>
+      <p>NiouDem est un organisme de formation. Pendant les séances, <strong>on t'explique comment ça marche et on te pose des questions. La décision finale est toujours la tienne.</strong> On ne te conseille aucun produit, et ta stratégie, c'est toi qui l'écris, avec tes mots et tes chiffres.</p>
+      <p>C'est la loi : le conseil en investissement personnalisé est un métier réglementé, et NiouDem ne l'exerce pas. Nous ne vendons aucun produit financier et ne touchons <strong>aucune commission</strong> d'une banque, d'un courtier ou d'un assureur. Nous sommes payés uniquement par les prix affichés sur cette page.</p>
+      <p><strong>Aucun gain n'est garanti.</strong> Quand on investit, on peut perdre de l'argent, et même tout ce qu'on a placé. Savoir passer un ordre te protège d'une chose : décider sans comprendre. C'est déjà beaucoup.</p>
     </div>
   </div>
 </section>
@@ -402,25 +403,24 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
 <section class="section section-soft">
   <div class="s-inner">
     <div class="s-head">
-      <div class="eyebrow">Les questions qu'on nous pose</div>
-      <h2 class="display">Avant de réserver.</h2>
+      <h2 class="display">Les questions qu'on nous pose.</h2>
     </div>
     <div class="questions">
       <div class="question">
         <h3>Pourquoi payer si NiouDem Learn est gratuit ?</h3>
-        <p>Parce que les formations donnent le savoir, pas le geste. Ce que tu paies ici, c'est du temps humain. Il se compte en heures : quelqu'un en face de toi pendant que tu ouvres ton compte, qui répond à la question précise que tu te poses à ce moment-là. Les huit formations, elles, resteront gratuites sans condition.</p>
+        <p>Les formations t'apprennent la théorie. Ici, tu paies le temps d'une personne : quelqu'un à côté de toi pendant que tu ouvres ton compte, qui répond à ta question au moment où tu te la poses. Les 8 formations resteront gratuites.</p>
       </div>
       <div class="question">
         <h3>Combien faut-il avoir pour commencer ?</h3>
-        <p>Quelques dizaines d'euros suffisent pour passer un premier ordre et comprendre le mécanisme. La première séance sert d'ailleurs à vérifier que tu as de quoi tenir un imprévu avant d'investir. Si ce n'est pas le cas, on te le dira, et on commencera par là.</p>
+        <p>Quelques dizaines d'euros suffisent pour passer un premier ordre et comprendre comment ça marche. La première séance sert aussi à vérifier que tu as une réserve pour les imprévus. Si ce n'est pas le cas, on te le dira et on commencera par là.</p>
       </div>
       <div class="question">
         <h3>Vais-je savoir investir en trois heures ?</h3>
-        <p>Tu sauras manipuler, comparer et décider en connaissance de cause. Le jugement, lui, se construit avec le temps et les cycles de marché. Toute personne qui te promet la maîtrise complète en quelques heures te vend autre chose que de la formation.</p>
+        <p>Tu sauras utiliser ton compte, comparer et décider en sachant ce que tu fais. L'expérience, elle, vient avec le temps. Si quelqu'un te promet de tout maîtriser en quelques heures, méfie-toi.</p>
       </div>
       <div class="question">
         <h3>Et si je bloque après les séances ?</h3>
-        <p>C'est précisément le moment que couvre le parcours en trente jours. Le découragement arrive rarement avant la première décision, presque toujours après. La troisième séance existe pour ça.</p>
+        <p>Pendant les 2 semaines qui suivent la dernière séance, tu peux poser toutes tes questions par écrit. On sait que le doute arrive souvent juste après la première décision, et c'est prévu pour ça.</p>
       </div>
     </div>
     <div class="refrain">NiouDem.</div>
@@ -432,7 +432,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
   <div class="s-inner">
     <div class="cloture">
       <h2 class="display">On commence par un échange, sans engagement.</h2>
-      <p>Vingt minutes pour regarder où tu en es et décider ensemble si l'une des deux formules a du sens pour toi. Si ce n'est pas le cas, on te le dira.</p>
+      <p>20 minutes pour faire le point et voir ensemble si une des deux formules te correspond. Si ce n'est pas le cas, on te le dira.</p>
       <a href="https://calendar.app.google/ivANmMynLoPoud7H8" class="btn-primary" target="_blank" rel="noopener">Réserver cet échange</a>
     </div>
   </div>
@@ -447,11 +447,10 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       </div>
       <div class="ft-links">
         <a href="index.html">Accueil</a>
-        <a href="index.html#formations">Formations</a>
+        <a href="index.html#commencer">Formations</a>
         <a href="outils.html">Outils gratuits</a>
         <a href="accompagnement.html">Accompagnement</a>
         <a href="tarifs.html">Tarifs</a>
-        <a href="outils.html">Outils gratuits</a>
         <a href="carnet.html">Mon carnet</a>
         <a href="qui-sommes-nous.html">Qui nous sommes</a>
         <a href="contact.html">Contact</a>
@@ -461,7 +460,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       </div>
     </div>
     <p class="ft-mentions">NiouDem est un site de formation en éducation financière. Il ne fournit ni conseil en investissement personnalisé, ni service de gestion, ni intermédiation en produits financiers. Investir comporte un risque de perte en capital.</p>
-    <div class="ft-copy">© 2025 NiouDem · Méthode Petites Actions</div>
+    <div class="ft-copy">© 2026 NiouDem, méthode Petites Actions</div>
   </div>
 </footer>
 

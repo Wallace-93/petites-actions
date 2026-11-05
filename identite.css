@@ -1,0 +1,130 @@
+/* =====================================================================
+   NiouDem : identité visuelle
+   Chargée en dernier sur toutes les pages, elle passe après les styles
+   propres à chaque page.
+
+   Couleurs : l'indigo des pagnes teints, le safran des marchés, le rouge
+   du bissap pour les mises en garde. Fond blanc, pas de crème.
+   Typographie : une seule famille, Archivo. Les titres utilisent sa
+   version large et grasse, le texte sa version normale. Pas de police
+   à chasse fixe, pas de petites capitales espacées.
+   ===================================================================== */
+
+:root{
+  --indigo-nuit:#171C45;
+  --indigo:#2B3A8F;
+  --safran:#F2A900;
+  --safran-texte:#8F5F00;
+  --bissap:#A3213D;
+  --brume:#F0F1F7;
+}
+
+body{font-feature-settings:"lnum" 1,"tnum" 1;}
+
+/* ---------- Titres ----------
+   La largeur fait la personnalité : les grands titres sont élargis et
+   très gras, comme une enseigne peinte. */
+.display,h1,h2{
+  font-family:'Archivo',system-ui,sans-serif;
+  font-stretch:118%;
+  font-weight:800;
+  letter-spacing:-.025em;
+  line-height:1.06;
+}
+h1.display{font-size:clamp(36px,5.6vw,64px);}
+h2.display{font-size:clamp(28px,3.8vw,42px);line-height:1.08;}
+h3{font-family:'Archivo',system-ui,sans-serif;font-stretch:105%;font-weight:700;letter-spacing:-.01em;}
+
+/* Plus de mot isolé en couleur ou en italique dans les titres :
+   la phrase se lit d'un seul tenant. */
+.display em,h1 em,h2 em{font-style:normal;color:inherit;}
+
+/* ---------- Petits intitulés au-dessus des titres ----------
+   Écrits comme une phrase, en safran foncé, sans trait décoratif. */
+.eyebrow{
+  font-family:'Archivo',system-ui,sans-serif;
+  font-size:15px;font-weight:700;letter-spacing:0;text-transform:none;
+  color:var(--safran-texte);
+}
+.eyebrow::before{display:none;}
+.section-encre .eyebrow,.hero-nd .eyebrow{color:var(--safran);}
+
+/* Les numéros n'apparaissent que là où il y a un ordre à suivre.
+   Les trois obstacles ne sont pas une suite. */
+.obstacle-n{display:none;}
+
+/* ---------- Boutons ----------
+   Bouton principal indigo, bouton sur fond sombre en safran. */
+.btn-primary,.nav-cta{background:var(--indigo);border-radius:6px;font-weight:700;}
+.btn-primary:hover,.nav-cta:hover{background:#1F2B72;transform:none;}
+.btn-ghost{border-radius:6px;border-width:1.5px;}
+.section-encre .btn-primary,#cout .btn-primary{background:var(--safran);color:var(--indigo-nuit);}
+.section-encre .btn-primary:hover,#cout .btn-primary:hover{background:#FFBE2E;}
+
+/* ---------- Logo ----------
+   Le carré du logo prend le safran : c'est la seule touche vive
+   de la barre de navigation. */
+.nav-mark{background:var(--safran);border-radius:50%;}
+.nav-mark svg path{stroke:var(--indigo-nuit);}
+.nav-name,.ft-name{font-stretch:118%;font-weight:800;letter-spacing:-.02em;}
+.nav-name em{color:var(--indigo);}
+.ft-name em{color:var(--safran);}
+.nav{background:rgba(255,255,255,.96);}
+
+/* ---------- Sections ---------- */
+.section-encre{background:var(--indigo-nuit);}
+footer{background:var(--indigo-nuit);}
+.refrain{font-stretch:118%;font-weight:800;color:var(--safran-texte);}
+.section-encre .refrain{color:var(--safran);}
+
+/* La frise : une bande de motif tissé qui sépare l'en-tête du reste.
+   C'est le seul ornement du site. */
+.frise{
+  height:14px;
+  background:
+    repeating-linear-gradient(90deg,var(--safran) 0 14px,transparent 14px 28px) 0 0/100% 7px no-repeat,
+    repeating-linear-gradient(90deg,transparent 0 14px,var(--safran) 14px 28px) 0 7px/100% 7px no-repeat,
+    var(--indigo-nuit);
+}
+
+/* ---------- Accueil : en-tête sur fond indigo ---------- */
+.hero-nd{background:var(--indigo-nuit);color:#C3C7E3;padding:72px 24px 84px;}
+.hero-nd .hero-in{max-width:var(--lg,1120px);margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center;}
+.hero-nd .hero-h1{color:#fff;max-width:13ch;margin-bottom:22px;font-size:clamp(40px,6.4vw,76px);line-height:1;}
+.hero-nd .hero-nom{font-family:'Archivo',system-ui,sans-serif;font-size:16px;letter-spacing:0;color:#C3C7E3;margin-bottom:22px;}
+.hero-nd .hero-nom strong{color:var(--safran);font-weight:700;}
+.hero-nd .lede{color:#DDE0F2;font-size:18px;}
+.hero-nd .lede strong{color:#fff;font-weight:700;}
+.hero-nd .btn-primary{background:var(--safran);color:var(--indigo-nuit);}
+.hero-nd .btn-primary:hover{background:#FFBE2E;}
+.hero-nd .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.35);}
+.hero-nd .btn-ghost:hover{border-color:#fff;}
+.hero-nd .hero-trust{font-family:'Archivo',system-ui,sans-serif;font-size:14px;color:#C3C7E3;}
+.hero-nd .hero-trust span::before{background:var(--safran);}
+.hero-nd .carnet{box-shadow:0 30px 60px -30px rgba(0,0,0,.55);border:0;border-radius:4px;}
+.hero-nd .ligne.faite .case{background:var(--safran);border-color:var(--safran);}
+.hero-nd .ligne.faite .case svg path,.hero-nd .ligne.a-faire.faite .case svg path{stroke:var(--indigo-nuit);}
+.hero-nd .ligne.a-faire .case{border-color:var(--indigo);}
+.hero-nd .ligne.a-faire:hover{background:var(--brume);}
+@media(max-width:940px){.hero-nd .hero-in{grid-template-columns:1fr;gap:44px;}.hero-nd .hero-h1{max-width:none;}}
+@media(max-width:640px){.hero-nd{padding:52px 20px 60px;}}
+
+/* ---------- Cartes : moins d'arrondis, pas d'ombres grises ---------- */
+.carnet,.echange,.tarif,.situ,.question,.inclus,.tarif-intro,.bandeau-lancement{border-radius:4px;}
+.obstacles,.grille-4,.formations-grid,.questions{border-radius:4px;}
+.situ[open]{border-color:var(--indigo);}
+.situ[open] .situ-case{background:var(--safran);border-color:var(--safran);}
+.situ:hover{transform:none;}
+
+/* Mises en garde en bissap */
+.cadre{border-left-color:var(--bissap);}
+
+:focus-visible{outline-color:var(--indigo);}
+
+/* Petits écrans : la barre garde le logo et un seul bouton.
+   Le logo ramène déjà à l'accueil. */
+@media(max-width:640px){
+  .nav-right .nav-login,.nav-right .nav-lien,.nav-right .nav-connexion{display:none;}
+  .nav-in{padding-left:16px;padding-right:16px;}
+  .nav-cta{padding:9px 13px;font-size:14px;}
+}

@@ -8,17 +8,17 @@
 <meta name="description" content="Vingt minutes pour regarder où tu en es et décider ensemble si l'accompagnement NiouDem a du sens pour toi.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --encre:#12212B;--encre-2:#43555F;--encre-3:#7A8A93;
-  --papier:#FCFBF8;--papier-2:#EFF0EA;--trait:#DCDDD3;
-  --pin:#1E4B3C;--pin-clair:#E7EFEA;
-  --laiton:#B8862F;--laiton-clair:#F6EFE0;
-  --display:'Newsreader',Georgia,serif;
-  --texte:'Karla',system-ui,-apple-system,sans-serif;
-  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --encre:#171C45;--encre-2:#44496B;--encre-3:#6B7094;
+  --papier:#FFFFFF;--papier-2:#F0F1F7;--trait:#DCDEEA;
+  --pin:#2B3A8F;--pin-clair:#E9EBF7;
+  --laiton:#C27C00;--laiton-clair:#FDF2DA;
+  --display:'Archivo',system-ui,sans-serif;
+  --texte:'Archivo',system-ui,-apple-system,sans-serif;
+  --mono:'Archivo',system-ui,sans-serif;
 }
 body{font-family:var(--texte);background:var(--papier);color:var(--encre-2);font-size:16px;line-height:1.68;-webkit-font-smoothing:antialiased;}
 a{color:inherit;}
@@ -34,7 +34,7 @@ a{color:inherit;}
 .nav-back{margin-left:auto;font-size:14.5px;font-weight:600;text-decoration:none;color:var(--encre);}
 
 .wrap{max-width:760px;margin:0 auto;padding:62px 24px 80px;}
-.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--laiton);display:flex;align-items:center;gap:9px;margin-bottom:18px;}
+.eyebrow{font-family:var(--mono);font-size:13.5px;letter-spacing:0;text-transform:none;color:var(--laiton);display:flex;align-items:center;gap:9px;margin-bottom:18px;}
 .eyebrow::before{content:"";width:22px;height:1px;background:var(--laiton);}
 h1{font-family:var(--display);font-weight:500;font-size:clamp(32px,4.4vw,48px);color:var(--encre);letter-spacing:-.018em;line-height:1.14;margin-bottom:16px;}
 .lede{font-size:17.5px;margin-bottom:34px;}
@@ -42,20 +42,20 @@ h2{font-family:var(--display);font-weight:600;font-size:21px;color:var(--encre);
 p{margin-bottom:12px;}
 ul{list-style:none;display:grid;gap:10px;margin-bottom:16px;}
 li{padding-left:26px;position:relative;}
-li::before{content:"";position:absolute;left:0;top:9px;width:13px;height:13px;border-radius:4px;background:var(--laiton-clair);border:1px solid #E4D2AC;}
+li::before{content:"";position:absolute;left:0;top:9px;width:13px;height:13px;border-radius:4px;background:var(--laiton-clair);border:1px solid #F0D49A;}
 
 .bloc{border:1px solid var(--trait);border-radius:12px;padding:28px 26px 30px;background:var(--papier);margin-bottom:22px;}
 .bloc h2{margin-top:0;}
 .btn{display:inline-block;text-decoration:none;background:var(--pin);color:#fff;font-size:15.5px;font-weight:600;padding:14px 26px;border-radius:8px;margin-top:8px;}
-.tbd{background:var(--laiton-clair);border-bottom:1px dashed var(--laiton);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:.88em;color:#7A5A12;}
+.tbd{background:var(--laiton-clair);border-bottom:1px dashed var(--laiton);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:.88em;color:#7A4D00;}
 .note{font-family:var(--mono);font-size:12px;color:var(--encre-3);margin-top:14px;}
 
-footer{background:var(--encre);color:#B7C3CA;padding:44px 24px 36px;}
+footer{background:var(--encre);color:#C3C7E3;padding:44px 24px 36px;}
 .ft{max-width:1120px;margin:0 auto;}
 .ft-links{display:flex;flex-wrap:wrap;gap:18px;margin-bottom:18px;}
-.ft-links a{color:#B7C3CA;text-decoration:none;font-size:14px;}
-.ft-mentions{font-size:12.5px;line-height:1.7;color:#8FA0A9;max-width:70ch;}
-.ft-copy{font-family:var(--mono);font-size:11.5px;color:#7A8A93;margin-top:16px;}
+.ft-links a{color:#C3C7E3;text-decoration:none;font-size:14px;}
+.ft-mentions{font-size:12.5px;line-height:1.7;color:#9AA0C8;max-width:70ch;}
+.ft-copy{font-family:var(--mono);font-size:11.5px;color:#6B7094;margin-top:16px;}
 
 /* ===== La note de marge =====
    Sur les grands ecrans, les marges sont vides. Plutot qu'un encart
@@ -65,19 +65,20 @@ footer{background:var(--encre);color:#B7C3CA;padding:44px 24px 36px;}
 @media(min-width:1420px){
   .marge{display:block;position:fixed;left:24px;top:50%;transform:translateY(-50%);
     width:190px;z-index:20;}
-  .marge-trait{width:26px;height:1px;background:var(--laiton,#B8862F);margin-bottom:14px;}
-  .marge-sur{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.13em;
-    text-transform:uppercase;color:var(--laiton,#B8862F);margin-bottom:9px;}
-  .marge-titre{font-family:var(--display,Georgia,serif);font-size:19px;font-weight:600;
-    color:var(--encre,#12212B);line-height:1.28;margin-bottom:9px;}
-  .marge-txt{font-size:13px;line-height:1.6;color:var(--encre-3,#7A8A93);margin-bottom:13px;}
-  .marge-lien{font-size:13px;font-weight:700;color:var(--pin,#1E4B3C);text-decoration:none;
-    border-bottom:1px solid rgba(30,75,60,.35);}
-  .marge-lien:hover{border-bottom-color:var(--pin,#1E4B3C);}
+  .marge-trait{width:26px;height:1px;background:var(--laiton,#C27C00);margin-bottom:14px;}
+  .marge-sur{font-family:var(--mono,'Archivo',sans-serif);font-size:13.5px;letter-spacing:0;
+    text-transform:none;color:var(--laiton,#C27C00);margin-bottom:9px;}
+  .marge-titre{font-family:var(--display,'Archivo',sans-serif);font-size:19px;font-weight:600;
+    color:var(--encre,#171C45);line-height:1.28;margin-bottom:9px;}
+  .marge-txt{font-size:13px;line-height:1.6;color:var(--encre-3,#6B7094);margin-bottom:13px;}
+  .marge-lien{font-size:13px;font-weight:700;color:var(--pin,#2B3A8F);text-decoration:none;
+    border-bottom:1px solid rgba(43,58,143,.35);}
+  .marge-lien:hover{border-bottom-color:var(--pin,#2B3A8F);}
   .marge-fermer{position:absolute;top:-6px;right:0;background:transparent;border:0;cursor:pointer;
-    color:var(--encre-3,#7A8A93);font-size:15px;line-height:1;padding:2px 4px;}
+    color:var(--encre-3,#6B7094);font-size:15px;line-height:1;padding:2px 4px;}
 }
 </style>
+<link rel="stylesheet" href="identite.css">
 </head>
 <body>
 
@@ -87,38 +88,38 @@ footer{background:var(--encre);color:#B7C3CA;padding:44px 24px 36px;}
       <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       <span class="nav-name">Niou<em>Dem</em></span>
     </a>
-    <a href="accompagnement.html" class="nav-back">← L'accompagnement</a>
+    <a href="accompagnement.html" class="nav-back">Retour à l'accompagnement</a>
   </div>
 </nav>
 
 <div class="wrap">
   <div class="eyebrow">Premier échange</div>
-  <h1>Vingt minutes, sans engagement.</h1>
-  <p class="lede">Avant toute formule, on prend le temps de regarder où tu en es. Si l'accompagnement n'est pas ce dont tu as besoin, on te le dira, et on t'indiquera par quelle leçon gratuite commencer.</p>
+  <h1>20 minutes pour faire le point, sans engagement.</h1>
+  <p class="lede">Avant de choisir une formule, on regarde ensemble où tu en es. Si tu n'as pas besoin d'accompagnement, on te le dira et on t'indiquera par quelle leçon gratuite commencer.</p>
 
   <div class="bloc">
     <h2>Réserver un créneau</h2>
-    <p>Choisis directement l'horaire qui t'arrange dans l'agenda.</p>
+    <p>Choisis l'horaire qui t'arrange dans l'agenda.</p>
     <a href="https://calendar.app.google/ivANmMynLoPoud7H8" class="btn" target="_blank" rel="noopener">Voir les créneaux disponibles</a>
-    <p style="font-size:14px;color:var(--encre-3);margin-top:14px;">Aucun compte n'est nécessaire, une adresse mail suffit. Tu recevras une confirmation, puis un rappel avant l'échange.</p>
+    <p style="font-size:14px;color:var(--encre-3);margin-top:14px;">Pas besoin de compte, ton adresse mail suffit. Tu recevras une confirmation, puis un rappel avant le rendez-vous.</p>
   </div>
 
   <div class="bloc">
-    <h2>Ou écrire simplement</h2>
-    <p>Si tu préfères poser tes questions par écrit avant de réserver quoi que ce soit : <a href="mailto:info@nioudem.com" style="color:var(--pin);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(30,75,60,.35);">info@nioudem.com</a></p>
-    <p>Une réponse te parvient sous quarante-huit heures ouvrées.</p>
+    <h2>Ou écris-nous</h2>
+    <p>Tu préfères poser tes questions par écrit avant de réserver ? <a href="mailto:info@nioudem.com" style="color:var(--pin);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(43,58,143,.35);">info@nioudem.com</a></p>
+    <p>On te répond en 2 jours ouvrés maximum.</p>
   </div>
 
-  <h2>Ce qu'on regardera pendant cet échange</h2>
+  <h2>Ce qu'on regarde pendant cet échange</h2>
   <ul>
-    <li>Où en est ta situation aujourd'hui, sans jugement et sans chiffres à justifier.</li>
-    <li>Ce que tu cherches vraiment : mettre de côté, comprendre, ou passer à l'acte.</li>
-    <li>Si tu as de quoi tenir un imprévu avant d'envisager d'investir.</li>
-    <li>Laquelle des deux formules a du sens, ou aucune des deux.</li>
+    <li>Ta situation aujourd'hui, sans jugement et sans justificatif.</li>
+    <li>Ce que tu veux vraiment : mettre de côté, comprendre, ou te lancer.</li>
+    <li>Si tu as une réserve pour les imprévus avant de penser à investir.</li>
+    <li>Quelle formule te correspond, ou si aucune ne te correspond.</li>
   </ul>
 
   <h2>Ce qu'on ne fera pas</h2>
-  <p>Aucun produit financier ne te sera proposé ni vendu, aucun actif ne te sera recommandé, et aucune allocation ne te sera suggérée. NiouDem est un organisme de formation et n'exerce pas le conseil en investissement, qui est une activité réglementée. Ta stratégie reste la tienne, écrite par toi.</p>
+  <p>On ne te proposera aucun produit financier, et on ne te dira pas où placer ton argent. NiouDem est un organisme de formation. Le conseil en investissement est un métier réglementé, et nous ne l'exerçons pas. Ta stratégie, c'est toi qui l'écris.</p>
 </div>
 
 <footer>
@@ -129,14 +130,13 @@ footer{background:var(--encre);color:#B7C3CA;padding:44px 24px 36px;}
       <a href="outils.html">Outils gratuits</a>
         <a href="accompagnement.html">Accompagnement</a>
         <a href="tarifs.html">Tarifs</a>
-      <a href="outils.html">Outils gratuits</a>
         <a href="carnet.html">Mon carnet</a>
         <a href="qui-sommes-nous.html">Qui nous sommes</a>
       <a href="mentions-legales.html">Mentions légales</a>
       <a href="mentions-legales.html#cgv">CGV</a>
     </div>
     <p class="ft-mentions">NiouDem est un site de formation en éducation financière. Il ne fournit ni conseil en investissement personnalisé, ni service de gestion, ni intermédiation en produits financiers. Investir comporte un risque de perte en capital.</p>
-    <div class="ft-copy">© 2025 NiouDem · Méthode Petites Actions</div>
+    <div class="ft-copy">© 2026 NiouDem, méthode Petites Actions</div>
   </div>
 </footer>
 
@@ -148,7 +148,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:44px 24px 36px;}
   <div class="marge-sur">NiouDem Learn</div>
   <div class="marge-titre">132 leçons, gratuites.</div>
   <div class="marge-txt">Les 8 formations en entier, sans compte à rebours ni version limitée. Ce qui se paie ici, c'est du temps humain, jamais le savoir.</div>
-  <a href="index.html#formations" class="marge-lien">Commencer une formation →</a>
+  <a href="index.html#formations" class="marge-lien">Commencer une formation</a>
 </aside>
 </body>
 </html>

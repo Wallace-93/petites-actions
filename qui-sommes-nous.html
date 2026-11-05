@@ -8,18 +8,18 @@
 <meta name="description" content="NiouDem veut dire « on y va » en wolof. D'où vient ce projet, ce qu'il promet, ce qu'il refuse de promettre, et comment il gagne sa vie.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --encre:#12212B;--encre-2:#43555F;--encre-3:#7A8A93;
-  --papier:#FCFBF8;--papier-2:#EFF0EA;--trait:#DCDDD3;
-  --pin:#1E4B3C;--pin-clair:#E7EFEA;
-  --laiton:#B8862F;--laiton-clair:#F6EFE0;
-  --brique:#A24332;--brique-clair:#F8EDEA;
-  --display:'Newsreader',Georgia,serif;
-  --texte:'Karla',system-ui,-apple-system,sans-serif;
-  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --encre:#171C45;--encre-2:#44496B;--encre-3:#6B7094;
+  --papier:#FFFFFF;--papier-2:#F0F1F7;--trait:#DCDEEA;
+  --pin:#2B3A8F;--pin-clair:#E9EBF7;
+  --laiton:#C27C00;--laiton-clair:#FDF2DA;
+  --brique:#A3213D;--brique-clair:#FAEAEE;
+  --display:'Archivo',system-ui,sans-serif;
+  --texte:'Archivo',system-ui,-apple-system,sans-serif;
+  --mono:'Archivo',system-ui,sans-serif;
   --lg:1120px;
 }
 html{scroll-behavior:smooth;}
@@ -35,7 +35,7 @@ h3{font-family:var(--display);font-weight:600;color:var(--encre);font-size:19px;
 p{max-width:68ch;}
 p + p{margin-top:13px;}
 
-.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--laiton);display:flex;align-items:center;gap:9px;margin-bottom:18px;}
+.eyebrow{font-family:var(--mono);font-size:13.5px;letter-spacing:0;text-transform:none;color:var(--laiton);display:flex;align-items:center;gap:9px;margin-bottom:18px;}
 .eyebrow::before{content:"";width:22px;height:1px;background:var(--laiton);flex:none;}
 
 .refrain{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:52px;
@@ -43,7 +43,7 @@ p + p{margin-top:13px;}
 .refrain::before,.refrain::after{content:"";height:1px;width:48px;background:var(--laiton);opacity:.45;}
 
 /* Navigation */
-.nav{position:sticky;top:0;z-index:50;background:rgba(252,251,248,.93);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--trait);}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.93);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--trait);}
 .nav-in{max-width:var(--lg);margin:0 auto;padding:15px 24px;display:flex;align-items:center;gap:24px;}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
 .nav-mark{width:28px;height:28px;border-radius:7px;background:var(--pin);display:grid;place-items:center;flex:none;}
@@ -58,9 +58,9 @@ p + p{margin-top:13px;}
 /* Sections */
 .section{padding:80px 24px;}
 .section-soft{background:var(--papier-2);border-top:1px solid var(--trait);border-bottom:1px solid var(--trait);}
-.section-encre{background:var(--encre);color:#B7C3CA;}
+.section-encre{background:var(--encre);color:#C3C7E3;}
 .section-encre .display{color:#fff;}
-.section-encre .lede,.section-encre p{color:#B7C3CA;}
+.section-encre .lede,.section-encre p{color:#C3C7E3;}
 .s-inner{max-width:var(--lg);margin:0 auto;}
 .s-head{max-width:62ch;margin-bottom:38px;}
 .s-head .display{margin-bottom:14px;}
@@ -71,7 +71,7 @@ p + p{margin-top:13px;}
 .entete-in{max-width:var(--lg);margin:0 auto;}
 .nom-decompose{display:flex;flex-wrap:wrap;gap:0 10px;align-items:baseline;margin-bottom:22px;}
 .nom-part{font-family:var(--display);font-size:clamp(40px,6vw,68px);font-weight:500;color:var(--encre);letter-spacing:-.02em;line-height:1;}
-.nom-part .trad{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--laiton);margin-top:12px;font-weight:400;}
+.nom-part .trad{display:block;font-family:var(--mono);font-size:13.5px;letter-spacing:0;text-transform:none;color:var(--laiton);margin-top:12px;font-weight:400;}
 .entete .lede{margin-top:8px;}
 
 /* Convictions */
@@ -83,7 +83,7 @@ p + p{margin-top:13px;}
 @media(max-width:760px){.convictions{grid-template-columns:1fr;}}
 
 /* Champs à compléter */
-.tbd{background:var(--laiton-clair);border-bottom:1px dashed var(--laiton);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:.88em;color:#7A5A12;}
+.tbd{background:var(--laiton-clair);border-bottom:1px dashed var(--laiton);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:.88em;color:#7A4D00;}
 
 /* Transparence */
 .transparence{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
@@ -91,15 +91,15 @@ p + p{margin-top:13px;}
 .colonne ul{list-style:none;display:grid;gap:11px;}
 .colonne li{padding-left:26px;position:relative;font-size:15px;}
 .colonne li::before{content:"";position:absolute;left:0;top:8px;width:13px;height:13px;border-radius:3px;}
-.oui li::before{background:var(--pin-clair);border:1px solid #BFD6C9;}
-.non li::before{background:var(--brique-clair);border:1px solid #EBC9C1;}
+.oui li::before{background:var(--pin-clair);border:1px solid #C5CAEB;}
+.non li::before{background:var(--brique-clair);border:1px solid #EFC3CD;}
 @media(max-width:760px){.transparence{grid-template-columns:1fr;gap:28px;}}
 
 /* Ce qu'on ne sait pas */
 .aveu{border-left:3px solid var(--laiton);background:var(--laiton-clair);border-radius:0 10px 10px 0;padding:24px 26px 26px;max-width:760px;}
 .aveu h3{margin-bottom:11px;}
-.aveu p{font-size:15px;color:#7A5A12;}
-.aveu strong{color:#5E4409;font-weight:700;}
+.aveu p{font-size:15px;color:#7A4D00;}
+.aveu strong{color:#5C3A00;font-weight:700;}
 
 .cloture{text-align:center;max-width:620px;margin:0 auto;}
 .cloture .display{margin-bottom:16px;}
@@ -107,16 +107,16 @@ p + p{margin-top:13px;}
 .btn-primary{display:inline-block;text-decoration:none;background:var(--pin);color:#fff;font-size:15.5px;font-weight:600;padding:14px 26px;border-radius:8px;}
 
 /* Pied de page */
-footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
+footer{background:var(--encre);color:#C3C7E3;padding:52px 24px 40px;}
 .ft{max-width:var(--lg);margin:0 auto;}
 .ft-haut{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:flex-start;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.12);}
 .ft-brand{display:flex;align-items:center;gap:10px;}
 .ft-name{font-family:var(--display);font-size:19px;font-weight:600;color:#fff;letter-spacing:-.02em;}
 .ft-links{display:flex;flex-wrap:wrap;gap:20px;}
-.ft-links a{text-decoration:none;font-size:14px;color:#B7C3CA;}
+.ft-links a{text-decoration:none;font-size:14px;color:#C3C7E3;}
 .ft-links a:hover{color:#fff;}
-.ft-mentions{font-size:13px;line-height:1.7;margin-top:22px;max-width:70ch;color:#8FA0A9;}
-.ft-copy{font-family:var(--mono);font-size:11.5px;color:#7A8A93;margin-top:20px;}
+.ft-mentions{font-size:13px;line-height:1.7;margin-top:22px;max-width:70ch;color:#9AA0C8;}
+.ft-copy{font-family:var(--mono);font-size:11.5px;color:#6B7094;margin-top:20px;}
 
 /* ===== La note de marge =====
    Sur les grands ecrans, les marges sont vides. Plutot qu'un encart
@@ -126,19 +126,20 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
 @media(min-width:1420px){
   .marge{display:block;position:fixed;left:24px;top:50%;transform:translateY(-50%);
     width:190px;z-index:20;}
-  .marge-trait{width:26px;height:1px;background:var(--laiton,#B8862F);margin-bottom:14px;}
-  .marge-sur{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.13em;
-    text-transform:uppercase;color:var(--laiton,#B8862F);margin-bottom:9px;}
-  .marge-titre{font-family:var(--display,Georgia,serif);font-size:19px;font-weight:600;
-    color:var(--encre,#12212B);line-height:1.28;margin-bottom:9px;}
-  .marge-txt{font-size:13px;line-height:1.6;color:var(--encre-3,#7A8A93);margin-bottom:13px;}
-  .marge-lien{font-size:13px;font-weight:700;color:var(--pin,#1E4B3C);text-decoration:none;
-    border-bottom:1px solid rgba(30,75,60,.35);}
-  .marge-lien:hover{border-bottom-color:var(--pin,#1E4B3C);}
+  .marge-trait{width:26px;height:1px;background:var(--laiton,#C27C00);margin-bottom:14px;}
+  .marge-sur{font-family:var(--mono,'Archivo',sans-serif);font-size:13.5px;letter-spacing:0;
+    text-transform:none;color:var(--laiton,#C27C00);margin-bottom:9px;}
+  .marge-titre{font-family:var(--display,'Archivo',sans-serif);font-size:19px;font-weight:600;
+    color:var(--encre,#171C45);line-height:1.28;margin-bottom:9px;}
+  .marge-txt{font-size:13px;line-height:1.6;color:var(--encre-3,#6B7094);margin-bottom:13px;}
+  .marge-lien{font-size:13px;font-weight:700;color:var(--pin,#2B3A8F);text-decoration:none;
+    border-bottom:1px solid rgba(43,58,143,.35);}
+  .marge-lien:hover{border-bottom-color:var(--pin,#2B3A8F);}
   .marge-fermer{position:absolute;top:-6px;right:0;background:transparent;border:0;cursor:pointer;
-    color:var(--encre-3,#7A8A93);font-size:15px;line-height:1;padding:2px 4px;}
+    color:var(--encre-3,#6B7094);font-size:15px;line-height:1;padding:2px 4px;}
 }
 </style>
+<link rel="stylesheet" href="identite.css">
 </head>
 <body>
 
@@ -149,7 +150,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       <span class="nav-name">Niou<em>Dem</em></span>
     </a>
     <div class="nav-right">
-      <a href="index.html" class="nav-login">← Retour au site</a>
+      <a href="index.html" class="nav-login">Retour au site</a>
       <a href="lecons-monnaie.html" class="nav-cta">Commencer</a>
     </div>
   </div>
@@ -163,8 +164,8 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       <span class="nom-part">Niou<span class="trad">Nous</span></span>
       <span class="nom-part">Dem<span class="trad">On y va</span></span>
     </div>
-    <p class="lede"><strong style="color:var(--encre);font-weight:600;">Niou dem : on y va.</strong> Pas « on va voir ». Pas « un jour peut-être ». Le nom du projet est déjà une phrase, et c'est la seule promesse qu'il fait : se mettre en route, ensemble, maintenant.</p>
-    <p class="lede" style="margin-top:16px;">Le wolof est là pour une raison précise. C'est la langue dans laquelle beaucoup d'entre nous ont entendu parler d'argent pour la première fois, souvent en termes d'effort, de devoir et d'envoi au pays, rarement en termes de construction. NiouDem part de là.</p>
+    <p class="lede"><strong style="color:var(--encre);font-weight:600;">Niou dem : on y va.</strong> Pas « on verra », pas « un jour peut-être ». Le nom dit déjà ce qu'on veut faire : se mettre en route, ensemble, maintenant.</p>
+    <p class="lede" style="margin-top:16px;">Pourquoi le wolof ? Parce que c'est dans cette langue que beaucoup d'entre nous ont entendu parler d'argent pour la première fois. On en parlait comme d'un effort, d'un devoir, d'argent à envoyer au pays. Rarement comme de quelque chose à faire grandir. NiouDem part de là.</p>
   </div>
 </header>
 
@@ -173,11 +174,11 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
   <div class="s-inner">
     <div class="s-head">
       <div class="eyebrow">Pourquoi ce projet</div>
-      <h2 class="display">Le savoir circule mal là où il manque le plus.</h2>
+      <h2 class="display">Ceux qui en ont le plus besoin sont ceux qui en savent le moins.</h2>
     </div>
-    <p class="lede">Dans beaucoup de familles, l'argent est un sujet de tension ou de silence. On sait le gagner, on sait l'envoyer, on sait s'en priver. Personne n'a appris à le faire durer, ni à le faire travailler. Une question de transmission, pas d'intelligence.</p>
-    <p class="lede" style="margin-top:14px;">Il se transmet ailleurs, discrètement, dans des familles où quelqu'un a déjà ouvert un contrat, comparé des frais, hérité de quelque chose. Travailler plus dur laisse cette différence intacte. Elle se rattrape en apprenant ce que les autres savaient déjà.</p>
-    <p class="lede" style="margin-top:14px;">NiouDem n'a pas été créé pour former des investisseurs. Il a été créé pour que ce savoir cesse d'être héréditaire.</p>
+    <p class="lede">Dans beaucoup de familles, l'argent crée des tensions, ou on n'en parle pas. On sait le gagner, l'envoyer, s'en priver. Mais personne ne nous a appris à le garder ni à le faire fructifier. Ce n'est pas une question d'intelligence. C'est une question de transmission.</p>
+    <p class="lede" style="margin-top:14px;">Dans d'autres familles, ce savoir se transmet sans bruit : quelqu'un a déjà ouvert un placement, comparé des frais, reçu un héritage. Travailler plus dur ne comble pas cet écart. Apprendre ce que les autres savent déjà, si.</p>
+    <p class="lede" style="margin-top:14px;">NiouDem n'a pas été créé pour fabriquer des investisseurs. Il a été créé pour que ce savoir ne dépende plus de la famille dans laquelle on est né.</p>
   </div>
 </section>
 
@@ -186,28 +187,28 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
   <div class="s-inner">
     <div class="s-head">
       <div class="eyebrow">Ce qu'on croit</div>
-      <h2 class="display">Quatre convictions, qui décident de tout le reste.</h2>
+      <h2 class="display">Ce en quoi on croit.</h2>
     </div>
     <div class="convictions">
       <div class="conviction">
         <div class="conviction-n">01</div>
         <h3>Comprendre vaut mieux qu'obéir</h3>
-        <p>On n'écrira jamais « fais ceci ». On expliquera comment ça marche, ce que ça coûte, ce que ça risque, et tu décideras. Une décision comprise tient dans le temps. Une décision subie finit par être abandonnée, même quand elle était bonne.</p>
+        <p>On n'écrira jamais « fais ceci ». On t'explique comment ça marche, ce que ça coûte et ce que tu risques, puis tu décides. Une décision que tu comprends, tu la tiens. Une décision qu'on t'impose, tu finis par l'abandonner.</p>
       </div>
       <div class="conviction">
         <div class="conviction-n">02</div>
         <h3>Une petite action bat un grand projet</h3>
-        <p>Les grandes résolutions financières tiennent trois semaines. Une action minuscule, répétée, change une situation en un an. C'est toute la méthode : une leçon, une vérification, une chose à faire ce soir.</p>
+        <p>Les grandes résolutions tiennent trois semaines. Une toute petite action, refaite souvent, change une situation en un an. C'est toute la méthode : une leçon, un petit quiz, une chose à faire le soir même.</p>
       </div>
       <div class="conviction">
         <div class="conviction-n">03</div>
         <h3>Le prix ne doit écarter personne</h3>
-        <p>Les huit formations sont gratuites, sans condition et sans compte à rebours. Seul l'accompagnement individuel est payant, parce qu'il coûte du temps humain, et deux places solidaires y sont réservées chaque mois.</p>
+        <p>Les 8 formations sont gratuites, sans condition et sans limite de temps. Seul l'accompagnement est payant, parce qu'il demande le temps d'une personne. Et chaque mois, 2 places sont proposées à tarif réduit.</p>
       </div>
       <div class="conviction">
         <div class="conviction-n">04</div>
         <h3>Dire ce qu'on ne sait pas</h3>
-        <p>Personne ne prévoit les marchés, et ceux qui l'affirment vendent quelque chose. On préfère annoncer les limites d'une méthode plutôt que promettre un résultat qui dépend du marché.</p>
+        <p>Personne ne peut prévoir la bourse. Ceux qui disent le contraire ont quelque chose à vendre. On préfère te dire les limites de notre méthode plutôt que te promettre des gains.</p>
       </div>
     </div>
     <div class="refrain">NiouDem.</div>
@@ -221,21 +222,21 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       <div class="eyebrow">D'où viennent ces leçons</div>
       <h2 class="display">De l'autre côté du guichet.</h2>
     </div>
-    <p><strong>NiouDem est écrit par d'anciens professionnels de la banque.</strong> C'est ce qui explique le ton du site, et ce qu'il choisit de dire.</p>
+    <p><strong>NiouDem est écrit par d'anciens professionnels de la banque.</strong> Ça explique le ton du site, et ce qu'il ose dire.</p>
 
-    <p>Dans une agence ou sur une plateforme téléphonique, on parle à des dizaines de personnes par jour. Ça fait beaucoup de monde. Ça fait surtout beaucoup de situations qui se ressemblent.</p>
+    <p>En agence ou au téléphone, on parle à des dizaines de personnes par jour. Et on voit revenir les mêmes situations, encore et encore.</p>
 
-    <p>Des gens qui évitent de poser une question, de peur d'avoir l'air de ne pas savoir. Des gens qui cotisent pendant des années sur un contrat inadapté dont ils ignorent jusqu'à l'existence. Des gens qui signent parce qu'on leur dit de signer.</p>
+    <p>Des gens qui n'osent pas poser une question, de peur d'avoir l'air de ne pas savoir. Des gens qui paient pendant des années un contrat qui ne leur sert à rien, sans même savoir qu'ils l'ont. Des gens qui signent parce qu'on leur dit de signer.</p>
 
-    <p>De l'autre côté du bureau, le métier ressemble rarement à ce que le titre indique. L'objectif du mois porte sur les contrats les plus rentables pour l'établissement. Les projets du client, ses contraintes, parfois ses fragilités, passent après. <strong>Ce n'est écrit nulle part en ces termes.</strong> C'est dans les objectifs, dans les tableaux de suivi, et dans ce qu'on félicite.</p>
+    <p>Côté banque, le métier n'est pas toujours celui qu'on imagine. Chaque mois, il faut vendre les contrats qui rapportent le plus à la banque. Les projets du client, ses contraintes, parfois ses difficultés, passent après. <strong>Personne ne le dit comme ça.</strong> Mais c'est ce que montrent les objectifs et les primes.</p>
 
-    <p>Le constat qui a fait naître NiouDem tient en une phrase : <strong>ces principes de gestion et d'investissement s'expliquent en français simple, et ils devraient l'être au plus grand nombre.</strong></p>
+    <p>NiouDem est né d'une idée simple : <strong>gérer son argent et investir, ça peut s'expliquer en français simple, et tout le monde devrait y avoir accès.</strong></p>
 
-    <p>Le travail a consisté à démonter ce vocabulaire pour le rendre transmissible. Comment expliquer des frais de gestion à quelqu'un que le mot fait déjà fuir ? Comment parler d'un placement en laissant de côté le jargon qui sert justement à perdre l'interlocuteur ? Ce travail s'appelle NiouDem.</p>
+    <p>Notre travail, c'est de traduire le jargon. Comment expliquer des « frais de gestion » à quelqu'un que le mot fait déjà fuir ? Comment parler d'un placement sans les mots compliqués qui servent surtout à perdre le client ? C'est ça, NiouDem.</p>
 
-    <p>Une précision utile, écrite ici plutôt qu'apprise ailleurs : <strong>NiouDem n'est ni une banque, ni un cabinet de conseil en investissement.</strong> Ce que le site apporte, c'est du temps passé de l'autre côté du guichet, assez pour voir comment le système fonctionne et à qui il profite.</p>
+    <p>Pour être clair : <strong>NiouDem n'est ni une banque, ni un conseiller en investissement.</strong> Ce qu'on t'apporte, c'est l'expérience de gens qui ont travaillé de l'autre côté du guichet, et qui savent comment le système fonctionne et à qui il profite.</p>
 
-    <p>Un établissement bancaire garde ce qu'il sait, parce que son modèle repose sur l'écart entre ce qu'il sait et ce que tu sais. L'information doit donc circuler autrement, et c'est le rôle de ce site. Si tu lis ces lignes, tu es déjà passé du bon côté de cet écart.</p>
+    <p>Une banque gagne de l'argent grâce à ce qu'elle sait et que toi tu ne sais pas. Elle n'a donc pas intérêt à tout t'expliquer. Ce site est là pour le faire à sa place.</p>
 
   </div>
 </section>
@@ -246,13 +247,13 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
     <div class="s-head">
       <div class="eyebrow">Transparence</div>
       <h2 class="display">Comment NiouDem gagne sa vie.</h2>
-      <p class="lede">Sur un site qui parle d'argent, cette question mérite une réponse écrite plutôt qu'une page de conditions générales.</p>
+      <p class="lede">Sur un site qui parle d'argent, tu as le droit de savoir comment on est payés. Voici la réponse, en clair.</p>
     </div>
     <div class="transparence">
       <div class="colonne oui">
         <h3>Ce qui nous rémunère</h3>
         <ul>
-          <li>Les séances d'accompagnement individuelles, et rien d'autre.</li>
+          <li>Les séances d'accompagnement, et rien d'autre.</li>
           <li>Les formations, elles, sont gratuites pour tout le monde.</li>
         </ul>
       </div>
@@ -260,13 +261,13 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
         <h3>Ce qu'on refuse</h3>
         <ul>
           <li>Toute commission d'une banque, d'un courtier ou d'un assureur.</li>
-          <li>Tout partenariat rémunéré présenté comme un conseil.</li>
-          <li>Tout lien affilié dans les leçons, y compris signalé.</li>
+          <li>Toute publicité déguisée en conseil.</li>
+          <li>Tout lien qui nous rapporterait de l'argent dans les leçons, même signalé.</li>
           <li>Toute publicité, et toute revente de données.</li>
         </ul>
       </div>
     </div>
-    <p style="margin-top:26px;">Cette liste a une conséquence directe sur ce que tu lis : quand une leçon dit qu'un produit est cher, c'est qu'il est cher. Personne ne nous paie pour écrire l'inverse, et c'est précisément ce qui nous permet de nommer les frais que d'autres passent sous silence.</p>
+    <p style="margin-top:26px;">Résultat : quand une leçon dit qu'un produit est cher, c'est qu'il est cher. Personne ne nous paie pour dire le contraire. C'est pour ça qu'on peut parler des frais dont les autres ne parlent pas.</p>
   </div>
 </section>
 
@@ -278,9 +279,9 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       <h2 class="display">Ce que NiouDem ne fera pas.</h2>
     </div>
     <div class="aveu">
-      <h3>Nous ne prévoyons rien, et nous ne conseillons personne en particulier.</h3>
-      <p>Nous ne sommes pas conseillers en investissement : aucune recommandation personnalisée, aucun produit vendu, aucune commission perçue. <strong>Aucun rendement n'est garanti nulle part sur ce site,</strong> et tout investissement comporte un risque de perte en capital.</p>
-      <p style="margin-top:11px;">Le site est jeune. Certaines formations seront réécrites, certaines leçons manquent encore de clarté, et la traduction en wolof et en soninké n'est pas faite. Nous préférons l'écrire ici plutôt que de laisser croire à un produit fini, et les retours des premiers membres décideront de l'ordre dans lequel tout cela avance.</p>
+      <h3>On ne prédit rien, et on ne conseille personne en particulier.</h3>
+      <p>Nous ne sommes pas conseillers en investissement : pas de conseil personnalisé, aucun produit vendu, aucune commission. <strong>Aucun gain n'est garanti sur ce site.</strong> Quand on investit, on peut perdre de l'argent.</p>
+      <p style="margin-top:11px;">Le site est jeune. Certaines formations seront réécrites, certaines leçons ne sont pas encore assez claires, et la traduction en wolof et en soninké n'est pas faite. On préfère le dire. Ce sont vos retours qui décideront de ce qu'on améliore en premier.</p>
     </div>
     <div class="refrain">NiouDem.</div>
   </div>
@@ -291,7 +292,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
   <div class="s-inner">
     <div class="cloture">
       <h2 class="display">On y va ?</h2>
-      <p>Les huit formations sont ouvertes à tout le monde, en entier et gratuitement. Cinq minutes suffisent pour commencer.</p>
+      <p>Les 8 formations sont ouvertes à tout le monde, en entier et gratuitement. 5 minutes suffisent pour commencer.</p>
       <a href="lecons-monnaie.html" class="btn-primary">Ouvrir la première leçon</a>
     </div>
   </div>
@@ -310,7 +311,6 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
         <a href="outils.html">Outils gratuits</a>
         <a href="accompagnement.html">Accompagnement</a>
         <a href="tarifs.html">Tarifs</a>
-        <a href="outils.html">Outils gratuits</a>
         <a href="carnet.html">Mon carnet</a>
         <a href="qui-sommes-nous.html">Qui nous sommes</a>
         <a href="contact.html">Contact</a>
@@ -320,7 +320,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
       </div>
     </div>
     <p class="ft-mentions">NiouDem est un site de formation en éducation financière. Il ne fournit ni conseil en investissement personnalisé, ni service de gestion, ni intermédiation en produits financiers. Investir comporte un risque de perte en capital.</p>
-    <div class="ft-copy">© 2025 NiouDem · Méthode Petites Actions</div>
+    <div class="ft-copy">© 2026 NiouDem, méthode Petites Actions</div>
   </div>
 </footer>
 
@@ -332,7 +332,7 @@ footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
   <div class="marge-sur">NiouDem Learn</div>
   <div class="marge-titre">132 leçons, gratuites.</div>
   <div class="marge-txt">Les 8 formations en entier, sans compte à rebours ni version limitée. Ce qui se paie ici, c'est du temps humain, jamais le savoir.</div>
-  <a href="index.html#formations" class="marge-lien">Commencer une formation →</a>
+  <a href="index.html#formations" class="marge-lien">Commencer une formation</a>
 </aside>
 </body>
 </html>

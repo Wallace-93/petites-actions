@@ -7,19 +7,19 @@
 <title>Formation terminée · NiouDem</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --ink:#12212B;--ink-soft:#43555F;--ink-muted:#7A8A93;--ink-faint:#96A3AA;
-  --bg:#FCFBF8;--bg-soft:#F5F4EE;--bg-mid:#EFF0EA;--bg-line:#DCDDD3;
-  --green:#1E4B3C;--green-light:#2A6350;--green-pale:#E7EFEA;--green-bord:#BFD6C9;
-  --amber:#B8862F;--amber-pale:#F6EFE0;--amber-bord:#E4D2AC;
-  --violet:#4A5C6B;--violet-pale:#EDF0F2;
-  --coral:#A24332;
-  --sans:'Karla',system-ui,-apple-system,sans-serif;
-  --display:'Newsreader',Georgia,serif;
-  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --ink:#171C45;--ink-soft:#44496B;--ink-muted:#6B7094;--ink-faint:#9599B5;
+  --bg:#FFFFFF;--bg-soft:#F6F7FB;--bg-mid:#F0F1F7;--bg-line:#DCDEEA;
+  --green:#2B3A8F;--green-light:#3B4BA8;--green-pale:#E9EBF7;--green-bord:#C5CAEB;
+  --amber:#C27C00;--amber-pale:#FDF2DA;--amber-bord:#F0D49A;
+  --violet:#4D5675;--violet-pale:#EEF0F5;
+  --coral:#A3213D;
+  --sans:'Archivo',system-ui,-apple-system,sans-serif;
+  --display:'Archivo',system-ui,sans-serif;
+  --mono:'Archivo',system-ui,sans-serif;
 }
 body{font-family:var(--sans);background:var(--bg-soft);color:var(--ink);-webkit-font-smoothing:antialiased;letter-spacing:-.01em;}
 a{color:inherit;}
@@ -39,7 +39,7 @@ a{color:inherit;}
 .badge-wrap{position:relative;z-index:2;}
 .badge-circle{width:104px;height:104px;border-radius:50%;background:linear-gradient(145deg,var(--amber),#FFD27A);display:flex;align-items:center;justify-content:center;font-size:44px;margin:0 auto 20px;box-shadow:0 12px 40px rgba(245,158,11,.4);animation:pop .5s cubic-bezier(.34,1.56,.64,1);}
 @keyframes pop{0%{transform:scale(0);}70%{transform:scale(1.1);}100%{transform:scale(1);}}
-.hero-tag{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px;position:relative;z-index:2;}
+.hero-tag{font-size:13.5px;font-weight:700;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.4);margin-bottom:10px;position:relative;z-index:2;}
 .hero-title{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.03em;color:#fff;margin-bottom:10px;position:relative;z-index:2;}
 .hero-title span{color:var(--green-light);}
 .hero-sub{font-size:14.5px;font-weight:400;color:rgba(255,255,255,.5);max-width:440px;margin:0 auto;line-height:1.6;position:relative;z-index:2;}
@@ -51,8 +51,8 @@ a{color:inherit;}
 /* OFFER SECTION */
 .section{padding:56px 24px 80px;max-width:640px;margin:0 auto;}
 .offer-card{background:var(--bg);border:2px solid var(--green);border-radius:22px;padding:36px 32px;text-align:center;position:relative;box-shadow:0 20px 50px rgba(22,163,74,.12);}
-.offer-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--coral);color:#fff;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:6px 18px;border-radius:100px;white-space:nowrap;}
-.offer-eyebrow{font-size:12px;font-weight:700;color:var(--green);letter-spacing:.05em;text-transform:uppercase;margin-bottom:10px;margin-top:8px;}
+.offer-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--coral);color:#fff;font-size:13.5px;font-weight:800;letter-spacing:0;text-transform:none;padding:6px 18px;border-radius:100px;white-space:nowrap;}
+.offer-eyebrow{font-size:13.5px;font-weight:700;color:var(--green);letter-spacing:0;text-transform:none;margin-bottom:10px;margin-top:8px;}
 .offer-title{font-size:22px;font-weight:800;color:var(--ink);margin-bottom:16px;letter-spacing:-.02em;}
 .offer-price-row{display:flex;align-items:baseline;justify-content:center;gap:12px;margin-bottom:6px;}
 .offer-old{font-size:20px;font-weight:600;color:var(--ink-faint);text-decoration:line-through;}
@@ -81,6 +81,7 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
 .nav-name em,.ft-name em{font-style:normal;color:var(--amber);}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<link rel="stylesheet" href="identite.css">
 </head>
 <body>
 
