@@ -15,7 +15,8 @@ const FORMATIONS_CARTE = {
   bourse:      { nom: 'Premiers pas en bourse',   num: '05', suite: 'fiscalite.html',   suiteNom: 'Optimisation fiscale' },
   fiscalite:   { nom: 'Optimisation fiscale',     num: '06', suite: 'immobilier.html',  suiteNom: 'Investir dans la pierre' },
   immobilier:  { nom: 'Investir dans la pierre',  num: '07', suite: 'crypto.html',      suiteNom: 'Bitcoin & cryptomonnaies' },
-  crypto:      { nom: 'Bitcoin & cryptomonnaies', num: '08', suite: 'carnet.html',      suiteNom: 'Ton carnet de route' }
+  crypto:      { nom: 'Bitcoin & cryptomonnaies', num: '08', suite: 'finance-islamique.html', suiteNom: 'Finance islamique' },
+  'finance-islamique': { nom: 'Finance islamique', num: '09', suite: 'carnet.html', suiteNom: 'Ton carnet de route' }
 };
 
 const CSS_CARTE = `

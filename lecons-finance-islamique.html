@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finance islamique · Leçons · NiouDem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#171C45;--ink-soft:#44496B;--ink-muted:#6B7094;--ink-faint:#9599B5;
+  --bg:#FFFFFF;--bg-soft:#F6F7FB;--bg-mid:#F0F1F7;--bg-line:#DCDEEA;
+  --green:#2B3A8F;--green-light:#3B4BA8;--green-pale:#E9EBF7;--green-bord:#C5CAEB;
+  --amber:#C27C00;--amber-pale:#FDF2DA;--amber-bord:#F0D49A;
+  --violet:#4D5675;--violet-pale:#EEF0F5;--violet-bord:#D5D9E6;
+  --coral:#A3213D;--coral-pale:#FAEAEE;
+  --sans:'Archivo',system-ui,-apple-system,sans-serif;
+  --display:'Archivo',system-ui,sans-serif;
+  --mono:'Archivo',system-ui,sans-serif;
+}
+body{font-family:var(--sans);background:var(--bg-soft);color:var(--ink);-webkit-font-smoothing:antialiased;letter-spacing:-.01em;}
+a{color:inherit;}
+
+.nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--bg-line);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;font-size:15px;color:var(--ink);}
+.nav-mark{width:26px;height:26px;border-radius:8px;background:var(--green);display:flex;align-items:center;justify-content:center;}
+.nav-mark svg{width:14px;height:14px;}
+.nav-back{font-size:13px;font-weight:600;color:var(--ink-muted);text-decoration:none;}
+.nav-progress-pill{font-size:12px;font-weight:700;color:var(--green);background:var(--green-pale);padding:5px 12px;border-radius:100px;}
+
+.layout{display:grid;grid-template-columns:280px 1fr;max-width:1100px;margin:0 auto;min-height:calc(100vh - 60px);}
+.sidebar{border-right:1px solid var(--bg-line);background:var(--bg);padding:24px 16px;position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow-y:auto;}
+.sb-progress-bar{height:6px;background:var(--bg-mid);border-radius:100px;overflow:hidden;margin:0 10px 18px;}
+.sb-progress-fill{height:100%;background:var(--green);border-radius:100px;transition:width .3s;}
+.sb-item{display:flex;align-items:center;gap:10px;padding:10px 10px;border-radius:10px;cursor:pointer;margin-bottom:2px;font-size:13px;font-weight:600;color:var(--ink-muted);transition:background .15s;}
+.sb-item:hover{background:var(--bg-soft);}
+.sb-item.active{background:var(--green-pale);color:var(--green);}
+.sb-item.done{color:var(--ink);}
+.sb-item.locked{opacity:.45;cursor:not-allowed;}
+.sb-item.locked:hover{background:transparent;}
+.sb-check{width:20px;height:20px;border-radius:50%;background:var(--bg-mid);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--ink-faint);flex-shrink:0;}
+.sb-item.done .sb-check{background:var(--green);color:#fff;}
+.sb-item.active .sb-check{background:var(--green);color:#fff;}
+.sb-module-label{font-size:13.5px;font-weight:700;color:var(--ink-faint);text-transform:none;letter-spacing:0;padding:14px 10px 6px;}
+
+.main{padding:36px 40px 80px;max-width:720px;}
+.lesson-eyebrow{font-size:13.5px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--green);margin-bottom:10px;}
+.lesson-title{font-size:28px;font-weight:800;letter-spacing:-.03em;color:var(--ink);margin-bottom:8px;line-height:1.15;}
+.lesson-meta{font-size:13px;color:var(--ink-faint);margin-bottom:32px;}
+
+.section-label{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:800;letter-spacing:0;text-transform:none;color:var(--ink-muted);margin:36px 0 16px;}
+.section-label .dot{width:6px;height:6px;border-radius:50%;background:var(--green);}
+.section-label.quiz .dot{background:var(--violet);}
+.section-label.action .dot{background:var(--amber);}
+
+.script-text p{font-size:15.5px;font-weight:400;color:var(--ink-soft);line-height:1.75;margin-bottom:18px;}
+
+.quiz-card{background:var(--bg);border:1px solid var(--bg-line);border-radius:16px;padding:24px;margin-bottom:14px;}
+.quiz-q{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:16px;line-height:1.5;}
+.quiz-opt{display:flex;align-items:flex-start;gap:12px;padding:13px 15px;border:1.5px solid var(--bg-line);border-radius:11px;margin-bottom:9px;cursor:pointer;transition:border-color .15s,background .15s;}
+.quiz-opt:hover{border-color:var(--ink-faint);}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-pale);}
+.quiz-opt.wrong{border-color:var(--coral);background:var(--coral-pale);}
+.quiz-opt.disabled{cursor:default;pointer-events:none;}
+.quiz-letter{width:24px;height:24px;border-radius:7px;background:var(--bg-soft);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--ink-muted);flex-shrink:0;}
+.quiz-opt.correct .quiz-letter{background:var(--green);color:#fff;}
+.quiz-opt.wrong .quiz-letter{background:var(--coral);color:#fff;}
+.quiz-opt-text{font-size:13.5px;font-weight:500;color:var(--ink);padding-top:2px;}
+.quiz-explain{display:none;font-size:13px;font-weight:400;color:var(--ink-muted);line-height:1.6;background:var(--bg-soft);border-radius:10px;padding:14px 16px;margin-top:8px;}
+.quiz-explain.show{display:block;}
+.quiz-explain strong{color:var(--ink);}
+
+.action-card{background:var(--amber-pale);border:1px solid var(--amber-bord);border-radius:16px;padding:22px 24px;}
+.action-text{font-size:14.5px;font-weight:500;color:var(--ink);line-height:1.65;margin-bottom:16px;}
+.action-check{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;}
+.action-box{width:22px;height:22px;border-radius:7px;border:2px solid var(--amber);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;transition:background .15s;}
+.action-box.checked{background:var(--amber);}
+.action-label{font-size:13px;font-weight:700;color:#8a6a00;}
+
+.lesson-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:1px solid var(--bg-line);}
+.nav-btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;border:none;cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:700;padding:13px 24px;border-radius:11px;text-decoration:none;transition:background .2s;}
+.nav-btn:hover{background:var(--ink-soft);}
+.nav-btn.ghost{background:var(--bg-mid);color:var(--ink-muted);}
+.nav-btn.ghost:hover{background:var(--bg-line);}
+.completion-badge{display:none;align-items:center;gap:8px;background:var(--green-pale);color:var(--green);font-size:12.5px;font-weight:700;padding:8px 16px;border-radius:100px;margin-bottom:20px;}
+.completion-badge.show{display:inline-flex;}
+
+@media(max-width:860px){
+  .layout{grid-template-columns:1fr;}
+  .sidebar{position:static;height:auto;border-right:none;border-bottom:1px solid var(--bg-line);}
+  .main{padding:28px 20px 60px;}
+}
+
+/* ===== Direction Encre & Laiton — surcouche typographique ===== */
+body{font-family:var(--sans);letter-spacing:0;}
+h1,h2,h3,h4,.hero-h1,.s-title,.cta-h2,.p-name,.mod-title,.c-title,.hc-title,
+.lecon-title,.q-title,.auth-title,.perf-title,.section-title,.edu-title,.tips-title{
+  font-family:var(--display);letter-spacing:-.015em;
+}
+.hero-h1,.s-title,.cta-h2,.auth-title{font-weight:500;letter-spacing:-.018em;line-height:1.16;}
+h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
+.s-tag,.f-copy,.hstat-label,.stat-label,.perf-note,.order-meta,.pos-value,
+.price-cell,.asset-label,.badge,.eyebrow,.nav-balance{font-family:var(--mono);}
+
+.nav-name em,.ft-name em{font-style:normal;color:var(--amber);}
+
+/* Mise en valeur dans le corps des lecons : le gras porte la notion a
+   retenir, l italique la nuance ou le terme technique. */
+.script-text strong{color:var(--ink,#171C45);font-weight:700;}
+.script-text em{font-style:italic;color:var(--ink-soft,#44496B);}
+.script-text u{text-decoration:none;background:linear-gradient(transparent 62%,var(--amber-pale,#FDF2DA) 62%);
+  box-shadow:inset 0 -1px 0 var(--amber,#C27C00);}
+.script-text p + p{margin-top:14px;}
+
+/* ===== L'itineraire =====
+   Une route verticale plutot qu'une liste : on voit d'ou l'on vient,
+   ou l'on est, et ce qu'il reste. Meme vocabulaire graphique que le
+   carnet de route et les emblemes. */
+.itin{padding:4px 4px 24px;}
+.itin-tete{padding:0 8px 16px;border-bottom:1px solid var(--bg-line);margin-bottom:16px;}
+.itin-formation{font-family:var(--display);font-size:16px;font-weight:600;color:var(--ink);line-height:1.25;}
+.itin-compte{font-family:var(--mono);font-size:13.5px;letter-spacing:0;text-transform:none;
+  color:var(--ink-muted);margin-top:7px;}
+.itin-barre{height:4px;background:var(--bg-mid);border-radius:100px;overflow:hidden;margin-top:10px;}
+.itin-barre span{display:block;height:100%;background:var(--amber);border-radius:100px;transition:width .4s cubic-bezier(.4,0,.2,1);}
+
+/* La route */
+.route{position:relative;padding-left:30px;}
+.route::before{content:"";position:absolute;left:11px;top:14px;bottom:14px;width:2px;
+  background:repeating-linear-gradient(var(--bg-line) 0 6px, transparent 6px 11px);}
+.etape-i{position:relative;margin-bottom:6px;}
+.borne{position:absolute;left:-30px;top:6px;width:24px;height:24px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--bg-line);display:grid;place-items:center;
+  font-family:var(--mono);font-size:10px;color:var(--ink-faint);z-index:1;transition:all .2s;}
+.borne svg{width:11px;height:11px;}
+.etape-i.faite .borne{background:var(--amber);border-color:var(--amber);color:#fff;}
+.etape-i.ici .borne{background:var(--green);border-color:var(--green);color:#fff;
+  box-shadow:0 0 0 4px var(--green-pale);}
+.etape-titre{display:block;width:100%;text-align:left;background:transparent;border:0;cursor:pointer;
+  font-family:var(--display);font-size:14.5px;font-weight:600;color:var(--ink-soft);
+  padding:7px 9px;border-radius:9px;line-height:1.3;transition:background .15s,color .15s;}
+.etape-titre:hover{background:var(--bg-soft);color:var(--ink);}
+.etape-i.ici .etape-titre{color:var(--green);}
+.etape-i.faite .etape-titre{color:var(--ink);}
+.etape-meta{font-family:var(--mono);font-size:10px;color:var(--ink-faint);padding:0 9px 4px;letter-spacing:.06em;}
+
+/* Les lecons de l'etape en cours */
+.arrets{margin:2px 0 12px;padding-left:9px;border-left:1px solid var(--bg-line);}
+.arret{display:flex;align-items:flex-start;gap:9px;padding:7px 9px;border-radius:8px;cursor:pointer;
+  font-size:12.8px;font-weight:500;color:var(--ink-muted);transition:background .15s;line-height:1.35;}
+.arret:hover{background:var(--bg-soft);color:var(--ink);}
+.arret.ici{background:var(--green-pale);color:var(--green);font-weight:700;}
+.arret.faite{color:var(--ink);}
+.arret.bloque{opacity:.42;cursor:not-allowed;}
+.arret.bloque:hover{background:transparent;}
+.puce{width:15px;height:15px;border-radius:4px;flex:none;margin-top:1px;border:1.5px solid var(--bg-line);
+  display:grid;place-items:center;background:var(--bg);}
+.puce svg{width:9px;height:9px;opacity:0;}
+.arret.faite .puce{background:var(--amber);border-color:var(--amber);}
+.arret.faite .puce svg{opacity:1;}
+.arret.ici .puce{border-color:var(--green);border-style:dashed;}
+
+/* Changer de formation sans repasser par le menu */
+.escale{margin-top:22px;padding-top:16px;border-top:1px solid var(--bg-line);}
+.escale-titre{font-family:var(--mono);font-size:13.5px;letter-spacing:0;text-transform:none;
+  color:var(--ink-faint);padding:0 9px 9px;}
+.escale a{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:8px;text-decoration:none;
+  font-size:12.8px;color:var(--ink-soft);transition:background .15s;}
+.escale a:hover{background:var(--bg-soft);color:var(--ink);}
+.escale a.courante{background:var(--green-pale);color:var(--green);font-weight:700;}
+.jeton{width:7px;height:7px;border-radius:50%;background:var(--bg-line);flex:none;}
+.escale a.courante .jeton{background:var(--green);}
+.escale a.prete .jeton{background:var(--amber);}
+
+@media(max-width:860px){
+  .itin{padding-bottom:8px;}
+  .route{padding-left:26px;}
+  .borne{left:-26px;}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none !important;}}
+
+/* ===== Schemas des lecons ===== */
+.schema{margin:26px 0;padding:20px 18px 14px;border:1px solid var(--bg-line,#DCDEEA);
+  border-radius:12px;background:var(--bg,#FFFFFF);}
+.schema svg{width:100%;height:auto;display:block;}
+.schema figcaption{font-family:var(--mono,'Archivo',sans-serif);font-size:11.5px;line-height:1.55;
+  color:var(--ink-muted,#6B7094);margin-top:14px;padding-top:12px;
+  border-top:1px solid var(--bg-line,#DCDEEA);}
+@media(max-width:620px){.schema{padding:14px 12px 10px;margin:20px -6px;}}
+
+.script-text strong{color:var(--ink,#171C45);font-weight:700;}
+.script-text em{font-style:italic;color:var(--ink-soft,#44496B);}
+.script-text u{text-decoration:none;background:linear-gradient(transparent 62%,var(--amber-pale,#FDF2DA) 62%);
+  box-shadow:inset 0 -1px 0 var(--amber,#C27C00);}
+.script-text p + p{margin-top:14px;}
+
+/* Sortie de leçon : on peut toujours s'arrêter sans se sentir coincé. */
+.lesson-sortie{display:flex;flex-wrap:wrap;align-items:center;gap:9px;justify-content:center;
+  margin-top:24px;padding-top:18px;border-top:1px solid var(--bg-line);
+  font-size:13.5px;color:var(--ink-faint);}
+.lesson-sortie a{color:var(--ink-muted);text-decoration:none;font-weight:600;}
+.lesson-sortie a:hover{color:var(--green);}
+</style>
+<link rel="stylesheet" href="identite.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    NiouDem
+  </a>
+  <a href="finance-islamique.html" class="nav-back">← Retour au parcours</a>
+  <div style="display:flex;align-items:center;gap:14px;">
+    <span class="nav-progress-pill" id="navProgress">0/12 leçons</span>
+    <a href="#" onclick="signOut();return false;" style="font-size:12.5px;font-weight:600;color:var(--ink-muted);text-decoration:none;">Déconnexion</a>
+  </div>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar"></aside>
+  <main class="main" id="main"></main>
+</div>
+
+<script>
+/* ============ DONNÉES DES 14 LEÇONS — FINANCE ISLAMIQUE ============ */
+const LESSONS = [
+{module:"Module 1 — Les principes", title:"La finance islamique, c'est quoi ?", duration:"5 min",
+script:[
+"La finance islamique, c'est une façon de gérer l'argent qui suit les règles de l'islam. Elle existe depuis des siècles, mais elle s'est vraiment développée à partir des années 1970. Aujourd'hui, elle pèse <strong>plusieurs milliers de milliards de dollars</strong> dans le monde, surtout dans les pays du Golfe, en Malaisie et en Indonésie.",
+"Elle repose sur une idée simple : <strong>l'argent seul ne doit pas produire de l'argent.</strong> Pour gagner, il faut prendre part à une activité réelle : acheter, vendre, louer, produire, s'associer. Prêter de l'argent pour toucher des intérêts, sans rien risquer, n'est pas accepté.",
+"Elle tient en quelques grandes règles, que tu vas voir une par une dans cette formation : pas d'intérêt (le <em>riba</em>), pas d'incertitude excessive dans un contrat (le <em>gharar</em>), pas de pari ni de jeu de hasard (le <em>maysir</em>), et pas d'argent placé dans des activités interdites, comme l'alcool ou les jeux d'argent.",
+"Une précision importante : <u>la finance islamique n'est pas réservée aux musulmans.</u> Beaucoup de gens s'y intéressent pour son côté éthique : partager les risques, financer l'économie réelle, éviter la spéculation. À l'inverse, beaucoup de musulmans utilisent la banque classique, par choix ou par manque d'offre.",
+"Autre précision : <strong>les savants ne sont pas tous d'accord sur tout.</strong> Un même produit peut être jugé acceptable par certains et refusé par d'autres. Cette formation t'explique les règles et les mécanismes. Elle ne te dit pas ce qui est permis ou non pour toi : pour ça, adresse-toi à une personne de confiance qui connaît bien le sujet.",
+"Enfin, rappelle-toi une chose pendant toute la formation : un produit « islamique » reste un produit financier. Il a des frais, des risques, et il peut faire perdre de l'argent. <strong>Le label ne remplace pas la vérification.</strong>"
+],
+quiz:[
+{q:"Quelle est l'idée de base de la finance islamique ?",opts:["Il est interdit de gagner de l'argent","L'argent seul ne doit pas produire de l'argent : il faut une activité réelle","Il faut tout placer dans l'or","Il ne faut jamais emprunter"],correct:1,
+explain:"Gagner de l'argent est permis. Ce qui pose problème, c'est de gagner sans activité réelle et sans risque, comme avec un prêt à intérêt."},
+{q:"La finance islamique est-elle réservée aux musulmans ?",opts:["Oui, c'est obligatoire","Non, tout le monde peut l'utiliser","Seulement dans les pays musulmans","Seulement pour acheter un logement"],correct:1,
+explain:"Ses principes de partage des risques et de financement de l'économie réelle intéressent aussi des personnes qui ne sont pas musulmanes."},
+{q:"Que faire si tu doutes qu'un produit soit conforme à tes principes ?",opts:["Faire confiance au mot « halal » sur la publicité","Demander à une personne de confiance qui connaît le sujet","Acheter quand même","Demander au vendeur, qui sait forcément"],correct:1,
+explain:"Les avis varient selon les savants. Le vendeur a intérêt à te vendre son produit : son avis ne suffit pas."}
+],
+action:"Ce soir, écris en une phrase pourquoi la finance islamique t'intéresse : ta foi, l'éthique, la curiosité, ou un projet précis comme un logement. Garde cette phrase. Elle t'aidera à choisir ce qui compte vraiment pour toi dans les leçons suivantes."
+},
+{module:"Module 1 — Les principes", title:"Le riba : pourquoi l'intérêt est interdit", duration:"5 min",
+script:[
+"Le <em>riba</em> est la règle la plus connue de la finance islamique. Le mot veut dire « augmentation ». En pratique, il désigne <strong>l'intérêt sur un prêt</strong> : tu prêtes 1 000 €, on te rend 1 050 €. Les 50 € en plus, c'est du riba. Le Coran l'interdit clairement.",
+"Pourquoi ? Parce que dans un prêt à intérêt, <strong>le prêteur gagne quoi qu'il arrive</strong>, et tout le risque est pour l'emprunteur. Si son projet échoue, il doit quand même rembourser, avec les intérêts. La finance islamique veut que celui qui apporte l'argent partage aussi le risque.",
+"Prenons un exemple. Awa emprunte 10 000 € à 5 % pour ouvrir un salon de coiffure. Le salon ferme au bout d'un an. Awa doit toujours 10 000 €, plus les intérêts. La banque, elle, n'a rien perdu. Dans la logique islamique, celui qui finance aurait dû s'associer au projet, et donc perdre avec elle.",
+"Le riba ne concerne pas seulement les crédits. Il touche aussi <u>l'épargne qui rapporte des intérêts</u> : livret A, livrets bancaires, comptes à terme, obligations classiques. C'est pour ça que beaucoup de musulmans pratiquants se posent des questions sur ces produits.",
+"Attention à une confusion fréquente : <strong>gagner de l'argent n'est pas interdit.</strong> Faire un bénéfice en vendant un objet plus cher que son prix d'achat, c'est permis. Toucher un loyer pour un bien que tu possèdes, c'est permis. Recevoir une part des bénéfices d'une entreprise dont tu es associé, c'est permis. Ce qui est interdit, c'est que l'argent prêté rapporte tout seul.",
+"Et si tu as déjà touché des intérêts, par exemple sur un livret ? Beaucoup de savants recommandent de <strong>donner cette somme à une œuvre de bienfaisance</strong>, sans en attendre de récompense. On appelle ça « purifier » son argent. Là encore, les avis varient : renseigne-toi auprès d'une personne de confiance."
+],
+quiz:[
+{q:"Qu'est-ce que le riba ?",opts:["Un impôt religieux","L'intérêt sur un prêt, c'est-à-dire l'argent qui rapporte tout seul","Le bénéfice d'un commerçant","Un loyer"],correct:1,
+explain:"Le bénéfice d'un commerce et le loyer d'un bien sont permis. Le riba, c'est l'augmentation sur une somme prêtée."},
+{q:"Pourquoi l'intérêt pose-t-il problème selon ces principes ?",opts:["Parce qu'il est trop élevé","Parce que le prêteur gagne quoi qu'il arrive et que l'emprunteur porte tout le risque","Parce que les banques sont étrangères","Parce que l'argent est sale"],correct:1,
+explain:"La finance islamique cherche à partager le risque entre celui qui apporte l'argent et celui qui l'utilise."},
+{q:"Lequel de ces gains est généralement accepté ?",opts:["Les intérêts d'un livret A","Le loyer d'un appartement que tu possèdes","Les intérêts d'un compte à terme","Les intérêts d'une obligation classique"],correct:1,
+explain:"Le loyer vient d'un bien réel que tu possèdes et dont tu assumes les risques. Les autres sont des intérêts."}
+],
+action:"Ce soir, fais la liste de tes comptes et livrets. À côté de chacun, note s'il te rapporte des intérêts, et combien sur la dernière année (c'est écrit sur ton relevé de fin d'année). Tu sauras exactement où se trouve le riba dans ton argent."
+},
+{module:"Module 1 — Les principes", title:"Gharar et maysir : le flou et le pari", duration:"5 min",
+script:[
+"Après le riba, deux autres règles comptent beaucoup. Elles ont des noms un peu difficiles, mais l'idée est simple : <strong>un contrat doit être clair, et l'argent ne doit pas dépendre du hasard.</strong>",
+"Le <em>gharar</em>, c'est l'incertitude excessive dans un contrat. Par exemple, vendre un poisson qui est encore dans la mer, ou une récolte qui n'a pas encore poussé, sans savoir ce qu'on livrera. <strong>Si l'une des deux parties ne sait pas vraiment ce qu'elle achète ou ce qu'elle paie, le contrat pose problème.</strong> Le but : éviter qu'un des deux se fasse avoir.",
+"Un peu d'incertitude est normal : personne ne connaît l'avenir. Ce qui est visé, c'est l'incertitude <u>excessive</u>, celle qui porte sur l'objet même du contrat, son prix ou sa livraison. Un contrat avec des petits caractères qui cachent des frais entre aussi dans cette logique.",
+"Le <em>maysir</em>, c'est le jeu de hasard et le pari. On gagne seulement si l'autre perd, sans rien produire. Le loto, les paris sportifs et les casinos sont concernés. <strong>Mais certains placements y ressemblent aussi</strong> : acheter et revendre très vite en espérant un coup de chance, ou utiliser des produits très risqués qui fonctionnent comme des paris sur la hausse ou la baisse.",
+"C'est pour ça que beaucoup de savants refusent les produits dérivés spéculatifs (options, contrats à terme utilisés pour parier), la vente à découvert, et le trading à effet de levier. Ces produits sont aussi ceux qui font perdre le plus d'argent aux particuliers, toutes religions confondues.",
+"Ce qu'il faut retenir : <strong>la finance islamique préfère investir à long terme dans des choses réelles</strong> plutôt que de spéculer. C'est d'ailleurs le même conseil que tu retrouves dans la formation « Premiers pas en bourse »."
+],
+quiz:[
+{q:"Qu'est-ce que le gharar ?",opts:["Un type de prêt","Une incertitude excessive dans un contrat","Un impôt","Une banque islamique"],correct:1,
+explain:"Quand une partie ne sait pas vraiment ce qu'elle achète, ce qu'elle paie ou ce qu'elle recevra, le contrat est jugé injuste."},
+{q:"Lequel de ces placements ressemble le plus au maysir ?",opts:["Acheter un logement pour y vivre","Faire du trading à effet de levier en espérant un coup de chance","Ouvrir un commerce avec un associé","Épargner chaque mois"],correct:1,
+explain:"Le levier et la spéculation à très court terme fonctionnent comme un pari : on gagne si l'autre perd, sans rien produire."},
+{q:"Pourquoi ces règles protègent-elles aussi l'épargnant ?",opts:["Elles garantissent un gain","Elles écartent les produits flous et spéculatifs, qui font souvent perdre de l'argent","Elles suppriment les impôts","Elles n'ont aucun effet"],correct:1,
+explain:"Les produits les plus risqués pour un particulier sont souvent ceux que ces règles écartent."}
+],
+action:"Ce soir, prends un contrat que tu as signé (assurance, abonnement, crédit). Cherche une chose que tu ne comprends pas : un frais, une condition, une durée. Note-la et pose la question à l'organisme. Un contrat clair, c'est la base, quelle que soit ta croyance."
+},
+{module:"Module 1 — Les principes", title:"Ce qu'on ne finance pas", duration:"5 min",
+script:[
+"La finance islamique ne regarde pas seulement <em>comment</em> l'argent est placé. Elle regarde aussi <strong>à quoi il sert.</strong> Certaines activités sont jugées interdites (<em>haram</em>), et on ne doit pas les financer, même indirectement.",
+"Les secteurs exclus le plus souvent sont : <strong>l'alcool, le porc, les jeux d'argent, le tabac, l'armement, la pornographie</strong>, et la finance classique à intérêt (banques et assurances traditionnelles). Selon les cas, d'autres secteurs peuvent s'ajouter.",
+"Ça a une conséquence très concrète. Si tu achètes un fonds qui contient des actions de brasseurs ou de casinos, une partie de ton argent finance ces activités. C'est pour ça que les placements islamiques passent par des <strong>filtres</strong>, que tu verras en détail dans la leçon sur la bourse.",
+"Dans la réalité, c'est rarement tout blanc ou tout noir. Une chaîne de supermarchés vend un peu d'alcool. Une compagnie aérienne sert des boissons à bord. Les règles fixent donc souvent un seuil : <u>l'activité interdite doit rester très petite</u>, en général moins de 5 % du chiffre d'affaires.",
+"La finance islamique ajoute aussi une idée positive : <strong>le partage des pertes et des profits.</strong> Celui qui apporte l'argent et celui qui travaille sont des associés. Ils gagnent ensemble, et ils perdent ensemble. C'est l'inverse du prêt classique, où le prêteur gagne toujours.",
+"Si tu n'es pas musulman, cette leçon peut quand même t'être utile. <strong>Savoir ce que finance ton argent</strong>, c'est la même question que se posent les investisseurs qui cherchent des placements éthiques ou responsables."
+],
+quiz:[
+{q:"Lequel de ces secteurs est généralement exclu ?",opts:["L'alimentation","Les jeux d'argent","Les transports","La santé"],correct:1,
+explain:"Les jeux d'argent font partie des activités interdites, avec l'alcool, le porc, le tabac, l'armement et la finance à intérêt."},
+{q:"Une entreprise fait 2 % de son chiffre d'affaires avec une activité interdite. Que disent souvent les règles ?",opts:["Elle est forcément exclue","Elle peut être acceptée car l'activité interdite reste sous le seuil, souvent 5 %","Elle est toujours acceptée, quel que soit le chiffre","Les règles ne parlent pas de ce cas"],correct:1,
+explain:"Les filtres fixent souvent un seuil autour de 5 %. La part de revenus concernée doit ensuite être « purifiée »."},
+{q:"Que veut dire « partage des pertes et des profits » ?",opts:["La banque garde tous les profits","Celui qui apporte l'argent et celui qui travaille gagnent et perdent ensemble","L'État rembourse les pertes","On partage les impôts"],correct:1,
+explain:"C'est le cœur de la finance islamique : le financeur devient un associé, pas un simple prêteur."}
+],
+action:"Ce soir, si tu as une assurance-vie ou un plan d'épargne, connecte-toi à ton espace client et cherche la liste des fonds où ton argent est placé. Note les 3 plus gros. Tu verras peut-être pour la première fois ce que finance réellement ton épargne."
+},
+{module:"Module 2 — Les contrats", title:"La mourabaha : acheter avec une marge connue", duration:"5 min",
+script:[
+"La <em>mourabaha</em> est le contrat le plus utilisé en finance islamique. Elle sert à financer un achat sans prêt à intérêt. Le principe : <strong>la banque achète le bien elle-même, puis te le revend plus cher, avec une marge fixée dès le départ.</strong> Tu paies ensuite en plusieurs fois.",
+"Exemple. Moussa veut une voiture à 15 000 €. La banque l'achète au garage, à son nom. Puis elle la revend à Moussa 17 000 €, payables en 48 mois. Les 2 000 € de marge sont connus le jour de la signature et <u>ne bougeront plus</u>, même si Moussa paie en retard.",
+"Différence avec un crédit classique : dans un crédit, la banque te prête de l'argent et touche des intérêts. Dans une mourabaha, <strong>la banque fait du commerce</strong> : elle possède réellement le bien pendant un moment, avec les risques qui vont avec, puis elle le vend avec un bénéfice.",
+"Et en cas de retard de paiement ? Dans un crédit classique, des pénalités et des intérêts s'ajoutent. Dans une mourabaha, la banque ne peut pas augmenter sa marge. Elle peut demander une pénalité de retard, mais <strong>cette pénalité est en général reversée à une œuvre de bienfaisance</strong>, pas gardée par la banque.",
+"Il faut quand même être honnête : <u>beaucoup de gens trouvent que la mourabaha ressemble beaucoup à un crédit</u>, car la marge est souvent calculée à partir des taux d'intérêt du marché. Ses défenseurs répondent que la forme du contrat compte, et qu'elle change vraiment les risques et les droits de chacun.",
+"Conseil pratique : <strong>compare toujours le coût total</strong>. Une mourabaha peut coûter plus cher qu'un crédit classique, car l'offre est rare et les montages plus complexes. Ton choix peut être guidé par tes principes, mais tu dois savoir ce qu'il te coûte."
+],
+quiz:[
+{q:"Comment fonctionne une mourabaha ?",opts:["La banque te prête de l'argent avec intérêt","La banque achète le bien et te le revend avec une marge fixée à l'avance","Tu loues le bien pour toujours","L'État paie la moitié"],correct:1,
+explain:"La banque possède le bien un moment, puis le revend avec une marge connue dès le départ."},
+{q:"Que se passe-t-il en général en cas de retard de paiement ?",opts:["La marge augmente","Une pénalité peut être demandée, souvent reversée à une œuvre de bienfaisance","Le bien est saisi le jour même","Rien du tout, jamais"],correct:1,
+explain:"La banque ne peut pas transformer le retard en source de profit, contrairement aux intérêts de retard d'un crédit classique."},
+{q:"Quel conseil pratique garder ?",opts:["Une mourabaha est toujours moins chère","Comparer le coût total avec les autres solutions","Ne jamais lire le contrat","Choisir la marge la plus haute"],correct:1,
+explain:"Tes principes peuvent guider ton choix, mais tu dois connaître la différence de prix."}
+],
+action:"Ce soir, reprends un achat payé en plusieurs fois (téléphone, voiture, électroménager). Calcule ce que tu as payé au total et compare au prix affiché. La différence, c'est le coût du financement, quel que soit son nom. L'outil « Le vrai prix d'un crédit » peut t'aider."
+},
+{module:"Module 2 — Les contrats", title:"L'ijara : louer avant de posséder", duration:"5 min",
+script:[
+"L'<em>ijara</em>, c'est la location. Dans la finance islamique, elle sert à financer un bien que tu ne peux pas payer tout de suite. <strong>La banque achète le bien et te le loue.</strong> Toucher un loyer est permis, car la banque possède un bien réel et en assume les risques.",
+"La forme la plus utilisée s'appelle l'<em>ijara wa iqtina</em> : la location qui se termine par l'achat. <strong>Tu paies un loyer chaque mois, et à la fin du contrat, le bien devient à toi</strong>, gratuitement ou pour un prix symbolique fixé au départ.",
+"Exemple. Fatou a besoin d'une machine à coudre professionnelle à 6 000 € pour son atelier. La banque l'achète et la lui loue 140 € par mois pendant 4 ans. Au bout de 4 ans, Fatou devient propriétaire. Au total, elle aura payé 6 720 €.",
+"Qui paie les réparations ? C'est un point important. Comme la banque est propriétaire, <u>les grosses réparations et l'assurance du bien sont en principe à sa charge</u>. L'entretien courant reste au locataire. Dans la pratique, les contrats répartissent souvent ces frais autrement : lis bien cette partie.",
+"Ça ressemble à quelque chose que tu connais peut-être : la <strong>location avec option d'achat (LOA)</strong> pour les voitures. La logique est proche. La différence vient surtout du contrat : pas d'intérêts, un loyer qui ne peut pas grimper à cause des retards, et un propriétaire qui garde ses responsabilités.",
+"Avant de signer, pose toujours ces 3 questions : <strong>combien je paie au total ? Qui paie l'assurance et les grosses réparations ? Que se passe-t-il si je veux arrêter avant la fin ?</strong>"
+],
+quiz:[
+{q:"Qu'est-ce qu'une ijara ?",opts:["Un prêt à intérêt","Une location : la banque achète le bien et te le loue","Une donation","Un placement en bourse"],correct:1,
+explain:"La banque reste propriétaire et touche un loyer, ce qui est permis car elle assume les risques du bien."},
+{q:"Que veut dire « ijara wa iqtina » ?",opts:["Location sans fin","Location qui se termine par l'achat du bien","Achat au comptant","Location entre particuliers"],correct:1,
+explain:"À la fin du contrat, le bien devient à toi, gratuitement ou pour un prix fixé au départ."},
+{q:"Quelle question poser avant de signer ?",opts:["De quelle couleur est le bien ?","Qui paie l'assurance et les grosses réparations ?","Combien d'employés a la banque ?","Aucune, tout est standard"],correct:1,
+explain:"En principe ces frais sont pour le propriétaire, mais les contrats varient. C'est souvent là que se cachent des coûts."}
+],
+action:"Ce soir, pense à un bien que tu loues ou que tu paies en plusieurs fois (voiture, box, téléphone). Retrouve le contrat et réponds aux 3 questions de la leçon : coût total, qui paie quoi, comment sortir avant la fin."
+},
+{module:"Module 2 — Les contrats", title:"Moucharaka et moudaraba : s'associer", duration:"5 min",
+script:[
+"Ces deux contrats sont le cœur de l'idéal islamique, car ils reposent sur le <strong>partage des pertes et des profits</strong>. Celui qui apporte l'argent n'est pas un prêteur : c'est un associé.",
+"La <em>moucharaka</em> veut dire « association ». <strong>Chacun apporte une part de l'argent</strong>, et souvent aussi du travail. Les bénéfices sont partagés selon ce qui a été décidé au départ. Les pertes, elles, sont partagées selon l'argent apporté par chacun.",
+"Exemple. Ibrahim et Khadija ouvrent un restaurant. Ibrahim apporte 30 000 €, Khadija 20 000 €. Ils décident de partager les bénéfices moitié-moitié, car Khadija travaille en cuisine tous les jours. Si le restaurant perd 10 000 €, Ibrahim en perd 6 000 € et Khadija 4 000 €, selon leurs apports.",
+"La <em>moudaraba</em> est un peu différente. <strong>Un associé apporte tout l'argent, l'autre apporte son travail et son savoir-faire.</strong> Les bénéfices sont partagés selon un pourcentage fixé à l'avance. Si le projet perd de l'argent, c'est celui qui a apporté l'argent qui perd son capital, et l'autre perd son temps de travail. Sauf faute grave ou négligence de sa part.",
+"Pour l'acheteur d'un logement, il existe une version spéciale : la <em>moucharaka dégressive</em>. La banque et toi achetez le logement ensemble. Tu lui rachètes ses parts petit à petit, et tu lui paies un loyer pour la partie qu'elle possède encore. À la fin, <u>tout le logement est à toi</u>.",
+"Ces contrats sont les plus fidèles aux principes, mais aussi <strong>les plus rares</strong>, car ils sont plus risqués pour la banque. Retiens surtout l'idée : un vrai associé partage les pertes. Si quelqu'un te propose de « t'associer » avec un gain garanti, ce n'est pas une association."
+],
+quiz:[
+{q:"Dans une moucharaka, comment sont partagées les pertes ?",opts:["Toujours moitié-moitié","Selon l'argent apporté par chacun","Seulement par celui qui travaille","Par la banque uniquement"],correct:1,
+explain:"Les bénéfices suivent l'accord de départ, mais les pertes suivent la part d'argent de chacun."},
+{q:"Quelle est la particularité de la moudaraba ?",opts:["Les deux associés apportent de l'argent","L'un apporte l'argent, l'autre son travail","Il n'y a jamais de bénéfice","C'est un prêt à intérêt"],correct:1,
+explain:"En cas de perte, celui qui a apporté l'argent perd son capital, l'autre perd son travail, sauf en cas de faute."},
+{q:"On te propose de « t'associer » à un projet avec un gain garanti de 10 % par an. Qu'en penser ?",opts:["C'est une vraie association","Ce n'est pas une association : un vrai associé partage les pertes","C'est forcément halal","C'est la règle en finance islamique"],correct:1,
+explain:"Un gain garanti est l'inverse du partage des risques. C'est aussi un signal d'arnaque classique."}
+],
+action:"Ce soir, si tu as un projet à plusieurs (commerce, achat en commun, tontine), écris noir sur blanc qui apporte quoi, comment se partagent les bénéfices, et comment se partagent les pertes. Si ce dernier point n'a jamais été discuté, c'est le moment."
+},
+{module:"Module 2 — Les contrats", title:"Les soukouk : des parts d'un bien réel", duration:"5 min",
+script:[
+"Dans la finance classique, les États et les entreprises empruntent en émettant des <strong>obligations</strong> : tu leur prêtes de l'argent, ils te versent des intérêts, puis te remboursent. Comme ces intérêts sont du riba, la finance islamique a créé une alternative : les <em>soukouk</em> (au singulier, <em>sakk</em>).",
+"Un sakk, c'est <strong>un certificat qui représente une part d'un bien réel</strong> : un immeuble, une autoroute, un avion, une usine. Tu n'es pas un prêteur, tu es copropriétaire d'une partie de ce bien. Ton revenu vient de ce que le bien rapporte, par exemple des loyers.",
+"Exemple. Un État veut construire un aéroport. Il émet des soukouk pour 500 millions. Les investisseurs achètent des parts. L'aéroport est loué à l'État, et les loyers sont versés aux investisseurs. À la fin, l'État rachète les parts.",
+"Les soukouk sont très utilisés dans les pays du Golfe, en Malaisie et en Indonésie. Des pays non musulmans en ont aussi émis, comme le Royaume-Uni ou le Luxembourg. <strong>En France, il en existe très peu</strong>, et ils ne sont pas faciles d'accès pour un particulier.",
+"Une critique revient souvent : dans certains soukouk, <u>le rendement est fixé à l'avance et le rachat est garanti</u>, ce qui les rend très proches d'une obligation classique. Les spécialistes distinguent les soukouk « adossés à des actifs », où tu portes vraiment le risque du bien, et ceux « basés sur des actifs », où le lien avec le bien est surtout juridique.",
+"Comme pour tout placement : <strong>un sakk peut perdre de la valeur</strong>, et l'émetteur peut avoir des difficultés. Le mot « islamique » ne protège pas du risque. Regarde qui émet, ce que représente le bien, et comment tu récupères ton argent."
+],
+quiz:[
+{q:"Qu'est-ce qu'un sakk ?",opts:["Un prêt avec intérêt","Un certificat qui représente une part d'un bien réel","Une action d'entreprise","Un compte d'épargne"],correct:1,
+explain:"Tu deviens copropriétaire d'une partie d'un bien, et ton revenu vient de ce que ce bien rapporte."},
+{q:"D'où vient le revenu d'un sakk ?",opts:["D'un taux d'intérêt","De ce que rapporte le bien, par exemple des loyers","D'un impôt","D'un tirage au sort"],correct:1,
+explain:"C'est la différence de principe avec une obligation classique, où tu touches des intérêts sur un prêt."},
+{q:"Un sakk peut-il faire perdre de l'argent ?",opts:["Non, il est garanti par la religion","Oui, comme tout placement","Seulement en France","Seulement s'il est vendu le dimanche"],correct:1,
+explain:"La valeur du bien peut baisser et l'émetteur peut avoir des difficultés. Le label ne supprime pas le risque."}
+],
+action:"Ce soir, cherche « soukouk » et le nom d'un pays dans un moteur de recherche (par exemple « soukouk Indonésie »). Lis un article de 5 minutes et note quel bien réel servait de base. Tu verras concrètement comment ça fonctionne."
+},
+{module:"Module 3 — En France, concrètement", title:"Épargner sans intérêt", duration:"5 min",
+script:[
+"En France, presque toute l'épargne simple rapporte des intérêts : livret A, LDDS, LEP, livrets bancaires, comptes à terme. Si tu veux éviter le riba, que reste-t-il ? Moins de choix, mais <strong>des solutions existent</strong>.",
+"<strong>1. Le compte courant ou un livret sans intérêt.</strong> Ton argent ne rapporte rien, mais il est disponible et sûr. C'est bien pour ton épargne de précaution (l'argent des imprévus). Le défaut : avec l'inflation, il perd un peu de valeur chaque année.",
+"<strong>2. Garder un livret et donner les intérêts.</strong> Certains gardent leur livret A, parce qu'il est sûr et disponible, et donnent chaque année les intérêts reçus à une œuvre de bienfaisance. C'est la « purification » vue plus tôt. <u>Tous les savants ne sont pas d'accord avec cette pratique</u> : demande l'avis d'une personne de confiance.",
+"<strong>3. La tontine.</strong> Tu la connais sans doute : un groupe de personnes met chaque mois la même somme dans un pot commun, et chacun reçoit le pot à son tour. <strong>Pas d'intérêt, pas de banque</strong>, juste de la confiance. C'est une vraie forme de finance sans riba, très répandue dans la diaspora africaine.",
+"La tontine a aussi ses risques. Si quelqu'un arrête de payer après avoir reçu le pot, les autres perdent. Pour la sécuriser : <strong>des membres que tu connais bien, des règles écrites</strong> (montant, ordre, que faire en cas de défaut), et un carnet où tout est noté.",
+"<strong>4. Les placements conformes à long terme</strong> : fonds et assurances-vie filtrés selon les principes islamiques. Ils sont plus risqués qu'un livret et servent pour l'argent dont tu n'as pas besoin avant plusieurs années. Tu les verras dans la prochaine leçon. Règle d'or, valable pour tous : <strong>d'abord une réserve pour les imprévus, ensuite seulement les placements.</strong>"
+],
+quiz:[
+{q:"Quelle solution garde ton argent disponible sans intérêt ?",opts:["Un compte courant","Un livret A","Un compte à terme","Une obligation"],correct:0,
+explain:"Le compte courant ne rapporte rien, mais l'argent reste sûr et disponible. Il perd un peu de valeur avec l'inflation."},
+{q:"Pourquoi la tontine est-elle une finance sans riba ?",opts:["Elle est gérée par une banque islamique","Chacun reçoit exactement ce qui a été versé, sans intérêt","Elle est interdite en France","Elle rapporte 10 % par an"],correct:1,
+explain:"Pas d'intérêt, pas de banque : seulement de l'entraide et de la confiance entre les membres."},
+{q:"Comment rendre une tontine plus sûre ?",opts:["Accepter tout le monde","Des membres connus, des règles écrites et un carnet des versements","Ne rien écrire pour rester discret","Verser plus que les autres"],correct:1,
+explain:"Le principal risque est qu'un membre arrête de payer après avoir reçu le pot. Des règles écrites évitent beaucoup de conflits."}
+],
+action:"Ce soir, si tu participes à une tontine, écris ses règles sur une page : montant, fréquence, ordre de passage, et ce qui se passe si quelqu'un ne paie pas. Propose de la partager avec les autres membres. Si tu n'en as pas, calcule combien il te faudrait pour couvrir 3 mois de dépenses : c'est ta réserve à constituer en premier."
+},
+{module:"Module 3 — En France, concrètement", title:"Investir en bourse selon ses principes", duration:"6 min",
+script:[
+"Investir en actions, c'est devenir copropriétaire d'entreprises. Le principe est accepté par la plupart des savants, car <strong>tu partages les bénéfices et les pertes</strong>. Mais toutes les entreprises ne conviennent pas. Pour choisir, on utilise des <strong>filtres</strong>.",
+"<strong>Filtre 1 : l'activité.</strong> On exclut les entreprises dont le métier principal est interdit : alcool, porc, jeux d'argent, tabac, armement, pornographie, banques et assurances classiques. Si une petite partie seulement des revenus vient d'une activité interdite, on tolère souvent jusqu'à environ 5 %.",
+"<strong>Filtre 2 : les finances de l'entreprise.</strong> Même une entreprise « propre » peut avoir beaucoup de dettes à intérêt ou beaucoup d'argent placé à intérêt. Les règles les plus utilisées fixent des limites, souvent <u>autour d'un tiers</u> : par exemple, les dettes ne doivent pas dépasser environ 33 % de la valeur de l'entreprise.",
+"Tu n'as pas à faire ces calculs toi-même. Il existe des <strong>indices boursiers islamiques</strong>, calculés par de grands fournisseurs d'indices, et des <strong>fonds (dont des ETF)</strong> qui les suivent. Un comité de spécialistes, appelé <em>comité charia</em>, vérifie la sélection. Certains de ces fonds sont accessibles depuis la France, via un compte-titres et parfois via un PEA ou une assurance-vie.",
+"<strong>La purification.</strong> Même filtrée, une entreprise peut toucher un peu d'argent interdit (par exemple des intérêts sur sa trésorerie). La part correspondante de tes dividendes doit être donnée à une œuvre de bienfaisance. Beaucoup de fonds indiquent chaque année le pourcentage à purifier.",
+"Le reste des règles de prudence ne change pas : <strong>investir à long terme, diversifier, regarder les frais</strong>, et ne placer que l'argent dont tu n'as pas besoin avant plusieurs années. Un fonds islamique peut baisser de 30 % lors d'une crise, comme n'importe quel fonds en actions. Tout ça est détaillé dans la formation « Premiers pas en bourse »."
+],
+quiz:[
+{q:"Pourquoi les actions sont-elles généralement acceptées ?",opts:["Elles sont garanties","Parce qu'on devient associé : on partage les bénéfices et les pertes","Parce qu'elles rapportent des intérêts","Parce qu'elles sont toutes halal"],correct:1,
+explain:"Détenir une action, c'est posséder une part d'entreprise, avec ses risques. Mais il faut filtrer les entreprises."},
+{q:"Que vérifie le filtre financier ?",opts:["La couleur du logo","Le niveau de dettes et d'argent placé à intérêt de l'entreprise","Le nombre de salariés","Le pays d'origine"],correct:1,
+explain:"Les limites tournent souvent autour d'un tiers de la valeur de l'entreprise."},
+{q:"Qu'est-ce que la purification des dividendes ?",opts:["Laver ses billets","Donner à une œuvre la part des dividendes qui vient de revenus interdits","Vendre toutes ses actions","Payer un impôt spécial"],correct:1,
+explain:"Beaucoup de fonds islamiques publient chaque année le pourcentage de dividendes à purifier."}
+],
+action:"Ce soir, cherche « ETF islamique » ou « fonds charia » avec le nom de ton courtier ou de ton assureur. Pour un fonds trouvé, note 3 choses : ses frais annuels, l'indice qu'il suit, et s'il est accessible dans ton PEA, ton assurance-vie ou seulement un compte-titres. Ne l'achète pas ce soir : compare d'abord."
+},
+{module:"Module 3 — En France, concrètement", title:"Acheter un logement sans crédit à intérêt", duration:"6 min",
+script:[
+"Pour beaucoup de familles, c'est la grande question : <strong>comment devenir propriétaire sans crédit immobilier classique ?</strong> En France, la réponse honnête est : c'est possible, mais l'offre est limitée et elle bouge souvent.",
+"Les montages utilisés sont ceux vus au module 2. <strong>La mourabaha</strong> : la banque achète le logement et te le revend plus cher, payable en plusieurs années. <strong>L'ijara</strong> : la banque achète et te loue, et tu deviens propriétaire à la fin. <strong>La moucharaka dégressive</strong> : vous achetez ensemble, et tu rachètes ses parts petit à petit.",
+"Un point technique a longtemps bloqué ces montages : comme le logement est vendu deux fois (au vendeur puis à toi), on risquait de payer <u>deux fois les frais de mutation</u> (les « frais de notaire »). Depuis 2010, l'administration fiscale a publié des règles pour éviter cette double taxation dans certains cas. Fais toujours vérifier ce point par le notaire.",
+"Ce qu'il faut comparer : <strong>le coût total sur toute la durée</strong>, l'apport demandé, qui paie l'assurance et les travaux, ce qui se passe si tu veux revendre ou rembourser plus tôt, et ce qui se passe si tu as des difficultés de paiement.",
+"Certaines familles choisissent une autre voie : <strong>épargner plus longtemps pour acheter comptant</strong>, ou acheter plus petit d'abord. C'est plus lent, mais sans aucun financement. D'autres s'organisent en famille, avec des prêts sans intérêt entre proches. Dans ce cas, écris tout et fais-le enregistrer si les montants sont importants.",
+"Enfin, méfie-toi des offres qui promettent une « maison halal sans apport, validée en 48 heures ». <strong>Un vrai financement de logement prend du temps</strong>, demande des justificatifs et passe par un notaire. La formation « Investir dans la pierre » t'explique ce que regarde un financeur et comment calculer ce que tu peux supporter."
+],
+quiz:[
+{q:"Quelle est la situation de l'offre islamique pour le logement en France ?",opts:["Toutes les banques en proposent","Elle existe mais elle est limitée et change souvent","Elle est interdite","Elle est gratuite"],correct:1,
+explain:"Quelques acteurs proposent ces montages, mais le choix reste faible. Il faut comparer avec attention."},
+{q:"Quel risque technique faut-il faire vérifier par le notaire ?",opts:["La couleur des murs","Le risque de payer deux fois les frais de mutation","Le nombre de pièces","La date de construction"],correct:1,
+explain:"Le logement passe par la banque avant d'être à toi. Des règles fiscales existent depuis 2010 pour éviter la double taxation, mais il faut vérifier."},
+{q:"Une offre promet une « maison halal sans apport, validée en 48 heures ». Que faire ?",opts:["Signer vite avant qu'elle disparaisse","Se méfier : un vrai financement prend du temps et passe par un notaire","Payer des frais de dossier tout de suite","Transférer l'apport sur un compte à l'étranger"],correct:1,
+explain:"La rapidité et l'absence de vérification sont des signaux d'arnaque, quel que soit le label utilisé."}
+],
+action:"Ce soir, calcule combien tu pourrais mettre de côté chaque mois pour un apport. Multiplie par 12, puis par 5. Ce chiffre te montre ce que tu pourrais réunir en 5 ans sans aucun financement. Note-le dans ton carnet."
+},
+{module:"Module 3 — En France, concrètement", title:"La zakat : calculer ce que l'on doit", duration:"5 min",
+script:[
+"La <em>zakat</em> est l'un des cinq piliers de l'islam. C'est une <strong>aumône obligatoire</strong> sur la richesse, destinée aux plus démunis et à d'autres catégories prévues par le Coran. Elle a aussi un sens financier clair : elle pousse à ne pas laisser dormir son argent.",
+"Le taux le plus connu est de <strong>2,5 %</strong> par an. Il s'applique à l'épargne et à certains biens (argent, or, marchandises d'un commerce, placements), <u>à deux conditions</u>.",
+"<strong>Condition 1 : le nisab.</strong> C'est un seuil minimum. En dessous, on ne doit pas la zakat. Il correspond à la valeur de <strong>85 grammes d'or</strong> (certains utilisent 595 grammes d'argent, ce qui donne un seuil plus bas). Comme le prix de l'or change, le seuil change aussi : vérifie le cours le jour du calcul.",
+"<strong>Condition 2 : le hawl.</strong> L'argent doit être resté au-dessus du seuil pendant <strong>une année lunaire</strong> (environ 354 jours). Beaucoup de gens choisissent une date fixe chaque année, par exemple pendant le ramadan, pour faire leur calcul.",
+"Exemple. Disons que le gramme d'or vaut 100 €. Le nisab est donc de 8 500 €. Aminata a 12 000 € d'épargne depuis plus d'un an. Sa zakat est de 12 000 × 2,5 % = <strong>300 €</strong>. Si elle avait 7 000 €, sous le seuil, elle ne devrait rien.",
+"Quels biens compter exactement ? La résidence principale, la voiture personnelle et les objets du quotidien ne comptent pas. Pour les actions, l'épargne retraite ou les dettes, <strong>les méthodes de calcul varient</strong>. Demande à une personne de confiance ou à une association reconnue. Ce qui compte : faire le calcul chaque année, au même moment, et le noter."
+],
+quiz:[
+{q:"Quel est le taux de zakat le plus connu ?",opts:["10 %","2,5 %","20 %","0,5 %"],correct:1,
+explain:"2,5 % par an sur la richesse concernée, une fois les conditions remplies."},
+{q:"Qu'est-ce que le nisab ?",opts:["Le mois du calcul","Le seuil minimum en dessous duquel on ne doit pas la zakat","Le taux d'intérêt","Le nom d'un impôt français"],correct:1,
+explain:"Il correspond à la valeur de 85 grammes d'or. Il change avec le cours de l'or."},
+{q:"Avec un nisab à 8 500 € et 20 000 € d'épargne depuis plus d'un an, combien vaut la zakat ?",opts:["200 €","500 €","2 000 €","Rien"],correct:1,
+explain:"20 000 × 2,5 % = 500 €. L'épargne est au-dessus du seuil depuis plus d'une année lunaire."}
+],
+action:"Ce soir, choisis ta date annuelle de calcul et note-la dans ton agenda avec un rappel. Puis fais une première estimation : additionne ton épargne disponible, compare au nisab du jour, et calcule 2,5 % si tu es au-dessus."
+},
+{module:"Module 4 — Garder l'esprit critique", title:"Repérer le « halal-washing » et les arnaques", duration:"5 min",
+script:[
+"Plus la demande grandit, plus les faux produits se multiplient. On parle de « halal-washing » : <strong>coller l'étiquette « halal » sur un produit qui ne respecte pas vraiment les principes</strong>, ou qui sert seulement à attirer la confiance. Et parfois, c'est carrément une arnaque.",
+"<strong>Signal 1 : un rendement garanti.</strong> « 8 % par mois, 100 % halal. » C'est un double mensonge. Un gain garanti va à l'encontre du partage des risques. Et aucun placement honnête ne garantit de tels chiffres. <u>Un rendement garanti élevé, c'est le premier signe d'une arnaque</u>, quel que soit le label.",
+"<strong>Signal 2 : l'urgence et la communauté.</strong> « Places limitées, entre frères seulement, ne parle pas de ça à ta banque. » Les escrocs utilisent la confiance religieuse et communautaire pour éviter les questions. Un vrai produit supporte les questions.",
+"<strong>Signal 3 : pas de comité charia identifiable.</strong> Un produit sérieux indique qui a vérifié sa conformité : des noms, des avis publiés, un audit régulier. « Validé par des savants » sans aucun nom, ça ne vaut rien.",
+"<strong>Signal 4 : pas d'autorisation en France.</strong> Toute société qui te propose un placement en France doit être autorisée. Tu peux vérifier son nom sur les <strong>listes noires de l'AMF</strong> (Autorité des marchés financiers) et dans le registre officiel des intermédiaires. Les cryptomonnaies « halal » et le trading « islamique » à effet de levier sont parmi les arnaques les plus fréquentes.",
+"Ta règle de sécurité : <strong>avant d'envoyer le moindre euro, attends 48 heures et pose 3 questions.</strong> Qui est autorisé à vendre ce produit ? Qui a validé sa conformité, avec quels noms ? Que se passe-t-il si je perds ? Si on ne te répond pas clairement, ne va pas plus loin."
+],
+quiz:[
+{q:"On te promet « 5 % par mois garanti, 100 % halal ». Qu'en penser ?",opts:["C'est une bonne affaire","C'est un double signal d'alerte : rendement garanti et très élevé","C'est normal en finance islamique","Il faut investir vite"],correct:1,
+explain:"Un gain garanti contredit le partage des risques, et aucun placement honnête ne garantit un tel rendement."},
+{q:"Qu'indique un produit islamique sérieux ?",opts:["Rien, il faut faire confiance","Qui a vérifié sa conformité : un comité charia avec des noms et des avis publiés","Seulement le numéro de téléphone du vendeur","Une photo de mosquée"],correct:1,
+explain:"Sans noms ni avis publiés, la mention « validé par des savants » n'a aucune valeur."},
+{q:"Où vérifier qu'une société a le droit de proposer un placement en France ?",opts:["Sur ses réseaux sociaux","Sur les listes noires de l'AMF et dans le registre officiel des intermédiaires","Auprès du vendeur lui-même","Nulle part, c'est impossible"],correct:1,
+explain:"Ces vérifications prennent 5 minutes et évitent la plupart des arnaques."}
+],
+action:"Ce soir, va sur le site de l'AMF et trouve la page des listes noires. Ajoute-la à tes favoris. La prochaine fois qu'on te propose un placement, tu pourras vérifier le nom en 2 minutes."
+},
+{module:"Module 4 — Garder l'esprit critique", title:"Ta règle à toi", duration:"5 min",
+script:[
+"Tu as vu les principes, les contrats, et ce qui existe en France. Il reste le plus important : <strong>décider ce que tu fais, toi, avec ton argent.</strong> Personne ne peut le faire à ta place.",
+"Chacun place sa limite à un endroit différent. Certains refusent tout intérêt, même sur un compte. D'autres gardent un livret pour leur réserve et purifient les intérêts. D'autres encore utilisent la banque classique pour certaines choses et la finance islamique pour d'autres. <u>Ce qui compte, c'est que ton choix soit réfléchi, et qu'il soit le tien.</u>",
+"Pour t'aider, écris ta règle en quelques lignes. <strong>Ce que j'accepte</strong> : par exemple, un compte courant, des fonds filtrés, une tontine. <strong>Ce que je refuse</strong> : par exemple, tout crédit à intérêt, ou le trading à effet de levier. <strong>Ce que je fais avec les intérêts que je n'ai pas pu éviter</strong> : par exemple, les donner chaque année.",
+"Ajoute aussi les règles de prudence, qui valent pour tout le monde. <strong>D'abord une réserve pour les imprévus.</strong> Ensuite seulement les placements. Ne jamais placer l'argent dont tu as besoin dans les prochaines années. Toujours connaître les frais. Toujours vérifier qui vend.",
+"Enfin, garde en tête que <strong>tes principes peuvent avoir un coût</strong>. L'offre islamique est plus petite, parfois plus chère, parfois moins pratique. Ce n'est pas une raison pour y renoncer. C'est une raison pour faire tes choix en sachant ce qu'ils te coûtent, et pour comparer.",
+"Tu peux maintenant reprendre les autres formations avec ce regard : le budget, l'épargne de précaution et la psychologie de l'argent s'appliquent exactement pareil. Et si tu veux en parler avec quelqu'un, l'échange découverte est gratuit. <strong>NiouDem : on y va.</strong>"
+],
+quiz:[
+{q:"Qui doit décider où placer la limite entre ce que tu acceptes et ce que tu refuses ?",opts:["Le vendeur","Toi, après réflexion et si besoin avec une personne de confiance","Ta banque","Les réseaux sociaux"],correct:1,
+explain:"Cette formation explique les mécanismes. Le choix final, et la règle qui va avec, sont les tiens."},
+{q:"Quelle règle de prudence vient avant tout placement ?",opts:["Acheter de l'or","Avoir une réserve pour les imprévus","Emprunter","Faire du trading"],correct:1,
+explain:"C'est vrai pour tout le monde, quelle que soit la finance choisie."},
+{q:"Les placements islamiques coûtent parfois plus cher. Que faire ?",opts:["Y renoncer forcément","Faire son choix en connaissant ce coût, et comparer","Ne jamais regarder les frais","Choisir le plus cher, c'est plus sûr"],correct:1,
+explain:"Tes principes ont de la valeur. Les connaître, c'est aussi connaître leur prix."}
+],
+action:"Ce soir, écris ta règle sur une feuille, en trois parties : ce que j'accepte, ce que je refuse, ce que je fais des intérêts que je n'ai pas pu éviter. Ajoute la date. Relis-la dans un an, au moment de calculer ta zakat ou de faire le point sur ton épargne."
+}
+
+];
+
+/* ============ SUPABASE ============ */
+const SUPABASE_URL = 'https://pchkshpbzsybvtwxqvrf.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjaGtzaHBienN5YnZ0d3hxdnJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NDgwMTAsImV4cCI6MjEwMTUyNDAxMH0.3EqyBUDmHHJ79mdDD6dmpVwsuEA0h2hF-75Up9R2Snc';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+/* Exposé pour que le widget de retours réutilise ce client plutôt
+   que d'en créer un second sur la même clé de stockage. */
+window.sb = sb;
+const FORMATION = 'finance-islamique';
+const NOM_FORMATION = 'Finance islamique';
+let CURRENT_USER = null;
+let PROGRESS_CACHE = {};
+
+async function requireAuth(){
+  const { data: { session } } = await sb.auth.getSession();
+  if(!session){
+    window.location.href = 'inscription.html?redirect=lecons-finance-islamique.html';
+    return null;
+  }
+  return session.user;
+}
+
+const PAGE_PORTE = 'lecons-monnaie.html';
+
+async function requireUnlock(userId){
+  /* La formation d'entrée n'est jamais verrouillée : la vérifier ici
+     provoquerait une redirection de la page vers elle-même, donc une
+     boucle infinie. */
+  if(FORMATION === 'monnaie') return true;
+
+  const { data: badge } = await sb.from('badges')
+    .select('badge_name').eq('user_id', userId).eq('badge_name','le_declic').maybeSingle();
+  if(badge) return true;
+
+  /* Garde-fou : ne jamais rediriger vers la page courante. */
+  const ici = window.location.pathname.split('/').pop() || 'index.html';
+  if(ici === PAGE_PORTE){
+    console.warn('Verrou actif sur la page d\'entrée : redirection ignorée.');
+    return true;
+  }
+  window.location.href = PAGE_PORTE + '?verrou=1';
+  return false;
+}
+
+async function signOut(){
+  await sb.auth.signOut();
+  window.location.href = 'index.html';
+}
+
+async function loadProgressFromServer(){
+  const { data } = await sb
+    .from('lesson_progress')
+    .select('lesson_number, completed')
+    .eq('user_id', CURRENT_USER.id)
+    .eq('formation', FORMATION);
+  const p = {};
+  if(data){ data.forEach(function(row){ if(row.completed) p[row.lesson_number] = true; }); }
+  PROGRESS_CACHE = p;
+  return p;
+}
+function getProgress(){ return PROGRESS_CACHE; }
+async function setProgressServer(lessonNumber, value){
+  PROGRESS_CACHE[lessonNumber] = value;
+  await sb.from('lesson_progress').upsert({
+    user_id: CURRENT_USER.id,
+    formation: FORMATION,
+    lesson_number: lessonNumber,
+    completed: value,
+    completed_at: value ? new Date().toISOString() : null
+  }, { onConflict: 'user_id,formation,lesson_number' });
+
+  await majCarnet(lessonNumber, value);
+}
+
+/* Le carnet de route : l'action cochée s'inscrit dans le carnet personnel,
+   la décocher l'en retire. Une erreur ici ne doit jamais bloquer la
+   progression de la leçon, d'où le try/catch silencieux. */
+async function majCarnet(lessonNumber, value){
+  try {
+    const l = LESSONS[lessonNumber - 1];
+    if(!l) return;
+
+    if(!value){
+      await sb.from('carnet').delete()
+        .eq('user_id', CURRENT_USER.id)
+        .eq('formation', FORMATION)
+        .eq('lesson_number', lessonNumber);
+      return;
+    }
+
+    await sb.from('carnet').upsert({
+      user_id: CURRENT_USER.id,
+      formation: FORMATION,
+      lesson_number: lessonNumber,
+      titre: l.title || ('Leçon ' + lessonNumber),
+      action: l.action || ''
+    }, { onConflict: 'user_id,formation,lesson_number', ignoreDuplicates: true });
+  } catch(e){
+    console.warn('Carnet non mis à jour :', e);
+  }
+}
+
+let current = parseInt(new URLSearchParams(location.search).get('l')) || 1;
+if(current < 1) current = 1;
+if(current > LESSONS.length) current = LESSONS.length;
+
+function isUnlocked(n){
+  if(n === 1) return true;
+  const progress = getProgress();
+  return !!progress[n-1];
+}
+
+function renderSidebar(){
+  const progress = getProgress();
+  const doneCount = Object.keys(progress).filter(function(k){ return progress[k]; }).length;
+  document.getElementById('navProgress').textContent = doneCount + '/' + LESSONS.length + ' leçons';
+
+  /* Regroupement des lecons par module : c'est le module qui devient
+     l'etape de l'itineraire, la lecon n'est qu'un arret. */
+  const etapes = [];
+  LESSONS.forEach(function(l, i){
+    const nom = l.module.split(' — ')[1] || l.module;
+    let e = etapes.find(function(x){ return x.nom === nom; });
+    if(!e){ e = { nom: nom, lecons: [] }; etapes.push(e); }
+    e.lecons.push({ n: i + 1, titre: l.title });
+  });
+
+  const etapeCourante = etapes.findIndex(function(e){
+    return e.lecons.some(function(a){ return a.n === current; });
+  });
+
+  const COCHE = '<svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  let html = '<div class="itin">' +
+    '<div class="itin-tete">' +
+      '<div class="itin-formation">' + NOM_FORMATION + '</div>' +
+      '<div class="itin-compte">Étape ' + (etapeCourante + 1) + ' sur ' + etapes.length + ' · ' + doneCount + '/' + LESSONS.length + ' leçons</div>' +
+      '<div class="itin-barre"><span style="width:' + Math.round(doneCount / LESSONS.length * 100) + '%"></span></div>' +
+    '</div><div class="route">';
+
+  etapes.forEach(function(e, idx){
+    const toutesFaites = e.lecons.every(function(a){ return progress[a.n]; });
+    const ici = idx === etapeCourante;
+    const premiereAccessible = e.lecons.find(function(a){ return isUnlocked(a.n); });
+    const classe = toutesFaites ? 'faite' : (ici ? 'ici' : '');
+    const borne = toutesFaites ? COCHE : String(idx + 1);
+    const cible = premiereAccessible ? premiereAccessible.n : e.lecons[0].n;
+
+    html += '<div class="etape-i ' + classe + '">' +
+      '<span class="borne">' + borne + '</span>' +
+      '<button class="etape-titre" onclick="goTo(' + cible + ')">' + e.nom + '</button>' +
+      '<div class="etape-meta">' + e.lecons.length + ' leçon' + (e.lecons.length > 1 ? 's' : '') + '</div>';
+
+    /* On ne deroule que l'etape ou l'on se trouve : la carte reste lisible. */
+    if(ici){
+      html += '<div class="arrets">';
+      e.lecons.forEach(function(a){
+        const fait = !!progress[a.n];
+        const ouvert = isUnlocked(a.n);
+        const cl = (a.n === current ? 'ici ' : '') + (fait ? 'faite ' : '') + (ouvert ? '' : 'bloque');
+        html += '<div class="arret ' + cl + '" onclick="goTo(' + a.n + ')">' +
+          '<span class="puce">' + COCHE + '</span><span>' + a.titre + '</span></div>';
+      });
+      html += '</div>';
+    }
+    html += '</div>';
+  });
+
+  html += '</div>' + escaleHtml() + '</div>';
+  document.getElementById('sidebar').innerHTML = html;
+}
+
+/* Changer de formation sans repasser par le menu. */
+const PARCOURS = [
+  { cle:'monnaie',     nom:'Comprendre la monnaie',   page:'lecons-monnaie.html' },
+  { cle:'psychologie', nom:"Psychologie de l'argent", page:'lecons-psychologie.html' },
+  { cle:'budget',      nom:'Maîtriser son budget',    page:'lecons-budget.html' },
+  { cle:'bourse',      nom:'Premiers pas en bourse',  page:'lecons-bourse.html' },
+  { cle:'crypto',      nom:'Bitcoin & cryptomonnaies',page:'lecons-crypto.html' },
+  { cle:'immobilier',  nom:'Investir dans la pierre', page:'lecons-immobilier.html' },
+  { cle:'epargne',     nom:'Épargne & sécurité',      page:'lecons-epargne.html' },
+  { cle:'fiscalite',   nom:'Optimisation fiscale',    page:'lecons-fiscalite.html' },
+  { cle:'finance-islamique', nom:'Finance islamique', page:'lecons-finance-islamique.html' }
+];
+
+function escaleHtml(){
+  let h = '<div class="escale"><div class="escale-titre">Autres formations</div>';
+  PARCOURS.forEach(function(p){
+    const courante = p.cle === FORMATION;
+    h += '<a href="' + p.page + '" class="' + (courante ? 'courante' : 'prete') + '">' +
+      '<span class="jeton"></span><span>' + p.nom + '</span></a>';
+  });
+  h += '</div>';
+  return h;
+}
+
+function goTo(n){
+  if(!isUnlocked(n)){
+    alert('Termine la leçon précédente pour débloquer celle-ci.');
+    return;
+  }
+  current = n;
+  history.replaceState(null, '', '?l=' + n);
+  render();
+  window.scrollTo(0,0);
+}
+
+let quizState = {};
+
+function allQuizCorrect(l){
+  for(let i=0;i<l.quiz.length;i++){ if(!quizState[i]) return false; }
+  return true;
+}
+
+function render(){
+  renderSidebar();
+  const l = LESSONS[current-1];
+  const progress = getProgress();
+  const done = !!progress[current];
+  quizState = {};
+  if(done){ l.quiz.forEach(function(q,i){ quizState[i] = true; }); }
+  const main = document.getElementById('main');
+  let quizHtml = '';
+  l.quiz.forEach(function(q, qi){
+    let optsHtml = '';
+    q.opts.forEach(function(opt, oi){
+      const preAnswered = done && oi === q.correct;
+      optsHtml += '<div class="quiz-opt ' + (preAnswered?'correct disabled':'') + '" id="q' + qi + 'o' + oi + '" onclick="answerQuiz(' + qi + ',' + oi + ',' + q.correct + ')">' +
+        '<span class="quiz-letter">' + String.fromCharCode(65+oi) + '</span><span class="quiz-opt-text">' + opt + '</span></div>';
+    });
+    quizHtml += '<div class="quiz-card"><div class="quiz-q">Question ' + (qi+1) + '. ' + q.q + '</div>' + optsHtml +
+      '<div class="quiz-explain ' + (done?'show':'') + '" id="exp' + qi + '"><strong>Explication : </strong>' + q.explain + '</div></div>';
+  });
+
+  const quizOk = allQuizCorrect(l);
+  const actionCardStyle = (!quizOk && !done) ? 'opacity:.5;pointer-events:none;' : '';
+
+  main.innerHTML =
+    (done ? '<div class="completion-badge show">✓ Leçon terminée</div>' : '') +
+    '<div class="lesson-eyebrow">' + l.module + '</div>' +
+    '<div class="lesson-title">' + (current) + '. ' + l.title + '</div>' +
+    '<div class="lesson-meta">' + l.duration + ' de lecture · Leçon ' + current + ' sur ' + LESSONS.length + '</div>' +
+    '<div class="section-label"><span class="dot"></span>Comprendre</div>' +
+    '<div class="script-text">' + l.script.map(function(p){
+      return p.indexOf('<figure') === 0 ? p : '<p>' + p + '</p>';
+    }).join('') + '</div>' +
+    '<div class="section-label quiz"><span class="dot"></span>Vérifier</div>' +
+    quizHtml +
+    '<div class="section-label action"><span class="dot"></span>Petite action</div>' +
+    (!quizOk && !done ? '<div style="font-size:12.5px;font-weight:600;color:var(--coral);margin-bottom:10px;">Réponds correctement aux ' + l.quiz.length + ' questions pour débloquer cette action.</div>' : '') +
+    '<div class="action-card" id="actionCard" style="' + actionCardStyle + '">' +
+      '<div class="action-text">' + l.action + '</div>' +
+      '<div class="action-check" onclick="toggleAction()"><span class="action-box ' + (done?'checked':'') + '" id="actionBox">' + (done?'✓':'') + '</span><span class="action-label">Marquer cette leçon comme terminée</span></div>' +
+    '</div>' +
+    '<div class="lesson-nav">' +
+      (current > 1 ? '<button class="nav-btn ghost" onclick="goTo(' + (current-1) + ')">← Leçon précédente</button>' : '<span></span>') +
+      (current < LESSONS.length ? '<button class="nav-btn" onclick="goTo(' + (current+1) + ')">Leçon suivante →</button>' : '<a href="carnet.html" class="nav-btn">Voir mon carnet →</a>') +
+    '</div>' +
+
+    '<div class="lesson-sortie">' +
+      '<a href="index.html#formations">Sommaire des formations</a><span>·</span>' +
+      '<a href="carnet.html">Mon carnet</a><span>·</span>' +
+      '<a href="index.html">Retour au site</a>' +
+    '</div>';
+}
+
+function answerQuiz(qi, oi, correct){
+  if(quizState[qi]) return; // déjà répondu correctement, verrouillé
+  const chosen = document.getElementById('q'+qi+'o'+oi);
+  if(chosen.classList.contains('disabled')) return;
+
+  if(oi === correct){
+    for(let k=0;k<10;k++){
+      const el = document.getElementById('q'+qi+'o'+k);
+      if(el){ el.classList.add('disabled'); }
+    }
+    chosen.classList.add('correct');
+    quizState[qi] = true;
+    document.getElementById('exp'+qi).classList.add('show');
+    const l = LESSONS[current-1];
+    const quizOk = allQuizCorrect(l);
+    const card = document.getElementById('actionCard');
+    if(quizOk && card){
+      card.style.opacity = '';
+      card.style.pointerEvents = '';
+      const lock = card.previousElementSibling;
+      if(lock && lock.textContent.indexOf('Réponds correctement') !== -1){ lock.style.display = 'none'; }
+    }
+  } else {
+    chosen.classList.add('wrong');
+    document.getElementById('exp'+qi).classList.add('show');
+    setTimeout(function(){ chosen.classList.remove('wrong'); }, 900);
+  }
+}
+
+async function toggleAction(){
+  const l = LESSONS[current-1];
+  const progress = getProgress();
+  const newValue = !progress[current];
+  if(newValue && !allQuizCorrect(l)){
+    alert('Réponds correctement à toutes les questions du quiz avant de valider cette leçon.');
+    return;
+  }
+  await setProgressServer(current, newValue);
+  render();
+
+  /* La formation vient-elle de s'achever ? Si oui, on plante la borne.
+     On ne la montre qu'au moment du basculement, jamais en revenant
+     sur une leçon déjà validée. */
+  if(newValue) verifierFinDeParcours();
+}
+
+async function verifierFinDeParcours(){
+  const progress = getProgress();
+  const faites = Object.keys(progress).filter(function(k){ return progress[k]; }).length;
+  if(faites < LESSONS.length) return;
+
+  let prenom = '';
+  let semaines = 1;
+  try {
+    const { data } = await sb.from('profiles').select('prenom').eq('id', CURRENT_USER.id).maybeSingle();
+    if(data && data.prenom) prenom = data.prenom;
+
+    const { data: dates } = await sb.from('lesson_progress')
+      .select('completed_at').eq('user_id', CURRENT_USER.id).eq('formation', FORMATION)
+      .not('completed_at', 'is', null).order('completed_at', { ascending: true }).limit(1);
+    if(dates && dates.length){
+      const debut = new Date(dates[0].completed_at).getTime();
+      semaines = Math.max(1, Math.round((Date.now() - debut) / (7*24*3600*1000)));
+    }
+  } catch(e){ console.warn('Carte : données partielles', e); }
+
+  ouvrirCarte(FORMATION, LESSONS.length, prenom, semaines);
+}
+
+async function boot(){
+  document.getElementById('main').innerHTML = '<div style="padding:60px 0;text-align:center;color:var(--ink-faint);font-size:14px;">Chargement de ta progression…</div>';
+  const user = await requireAuth();
+  if(!user) return;
+  const unlocked = await requireUnlock(user.id);
+  if(!unlocked) return;
+  CURRENT_USER = user;
+  await loadProgressFromServer();
+
+  if(!isUnlocked(current)){
+    let lastUnlocked = 1;
+    for(let i=1;i<=LESSONS.length;i++){ if(isUnlocked(i)) lastUnlocked = i; else break; }
+    current = lastUnlocked;
+    history.replaceState(null, '', '?l=' + current);
+  }
+  render();
+}
+boot();
+</script>
+
+<div style="border-top:1px solid var(--bg-line);padding:22px 24px;text-align:center;font-size:12.5px;color:var(--ink-muted);background:var(--bg-soft);">
+  <a href="outils.html" style="color:var(--ink-muted);margin:0 10px;">Outils</a>
+  <a href="carnet.html" style="color:var(--ink-muted);margin:0 10px;">Mon carnet</a>
+  <a href="qui-sommes-nous.html" style="color:var(--ink-muted);margin:0 10px;">Qui nous sommes</a>
+  <a href="contact.html" style="color:var(--ink-muted);margin:0 10px;">Contact</a>
+  <a href="mentions-legales.html" style="color:var(--ink-muted);margin:0 10px;">Mentions légales</a>
+  <a href="mentions-legales.html#confidentialite" style="color:var(--ink-muted);margin:0 10px;">Confidentialité</a>
+  <a href="mentions-legales.html#cgv" style="color:var(--ink-muted);margin:0 10px;">CGV</a>
+</div>
+<script src="retours.js" defer></script>
+<script src="accomplissement.js"></script>
+</body>
+</html>
