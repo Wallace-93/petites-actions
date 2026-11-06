@@ -583,7 +583,7 @@ script:[
 "<strong>Sur la fiscalité.</strong> Déclarer ses comptes étrangers avant de penser à optimiser, tenir un registre au fil de l'eau, et revérifier les chiffres chaque année.",
 "Un dernier mot, et il vaut pour tout le parcours. <strong>Cette formation ne t'a pas dit d'acheter, ni de ne pas acheter</strong>, et ce n'est pas une prudence de façade : NiouDem ne vend aucun produit financier et ne perçoit aucune commission. Le conseil sur crypto-actifs est par ailleurs une activité réglementée que nous n'exerçons pas.",
 "Ce que tu as maintenant est plus utile qu'une recommandation : <strong>la capacité d'évaluer seul ce qu'on te présentera.</strong> Dans un secteur où l'essentiel de ce que tu liras cherche à te vendre quelque chose, savoir poser les 4 bonnes questions vaut plus que n'importe quel conseil reçu.",
-"<u>Tu as terminé les 8 formations. Ce qui compte maintenant n'est plus ce que tu sais, c'est ce que tu as coché dans ton carnet de route.</u>"
+"<u>Tu as terminé le parcours principal. Ce qui compte maintenant n'est plus ce que tu sais, c'est ce que tu as coché dans ton carnet de route.</u>"
 ],
 quiz:[
 {q:"Qu'a réellement démontré Bitcoin ?",opts:["Qu'il remplacera les monnaies","Qu'un registre partagé peut fonctionner sans autorité centrale","Que la rareté crée la valeur","Que la finance décentralisée est fiable"],correct:1,
@@ -784,7 +784,8 @@ const PARCOURS = [
   { cle:'crypto',      nom:'Bitcoin & cryptomonnaies',page:'lecons-crypto.html' },
   { cle:'immobilier',  nom:'Investir dans la pierre', page:'lecons-immobilier.html' },
   { cle:'epargne',     nom:'Épargne & sécurité',      page:'lecons-epargne.html' },
-  { cle:'fiscalite',   nom:'Optimisation fiscale',    page:'lecons-fiscalite.html' }
+  { cle:'fiscalite',   nom:'Optimisation fiscale',    page:'lecons-fiscalite.html' },
+  { cle:'finance-islamique', nom:'Finance islamique', page:'lecons-finance-islamique.html' }
 ];
 
 function escaleHtml(){
@@ -851,7 +852,7 @@ function render(){
     '</div>' +
     '<div class="lesson-nav">' +
       (current > 1 ? '<button class="nav-btn ghost" onclick="goTo(' + (current-1) + ')">← Leçon précédente</button>' : '<span></span>') +
-      (current < LESSONS.length ? '<button class="nav-btn" onclick="goTo(' + (current+1) + ')">Leçon suivante →</button>' : '<a href="carnet.html" class="nav-btn">Voir mon carnet de route →</a>') +
+      (current < LESSONS.length ? '<button class="nav-btn" onclick="goTo(' + (current+1) + ')">Leçon suivante →</button>' : '<a href="lecons-finance-islamique.html" class="nav-btn">Finance islamique →</a>') +
     '</div>' +
 
     '<div class="lesson-sortie">' +
