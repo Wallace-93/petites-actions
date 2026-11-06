@@ -94,7 +94,7 @@ h3,h4,.p-name,.mod-title,.c-title,.hc-title,.lecon-title{font-weight:600;}
 
     <button class="submit-btn" id="submitBtn" onclick="login()">Se connecter →</button>
     <div class="form-note" style="margin-bottom:10px;"><a href="mot-de-passe-oublie.html">Mot de passe oublié ?</a></div>
-    <div class="form-note">Pas encore de compte ? <a href="inscription.html">Créer un compte gratuit</a></div>
+    <div class="form-note">Pas encore de compte ? <a href="inscription.html" id="lienInscription">Créer un compte gratuit</a></div>
   </div>
 </div>
 
@@ -151,6 +151,13 @@ async function login(){
   <a href="mentions-legales.html#confidentialite" style="color:var(--ink-muted);margin:0 10px;">Confidentialité</a>
   <a href="mentions-legales.html#cgv" style="color:var(--ink-muted);margin:0 10px;">CGV</a>
 </div>
+<script>
+(function(){
+  const dest = new URLSearchParams(location.search).get('redirect');
+  const a = document.getElementById('lienInscription');
+  if(dest && a) a.href = 'inscription.html?redirect=' + encodeURIComponent(dest);
+})();
+</script>
 <script src="retours.js" defer></script>
 </body>
 </html>
